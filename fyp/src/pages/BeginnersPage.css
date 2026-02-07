@@ -1,0 +1,391 @@
+/* Reset & Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.beginners-page {
+  background-color: white;
+  color: #284a4b;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  padding-top: 0;
+  margin-top: 120px;
+}
+
+/* ========== NEW: FULLSCREEN PICTURE SECTION ========== */
+.fullscreen-kitchen-image {
+  width: 100vw;
+  height: 40vw;
+  min-height: 300px;
+  max-height: 500px;
+  background: 
+    linear-gradient(rgba(40, 74, 75, 0.7), rgba(40, 74, 75, 0.3)),
+    url('beginners.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fullscreen-kitchen-content {
+  padding: 20px;
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
+}
+
+.fullscreen-kitchen-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.fullscreen-kitchen-content p {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+/* ========== MODIFIED HERO SECTION (Green Format like Pantry) ========== */
+.guide-header {
+  background: linear-gradient(135deg, #284a4b, #2b5a5b);
+  color: white;
+  padding: 60px 20px 100px;
+  height: 180px;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid #1e3a3b;
+  overflow: hidden;
+}
+
+.guide-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.05"><path d="M0,0 L100,0 L100,100 Z" fill="white"/></svg>');
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.guide-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+  margin-top: -7px;
+  position: relative;
+  z-index: 2;
+}
+
+.guide-header p {
+  font-size: 1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  font-weight: 300;
+}
+
+/* Grid Layout Container */
+.guide-sections-container {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.guide-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 20px;
+}
+
+/* Enhanced Card Design */
+.guide-section-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(40, 91, 90, 0.08);
+  border: 2px solid #e8f0f0;
+  height: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.guide-section-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(40, 91, 90, 0.15);
+  border-color: #285B5A;
+}
+
+/* Empty Card for Layout */
+.guide-empty-card {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Card Header with Icon */
+.guide-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #f0f5f5;
+}
+
+.guide-card-icon-wrapper {
+  background: #285B5A;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(40, 91, 90, 0.2);
+  flex-shrink: 0;
+}
+
+.guide-card-title {
+  flex-grow: 1;
+}
+
+.guide-card-title h3 {
+  font-size: 1.1rem;
+  color: #285B5A;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+/* Card Number - Top Right Corner */
+.guide-card-number {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(40, 91, 90, 0.1);
+  color: #285B5A;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid #285B5A;
+}
+
+/* Card Content */
+.guide-card-content {
+  flex-grow: 1;
+}
+
+.guide-card-features {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.guide-card-features li {
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.guide-card-features li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #285B5A;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Card Footer with Teal Accent */
+.guide-card-footer {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 2px dashed #e0e8e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guide-card-tag {
+  background: rgba(40, 91, 90, 0.1);
+  color: #285B5A;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.guide-card-arrow {
+  color: #285B5A;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.guide-section-card:hover .guide-card-arrow {
+  transform: translateX(5px);
+}
+
+/* Card Accent Corner */
+.guide-card-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 40px solid #285B5A;
+  border-left: 40px solid transparent;
+  opacity: 0.1;
+}
+
+.guide-section-card:hover .guide-card-accent {
+  opacity: 0.15;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .guide-sections-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .guide-sections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .beginners-page {
+    padding-top: 0;
+  }
+  
+  .fullscreen-kitchen-image {
+    height: 50vh;
+    margin-top: 90px;
+  }
+  
+  .fullscreen-kitchen-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .fullscreen-kitchen-content p {
+    font-size: 1.1rem;
+  }
+    
+  .guide-header {
+    padding: 2rem 1rem;
+    margin-bottom: 1.5rem;
+    height: auto;
+    padding-bottom: 60px;
+  }
+    
+  .guide-header h1 {
+    font-size: 1.6rem;
+  }
+    
+  .guide-section-card {
+    min-height: 220px;
+    padding: 1.2rem;
+  }
+    
+  .guide-card-icon-wrapper {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+    
+  .guide-card-title h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .guide-sections-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-top: 15px;
+  }
+    
+  .guide-section-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .beginners-page {
+    padding-top: 0;
+  }
+  
+  .fullscreen-kitchen-image {
+    height: 40vh;
+    margin-top: 80px;
+  }
+  
+  .fullscreen-kitchen-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .fullscreen-kitchen-content p {
+    font-size: 1rem;
+  }
+    
+  .guide-header h1 {
+    font-size: 1.4rem;
+  }
+    
+  .guide-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+    
+  .guide-card-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+}
