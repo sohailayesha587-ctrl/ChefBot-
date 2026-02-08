@@ -16,9 +16,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1001;
-  height: 35px; /* Increased from 30px */
+  height: 35px;
   padding: 0 2rem;
-  overflow: visible;
 }
 
 .welcome-text {
@@ -27,16 +26,14 @@
   color: white;
   text-align: center;
   letter-spacing: 0.3px;
-  line-height: 35px; /* Match navbar height */
-  margin: 0;
-  padding: 0;
+  line-height: 35px;
   white-space: nowrap;
 }
 
 /* ---------- MAIN NAVBAR ---------- */
 .navbar-main {
   position: fixed;
-  top: 35px; /* Position below top navbar */
+  top: 35px;
   left: 0;
   width: 100%;
   background: linear-gradient(to right, white);
@@ -81,29 +78,12 @@
   transition: all 0.3s ease;
   padding: 6px 12px;
   border-radius: 6px;
-  position: relative;
   white-space: nowrap;
 }
 
 .nav-link:hover {
   color: #397d7c;
   background-color: rgba(40, 91, 90, 0.1);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #397d7c;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.nav-link:hover::after {
-  width: 70%;
 }
 
 .h-search-container {
@@ -154,7 +134,7 @@
   justify-content: flex-end;
 }
 
-/* Simple icons without background */
+/* ---------- ICONS ---------- */
 .simple-icon {
   font-size: 1.1rem;
   color: #284a4b;
@@ -162,11 +142,29 @@
   transition: all 0.3s ease;
   padding: 6px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .simple-icon:hover {
   color: #397d7c;
   transform: translateY(-1px);
+}
+
+.alarm-icon {
+  cursor: pointer;
+}
+
+/* FontAwesome icons */
+.fa-bell, .fa-globe, .fa-sign-out-alt {
+  font-size: 1.2rem;
+  color: #284a4b;
+}
+
+.fa-bell:hover {
+  color: #397d7c;
+  transform: scale(1.1);
 }
 
 .language-selector {
@@ -186,29 +184,27 @@
   color: #397d7c;
 }
 
+.language-selector span {
+  display: inline-block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar-main {
     padding: 10px 1rem;
-    top: 35px; /* Keep below top navbar */
   }
   
   .nav-center {
     gap: 1rem;
   }
   
-  .search-input {
+  .h-search-input {
     width: 120px;
   }
   
   .nav-link {
     font-size: 0.8rem;
     padding: 4px 8px;
-  }
-  
-  .logo-img {
-    width: 60px;
-    height: 85px;
   }
 }
 
@@ -224,10 +220,6 @@
   
   .navbar-main {
     top: 30px;
-  }
-  
-  .search-container {
-    display: none;
   }
   
   .language-selector span {

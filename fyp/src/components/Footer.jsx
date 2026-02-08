@@ -11,7 +11,10 @@ function Footer() {
   if (currentPath === '/login' || currentPath === '/login-page') {
     return null;
   }
-
+// 1. LOGIN PAGE - NO FOOTER AT ALL
+  if (currentPath === '/Alarm' || currentPath === '/Alarm') {
+    return null;
+  }
   // 2. SIGNUP PAGE - SIMPLE FOOTER (TEXT ONLY)
   if (currentPath === '/signup') {
     console.log("Showing SIMPLE footer for signup");

@@ -24,38 +24,41 @@ import MealCalendar from './pages/MealCalender';
 import MealFeature from './pages/MealFeature';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-
-
-
+import AlarmModal from './components/AlarmModal'; // ✅ MODAL IMPORT
 
 function App() {
   return (
     <Router>
+      {/* ✅ ALARM MODAL - SABSE UPAR */}
+      <AlarmModal />
+      
       <Header />
       <Routes>
         <Route path="/" element={<PublicHome />} />
         <Route path="/home" element={<HomePage />} />
-                <Route path="/smart-pantry" element={<PantryPage />} />
- <Route path="/smart-shopping" element={<ShoppingList />} />
-  <Route path="/guidance" element={<BeginnersPage/>} />
-    <Route path="/measuring-skills" element={<MeasuringSkillsPage/>} />
-    <Route path="/table-settings" element={<TableSettingsPage/>} />
+        <Route path="/smart-pantry" element={<PantryPage />} />
+        <Route path="/smart-shopping" element={<ShoppingList />} />
+        <Route path="/guidance" element={<BeginnersPage/>} />
+        <Route path="/measuring-skills" element={<MeasuringSkillsPage/>} />
+        <Route path="/table-settings" element={<TableSettingsPage/>} />
         <Route path="/cutting-techniques" element={<CuttingTechniquesPage/>} />
-                <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
-<Route path="/cooking-methods" element={<CookingMethodsPage/>} />
-    <Route path="/meat-cuts" element={<MeatCutsPage/>} />  
-    <Route path="/spices-flavors" element={<SpicesFlavorsPage/>} />    
+        <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
+        <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
+        <Route path="/meat-cuts" element={<MeatCutsPage/>} />  
+        <Route path="/spices-flavors" element={<SpicesFlavorsPage/>} />    
         <Route path="/recipes" element={<RecipeFeature/>} />    
-           <Route path="/soups" element={<RecipeSoupPage/>} />    
-            <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
-             <Route path="/Beverages" element={<RecipeBeveragesPage/>} />    
-              <Route path="/desserts" element={<RecipeDessertsPage/>} />    
-                            <Route path="/baking" element={<RecipeBakingPage/>} />    
- <Route path="/calender" element={<MealCalendar/>} />
-  <Route path="/meal-planner" element={<MealFeature/>} />
-<Route path="/login-page" element={<LoginPage />} />
-<Route path="/signup" element={<SignUpPage />} />
-
+        <Route path="/soups" element={<RecipeSoupPage/>} />    
+        <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
+        <Route path="/Beverages" element={<RecipeBeveragesPage/>} />    
+        <Route path="/desserts" element={<RecipeDessertsPage/>} />    
+        <Route path="/baking" element={<RecipeBakingPage/>} />    
+        <Route path="/calender" element={<MealCalendar/>} />
+        <Route path="/meal-planner" element={<MealFeature/>} />
+        <Route path="/login-page" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        
+        {/* ❌ ALARM ROUTE HATA DIYA - Kyonki modal use karenge */}
+        {/* <Route path="/Alarm" element={<Alarm />} /> */}
       </Routes>
       <Footer />
     </Router>

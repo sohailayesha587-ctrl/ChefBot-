@@ -1,46 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // ❌ useNavigate HATAO
 import './Header.css';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const location = useLocation(); // ✅ Better way to get current path
+  const location = useLocation();
+  // ❌ useNavigate HATA DIYA
   
   const handleSearch = (e) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
   };
 
-  // ✅ Use effect to track path changes
+  // ✅ CORRECT FUNCTION - Modal kholega
+  const openAlarmModal = () => {
+    console.log("🔔 Alarm icon clicked!");
+    
+    // ✅ Yeh line IMPORTANT hai:
+    if (window.openAlarmModal) {
+      window.openAlarmModal(); // AlarmModal.jsx ka function call karo
+    } else {
+      console.error("❌ openAlarmModal not found! Check AlarmModal.jsx");
+      alert("Alarm modal is loading... Please wait or refresh.");
+    }
+  };
+
   useEffect(() => {
-    console.log("Header - Location changed to:", location.pathname);
-    console.log("Header - Is signup page?", location.pathname === '/signup');
+    console.log("Header - Location:", location.pathname);
   }, [location]);
 
-  // ✅ LOGIN PAGE PE - NO HEADER
-  if (location.pathname === '/login-page') {
-    console.log("Hiding header for login-page");
-    return null; 
+  if (location.pathname === '/login-page' || location.pathname === '/Alarm') {
+    return null;
   }
-  
-  // ✅ All other pages (INCLUDING SIGNUP) should show header
-  console.log("Showing header for path:", location.pathname);
   
   return (
     <>
-      {/* FIRST NAVBAR - Welcome Bar */}
+      {/* Top Welcome Bar */}
       <nav className="navbar-top">
-        <div className="welcome-text">Hey guys! Welcome to ChefBot - Your AI Cooking Assistant</div>
+        <div className="welcome-text">
+          Hey guys! Welcome to ChefBot - Your AI Cooking Assistant
+        </div>
       </nav>
 
-      {/* SECOND NAVBAR - Main Navigation */}
+      {/* Main Navigation */}
       <nav className="navbar-main">
-        {/* Left: Logo */}
+        {/* Logo */}
         <div className="logo">
           <img src="/logo.png" alt="ChefBot Logo" className="logo-img" />
         </div>
         
-        {/* Center: Links + Search */}
+        {/* Center Links + Search */}
         <div className="nav-center">
           <Link to="/home" className="nav-link">Home</Link>
           <Link to="/about" className="nav-link">About</Link>
@@ -65,17 +74,22 @@ const Header = () => {
           </div>
         </div>
         
-        {/* Right: Icons */}
+        {/* Right Icons */}
         <div className="nav-right">
-          <div className="simple-icon">
+          {/* ✅ Alarm Bell - CORRECT onClick */}
+          <div className="simple-icon alarm-icon" onClick={openAlarmModal} title="Open Alarm Timer">
             <i className="fas fa-bell"></i>
           </div>
+          
+          {/* Language */}
           <div className="language-selector">
             <div className="simple-icon">
               <i className="fas fa-globe"></i>
             </div>
             <span>EN/UR</span>
           </div>
+          
+          {/* User */}
           <div className="simple-icon">
             <i className="fas fa-sign-out-alt"></i>
           </div>
