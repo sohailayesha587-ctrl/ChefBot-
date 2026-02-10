@@ -2268,3 +2268,111 @@ html, body, #root {
 .ktp-crockery-card, .ktp-cutlery-card, .ktp-servingware-card {
   animation: fadeInUp 0.5s ease-out;
 }
+/* ===== SERVING CUTLERY SECTION ===== */
+.ktp-serving-cutlery-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-serving-cutlery-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ktp-serving-cutlery-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-serving-cutlery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+  border-top: 4px solid #8b5cf6; /* Purple for Serving Cutlery */
+}
+
+.ktp-serving-cutlery-card-image {
+  width: 100%;
+  height: 250px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.ktp-serving-cutlery-card-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ktp-serving-cutlery-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.ktp-serving-cutlery-description {
+  background: #f8fafc;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #8b5cf6;
+}
+
+.ktp-serving-cutlery-description p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+}
+
+/* RESPONSIVE FOR SERVING CUTLERY */
+@media (max-width: 768px) {
+  .ktp-serving-cutlery-card {
+    max-width: 100%;
+  }
+  
+  .ktp-serving-cutlery-card-image {
+    height: 200px;
+  }
+  
+  .ktp-serving-cutlery-card-content {
+    padding: 15px;
+    gap: 10px;
+  }
+  
+  .ktp-serving-cutlery-card-title {
+    font-size: 16px;
+  }
+  
+  .ktp-serving-cutlery-description {
+    padding: 10px 12px;
+  }
+  
+  .ktp-serving-cutlery-description p {
+    font-size: 13px;
+  }
+}
+
+/* Add serving cutlery card to animation */
+.ktp-serving-cutlery-card {
+  animation: fadeInUp 0.5s ease-out;
+}
