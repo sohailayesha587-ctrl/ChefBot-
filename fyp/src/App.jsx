@@ -13,7 +13,6 @@ import CuttingTechniquesPage from './pages/CuttingTechniquesPage';
 import KitchenToolsPage from './pages/KitchenToolsPage';
 import CookingMethodsPage from './pages/CookingMethodsPage';
 import MeatCutsPage from './pages/MeatCutsPage';
-import SpicesFlavorsPage from './pages/SpicesFlavorsPage';
 import RecipeFeature from './pages/RecipeFeature';
 import RecipeSoupPage from './pages/RecipeSoupPage';
 import RecipeBakingPage from './pages/RecipeBakingPage';
@@ -25,6 +24,8 @@ import MealFeature from './pages/MealFeature';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AlarmModal from './components/AlarmModal'; // ✅ MODAL IMPORT
+import PantryBasicsPage from './pages/PantryBasicsPage';
+import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
         <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
         <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
         <Route path="/meat-cuts" element={<MeatCutsPage/>} />  
-        <Route path="/spices-flavors" element={<SpicesFlavorsPage/>} />    
+        <Route path="/pantry-basics" element={<PantryBasicsPage/>} />    
         <Route path="/recipes" element={<RecipeFeature/>} />    
         <Route path="/soups" element={<RecipeSoupPage/>} />    
         <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
@@ -56,6 +57,8 @@ function App() {
         <Route path="/meal-planner" element={<MealFeature/>} />
         <Route path="/login-page" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
+
         
         {/* ❌ ALARM ROUTE HATA DIYA - Kyonki modal use karenge */}
         {/* <Route path="/Alarm" element={<Alarm />} /> */}

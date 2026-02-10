@@ -2,338 +2,304 @@ import React, { useState } from 'react';
 import './TableSettingsPage.css';
 
 const TableSettingsPage = () => {
-  const [activeSetting, setActiveSetting] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSetting, setSelectedSetting] = useState(null);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
 
-  const settings = [
-    { 
-      id: 1, 
-      title: "Basic Setting", 
-      shortDesc: "Simple and clean for everyday meals.",
-      detailedDescription: `This is the everyday setup used for a simple meal like breakfast or lunch. It's minimal, practical, and perfect for daily family meals where formality isn't required but organization still matters.
-
-**Key Characteristics:**
-- One fork, one knife, one spoon
-- Single water glass
-- Napkin placement varies
-- Casual and approachable
-
-**Perfect For:**
-- Family breakfasts
-- Quick lunches
-- Informal weekend meals
-- Daily dining routine`,
-      steps: `Step 1: Place the dinner plate in the center
-Step 2: Place the napkin to the left of the plate
-Step 3: Place the fork on the napkin
-Step 4: Place the knife to the right of the plate (blade facing in)
-Step 5: Place the water glass above the knife`,
-      rule: "Think of the word FORKS. From left to right: F(ork), O(plate), K(nife), S(poon).",
-      bestFor: "Everyday breakfast or lunch",
-      proTip: "The knife blade must always face the plate!",
-      tools: "Dinner plate, fork, knife, water glass, napkin",
-      image: "https://images.unsplash.com/photo-1544145945-f904253d0c71?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+  // TABLE SETTINGS DATA
+  const tableSettings = [
+    {
+      id: 1,
+      name: "Basic Table Setting",
+      tagline: "Everyday casual dining",
+      fullDesc: "The basic table setting is used for everyday meals and casual dining. It includes essential utensils for a simple meal, typically with just one course. This setting is perfect for breakfast, lunch, or casual family dinners.",
+      keyUses: ["Family dinners", "Breakfast", "Lunch", "Casual meals"],
+      previewImg: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Placemat optional",
+        "Dinner plate in center",
+        "Fork on left of plate",
+        "Knife on right, blade facing plate",
+        "Spoon right of knife",
+        "Water glass above knife tip",
+        "Napkin left of fork or on plate"
+      ],
+      utensils: "Dinner fork, knife, teaspoon, water glass, napkin",
+      occasions: "Daily meals, casual dining, family gatherings",
+      tips: ["Keep it simple and functional", "Use casual dinnerware", "Napkin can be folded simply", "Add plate charger for formal touch"]
     },
-    { 
-      id: 2, 
-      title: "Informal Dinner", 
-      shortDesc: "Elegant yet relaxed for dinner guests.",
-      detailedDescription: `Use this when you have guests over for a nice 3-course dinner. It strikes the perfect balance between casual and formal, making guests feel special without being overly rigid.
-
-**Key Characteristics:**
-- Multiple glasses for different drinks
-- Soup spoon included
-- Napkin placement options
-- Slightly more elaborate than basic
-
-**Perfect For:**
-- Dinner parties with friends
-- Date nights at home
-- Holiday meals with family
-- Weekend entertaining`,
-      steps: `Step 1: Dinner plate in the center
-Step 2: Soup bowl on top of the plate
-Step 3: Dinner fork to the left
-Step 4: Knife to the right, then soup spoon next to it
-Step 5: Water glass and wine glass at the top right`,
-      rule: "The glass closest to the guest's hand should be the water glass.",
-      bestFor: "Casual dinner parties with friends",
-      proTip: "Place the napkin on top of the plate for a modern look.",
-      tools: "Dinner plate, soup bowl, dinner fork, knife, soup spoon, water glass, wine glass",
-      image: "https://images.unsplash.com/photo-1517054011397-c85ec01fd634?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800"
+    {
+      id: 2,
+      name: "Informal Table Setting",
+      tagline: "Semi-formal occasions",
+      fullDesc: "The informal table setting is used for semi-formal occasions like dinner parties, holiday meals, or special family gatherings. It includes more utensils than basic setting but less than formal. Suitable for 2-3 course meals.",
+      keyUses: ["Dinner parties", "Holiday meals", "Anniversaries", "Special occasions"],
+      previewImg: "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Placemat or tablecloth",
+        "Dinner plate in center",
+        "Salad plate on dinner plate",
+        "Forks left of plate (dinner fork inside)",
+        "Knives right of plate (dinner knife inside)",
+        "Spoons right of knives",
+        "Bread plate top left",
+        "Drink glasses top right",
+        "Napkin on dinner plate or left"
+      ],
+      utensils: "Salad fork, dinner fork, dinner knife, teaspoon, soup spoon, bread plate, butter knife, water glass, wine glass, napkin",
+      occasions: "Dinner parties, celebrations, holiday meals",
+      tips: ["Use matching dinnerware", "Leave 1 inch between place settings", "Align bottoms of utensils", "Glassware in order of use"]
     },
-    { 
-      id: 3, 
-      title: "Formal Setting", 
-      shortDesc: "The ultimate guide for fancy dining.",
-      detailedDescription: `The "Royal" look for weddings, holidays, or 5-star events. This setting follows traditional etiquette rules and is designed for multi-course meals with wine pairings.
-
-**Key Characteristics:**
-- Charger plate as base
-- Multiple forks and knives
-- Bread plate with butter knife
-- Multiple glasses arranged by size
-- Dessert utensils above plate
-
-**Perfect For:**
-- Weddings and formal receptions
-- Holiday feasts (Thanksgiving, Christmas)
-- Fine dining experiences
-- Business dinners`,
-      steps: `Step 1: Place a large decorative plate (Charger) down first
-Step 2: Salad fork and Dinner fork to the left
-Step 3: Knife, Salad knife, and Spoon to the right
-Step 4: Bread plate and butter knife at top left
-Step 5: Dessert spoon and fork horizontally above the plate`,
-      rule: "Always use the silverware from the outside in as the meal progresses!",
-      bestFor: "Weddings or multi-course holiday meals",
-      proTip: "Start with the cutlery furthest from the plate and work your way in!",
-      tools: "Charger plate, dinner plate, salad fork, dinner fork, knife, salad knife, spoon, bread plate, butter knife, dessert utensils, multiple glasses",
-      image: "https://images.unsplash.com/photo-1529101091764-c3526daf38fe?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800"
+    {
+      id: 3,
+      name: "Formal Table Setting",
+      tagline: "Elegant multi-course dining",
+      fullDesc: "The formal table setting is used for elegant dinners, weddings, fine dining restaurants, and special ceremonies. It follows strict etiquette rules with multiple utensils for each course. Typically used for 4+ course meals.",
+      keyUses: ["Weddings", "Fine dining", "State dinners", "Gala events"],
+      previewImg: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Tablecloth required",
+        "Charger plate in center",
+        "Salad plate on charger",
+        "Bread plate top left with butter knife",
+        "Forks left (outside in: salad, fish, dinner)",
+        "Knives right (outside in: fish, dinner)",
+        "Spoons right of knives",
+        "Glasses top right (water, red wine, white wine)",
+        "Napkin on charger or left",
+        "Dessert utensils above plate"
+      ],
+      utensils: "Salad fork, fish fork, dinner fork, fish knife, dinner knife, soup spoon, teaspoon, dessert utensils, bread plate, multiple glasses, napkin",
+      occasions: "Black tie events, weddings, diplomatic dinners",
+      tips: ["All utensils 1 inch from table edge", "Utensils 1/2 inch apart", "Glassware in diagonal arrangement", "Napkin with simple fold"]
     },
-    { 
-      id: 4, 
-      title: "Buffet Style", 
-      shortDesc: "Smart layout for large parties.",
-      detailedDescription: `When guests serve themselves from a large table. This practical setup maximizes flow and minimizes congestion while ensuring guests have everything they need when they sit down.
-
-**Key Characteristics:**
-- Plates at beginning of buffet line
-- Silverware at end of line or at table
-- Drinks on separate table
-- Napkins with silverware or at table
-- Multiple serving stations possible
-
-**Perfect For:**
-- Large parties and gatherings
-- Corporate events
-- Weddings with buffet service
-- Holiday open houses`,
-      steps: `Step 1: Stack plates at the very beginning of the buffet line
-Step 2: Place silverware and napkins at the very end so guests don't have to carry them while serving food
-Step 3: Put drinks on a separate table to avoid spills
-Step 4: Arrange food in logical order: appetizers, mains, sides, salads
-Step 5: Provide multiple serving utensils for each dish`,
-      rule: "Don't put the cutlery at the start; it's hard for guests to hold forks while scooping food!",
-      bestFor: "Large parties and gatherings",
-      proTip: "Create a separate drinks table to prevent beverage spills on the buffet line.",
-      tools: "Buffet tables, serving dishes, serving utensils, plates, silverware, napkins, drink station",
-      image: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 4,
+      name: "Buffet Table Setting",
+      tagline: "Self-service style",
+      fullDesc: "The buffet table setting allows guests to serve themselves from a central table. It's practical for large gatherings where serving individually isn't feasible. The focus is on organizing food logically and providing convenient serving areas.",
+      keyUses: ["Large parties", "Corporate events", "Wedding receptions", "Holiday gatherings"],
+      previewImg: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Table with tablecloth",
+        "Plates at beginning of line",
+        "Flatware wrapped in napkins at end",
+        "Food in logical order (appetizers to desserts)",
+        "Serving utensils for each dish",
+        "Drink station separate",
+        "Clear traffic flow path",
+        "Multiple stations for large crowds"
+      ],
+      utensils: "Dinner plates, salad plates, bowls, wrapped flatware sets, serving utensils, beverage glasses",
+      occasions: "Large gatherings, cocktail parties, office events",
+      tips: ["Create logical flow", "Label dishes clearly", "Keep hot foods hot", "Provide trash/recycle stations"]
     },
-    { 
-      id: 5, 
-      title: "Bistro Style", 
-      shortDesc: "European café-style casual dining.",
-      detailedDescription: `The relaxed European approach to table setting, often seen in cafes and bistros. It's minimal, charming, and focuses on creating a cozy atmosphere rather than formal presentation.
-
-**Key Characteristics:**
-- Utensils wrapped in napkin
-- No charger plate
-- Minimal glassware
-- Rustic, casual presentation
-- Often includes bread basket
-
-**Perfect For:**
-- Casual European-style dinners
-- Café and bistro dining
-- Rustic themed events
-- Intimate gatherings`,
-      steps: `Step 1: Place dinner plate slightly off-center for casual feel
-Step 2: Wrap utensils in napkin and place diagonally
-Step 3: Wine glass at 2 o'clock position
-Step 4: Bread plate optional, often served in basket
-Step 5: Salt and pepper shakers placed together`,
-      rule: "Utensils wrapped in napkins should have the tips pointing toward the guest.",
-      bestFor: "European-style casual dining",
-      proTip: "Use cloth napkins for a more authentic bistro feel.",
-      tools: "Dinner plate, fork, knife, wine glass, cloth napkin, bread basket",
-      image: "https://images.unsplash.com/photo-1554679665-f5537f187268?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800"
+    {
+      id: 5,
+      name: "Family Style Setting",
+      tagline: "Shared meal serving",
+      fullDesc: "Family style setting places serving dishes on the dining table for everyone to share. It creates a warm, communal atmosphere where dishes are passed around. This encourages interaction and conversation during meals.",
+      keyUses: ["Family meals", "Thanksgiving", "Sunday dinners", "Intimate gatherings"],
+      previewImg: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Individual place settings",
+        "Serving dishes in center",
+        "Serving utensils with each dish",
+        "Platters within easy reach",
+        "Trivets for hot dishes",
+        "Butter, salt, pepper accessible",
+        "Water pitcher on table",
+        "Extra serving space"
+      ],
+      utensils: "Individual place settings, serving platters, serving utensils, gravy boats, condiment dishes",
+      occasions: "Holiday meals, family dinners, friendly gatherings",
+      tips: ["Arrange for easy passing", "Provide serving utensils", "Keep hot dishes insulated", "Leave space for elbow room"]
     },
-    { 
-      id: 6, 
-      title: "Family Style", 
-      shortDesc: "Shared dishes in the center of the table.",
-      detailedDescription: `Traditional family dining where large serving dishes are placed in the center of the table and everyone serves themselves. This encourages conversation and sharing while keeping the individual place settings simple.
-
-**Key Characteristics:**
-- Simple individual place settings
-- Large serving dishes in center
-- Serving utensils for each dish
-- Passing dishes encouraged
-- Casual, communal atmosphere
-
-**Perfect For:**
-- Family holiday meals
-- Sunday dinners
-- Casual entertaining
-- Potluck gatherings`,
-      steps: `Step 1: Set simple individual place settings (plate, fork, knife, napkin)
-Step 2: Place serving dishes in center with serving utensils
-Step 3: Arrange drinks within easy reach
-Step 4: Include extra plates for second helpings
-Step 5: Provide trivets or hot pads for warm dishes`,
-      rule: "Serving dishes should be arranged in order of use: appetizers first, then mains, then sides.",
-      bestFor: "Family gatherings and casual dinners",
-      proTip: "Place serving spoons with handles facing outward for easy access.",
-      tools: "Individual plates, serving dishes, serving utensils, trivets, family-style bowls",
-      image: "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581092334652-d5728b8a5d3b?auto=format&fit=crop&w=800"
+    {
+      id: 6,
+      name: "Breakfast Table Setting",
+      tagline: "Morning meal arrangement",
+      fullDesc: "The breakfast table setting is simplified for morning meals. It typically includes fewer utensils and is designed for efficiency. Coffee/tea service is often incorporated directly into the place setting or nearby.",
+      keyUses: ["Breakfast", "Brunch", "Morning meetings", "Hotel service"],
+      previewImg: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?auto=format&fit=crop&w=400",
+      placementRules: [
+        "Placemat or bare table",
+        "Dinner plate or bowl in center",
+        "Fork left of plate",
+        "Knife right of plate",
+        "Spoon right of knife or on bowl",
+        "Cup and saucer top right",
+        "Juice glass above knife",
+        "Napkin left or on plate",
+        "Bread plate optional"
+      ],
+      utensils: "Breakfast fork, knife, teaspoon, juice glass, coffee cup/saucer, napkin",
+      occasions: "Morning meals, brunch, business breakfasts",
+      tips: ["Keep it simple", "Include coffee/tea service", "Use bright colors", "Consider toast or bread plate"]
     }
   ];
 
-  const handleSettingClick = (setting) => {
-    setActiveSetting(setting);
-    setIsModalOpen(true);
+  const handleSettingSelect = (setting) => {
+    setSelectedSetting(setting);
+    setShowDetailPanel(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setActiveSetting(null);
+  const closeDetailPanel = () => {
+    setShowDetailPanel(false);
+    setSelectedSetting(null);
   };
 
   return (
-    <div className="table-settings-page">
-      {/* SIDEBAR */}
-      <aside className="sidebar">
-        <h2>Dining Guide</h2>
-        <ul className="settings-list">
-          {settings.map(setting => (
-            <li key={setting.id} className="setting-item">
-              {setting.title}
-            </li>
-          ))}
-        </ul>
-      </aside>
+    <div className="tsp-container">
+      <div className="tsp-layout">
+        {/* SIDEBAR */}
+        <aside className="tsp-sidebar">
+          <div className="tsp-sidebar-header">
+            <h2 className="tsp-sidebar-title">Table Settings</h2>
+            <p className="tsp-sidebar-subtitle">Dining Arrangements</p>
+          </div>
 
-      {/* MAIN CONTENT */}
-      <main className="main-content">
-        <header className="content-header">
-          <h1>Table Setting Styles</h1>
-          <p className="header-subtitle">Master the art of beautiful table arrangements</p>
-        </header>
+          <div className="tsp-sidebar-settings">
+            <ul className="tsp-settings-list">
+              {tableSettings.map(setting => (
+                <li 
+                  key={setting.id} 
+                  className={`tsp-setting-list-item ${selectedSetting?.id === setting.id ? 'tsp-active' : ''}`}
+                  onClick={() => handleSettingSelect(setting)}
+                >
+                  <span className="tsp-setting-list-name">{setting.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
 
-        <div className="settings-grid">
-          {settings.map(setting => (
-            <div 
-              key={setting.id} 
-              className="setting-card"
-              onClick={() => handleSettingClick(setting)}
-            >
-              <div 
-                className="card-image"
-                style={{ backgroundImage: `url(${setting.image})` }}
-              ></div>
-              <div className="card-content">
-                <h3>{setting.title}</h3>
-                <p className="card-desc">{setting.shortDesc}</p>
-                <div className="click-details">
-                  View Details →
-                </div>
-              </div>
+        {/* MAIN CONTENT */}
+        <main className="tsp-main">
+          <header className="tsp-main-header">
+            <div className="tsp-header-content">
+              <h1 className="tsp-page-title">Table Setting Styles</h1>
+              <p className="tsp-page-description">
+                Learn proper table arrangements for every dining occasion.
+              </p>
             </div>
-          ))}
-        </div>
-      </main>
+          </header>
 
-    
-
-      {/* DETAILED POPUP MODAL */}
-      {isModalOpen && activeSetting && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closeModal}>×</button>
-            
-            {/* Main Image */}
-            <div className="modal-header">
-              <div 
-                className="modal-image"
-                style={{ backgroundImage: `url(${activeSetting.image})` }}
-              ></div>
-              <div className="modal-title-section">
-                <h2>{activeSetting.title}</h2>
-                <div className="modal-subtitle">{activeSetting.shortDesc}</div>
-              </div>
-            </div>
-            
-            <div className="modal-body">
-              {/* Detailed Description Section */}
-              <div className="section detailed-description">
-                <h3>Complete Guide</h3>
-                <div className="description-content">
-                  {activeSetting.detailedDescription?.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="description-paragraph">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Steps Section */}
-              <div className="section steps-section">
-                <h3>Step-by-Step Setup</h3>
-                <div className="steps-content">
-                  {activeSetting.steps?.split('\n').map((step, index) => (
-                    <div key={index} className="step-item">
-                      <span className="step-number">{index + 1}</span>
-                      <span className="step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Secondary Image */}
-              {activeSetting.secondaryImage && (
-                <div className="secondary-image-container">
+          {/* SETTINGS GRID */}
+          <div className="tsp-settings-grid-section">
+            <div className="tsp-settings-grid">
+              {tableSettings.map(setting => (
+                <div 
+                  key={setting.id} 
+                  className="tsp-setting-card"
+                  onClick={() => handleSettingSelect(setting)}
+                >
                   <div 
-                    className="secondary-image"
-                    style={{ backgroundImage: `url(${activeSetting.secondaryImage})` }}
+                    className="tsp-card-image"
+                    style={{ backgroundImage: `url(${setting.previewImg})` }}
                   ></div>
+                  
+                  <div className="tsp-card-content">
+                    <h3 className="tsp-card-title">{setting.name}</h3>
+                    <p className="tsp-card-description">{setting.tagline}</p>
+                    <div className="tsp-card-formality">
+                      <span className={`tsp-formality-badge ${setting.name.toLowerCase().includes('basic') ? 'casual' : setting.name.toLowerCase().includes('formal') ? 'formal' : 'semi-formal'}`}>
+                        {setting.name.toLowerCase().includes('basic') ? 'Casual' : setting.name.toLowerCase().includes('formal') ? 'Formal' : 'Semi-Formal'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              )}
-              
-              {/* Info Grid */}
-              <div className="info-grid">
-                <div className="info-box best-for-box">
-                  <h4>Best Used For</h4>
-                  <p>{activeSetting.bestFor}</p>
+              ))}
+            </div>
+          </div>
+        </main>
+      </div>
+
+      {/* DETAIL MODAL */}
+      {showDetailPanel && selectedSetting && (
+        <div className="tsp-modal-overlay" onClick={closeDetailPanel}>
+          <div className="tsp-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="tsp-modal-close" onClick={closeDetailPanel}>×</button>
+            
+            <div className="tsp-modal-header">
+              <div className="tsp-modal-title">
+                <h2>{selectedSetting.name}</h2>
+                <p className="tsp-modal-subtitle">{selectedSetting.tagline}</p>
+              </div>
+            </div>
+
+            <div className="tsp-modal-content">
+              {/* LEFT SIDE - CONTENT (65%) */}
+              <div className="tsp-modal-details">
+                {/* DESCRIPTION */}
+                <div className="tsp-detail-section description-section">
+                  <h3>Description</h3>
+                  <p>{selectedSetting.fullDesc}</p>
                 </div>
-                
-                <div className="info-box tools-box">
-                  <h4>Required Tools</h4>
-                  <p>{activeSetting.tools}</p>
+
+                {/* COMMON USES - HORIZONTAL */}
+                <div className="tsp-detail-section uses-section">
+                  <h3>Common Uses</h3>
+                  <div className="tsp-uses-list">
+                    {selectedSetting.keyUses.map((use, idx) => (
+                      <div key={idx} className="tsp-use-item">
+                        <span className="tsp-use-check">✓</span>
+                        <span>{use}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                
-                <div className="info-box pro-tip-box">
-                  <h4>Golden Rule</h4>
-                  <p>{activeSetting.rule}</p>
+
+                {/* TABLE DETAILS */}
+                <div className="tsp-detail-section details-section">
+                  <h3>Setting Details</h3>
+                  <div className="tsp-details-list">
+                    <div className="tsp-detail-item">
+                      <span className="tsp-detail-label">Required Utensils:</span>
+                      <span className="tsp-detail-value">{selectedSetting.utensils}</span>
+                    </div>
+                    <div className="tsp-detail-item">
+                      <span className="tsp-detail-label">Typical Occasions:</span>
+                      <span className="tsp-detail-value">{selectedSetting.occasions}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* PLACEMENT RULES */}
+                <div className="tsp-detail-section steps-section">
+                  <h3>Placement Rules</h3>
+                  <div className="tsp-steps-list">
+                    {selectedSetting.placementRules.map((rule, idx) => (
+                      <div key={idx} className="tsp-step-item">
+                        <span className="tsp-step-number">{idx + 1}.</span>
+                        <span className="tsp-step-text">{rule}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* TIPS */}
+                <div className="tsp-detail-section tips-section">
+                  <h3>Setting Tips</h3>
+                  <div className="tsp-tips-list">
+                    {selectedSetting.tips.map((tip, idx) => (
+                      <div key={idx} className="tsp-tip-item">
+                        <span className="tsp-tip-icon">💡</span>
+                        <span>{tip}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              
-              {/* Pro Tip Section */}
-              <div className="pro-tip-section">
-                <div className="pro-tip-icon">💡</div>
-                <div className="pro-tip-content">
-                  <h4>Expert Pro Tip</h4>
-                  <p>{activeSetting.proTip}</p>
+
+              {/* RIGHT SIDE - IMAGE (35%) */}
+              <div className="tsp-modal-image-container">
+                <div 
+                  className="tsp-modal-main-image"
+                  style={{ backgroundImage: `url(${selectedSetting.previewImg})` }}
+                ></div>
+                <div className="tsp-image-caption">
+                  {selectedSetting.name} - Table Setting
                 </div>
-              </div>
-              
-              {/* Etiquette Notes */}
-              <div className="etiquette-notes">
-                <h4>Etiquette Notes:</h4>
-                <ul>
-                  <li>Always pass dishes to the right</li>
-                  <li>Place used utensils on the plate, not the table</li>
-                  <li>Napkin on lap immediately after sitting</li>
-                  <li>Wait for host to start eating</li>
-                  <li>Keep elbows off the table during the meal</li>
-                  <li>Place used utensils at 4:20 position on plate when finished</li>
-                </ul>
               </div>
             </div>
           </div>

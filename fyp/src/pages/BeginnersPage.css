@@ -129,13 +129,12 @@
 .guide-section-card {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 20px rgba(40, 91, 90, 0.08);
   border: 2px solid #e8f0f0;
-  height: 100%;
-  min-height: 240px;
+  height: 315px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -190,23 +189,6 @@
   margin-bottom: 0.2rem;
 }
 
-/* Card Number - Top Right Corner */
-.guide-card-number {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(40, 91, 90, 0.1);
-  color: #285B5A;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.9rem;
-  border: 2px solid #285B5A;
-}
 
 /* Card Content */
 .guide-card-content {

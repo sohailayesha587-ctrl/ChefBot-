@@ -1,4 +1,5 @@
-/* ===== RESET & BASE ===== */
+/* ===== UNIQUE KITCHEN TOOLS PAGE CSS ===== */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -7,281 +8,1263 @@
 
 html, body, #root {
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  background: #f7f9fa;
-  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f8fafc;
 }
 
-/* ===== PAGE WRAPPER ===== */
-.kitchen-tools-page {
-  display: flex;
+/* MAIN CONTAINER */
+.ktp-container {
   width: 100%;
   min-height: 100vh;
-  position: relative;
+  padding: 0px;
+}
+
+.ktp-layout {
+  display: flex;
+  min-height: 100vh;
 }
 
 /* ===== SIDEBAR ===== */
-.sidebar {
+.ktp-sidebar {
   width: 280px;
-  background: linear-gradient(180deg, #284a4b);
-  color: white;
-  padding: 15px 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 100;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: -1px;
-  color: #ffffff;
-  text-align: center;
-  letter-spacing: 0.5px;
-  padding: 30px 20px;
-  border-bottom: 2px solid rgba(52, 152, 219, 0.3);
-  padding-bottom: 20px;
-}
-
-/* Tools List */
-.tools-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tool-item {
-  display: block;
-  width: 100%;
-  padding: 16px 25px;
-  margin-bottom: -10px;
-  font-size: 16px;
-  color: #ecf0f1;
-  background: none;
-  border: none;
-  text-align: left;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border-radius: 0;
-  border-left: 4px solid transparent;
-  cursor: default;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tool-item:hover {
-  background-color: rgba(52, 152, 219, 0.1);
-  color: #3498db;
-  border-left: 4px solid #3498db;
-  padding-left: 30px;
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-  margin-left: 280px;
-  width: calc(100% - 280px);
-  min-height: 100vh;
-  background: #f7f9fa;
-  padding: 40px;
-  padding-bottom: 80px;
-}
-
-/* Header */
-.content-header {
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.content-header h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  letter-spacing: -0.5px;
-}
-
-.header-subtitle {
-  font-size: 18px;
-  color: #7f8c8d;
-  font-weight: 400;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.5;
-}
-
-/* Grid */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 25px;
-  margin-bottom: 60px;
-}
-
-/* Cards */
-.tool-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border: 1px solid #e3e8ee;
-  height: 120px;
-  display: flex;
-  flex-direction: row;
-}
-
-.tool-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(44, 62, 80, 0.15);
-  border-color: #3498db;
-}
-
-.card-image {
-  width: 35%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.5s ease;
-  flex-shrink: 0;
-}
-
-.tool-card:hover .card-image {
-  transform: scale(1.05);
-}
-
-.card-content {
-  width: 65%;
-  padding: 15px 20px;
+  background: #284a4b;
+  border-right: 1px solid #e2e8f0;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  position: sticky;
+  top: 0;
+  height: 165vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+  font-size: 1rem;
 }
 
-.card-content h3 {
-  font-size: 18px;
-  color: #2c3e50;
-  margin-bottom: 6px;
+.ktp-sidebar-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ktp-sidebar-title {
+  font-size: 24px;
   font-weight: 600;
-  line-height: 1.3;
+  color: white;
+  margin-bottom: 15px;
+  margin-top: 140px;
+  text-align: center;
 }
 
-.card-desc {
-  font-size: 13px;
-  color: #5d6d7e;
-  line-height: 1.4;
-  margin-bottom: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.ktp-sidebar-subtitle {
+  font-size: 15px;
+  color: white;
+  font-weight: 500;
+  text-align: center;
 }
 
-.click-details {
-  color: #2c3e50;
-  font-weight: 600;
-  font-size: 12px;
+.ktp-sidebar-tools {
+  flex: 1;
+}
+
+.ktp-tools-list {
+  list-style: none;
+}
+
+.ktp-tool-list-item {
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  margin-top: auto;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  background-color: white;
 }
 
-.click-details:after {
-  content: "→";
-  transition: transform 0.3s ease;
-}
-
-.tool-card:hover .click-details:after {
+.ktp-tool-list-item:hover {
+  background: #f1f5f9;
   transform: translateX(5px);
 }
 
-/* ===== FOOTER ===== */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 280px;
-  right: 0;
-  background: #2c3e50;
-  color: white;
-  padding: 20px 40px;
-  text-align: center;
-  border-top: 1px solid rgba(52, 152, 219, 0.2);
-  z-index: 99;
+.ktp-tool-list-item.ktp-active {
+  background: white;
+  border-color: #6366f1;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.1);
 }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
+.ktp-tool-list-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #284a4b;
+  text-align: center;
+}
+
+.ktp-tool-priority {
+  display: none;
+}
+
+/* ===== MAIN CONTENT ===== */
+.ktp-main {
+  flex: 1;
+  padding: 30px 40px;
+  min-height: auto;
+  height: auto;
+  background: #f8fafc;
+  overflow-y: visible;
+}
+
+.ktp-main-header {
+  margin-bottom: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ktp-page-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-top: 130px;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.ktp-page-description {
+  font-size: 18px;
+  color: #64748b;
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ===== TOOLS GRID ===== */
+.ktp-tools-grid-section {
+  margin-bottom: 40px;
+}
+
+.ktp-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.ktp-tool-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  height: 120px;
+  width: 100%;
+}
+
+.ktp-tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+.ktp-card-image {
+  width: 180px;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  border-right: 1px solid #e2e8f0;
+}
+
+.ktp-card-content {
+  padding: 15px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ktp-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ktp-card-description {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ktp-card-specs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ktp-spec {
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.ktp-card-footer {
+  padding: 10px 15px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.footer-text {
-  font-size: 14px;
-  color: #ecf0f1;
+.ktp-priority-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
 }
 
-.footer-links {
+.ktp-priority-badge.essential {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.ktp-priority-badge.important {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.ktp-priority-badge.useful {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+/* ===== CUTTING BOARD CARDS - 4 IN 1 LINE ===== */
+.ktp-boards-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-boards-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* DESKTOP: 4 CARDS PER ROW */
+.ktp-boards-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* ===== CUTTING BOARD CARDS - COMPACT VERSION ===== */
+.ktp-board-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
   display: flex;
-  gap: 25px;
+  flex-direction: column;
 }
 
-.footer-link {
-  color: #ecf0f1;
-  text-decoration: none;
+.ktp-board-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE */
+.ktp-board-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* COMPACT CONTENT */
+.ktp-board-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-board-card-title {
   font-size: 14px;
-  transition: color 0.3s ease;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.footer-link:hover {
-  color: #3498db;
+/* COMPACT TWO-COLUMN LAYOUT */
+.ktp-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid #f1f5f9;
+  min-height: 28px;
 }
 
-/* ===== MODAL STYLES ===== */
-.modal-overlay {
+.ktp-info-row:last-child {
+  border-bottom: none;
+}
+
+/* COMPACT HEADING */
+.ktp-info-heading {
+  min-width: 70px;
+  max-width: 70px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1e293b;
+  padding: 3px 5px;
+  background: #e0f2fe;
+  border-radius: 4px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* COMPACT CONTENT */
+.ktp-info-content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 0;
+}
+
+/* COMPACT ITEMS */
+.ktp-info-pros-item,
+.ktp-info-cons-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  line-height: 1.2;
+}
+
+.ktp-info-pros-icon,
+.ktp-info-cons-icon {
+  font-size: 9px;
+}
+
+/* COMPACT TEXT */
+.ktp-info-text {
+  font-size: 10px;
+  color: #475569;
+  line-height: 1.2;
+  padding: 2px 0;
+}
+
+/* ===== MODAL ===== */
+.ktp-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(44, 62, 80, 0.95);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 1000;
   padding: 20px;
-  animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(5px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-container {
+.ktp-modal {
   background: white;
-  border-radius: 16px;
-  max-width: 900px;
-  width: 90%;
+  border-radius: 15px;
+  width: 95%;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  animation: slideUp 0.4s ease;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes slideUp {
+.ktp-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f1f5f9;
+  color: #64748b;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* MODAL HEADER */
+.ktp-modal-header {
+  padding: 35px 30px 2px 30px;
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.ktp-modal-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 5px;
+  letter-spacing: -0.5px;
+}
+
+.ktp-modal-subtitle {
+  font-size: 14px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.ktp-modal-content {
+  display: flex;
+}
+
+/* HIDE LEFT IMAGE SECTION */
+.ktp-modal-image-container {
+  display: none;
+}
+
+/* ===== COMPACT DETAILS LAYOUT ===== */
+.ktp-modal-details {
+  width: 100%;
+  padding: 15px 30px;
+  overflow-y: auto;
+}
+
+/* INLINE SECTIONS */
+.ktp-detail-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ktp-detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ktp-detail-section h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 0;
+  padding: 4px 10px;
+  background: #e0e7ff;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 100px;
+  text-align: center;
+  border: none;
+}
+
+/* DESCRIPTION */
+.ktp-detail-section.description-section p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #475569;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+/* COMMON USES - INLINE */
+.ktp-uses-section .ktp-uses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+  margin: 0;
+}
+
+.ktp-use-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.ktp-use-check {
+  color: #10b981;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ===== MODERN KNIFE CARDS LAYOUT ===== */
+.ktp-knives-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-knives-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* KNIFE CARDS GRID */
+.ktp-knives-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 15px;
+}
+
+/* INDIVIDUAL KNIFE CARD */
+.ktp-knife-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-knife-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* CARD IMAGE */
+.ktp-knife-card-image {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* CARD CONTENT */
+.ktp-knife-card-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-knife-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.ktp-knife-card-size {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ktp-knife-card-size::before {
+  content: "📏";
+  font-size: 14px;
+}
+
+/* BEST FOR SECTION */
+.ktp-knife-card-best {
+  margin-top: 10px;
+  flex: 1;
+}
+
+.ktp-knife-card-best-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ktp-knife-card-best-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* COLOR CODED CARDS */
+.ktp-knife-card.nakiri {
+  border-top: 4px solid #10b981;
+}
+.ktp-knife-card.chef {
+  border-top: 4px solid #10b981;
+}
+
+.ktp-knife-card.paring {
+  border-top: 4px solid #3b82f6;
+}
+
+.ktp-knife-card.bread {
+  border-top: 4px solid #f59e0b;
+}
+
+.ktp-knife-card.santoku {
+  border-top: 4px solid #8b5cf6;
+}
+
+.ktp-knife-card.boning {
+  border-top: 4px solid #ef4444;
+}
+
+.ktp-knife-card.utility {
+  border-top: 4px solid #6366f1;
+}
+
+/* ===== MIXING BOWL CARDS ===== */
+.ktp-bowls-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-bowls-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* DESKTOP: 3 CARDS PER ROW */
+.ktp-bowls-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 15px;
+}
+
+/* INDIVIDUAL BOWL CARD - KNIVES STYLE */
+.ktp-bowl-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-bowl-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* CARD IMAGE - SAME AS KNIVES */
+.ktp-bowl-card-image {
+  width: 100%;
+  height: 200px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* CARD CONTENT - SAME AS KNIVES */
+.ktp-bowl-card-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ktp-bowl-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* PROS SECTION */
+.ktp-bowl-pros {
+  flex: 1;
+}
+
+.ktp-bowl-pros-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ktp-bowl-pros-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-bowl-pros-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.ktp-bowl-pros-icon {
+  color: #10b981;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* CONS SECTION */
+.ktp-bowl-cons {
+  flex: 1;
+}
+
+.ktp-bowl-cons-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ktp-bowl-cons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-bowl-cons-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.ktp-bowl-cons-icon {
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* BEST FOR SECTION */
+.ktp-bowl-best {
+  margin-top: 10px;
+}
+
+.ktp-bowl-best-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ktp-bowl-best-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* COLOR CODED BOWL CARDS */
+.ktp-bowl-card.bowl-steel {
+  border-top: 4px solid #94a3b8;
+}
+
+.ktp-bowl-card.bowl-glass {
+  border-top: 4px solid #0ea5e9;
+}
+
+.ktp-bowl-card.bowl-ceramic {
+  border-top: 4px solid #f59e0b;
+}
+
+.ktp-bowl-card.bowl-plastic {
+  border-top: 4px solid #10b981;
+}
+
+.ktp-bowl-card.bowl-copper {
+  border-top: 4px solid #b45309;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .ktp-boards-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  
+  .ktp-board-card-image {
+    height: 200px;
+  }
+  
+  .ktp-board-card-title {
+    font-size: 15px;
+  }
+  
+  .ktp-info-heading {
+    font-size: 11px;
+    min-width: 75px;
+    max-width: 75px;
+  }
+  
+  .ktp-info-pros-item,
+  .ktp-info-cons-item,
+  .ktp-info-text {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ktp-layout {
+    flex-direction: column;
+  }
+  
+  .ktp-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .ktp-main {
+    padding: 20px;
+  }
+  
+  .ktp-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ktp-tool-card {
+    height: auto;
+    flex-direction: column;
+  }
+  
+  .ktp-card-image {
+    width: 100%;
+    height: 180px;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .ktp-modal {
+    width: 98%;
+    max-height: 98vh;
+  }
+  
+  .ktp-modal-content {
+    flex-direction: column;
+  }
+  
+  .ktp-modal-details {
+    padding: 15px 20px;
+  }
+  
+  .ktp-detail-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .ktp-detail-section h3 {
+    width: 100%;
+    text-align: left;
+    min-width: auto;
+  }
+  
+  .ktp-uses-section .ktp-uses-list {
+    width: 100%;
+  }
+  
+  .ktp-knives-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  
+  .ktp-knife-card-image {
+    height: 180px;
+  }
+  
+  .ktp-boards-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .ktp-board-card-image {
+    height: 200px;
+  }
+  
+  .ktp-board-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-board-card-title {
+    font-size: 16px;
+  }
+  
+  .ktp-info-row {
+    min-height: 30px;
+    padding: 5px 0;
+  }
+  
+  .ktp-info-heading {
+    min-width: 75px;
+    max-width: 75px;
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+  
+  .ktp-info-pros-item,
+  .ktp-info-cons-item {
+    font-size: 11px;
+    gap: 3px;
+    padding: 3px 5px;
+  }
+  
+  .ktp-info-text {
+    font-size: 11px;
+  }
+  
+  .ktp-bowls-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .ktp-bowl-card-image {
+    height: 180px;
+  }
+  
+  .ktp-bowl-card-content {
+    padding: 15px;
+    gap: 10px;
+  }
+  
+  .ktp-bowl-card-title {
+    font-size: 16px;
+  }
+  
+  .ktp-bowl-pros-item,
+  .ktp-bowl-cons-item,
+  .ktp-bowl-best-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ktp-page-title {
+    font-size: 28px;
+  }
+  
+  .ktp-modal-header {
+    padding: 12px 20px 8px 20px;
+  }
+  
+  .ktp-modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .ktp-modal-subtitle {
+    font-size: 13px;
+  }
+  
+  .ktp-modal-details {
+    padding: 12px 15px;
+  }
+  
+  .ktp-knives-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .ktp-knife-card-image {
+    height: 160px;
+  }
+  
+  .ktp-knife-card-content {
+    padding: 15px;
+  }
+  
+  .ktp-knives-cards-heading {
+    font-size: 18px;
+  }
+  
+  .ktp-boards-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .ktp-board-card-image {
+    height: 180px;
+  }
+  
+  .ktp-board-card-content {
+    padding: 10px 10px 10px 10px;
+    gap: 6px;
+  }
+  
+  .ktp-board-card-title {
+    font-size: 15px;
+  }
+  
+  .ktp-info-row {
+    min-height: 28px;
+    padding: 4px 0;
+  }
+  
+  .ktp-info-heading {
+    min-width: 70px;
+    max-width: 70px;
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+  
+  .ktp-info-pros-item,
+  .ktp-info-cons-item {
+    font-size: 10px;
+    gap: 2px;
+    padding: 2px 4px;
+  }
+  
+  .ktp-info-text {
+    font-size: 10px;
+  }
+  
+  .ktp-bowls-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .ktp-bowl-card-image {
+    height: 160px;
+  }
+  
+  .ktp-bowl-card-content {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .ktp-bowls-cards-heading {
+    font-size: 18px;
+  }
+  
+  .ktp-bowl-card-title {
+    font-size: 15px;
+  }
+  
+  .ktp-bowl-pros-label,
+  .ktp-bowl-cons-label,
+  .ktp-bowl-best-label {
+    font-size: 11px;
+  }
+  
+  .ktp-bowl-pros-item,
+  .ktp-bowl-cons-item,
+  .ktp-bowl-best-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ktp-container {
+    padding: 10px;
+  }
+  
+  .ktp-main {
+    padding: 15px;
+  }
+  
+  .ktp-sidebar {
+    padding: 20px;
+  }
+  
+  .ktp-page-title {
+    font-size: 24px;
+  }
+  
+  .ktp-tool-card {
+    height: auto;
+  }
+  
+  .ktp-modal {
+    width: 100%;
+    border-radius: 10px;
+    max-height: 100vh;
+  }
+  
+  .ktp-modal-header {
+    padding: 10px 15px 5px 15px;
+  }
+  
+  .ktp-modal-details {
+    padding: 10px 15px;
+  }
+  
+  .ktp-knives-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ktp-knife-card-image {
+    height: 180px;
+  }
+  
+  .ktp-boards-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ktp-board-card-image {
+    height: 200px;
+  }
+  
+  .ktp-board-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-board-card-title {
+    font-size: 16px;
+  }
+  
+  .ktp-info-row {
+    min-height: 30px;
+  }
+  
+  .ktp-info-heading {
+    min-width: 75px;
+    max-width: 75px;
+    font-size: 11px;
+  }
+  
+  .ktp-info-pros-item,
+  .ktp-info-cons-item {
+    font-size: 11px;
+  }
+  
+  .ktp-info-text {
+    font-size: 11px;
+  }
+  
+  .ktp-bowls-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ktp-bowl-card-image {
+    height: 180px;
+  }
+  
+  .ktp-bowl-card-content {
+    padding: 15px;
+  }
+  
+  .ktp-bowl-card-title {
+    font-size: 16px;
+  }
+}
+
+/* SCROLLBAR STYLING */
+.ktp-sidebar::-webkit-scrollbar,
+.ktp-modal-details::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ktp-sidebar::-webkit-scrollbar-track,
+.ktp-modal-details::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.ktp-sidebar::-webkit-scrollbar-thumb,
+.ktp-modal-details::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.ktp-sidebar::-webkit-scrollbar-thumb:hover,
+.ktp-modal-details::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* CARD ANIMATION */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -289,553 +1272,999 @@ html, body, #root {
   }
 }
 
-.close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #2c3e50;
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  font-weight: bold;
+.ktp-tool-card, .ktp-knife-card, .ktp-board-card, .ktp-bowl-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+/* ===== UTENSIL CARDS - 4 IN 1 ROW ===== */
+.ktp-utensils-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
 }
 
-.close-btn:hover {
-  background: #3498db;
-  transform: rotate(90deg);
-}
-
-.modal-header {
-  position: relative;
-  height: 300px;
-  border-radius: 16px 16px 0 0;
-  overflow: hidden;
-}
-
-.modal-image {
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.5s ease;
-}
-
-.modal-container:hover .modal-image {
-  transform: scale(1.02);
-}
-
-.modal-title-section {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
-  padding: 30px;
-  padding-top: 60px;
-}
-
-.modal-title-section h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.modal-subtitle {
-  font-size: 18px;
-  opacity: 0.9;
-  font-weight: 400;
-}
-
-.modal-body {
-  padding: 35px;
-}
-
-/* Detailed Description Section */
-.section {
-  margin-bottom: 30px;
-}
-
-.section h3 {
-  color: #2c3e50;
-  font-size: 26px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #3498db;
-  font-weight: 600;
-}
-
-.section p {
-  color: #34495e;
-  font-size: 16px;
-  line-height: 1.7;
-  margin-bottom: 15px;
-}
-
-/* Detailed Description Content */
-.detailed-description {
-  background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 35px;
-  border-left: 4px solid #2c3e50;
-}
-
-.description-content {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #34495e;
-}
-
-.description-paragraph {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ecf0f1;
-}
-
-.description-paragraph:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.description-paragraph strong {
-  color: #2c3e50;
-  font-weight: 700;
-}
-
-/* Uses Section */
-.uses-section {
-  background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  border-left: 4px solid #3498db;
-}
-
-.uses-content {
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.use-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  padding: 8px 0;
-}
-
-.use-item:last-child {
-  margin-bottom: 0;
-}
-
-.use-icon {
-  color: #2c3e50;
-  font-weight: bold;
-  margin-right: 15px;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  background: #e3e8ee;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.use-text {
-  color: #34495e;
-  line-height: 1.6;
-  font-size: 15px;
-  flex: 1;
-}
-
-/* Secondary Image */
-.secondary-image-container {
-  margin: 30px 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  height: 250px;
-}
-
-.secondary-image {
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  transition: transform 0.5s ease;
-}
-
-.secondary-image-container:hover .secondary-image {
-  transform: scale(1.05);
-}
-
-/* Info Grid */
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  margin: 35px 0;
-}
-
-.info-box {
-  background-color: white;
-  padding: 25px;
-  border-radius: 12px;
-  border-top: 5px solid;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.info-box h4 {
-  color: #2c3e50;
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.info-box h4:before {
+.ktp-utensils-cards-heading {
   font-size: 20px;
-}
-
-.info-box p {
-  color: #5d6d7e;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.best-for-box {
-  border-top-color: #2c3e50;
-}
-
-.best-for-box h4:before {
-  content: "🎯";
-}
-
-.materials-box {
-  border-top-color: #3498db;
-}
-
-.materials-box h4:before {
-  content: "⚙️";
-}
-
-.maintenance-box {
-  border-top-color: #27ae60;
-  background-color: rgba(39, 174, 96, 0.05);
-}
-
-.maintenance-box h4:before {
-  content: "🔧";
-}
-
-/* Pro Tip Section */
-.pro-tip-section {
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(44, 62, 80, 0.05) 100%);
-  padding: 25px;
-  border-radius: 12px;
-  margin: 30px 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  border-left: 4px solid #3498db;
-}
-
-.pro-tip-icon {
-  font-size: 40px;
-  flex-shrink: 0;
-}
-
-.pro-tip-content h4 {
-  color: #2c3e50;
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.pro-tip-content p {
-  color: #34495e;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* Investment Tips */
-.investment-tips {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
-  padding: 25px;
-  border-radius: 12px;
-  margin-top: 30px;
-  border: 1px solid #e1e8ed;
-}
-
-.investment-tips h4 {
-  color: #2c3e50;
-  font-size: 22px;
+  color: #1e293b;
   margin-bottom: 20px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-weight: 700;
+  text-align: center;
 }
 
-.investment-tips h4:before {
-  content: "💰";
-  font-size: 24px;
-}
-
-.investment-tips ul {
-  list-style-type: none;
-  padding-left: 0;
+/* DESKTOP: 4 CARDS PER ROW */
+.ktp-utensils-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+  margin-top: 15px;
 }
 
-.investment-tips li {
-  padding: 12px 0 12px 35px;
-  position: relative;
-  color: #34495e;
-  font-size: 14px;
-  line-height: 1.5;
+/* ===== UTENSIL CARDS - COMPACT VERSION ===== */
+.ktp-utensil-card {
   background: white;
-  border-radius: 8px;
-  padding: 12px 15px 12px 45px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-}
-
-.investment-tips li:before {
-  content: "✓";
-  position: absolute;
-  left: 20px;
-  color: #2c3e50;
-  font-weight: bold;
-  font-size: 16px;
-  background: #e3e8ee;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+.ktp-utensil-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE FOR 4 CARDS */
+.ktp-utensil-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* COMPACT CONTENT */
+.ktp-utensil-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-utensil-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED UTENSIL CARDS */
+.ktp-utensil-card.utensil-wooden {
+  border-top: 4px solid #b45309; /* Brown for Wooden */
+}
+
+.ktp-utensil-card.utensil-spatula {
+  border-top: 4px solid #3b82f6; /* Blue for Spatula */
+}
+
+.ktp-utensil-card.utensil-whisk {
+  border-top: 4px solid #8b5cf6; /* Purple for Whisk */
+}
+
+.ktp-utensil-card.utensil-tongs {
+  border-top: 4px solid #ef4444; /* Red for Tongs */
+}
+
+.ktp-utensil-card.utensil-ladle {
+  border-top: 4px solid #10b981; /* Green for Ladle */
+}
+
+.ktp-utensil-card.utensil-shears {
+  border-top: 4px solid #6366f1; /* Indigo for Shears */
+}
+
+/* RESPONSIVE FOR UTENSIL CARDS */
 @media (max-width: 1200px) {
-  .modal-container {
-    max-width: 95%;
+  .ktp-utensils-cards-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards on smaller desktop */
+    gap: 15px;
   }
   
-  .info-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .ktp-utensil-card-image {
+    height: 200px;
   }
   
-  .investment-tips ul {
-    grid-template-columns: 1fr;
+  .ktp-utensil-card-title {
+    font-size: 15px;
   }
 }
 
-@media (max-width: 992px) {
-  .sidebar {
-    width: 250px;
+@media (max-width: 1024px) {
+  .ktp-utensils-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards on tablet */
+    gap: 16px;
   }
   
-  .main-content {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    padding: 30px;
+  .ktp-utensil-card-image {
+    height: 200px;
   }
   
-  .tools-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  .ktp-utensil-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
   }
   
-  .footer {
-    left: 250px;
+  .ktp-utensil-card-title {
+    font-size: 16px;
   }
 }
 
 @media (max-width: 768px) {
-  .kitchen-tools-page {
-    flex-direction: column;
+  .ktp-utensils-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile */
+    gap: 15px;
   }
   
-  .sidebar {
-    width: 100%;
-    position: relative;
-    height: auto;
-    max-height: 300px;
-    padding: 20px 0;
-  }
-  
-  .main-content {
-    margin-left: 0;
-    width: 100%;
-    padding: 25px;
-    padding-bottom: 100px;
-  }
-  
-  .content-header h1 {
-    font-size: 2.2rem;
-  }
-  
-  .tools-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .tool-card {
-    flex-direction: column;
-    height: auto;
-  }
-  
-  .card-image {
-    width: 100%;
+  .ktp-utensil-card-image {
     height: 180px;
   }
   
-  .card-content {
-    width: 100%;
-    padding: 20px;
+  .ktp-utensil-card-content {
+    padding: 10px 10px 10px 10px;
+    gap: 6px;
   }
   
-  .card-content h3 {
-    font-size: 20px;
+  .ktp-utensil-card-title {
+    font-size: 15px;
   }
-  
-  .card-desc {
-    font-size: 14px;
-    -webkit-line-clamp: 3;
-  }
-  
-  .footer {
-    position: relative;
-    left: 0;
-    margin-top: 40px;
-  }
-  
-  .footer-content {
-    flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .ktp-utensils-cards-grid {
+    grid-template-columns: 1fr; /* 1 card per row on small mobile */
     gap: 15px;
-    text-align: center;
   }
   
-  .footer-links {
-    justify-content: center;
-  }
-  
-  .modal-header {
+  .ktp-utensil-card-image {
     height: 200px;
   }
   
-  .modal-title-section h2 {
-    font-size: 24px;
+  .ktp-utensil-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
   }
   
-  .modal-body {
-    padding: 20px;
-  }
-  
-  .info-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .secondary-image-container {
-    height: 180px;
-  }
-}
-
-@media (max-width: 576px) {
-  .main-content {
-    padding: 20px;
-    padding-bottom: 100px;
-  }
-  
-  .content-header h1 {
-    font-size: 1.8rem;
-  }
-  
-  .header-subtitle {
+  .ktp-utensil-card-title {
     font-size: 16px;
   }
-  
-  .card-content {
-    padding: 20px;
+}
+
+/* Add utensil cards to animation */
+.ktp-tool-card, .ktp-knife-card, .ktp-board-card, .ktp-bowl-card, .ktp-utensil-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+/* ===== COOKWARE CARDS - 3+2 LAYOUT ===== */
+.ktp-cookware-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-cookware-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* DESKTOP: FIRST ROW 3 CARDS, SECOND ROW 2 CARDS */
+.ktp-cookware-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Center the last two cards in second row */
+.ktp-cookware-cards-grid .ktp-cookware-card:nth-child(4),
+.ktp-cookware-cards-grid .ktp-cookware-card:nth-child(5) {
+  grid-column: span 1;
+}
+
+/* ===== COOKWARE CARDS - COMPACT VERSION ===== */
+.ktp-cookware-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-cookware-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE FOR COOKWARE CARDS */
+.ktp-cookware-card-image {
+  width: 100%;
+  height: 200px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* COMPACT CONTENT */
+.ktp-cookware-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-cookware-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED COOKWARE CARDS */
+.ktp-cookware-card.cookware-steel {
+  border-top: 4px solid #94a3b8; /* Gray for Stainless Steel */
+}
+
+.ktp-cookware-card.cookware-glass {
+  border-top: 4px solid #0ea5e9; /* Blue for Glass */
+}
+
+.ktp-cookware-card.cookware-ceramic {
+  border-top: 4px solid #f59e0b; /* Orange/Yellow for Ceramic */
+}
+
+.ktp-cookware-card.cookware-plastic {
+  border-top: 4px solid #10b981; /* Green for Plastic */
+}
+
+.ktp-cookware-card.cookware-copper {
+  border-top: 4px solid #b45309; /* Brown/Copper for Copper/Silicone */
+}
+
+/* RESPONSIVE FOR COOKWARE CARDS */
+@media (max-width: 1024px) {
+  .ktp-cookware-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on tablet */
   }
   
-  .card-content h3 {
-    font-size: 18px;
+  /* Reset the center alignment for mobile */
+  .ktp-cookware-cards-grid .ktp-cookware-card:nth-child(4),
+  .ktp-cookware-cards-grid .ktp-cookware-card:nth-child(5) {
+    grid-column: span 1;
   }
   
-  .modal-container {
-    width: 95%;
-    border-radius: 12px;
+  .ktp-cookware-card-image {
+    height: 200px;
   }
   
-  .modal-title-section {
-    padding: 20px;
-    padding-top: 40px;
+  .ktp-cookware-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
   }
   
-  .pro-tip-section {
-    padding: 20px;
+  .ktp-cookware-card-title {
+    font-size: 16px;
   }
-  
-  .investment-tips {
-    padding: 20px;
-  }
-  
-  .footer {
-    padding: 15px 20px;
-  }
-  
-  .footer-links {
-    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .ktp-cookware-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile */
     gap: 15px;
-    justify-content: center;
+  }
+  
+  .ktp-cookware-card-image {
+    height: 180px;
+  }
+  
+  .ktp-cookware-card-content {
+    padding: 10px 10px 10px 10px;
+    gap: 6px;
+  }
+  
+  .ktp-cookware-card-title {
+    font-size: 15px;
   }
 }
 
-/* Scrollbar Styling */
-.modal-container::-webkit-scrollbar {
-  width: 8px;
+@media (max-width: 480px) {
+  .ktp-cookware-cards-grid {
+    grid-template-columns: 1fr; /* 1 card per row on small mobile */
+    gap: 15px;
+  }
+  
+  .ktp-cookware-card-image {
+    height: 200px;
+  }
+  
+  .ktp-cookware-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-cookware-card-title {
+    font-size: 16px;
+  }
 }
 
-.modal-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 0 16px 16px 0;
+/* Add cookware cards to animation */
+.ktp-tool-card, .ktp-knife-card, .ktp-board-card, .ktp-bowl-card, .ktp-utensil-card, .ktp-cookware-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+/* ===== COOKWARE TYPES CARDS ===== */
+.ktp-cookware-types-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
 }
 
-.modal-container::-webkit-scrollbar-thumb {
-  background: #2c3e50;
-  border-radius: 4px;
+.ktp-cookware-types-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
 }
 
-.modal-container::-webkit-scrollbar-thumb:hover {
-  background: #3498db;
+/* COOKWARE TYPES GRID - 8 ITEMS (4 in 1 row) */
+.ktp-cookware-types-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.sidebar::-webkit-scrollbar {
-  width: 6px;
+/* ===== COOKWARE MATERIALS CARDS ===== */
+.ktp-cookware-materials-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
-  background: rgba(52, 152, 219, 0.3);
-  border-radius: 3px;
+.ktp-cookware-materials-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* COOKWARE MATERIALS GRID - 4 ITEMS (4 in 1 row) */
+.ktp-cookware-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* ===== COOKWARE CARDS - COMMON STYLES ===== */
+.ktp-cookware-type-card,
+.ktp-cookware-material-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-cookware-type-card:hover,
+.ktp-cookware-material-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE */
+.ktp-cookware-type-card-image,
+.ktp-cookware-material-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.ktp-cookware-type-card-content,
+.ktp-cookware-material-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-cookware-type-card-title,
+.ktp-cookware-material-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED COOKWARE TYPE CARDS */
+.ktp-cookware-type-card.cookware-pressure {
+  border-top: 4px solid #ef4444; /* Red for Pressure Cooker */
+}
+
+.ktp-cookware-type-card.cookware-tawa {
+  border-top: 4px solid #f59e0b; /* Orange for Tawa */
+}
+
+.ktp-cookware-type-card.cookware-karahi {
+  border-top: 4px solid #10b981; /* Green for Karahi */
+}
+
+.ktp-cookware-type-card.cookware-skillet {
+  border-top: 4px solid #3b82f6; /* Blue for Skillet */
+}
+
+.ktp-cookware-type-card.cookware-saucepan {
+  border-top: 4px solid #8b5cf6; /* Purple for Saucepan */
+}
+
+.ktp-cookware-type-card.cookware-stock {
+  border-top: 4px solid #ec4899; /* Pink for Stock Pot */
+}
+
+.ktp-cookware-type-card.cookware-dutch {
+  border-top: 4px solid #6366f1; /* Indigo for Dutch Oven */
+}
+
+.ktp-cookware-type-card.cookware-baking {
+  border-top: 4px solid #14b8a6; /* Teal for Baking Dish */
+}
+
+/* COLOR CODED COOKWARE MATERIAL CARDS */
+.ktp-cookware-material-card.cookware-steel {
+  border-top: 4px solid #94a3b8; /* Gray for Stainless Steel */
+}
+
+.ktp-cookware-material-card.cookware-glass {
+  border-top: 4px solid #0ea5e9; /* Blue for Glass */
+}
+
+.ktp-cookware-material-card.cookware-nonstick {
+  border-top: 4px solid #f59e0b; /* Orange for Non-Stick */
+}
+
+.ktp-cookware-material-card.cookware-iron {
+  border-top: 4px solid #b45309; /* Brown for Iron */
+}
+
+/* ===== CROCKERY CARDS ===== */
+.ktp-crockery-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-crockery-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* CROCKERY GRID - 8 ITEMS (4 in 1 row) */
+.ktp-crockery-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* ===== CROCKERY CARDS - COMMON STYLES ===== */
+.ktp-crockery-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-crockery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE */
+.ktp-crockery-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.ktp-crockery-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-crockery-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED CROCKERY CARDS */
+.ktp-crockery-card.crockery-plate {
+  border-top: 4px solid #ef4444; /* Red for Dinner Plates */
+}
+
+.ktp-crockery-card.crockery-side {
+  border-top: 4px solid #f59e0b; /* Orange for Side Plates */
+}
+
+.ktp-crockery-card.crockery-soup {
+  border-top: 4px solid #10b981; /* Green for Soup Bowls */
+}
+
+.ktp-crockery-card.crockery-cereal {
+  border-top: 4px solid #3b82f6; /* Blue for Cereal Bowls */
+}
+
+.ktp-crockery-card.crockery-mug {
+  border-top: 4px solid #8b5cf6; /* Purple for Mugs */
+}
+
+.ktp-crockery-card.crockery-glass {
+  border-top: 4px solid #0ea5e9; /* Light Blue for Water Glasses */
+}
+
+.ktp-crockery-card.crockery-tea {
+  border-top: 4px solid #ec4899; /* Pink for Tea Cups */
+}
+
+.ktp-crockery-card.crockery-serving {
+  border-top: 4px solid #14b8a6; /* Teal for Serving Bowls */
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  /* COOKWARE TYPES, MATERIALS & CROCKERY - 3 in 1 row */
+  .ktp-cookware-types-grid,
+  .ktp-cookware-materials-grid,
+  .ktp-crockery-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .ktp-cookware-type-card-image,
+  .ktp-cookware-material-card-image,
+  .ktp-crockery-card-image {
+    height: 200px;
+  }
+  
+  .ktp-cookware-type-card-content,
+  .ktp-cookware-material-card-content,
+  .ktp-crockery-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-cookware-type-card-title,
+  .ktp-cookware-material-card-title,
+  .ktp-crockery-card-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* COOKWARE TYPES, MATERIALS & CROCKERY - 2 in 1 row */
+  .ktp-cookware-types-grid,
+  .ktp-cookware-materials-grid,
+  .ktp-crockery-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .ktp-cookware-type-card-image,
+  .ktp-cookware-material-card-image,
+  .ktp-crockery-card-image {
+    height: 180px;
+  }
+  
+  .ktp-cookware-type-card-content,
+  .ktp-cookware-material-card-content,
+  .ktp-crockery-card-content {
+    padding: 10px 10px 10px 10px;
+    gap: 6px;
+  }
+  
+  .ktp-cookware-type-card-title,
+  .ktp-cookware-material-card-title,
+  .ktp-crockery-card-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ALL GRIDS - 1 in 1 row */
+  .ktp-cookware-types-grid,
+  .ktp-cookware-materials-grid,
+  .ktp-crockery-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ktp-cookware-type-card-image,
+  .ktp-cookware-material-card-image,
+  .ktp-crockery-card-image {
+    height: 200px;
+  }
+  
+  .ktp-cookware-type-card-content,
+  .ktp-cookware-material-card-content,
+  .ktp-crockery-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-cookware-type-card-title,
+  .ktp-cookware-material-card-title,
+  .ktp-crockery-card-title {
+    font-size: 16px;
+  }
+}
+
+/* Add all cards to animation */
+.ktp-tool-card, .ktp-knife-card, .ktp-board-card, .ktp-bowl-card, 
+.ktp-utensil-card, .ktp-cookware-type-card, .ktp-cookware-material-card,
+.ktp-crockery-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+/* ===== CUTLERY CARDS ===== */
+.ktp-cutlery-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-cutlery-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* CUTLERY GRID - 8 ITEMS (4 in 1 row) */
+.ktp-cutlery-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* ===== CUTLERY CARDS - COMMON STYLES ===== */
+.ktp-cutlery-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-cutlery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE */
+.ktp-cutlery-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.ktp-cutlery-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-cutlery-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED CUTLERY CARDS */
+.ktp-cutlery-card.cutlery-dinner-fork {
+  border-top: 4px solid #ef4444; /* Red for Dinner Fork */
+}
+
+.ktp-cutlery-card.cutlery-dinner-knife {
+  border-top: 4px solid #3b82f6; /* Blue for Dinner Knife */
+}
+
+.ktp-cutlery-card.cutlery-tablespoon {
+  border-top: 4px solid #10b981; /* Green for Tablespoon */
+}
+
+.ktp-cutlery-card.cutlery-teaspoon {
+  border-top: 4px solid #f59e0b; /* Orange for Teaspoon */
+}
+
+.ktp-cutlery-card.cutlery-dessert {
+  border-top: 4px solid #8b5cf6; /* Purple for Dessert Spoon */
+}
+
+.ktp-cutlery-card.cutlery-soup {
+  border-top: 4px solid #ec4899; /* Pink for Soup Spoon */
+}
+
+.ktp-cutlery-card.cutlery-salad {
+  border-top: 4px solid #0ea5e9; /* Light Blue for Salad Fork */
+}
+
+.ktp-cutlery-card.cutlery-butter {
+  border-top: 4px solid #b45309; /* Brown for Butter Knife */
+}
+
+/* ===== SERVINGWARE CARDS ===== */
+.ktp-servingware-cards-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.ktp-servingware-cards-heading {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* SERVINGWARE GRID - 8 ITEMS (4 in 1 row) */
+.ktp-servingware-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* ===== SERVINGWARE CARDS - COMMON STYLES ===== */
+.ktp-servingware-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ktp-servingware-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #6366f1;
+}
+
+/* IMAGE SIZE */
+.ktp-servingware-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.ktp-servingware-card-content {
+  padding: 12px 10px 10px 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ktp-servingware-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* COLOR CODED SERVINGWARE CARDS */
+.ktp-servingware-card.servingware-bowl {
+  border-top: 4px solid #ef4444; /* Red for Serving Bowls */
+}
+
+.ktp-servingware-card.servingware-platter {
+  border-top: 4px solid #f59e0b; /* Orange for Platters */
+}
+
+.ktp-servingware-card.servingware-gravy {
+  border-top: 4px solid #10b981; /* Green for Gravy Boat */
+}
+
+.ktp-servingware-card.servingware-butter {
+  border-top: 4px solid #3b82f6; /* Blue for Butter Dish */
+}
+
+.ktp-servingware-card.servingware-sugar {
+  border-top: 4px solid #8b5cf6; /* Purple for Sugar Bowl */
+}
+
+.ktp-servingware-card.servingware-creamer {
+  border-top: 4px solid #ec4899; /* Pink for Creamer */
+}
+
+.ktp-servingware-card.servingware-salad {
+  border-top: 4px solid #0ea5e9; /* Light Blue for Salad Bowl */
+}
+
+.ktp-servingware-card.servingware-cake {
+  border-top: 4px solid #14b8a6; /* Teal for Cake Stand */
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  /* CUTLERY & SERVINGWARE - 3 in 1 row */
+  .ktp-cutlery-cards-grid,
+  .ktp-servingware-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .ktp-cutlery-card-image,
+  .ktp-servingware-card-image {
+    height: 200px;
+  }
+  
+  .ktp-cutlery-card-content,
+  .ktp-servingware-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-cutlery-card-title,
+  .ktp-servingware-card-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* CUTLERY & SERVINGWARE - 2 in 1 row */
+  .ktp-cutlery-cards-grid,
+  .ktp-servingware-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .ktp-cutlery-card-image,
+  .ktp-servingware-card-image {
+    height: 180px;
+  }
+  
+  .ktp-cutlery-card-content,
+  .ktp-servingware-card-content {
+    padding: 10px 10px 10px 10px;
+    gap: 6px;
+  }
+  
+  .ktp-cutlery-card-title,
+  .ktp-servingware-card-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ALL GRIDS - 1 in 1 row */
+  .ktp-cutlery-cards-grid,
+  .ktp-servingware-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ktp-cutlery-card-image,
+  .ktp-servingware-card-image {
+    height: 200px;
+  }
+  
+  .ktp-cutlery-card-content,
+  .ktp-servingware-card-content {
+    padding: 12px 12px 12px 12px;
+    gap: 8px;
+  }
+  
+  .ktp-cutlery-card-title,
+  .ktp-servingware-card-title {
+    font-size: 16px;
+  }
+}
+
+/* Add cutlery and servingware cards to animation */
+.ktp-tool-card, .ktp-knife-card, .ktp-board-card, .ktp-bowl-card, 
+.ktp-utensil-card, .ktp-cookware-type-card, .ktp-cookware-material-card,
+.ktp-crockery-card, .ktp-cutlery-card, .ktp-servingware-card {
+  animation: fadeInUp 0.5s ease-out;
 }

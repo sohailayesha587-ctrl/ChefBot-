@@ -514,9 +514,7 @@ const AlarmTimerComponent = () => {
       <div className="timer-display-section">
         <div className={`time-display ${isCompleted ? 'completed' : ''} ${isRunning ? 'running' : ''}`}>
           {formatTime(totalSeconds)}
-          <div className="time-label">
-            {isCompleted ? 'TIME UP! 🔊' : isRunning ? 'RUNNING (Background)' : ''}
-          </div>
+         
         </div>
       </div>
       

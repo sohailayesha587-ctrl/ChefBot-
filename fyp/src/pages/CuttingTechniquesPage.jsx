@@ -2,405 +2,315 @@ import React, { useState } from 'react';
 import './CuttingTechniquesPage.css';
 
 const CuttingTechniquesPage = () => {
-  const [activeStyle, setActiveStyle] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTechnique, setSelectedTechnique] = useState(null);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
 
-  const cuttingStyles = [
-    { 
-      id: 1, 
-      title: "Julienne", 
-      shortDesc: "Thin matchstick cuts for quick cooking.",
-      detailedDescription: `The julienne cut creates uniform matchstick-shaped pieces, typically 1/8 inch thick and 2-3 inches long. This classic French technique ensures even cooking and elegant presentation.
-
-**Key Characteristics:**
-- Uniform 1/8" × 1/8" × 2-3" pieces
-- Perfect for quick stir-frying or sautéing
-- Creates beautiful, consistent texture
-- Essential for Asian and French cuisine
-
-**Perfect For:**
-- Stir-fry vegetables
-- Garnishes for soups and salads
-- French vegetable soups
-- Quick-cooking side dishes`,
-      technique: `Step 1: Cut vegetable into 2-3 inch long pieces
-Step 2: Slice lengthwise into 1/8 inch thick planks
-Step 3: Stack planks and cut into 1/8 inch strips
-Step 4: Keep strips uniform for even cooking
-Step 5: Use for stir-fries or as garnish`,
-      rule: "Always cut against the grain of the vegetable for cleaner cuts.",
-      bestFor: "Carrots, bell peppers, zucchini, celery",
-      proTip: "Chill vegetables in ice water for 30 minutes before cutting for extra crispiness.",
-      tools: "Chef's knife, cutting board, mandoline (optional)",
-      image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+  // CUTTING TECHNIQUES DATA
+  const cuttingTechniques = [
+    {
+      id: 1,
+      name: "Julienne",
+      tagline: "Matchstick-style thin strips",
+      fullDesc: "Julienne is a knife technique that produces thin, matchstick-sized strips of vegetables or fruits. The standard dimensions are 4mm × 4mm × 5-7cm long. It's essential for dishes that require quick cooking and uniform texture.",
+      keyUses: ["Stir-fries", "Salads", "Garnishes", "Asian dishes"],
+      previewImg: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=400",
+      knife: "Chef's knife or Santoku",
+      tips: ["Keep fingers curled under", "Create planks first, then strips", "Maintain uniform thickness"],
+      steps: [
+        "Wash and peel the vegetable if needed.",
+        "Trim the ends and cut into 5-7 cm long segments.",
+        "Slice the segments into 4 mm thick planks.",
+        "Stack the planks and slice lengthwise into 4 mm thick strips.",
+        "Keep cuts even for uniform matchstick-sized pieces."
+      ]
     },
-    { 
-      id: 2, 
-      title: "Brunoise", 
-      shortDesc: "Tiny perfect cubes for fine dining.",
-      detailedDescription: `The brunoise is the finest of all dice cuts, creating perfectly uniform 1/8 inch cubes. This precision cut requires patience and skill but results in exquisite presentation and even cooking.
-
-**Key Characteristics:**
-- 1/8 inch × 1/8 inch × 1/8 inch cubes
-- Requires multiple precision cuts
-- Time-consuming but beautiful
-- Dissolves into sauces for texture
-
-**Perfect For:**
-- Garnishing fine dishes
-- Soups and consommés
-- Salsas and relishes
-- Decorative elements`,
-      technique: `Step 1: Start with julienne cuts (1/8" strips)
-Step 2: Gather strips into a tight bundle
-Step 3: Cut crosswise into 1/8 inch pieces
-Step 4: Spread cubes to check uniformity
-Step 5: Use immediately or store in cold water`,
-      rule: "Work with a very sharp knife and clean cuts—no sawing motions.",
-      bestFor: "Carrots, onions, celery, turnips",
-      proTip: "Use a mandoline for perfectly uniform strips before cubing.",
-      tools: "Sharp chef's knife, cutting board, mandoline recommended",
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800"
+    {
+      id: 2,
+      name: "Brunoise",
+      tagline: "Fine 3mm cubes",
+      fullDesc: "Brunoise is an extremely fine dice cut, typically 3mm × 3mm × 3mm. It's the smallest of the dice cuts and requires precision knife work. Often used for garnishes or ingredients that need to cook quickly or melt into dishes.",
+      keyUses: ["Sauces", "Soups", "Garnishes", "Stuffings"],
+      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      knife: "Sharp Chef's knife",
+      tips: ["Start with julienne cuts", "Use claw grip for safety", "Keep knife very sharp"],
+      steps: [
+        "Start with julienne-cut vegetables (4mm × 4mm strips).",
+        "Gather the julienne strips into a tight bundle.",
+        "Slice across the bundle at 3mm intervals.",
+        "Keep the pieces as uniform as possible.",
+        "Use a gentle rocking motion for precision cuts."
+      ]
     },
-    { 
-      id: 3, 
-      title: "Chiffonade", 
-      shortDesc: "Elegant ribbon cuts for leafy greens.",
-      detailedDescription: `The chiffonade technique creates delicate ribbons from leafy greens and herbs. This French method preserves flavor and creates beautiful presentation for both garnishes and cooked dishes.
-
-**Key Characteristics:**
-- Thin ribbon-like strips
-- Perfect for leafy vegetables
-- Releases maximum flavor
-- Beautiful visual presentation
-
-**Perfect For:**
-- Basil, mint, and other herbs
-- Spinach and other leafy greens
-- Garnishing soups and pasta
-- Salad presentations`,
-      technique: `Step 1: Stack leaves neatly on top of each other
-Step 2: Roll leaves tightly into a cigar shape
-Step 3: Slice crosswise into thin ribbons
-Step 4: Fluff ribbons gently with fingers
-Step 5: Use immediately to prevent browning`,
-      rule: "Always use a very sharp knife and cut in one smooth motion.",
-      bestFor: "Basil, mint, spinach, kale, cabbage",
-      proTip: "Chill leaves in refrigerator for 30 minutes before cutting for cleaner edges.",
-      tools: "Sharp chef's knife, cutting board",
-      image: "https://images.unsplash.com/photo-1519996409144-56c88c9aa612?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800"
+    {
+      id: 3,
+      name: "Chiffonade",
+      tagline: "Fine ribbon cuts for leafy greens",
+      fullDesc: "Chiffonade is a technique for cutting leafy herbs and vegetables into thin, ribbon-like strips. Literally meaning 'made of rags' in French, it's perfect for herbs and leafy greens where you want maximum flavor and elegant presentation.",
+      keyUses: ["Herb garnishes", "Salads", "Pasta dishes", "Garnishes"],
+      previewImg: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400",
+      knife: "Chef's knife",
+      tips: ["Stack leaves neatly", "Roll tightly before cutting", "Use gentle sawing motion"],
+      steps: [
+        "Wash and thoroughly dry the leaves.",
+        "Stack 5-10 leaves of similar size neatly.",
+        "Roll the stack tightly into a cigar shape.",
+        "Slice across the roll into thin ribbons (1-3mm wide).",
+        "Separate the ribbons gently with your fingers."
+      ]
     },
-    { 
-      id: 4, 
-      title: "Dice", 
-      shortDesc: "Versatile cubes for everyday cooking.",
-      detailedDescription: `Dicing creates uniform cubes that cook evenly and look professional. Different sizes serve different purposes in cooking, from small dice for sauces to large dice for stews and roasts.
-
-**Types of Dice:**
-- **Large Dice:** 3/4 inch cubes (stews, roasting)
-- **Medium Dice:** 1/2 inch cubes (soups, sautés)
-- **Small Dice:** 1/4 inch cubes (sauces, salsas)
-- **Brunoise:** 1/8 inch cubes (garnishes)
-
-**Perfect For:**
-- Soups and stews
-- Sautéed vegetables
-- Salsas and relishes
-- Vegetable medleys`,
-      technique: `Step 1: Trim vegetable and create flat sides
-Step 2: Cut into uniform planks of desired thickness
-Step 3: Cut planks into uniform sticks (batons)
-Step 4: Cut sticks crosswise into cubes
-Step 5: Maintain consistent size for even cooking`,
-      rule: "The size of the dice determines cooking time—smaller dice cook faster.",
-      bestFor: "Potatoes, carrots, onions, bell peppers",
-      proTip: "Use the 'claw grip' with your non-cutting hand for safety and control.",
-      tools: "Chef's knife, cutting board, ruler (for precision)",
-      image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 4,
+      name: "Dice",
+      tagline: "Uniform cube cuts",
+      fullDesc: "Dicing involves cutting food into uniform cube-shaped pieces. There are different sizes: large dice (20mm), medium dice (12mm), and small dice (6mm). Uniform dicing ensures even cooking and professional presentation.",
+      keyUses: ["Sautéing", "Soups", "Stews", "Salads"],
+      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      knife: "Chef's knife",
+      tips: ["Create planks then batons", "Maintain consistent pressure", "Use cutting board anchors"],
+      steps: [
+        "Trim and square off the vegetable.",
+        "Slice into uniform planks of desired thickness.",
+        "Stack planks and cut into uniform batons.",
+        "Line up batons and cut into cubes.",
+        "Adjust size based on recipe requirements."
+      ]
     },
-    { 
-      id: 5, 
-      title: "Slice", 
-      shortDesc: "Basic cuts for all skill levels.",
-      detailedDescription: `Slicing is the foundation of all knife skills, creating flat pieces of consistent thickness. Mastering different slicing techniques allows for proper cooking and beautiful presentation.
-
-**Types of Slices:**
-- **Rounds:** Circular slices (carrots, cucumbers)
-- **Diagonal:** Angled cuts for more surface area
-- **Bias:** Angled cuts for Asian dishes
-- **Roll Cut:** Irregular cuts for uneven vegetables
-
-**Perfect For:**
-- Tomato and cucumber salads
-- Stir-fry vegetables
-- Potato and root vegetable dishes
-- Bread and meat slicing`,
-      technique: `Step 1: Secure vegetable with claw grip
-Step 2: Position knife at desired angle
-Step 3: Use smooth rocking motion
-Step 4: Maintain consistent thickness
-Step 5: Use sharp knife for clean cuts`,
-      rule: "Let the knife do the work—apply minimal pressure with proper technique.",
-      bestFor: "Tomatoes, cucumbers, potatoes, onions",
-      proTip: "Sharpen your knife before slicing for cleaner, safer cuts.",
-      tools: "Sharp chef's knife, cutting board, honing steel",
-      image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581092334652-d5728b8a5d3b?auto=format&fit=crop&w=800"
+    {
+      id: 5,
+      name: "Slice",
+      tagline: "Basic cross-sectional cuts",
+      fullDesc: "Slicing is the most fundamental cutting technique, involving cutting food into flat, broad pieces. The thickness can vary from paper-thin to thick slices depending on the recipe requirements.",
+      keyUses: ["Sandwiches", "Roasting", "Frying", "Presentation"],
+      previewImg: "https://images.unsplash.com/photo-1563379091339-03246963d9d6?auto=format&fit=crop&w=400",
+      knife: "Chef's knife or Santoku",
+      tips: ["Use rocking motion", "Keep slices even", "Anchor food with flat side down"],
+      steps: [
+        "Create a flat surface by cutting a thin slice off one side.",
+        "Place the flat side down on the cutting board.",
+        "Use claw grip to hold the food securely.",
+        "Slice to desired thickness using a smooth motion.",
+        "Keep slices consistent for even cooking."
+      ]
     },
-    { 
-      id: 6, 
-      title: "Mince", 
-      shortDesc: "Ultra-fine cuts for maximum flavor.",
-      detailedDescription: `Mincing creates the smallest possible pieces, releasing maximum flavor and creating smooth textures. This technique is essential for garlic, herbs, and aromatics where you want flavor distributed throughout the dish.
-
-**Key Characteristics:**
-- Extremely fine pieces
-- Releases maximum flavor compounds
-- Creates smooth texture
-- Essential for aromatics
-
-**Perfect For:**
-- Garlic, ginger, and shallots
-- Fresh herbs (parsley, cilantro)
-- Onions for sauces and pastes
-- Flavor bases for soups and stews`,
-      technique: `Step 1: Rough chop ingredient first
-Step 2: Gather pieces into a tight pile
-Step 3: Use rocking motion with knife tip anchored
-Step 4: Continue chopping until desired fineness
-Step 5: Scrape and gather occasionally`,
-      rule: "Keep the tip of your knife on the board while rocking for control.",
-      bestFor: "Garlic, ginger, onions, fresh herbs",
-      proTip: "Sprinkle with a little salt to prevent sticking and enhance flavor extraction.",
-      tools: "Sharp chef's knife, cutting board",
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800"
+    {
+      id: 6,
+      name: "Mince",
+      tagline: "Finely chopped pieces",
+      fullDesc: "Mincing involves cutting food into very small, irregular pieces that are smaller than a dice. The goal is to create tiny pieces that distribute flavor evenly throughout a dish without being noticeable.",
+      keyUses: ["Garlic", "Onions", "Herbs", "Flavor bases"],
+      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      knife: "Chef's knife",
+      tips: ["Rock knife back and forth", "Gather and chop repeatedly", "Use curved blade efficiently"],
+      steps: [
+        "Start with finely chopped pieces.",
+        "Place the tip of the knife on the cutting board.",
+        "Rock the knife back and forth while moving across the pile.",
+        "Gather the pieces and repeat the process.",
+        "Continue until desired fineness is achieved."
+      ]
     },
-    { 
-      id: 7, 
-      title: "Batonnet", 
-      shortDesc: "Thick sticks for roasting and frying.",
-      detailedDescription: `The batonnet cut creates thick sticks, larger than julienne but smaller than French fries. This versatile cut is perfect for vegetables that will be roasted, fried, or served as crudités.
-
-**Key Characteristics:**
-- 1/4 inch × 1/4 inch × 2-3 inches
-- Substantial texture and bite
-- Holds shape during cooking
-- Great for roasting and frying
-
-**Perfect For:**
-- French fries and steak fries
-- Roasted vegetable sticks
-- Crudités with dips
-- Stir-fry with longer cooking times`,
-      technique: `Step 1: Trim ends and create rectangular block
-Step 2: Cut into 1/4 inch thick slabs
-Step 3: Stack slabs and cut into 1/4 inch sticks
-Step 4: Trim to 2-3 inch length
-Step 5: Soak potatoes in cold water if frying`,
-      rule: "Cut vegetables of similar density to ensure even cooking.",
-      bestFor: "Potatoes, carrots, zucchini, cucumbers",
-      proTip: "For perfect fries, soak cut potatoes in cold water for 1 hour to remove excess starch.",
-      tools: "Chef's knife, cutting board, ruler for precision",
-      image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 7,
+      name: "Batonnet",
+      tagline: "Stick-shaped cuts",
+      fullDesc: "Batonnet produces stick-shaped pieces, typically 6mm × 6mm × 5-6cm long. It's larger than julienne and serves as a starting point for medium dice cuts. Perfect for vegetables that will be served as side dishes or in stews.",
+      keyUses: ["French fries", "Vegetable sticks", "Stir-fries", "Crudités"],
+      previewImg: "Batonnet.png",
+      knife: "Chef's knife",
+      tips: ["Trim sides first", "Measure thickness", "Keep consistent length"],
+      steps: [
+        "Trim and square off the vegetable.",
+        "Cut into 5-6cm long segments.",
+        "Slice each segment into 6mm thick planks.",
+        "Stack planks and cut into 6mm thick sticks.",
+        "Maintain uniform size throughout."
+      ]
     },
-    { 
-      id: 8, 
-      title: "Tourné", 
-      shortDesc: "Football-shaped elegant cuts.",
-      detailedDescription: `Tourné is an advanced knife cut that creates seven-sided football-shaped pieces. This classical French technique requires skill and patience but results in the most elegant vegetable presentation.
-
-**Key Characteristics:**
-- Seven equal sides
-- Football or barrel shape
-- 2 inches long, 3/4 inch diameter
-- Time-consuming but impressive
-
-**Perfect For:**
-- Fine dining presentations
-- Classical French cuisine
-- Special occasion dishes
-- Garnishing luxury meals`,
-      technique: `Step 1: Cut vegetable into 2 inch cylinders
-Step 2: Trim ends to create football shape
-Step 3: Make seven equal angled cuts
-Step 4: Rotate and trim for uniformity
-Step 5: Practice with potatoes first`,
-      rule: "Keep turning the vegetable while cutting to maintain seven equal sides.",
-      bestFor: "Potatoes, carrots, turnips, zucchini",
-      proTip: "Use a bird's beak paring knife for better control and curved cuts.",
-      tools: "Bird's beak paring knife, cutting board, practice vegetables",
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800"
+    {
+      id: 8,
+      name: "Tourne",
+      tagline: "Football-shaped decorative cuts",
+      fullDesc: "Tourne (or 'turned') is an advanced knife technique that produces seven-sided, football-shaped pieces. It's a decorative cut used in fine dining to create elegant vegetable presentations that cook evenly.",
+      keyUses: ["Fine dining", "Garnishes", "Roasted vegetables", "Special occasions"],
+      previewImg: "https://images.unsplash.com/photo-1563379091339-03246963d9d6?auto=format&fit=crop&w=400",
+      knife: "Paring knife or tourne knife",
+      tips: ["Use small paring knife", "Practice on carrots first", "Maintain seven equal sides"],
+      steps: [
+        "Peel the vegetable and cut into 5cm lengths.",
+        "Hold the vegetable at an angle with your thumb.",
+        "Make a shallow cut along the length, rotating after each cut.",
+        "Create seven equal sides around the vegetable.",
+        "Trim ends for uniform football shapes."
+      ]
     }
   ];
 
-  const handleStyleClick = (style) => {
-    setActiveStyle(style);
-    setIsModalOpen(true);
+  const handleTechniqueSelect = (technique) => {
+    setSelectedTechnique(technique);
+    setShowDetailPanel(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setActiveStyle(null);
+  const closeDetailPanel = () => {
+    setShowDetailPanel(false);
+    setSelectedTechnique(null);
+  };
+
+  // Helper functions for card classes
+  const getTechniqueCardClass = (techniqueName) => {
+    const name = techniqueName.toLowerCase();
+    if (name.includes('julienne')) return 'julienne';
+    if (name.includes('brunoise')) return 'brunoise';
+    if (name.includes('chiffonade')) return 'chiffonade';
+    if (name.includes('dice')) return 'dice';
+    if (name.includes('slice')) return 'slice';
+    if (name.includes('mince')) return 'mince';
+    if (name.includes('batonnet')) return 'batonnet';
+    if (name.includes('tourne')) return 'tourne';
+    return '';
   };
 
   return (
-    <div className="cutting-styles-page">
-      {/* SIDEBAR */}
-      <aside className="sidebar">
-        <h2>Knife Skills Guide</h2>
-        <ul className="styles-list">
-          {cuttingStyles.map(style => (
-            <li key={style.id} className="style-item">
-              {style.title}
-            </li>
-          ))}
-        </ul>
-      </aside>
-
-      {/* MAIN CONTENT */}
-      <main className="main-content">
-        <header className="content-header">
-          <h1>Cutting & Knife Skills</h1>
-          <p className="header-subtitle">Master professional cutting techniques for perfect results</p>
-        </header>
-
-        <div className="styles-grid">
-          {cuttingStyles.map(style => (
-            <div 
-              key={style.id} 
-              className="style-card"
-              onClick={() => handleStyleClick(style)}
-            >
-              <div 
-                className="card-image"
-                style={{ backgroundImage: `url(${style.image})` }}
-              ></div>
-              <div className="card-content">
-                <h3>{style.title}</h3>
-                <p className="card-desc">{style.shortDesc}</p>
-                <div className="click-details">
-                  Learn Technique →
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-text">
-            © 2024 Culinary Knife Skills | Professional Cutting Techniques
+    <div className="ctp-container">
+      <div className="ctp-layout">
+        {/* SIDEBAR */}
+        <aside className="ctp-sidebar">
+          <div className="ctp-sidebar-header">
+            <h2 className="ctp-sidebar-title">Cutting Techniques</h2>
+            <p className="ctp-sidebar-subtitle">Essential Knife Skills</p>
           </div>
-          <div className="footer-links">
-            <a href="#" className="footer-link">Safety Guide</a>
-            <a href="#" className="footer-link">Knife Selection</a>
-            <a href="#" className="footer-link">Video Tutorials</a>
-            <a href="#" className="footer-link">Chef Courses</a>
-          </div>
-        </div>
-      </footer>
 
-      {/* DETAILED POPUP MODAL */}
-      {isModalOpen && activeStyle && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closeModal}>×</button>
-            
-            {/* Main Image */}
-            <div className="modal-header">
-              <div 
-                className="modal-image"
-                style={{ backgroundImage: `url(${activeStyle.image})` }}
-              ></div>
-              <div className="modal-title-section">
-                <h2>{activeStyle.title}</h2>
-                <div className="modal-subtitle">{activeStyle.shortDesc}</div>
-              </div>
+          <div className="ctp-sidebar-techniques">
+            <ul className="ctp-techniques-list">
+              {cuttingTechniques.map(technique => (
+                <li 
+                  key={technique.id} 
+                  className={`ctp-technique-list-item ${selectedTechnique?.id === technique.id ? 'ctp-active' : ''}`}
+                  onClick={() => handleTechniqueSelect(technique)}
+                >
+                  <span className="ctp-technique-list-name">{technique.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+        {/* MAIN CONTENT */}
+        <main className="ctp-main">
+          <header className="ctp-main-header">
+            <div className="ctp-header-content">
+              <h1 className="ctp-page-title">Essential Cutting Techniques</h1>
+              <p className="ctp-page-description">
+                Master professional knife skills with these fundamental cutting techniques.
+              </p>
             </div>
-            
-            <div className="modal-body">
-              {/* Detailed Description Section */}
-              <div className="section detailed-description">
-                <h3>Complete Guide</h3>
-                <div className="description-content">
-                  {activeStyle.detailedDescription?.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="description-paragraph">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Technique Section */}
-              <div className="section technique-section">
-                <h3>Step-by-Step Technique</h3>
-                <div className="technique-content">
-                  {activeStyle.technique?.split('\n').map((step, index) => (
-                    <div key={index} className="step-item">
-                      <span className="step-number">{index + 1}</span>
-                      <span className="step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Secondary Image */}
-              {activeStyle.secondaryImage && (
-                <div className="secondary-image-container">
+          </header>
+
+          {/* TECHNIQUES GRID */}
+          <div className="ctp-techniques-grid-section">
+            <div className="ctp-techniques-grid">
+              {cuttingTechniques.map(technique => (
+                <div 
+                  key={technique.id} 
+                  className="ctp-technique-card"
+                  onClick={() => handleTechniqueSelect(technique)}
+                >
                   <div 
-                    className="secondary-image"
-                    style={{ backgroundImage: `url(${activeStyle.secondaryImage})` }}
+                    className="ctp-card-image"
+                    style={{ backgroundImage: `url(${technique.previewImg})` }}
                   ></div>
+                  
+                  <div className="ctp-card-content">
+                    <h3 className="ctp-card-title">{technique.name}</h3>
+                    <p className="ctp-card-description">{technique.tagline}</p>
+                  </div>
                 </div>
-              )}
-              
-              {/* Info Grid */}
-              <div className="info-grid">
-                <div className="info-box best-for-box">
-                  <h4>Best For</h4>
-                  <p>{activeStyle.bestFor}</p>
-                </div>
-                
-                <div className="info-box tools-box">
-                  <h4>Essential Tools</h4>
-                  <p>{activeStyle.tools}</p>
-                </div>
-                
-                <div className="info-box rule-box">
-                  <h4>Golden Rule</h4>
-                  <p>{activeStyle.rule}</p>
-                </div>
+              ))}
+            </div>
+          </div>
+        </main>
+      </div>
+
+      {/* DETAIL MODAL */}
+      {showDetailPanel && selectedTechnique && (
+        <div className="ctp-modal-overlay" onClick={closeDetailPanel}>
+          <div className="ctp-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="ctp-modal-close" onClick={closeDetailPanel}>×</button>
+            
+            <div className="ctp-modal-header">
+              <div className="ctp-modal-title">
+                <h2>{selectedTechnique.name}</h2>
+                <p className="ctp-modal-subtitle">{selectedTechnique.tagline}</p>
               </div>
-              
-              {/* Pro Tip Section */}
-              <div className="pro-tip-section">
-                <div className="pro-tip-icon">🔪</div>
-                <div className="pro-tip-content">
-                  <h4>Chef's Pro Tip</h4>
-                  <p>{activeStyle.proTip}</p>
+            </div>
+
+            <div className="ctp-modal-content">
+              {/* LEFT SIDE - CONTENT */}
+              <div className="ctp-modal-details">
+                {/* DESCRIPTION */}
+                <div className="ctp-detail-section description-section">
+                  <h3>Description</h3>
+                  <p>{selectedTechnique.fullDesc}</p>
                 </div>
-              </div>
-              
-              {/* Safety Tips */}
-              <div className="safety-tips">
-                <h4>Safety Tips:</h4>
-                <ul>
-                  <li>Always use a sharp knife—dull knives are more dangerous</li>
-                  <li>Keep fingers curled in a claw grip away from blade</li>
-                  <li>Cut on a stable, non-slip cutting board</li>
-                  <li>Focus completely on the task—no distractions</li>
-                  <li>Clean as you go to prevent slipping hazards</li>
-                  <li>Store knives properly in a block or on magnetic strip</li>
-                </ul>
+
+                {/* COMMON USES - HORIZONTAL */}
+                <div className="ctp-detail-section uses-section">
+                  <h3>Common Uses</h3>
+                  <div className="ctp-uses-list">
+                    {selectedTechnique.keyUses.map((use, idx) => (
+                      <div key={idx} className="ctp-use-item">
+                        <span className="ctp-use-check">✓</span>
+                        <span>{use}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* TECHNIQUE DETAILS - UNDER COMMON USES */}
+                <div className="ctp-detail-section details-section">
+                  <h3>Technique Details</h3>
+                  <div className="ctp-details-list">
+                    <div className="ctp-detail-item">
+                      <span className="ctp-detail-label">Recommended Knife:</span>
+                      <span className="ctp-detail-value">{selectedTechnique.knife}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* STEPS */}
+                <div className="ctp-detail-section steps-section">
+                  <h3>Steps to {selectedTechnique.name} Cut</h3>
+                  <div className="ctp-steps-list">
+                    {selectedTechnique.steps.map((step, idx) => (
+                      <div key={idx} className="ctp-step-item">
+                        <span className="ctp-step-number">{idx + 1}.</span>
+                        <span className="ctp-step-text">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              {/* TIPS - WITH NUMBERED STYLE */}
+<div className="ctp-detail-section tips-section">
+  <h3>Pro Tips</h3>
+  <div className="ctp-tips-list">
+    {selectedTechnique.tips.map((tip, idx) => (
+      <div key={idx} className="ctp-tip-item">
+        <span className="ctp-tip-number">{idx + 1}.</span>
+        <span className="ctp-tip-text">{tip}</span>
+      </div>
+    ))}
+  </div>
+</div>
+</div>
+              {/* RIGHT SIDE - IMAGE */}
+              <div className="ctp-modal-image-container">
+                <div 
+                  className="ctp-modal-main-image"
+                  style={{ backgroundImage: `url(${selectedTechnique.previewImg})` }}
+                ></div>
+                <div className="ctp-image-caption">
+                  {selectedTechnique.name} - Cutting Technique
+                </div>
               </div>
             </div>
           </div>

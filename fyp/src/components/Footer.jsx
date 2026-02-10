@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
-  // ✅ PAKKA CHECK KARNE KE LIYE
   const currentPath = window.location.pathname;
-  console.log("Footer checking path:", currentPath); // Debug ke liye
+  console.log("🟢 FOOTER DEBUG: Current Path =", currentPath);
 
-  // 1. LOGIN PAGE - NO FOOTER AT ALL
-  if (currentPath === '/login' || currentPath === '/login-page') {
+  // PAGES WHERE NO FOOTER SHOULD SHOW
+  const noFooterPages = ['/login', '/login-page', '/Alarm', '/alarm'];
+  
+  if (noFooterPages.includes(currentPath)) {
+    console.log("🟡 FOOTER: Hiding footer for", currentPath);
     return null;
   }
-// 1. LOGIN PAGE - NO FOOTER AT ALL
-  if (currentPath === '/Alarm' || currentPath === '/Alarm') {
-    return null;
-  }
-  // 2. SIGNUP PAGE - SIMPLE FOOTER (TEXT ONLY)
+
+  // SIGNUP PAGE - SIMPLE FOOTER
   if (currentPath === '/signup') {
-    console.log("Showing SIMPLE footer for signup");
+    console.log("🟡 FOOTER: Showing simple footer for signup");
     return (
       <footer className="simple-footer">
         <div className="simple-footer-content">
@@ -33,7 +32,9 @@ function Footer() {
     );
   }
 
-  // 3. ALL OTHER PAGES - FULL FOOTER WITH IMAGES
+  // ALL OTHER PAGES - FULL FOOTER
+  console.log("🟢 FOOTER: Showing full footer for", currentPath);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Thank you for joining ChefBot!");
@@ -41,7 +42,6 @@ function Footer() {
 
   return (
     <footer className="chefbot-footer">
-      {/* Top Image Strip */}
       <div className="footer-gallery">
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Food 1" />
         <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0" alt="Food 2" />
@@ -50,16 +50,14 @@ function Footer() {
         <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0" alt="Food 5" />
       </div>
 
-      {/* Middle CTA Section */}
       <div className="footer-cta">
-        <h2>Let’s cook something amazing together.</h2>
+        <h2>Let's cook something amazing together.</h2>
         <form onSubmit={handleSubmit}>
           <input type="email" id="search-footer" placeholder="Enter your email" required />
           <button type="submit">Join Now</button>
         </form>
       </div>
 
-      {/* Bottom 3-Section Footer */}
       <div className="footer-main">
         <div className="footer-column">
           <h3>ChefBot</h3>
@@ -87,7 +85,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* Copyright */}
       <div className="footer-bottom">
         <p>© 2026 ChefBot. All rights reserved.</p>
       </div>

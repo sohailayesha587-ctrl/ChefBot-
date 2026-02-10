@@ -2,389 +2,2215 @@ import React, { useState } from 'react';
 import './MeasuringSkillsPage.css';
 
 const MeasuringSkillsPage = () => {
-  const [activeSkill, setActiveSkill] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('tools');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
 
-  const skills = [
-    { 
-      id: 1, 
-      title: "Dry vs Liquid", 
-      shortDesc: "Understanding measurement types.", 
-      fullDesc: "Dry ingredients (flour, sugar, grains) must be measured in dry cups and leveled off. Liquid ingredients (water, milk, oil) require clear measuring cups with spouts and must be read at eye level.",
-      detailedDescription: `Accurately measuring ingredients is the foundation of successful cooking and baking. The distinction between dry and liquid measurements is crucial because they are designed differently for precision.
-      
-**Dry Measuring Cups:**
-- Made of metal or plastic
-- Come in nested sets (¼, ⅓, ½, 1 cup)
-- Designed to be filled to the brim and leveled
-- Perfect for flour, sugar, grains, powders
-
-**Liquid Measuring Cups:**
-- Usually made of glass or clear plastic
-- Have a spout for pouring
-- Feature measurement markings on the side
-- Must be viewed at eye level for accuracy
-
-Using the wrong type can lead to measurement errors of up to 20%, which can ruin delicate recipes.`,
-      bestFor: "All types of cooking and baking",
-      proTip: "Never measure dry ingredients in liquid cups or vice versa.",
-      tools: "Dry measuring cups, liquid measuring cups, straight-edge spatula",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800"
-    },
-    { 
-      id: 2, 
-      title: "The Scale Advantage", 
-      shortDesc: "Why weight beats volume.", 
-      fullDesc: "Professional chefs use digital kitchen scales because weight measurements (grams/ounces) are always accurate. Volume measurements (cups) can vary dramatically depending on how ingredients are packed.",
-      detailedDescription: `Weight measurements provide consistent results that volume measurements can't match. A cup of flour can vary by 30 grams depending on how it's scooped and settled.
-      
-**Why Scales Are Superior:**
-1. **Consistency:** 100g of flour is always 100g
-2. **Less Cleanup:** Measure directly into mixing bowls
-3. **Precision:** Accurate to 1 gram or 0.1 ounce
-4. **Conversion Friendly:** Easy to scale recipes up or down
-5. **International Recipes:** Most global recipes use weight
-
-**Types of Kitchen Scales:**
-- **Digital Scales:** Most accurate, easy to read
-- **Mechanical Scales:** No batteries needed
-- **Precision Scales:** For small amounts (yeast, spices)
-
-Professional bakers measure almost everything by weight for predictable results every time.`,
-      bestFor: "Precision baking, bread making, consistent results",
-      proTip: "1 cup of flour can weigh anywhere from 120-150 grams depending on how it's packed.",
-      tools: "Digital kitchen scale, batteries, mixing bowls",
-      image: "https://images.unsplash.com/photo-1594339044197-39167bd43e6a?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800"
-    },
-    { 
-      id: 3, 
-      title: "Spoon & Level", 
-      shortDesc: "The right way to measure dry ingredients.", 
-      fullDesc: "For accurate flour measurement: 1) Fluff the flour in its container with a fork, 2) Gently spoon flour into measuring cup until overflowing, 3) Level off excess with straight edge of knife.",
-      detailedDescription: `The spoon-and-level method is essential for accurate baking measurements. When flour is scooped directly from the bag, it becomes packed and compressed, leading to up to 25% more flour than intended.
-
-**Step-by-Step Process:**
-1. **Fluff First:** Use a fork to aerate the flour in its container
-2. **Spoon Gently:** Lightly spoon flour into the measuring cup
-3. **Overfill:** Let it mound above the rim
-4. **Level Off:** Use the straight edge of a knife or spatula to remove excess
-
-**Why It Matters:**
-- Too much flour = dense, dry baked goods
-- Too little flour = flat, spread-out results
-- Proper measurement = consistent texture and rise
-
-This technique is especially important for delicate pastries and cakes where precision matters most.`,
-      bestFor: "Cakes, cookies, muffins, and breads",
-      proTip: "Never scoop flour directly with measuring cup - it compacts the flour and adds up to 25% more.",
-      tools: "Dry measuring cups, fork or whisk, straight-edge knife",
-      image: "https://images.unsplash.com/photo-1595908129746-57ca1a63dd4d?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800"
-    },
-    { 
-      id: 4, 
-      title: "Eye-Level Reading", 
-      shortDesc: "Accurate liquid measurements.", 
-      fullDesc: "Place liquid measuring cup on a flat surface and bend down so your eyes are level with the measurement line. Read from the bottom of the meniscus (the curve at liquid surface).",
-      detailedDescription: `Accurate liquid measurement requires understanding the meniscus - the curve that forms at the surface of liquids in containers. This curvature can cause significant reading errors if not viewed properly.
-
-**Correct Technique:**
-1. **Flat Surface:** Place measuring cup on counter, not in hand
-2. **Eye Level:** Bend down until your eyes are level with measurement mark
-3. **Bottom of Curve:** Read from the lowest point of the meniscus
-4. **Clean Cup:** Ensure cup is clean for clear visibility
-
-**Common Errors:**
-- Reading from above adds up to 2 tbsp extra
-- Reading from below reduces amount by similar margin
-- Holding cup instead of placing it flat causes tilting
-
-This is critical for recipes where liquid ratios affect chemical reactions, like in baking or sauce making.`,
-      bestFor: "Water, milk, oil, broth, and any liquid ingredients",
-      proTip: "Reading from above can result in significant measurement errors.",
-      tools: "Liquid measuring cup, flat surface, good lighting",
-      image: "https://images.unsplash.com/photo-1590152435552-e78f6962315b?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581092334652-d5728b8a5d3b?auto=format&fit=crop&w=800"
-    },
-    { 
-      id: 5, 
-      title: "Temperature Timing", 
-      shortDesc: "When thermometers are essential.", 
-      fullDesc: "Some ingredients require specific temperatures: butter at room temperature for creaming, cold butter for pastry, warm liquid for yeast activation. Kitchen thermometers ensure precision.",
-      detailedDescription: `Temperature control is as important as volume measurement in many recipes. Different cooking and baking processes require specific temperature ranges for optimal results.
-
-**Critical Temperature Zones:**
-- **Room Temperature Butter:** 65-68°F (18-20°C) for proper creaming
-- **Cold Butter/Dough:** 40-45°F (4-7°C) for flaky pastry
-- **Yeast Activation:** 105-115°F (40-46°C) for optimal rise
-- **Candy Making:** Precise temperatures from 235°F to 310°F
-
-**Essential Thermometers:**
-- **Instant-Read:** Quick checks of liquids and meats
-- **Oven Thermometer:** Verify actual oven temperature
-- **Candy Thermometer:** High-temperature precision
-- **Refrigerator Thermometer:** Ensure food safety
-
-Professional kitchens use thermometers more often than measuring cups for certain applications.`,
-      bestFor: "Baking, candy making, meat cooking, yeast breads",
-      proTip: "Room temperature butter should be 65-68°F (18-20°C) for optimal baking.",
-      tools: "Instant-read thermometer, candy thermometer, oven thermometer",
+  // SECTION 1: MEASURING TOOLS
+  const toolsData = [
+    {
+      id: 1,
+      name: "Measuring Cups (Liquid)",
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800"
+      tagline: "Transparent cups with spout for liquids",
+      fullDesc: "Specially designed for measuring liquids. Made of clear glass or plastic with measurement markings in ml and fl oz. Have a spout for easy pouring. Essential for accurate liquid measurements in cooking and baking.",
+      keyFeatures: ["Spout for pouring", "Eye-level reading", "Metric & Imperial marks", "Heat resistant"],
+      properUsage: "Place on flat surface, fill to mark, read at eye level, pour slowly from spout",
+      commonMistakes: ["Holding cup while reading", "Not using flat surface", "Pouring too fast"],
+      essentiality: "Essential",
+      types: [
+        {
+          name: "Glass Measuring Cup",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Heat-resistant borosilicate glass",
+          capacity: "250ml, 500ml, 1L",
+          bestFor: "Hot liquids, precise measurements"
+        },
+        {
+          name: "Plastic Measuring Cup",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Lightweight, durable plastic",
+          capacity: "250ml, 500ml, 1L",
+          bestFor: "Daily use, safety with kids"
+        }
+      ]
     },
-    { 
-      id: 6, 
-      title: "The Pinch & Dash", 
-      shortDesc: "Measuring without tools.", 
-      fullDesc: "A pinch = amount between thumb and forefinger. A dash = quick shake from bottle. A smidgen = even smaller amount. These estimates work for seasonings where precision isn't critical.",
-      detailedDescription: `Informal measurements have been used by cooks for centuries and still have their place in modern kitchens. These measurements rely on feel and experience rather than precise tools.
-
-**Standardized Equivalents:**
-- **Pinch:** 1/16 teaspoon (between thumb and forefinger)
-- **Dash:** 1/8 teaspoon (quick shake from shaker)
-- **Smidgen:** 1/32 teaspoon (smaller than a pinch)
-- **Handful:** Approximately 1/2 cup
-- **Dollop:** A small, irregular spoonful
-
-**When to Use Them:**
-- Seasoning to taste (salt, pepper, herbs)
-- Recipes where exact amounts aren't critical
-- When adding personal touch to dishes
-- Quick cooking without stopping to measure
-
-These measurements allow for creativity and adjustment based on personal preference and ingredient potency.`,
-      bestFor: "Salt, pepper, herbs, spices",
-      proTip: "Start with one pinch, taste, then add more if needed.",
-      tools: "Fingers, experience, tasting spoons",
-      image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 2,
+      name: "Measuring Cups (Dry)",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Nested cups for dry ingredients",
+      fullDesc: "Set of nesting cups for measuring dry ingredients like flour, sugar, rice. Usually come in set of 4: 1 cup, 1/2 cup, 1/3 cup, 1/4 cup. Made of metal or plastic with flat rims for leveling.",
+      keyFeatures: ["Nested design", "Flat rim for leveling", "Easy storage", "Stackable"],
+      properUsage: "Scoop ingredient, overfill, level with straight edge",
+      commonMistakes: ["Packing flour", "Using for liquids", "Not leveling properly"],
+      essentiality: "Essential",
+      types: [
+        {
+          name: "Metal Measuring Cups",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Stainless steel, durable",
+          sizes: "1, 1/2, 1/3, 1/4 cups",
+          bestFor: "Professional use, longevity"
+        },
+        {
+          name: "Plastic Measuring Cups",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Colorful, lightweight",
+          sizes: "1, 1/2, 1/3, 1/4 cups",
+          bestFor: "Home kitchens, baking"
+        }
+      ]
     },
-    { 
-      id: 7, 
-      title: "Conversion Charts", 
-      shortDesc: "Switching between measurement systems.", 
-      fullDesc: "Essential conversions: 3 tsp = 1 tbsp, 4 tbsp = 1/4 cup, 16 tbsp = 1 cup. Metric conversions: 1 oz = 28g, 1 cup flour = 120g, 1 cup sugar = 200g.",
-      detailedDescription: `Understanding measurement conversions is essential for adapting recipes, scaling quantities, and working with international recipes that use different systems.
-
-**Essential Volume Conversions:**
-- 3 teaspoons = 1 tablespoon
-- 4 tablespoons = 1/4 cup
-- 16 tablespoons = 1 cup
-- 2 cups = 1 pint
-- 4 cups = 1 quart
-- 4 quarts = 1 gallon
-
-**Weight Conversions:**
-- 1 ounce = 28.35 grams
-- 1 pound = 453.59 grams
-- 1 kilogram = 2.2 pounds
-
-**Ingredient-Specific Conversions:**
-- All-purpose flour: 1 cup = 120g
-- Granulated sugar: 1 cup = 200g
-- Brown sugar (packed): 1 cup = 220g
-- Butter: 1 cup = 227g (2 sticks)
-
-Keep a conversion chart visible in your kitchen for quick reference.`,
-      bestFor: "International recipes, scaling recipes up or down",
-      proTip: "Keep a conversion chart inside your pantry door for quick reference.",
-      tools: "Conversion chart, calculator, measuring tools",
-      image: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=800"
+    {
+      id: 3,
+      name: "Measuring Spoons",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "For small ingredient measurements",
+      fullDesc: "Set of spoons for measuring small quantities of both dry and liquid ingredients. Standard set includes: 1 tbsp, 1 tsp, 1/2 tsp, 1/4 tsp. Essential for spices, baking powder, vanilla extract, etc.",
+      keyFeatures: ["Nested design", "Leveling edge", "Both dry & liquid use", "Compact storage"],
+      properUsage: "Fill spoon, level with straight edge, pour carefully",
+      commonMistakes: ["Using for large quantities", "Not leveling spices", "Confusing tbsp & tsp"],
+      essentiality: "Essential",
+      types: [
+        {
+          name: "Standard Measuring Spoons",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Basic 4-piece set",
+          sizes: "1 tbsp, 1 tsp, 1/2 tsp, 1/4 tsp",
+          bestFor: "General cooking"
+        },
+        {
+          name: "Extended Set",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Includes 1/8 tsp, 1/2 tbsp",
+          sizes: "6-8 pieces",
+          bestFor: "Baking, precise recipes"
+        }
+      ]
     },
-    { 
-      id: 8, 
-      title: "Sticky Ingredients", 
-      shortDesc: "Measuring honey, syrup, etc.", 
-      fullDesc: "For sticky ingredients like honey or molasses: lightly coat measuring cup/spoon with oil or cooking spray first. The ingredient will slide out easily without waste.",
-      detailedDescription: `Sticky ingredients present unique measurement challenges. Their viscosity causes them to cling to measuring tools, leading to inaccurate measurements and wasted ingredients.
-
-**Measurement Techniques:**
-1. **Grease Method:** Lightly coat measuring tool with oil or cooking spray
-2. **Warm Water Method:** Dip tool in warm water before measuring
-3. **Weight Method:** Measure by weight instead of volume
-4. **Displacement Method:** For syrups, measure oil first, then add syrup
-
-**Special Considerations:**
-- **Honey & Syrups:** Warm slightly for easier pouring
-- **Peanut Butter:** Use greased tools or measure by weight
-- **Molasses:** Grease tool thoroughly; measure quickly
-- **Condensed Milk:** Use rubber spatula to remove all contents
-
-These techniques ensure you get the full measured amount into your mixture without waste.`,
-      bestFor: "Honey, molasses, corn syrup, peanut butter",
-      proTip: "You can also measure sticky ingredients by weight for ultimate accuracy.",
-      tools: "Measuring cups/spoons, cooking spray/oil, rubber spatula",
-      image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 4,
+      name: "Kitchen Scale",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Precision weight measurement",
+      fullDesc: "Digital or analog scale for measuring ingredients by weight. Most accurate method for baking. Can measure in grams, ounces, pounds. Digital scales with tare function are most convenient.",
+      keyFeatures: ["Digital display", "Tare function", "Multiple units", "Precise to 1g"],
+      properUsage: "Place bowl, press tare, add ingredient, read weight",
+      commonMistakes: ["Not using tare function", "Uneven surface", "Battery issues"],
+      essentiality: "Important",
+      types: [
+        {
+          name: "Digital Kitchen Scale",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Electronic, precise",
+          capacity: "Up to 5kg, 1g precision",
+          bestFor: "Baking, dieting"
+        },
+        {
+          name: "Mechanical Scale",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Spring-based, no battery",
+          capacity: "Up to 2kg",
+          bestFor: "Basic kitchen use"
+        }
+      ]
     },
-    { 
-      id: 9, 
-      title: "Brown Sugar Packing", 
-      shortDesc: "The exception to the rule.", 
-      fullDesc: "Unlike flour, brown sugar must be firmly packed into measuring cup. Press down with spoon or fingers until sugar holds shape when inverted.",
-      detailedDescription: `Brown sugar is unique among dry ingredients because it contains molasses, which adds moisture and creates clumping. This requires a different measurement approach than other dry ingredients.
-
-**Proper Packing Technique:**
-1. **Spoon Into Cup:** Add brown sugar to measuring cup
-2. **Press Firmly:** Use back of spoon or fingers to pack down
-3. **Add More:** Continue adding and packing until cup is full
-4. **Level Off:** Level with straight edge
-5. **Test:** Sugar should hold shape when cup is inverted
-
-**Why Packing Is Necessary:**
-- Ensures consistent measurement
-- Incorporates proper moisture content
-- Prevents air pockets
-- Provides accurate sweetness level
-
-**If Sugar Has Hardened:**
-- Place with apple slice or bread in sealed container overnight
-- Microwave briefly with damp paper towel
-- Use food processor to break up clumps
-
-Brown sugar should feel like wet sand when properly packed.`,
-      bestFor: "Cookies, crumbles, sweet sauces",
-      proTip: "If brown sugar has hardened, place with bread slice in sealed container overnight to soften.",
-      tools: "Measuring cups, spoon for packing, airtight container",
-      image: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=800",
-      secondaryImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800"
+    {
+      id: 5,
+      name: "Measuring Jug",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Large capacity liquid measurement",
+      fullDesc: "Large jug with measurement markings for bigger quantities of liquids. Usually 1-2 liter capacity. Essential for measuring water for rice, stock for soups, milk for large batches.",
+      keyFeatures: ["Large capacity", "Easy-grip handle", "Pouring lip", "Clear markings"],
+      properUsage: "Place on counter, fill to mark, lift to pour",
+      commonMistakes: ["Holding while reading", "Spilling while pouring", "Not cleaning properly"],
+      essentiality: "Useful",
+      types: [
+        {
+          name: "Plastic Measuring Jug",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Lightweight, durable",
+          capacity: "1L, 2L, 4L",
+          bestFor: "Daily cooking"
+        },
+        {
+          name: "Glass Measuring Jug",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Heat-resistant, easy to clean",
+          capacity: "1L, 1.5L, 2L",
+          bestFor: "Hot liquids"
+        }
+      ]
+    },
+    {
+      id: 6,
+      name: "Food Thermometer",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Temperature measurement for cooking",
+      fullDesc: "Essential for food safety and perfect cooking. Measures internal temperature of meat, oil temperature for frying, candy temperature for desserts. Digital instant-read thermometers are most popular.",
+      keyFeatures: ["Instant read", "Digital display", "Food-safe probe", "Auto-off"],
+      properUsage: "Insert into thickest part, wait for reading, clean after use",
+      commonMistakes: ["Touching bone", "Not cleaning probe", "Wrong placement"],
+      essentiality: "Important",
+      types: [
+        {
+          name: "Instant-Read Thermometer",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Quick reading, portable",
+          range: "-50°C to 300°C",
+          bestFor: "Meat, poultry"
+        },
+        {
+          name: "Oven Thermometer",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "For oven temperature",
+          range: "50°C - 300°C",
+          bestFor: "Baking, roasting"
+        }
+      ]
+    },
+    {
+      id: 7,
+      name: "Kitchen Timer",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Time management in cooking",
+      fullDesc: "Essential for perfect cooking results. Helps track cooking times for various dishes. Can be mechanical, digital, or app-based. Multiple timers useful for complex recipes.",
+      keyFeatures: ["Multiple timers", "Loud alarm", "Magnetic back", "Count up/down"],
+      properUsage: "Set time, start timer, attend to other tasks",
+      commonMistakes: ["Forgetting to start", "Setting wrong time", "Ignoring alarm"],
+      essentiality: "Useful",
+      types: [
+        {
+          name: "Digital Kitchen Timer",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Electronic, precise",
+          features: "Multiple timers, memory",
+          bestFor: "Modern kitchens"
+        },
+        {
+          name: "Mechanical Timer",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "Wind-up, classic",
+          features: "No battery needed",
+          bestFor: "Traditional cooking"
+        }
+      ]
+    },
+    {
+      id: 8,
+      name: "Portion Scoops",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Consistent portion control",
+      fullDesc: "Also called dishers or ice cream scoops. Used for consistent portioning of cookie dough, rice, batter, etc. Number indicates scoops per quart (#20 = 20 scoops per quart).",
+      keyFeatures: ["Release mechanism", "Ergonomic handle", "Standardized sizes", "Durable construction"],
+      properUsage: "Scoop, level, release with trigger",
+      commonMistakes: ["Wrong size selection", "Not leveling", "Forceful scooping"],
+      essentiality: "Specialized",
+      types: [
+        {
+          name: "Cookie Scoop",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "For uniform cookies",
+          sizes: "#20, #24, #30",
+          bestFor: "Baking, catering"
+        },
+        {
+          name: "Rice Scoop",
+          image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=300",
+          description: "For portioning rice",
+          capacity: "1/2 cup, 3/4 cup",
+          bestFor: "Meal prep"
+        }
+      ]
     }
   ];
 
-  const handleSkillClick = (skill) => {
-    setActiveSkill(skill);
-    setIsModalOpen(true);
+  // SECTION 2: MEASURING TECHNIQUES
+  const techniquesData = [
+    {
+      id: 1,
+      name: "Leveling Dry Ingredients",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Perfect flat measurements",
+      fullDesc: "Technique for measuring dry ingredients like flour, sugar, baking powder. Ensures exact amount by removing excess. Essential for baking accuracy.",
+      steps: [
+        "Scoop ingredient with measuring cup",
+        "Overfill slightly above rim",
+        "Use straight edge (knife, spatula)",
+        "Sweep across to remove excess"
+      ],
+      tips: "Use dry measuring cups only, don't shake or tap cup",
+      commonMistakes: ["Packing flour", "Using liquid cup", "Not using straight edge"],
+      applications: "Flour, sugar, cocoa powder, baking soda"
+    },
+    {
+      id: 2,
+      name: "Meniscus Reading (Liquids)",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Accurate liquid measurement",
+      fullDesc: "Reading the curved surface of liquid in measuring cup. Read from bottom of curve for accuracy. Essential for scientific precision in cooking.",
+      steps: [
+        "Place measuring cup on flat surface",
+        "Pour liquid to just below desired mark",
+        "Bend down to eye level",
+        "Read from bottom of curve (meniscus)"
+      ],
+      tips: "Use clear measuring cup, ensure good lighting",
+      commonMistakes: ["Reading from above", "Holding cup in hand", "Ignoring curve"],
+      applications: "Water, milk, oil, syrups, vinegar"
+    },
+    {
+      id: 3,
+      name: "Spoon & Level Method",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Proper flour measurement",
+      fullDesc: "Correct method for measuring flour without packing it. Aerates flour and gives consistent results. Prevents dense baked goods.",
+      steps: [
+        "Fluff flour in container with spoon",
+        "Gently spoon flour into measuring cup",
+        "Overfill above rim",
+        "Level with straight edge"
+      ],
+      tips: "Never scoop directly from bag, don't shake cup",
+      commonMistakes: ["Scooping from bag", "Packing flour", "Tapping cup"],
+      applications: "All-purpose flour, whole wheat flour"
+    },
+    {
+      id: 4,
+      name: "Brown Sugar Packing",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Measuring moist ingredients",
+      fullDesc: "Technique for measuring brown sugar, which needs to be packed to remove air pockets. Creates moist, dense texture in recipes.",
+      steps: [
+        "Place brown sugar in measuring cup",
+        "Press down firmly with back of spoon",
+        "Add more sugar and press again",
+        "Level with rim when packed"
+      ],
+      tips: "Should hold shape when turned out, use fresh moist brown sugar",
+      commonMistakes: ["Not packing enough", "Using stale sugar", "Over-packing"],
+      applications: "Brown sugar, moist coconut"
+    },
+    {
+      id: 5,
+      name: "Taring a Scale",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Zeroing scale with container",
+      fullDesc: "Using tare function to subtract container weight. Allows sequential adding of multiple ingredients to same bowl. Essential for efficient cooking.",
+      steps: [
+        "Place empty bowl on scale",
+        "Press tare/zero button",
+        "Add first ingredient to desired weight",
+        "Press tare again, add next ingredient"
+      ],
+      tips: "Use lightweight bowls, check scale is level",
+      commonMistakes: ["Forgetting to tare", "Uneven surface", "Overloading scale"],
+      applications: "Baking, meal prep, diet tracking"
+    },
+    {
+      id: 6,
+      name: "Sticky Ingredient Method",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Measuring honey, syrup, peanut butter",
+      fullDesc: "Technique for measuring sticky ingredients without waste. Uses oil or water coating for easy release.",
+      steps: [
+        "Lightly oil or spray measuring cup/spoon",
+        "Add sticky ingredient",
+        "Level if needed",
+        "Easily pour out without sticking"
+      ],
+      tips: "Use warm utensils for easier flow, scrape with spatula",
+      commonMistakes: ["Not greasing", "Wasting ingredient", "Inaccurate measurement"],
+      applications: "Honey, maple syrup, molasses, peanut butter"
+    },
+    {
+      id: 7,
+      name: "Butter Measurement",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Measuring solid fats",
+      fullDesc: "Methods for measuring butter and shortening. Can use measurement marks on wrapper, water displacement, or scale.",
+      methods: [
+        "Use markings on butter wrapper",
+        "Water displacement method",
+        "Kitchen scale (most accurate)",
+        "Pre-marked butter dish"
+      ],
+      tips: "Soften butter for cups, use cold for scale",
+      commonMistakes: ["Guessing amounts", "Not using wrapper marks", "Melting butter"],
+      applications: "Butter, margarine, shortening"
+    },
+    {
+      id: 8,
+      name: "Eye-Level Measurement",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Avoiding parallax error",
+      fullDesc: "Positioning yourself at eye level with measurement markings to avoid reading errors. Critical for both liquid and some dry measurements.",
+      steps: [
+        "Place measuring vessel on counter",
+        "Bend or crouch to eye level",
+        "Align eyes with measurement mark",
+        "Adjust liquid/ingredient to exact mark"
+      ],
+      tips: "Use well-lit area, wear glasses if needed",
+      commonMistakes: ["Reading from above", "Angled viewing", "Poor lighting"],
+      applications: "All precise measurements"
+    }
+  ];
+
+  // SECTION 3: ESTIMATION SKILLS
+  const estimationData = [
+    {
+      id: 1,
+      name: "Visual Estimation",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Measuring by sight",
+      fullDesc: "Estimating quantities without tools using visual cues. Develops with experience. Useful for quick cooking, adjustments, and professional kitchens.",
+      techniques: [
+        "Compare to known objects (tennis ball = 1/2 cup)",
+        "Divide pan/pot mentally into portions",
+        "Use finger measurements (knuckle depth)",
+        "Estimate by handfuls"
+      ],
+      accuracy: "±10-20% with practice",
+      whenToUse: "Stir-fries, soups, salads, casual cooking",
+      whenNotToUse: "Baking, exact recipes, first attempts"
+    },
+    {
+      id: 2,
+      name: "Hand Measurements",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Using your hand as guide",
+      fullDesc: "Traditional method using hand parts as measurement references. Consistent because hand size relates to body size.",
+      measurements: [
+        "Pinch = thumb & 1-2 fingers",
+        "Dash = 1/8 teaspoon",
+        "Smidgen = 1/32 teaspoon",
+        "Handful = about 1/2 cup",
+        "Palm = about 3 oz protein"
+      ],
+      tips: "Practice with measured amounts first, note your personal sizes",
+      applications: "Spices, herbs, grains, protein portions"
+    },
+    {
+      id: 3,
+      name: "Pinch & Dash System",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Small quantity estimation",
+      fullDesc: "Traditional measurements for very small amounts, especially spices. Based on finger pinch sizes.",
+      definitions: [
+        "Pinch = thumb & forefinger",
+        "Dash = 2-3 drops or quick shake",
+        "Smidgen = half a pinch",
+        "Drop = single drop from bottle"
+      ],
+      equivalents: [
+        "1 pinch ≈ 1/16 teaspoon",
+        "2 pinches ≈ 1/8 teaspoon",
+        "1 dash ≈ 1/8 teaspoon liquid",
+        "3 drops ≈ 1/4 teaspoon"
+      ],
+      applications: "Salt, pepper, spices, extracts"
+    },
+    {
+      id: 4,
+      name: "Volume by Eye",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Estimating cups & liters",
+      fullDesc: "Estimating volume measurements without tools by comparing to common containers and mental visualization.",
+      references: [
+        "Tea mug = about 1 cup",
+        "Small yogurt cup = 1/2 cup",
+        "Soda can = 12 oz (1.5 cups)",
+        "Wine glass = 5-6 oz",
+        "Rice bowl = 1 cup cooked rice"
+      ],
+      practiceTips: [
+        "Measure water into different containers",
+        "Memorize common package sizes",
+        "Practice with clear containers first"
+      ],
+      accuracy: "Improves with regular practice"
+    },
+    {
+      id: 5,
+      name: "Weight Estimation",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Guessing weight by feel",
+      fullDesc: "Estimating weight of ingredients, especially produce and meat, by heft and size comparison.",
+      comparisons: [
+        "Tennis ball = 2 oz",
+        "Baseball = 5 oz",
+        "Deck of cards = 3 oz meat",
+        "Smartphone = 6-7 oz",
+        "Can of soda = 12 oz"
+      ],
+      techniques: [
+        "Practice with scale first",
+        "Compare to known weighted objects",
+        "Consider density differences"
+      ],
+      applications: "Fruits, vegetables, meat portions"
+    },
+    {
+      id: 6,
+      name: "Portion Estimation",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Serving size by eye",
+      fullDesc: "Estimating proper serving sizes for balanced meals without weighing or measuring.",
+      guidelines: [
+        "Protein = palm-sized",
+        "Carbs = fist-sized",
+        "Vegetables = two handfuls",
+        "Fats = thumb-sized",
+        "Cheese = two dice-sized"
+      ],
+      plateMethod: [
+        "1/2 plate non-starchy vegetables",
+        "1/4 plate protein",
+        "1/4 plate carbohydrates"
+      ],
+      applications: "Meal planning, diet control, buffet servings"
+    },
+    {
+      id: 7,
+      name: "Seasoning by Taste",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Adjusting flavors intuitively",
+      fullDesc: "Adding seasonings without measurements based on taste, smell, and experience. The mark of an experienced cook.",
+      process: [
+        "Start with less than recipe suggests",
+        "Add gradually, tasting frequently",
+        "Consider dish volume and cooking time",
+        "Balance flavors (salt, acid, sweet, umami)"
+      ],
+      tips: [
+        "Salt early, herbs late",
+        "Acids brighten at end",
+        "Sweet balances spice",
+        "Umami enhances depth"
+      ],
+      applications: "Soups, stews, sauces, marinades"
+    },
+    {
+      id: 8,
+      name: "Cooking Time Estimation",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Timing without clock",
+      fullDesc: "Estimating cooking times based on experience, visual cues, and sensory signals.",
+      indicators: [
+        "Color change (browning, transparency)",
+        "Texture (fork-tender, al dente)",
+        "Smell (aromas developing)",
+        "Sound (sizzling changes)",
+        "Sight (bubbles, reduction)"
+      ],
+      timeReferences: [
+        "Boil water: 5-10 minutes",
+        "Sauté vegetables: 5-7 minutes",
+        "Cook rice: 15-20 minutes",
+        "Bake chicken: 25-30 minutes"
+      ],
+      applications: "All cooking processes"
+    }
+  ];
+
+  // SECTION 4: CONVERSION SKILLS
+  const conversionData = [
+    {
+      id: 1,
+      name: "Volume Conversions",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Cups, tablespoons, milliliters",
+      fullDesc: "Converting between different volume measurement units commonly used in recipes.",
+      commonConversions: [
+        "1 tablespoon = 3 teaspoons",
+        "1/4 cup = 4 tablespoons",
+        "1/3 cup = 5 tablespoons + 1 teaspoon",
+        "1/2 cup = 8 tablespoons",
+        "1 cup = 16 tablespoons",
+        "1 cup = 240 ml",
+        "1 quart = 4 cups",
+        "1 gallon = 16 cups"
+      ],
+      metricConversions: [
+        "1 teaspoon = 5 ml",
+        "1 tablespoon = 15 ml",
+        "1 fluid ounce = 30 ml",
+        "1 cup = 240 ml",
+        "1 pint = 480 ml",
+        "1 quart = 960 ml",
+        "1 liter = 4.2 cups"
+      ],
+      tips: "Use measuring spoons within cups, memorize key ratios"
+    },
+    {
+      id: 2,
+      name: "Weight Conversions",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Grams, ounces, pounds",
+      fullDesc: "Converting between weight measurement systems for precise ingredient measurement.",
+      commonConversions: [
+        "1 ounce = 28 grams",
+        "4 ounces = 113 grams (1/4 pound)",
+        "8 ounces = 227 grams (1/2 pound)",
+        "16 ounces = 454 grams (1 pound)",
+        "1 kilogram = 2.2 pounds",
+        "1 pound = 454 grams"
+      ],
+      bakingConversions: [
+        "1 cup flour = 120-125g",
+        "1 cup sugar = 200g",
+        "1 cup butter = 227g",
+        "1 cup water = 240g",
+        "1 cup honey = 340g"
+      ],
+      tips: "Weigh for accuracy, volume varies by ingredient"
+    },
+    {
+      id: 3,
+      name: "Temperature Conversions",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Celsius ↔ Fahrenheit",
+      fullDesc: "Converting oven and cooking temperatures between Celsius and Fahrenheit systems.",
+      formula: [
+        "°F to °C: Subtract 32, multiply by 5/9",
+        "°C to °F: Multiply by 9/5, add 32"
+      ],
+      commonTemperatures: [
+        "Freezing: 0°C = 32°F",
+        "Room temp: 20°C = 68°F",
+        "Body temp: 37°C = 98.6°F",
+        "Simmer: 85°C = 185°F",
+        "Boiling: 100°C = 212°F"
+      ],
+      ovenTemperatures: [
+        "Very cool: 120°C = 250°F",
+        "Cool: 150°C = 300°F",
+        "Moderate: 180°C = 350°F",
+        "Hot: 200°C = 400°F",
+        "Very hot: 230°C = 450°F"
+      ],
+      tips: "Memorize key points, use oven thermometer"
+    },
+    {
+      id: 4,
+      name: "Recipe Scaling",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Adjusting recipe quantities",
+      fullDesc: "Increasing or decreasing recipe quantities while maintaining proper ratios and cooking times.",
+      scalingRules: [
+        "Multiply all ingredients by same factor",
+        "Adjust cooking times (not linear)",
+        "Consider pan size changes",
+        "Adjust seasoning carefully"
+      ],
+      commonMultipliers: [
+        "Half recipe: Multiply by 0.5",
+        "Double recipe: Multiply by 2",
+        "Triple recipe: Multiply by 3",
+        "Quarter recipe: Multiply by 0.25"
+      ],
+      exceptions: [
+        "Spices: Increase slightly less",
+        "Salt: Increase carefully, taste",
+        "Baking powder/soda: Exact scaling",
+        "Eggs: Round to nearest whole"
+      ],
+      tips: "Write down conversions, check pan capacity"
+    },
+    {
+      id: 5,
+      name: "Imperial to Metric",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "US measurements to metric",
+      fullDesc: "Converting American recipe measurements to metric system used in most other countries.",
+      volumeConversions: [
+        "1 teaspoon = 5 ml",
+        "1 tablespoon = 15 ml",
+        "1 fluid ounce = 30 ml",
+        "1 cup = 240 ml",
+        "1 pint = 480 ml",
+        "1 quart = 960 ml",
+        "1 gallon = 3.8 liters"
+      ],
+      weightConversions: [
+        "1 ounce = 28 grams",
+        "1 pound = 454 grams",
+        "1 pound = 0.45 kilograms"
+      ],
+      ovenConversions: [
+        "250°F = 120°C",
+        "300°F = 150°C",
+        "350°F = 180°C",
+        "400°F = 200°C",
+        "450°F = 230°C"
+      ],
+      tips: "Round to convenient metric amounts, use scale for accuracy"
+    },
+    {
+      id: 6,
+      name: "Ingredient Substitutions",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Converting ingredients",
+      fullDesc: "Substituting ingredients when originals aren't available while maintaining similar properties.",
+      commonSubstitutions: [
+        "1 cup buttermilk = 1 cup milk + 1 tbsp vinegar",
+        "1 cup cake flour = 1 cup flour - 2 tbsp",
+        "1 tsp baking powder = 1/4 tsp baking soda + 1/2 tsp cream of tartar",
+        "1 cup honey = 1 1/4 cup sugar + 1/4 cup water",
+        "1 cup oil = 1 cup melted butter"
+      ],
+      dairySubstitutions: [
+        "1 cup milk = 1 cup water + 1/4 cup dry milk",
+        "1 cup cream = 3/4 cup milk + 1/4 cup butter",
+        "1 cup yogurt = 1 cup buttermilk"
+      ],
+      tips: "Consider flavor and texture changes, test when possible"
+    },
+    {
+      id: 7,
+      name: "Pan Size Conversions",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Adjusting for different pans",
+      fullDesc: "Converting recipes for different pan sizes and shapes while maintaining baking times and results.",
+      commonPanSizes: [
+        "8-inch round = 6-inch round × 1.8",
+        "9-inch round = 8-inch round × 1.3",
+        "13×9 inch = two 9-inch rounds",
+        "Loaf pan = 8×4 inch or 9×5 inch"
+      ],
+      areaCalculations: [
+        "Round pan: π × radius²",
+        "Square/rectangular: length × width",
+        "Compare areas to adjust quantities"
+      ],
+      adjustmentRules: [
+        "Keep depth similar (1-2 inch difference max)",
+        "Adjust time for thickness changes",
+        "Check doneness with toothpick"
+      ],
+      tips: "Fill pans 2/3 full, use parchment paper"
+    },
+    {
+      id: 8,
+      name: "Measurement Equivalents",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Quick reference conversions",
+      fullDesc: "Memorizing common measurement equivalents for quick mental calculations in the kitchen.",
+      mustKnowEquivalents: [
+        "3 teaspoons = 1 tablespoon",
+        "4 tablespoons = 1/4 cup",
+        "16 tablespoons = 1 cup",
+        "2 cups = 1 pint",
+        "2 pints = 1 quart",
+        "4 quarts = 1 gallon",
+        "8 fluid ounces = 1 cup",
+        "16 ounces = 1 pound"
+      ],
+      metricEquivalents: [
+        "5 ml = 1 teaspoon",
+        "15 ml = 1 tablespoon",
+        "240 ml = 1 cup",
+        "1 liter = 4.2 cups",
+        "28 grams = 1 ounce",
+        "454 grams = 1 pound"
+      ],
+      handyEquivalents: [
+        "Butter: 1 stick = 1/2 cup = 8 tbsp = 113g",
+        "Sugar: 1 cup = 200g = 7 oz",
+        "Flour: 1 cup = 120g = 4.25 oz",
+        "Rice: 1 cup raw = 3 cups cooked"
+      ],
+      tips: "Create cheat sheet for fridge door"
+    }
+  ];
+
+  // SECTION 5: PRECISION SKILLS
+  const precisionData = [
+    {
+      id: 1,
+      name: "Baking Precision",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Exact measurements for baking",
+      fullDesc: "Techniques for achieving the precision required in baking where chemical reactions depend on exact ratios.",
+      criticalRules: [
+        "Use scale for dry ingredients",
+        "Measure liquids at eye level",
+        "Room temperature ingredients",
+        "Precise oven temperature",
+        "Exact timing"
+      ],
+      commonErrors: [
+        "Scooping flour from bag",
+        "Not leveling measurements",
+        "Guessing small amounts",
+        "Substituting without adjustment"
+      ],
+      toolsRequired: [
+        "Digital kitchen scale",
+        "Proper measuring cups/spoons",
+        "Oven thermometer",
+        "Kitchen timer"
+      ],
+      tips: "Weigh ingredients, follow recipes exactly, don't improvise in baking"
+    },
+    {
+      id: 2,
+      name: "Scale Calibration",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Ensuring scale accuracy",
+      fullDesc: "Regular calibration and maintenance of kitchen scales for consistent, accurate measurements.",
+      calibrationMethods: [
+        "Use calibration weights",
+        "Coins (US nickel = 5g)",
+        "Water (1ml = 1g at 4°C)",
+        "Manufacturer's instructions"
+      ],
+      maintenanceTips: [
+        "Clean after each use",
+        "Store in dry place",
+        "Replace batteries regularly",
+        "Check zero before each use",
+        "Avoid overloading"
+      ],
+      accuracyCheck: [
+        "Weigh known object",
+        "Check at different weights",
+        "Test tare function",
+        "Verify on different surfaces"
+      ],
+      tips: "Calibrate monthly, use on hard flat surface, handle gently"
+    },
+    {
+      id: 3,
+      name: "Micro Measurements",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Measuring tiny amounts",
+      fullDesc: "Techniques for accurately measuring very small quantities crucial in baking and specialized cooking.",
+      toolsForMicro: [
+        "1/8 and 1/16 tsp measures",
+        "Digital scale (1g precision)",
+        "Medicine droppers",
+        "Micro measuring spoons"
+      ],
+      techniques: [
+        "Use scale for under 1 tsp",
+        "Dropper for liquids",
+        "Dip & sweep for powders",
+        "Divide known amounts"
+      ],
+      criticalAmounts: [
+        "Yeast: 2.25 tsp per packet",
+        "Baking soda: exact amounts",
+        "Salt: affects fermentation",
+        "Spices: balance flavors"
+      ],
+      tips: "Invest in micro spoons, use scale for accuracy, practice with water"
+    },
+    {
+      id: 4,
+      name: "Consistent Portioning",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Uniform food portions",
+      fullDesc: "Creating identical portions for consistent cooking, professional presentation, and controlled servings.",
+      portioningTools: [
+        "Cookie/ice cream scoops",
+        "Kitchen scale",
+        "Measuring cups",
+        "Portion control plates",
+        "Divided containers"
+      ],
+      techniques: [
+        "Weigh each portion",
+        "Use same scoop size",
+        "Divide total by number",
+        "Visual markers in pans"
+      ],
+      benefits: [
+        "Even cooking",
+        "Professional appearance",
+        "Consistent nutrition",
+        "Cost control",
+        "Waste reduction"
+      ],
+      tips: "Weigh first few, then eyeball, use consistent tools"
+    },
+    {
+      id: 5,
+      name: "Temperature Precision",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Exact temperature control",
+      fullDesc: "Achieving and maintaining precise temperatures crucial for candy making, meat cooking, and baking.",
+      criticalTemperatures: [
+        "Meat doneness temperatures",
+        "Candy stages (soft ball, hard crack)",
+        "Yeast activation (105-115°F)",
+        "Chocolate tempering",
+        "Oil for frying"
+      ],
+      tools: [
+        "Instant-read thermometer",
+        "Candy thermometer",
+        "Oven thermometer",
+        "Infrared thermometer"
+      ],
+      techniques: [
+        "Calibrate thermometers regularly",
+        "Measure in thickest part",
+        "Avoid bone/fat pockets",
+        "Allow for carryover cooking"
+      ],
+      tips: "Invest in quality thermometer, calibrate monthly, clean probes"
+    },
+    {
+      id: 6,
+      name: "Hydration Ratios",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Baking with exact water ratios",
+      fullDesc: "Precise water-to-flour ratios essential for bread baking, pasta making, and dough preparation.",
+      commonRatios: [
+        "Bread: 60-75% hydration",
+        "Pasta: 50% hydration",
+        "Pie crust: 30-40% hydration",
+        "Cookie dough: 15-25%"
+      ],
+      calculation: [
+        "Hydration % = (water weight ÷ flour weight) × 100",
+        "Baker's percentages",
+        "Adjust for humidity",
+        "Account for other liquids"
+      ],
+      effects: [
+        "Higher hydration: more open crumb",
+        "Lower hydration: denser texture",
+        "Affects fermentation time",
+        "Changes handling properties"
+      ],
+      tips: "Weigh ingredients, adjust for climate, keep notes"
+    },
+    {
+      id: 7,
+      name: "Ingredient Ratios",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Mastering recipe ratios",
+      fullDesc: "Understanding and applying fundamental ingredient ratios that form the basis of countless recipes.",
+      basicRatios: [
+        "Pie dough: 3:2:1 (flour:fat:water)",
+        "Biscuits: 3:1:2 (flour:fat:liquid)",
+        "Pancakes: 2:2:1:1/2 (flour:liquid:egg:fat)",
+        "Vinaigrette: 3:1 (oil:vinegar)",
+        "Rice: 1:2 (rice:water)"
+      ],
+      application: [
+        "Scale up/down easily",
+        "Create variations",
+        "Troubleshoot failures",
+        "Memorize less recipes"
+      ],
+      benefits: [
+        "Flexibility in cooking",
+        "Better understanding",
+        "Easier improvisation",
+        "Confidence in kitchen"
+      ],
+      tips: "Learn ratios instead of recipes, practice with variations"
+    },
+    {
+      id: 8,
+      name: "Measurement Documentation",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      tagline: "Recording exact measurements",
+      fullDesc: "System for documenting precise measurements, adjustments, and results for consistent reproduction.",
+      documentationMethods: [
+        "Recipe journal/notebook",
+        "Digital notes app",
+        "Photograph measurements",
+        "Spreadsheet tracking"
+      ],
+      whatToRecord: [
+        "Exact weights/measures",
+        "Brands of ingredients",
+        "Equipment used",
+        "Time/temperature",
+        "Results and adjustments"
+      ],
+      benefits: [
+        "Reproduce successes",
+        "Avoid repeating mistakes",
+        "Track improvements",
+        "Share exact recipes"
+      ],
+      tips: "Be consistent, include details, review regularly"
+    }
+  ];
+
+  // Get current data based on selected category
+  const getCurrentData = () => {
+    switch (selectedCategory) {
+      case 'tools': return toolsData;
+      case 'techniques': return techniquesData;
+      case 'estimation': return estimationData;
+      case 'conversions': return conversionData;
+      case 'precision': return precisionData;
+      default: return toolsData;
+    }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setActiveSkill(null);
+  const handleItemSelect = (item) => {
+    setSelectedItem(item);
+    setShowDetailPanel(true);
+  };
+
+  const closeDetailPanel = () => {
+    setShowDetailPanel(false);
+    setSelectedItem(null);
   };
 
   return (
-    <div className="measuring-skills-page">
-      {/* SIDEBAR - JUST TEXT, NO LINKS */}
-      <aside className="sidebar">
-        <h2>Measurement Tools</h2>
-        <ul className="features-list">
-          {skills.map(skill => (
-            <li 
-              key={skill.id} 
-              className="feature-item"
-            >
-              {skill.title}
-            </li>
-          ))}
-        </ul>
-      </aside>
+    <div className="msp-container">
+      <div className="msp-layout">
+        {/* SIDEBAR */}
+        <aside className="msp-sidebar">
+          <div className="msp-sidebar-header">
+            <h2 className="msp-sidebar-title">Measuring Skills</h2>
+            <p className="msp-sidebar-subtitle">Master Kitchen Measurements</p>
+          </div>
 
-      {/* MAIN CONTENT - ALL 9 CARDS */}
-      <main className="main-content">
-        <header className="content-header">
-          <h1>Measuring Skills</h1>
-        </header>
+          <div className="msp-sidebar-categories">
+            <ul className="msp-categories-list">
+              <li 
+                className={`msp-category-item ${selectedCategory === 'tools' ? 'msp-active' : ''}`}
+                onClick={() => setSelectedCategory('tools')}
+              >
+                <span className="msp-category-name">📏 Tools & Equipment</span>
+              </li>
+              <li 
+                className={`msp-category-item ${selectedCategory === 'techniques' ? 'msp-active' : ''}`}
+                onClick={() => setSelectedCategory('techniques')}
+              >
+                <span className="msp-category-name">👐 Measuring Techniques</span>
+              </li>
+              <li 
+                className={`msp-category-item ${selectedCategory === 'estimation' ? 'msp-active' : ''}`}
+                onClick={() => setSelectedCategory('estimation')}
+              >
+                <span className="msp-category-name">👁️ Estimation Skills</span>
+              </li>
+              <li 
+                className={`msp-category-item ${selectedCategory === 'conversions' ? 'msp-active' : ''}`}
+                onClick={() => setSelectedCategory('conversions')}
+              >
+                <span className="msp-category-name">🔄 Conversion Skills</span>
+              </li>
+              <li 
+                className={`msp-category-item ${selectedCategory === 'precision' ? 'msp-active' : ''}`}
+                onClick={() => setSelectedCategory('precision')}
+              >
+                <span className="msp-category-name">🎯 Precision Skills</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
 
-        <div className="features-grid">
-          {skills.map(skill => (
-            <div 
-              key={skill.id} 
-              className="feature-card"
-              onClick={() => handleSkillClick(skill)}
-            >
-              <div 
-                className="card-image"
-                style={{ backgroundImage: `url(${skill.image})` }}
-              ></div>
-              <div className="card-content">
-                <h3>{skill.title}</h3>
-                <p className="card-desc">{skill.shortDesc}</p>
-                <div className="click-details">
-                  View Details →
-                </div>
-              </div>
+        {/* MAIN CONTENT */}
+        <main className="msp-main">
+          <header className="msp-main-header">
+            <div className="msp-header-content">
+              <h1 className="msp-page-title">
+                {selectedCategory === 'tools' && 'Measuring Tools & Equipment'}
+                {selectedCategory === 'techniques' && 'Measuring Techniques'}
+                {selectedCategory === 'estimation' && 'Estimation Skills'}
+                {selectedCategory === 'conversions' && 'Conversion Skills'}
+                {selectedCategory === 'precision' && 'Precision Skills'}
+              </h1>
+              <p className="msp-page-description">
+                {selectedCategory === 'tools' && 'Essential tools for accurate kitchen measurements and their proper usage.'}
+                {selectedCategory === 'techniques' && 'Proper methods and techniques for measuring ingredients accurately.'}
+                {selectedCategory === 'estimation' && 'Skills for estimating quantities when precise measuring isn\'t possible.'}
+                {selectedCategory === 'conversions' && 'Converting between measurement systems and adjusting recipes.'}
+                {selectedCategory === 'precision' && 'Advanced skills for exact measurements in baking and precision cooking.'}
+              </p>
             </div>
-          ))}
-        </div>
-      </main>
+          </header>
 
-      {/* COMPLETE DETAILED POPUP */}
-      {isModalOpen && activeSkill && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closeModal}>×</button>
-            
-            {/* Main Image */}
-            <div className="modal-header">
-              <div 
-                className="modal-image"
-                style={{ backgroundImage: `url(${activeSkill.image})` }}
-              ></div>
-              <div className="modal-title-section">
-                <h2>{activeSkill.title}</h2>
-                <div className="modal-subtitle">{activeSkill.shortDesc}</div>
-              </div>
-            </div>
-            
-            <div className="modal-body">
-              {/* Detailed Description Section */}
-              <div className="section detailed-description">
-                <h3>Complete Guide</h3>
-                <div className="description-content">
-                  {activeSkill.detailedDescription?.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="description-paragraph">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Secondary Image */}
-              {activeSkill.secondaryImage && (
-                <div className="secondary-image-container">
+          {/* ITEMS GRID */}
+          <div className="msp-items-grid-section">
+            <div className="msp-items-grid">
+              {getCurrentData().map(item => (
+                <div 
+                  key={item.id} 
+                  className="msp-item-card"
+                  onClick={() => handleItemSelect(item)}
+                >
                   <div 
-                    className="secondary-image"
-                    style={{ backgroundImage: `url(${activeSkill.secondaryImage})` }}
+                    className="msp-card-image"
+                    style={{ backgroundImage: `url(${item.image})` }}
                   ></div>
+                  
+                  <div className="msp-card-content">
+                    <div className="msp-card-header">
+                      <h3 className="msp-card-title">{item.name}</h3>
+                      {item.essentiality && (
+                        <div className={`msp-essentiality-badge ${item.essentiality.toLowerCase()}`}>
+                          {item.essentiality}
+                        </div>
+                      )}
+                    </div>
+                    <p className="msp-card-description">{item.tagline}</p>
+                  </div>
                 </div>
-              )}
-              
-              {/* Info Grid */}
-              <div className="info-grid">
-                <div className="info-box best-for-box">
-                  <h4>Best Used For</h4>
-                  <p>{activeSkill.bestFor}</p>
-                </div>
-                
-                <div className="info-box tools-box">
-                  <h4>Essential Tools</h4>
-                  <p>{activeSkill.tools}</p>
-                </div>
-                
-                <div className="info-box pro-tip-box">
-                  <h4>Pro Chef's Tip</h4>
-                  <p>{activeSkill.proTip}</p>
+              ))}
+            </div>
+          </div>
+        </main>
+      </div>
+
+  {/* DETAIL MODAL - ALL CATEGORIES WITH FULL DETAILS */}
+{showDetailPanel && selectedItem && (
+  <div className="msp-modal-overlay" onClick={closeDetailPanel}>
+    <div className="msp-modal" onClick={(e) => e.stopPropagation()}>
+      <button className="msp-modal-close" onClick={closeDetailPanel}>×</button>
+      
+      <div className="msp-modal-header">
+        <div className="msp-modal-title">
+          <h2>{selectedItem.name}</h2>
+          <p className="msp-modal-subtitle">{selectedItem.tagline}</p>
+        </div>
+      </div>
+
+      <div className="msp-modal-content">
+        <div className="msp-modal-layout">
+          {/* LEFT SIDE - CONTENT */}
+          <div className="msp-modal-left">
+            <div className="msp-modal-details">
+              {/* DESCRIPTION - ALL CATEGORIES */}
+              <div className="msp-detail-section">
+                <h3>📋 Description</h3>
+                <div className="msp-detail-content">
+                  <p>{selectedItem.fullDesc}</p>
                 </div>
               </div>
-              
-              {/* Key Points */}
-              <div className="key-points">
-                <h4>Key Takeaways:</h4>
-                <ul>
-                  <li>Always use the right tool for each measurement type</li>
-                  <li>Consistency is key for repeatable results</li>
-                  <li>When in doubt, weigh ingredients instead of using volume</li>
-                  <li>Clean tools ensure accurate measurements</li>
-                  <li>Practice develops intuitive measurement skills</li>
-                  <li>Document your measurements for future reference</li>
-                </ul>
+
+              {/* ===== TOOLS CATEGORY FULL DETAILS ===== */}
+              {selectedCategory === 'tools' && selectedItem && (
+                <>
+                  {/* Key Features - Horizontal Grid */}
+                  {selectedItem.keyFeatures && Array.isArray(selectedItem.keyFeatures) && (
+                    <div className="msp-detail-section">
+                      <h3>✅ Key Features</h3>
+                      <div className="msp-features-horizontal">
+                        {selectedItem.keyFeatures.map((feature, idx) => (
+                          <div key={idx} className="msp-feature-box">
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Proper Usage */}
+                  {selectedItem.properUsage && (
+                    <div className="msp-detail-section">
+                      <h3>📝 Proper Usage</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>How to use correctly:</strong> {selectedItem.properUsage}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Mistakes - Horizontal Grid */}
+                  {selectedItem.commonMistakes && Array.isArray(selectedItem.commonMistakes) && (
+                    <div className="msp-detail-section">
+                      <h3>❌ Common Mistakes</h3>
+                      <div className="msp-mistakes-horizontal">
+                        {selectedItem.commonMistakes.map((mistake, idx) => (
+                          <div key={idx} className="msp-mistake-box">
+                            {mistake}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Essentiality */}
+                  {selectedItem.essentiality && (
+                    <div className="msp-detail-section">
+                      <h3>⭐ Importance Level</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>{selectedItem.essentiality}</strong> - {
+                          selectedItem.essentiality === 'Essential' ? 'Must-have for every kitchen' :
+                          selectedItem.essentiality === 'Important' ? 'Highly recommended for serious cooks' :
+                          selectedItem.essentiality === 'Useful' ? 'Good to have for specific tasks' :
+                          'Specialized tool for specific purposes'
+                        }</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Types & Varieties */}
+                  {selectedItem.types && Array.isArray(selectedItem.types) && selectedItem.types.length > 0 && (
+                    <div className="msp-types-section">
+                      <h3 className="msp-types-heading">🔧 Types & Varieties</h3>
+                      <div className="msp-detail-content">
+                        <p>Different types available in the market:</p>
+                      </div>
+                      <div className="msp-types-grid">
+                        {selectedItem.types.map((type, index) => (
+                          <div key={index} className="msp-type-card">
+                            <div 
+                              className="msp-type-image"
+                              style={{ backgroundImage: `url(${type.image})` }}
+                            ></div>
+                            <div className="msp-type-content">
+                              <h4>{type.name}</h4>
+                              <p className="msp-type-desc">{type.description}</p>
+                              {type.capacity && (
+                                <div className="msp-type-info">
+                                  <span className="msp-type-info-item">📏 Capacity: {type.capacity}</span>
+                                </div>
+                              )}
+                              {type.sizes && (
+                                <div className="msp-type-info">
+                                  <span className="msp-type-info-item">📐 Sizes: {type.sizes}</span>
+                                </div>
+                              )}
+                              {type.features && (
+                                <div className="msp-type-info">
+                                  <span className="msp-type-info-item">✨ Features: {type.features}</span>
+                                </div>
+                              )}
+                              {type.range && (
+                                <div className="msp-type-info">
+                                  <span className="msp-type-info-item">🌡️ Range: {type.range}</span>
+                                </div>
+                              )}
+                              <div className="msp-type-best">
+                                <strong>Best For:</strong> {type.bestFor}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* ===== TECHNIQUES CATEGORY FULL DETAILS ===== */}
+              {selectedCategory === 'techniques' && selectedItem && (
+                <>
+                  {/* Steps */}
+                  {selectedItem.steps && Array.isArray(selectedItem.steps) && (
+                    <div className="msp-detail-section">
+                      <h3>📋 Step-by-Step Process</h3>
+                      <div className="msp-detail-content">
+                        <ol className="msp-steps-list">
+                          {selectedItem.steps.map((step, idx) => (
+                            <li key={idx} className="msp-step-item">
+                              <span className="msp-step-number">{idx + 1}.</span>
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tips */}
+                  {selectedItem.tips && (
+                    <div className="msp-detail-section">
+                      <h3>💡 Pro Tips</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Mistakes */}
+                  {selectedItem.commonMistakes && Array.isArray(selectedItem.commonMistakes) && (
+                    <div className="msp-detail-section">
+                      <h3>❌ Common Mistakes to Avoid</h3>
+                      <div className="msp-detail-content">
+                        <ul className="msp-mistakes-list">
+                          {selectedItem.commonMistakes.map((mistake, idx) => (
+                            <li key={idx} className="msp-mistake-item">
+                              <span className="msp-mistake-icon">⚠️</span>
+                              <span>{mistake}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Applications */}
+                  {selectedItem.applications && Array.isArray(selectedItem.applications) && (
+                    <div className="msp-detail-section">
+                      <h3>🎯 Where to Apply</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-applications-list">
+                          {selectedItem.applications.map((app, idx) => (
+                            <div key={idx} className="msp-application-item">
+                              <span className="msp-application-check">✓</span>
+                              <span>{app}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Methods (for Butter Measurement) */}
+                  {selectedItem.methods && Array.isArray(selectedItem.methods) && (
+                    <div className="msp-detail-section">
+                      <h3>🛠️ Different Methods</h3>
+                      <div className="msp-detail-content">
+                        <ol className="msp-methods-list">
+                          {selectedItem.methods.map((method, idx) => (
+                            <li key={idx} className="msp-method-item">
+                              <span className="msp-method-number">{idx + 1}.</span>
+                              <span>{method}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* ===== ESTIMATION CATEGORY FULL DETAILS ===== */}
+              {selectedCategory === 'estimation' && selectedItem && (
+                <>
+                  {/* Techniques */}
+                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && (
+                    <div className="msp-detail-section">
+                      <h3>👐 Estimation Techniques</h3>
+                      <div className="msp-detail-content">
+                        <ul className="msp-techniques-list">
+                          {selectedItem.techniques.map((tech, idx) => (
+                            <li key={idx} className="msp-technique-item">
+                              <span className="msp-technique-icon">•</span>
+                              <span>{tech}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Measurements (Hand Measurements) */}
+                  {selectedItem.measurements && Array.isArray(selectedItem.measurements) && (
+                    <div className="msp-detail-section">
+                      <h3>📏 Measurement References</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-measurements-grid">
+                          {selectedItem.measurements.map((measurement, idx) => (
+                            <div key={idx} className="msp-measurement-box">
+                              {measurement}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Definitions (Pinch & Dash) */}
+                  {selectedItem.definitions && Array.isArray(selectedItem.definitions) && (
+                    <div className="msp-detail-section">
+                      <h3>📚 Definitions</h3>
+                      <div className="msp-detail-content">
+                        <ul className="msp-definitions-list">
+                          {selectedItem.definitions.map((definition, idx) => (
+                            <li key={idx} className="msp-definition-item">
+                              <span className="msp-definition-icon">•</span>
+                              <span>{definition}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Equivalents (Pinch & Dash) */}
+                  {selectedItem.equivalents && Array.isArray(selectedItem.equivalents) && (
+                    <div className="msp-detail-section">
+                      <h3>⚖️ Measurement Equivalents</h3>
+                      <div className="msp-detail-content">
+                        <ul className="msp-equivalents-list">
+                          {selectedItem.equivalents.map((equivalent, idx) => (
+                            <li key={idx} className="msp-equivalent-item">
+                              <span className="msp-equivalent-icon">↔️</span>
+                              <span>{equivalent}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Comparisons (Weight Estimation) */}
+                  {selectedItem.comparisons && Array.isArray(selectedItem.comparisons) && (
+                    <div className="msp-detail-section">
+                      <h3>⚖️ Weight Comparisons</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-comparisons-grid">
+                          {selectedItem.comparisons.map((comparison, idx) => (
+                            <div key={idx} className="msp-comparison-box">
+                              {comparison}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* References (Volume by Eye) */}
+                  {selectedItem.references && Array.isArray(selectedItem.references) && (
+                    <div className="msp-detail-section">
+                      <h3>👀 Visual References</h3>
+                      <div className="msp-detail-content">
+                        <ul className="msp-references-list">
+                          {selectedItem.references.map((reference, idx) => (
+                            <li key={idx} className="msp-reference-item">
+                              <span className="msp-reference-icon">📊</span>
+                              <span>{reference}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Guidelines (Portion Estimation) */}
+                  {selectedItem.guidelines && Array.isArray(selectedItem.guidelines) && (
+                    <div className="msp-detail-section">
+                      <h3>🍽️ Portion Guidelines</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-guidelines-grid">
+                          {selectedItem.guidelines.map((guideline, idx) => (
+                            <div key={idx} className="msp-guideline-box">
+                              {guideline}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Plate Method (Portion Estimation) */}
+                  {selectedItem.plateMethod && Array.isArray(selectedItem.plateMethod) && (
+                    <div className="msp-detail-section">
+                      <h3>🍽️ Plate Method</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-plate-method-grid">
+                          {selectedItem.plateMethod.map((method, idx) => (
+                            <div key={idx} className="msp-plate-method-box">
+                              {method}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Process (Seasoning by Taste) */}
+                  {selectedItem.process && Array.isArray(selectedItem.process) && (
+                    <div className="msp-detail-section">
+                      <h3>🧂 Seasoning Process</h3>
+                      <div className="msp-detail-content">
+                        <ol className="msp-process-list">
+                          {selectedItem.process.map((step, idx) => (
+                            <li key={idx} className="msp-process-item">
+                              <span className="msp-process-number">{idx + 1}.</span>
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Seasoning Tips */}
+                  {selectedItem.tips && Array.isArray(selectedItem.tips) && (
+                    <div className="msp-detail-section">
+                      <h3>💡 Flavor Tips</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-tips-grid">
+                          {selectedItem.tips.map((tip, idx) => (
+                            <div key={idx} className="msp-tip-box">
+                              {tip}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Indicators (Cooking Time) */}
+                  {selectedItem.indicators && Array.isArray(selectedItem.indicators) && (
+                    <div className="msp-detail-section">
+                      <h3>👁️ Visual & Sensory Indicators</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-indicators-grid">
+                          {selectedItem.indicators.map((indicator, idx) => (
+                            <div key={idx} className="msp-indicator-box">
+                              {indicator}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Time References */}
+                  {selectedItem.timeReferences && Array.isArray(selectedItem.timeReferences) && (
+                    <div className="msp-detail-section">
+                      <h3>⏰ Time References</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-time-references-grid">
+                          {selectedItem.timeReferences.map((time, idx) => (
+                            <div key={idx} className="msp-time-reference-box">
+                              {time}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Practice Tips (Volume by Eye) */}
+                  {selectedItem.practiceTips && Array.isArray(selectedItem.practiceTips) && (
+                    <div className="msp-detail-section">
+                      <h3>📚 Practice Tips</h3>
+                      <div className="msp-detail-content">
+                        <ol className="msp-practice-tips-list">
+                          {selectedItem.practiceTips.map((tip, idx) => (
+                            <li key={idx} className="msp-practice-tip-item">
+                              <span className="msp-practice-tip-number">{idx + 1}.</span>
+                              <span>{tip}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Accuracy */}
+                  {selectedItem.accuracy && (
+                    <div className="msp-detail-section">
+                      <h3>🎯 Expected Accuracy</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>How accurate can you get:</strong> {selectedItem.accuracy}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* When to Use */}
+                  {selectedItem.whenToUse && (
+                    <div className="msp-detail-section">
+                      <h3>✅ When to Use This Method</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Best situations:</strong> {selectedItem.whenToUse}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* When NOT to Use */}
+                  {selectedItem.whenNotToUse && (
+                    <div className="msp-detail-section">
+                      <h3>❌ When NOT to Use This Method</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Avoid when:</strong> {selectedItem.whenNotToUse}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Applications */}
+                  {selectedItem.applications && (
+                    <div className="msp-detail-section">
+                      <h3>🎯 Common Applications</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Use for:</strong> {selectedItem.applications}</p>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* ===== CONVERSIONS CATEGORY FULL DETAILS ===== */}
+              {selectedCategory === 'conversions' && selectedItem && (
+                <>
+                  {/* Common Conversions */}
+                  {selectedItem.commonConversions && Array.isArray(selectedItem.commonConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>🔄 Common Conversions</h3>
+                      <div className="msp-conversions-grid">
+                        {selectedItem.commonConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Metric Conversions */}
+                  {selectedItem.metricConversions && Array.isArray(selectedItem.metricConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>📏 Metric Conversions</h3>
+                      <div className="msp-metric-conversions-grid">
+                        {selectedItem.metricConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-metric-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Baking Conversions */}
+                  {selectedItem.bakingConversions && Array.isArray(selectedItem.bakingConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>🍰 Baking Conversions</h3>
+                      <div className="msp-baking-conversions-grid">
+                        {selectedItem.bakingConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-baking-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Formula (Temperature) */}
+                  {selectedItem.formula && Array.isArray(selectedItem.formula) && (
+                    <div className="msp-detail-section">
+                      <h3>🧮 Conversion Formulas</h3>
+                      <div className="msp-detail-content">
+                        <div className="msp-formula-grid">
+                          {selectedItem.formula.map((formula, idx) => (
+                            <div key={idx} className="msp-formula-box">
+                              {formula}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Temperatures */}
+                  {selectedItem.commonTemperatures && Array.isArray(selectedItem.commonTemperatures) && (
+                    <div className="msp-detail-section">
+                      <h3>🌡️ Common Temperatures</h3>
+                      <div className="msp-temperatures-grid">
+                        {selectedItem.commonTemperatures.map((temp, idx) => (
+                          <div key={idx} className="msp-temperature-box">
+                            {temp}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Oven Temperatures */}
+                  {selectedItem.ovenTemperatures && Array.isArray(selectedItem.ovenTemperatures) && (
+                    <div className="msp-detail-section">
+                      <h3>🔥 Oven Temperatures</h3>
+                      <div className="msp-oven-temperatures-grid">
+                        {selectedItem.ovenTemperatures.map((temp, idx) => (
+                          <div key={idx} className="msp-oven-temperature-box">
+                            {temp}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Volume Conversions */}
+                  {selectedItem.volumeConversions && Array.isArray(selectedItem.volumeConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>📊 Volume Conversions</h3>
+                      <div className="msp-volume-conversions-grid">
+                        {selectedItem.volumeConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-volume-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Weight Conversions */}
+                  {selectedItem.weightConversions && Array.isArray(selectedItem.weightConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>⚖️ Weight Conversions</h3>
+                      <div className="msp-weight-conversions-grid">
+                        {selectedItem.weightConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-weight-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Oven Conversions */}
+                  {selectedItem.ovenConversions && Array.isArray(selectedItem.ovenConversions) && (
+                    <div className="msp-detail-section">
+                      <h3>🔥 Oven Conversions</h3>
+                      <div className="msp-oven-conversions-grid">
+                        {selectedItem.ovenConversions.map((conversion, idx) => (
+                          <div key={idx} className="msp-oven-conversion-box">
+                            {conversion}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Substitutions */}
+                  {selectedItem.commonSubstitutions && Array.isArray(selectedItem.commonSubstitutions) && (
+                    <div className="msp-detail-section">
+                      <h3>🔄 Common Substitutions</h3>
+                      <div className="msp-substitutions-grid">
+                        {selectedItem.commonSubstitutions.map((sub, idx) => (
+                          <div key={idx} className="msp-substitution-box">
+                            {sub}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Dairy Substitutions */}
+                  {selectedItem.dairySubstitutions && Array.isArray(selectedItem.dairySubstitutions) && (
+                    <div className="msp-detail-section">
+                      <h3>🥛 Dairy Substitutions</h3>
+                      <div className="msp-dairy-substitutions-grid">
+                        {selectedItem.dairySubstitutions.map((sub, idx) => (
+                          <div key={idx} className="msp-dairy-substitution-box">
+                            {sub}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Scaling Rules */}
+                  {selectedItem.scalingRules && Array.isArray(selectedItem.scalingRules) && (
+                    <div className="msp-detail-section">
+                      <h3>📈 Recipe Scaling Rules</h3>
+                      <div className="msp-scaling-rules-grid">
+                        {selectedItem.scalingRules.map((rule, idx) => (
+                          <div key={idx} className="msp-scaling-rule-box">
+                            {rule}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Multipliers */}
+                  {selectedItem.commonMultipliers && Array.isArray(selectedItem.commonMultipliers) && (
+                    <div className="msp-detail-section">
+                      <h3>✖️ Common Multipliers</h3>
+                      <div className="msp-multipliers-grid">
+                        {selectedItem.commonMultipliers.map((multiplier, idx) => (
+                          <div key={idx} className="msp-multiplier-box">
+                            {multiplier}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Exceptions */}
+                  {selectedItem.exceptions && Array.isArray(selectedItem.exceptions) && (
+                    <div className="msp-detail-section">
+                      <h3>⚠️ Scaling Exceptions</h3>
+                      <div className="msp-exceptions-grid">
+                        {selectedItem.exceptions.map((exception, idx) => (
+                          <div key={idx} className="msp-exception-box">
+                            {exception}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Pan Sizes */}
+                  {selectedItem.commonPanSizes && Array.isArray(selectedItem.commonPanSizes) && (
+                    <div className="msp-detail-section">
+                      <h3>🥘 Common Pan Sizes</h3>
+                      <div className="msp-pan-sizes-grid">
+                        {selectedItem.commonPanSizes.map((size, idx) => (
+                          <div key={idx} className="msp-pan-size-box">
+                            {size}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Area Calculations */}
+                  {selectedItem.areaCalculations && Array.isArray(selectedItem.areaCalculations) && (
+                    <div className="msp-detail-section">
+                      <h3>📐 Area Calculations</h3>
+                      <div className="msp-area-calculations-grid">
+                        {selectedItem.areaCalculations.map((calc, idx) => (
+                          <div key={idx} className="msp-area-calculation-box">
+                            {calc}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Adjustment Rules */}
+                  {selectedItem.adjustmentRules && Array.isArray(selectedItem.adjustmentRules) && (
+                    <div className="msp-detail-section">
+                      <h3>⚙️ Adjustment Rules</h3>
+                      <div className="msp-adjustment-rules-grid">
+                        {selectedItem.adjustmentRules.map((rule, idx) => (
+                          <div key={idx} className="msp-adjustment-rule-box">
+                            {rule}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Must-Know Equivalents */}
+                  {selectedItem.mustKnowEquivalents && Array.isArray(selectedItem.mustKnowEquivalents) && (
+                    <div className="msp-detail-section">
+                      <h3>📚 Must-Know Equivalents</h3>
+                      <div className="msp-must-know-grid">
+                        {selectedItem.mustKnowEquivalents.map((equiv, idx) => (
+                          <div key={idx} className="msp-must-know-box">
+                            {equiv}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Metric Equivalents */}
+                  {selectedItem.metricEquivalents && Array.isArray(selectedItem.metricEquivalents) && (
+                    <div className="msp-detail-section">
+                      <h3>📏 Metric Equivalents</h3>
+                      <div className="msp-metric-equivalents-grid">
+                        {selectedItem.metricEquivalents.map((equiv, idx) => (
+                          <div key={idx} className="msp-metric-equivalent-box">
+                            {equiv}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Handy Equivalents */}
+                  {selectedItem.handyEquivalents && Array.isArray(selectedItem.handyEquivalents) && (
+                    <div className="msp-detail-section">
+                      <h3>✨ Handy Equivalents</h3>
+                      <div className="msp-handy-equivalents-grid">
+                        {selectedItem.handyEquivalents.map((equiv, idx) => (
+                          <div key={idx} className="msp-handy-equivalent-box">
+                            {equiv}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tips */}
+                  {selectedItem.tips && (
+                    <div className="msp-detail-section">
+                      <h3>💡 Pro Tips</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* ===== PRECISION CATEGORY FULL DETAILS ===== */}
+              {selectedCategory === 'precision' && selectedItem && (
+                <>
+                  {/* Critical Rules */}
+                  {selectedItem.criticalRules && Array.isArray(selectedItem.criticalRules) && (
+                    <div className="msp-detail-section">
+                      <h3>🎯 Critical Rules</h3>
+                      <div className="msp-critical-rules-grid">
+                        {selectedItem.criticalRules.map((rule, idx) => (
+                          <div key={idx} className="msp-critical-rule-box">
+                            {rule}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Errors */}
+                  {selectedItem.commonErrors && Array.isArray(selectedItem.commonErrors) && (
+                    <div className="msp-detail-section">
+                      <h3>❌ Common Errors</h3>
+                      <div className="msp-errors-grid">
+                        {selectedItem.commonErrors.map((error, idx) => (
+                          <div key={idx} className="msp-error-box">
+                            {error}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tools Required */}
+                  {selectedItem.toolsRequired && Array.isArray(selectedItem.toolsRequired) && (
+                    <div className="msp-detail-section">
+                      <h3>🔧 Tools Required</h3>
+                      <div className="msp-tools-required-grid">
+                        {selectedItem.toolsRequired.map((tool, idx) => (
+                          <div key={idx} className="msp-tool-required-box">
+                            {tool}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Calibration Methods */}
+                  {selectedItem.calibrationMethods && Array.isArray(selectedItem.calibrationMethods) && (
+                    <div className="msp-detail-section">
+                      <h3>⚖️ Calibration Methods</h3>
+                      <div className="msp-calibration-methods-grid">
+                        {selectedItem.calibrationMethods.map((method, idx) => (
+                          <div key={idx} className="msp-calibration-method-box">
+                            {method}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Maintenance Tips */}
+                  {selectedItem.maintenanceTips && Array.isArray(selectedItem.maintenanceTips) && (
+                    <div className="msp-detail-section">
+                      <h3>🔧 Maintenance Tips</h3>
+                      <div className="msp-maintenance-tips-grid">
+                        {selectedItem.maintenanceTips.map((tip, idx) => (
+                          <div key={idx} className="msp-maintenance-tip-box">
+                            {tip}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Accuracy Check */}
+                  {selectedItem.accuracyCheck && Array.isArray(selectedItem.accuracyCheck) && (
+                    <div className="msp-detail-section">
+                      <h3>✅ Accuracy Check</h3>
+                      <div className="msp-accuracy-check-grid">
+                        {selectedItem.accuracyCheck.map((check, idx) => (
+                          <div key={idx} className="msp-accuracy-check-box">
+                            {check}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tools for Micro */}
+                  {selectedItem.toolsForMicro && Array.isArray(selectedItem.toolsForMicro) && (
+                    <div className="msp-detail-section">
+                      <h3>🔬 Tools for Micro Measurements</h3>
+                      <div className="msp-micro-tools-grid">
+                        {selectedItem.toolsForMicro.map((tool, idx) => (
+                          <div key={idx} className="msp-micro-tool-box">
+                            {tool}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Micro Techniques */}
+                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && (
+                    <div className="msp-detail-section">
+                      <h3>🔍 Micro Measurement Techniques</h3>
+                      <div className="msp-micro-techniques-grid">
+                        {selectedItem.techniques.map((tech, idx) => (
+                          <div key={idx} className="msp-micro-technique-box">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Critical Amounts */}
+                  {selectedItem.criticalAmounts && Array.isArray(selectedItem.criticalAmounts) && (
+                    <div className="msp-detail-section">
+                      <h3>⚡ Critical Amounts</h3>
+                      <div className="msp-critical-amounts-grid">
+                        {selectedItem.criticalAmounts.map((amount, idx) => (
+                          <div key={idx} className="msp-critical-amount-box">
+                            {amount}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Portioning Tools */}
+                  {selectedItem.portioningTools && Array.isArray(selectedItem.portioningTools) && (
+                    <div className="msp-detail-section">
+                      <h3>🍽️ Portioning Tools</h3>
+                      <div className="msp-portioning-tools-grid">
+                        {selectedItem.portioningTools.map((tool, idx) => (
+                          <div key={idx} className="msp-portioning-tool-box">
+                            {tool}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Portioning Techniques */}
+                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && selectedCategory === 'precision' && (
+                    <div className="msp-detail-section">
+                      <h3>👐 Portioning Techniques</h3>
+                      <div className="msp-portioning-techniques-grid">
+                        {selectedItem.techniques.map((tech, idx) => (
+                          <div key={idx} className="msp-portioning-technique-box">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Benefits */}
+                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && (
+                    <div className="msp-detail-section">
+                      <h3>✅ Benefits</h3>
+                      <div className="msp-benefits-grid">
+                        {selectedItem.benefits.map((benefit, idx) => (
+                          <div key={idx} className="msp-benefit-box">
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Critical Temperatures */}
+                  {selectedItem.criticalTemperatures && Array.isArray(selectedItem.criticalTemperatures) && (
+                    <div className="msp-detail-section">
+                      <h3>🌡️ Critical Temperatures</h3>
+                      <div className="msp-critical-temperatures-grid">
+                        {selectedItem.criticalTemperatures.map((temp, idx) => (
+                          <div key={idx} className="msp-critical-temperature-box">
+                            {temp}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Temperature Tools */}
+                  {selectedItem.tools && Array.isArray(selectedItem.tools) && (
+                    <div className="msp-detail-section">
+                      <h3>🔧 Temperature Tools</h3>
+                      <div className="msp-temperature-tools-grid">
+                        {selectedItem.tools.map((tool, idx) => (
+                          <div key={idx} className="msp-temperature-tool-box">
+                            {tool}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Temperature Techniques */}
+                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && selectedItem.name === "Temperature Precision" && (
+                    <div className="msp-detail-section">
+                      <h3>📊 Temperature Techniques</h3>
+                      <div className="msp-temperature-techniques-grid">
+                        {selectedItem.techniques.map((tech, idx) => (
+                          <div key={idx} className="msp-temperature-technique-box">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Common Ratios */}
+                  {selectedItem.commonRatios && Array.isArray(selectedItem.commonRatios) && (
+                    <div className="msp-detail-section">
+                      <h3>📐 Common Ratios</h3>
+                      <div className="msp-ratios-grid">
+                        {selectedItem.commonRatios.map((ratio, idx) => (
+                          <div key={idx} className="msp-ratio-box">
+                            {ratio}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Calculation Methods */}
+                  {selectedItem.calculation && Array.isArray(selectedItem.calculation) && (
+                    <div className="msp-detail-section">
+                      <h3>🧮 Calculation Methods</h3>
+                      <div className="msp-calculation-grid">
+                        {selectedItem.calculation.map((calc, idx) => (
+                          <div key={idx} className="msp-calculation-box">
+                            {calc}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Effects */}
+                  {selectedItem.effects && Array.isArray(selectedItem.effects) && (
+                    <div className="msp-detail-section">
+                      <h3>📊 Effects</h3>
+                      <div className="msp-effects-grid">
+                        {selectedItem.effects.map((effect, idx) => (
+                          <div key={idx} className="msp-effect-box">
+                            {effect}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Basic Ratios */}
+                  {selectedItem.basicRatios && Array.isArray(selectedItem.basicRatios) && (
+                    <div className="msp-detail-section">
+                      <h3>📏 Basic Ratios</h3>
+                      <div className="msp-basic-ratios-grid">
+                        {selectedItem.basicRatios.map((ratio, idx) => (
+                          <div key={idx} className="msp-basic-ratio-box">
+                            {ratio}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Application Methods */}
+                  {selectedItem.application && Array.isArray(selectedItem.application) && (
+                    <div className="msp-detail-section">
+                      <h3>🎯 Application</h3>
+                      <div className="msp-application-methods-grid">
+                        {selectedItem.application.map((method, idx) => (
+                          <div key={idx} className="msp-application-method-box">
+                            {method}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Ratio Benefits */}
+                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && selectedItem.name === "Ingredient Ratios" && (
+                    <div className="msp-detail-section">
+                      <h3>✨ Benefits</h3>
+                      <div className="msp-ratio-benefits-grid">
+                        {selectedItem.benefits.map((benefit, idx) => (
+                          <div key={idx} className="msp-ratio-benefit-box">
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Documentation Methods */}
+                  {selectedItem.documentationMethods && Array.isArray(selectedItem.documentationMethods) && (
+                    <div className="msp-detail-section">
+                      <h3>📝 Documentation Methods</h3>
+                      <div className="msp-documentation-methods-grid">
+                        {selectedItem.documentationMethods.map((method, idx) => (
+                          <div key={idx} className="msp-documentation-method-box">
+                            {method}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* What to Record */}
+                  {selectedItem.whatToRecord && Array.isArray(selectedItem.whatToRecord) && (
+                    <div className="msp-detail-section">
+                      <h3>📋 What to Record</h3>
+                      <div className="msp-what-to-record-grid">
+                        {selectedItem.whatToRecord.map((item, idx) => (
+                          <div key={idx} className="msp-record-item-box">
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Documentation Benefits */}
+                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && selectedItem.name === "Measurement Documentation" && (
+                    <div className="msp-detail-section">
+                      <h3>✅ Documentation Benefits</h3>
+                      <div className="msp-documentation-benefits-grid">
+                        {selectedItem.benefits.map((benefit, idx) => (
+                          <div key={idx} className="msp-documentation-benefit-box">
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tips */}
+                  {selectedItem.tips && (
+                    <div className="msp-detail-section">
+                      <h3>💡 Pro Tips</h3>
+                      <div className="msp-detail-content">
+                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* RIGHT SIDE - SINGLE IMAGE */}
+          <div className="msp-modal-right">
+            <div className="msp-main-image-container">
+              <div 
+                className="msp-main-image"
+                style={{ backgroundImage: `url(${selectedItem.image})` }}
+              >
+                {selectedItem.essentiality && (
+                  <div className="msp-image-overlay">
+                    <div className={`msp-essentiality-badge-large ${selectedItem.essentiality.toLowerCase()}`}>
+                      {selectedItem.essentiality}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

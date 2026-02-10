@@ -7,7 +7,7 @@ const BeginnersPage = () => {
 
   const skillCards = [
     {
-      id: 1,
+      
       icon: 'fas fa-tools',
       title: 'Kitchen Tools',
       route: '/kitchen-tools',
@@ -15,12 +15,11 @@ const BeginnersPage = () => {
         'Essential knives set',
         'Cutting boards types',
         'Pots & pans selection',
-        'Measuring tools'
       ],
       tag: 'ESSENTIAL'
     },
     {
-      id: 2,
+     
       icon: 'fas fa-cut',
       title: 'Cutting Techniques',
       route: '/cutting-techniques',
@@ -33,7 +32,7 @@ const BeginnersPage = () => {
       tag: 'SKILL'
     },
     {
-      id: 3,
+    
       icon: 'fas fa-fire',
       title: 'Cooking Methods',
       route: '/cooking-methods',
@@ -46,7 +45,7 @@ const BeginnersPage = () => {
       tag: 'METHOD'
     },
     {
-      id: 4,
+      
       icon: 'fas fa-drumstick-bite',
       title: 'Meat Cuts',
       route: '/meat-cuts',
@@ -59,7 +58,7 @@ const BeginnersPage = () => {
       tag: 'PROTEIN'
     },
     {
-      id: 5,
+      
       icon: 'fas fa-utensils',
       title: 'Table Settings',
       route: '/table-settings',
@@ -72,10 +71,10 @@ const BeginnersPage = () => {
       tag: 'ETIQUETTE'
     },
     {
-      id: 6,
+      
       icon: 'fas fa-mortar-pestle',
-      title: 'Spices & Flavors',
-      route: '/spices-flavors',
+      title: 'Pantry Basics',
+      route: '/pantry-basics',
       features: [
         'Essential spices list',
         'Flavor balancing',
@@ -85,59 +84,7 @@ const BeginnersPage = () => {
       tag: 'FLAVOR'
     },
     {
-      id: 7,
-      icon: 'fas fa-temperature-high',
-      title: 'Food Safety',
-      route: '/food-safety',
-      features: [
-        'Temperature control',
-        'Storage methods',
-        'Cross-contamination',
-        'Shelf life guide'
-      ],
-      tag: 'SAFETY'
-    },
-    {
-      id: 8,
-      icon: 'fas fa-clock',
-      title: 'Kitchen Timing',
-      route: '/kitchen-timing',
-      features: [
-        'Mise en place',
-        'Meal prep strategies',
-        'Multi-course timing',
-        'Efficient workflow'
-      ],
-      tag: 'TIMING'
-    },
-    {
-      id: 9,
-      icon: 'fas fa-book-open',
-      title: 'Basic Recipes',
-      route: '/basic-recipes',
-      features: [
-        'Perfect rice every time',
-        'Basic sauces mastery',
-        'Simple dishes',
-        'Baking fundamentals'
-      ],
-      tag: 'RECIPES'
-    },
-    {
-      id: 10,
-      icon: 'fas fa-graduation-cap',
-      title: 'Learning Resources',
-      route: '/learning-resources',
-      features: [
-        'Recommended books',
-        'YouTube channels',
-        'Weekly practice plans',
-        'Advanced skills'
-      ],
-      tag: 'LEARNING'
-    },
-    {
-      id: 11,
+     
       icon: 'fas fa-weight',
       title: 'Measuring Skills',
       route: '/measuring-skills',
@@ -150,7 +97,7 @@ const BeginnersPage = () => {
       tag: 'PRECISION'
     },
     {
-      id: 12,
+      
       icon: 'fas fa-birthday-cake',
       title: 'Bakery Essentials',
       route: '/bakery-essentials',
@@ -181,7 +128,7 @@ const BeginnersPage = () => {
       {/* Kitchen Mastery Title */}
       <div className="guide-header">
         <h1>Kitchen Mastery Guide</h1>
-        <p>Master 12 essential kitchen skills in one place</p>
+        <p>Master essential kitchen skills in one place</p>
       </div>
 
       {/* Skills Grid */}
