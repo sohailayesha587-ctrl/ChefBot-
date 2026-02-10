@@ -60,8 +60,8 @@ const BeginnersPage = () => {
     {
       
       icon: 'fas fa-utensils',
-      title: 'Table Settings',
-      route: '/table-settings',
+      title: 'Kitchen Appliances',
+      route: '/kitchen-appliances',
       features: [
         'Casual setup guide',
         'Formal arrangement',

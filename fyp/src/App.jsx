@@ -8,7 +8,7 @@ import PantryPage from './pages/PantryPage';
 import ShoppingList from './pages/ShoppingList';
 import BeginnersPage from './pages/BeginnersPage';
 import MeasuringSkillsPage from './pages/MeasuringSkillsPage';
-import TableSettingsPage from './pages/TableSettingsPage';
+import KitchenAppliancesPage from './pages/KitchenAppliancesPage';
 import CuttingTechniquesPage from './pages/CuttingTechniquesPage';
 import KitchenToolsPage from './pages/KitchenToolsPage';
 import CookingMethodsPage from './pages/CookingMethodsPage';
@@ -41,7 +41,7 @@ function App() {
         <Route path="/smart-shopping" element={<ShoppingList />} />
         <Route path="/guidance" element={<BeginnersPage/>} />
         <Route path="/measuring-skills" element={<MeasuringSkillsPage/>} />
-        <Route path="/table-settings" element={<TableSettingsPage/>} />
+        <Route path="/kitchen-appliances" element={<KitchenAppliancesPage/>} />
         <Route path="/cutting-techniques" element={<CuttingTechniquesPage/>} />
         <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
         <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
