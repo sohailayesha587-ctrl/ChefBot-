@@ -11,7 +11,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 1,
       name: "Measuring Cups (Liquid)",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "LiqMT.png",
       tagline: "Transparent cups with spout for liquids",
       fullDesc: "Specially designed for measuring liquids. Made of clear glass or plastic with measurement markings in ml and fl oz. Have a spout for easy pouring. Essential for accurate liquid measurements in cooking and baking.",
       keyFeatures: ["Spout for pouring", "Eye-level reading", "Metric & Imperial marks", "Heat resistant"],
@@ -38,7 +38,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 2,
       name: "Measuring Cups (Dry)",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CupsMT.png",
       tagline: "Nested cups for dry ingredients",
       fullDesc: "Set of nesting cups for measuring dry ingredients like flour, sugar, rice. Usually come in set of 4: 1 cup, 1/2 cup, 1/3 cup, 1/4 cup. Made of metal or plastic with flat rims for leveling.",
       keyFeatures: ["Nested design", "Flat rim for leveling", "Easy storage", "Stackable"],
@@ -65,7 +65,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 3,
       name: "Measuring Spoons",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "SpoonsMT.png",
       tagline: "For small ingredient measurements",
       fullDesc: "Set of spoons for measuring small quantities of both dry and liquid ingredients. Standard set includes: 1 tbsp, 1 tsp, 1/2 tsp, 1/4 tsp. Essential for spices, baking powder, vanilla extract, etc.",
       keyFeatures: ["Nested design", "Leveling edge", "Both dry & liquid use", "Compact storage"],
@@ -92,7 +92,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Kitchen Scale",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "KitScale.png",
       tagline: "Precision weight measurement",
       fullDesc: "Digital or analog scale for measuring ingredients by weight. Most accurate method for baking. Can measure in grams, ounces, pounds. Digital scales with tare function are most convenient.",
       keyFeatures: ["Digital display", "Tare function", "Multiple units", "Precise to 1g"],
@@ -119,7 +119,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 5,
       name: "Measuring Jug",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "JugMT.png",
       tagline: "Large capacity liquid measurement",
       fullDesc: "Large jug with measurement markings for bigger quantities of liquids. Usually 1-2 liter capacity. Essential for measuring water for rice, stock for soups, milk for large batches.",
       keyFeatures: ["Large capacity", "Easy-grip handle", "Pouring lip", "Clear markings"],
@@ -146,7 +146,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Food Thermometer",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "FoodThermMT.png",
       tagline: "Temperature measurement for cooking",
       fullDesc: "Essential for food safety and perfect cooking. Measures internal temperature of meat, oil temperature for frying, candy temperature for desserts. Digital instant-read thermometers are most popular.",
       keyFeatures: ["Instant read", "Digital display", "Food-safe probe", "Auto-off"],
@@ -200,7 +200,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 8,
       name: "Portion Scoops",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "PortionScoopsMT.png",
       tagline: "Consistent portion control",
       fullDesc: "Also called dishers or ice cream scoops. Used for consistent portioning of cookie dough, rice, batter, etc. Number indicates scoops per quart (#20 = 20 scoops per quart).",
       keyFeatures: ["Release mechanism", "Ergonomic handle", "Standardized sizes", "Durable construction"],
@@ -231,7 +231,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 1,
       name: "Leveling Dry Ingredients",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTLevel-Dry.png",
       tagline: "Perfect flat measurements",
       fullDesc: "Technique for measuring dry ingredients like flour, sugar, baking powder. Ensures exact amount by removing excess. Essential for baking accuracy.",
       steps: [
@@ -247,7 +247,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 2,
       name: "Meniscus Reading (Liquids)",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTMeniscus.png",
       tagline: "Accurate liquid measurement",
       fullDesc: "Reading the curved surface of liquid in measuring cup. Read from bottom of curve for accuracy. Essential for scientific precision in cooking.",
       steps: [
@@ -263,7 +263,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 3,
       name: "Spoon & Level Method",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTSpoonLevel.png",
       tagline: "Proper flour measurement",
       fullDesc: "Correct method for measuring flour without packing it. Aerates flour and gives consistent results. Prevents dense baked goods.",
       steps: [
@@ -279,7 +279,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Brown Sugar Packing",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTBrownSugar.png",
       tagline: "Measuring moist ingredients",
       fullDesc: "Technique for measuring brown sugar, which needs to be packed to remove air pockets. Creates moist, dense texture in recipes.",
       steps: [
@@ -295,7 +295,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 5,
       name: "Taring a Scale",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTScale.png",
       tagline: "Zeroing scale with container",
       fullDesc: "Using tare function to subtract container weight. Allows sequential adding of multiple ingredients to same bowl. Essential for efficient cooking.",
       steps: [
@@ -311,7 +311,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Sticky Ingredient Method",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTStickyIng.png",
       tagline: "Measuring honey, syrup, peanut butter",
       fullDesc: "Technique for measuring sticky ingredients without waste. Uses oil or water coating for easy release.",
       steps: [
@@ -327,7 +327,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 7,
       name: "Butter Measurement",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTButter.png",
       tagline: "Measuring solid fats",
       fullDesc: "Methods for measuring butter and shortening. Can use measurement marks on wrapper, water displacement, or scale.",
       methods: [
@@ -343,7 +343,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 8,
       name: "Eye-Level Measurement",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "MTEyeLevel.png",
       tagline: "Avoiding parallax error",
       fullDesc: "Positioning yourself at eye level with measurement markings to avoid reading errors. Critical for both liquid and some dry measurements.",
       steps: [
@@ -363,7 +363,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 1,
       name: "Visual Estimation",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "VisualET.png",
       tagline: "Measuring by sight",
       fullDesc: "Estimating quantities without tools using visual cues. Develops with experience. Useful for quick cooking, adjustments, and professional kitchens.",
       techniques: [
@@ -379,7 +379,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 2,
       name: "Hand Measurements",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "HandMeasureET.png",
       tagline: "Using your hand as guide",
       fullDesc: "Traditional method using hand parts as measurement references. Consistent because hand size relates to body size.",
       measurements: [
@@ -395,7 +395,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 3,
       name: "Pinch & Dash System",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "PachET.png",
       tagline: "Small quantity estimation",
       fullDesc: "Traditional measurements for very small amounts, especially spices. Based on finger pinch sizes.",
       definitions: [
@@ -415,7 +415,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Volume by Eye",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "VolumeET.png",
       tagline: "Estimating cups & liters",
       fullDesc: "Estimating volume measurements without tools by comparing to common containers and mental visualization.",
       references: [
@@ -435,7 +435,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 5,
       name: "Weight Estimation",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "WeightET.png",
       tagline: "Guessing weight by feel",
       fullDesc: "Estimating weight of ingredients, especially produce and meat, by heft and size comparison.",
       comparisons: [
@@ -455,7 +455,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Portion Estimation",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "PortionET",
       tagline: "Serving size by eye",
       fullDesc: "Estimating proper serving sizes for balanced meals without weighing or measuring.",
       guidelines: [
@@ -475,7 +475,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 7,
       name: "Seasoning by Taste",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "TasteET.png",
       tagline: "Adjusting flavors intuitively",
       fullDesc: "Adding seasonings without measurements based on taste, smell, and experience. The mark of an experienced cook.",
       process: [
@@ -495,7 +495,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 8,
       name: "Cooking Time Estimation",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CookTimeET.png",
       tagline: "Timing without clock",
       fullDesc: "Estimating cooking times based on experience, visual cues, and sensory signals.",
       indicators: [
@@ -520,7 +520,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 1,
       name: "Volume Conversions",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "VolumeCS.png",
       tagline: "Cups, tablespoons, milliliters",
       fullDesc: "Converting between different volume measurement units commonly used in recipes.",
       commonConversions: [
@@ -547,7 +547,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 2,
       name: "Weight Conversions",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "WeightCS.png",
       tagline: "Grams, ounces, pounds",
       fullDesc: "Converting between weight measurement systems for precise ingredient measurement.",
       commonConversions: [
@@ -570,7 +570,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 3,
       name: "Temperature Conversions",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "TemperatureCS.png",
       tagline: "Celsius ↔ Fahrenheit",
       fullDesc: "Converting oven and cooking temperatures between Celsius and Fahrenheit systems.",
       formula: [
@@ -596,7 +596,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Recipe Scaling",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "RecipeCS",
       tagline: "Adjusting recipe quantities",
       fullDesc: "Increasing or decreasing recipe quantities while maintaining proper ratios and cooking times.",
       scalingRules: [
@@ -622,7 +622,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 5,
       name: "Imperial to Metric",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "ImperialCS.png",
       tagline: "US measurements to metric",
       fullDesc: "Converting American recipe measurements to metric system used in most other countries.",
       volumeConversions: [
@@ -651,7 +651,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Ingredient Substitutions",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "IngredieantCS.png",
       tagline: "Converting ingredients",
       fullDesc: "Substituting ingredients when originals aren't available while maintaining similar properties.",
       commonSubstitutions: [
@@ -1066,1151 +1066,1062 @@ const MeasuringSkillsPage = () => {
         </main>
       </div>
 
-  {/* DETAIL MODAL - ALL CATEGORIES WITH FULL DETAILS */}
-{showDetailPanel && selectedItem && (
-  <div className="msp-modal-overlay" onClick={closeDetailPanel}>
-    <div className="msp-modal" onClick={(e) => e.stopPropagation()}>
-      <button className="msp-modal-close" onClick={closeDetailPanel}>×</button>
-      
-      <div className="msp-modal-header">
-        <div className="msp-modal-title">
-          <h2>{selectedItem.name}</h2>
-          <p className="msp-modal-subtitle">{selectedItem.tagline}</p>
-        </div>
-      </div>
+      {/* ===== FIXED MODAL - SIRF LEFT SIDE SCROLL, RIGHT IMAGE FIXED ===== */}
+      {showDetailPanel && selectedItem && (
+        <div className="msp-modal-overlay" onClick={closeDetailPanel}>
+          <div className="msp-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="msp-modal-close" onClick={closeDetailPanel}>×</button>
+            
+            <div className="msp-modal-header">
+              <div className="msp-modal-title">
+                <h2>{selectedItem.name}</h2>
+                <p className="msp-modal-subtitle">{selectedItem.tagline}</p>
+              </div>
+            </div>
 
-      <div className="msp-modal-content">
-        <div className="msp-modal-layout">
-          {/* LEFT SIDE - CONTENT */}
-          <div className="msp-modal-left">
-            <div className="msp-modal-details">
-              {/* DESCRIPTION - ALL CATEGORIES */}
-              <div className="msp-detail-section">
-                <h3>📋 Description</h3>
-                <div className="msp-detail-content">
-                  <p>{selectedItem.fullDesc}</p>
+            {/* DIRECT 2-COLUMN LAYOUT - NO EXTRA WRAPPERS */}
+            <div className="msp-modal-content">
+              
+              {/* LEFT SIDE - SCROLLABLE CONTENT (65%) */}
+              <div className="msp-modal-left">
+                <div className="msp-modal-details">
+                  
+                  {/* DESCRIPTION */}
+                  <div className="msp-detail-section">
+                    <h3>📋 Description</h3>
+                    <div className="msp-detail-content">
+                      <p>{selectedItem.fullDesc}</p>
+                    </div>
+                  </div>
+
+                  {/* ===== TOOLS CATEGORY ===== */}
+                  {selectedCategory === 'tools' && selectedItem && (
+                    <>
+                      {/* Key Features */}
+                      {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>✅ Key Features</h3>
+                          <div className="msp-features-horizontal">
+                            {selectedItem.keyFeatures.map((feature, idx) => (
+                              <div key={idx} className="msp-feature-box">
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Proper Usage */}
+                      {selectedItem.properUsage && (
+                        <div className="msp-detail-section">
+                          <h3>📝 Proper Usage</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>How to use correctly:</strong> {selectedItem.properUsage}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Mistakes */}
+                      {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>❌ Common Mistakes</h3>
+                          <div className="msp-mistakes-horizontal">
+                            {selectedItem.commonMistakes.map((mistake, idx) => (
+                              <div key={idx} className="msp-mistake-box">
+                                {mistake}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Essentiality */}
+                      {selectedItem.essentiality && (
+                        <div className="msp-detail-section">
+                          <h3>⭐ Importance Level</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>{selectedItem.essentiality}</strong> - {
+                              selectedItem.essentiality === 'Essential' ? 'Must-have for every kitchen' :
+                              selectedItem.essentiality === 'Important' ? 'Highly recommended for serious cooks' :
+                              selectedItem.essentiality === 'Useful' ? 'Good to have for specific tasks' :
+                              'Specialized tool for specific purposes'
+                            }</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Types & Varieties */}
+                      {selectedItem.types && selectedItem.types.length > 0 && (
+                        <div className="msp-types-section">
+                          <h3 className="msp-types-heading">🔧 Types & Varieties</h3>
+                          <div className="msp-types-grid">
+                            {selectedItem.types.map((type, index) => (
+                              <div key={index} className="msp-type-card">
+                                <div 
+                                  className="msp-type-image"
+                                  style={{ backgroundImage: `url(${type.image})` }}
+                                ></div>
+                                <div className="msp-type-content">
+                                  <h4>{type.name}</h4>
+                                  <p className="msp-type-desc">{type.description}</p>
+                                  {type.capacity && (
+                                    <div className="msp-type-info">
+                                      <span className="msp-type-info-item">📏 Capacity: {type.capacity}</span>
+                                    </div>
+                                  )}
+                                  {type.sizes && (
+                                    <div className="msp-type-info">
+                                      <span className="msp-type-info-item">📐 Sizes: {type.sizes}</span>
+                                    </div>
+                                  )}
+                                  {type.range && (
+                                    <div className="msp-type-info">
+                                      <span className="msp-type-info-item">🌡️ Range: {type.range}</span>
+                                    </div>
+                                  )}
+                                  <div className="msp-type-best">
+                                    <strong>Best For:</strong> {type.bestFor}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* ===== TECHNIQUES CATEGORY ===== */}
+                  {selectedCategory === 'techniques' && selectedItem && (
+                    <>
+                      {/* Steps */}
+                      {selectedItem.steps && selectedItem.steps.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📋 Step-by-Step Process</h3>
+                          <div className="msp-detail-content">
+                            <ol className="msp-steps-list">
+                              {selectedItem.steps.map((step, idx) => (
+                                <li key={idx} className="msp-step-item">{step}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tips */}
+                      {selectedItem.tips && (
+                        <div className="msp-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Mistakes */}
+                      {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>❌ Common Mistakes</h3>
+                          <div className="msp-mistakes-horizontal">
+                            {selectedItem.commonMistakes.map((mistake, idx) => (
+                              <div key={idx} className="msp-mistake-box">
+                                {mistake}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Applications */}
+                      {selectedItem.applications && (
+                        <div className="msp-detail-section">
+                          <h3>🎯 Where to Apply</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Use for:</strong> {selectedItem.applications}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Methods */}
+                      {selectedItem.methods && selectedItem.methods.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🛠️ Different Methods</h3>
+                          <div className="msp-detail-content">
+                            <ol className="msp-methods-list">
+                              {selectedItem.methods.map((method, idx) => (
+                                <li key={idx} className="msp-method-item">{method}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* ===== ESTIMATION CATEGORY ===== */}
+                  {selectedCategory === 'estimation' && selectedItem && (
+                    <>
+                      {/* Techniques */}
+                      {selectedItem.techniques && selectedItem.techniques.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>👐 Estimation Techniques</h3>
+                          <div className="msp-detail-content">
+                            <ul className="msp-techniques-list">
+                              {selectedItem.techniques.map((tech, idx) => (
+                                <li key={idx} className="msp-technique-item">
+                                  <span className="msp-technique-icon">•</span>
+                                  <span>{tech}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Measurements */}
+                      {selectedItem.measurements && selectedItem.measurements.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📏 Measurement References</h3>
+                          <div className="msp-measurements-grid">
+                            {selectedItem.measurements.map((measurement, idx) => (
+                              <div key={idx} className="msp-measurement-box">
+                                {measurement}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Definitions */}
+                      {selectedItem.definitions && selectedItem.definitions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📚 Definitions</h3>
+                          <div className="msp-detail-content">
+                            <ul className="msp-definitions-list">
+                              {selectedItem.definitions.map((definition, idx) => (
+                                <li key={idx} className="msp-definition-item">
+                                  <span className="msp-definition-icon">•</span>
+                                  <span>{definition}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Equivalents */}
+                      {selectedItem.equivalents && selectedItem.equivalents.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚖️ Measurement Equivalents</h3>
+                          <div className="msp-equivalents-grid">
+                            {selectedItem.equivalents.map((equivalent, idx) => (
+                              <div key={idx} className="msp-equivalent-box">
+                                {equivalent}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Comparisons */}
+                      {selectedItem.comparisons && selectedItem.comparisons.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚖️ Weight Comparisons</h3>
+                          <div className="msp-comparisons-grid">
+                            {selectedItem.comparisons.map((comparison, idx) => (
+                              <div key={idx} className="msp-comparison-box">
+                                {comparison}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* References */}
+                      {selectedItem.references && selectedItem.references.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>👀 Visual References</h3>
+                          <div className="msp-references-grid">
+                            {selectedItem.references.map((reference, idx) => (
+                              <div key={idx} className="msp-reference-box">
+                                {reference}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Guidelines */}
+                      {selectedItem.guidelines && selectedItem.guidelines.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🍽️ Portion Guidelines</h3>
+                          <div className="msp-guidelines-grid">
+                            {selectedItem.guidelines.map((guideline, idx) => (
+                              <div key={idx} className="msp-guideline-box">
+                                {guideline}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Plate Method */}
+                      {selectedItem.plateMethod && selectedItem.plateMethod.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🍽️ Plate Method</h3>
+                          <div className="msp-plate-method-grid">
+                            {selectedItem.plateMethod.map((method, idx) => (
+                              <div key={idx} className="msp-plate-method-box">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Process */}
+                      {selectedItem.process && selectedItem.process.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🧂 Seasoning Process</h3>
+                          <div className="msp-detail-content">
+                            <ol className="msp-process-list">
+                              {selectedItem.process.map((step, idx) => (
+                                <li key={idx} className="msp-process-item">{step}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tips Array */}
+                      {selectedItem.tips && Array.isArray(selectedItem.tips) && (
+                        <div className="msp-detail-section">
+                          <h3>💡 Flavor Tips</h3>
+                          <div className="msp-tips-grid">
+                            {selectedItem.tips.map((tip, idx) => (
+                              <div key={idx} className="msp-tip-box">
+                                {tip}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Indicators */}
+                      {selectedItem.indicators && selectedItem.indicators.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>👁️ Visual & Sensory Indicators</h3>
+                          <div className="msp-indicators-grid">
+                            {selectedItem.indicators.map((indicator, idx) => (
+                              <div key={idx} className="msp-indicator-box">
+                                {indicator}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Time References */}
+                      {selectedItem.timeReferences && selectedItem.timeReferences.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⏰ Time References</h3>
+                          <div className="msp-time-references-grid">
+                            {selectedItem.timeReferences.map((time, idx) => (
+                              <div key={idx} className="msp-time-reference-box">
+                                {time}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Practice Tips */}
+                      {selectedItem.practiceTips && selectedItem.practiceTips.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📚 Practice Tips</h3>
+                          <div className="msp-detail-content">
+                            <ol className="msp-practice-tips-list">
+                              {selectedItem.practiceTips.map((tip, idx) => (
+                                <li key={idx} className="msp-practice-tip-item">{tip}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Accuracy */}
+                      {selectedItem.accuracy && (
+                        <div className="msp-detail-section">
+                          <h3>🎯 Expected Accuracy</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>How accurate can you get:</strong> {selectedItem.accuracy}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* When to Use */}
+                      {selectedItem.whenToUse && (
+                        <div className="msp-detail-section">
+                          <h3>✅ When to Use This Method</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Best situations:</strong> {selectedItem.whenToUse}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* When NOT to Use */}
+                      {selectedItem.whenNotToUse && (
+                        <div className="msp-detail-section">
+                          <h3>❌ When NOT to Use This Method</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Avoid when:</strong> {selectedItem.whenNotToUse}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* ===== CONVERSIONS CATEGORY ===== */}
+                  {selectedCategory === 'conversions' && selectedItem && (
+                    <>
+                      {/* Common Conversions */}
+                      {selectedItem.commonConversions && selectedItem.commonConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔄 Common Conversions</h3>
+                          <div className="msp-conversions-grid">
+                            {selectedItem.commonConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Metric Conversions */}
+                      {selectedItem.metricConversions && selectedItem.metricConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📏 Metric Conversions</h3>
+                          <div className="msp-metric-conversions-grid">
+                            {selectedItem.metricConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-metric-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Baking Conversions */}
+                      {selectedItem.bakingConversions && selectedItem.bakingConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🍰 Baking Conversions</h3>
+                          <div className="msp-baking-conversions-grid">
+                            {selectedItem.bakingConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-baking-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Formula */}
+                      {selectedItem.formula && selectedItem.formula.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🧮 Conversion Formulas</h3>
+                          <div className="msp-formula-grid">
+                            {selectedItem.formula.map((formula, idx) => (
+                              <div key={idx} className="msp-formula-box">
+                                {formula}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Temperatures */}
+                      {selectedItem.commonTemperatures && selectedItem.commonTemperatures.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🌡️ Common Temperatures</h3>
+                          <div className="msp-temperatures-grid">
+                            {selectedItem.commonTemperatures.map((temp, idx) => (
+                              <div key={idx} className="msp-temperature-box">
+                                {temp}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Oven Temperatures */}
+                      {selectedItem.ovenTemperatures && selectedItem.ovenTemperatures.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔥 Oven Temperatures</h3>
+                          <div className="msp-oven-temperatures-grid">
+                            {selectedItem.ovenTemperatures.map((temp, idx) => (
+                              <div key={idx} className="msp-oven-temperature-box">
+                                {temp}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Volume Conversions */}
+                      {selectedItem.volumeConversions && selectedItem.volumeConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📊 Volume Conversions</h3>
+                          <div className="msp-volume-conversions-grid">
+                            {selectedItem.volumeConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-volume-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Weight Conversions */}
+                      {selectedItem.weightConversions && selectedItem.weightConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚖️ Weight Conversions</h3>
+                          <div className="msp-weight-conversions-grid">
+                            {selectedItem.weightConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-weight-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Oven Conversions */}
+                      {selectedItem.ovenConversions && selectedItem.ovenConversions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔥 Oven Conversions</h3>
+                          <div className="msp-oven-conversions-grid">
+                            {selectedItem.ovenConversions.map((conversion, idx) => (
+                              <div key={idx} className="msp-oven-conversion-box">
+                                {conversion}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Substitutions */}
+                      {selectedItem.commonSubstitutions && selectedItem.commonSubstitutions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔄 Common Substitutions</h3>
+                          <div className="msp-substitutions-grid">
+                            {selectedItem.commonSubstitutions.map((sub, idx) => (
+                              <div key={idx} className="msp-substitution-box">
+                                {sub}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Dairy Substitutions */}
+                      {selectedItem.dairySubstitutions && selectedItem.dairySubstitutions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🥛 Dairy Substitutions</h3>
+                          <div className="msp-dairy-substitutions-grid">
+                            {selectedItem.dairySubstitutions.map((sub, idx) => (
+                              <div key={idx} className="msp-dairy-substitution-box">
+                                {sub}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Scaling Rules */}
+                      {selectedItem.scalingRules && selectedItem.scalingRules.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📈 Recipe Scaling Rules</h3>
+                          <div className="msp-scaling-rules-grid">
+                            {selectedItem.scalingRules.map((rule, idx) => (
+                              <div key={idx} className="msp-scaling-rule-box">
+                                {rule}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Multipliers */}
+                      {selectedItem.commonMultipliers && selectedItem.commonMultipliers.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>✖️ Common Multipliers</h3>
+                          <div className="msp-multipliers-grid">
+                            {selectedItem.commonMultipliers.map((multiplier, idx) => (
+                              <div key={idx} className="msp-multiplier-box">
+                                {multiplier}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Exceptions */}
+                      {selectedItem.exceptions && selectedItem.exceptions.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚠️ Scaling Exceptions</h3>
+                          <div className="msp-exceptions-grid">
+                            {selectedItem.exceptions.map((exception, idx) => (
+                              <div key={idx} className="msp-exception-box">
+                                {exception}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Pan Sizes */}
+                      {selectedItem.commonPanSizes && selectedItem.commonPanSizes.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🥘 Common Pan Sizes</h3>
+                          <div className="msp-pan-sizes-grid">
+                            {selectedItem.commonPanSizes.map((size, idx) => (
+                              <div key={idx} className="msp-pan-size-box">
+                                {size}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Area Calculations */}
+                      {selectedItem.areaCalculations && selectedItem.areaCalculations.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📐 Area Calculations</h3>
+                          <div className="msp-area-calculations-grid">
+                            {selectedItem.areaCalculations.map((calc, idx) => (
+                              <div key={idx} className="msp-area-calculation-box">
+                                {calc}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Adjustment Rules */}
+                      {selectedItem.adjustmentRules && selectedItem.adjustmentRules.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚙️ Adjustment Rules</h3>
+                          <div className="msp-adjustment-rules-grid">
+                            {selectedItem.adjustmentRules.map((rule, idx) => (
+                              <div key={idx} className="msp-adjustment-rule-box">
+                                {rule}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Must-Know Equivalents */}
+                      {selectedItem.mustKnowEquivalents && selectedItem.mustKnowEquivalents.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📚 Must-Know Equivalents</h3>
+                          <div className="msp-must-know-grid">
+                            {selectedItem.mustKnowEquivalents.map((equiv, idx) => (
+                              <div key={idx} className="msp-must-know-box">
+                                {equiv}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Metric Equivalents */}
+                      {selectedItem.metricEquivalents && selectedItem.metricEquivalents.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📏 Metric Equivalents</h3>
+                          <div className="msp-metric-equivalents-grid">
+                            {selectedItem.metricEquivalents.map((equiv, idx) => (
+                              <div key={idx} className="msp-metric-equivalent-box">
+                                {equiv}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Handy Equivalents */}
+                      {selectedItem.handyEquivalents && selectedItem.handyEquivalents.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>✨ Handy Equivalents</h3>
+                          <div className="msp-handy-equivalents-grid">
+                            {selectedItem.handyEquivalents.map((equiv, idx) => (
+                              <div key={idx} className="msp-handy-equivalent-box">
+                                {equiv}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tips */}
+                      {selectedItem.tips && (
+                        <div className="msp-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* ===== PRECISION CATEGORY ===== */}
+                  {selectedCategory === 'precision' && selectedItem && (
+                    <>
+                      {/* Critical Rules */}
+                      {selectedItem.criticalRules && selectedItem.criticalRules.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🎯 Critical Rules</h3>
+                          <div className="msp-critical-rules-grid">
+                            {selectedItem.criticalRules.map((rule, idx) => (
+                              <div key={idx} className="msp-critical-rule-box">
+                                {rule}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Errors */}
+                      {selectedItem.commonErrors && selectedItem.commonErrors.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>❌ Common Errors</h3>
+                          <div className="msp-errors-grid">
+                            {selectedItem.commonErrors.map((error, idx) => (
+                              <div key={idx} className="msp-error-box">
+                                {error}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tools Required */}
+                      {selectedItem.toolsRequired && selectedItem.toolsRequired.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔧 Tools Required</h3>
+                          <div className="msp-tools-required-grid">
+                            {selectedItem.toolsRequired.map((tool, idx) => (
+                              <div key={idx} className="msp-tool-required-box">
+                                {tool}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Calibration Methods */}
+                      {selectedItem.calibrationMethods && selectedItem.calibrationMethods.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚖️ Calibration Methods</h3>
+                          <div className="msp-calibration-methods-grid">
+                            {selectedItem.calibrationMethods.map((method, idx) => (
+                              <div key={idx} className="msp-calibration-method-box">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Maintenance Tips */}
+                      {selectedItem.maintenanceTips && selectedItem.maintenanceTips.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔧 Maintenance Tips</h3>
+                          <div className="msp-maintenance-tips-grid">
+                            {selectedItem.maintenanceTips.map((tip, idx) => (
+                              <div key={idx} className="msp-maintenance-tip-box">
+                                {tip}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Accuracy Check */}
+                      {selectedItem.accuracyCheck && selectedItem.accuracyCheck.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>✅ Accuracy Check</h3>
+                          <div className="msp-accuracy-check-grid">
+                            {selectedItem.accuracyCheck.map((check, idx) => (
+                              <div key={idx} className="msp-accuracy-check-box">
+                                {check}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tools for Micro */}
+                      {selectedItem.toolsForMicro && selectedItem.toolsForMicro.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔬 Tools for Micro Measurements</h3>
+                          <div className="msp-micro-tools-grid">
+                            {selectedItem.toolsForMicro.map((tool, idx) => (
+                              <div key={idx} className="msp-micro-tool-box">
+                                {tool}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Micro Techniques */}
+                      {selectedItem.techniques && selectedItem.techniques.length > 0 && selectedItem.name !== "Temperature Precision" && (
+                        <div className="msp-detail-section">
+                          <h3>🔍 Micro Measurement Techniques</h3>
+                          <div className="msp-micro-techniques-grid">
+                            {selectedItem.techniques.map((tech, idx) => (
+                              <div key={idx} className="msp-micro-technique-box">
+                                {tech}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Critical Amounts */}
+                      {selectedItem.criticalAmounts && selectedItem.criticalAmounts.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>⚡ Critical Amounts</h3>
+                          <div className="msp-critical-amounts-grid">
+                            {selectedItem.criticalAmounts.map((amount, idx) => (
+                              <div key={idx} className="msp-critical-amount-box">
+                                {amount}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Portioning Tools */}
+                      {selectedItem.portioningTools && selectedItem.portioningTools.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🍽️ Portioning Tools</h3>
+                          <div className="msp-portioning-tools-grid">
+                            {selectedItem.portioningTools.map((tool, idx) => (
+                              <div key={idx} className="msp-portioning-tool-box">
+                                {tool}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Portioning Techniques */}
+                      {selectedItem.techniques && selectedItem.techniques.length > 0 && selectedItem.name === "Consistent Portioning" && (
+                        <div className="msp-detail-section">
+                          <h3>👐 Portioning Techniques</h3>
+                          <div className="msp-portioning-techniques-grid">
+                            {selectedItem.techniques.map((tech, idx) => (
+                              <div key={idx} className="msp-portioning-technique-box">
+                                {tech}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Benefits */}
+                      {selectedItem.benefits && selectedItem.benefits.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>✅ Benefits</h3>
+                          <div className="msp-benefits-grid">
+                            {selectedItem.benefits.map((benefit, idx) => (
+                              <div key={idx} className="msp-benefit-box">
+                                {benefit}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Critical Temperatures */}
+                      {selectedItem.criticalTemperatures && selectedItem.criticalTemperatures.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🌡️ Critical Temperatures</h3>
+                          <div className="msp-critical-temperatures-grid">
+                            {selectedItem.criticalTemperatures.map((temp, idx) => (
+                              <div key={idx} className="msp-critical-temperature-box">
+                                {temp}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Temperature Tools */}
+                      {selectedItem.tools && selectedItem.tools.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🔧 Temperature Tools</h3>
+                          <div className="msp-temperature-tools-grid">
+                            {selectedItem.tools.map((tool, idx) => (
+                              <div key={idx} className="msp-temperature-tool-box">
+                                {tool}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Temperature Techniques */}
+                      {selectedItem.techniques && selectedItem.techniques.length > 0 && selectedItem.name === "Temperature Precision" && (
+                        <div className="msp-detail-section">
+                          <h3>📊 Temperature Techniques</h3>
+                          <div className="msp-temperature-techniques-grid">
+                            {selectedItem.techniques.map((tech, idx) => (
+                              <div key={idx} className="msp-temperature-technique-box">
+                                {tech}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Common Ratios */}
+                      {selectedItem.commonRatios && selectedItem.commonRatios.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📐 Common Ratios</h3>
+                          <div className="msp-ratios-grid">
+                            {selectedItem.commonRatios.map((ratio, idx) => (
+                              <div key={idx} className="msp-ratio-box">
+                                {ratio}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Calculation */}
+                      {selectedItem.calculation && selectedItem.calculation.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🧮 Calculation Methods</h3>
+                          <div className="msp-calculation-grid">
+                            {selectedItem.calculation.map((calc, idx) => (
+                              <div key={idx} className="msp-calculation-box">
+                                {calc}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Effects */}
+                      {selectedItem.effects && selectedItem.effects.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📊 Effects</h3>
+                          <div className="msp-effects-grid">
+                            {selectedItem.effects.map((effect, idx) => (
+                              <div key={idx} className="msp-effect-box">
+                                {effect}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Basic Ratios */}
+                      {selectedItem.basicRatios && selectedItem.basicRatios.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📏 Basic Ratios</h3>
+                          <div className="msp-basic-ratios-grid">
+                            {selectedItem.basicRatios.map((ratio, idx) => (
+                              <div key={idx} className="msp-basic-ratio-box">
+                                {ratio}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Application */}
+                      {selectedItem.application && selectedItem.application.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>🎯 Application</h3>
+                          <div className="msp-application-methods-grid">
+                            {selectedItem.application.map((method, idx) => (
+                              <div key={idx} className="msp-application-method-box">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Documentation Methods */}
+                      {selectedItem.documentationMethods && selectedItem.documentationMethods.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📝 Documentation Methods</h3>
+                          <div className="msp-documentation-methods-grid">
+                            {selectedItem.documentationMethods.map((method, idx) => (
+                              <div key={idx} className="msp-documentation-method-box">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* What to Record */}
+                      {selectedItem.whatToRecord && selectedItem.whatToRecord.length > 0 && (
+                        <div className="msp-detail-section">
+                          <h3>📋 What to Record</h3>
+                          <div className="msp-what-to-record-grid">
+                            {selectedItem.whatToRecord.map((item, idx) => (
+                              <div key={idx} className="msp-record-item-box">
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tips */}
+                      {selectedItem.tips && (
+                        <div className="msp-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="msp-detail-content">
+                            <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
 
-              {/* ===== TOOLS CATEGORY FULL DETAILS ===== */}
-              {selectedCategory === 'tools' && selectedItem && (
-                <>
-                  {/* Key Features - Horizontal Grid */}
-                  {selectedItem.keyFeatures && Array.isArray(selectedItem.keyFeatures) && (
-                    <div className="msp-detail-section">
-                      <h3>✅ Key Features</h3>
-                      <div className="msp-features-horizontal">
-                        {selectedItem.keyFeatures.map((feature, idx) => (
-                          <div key={idx} className="msp-feature-box">
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Proper Usage */}
-                  {selectedItem.properUsage && (
-                    <div className="msp-detail-section">
-                      <h3>📝 Proper Usage</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>How to use correctly:</strong> {selectedItem.properUsage}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Mistakes - Horizontal Grid */}
-                  {selectedItem.commonMistakes && Array.isArray(selectedItem.commonMistakes) && (
-                    <div className="msp-detail-section">
-                      <h3>❌ Common Mistakes</h3>
-                      <div className="msp-mistakes-horizontal">
-                        {selectedItem.commonMistakes.map((mistake, idx) => (
-                          <div key={idx} className="msp-mistake-box">
-                            {mistake}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Essentiality */}
-                  {selectedItem.essentiality && (
-                    <div className="msp-detail-section">
-                      <h3>⭐ Importance Level</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>{selectedItem.essentiality}</strong> - {
-                          selectedItem.essentiality === 'Essential' ? 'Must-have for every kitchen' :
-                          selectedItem.essentiality === 'Important' ? 'Highly recommended for serious cooks' :
-                          selectedItem.essentiality === 'Useful' ? 'Good to have for specific tasks' :
-                          'Specialized tool for specific purposes'
-                        }</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Types & Varieties */}
-                  {selectedItem.types && Array.isArray(selectedItem.types) && selectedItem.types.length > 0 && (
-                    <div className="msp-types-section">
-                      <h3 className="msp-types-heading">🔧 Types & Varieties</h3>
-                      <div className="msp-detail-content">
-                        <p>Different types available in the market:</p>
-                      </div>
-                      <div className="msp-types-grid">
-                        {selectedItem.types.map((type, index) => (
-                          <div key={index} className="msp-type-card">
-                            <div 
-                              className="msp-type-image"
-                              style={{ backgroundImage: `url(${type.image})` }}
-                            ></div>
-                            <div className="msp-type-content">
-                              <h4>{type.name}</h4>
-                              <p className="msp-type-desc">{type.description}</p>
-                              {type.capacity && (
-                                <div className="msp-type-info">
-                                  <span className="msp-type-info-item">📏 Capacity: {type.capacity}</span>
-                                </div>
-                              )}
-                              {type.sizes && (
-                                <div className="msp-type-info">
-                                  <span className="msp-type-info-item">📐 Sizes: {type.sizes}</span>
-                                </div>
-                              )}
-                              {type.features && (
-                                <div className="msp-type-info">
-                                  <span className="msp-type-info-item">✨ Features: {type.features}</span>
-                                </div>
-                              )}
-                              {type.range && (
-                                <div className="msp-type-info">
-                                  <span className="msp-type-info-item">🌡️ Range: {type.range}</span>
-                                </div>
-                              )}
-                              <div className="msp-type-best">
-                                <strong>Best For:</strong> {type.bestFor}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* ===== TECHNIQUES CATEGORY FULL DETAILS ===== */}
-              {selectedCategory === 'techniques' && selectedItem && (
-                <>
-                  {/* Steps */}
-                  {selectedItem.steps && Array.isArray(selectedItem.steps) && (
-                    <div className="msp-detail-section">
-                      <h3>📋 Step-by-Step Process</h3>
-                      <div className="msp-detail-content">
-                        <ol className="msp-steps-list">
-                          {selectedItem.steps.map((step, idx) => (
-                            <li key={idx} className="msp-step-item">
-                              <span className="msp-step-number">{idx + 1}.</span>
-                              <span>{step}</span>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tips */}
-                  {selectedItem.tips && (
-                    <div className="msp-detail-section">
-                      <h3>💡 Pro Tips</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Mistakes */}
-                  {selectedItem.commonMistakes && Array.isArray(selectedItem.commonMistakes) && (
-                    <div className="msp-detail-section">
-                      <h3>❌ Common Mistakes to Avoid</h3>
-                      <div className="msp-detail-content">
-                        <ul className="msp-mistakes-list">
-                          {selectedItem.commonMistakes.map((mistake, idx) => (
-                            <li key={idx} className="msp-mistake-item">
-                              <span className="msp-mistake-icon">⚠️</span>
-                              <span>{mistake}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Applications */}
-                  {selectedItem.applications && Array.isArray(selectedItem.applications) && (
-                    <div className="msp-detail-section">
-                      <h3>🎯 Where to Apply</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-applications-list">
-                          {selectedItem.applications.map((app, idx) => (
-                            <div key={idx} className="msp-application-item">
-                              <span className="msp-application-check">✓</span>
-                              <span>{app}</span>
-                            </div>
-                          ))}
+              {/* RIGHT SIDE - FIXED IMAGE (35%) - NO SCROLL */}
+              <div className="msp-modal-right">
+                <div className="msp-main-image-container">
+                  <div 
+                    className="msp-main-image"
+                    style={{ backgroundImage: `url(${selectedItem.image})` }}
+                  >
+                    {selectedItem.essentiality && (
+                      <div className="msp-image-overlay">
+                        <div className={`msp-essentiality-badge-large ${selectedItem.essentiality.toLowerCase()}`}>
+                          {selectedItem.essentiality}
                         </div>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Methods (for Butter Measurement) */}
-                  {selectedItem.methods && Array.isArray(selectedItem.methods) && (
-                    <div className="msp-detail-section">
-                      <h3>🛠️ Different Methods</h3>
-                      <div className="msp-detail-content">
-                        <ol className="msp-methods-list">
-                          {selectedItem.methods.map((method, idx) => (
-                            <li key={idx} className="msp-method-item">
-                              <span className="msp-method-number">{idx + 1}.</span>
-                              <span>{method}</span>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* ===== ESTIMATION CATEGORY FULL DETAILS ===== */}
-              {selectedCategory === 'estimation' && selectedItem && (
-                <>
-                  {/* Techniques */}
-                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && (
-                    <div className="msp-detail-section">
-                      <h3>👐 Estimation Techniques</h3>
-                      <div className="msp-detail-content">
-                        <ul className="msp-techniques-list">
-                          {selectedItem.techniques.map((tech, idx) => (
-                            <li key={idx} className="msp-technique-item">
-                              <span className="msp-technique-icon">•</span>
-                              <span>{tech}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Measurements (Hand Measurements) */}
-                  {selectedItem.measurements && Array.isArray(selectedItem.measurements) && (
-                    <div className="msp-detail-section">
-                      <h3>📏 Measurement References</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-measurements-grid">
-                          {selectedItem.measurements.map((measurement, idx) => (
-                            <div key={idx} className="msp-measurement-box">
-                              {measurement}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Definitions (Pinch & Dash) */}
-                  {selectedItem.definitions && Array.isArray(selectedItem.definitions) && (
-                    <div className="msp-detail-section">
-                      <h3>📚 Definitions</h3>
-                      <div className="msp-detail-content">
-                        <ul className="msp-definitions-list">
-                          {selectedItem.definitions.map((definition, idx) => (
-                            <li key={idx} className="msp-definition-item">
-                              <span className="msp-definition-icon">•</span>
-                              <span>{definition}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Equivalents (Pinch & Dash) */}
-                  {selectedItem.equivalents && Array.isArray(selectedItem.equivalents) && (
-                    <div className="msp-detail-section">
-                      <h3>⚖️ Measurement Equivalents</h3>
-                      <div className="msp-detail-content">
-                        <ul className="msp-equivalents-list">
-                          {selectedItem.equivalents.map((equivalent, idx) => (
-                            <li key={idx} className="msp-equivalent-item">
-                              <span className="msp-equivalent-icon">↔️</span>
-                              <span>{equivalent}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Comparisons (Weight Estimation) */}
-                  {selectedItem.comparisons && Array.isArray(selectedItem.comparisons) && (
-                    <div className="msp-detail-section">
-                      <h3>⚖️ Weight Comparisons</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-comparisons-grid">
-                          {selectedItem.comparisons.map((comparison, idx) => (
-                            <div key={idx} className="msp-comparison-box">
-                              {comparison}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* References (Volume by Eye) */}
-                  {selectedItem.references && Array.isArray(selectedItem.references) && (
-                    <div className="msp-detail-section">
-                      <h3>👀 Visual References</h3>
-                      <div className="msp-detail-content">
-                        <ul className="msp-references-list">
-                          {selectedItem.references.map((reference, idx) => (
-                            <li key={idx} className="msp-reference-item">
-                              <span className="msp-reference-icon">📊</span>
-                              <span>{reference}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Guidelines (Portion Estimation) */}
-                  {selectedItem.guidelines && Array.isArray(selectedItem.guidelines) && (
-                    <div className="msp-detail-section">
-                      <h3>🍽️ Portion Guidelines</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-guidelines-grid">
-                          {selectedItem.guidelines.map((guideline, idx) => (
-                            <div key={idx} className="msp-guideline-box">
-                              {guideline}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Plate Method (Portion Estimation) */}
-                  {selectedItem.plateMethod && Array.isArray(selectedItem.plateMethod) && (
-                    <div className="msp-detail-section">
-                      <h3>🍽️ Plate Method</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-plate-method-grid">
-                          {selectedItem.plateMethod.map((method, idx) => (
-                            <div key={idx} className="msp-plate-method-box">
-                              {method}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Process (Seasoning by Taste) */}
-                  {selectedItem.process && Array.isArray(selectedItem.process) && (
-                    <div className="msp-detail-section">
-                      <h3>🧂 Seasoning Process</h3>
-                      <div className="msp-detail-content">
-                        <ol className="msp-process-list">
-                          {selectedItem.process.map((step, idx) => (
-                            <li key={idx} className="msp-process-item">
-                              <span className="msp-process-number">{idx + 1}.</span>
-                              <span>{step}</span>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Seasoning Tips */}
-                  {selectedItem.tips && Array.isArray(selectedItem.tips) && (
-                    <div className="msp-detail-section">
-                      <h3>💡 Flavor Tips</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-tips-grid">
-                          {selectedItem.tips.map((tip, idx) => (
-                            <div key={idx} className="msp-tip-box">
-                              {tip}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Indicators (Cooking Time) */}
-                  {selectedItem.indicators && Array.isArray(selectedItem.indicators) && (
-                    <div className="msp-detail-section">
-                      <h3>👁️ Visual & Sensory Indicators</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-indicators-grid">
-                          {selectedItem.indicators.map((indicator, idx) => (
-                            <div key={idx} className="msp-indicator-box">
-                              {indicator}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Time References */}
-                  {selectedItem.timeReferences && Array.isArray(selectedItem.timeReferences) && (
-                    <div className="msp-detail-section">
-                      <h3>⏰ Time References</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-time-references-grid">
-                          {selectedItem.timeReferences.map((time, idx) => (
-                            <div key={idx} className="msp-time-reference-box">
-                              {time}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Practice Tips (Volume by Eye) */}
-                  {selectedItem.practiceTips && Array.isArray(selectedItem.practiceTips) && (
-                    <div className="msp-detail-section">
-                      <h3>📚 Practice Tips</h3>
-                      <div className="msp-detail-content">
-                        <ol className="msp-practice-tips-list">
-                          {selectedItem.practiceTips.map((tip, idx) => (
-                            <li key={idx} className="msp-practice-tip-item">
-                              <span className="msp-practice-tip-number">{idx + 1}.</span>
-                              <span>{tip}</span>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Accuracy */}
-                  {selectedItem.accuracy && (
-                    <div className="msp-detail-section">
-                      <h3>🎯 Expected Accuracy</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>How accurate can you get:</strong> {selectedItem.accuracy}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* When to Use */}
-                  {selectedItem.whenToUse && (
-                    <div className="msp-detail-section">
-                      <h3>✅ When to Use This Method</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Best situations:</strong> {selectedItem.whenToUse}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* When NOT to Use */}
-                  {selectedItem.whenNotToUse && (
-                    <div className="msp-detail-section">
-                      <h3>❌ When NOT to Use This Method</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Avoid when:</strong> {selectedItem.whenNotToUse}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Applications */}
-                  {selectedItem.applications && (
-                    <div className="msp-detail-section">
-                      <h3>🎯 Common Applications</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Use for:</strong> {selectedItem.applications}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* ===== CONVERSIONS CATEGORY FULL DETAILS ===== */}
-              {selectedCategory === 'conversions' && selectedItem && (
-                <>
-                  {/* Common Conversions */}
-                  {selectedItem.commonConversions && Array.isArray(selectedItem.commonConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>🔄 Common Conversions</h3>
-                      <div className="msp-conversions-grid">
-                        {selectedItem.commonConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Metric Conversions */}
-                  {selectedItem.metricConversions && Array.isArray(selectedItem.metricConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>📏 Metric Conversions</h3>
-                      <div className="msp-metric-conversions-grid">
-                        {selectedItem.metricConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-metric-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Baking Conversions */}
-                  {selectedItem.bakingConversions && Array.isArray(selectedItem.bakingConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>🍰 Baking Conversions</h3>
-                      <div className="msp-baking-conversions-grid">
-                        {selectedItem.bakingConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-baking-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Formula (Temperature) */}
-                  {selectedItem.formula && Array.isArray(selectedItem.formula) && (
-                    <div className="msp-detail-section">
-                      <h3>🧮 Conversion Formulas</h3>
-                      <div className="msp-detail-content">
-                        <div className="msp-formula-grid">
-                          {selectedItem.formula.map((formula, idx) => (
-                            <div key={idx} className="msp-formula-box">
-                              {formula}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Temperatures */}
-                  {selectedItem.commonTemperatures && Array.isArray(selectedItem.commonTemperatures) && (
-                    <div className="msp-detail-section">
-                      <h3>🌡️ Common Temperatures</h3>
-                      <div className="msp-temperatures-grid">
-                        {selectedItem.commonTemperatures.map((temp, idx) => (
-                          <div key={idx} className="msp-temperature-box">
-                            {temp}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Oven Temperatures */}
-                  {selectedItem.ovenTemperatures && Array.isArray(selectedItem.ovenTemperatures) && (
-                    <div className="msp-detail-section">
-                      <h3>🔥 Oven Temperatures</h3>
-                      <div className="msp-oven-temperatures-grid">
-                        {selectedItem.ovenTemperatures.map((temp, idx) => (
-                          <div key={idx} className="msp-oven-temperature-box">
-                            {temp}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Volume Conversions */}
-                  {selectedItem.volumeConversions && Array.isArray(selectedItem.volumeConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>📊 Volume Conversions</h3>
-                      <div className="msp-volume-conversions-grid">
-                        {selectedItem.volumeConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-volume-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Weight Conversions */}
-                  {selectedItem.weightConversions && Array.isArray(selectedItem.weightConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>⚖️ Weight Conversions</h3>
-                      <div className="msp-weight-conversions-grid">
-                        {selectedItem.weightConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-weight-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Oven Conversions */}
-                  {selectedItem.ovenConversions && Array.isArray(selectedItem.ovenConversions) && (
-                    <div className="msp-detail-section">
-                      <h3>🔥 Oven Conversions</h3>
-                      <div className="msp-oven-conversions-grid">
-                        {selectedItem.ovenConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-oven-conversion-box">
-                            {conversion}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Substitutions */}
-                  {selectedItem.commonSubstitutions && Array.isArray(selectedItem.commonSubstitutions) && (
-                    <div className="msp-detail-section">
-                      <h3>🔄 Common Substitutions</h3>
-                      <div className="msp-substitutions-grid">
-                        {selectedItem.commonSubstitutions.map((sub, idx) => (
-                          <div key={idx} className="msp-substitution-box">
-                            {sub}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Dairy Substitutions */}
-                  {selectedItem.dairySubstitutions && Array.isArray(selectedItem.dairySubstitutions) && (
-                    <div className="msp-detail-section">
-                      <h3>🥛 Dairy Substitutions</h3>
-                      <div className="msp-dairy-substitutions-grid">
-                        {selectedItem.dairySubstitutions.map((sub, idx) => (
-                          <div key={idx} className="msp-dairy-substitution-box">
-                            {sub}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Scaling Rules */}
-                  {selectedItem.scalingRules && Array.isArray(selectedItem.scalingRules) && (
-                    <div className="msp-detail-section">
-                      <h3>📈 Recipe Scaling Rules</h3>
-                      <div className="msp-scaling-rules-grid">
-                        {selectedItem.scalingRules.map((rule, idx) => (
-                          <div key={idx} className="msp-scaling-rule-box">
-                            {rule}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Multipliers */}
-                  {selectedItem.commonMultipliers && Array.isArray(selectedItem.commonMultipliers) && (
-                    <div className="msp-detail-section">
-                      <h3>✖️ Common Multipliers</h3>
-                      <div className="msp-multipliers-grid">
-                        {selectedItem.commonMultipliers.map((multiplier, idx) => (
-                          <div key={idx} className="msp-multiplier-box">
-                            {multiplier}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Exceptions */}
-                  {selectedItem.exceptions && Array.isArray(selectedItem.exceptions) && (
-                    <div className="msp-detail-section">
-                      <h3>⚠️ Scaling Exceptions</h3>
-                      <div className="msp-exceptions-grid">
-                        {selectedItem.exceptions.map((exception, idx) => (
-                          <div key={idx} className="msp-exception-box">
-                            {exception}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Pan Sizes */}
-                  {selectedItem.commonPanSizes && Array.isArray(selectedItem.commonPanSizes) && (
-                    <div className="msp-detail-section">
-                      <h3>🥘 Common Pan Sizes</h3>
-                      <div className="msp-pan-sizes-grid">
-                        {selectedItem.commonPanSizes.map((size, idx) => (
-                          <div key={idx} className="msp-pan-size-box">
-                            {size}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Area Calculations */}
-                  {selectedItem.areaCalculations && Array.isArray(selectedItem.areaCalculations) && (
-                    <div className="msp-detail-section">
-                      <h3>📐 Area Calculations</h3>
-                      <div className="msp-area-calculations-grid">
-                        {selectedItem.areaCalculations.map((calc, idx) => (
-                          <div key={idx} className="msp-area-calculation-box">
-                            {calc}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Adjustment Rules */}
-                  {selectedItem.adjustmentRules && Array.isArray(selectedItem.adjustmentRules) && (
-                    <div className="msp-detail-section">
-                      <h3>⚙️ Adjustment Rules</h3>
-                      <div className="msp-adjustment-rules-grid">
-                        {selectedItem.adjustmentRules.map((rule, idx) => (
-                          <div key={idx} className="msp-adjustment-rule-box">
-                            {rule}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Must-Know Equivalents */}
-                  {selectedItem.mustKnowEquivalents && Array.isArray(selectedItem.mustKnowEquivalents) && (
-                    <div className="msp-detail-section">
-                      <h3>📚 Must-Know Equivalents</h3>
-                      <div className="msp-must-know-grid">
-                        {selectedItem.mustKnowEquivalents.map((equiv, idx) => (
-                          <div key={idx} className="msp-must-know-box">
-                            {equiv}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Metric Equivalents */}
-                  {selectedItem.metricEquivalents && Array.isArray(selectedItem.metricEquivalents) && (
-                    <div className="msp-detail-section">
-                      <h3>📏 Metric Equivalents</h3>
-                      <div className="msp-metric-equivalents-grid">
-                        {selectedItem.metricEquivalents.map((equiv, idx) => (
-                          <div key={idx} className="msp-metric-equivalent-box">
-                            {equiv}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Handy Equivalents */}
-                  {selectedItem.handyEquivalents && Array.isArray(selectedItem.handyEquivalents) && (
-                    <div className="msp-detail-section">
-                      <h3>✨ Handy Equivalents</h3>
-                      <div className="msp-handy-equivalents-grid">
-                        {selectedItem.handyEquivalents.map((equiv, idx) => (
-                          <div key={idx} className="msp-handy-equivalent-box">
-                            {equiv}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tips */}
-                  {selectedItem.tips && (
-                    <div className="msp-detail-section">
-                      <h3>💡 Pro Tips</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* ===== PRECISION CATEGORY FULL DETAILS ===== */}
-              {selectedCategory === 'precision' && selectedItem && (
-                <>
-                  {/* Critical Rules */}
-                  {selectedItem.criticalRules && Array.isArray(selectedItem.criticalRules) && (
-                    <div className="msp-detail-section">
-                      <h3>🎯 Critical Rules</h3>
-                      <div className="msp-critical-rules-grid">
-                        {selectedItem.criticalRules.map((rule, idx) => (
-                          <div key={idx} className="msp-critical-rule-box">
-                            {rule}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Errors */}
-                  {selectedItem.commonErrors && Array.isArray(selectedItem.commonErrors) && (
-                    <div className="msp-detail-section">
-                      <h3>❌ Common Errors</h3>
-                      <div className="msp-errors-grid">
-                        {selectedItem.commonErrors.map((error, idx) => (
-                          <div key={idx} className="msp-error-box">
-                            {error}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tools Required */}
-                  {selectedItem.toolsRequired && Array.isArray(selectedItem.toolsRequired) && (
-                    <div className="msp-detail-section">
-                      <h3>🔧 Tools Required</h3>
-                      <div className="msp-tools-required-grid">
-                        {selectedItem.toolsRequired.map((tool, idx) => (
-                          <div key={idx} className="msp-tool-required-box">
-                            {tool}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Calibration Methods */}
-                  {selectedItem.calibrationMethods && Array.isArray(selectedItem.calibrationMethods) && (
-                    <div className="msp-detail-section">
-                      <h3>⚖️ Calibration Methods</h3>
-                      <div className="msp-calibration-methods-grid">
-                        {selectedItem.calibrationMethods.map((method, idx) => (
-                          <div key={idx} className="msp-calibration-method-box">
-                            {method}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Maintenance Tips */}
-                  {selectedItem.maintenanceTips && Array.isArray(selectedItem.maintenanceTips) && (
-                    <div className="msp-detail-section">
-                      <h3>🔧 Maintenance Tips</h3>
-                      <div className="msp-maintenance-tips-grid">
-                        {selectedItem.maintenanceTips.map((tip, idx) => (
-                          <div key={idx} className="msp-maintenance-tip-box">
-                            {tip}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Accuracy Check */}
-                  {selectedItem.accuracyCheck && Array.isArray(selectedItem.accuracyCheck) && (
-                    <div className="msp-detail-section">
-                      <h3>✅ Accuracy Check</h3>
-                      <div className="msp-accuracy-check-grid">
-                        {selectedItem.accuracyCheck.map((check, idx) => (
-                          <div key={idx} className="msp-accuracy-check-box">
-                            {check}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tools for Micro */}
-                  {selectedItem.toolsForMicro && Array.isArray(selectedItem.toolsForMicro) && (
-                    <div className="msp-detail-section">
-                      <h3>🔬 Tools for Micro Measurements</h3>
-                      <div className="msp-micro-tools-grid">
-                        {selectedItem.toolsForMicro.map((tool, idx) => (
-                          <div key={idx} className="msp-micro-tool-box">
-                            {tool}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Micro Techniques */}
-                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && (
-                    <div className="msp-detail-section">
-                      <h3>🔍 Micro Measurement Techniques</h3>
-                      <div className="msp-micro-techniques-grid">
-                        {selectedItem.techniques.map((tech, idx) => (
-                          <div key={idx} className="msp-micro-technique-box">
-                            {tech}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Critical Amounts */}
-                  {selectedItem.criticalAmounts && Array.isArray(selectedItem.criticalAmounts) && (
-                    <div className="msp-detail-section">
-                      <h3>⚡ Critical Amounts</h3>
-                      <div className="msp-critical-amounts-grid">
-                        {selectedItem.criticalAmounts.map((amount, idx) => (
-                          <div key={idx} className="msp-critical-amount-box">
-                            {amount}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Portioning Tools */}
-                  {selectedItem.portioningTools && Array.isArray(selectedItem.portioningTools) && (
-                    <div className="msp-detail-section">
-                      <h3>🍽️ Portioning Tools</h3>
-                      <div className="msp-portioning-tools-grid">
-                        {selectedItem.portioningTools.map((tool, idx) => (
-                          <div key={idx} className="msp-portioning-tool-box">
-                            {tool}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Portioning Techniques */}
-                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && selectedCategory === 'precision' && (
-                    <div className="msp-detail-section">
-                      <h3>👐 Portioning Techniques</h3>
-                      <div className="msp-portioning-techniques-grid">
-                        {selectedItem.techniques.map((tech, idx) => (
-                          <div key={idx} className="msp-portioning-technique-box">
-                            {tech}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Benefits */}
-                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && (
-                    <div className="msp-detail-section">
-                      <h3>✅ Benefits</h3>
-                      <div className="msp-benefits-grid">
-                        {selectedItem.benefits.map((benefit, idx) => (
-                          <div key={idx} className="msp-benefit-box">
-                            {benefit}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Critical Temperatures */}
-                  {selectedItem.criticalTemperatures && Array.isArray(selectedItem.criticalTemperatures) && (
-                    <div className="msp-detail-section">
-                      <h3>🌡️ Critical Temperatures</h3>
-                      <div className="msp-critical-temperatures-grid">
-                        {selectedItem.criticalTemperatures.map((temp, idx) => (
-                          <div key={idx} className="msp-critical-temperature-box">
-                            {temp}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Temperature Tools */}
-                  {selectedItem.tools && Array.isArray(selectedItem.tools) && (
-                    <div className="msp-detail-section">
-                      <h3>🔧 Temperature Tools</h3>
-                      <div className="msp-temperature-tools-grid">
-                        {selectedItem.tools.map((tool, idx) => (
-                          <div key={idx} className="msp-temperature-tool-box">
-                            {tool}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Temperature Techniques */}
-                  {selectedItem.techniques && Array.isArray(selectedItem.techniques) && selectedItem.name === "Temperature Precision" && (
-                    <div className="msp-detail-section">
-                      <h3>📊 Temperature Techniques</h3>
-                      <div className="msp-temperature-techniques-grid">
-                        {selectedItem.techniques.map((tech, idx) => (
-                          <div key={idx} className="msp-temperature-technique-box">
-                            {tech}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Common Ratios */}
-                  {selectedItem.commonRatios && Array.isArray(selectedItem.commonRatios) && (
-                    <div className="msp-detail-section">
-                      <h3>📐 Common Ratios</h3>
-                      <div className="msp-ratios-grid">
-                        {selectedItem.commonRatios.map((ratio, idx) => (
-                          <div key={idx} className="msp-ratio-box">
-                            {ratio}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Calculation Methods */}
-                  {selectedItem.calculation && Array.isArray(selectedItem.calculation) && (
-                    <div className="msp-detail-section">
-                      <h3>🧮 Calculation Methods</h3>
-                      <div className="msp-calculation-grid">
-                        {selectedItem.calculation.map((calc, idx) => (
-                          <div key={idx} className="msp-calculation-box">
-                            {calc}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Effects */}
-                  {selectedItem.effects && Array.isArray(selectedItem.effects) && (
-                    <div className="msp-detail-section">
-                      <h3>📊 Effects</h3>
-                      <div className="msp-effects-grid">
-                        {selectedItem.effects.map((effect, idx) => (
-                          <div key={idx} className="msp-effect-box">
-                            {effect}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Basic Ratios */}
-                  {selectedItem.basicRatios && Array.isArray(selectedItem.basicRatios) && (
-                    <div className="msp-detail-section">
-                      <h3>📏 Basic Ratios</h3>
-                      <div className="msp-basic-ratios-grid">
-                        {selectedItem.basicRatios.map((ratio, idx) => (
-                          <div key={idx} className="msp-basic-ratio-box">
-                            {ratio}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Application Methods */}
-                  {selectedItem.application && Array.isArray(selectedItem.application) && (
-                    <div className="msp-detail-section">
-                      <h3>🎯 Application</h3>
-                      <div className="msp-application-methods-grid">
-                        {selectedItem.application.map((method, idx) => (
-                          <div key={idx} className="msp-application-method-box">
-                            {method}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Ratio Benefits */}
-                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && selectedItem.name === "Ingredient Ratios" && (
-                    <div className="msp-detail-section">
-                      <h3>✨ Benefits</h3>
-                      <div className="msp-ratio-benefits-grid">
-                        {selectedItem.benefits.map((benefit, idx) => (
-                          <div key={idx} className="msp-ratio-benefit-box">
-                            {benefit}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Documentation Methods */}
-                  {selectedItem.documentationMethods && Array.isArray(selectedItem.documentationMethods) && (
-                    <div className="msp-detail-section">
-                      <h3>📝 Documentation Methods</h3>
-                      <div className="msp-documentation-methods-grid">
-                        {selectedItem.documentationMethods.map((method, idx) => (
-                          <div key={idx} className="msp-documentation-method-box">
-                            {method}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* What to Record */}
-                  {selectedItem.whatToRecord && Array.isArray(selectedItem.whatToRecord) && (
-                    <div className="msp-detail-section">
-                      <h3>📋 What to Record</h3>
-                      <div className="msp-what-to-record-grid">
-                        {selectedItem.whatToRecord.map((item, idx) => (
-                          <div key={idx} className="msp-record-item-box">
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Documentation Benefits */}
-                  {selectedItem.benefits && Array.isArray(selectedItem.benefits) && selectedItem.name === "Measurement Documentation" && (
-                    <div className="msp-detail-section">
-                      <h3>✅ Documentation Benefits</h3>
-                      <div className="msp-documentation-benefits-grid">
-                        {selectedItem.benefits.map((benefit, idx) => (
-                          <div key={idx} className="msp-documentation-benefit-box">
-                            {benefit}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tips */}
-                  {selectedItem.tips && (
-                    <div className="msp-detail-section">
-                      <h3>💡 Pro Tips</h3>
-                      <div className="msp-detail-content">
-                        <p><strong>Expert advice:</strong> {selectedItem.tips}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* RIGHT SIDE - SINGLE IMAGE */}
-          <div className="msp-modal-right">
-            <div className="msp-main-image-container">
-              <div 
-                className="msp-main-image"
-                style={{ backgroundImage: `url(${selectedItem.image})` }}
-              >
-                {selectedItem.essentiality && (
-                  <div className="msp-image-overlay">
-                    <div className={`msp-essentiality-badge-large ${selectedItem.essentiality.toLowerCase()}`}>
-                      {selectedItem.essentiality}
-                    </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

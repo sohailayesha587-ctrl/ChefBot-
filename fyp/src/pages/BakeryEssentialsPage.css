@@ -1,5 +1,5 @@
 /* ===== BAKERY ESSENTIALS PAGE CSS ===== */
-/* PantryBasicsPage.css se exact copy */
+/* EXACT KITCHEN TOOLS PAGE STYLE - SIDEBAR + CARDS + MODAL */
 
 /* RESET */
 * {
@@ -11,7 +11,7 @@
 html, body, #root {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: #f8fafc;
 }
 
@@ -19,7 +19,7 @@ html, body, #root {
 .bep-container {
   width: 100%;
   min-height: 100vh;
-  padding: 0;
+  padding: 0px;
 }
 
 .bep-layout {
@@ -27,7 +27,7 @@ html, body, #root {
   min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== SIDEBAR - EXACT PANTRY BASICS STYLE ===== */
 .bep-sidebar {
   width: 280px;
   background: #284a4b;
@@ -37,13 +37,13 @@ html, body, #root {
   flex-direction: column;
   position: sticky;
   top: 0;
-  height: 165vh;
+  height: 100vh;
   overflow-y: auto;
   flex-shrink: 0;
-  font-size: 1rem;
 }
 
 .bep-sidebar-header {
+  margin-top: 70px;
   margin-bottom: 30px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(226, 232, 240, 0.2);
@@ -54,7 +54,7 @@ html, body, #root {
   font-weight: 600;
   color: white;
   margin-bottom: 15px;
-  margin-top: 140px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -71,6 +71,8 @@ html, body, #root {
 
 .bep-categories-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .bep-category-item {
@@ -108,13 +110,13 @@ html, body, #root {
 .bep-main {
   flex: 1;
   padding: 30px 40px;
-  min-height: auto;
-  height: auto;
   background: #f8fafc;
-  overflow-y: visible;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 .bep-main-header {
+  margin-top: 120px;
   margin-bottom: 20px;
   padding-bottom: 2px;
   border-bottom: 1px solid #e2e8f0;
@@ -124,7 +126,7 @@ html, body, #root {
   font-size: 36px;
   font-weight: 800;
   color: #1e293b;
-  margin-top: 130px;
+  margin-top: 40px;
   margin-bottom: 20px;
   letter-spacing: -0.5px;
 }
@@ -137,17 +139,41 @@ html, body, #root {
   margin-bottom: 20px;
 }
 
-/* ===== ITEMS GRID ===== */
-.bep-items-grid-section {
-  margin-bottom: 40px;
+/* ===== CONTENT AREA ===== */
+.bep-content-area {
+  width: 100%;
 }
 
+/* ===== SECTION HEADING ===== */
+.bep-section-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+  position: relative;
+}
+
+.bep-section-heading:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: #284a4b;
+}
+
+/* ===== CARDS GRID - EXACT PANTRY BASICS STYLE ===== */
 .bep-items-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
+  margin-bottom: 30px;
 }
 
+/* ===== BASE CARD STYLES - EXACT PANTRY BASICS ===== */
 .bep-item-card {
   background: white;
   border-radius: 16px;
@@ -168,7 +194,7 @@ html, body, #root {
 }
 
 .bep-card-image {
-  width: 180px;
+  width: 120px;
   height: 100%;
   background-size: cover;
   background-position: center;
@@ -227,10 +253,16 @@ html, body, #root {
   border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
-.bep-essentiality-badge.regular {
+.bep-essentiality-badge.useful {
   background: rgba(34, 197, 94, 0.1);
   color: #16a34a;
   border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.bep-essentiality-badge.specialized {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .bep-card-description {
@@ -243,168 +275,39 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* ===== MODAL - UPDATED LAYOUT ===== */
-.bep-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+/* ===== TABS STYLES ===== */
+.bep-tabs {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 15px;
 }
 
-.bep-modal {
+.bep-tab {
+  padding: 10px 25px;
   background: white;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 1200px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-}
-
-.bep-modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
   color: #64748b;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 20px;
   cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.3s ease;
 }
 
-.bep-modal-close:hover {
-  background: #e2e8f0;
-  transform: rotate(90deg);
-}
-
-/* MODAL HEADER */
-.bep-modal-header {
-  padding: 30px 30px 15px 30px;
-  background: linear-gradient(135deg, #f8fafc, #ffffff);
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.bep-modal-title h2 {
-  font-size: 28px;
-  font-weight: 800;
-  color: #1e293b;
-  margin-bottom: 5px;
-  letter-spacing: -0.5px;
-}
-
-.bep-modal-subtitle {
-  font-size: 16px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-/* NEW MODAL LAYOUT - CORRECTED */
-.bep-modal-content {
-  padding: 0;
-}
-
-/* Main flex container for left-right layout */
-.bep-modal-layout {
-  display: flex;
-  min-height: 500px;
-}
-
-/* LEFT SIDE - CONTENT + TYPES (65%) */
-.bep-modal-left {
-  flex: 0 0 65%;
-  padding: 25px 30px;
-  border-right: 1px solid #e2e8f0;
-  overflow-y: auto;
-  max-height: 70vh;
-}
-
-.bep-modal-details {
-  width: 100%;
-}
-
-/* DETAIL SECTIONS */
-.bep-detail-section {
-  margin-bottom: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.bep-detail-section:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.bep-detail-section h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 12px;
-}
-
-.bep-detail-content {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #475569;
-}
-
-/* USES LIST */
-.bep-uses-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.bep-use-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
+.bep-tab:hover {
   background: #f1f5f9;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #475569;
-  font-weight: 500;
+  border-color: #284a4b;
 }
 
-.bep-use-check {
-  color: #10b981;
-  font-size: 16px;
-  font-weight: bold;
+.bep-tab.bep-tab-active {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
 }
 
-/* TYPES SECTION - SIDE BY SIDE CARDS */
-.bep-types-section {
-  margin-top: 30px;
-  padding-top: 25px;
-  border-top: 2px solid #e2e8f0;
-}
-
-.bep-types-heading {
-  font-size: 22px;
-  color: #1e293b;
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-/* TYPES GRID - 4 IN A ROW */
+/* ===== TYPES GRID ===== */
 .bep-types-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -412,7 +315,6 @@ html, body, #root {
   margin-top: 15px;
 }
 
-/* TYPE CARD STYLING FOR 4 COLUMNS */
 .bep-type-card {
   background: white;
   border-radius: 10px;
@@ -492,35 +394,366 @@ html, body, #root {
   color: #1e293b;
 }
 
-/* RIGHT SIDE - SINGLE IMAGE (35%) */
-.bep-modal-right {
-  flex: 0 0 35%;
-  padding: 25px;
+/* ===== DETAIL SECTIONS ===== */
+.bep-detail-section {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.bep-detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.bep-detail-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 15px;
+}
+
+.bep-detail-content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* ===== FEATURES & MISTAKES GRIDS ===== */
+.bep-features-grid,
+.bep-mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-feature-item {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0369a1;
+}
+
+.bep-mistake-item {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #dc2626;
+}
+
+/* ===== STEPS LIST ===== */
+.bep-steps-list {
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.bep-step {
+  counter-increment: step-counter;
+  margin-bottom: 12px;
+  padding-left: 40px;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.bep-step:before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.bep-step-number {
+  font-weight: 700;
+  color: #284a4b;
+  min-width: 1.5rem;
+}
+
+.bep-step-text {
+  flex: 1;
+}
+
+/* ===== STAGES GRID ===== */
+.bep-stages-grid,
+.bep-methods-grid,
+.bep-temperatures-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-stage-item,
+.bep-method-item,
+.bep-temperature-item {
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #92400e;
+}
+
+/* ===== INGREDIENT TYPES GRID ===== */
+.bep-ingredient-types-grid,
+.bep-agents-grid,
+.bep-functions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-ingredient-type-card,
+.bep-agent-card,
+.bep-function-item {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #1e40af;
+}
+
+.bep-ingredient-type-card h4,
+.bep-agent-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1e3a8a;
+}
+
+.bep-ingredient-type-card p,
+.bep-agent-card p {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+/* ===== DECORATING TYPES GRID ===== */
+.bep-decorating-types-grid,
+.bep-techniques-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-decorating-type-card,
+.bep-technique-item {
+  background: #fce7f3;
+  border: 1px solid #f9a8d4;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #831843;
+}
+
+.bep-decorating-type-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #9d174d;
+}
+
+/* ===== MISTAKES LIST ===== */
+.bep-mistakes-list {
+  list-style: none;
+}
+
+.bep-mistake-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #475569;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-radius: 6px;
+  border-left: 3px solid #dc2626;
+}
+
+/* ===== MODAL - 2 PART LAYOUT (RIGHT IMAGE, LEFT SCROLL) ===== */
+.bep-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.bep-modal {
+  background: white;
+  border-radius: 20px;
+  width: 95%;
+  max-width: 1100px;
+  height: 85vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.bep-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.bep-modal-close:hover {
+  background: #f1f5f9;
+  transform: rotate(90deg);
+}
+
+.bep-modal-content {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* MODAL HEADER */
+.bep-modal-header {
+  padding: 30px 30px 15px 30px;
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bep-modal-title h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.bep-modal-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* LEFT SIDE - SCROLLABLE CONTENT (70%) */
+.bep-modal-left {
+  flex: 0 0 70%;
+  padding: 35px 30px 35px 35px;
+  overflow-y: auto;
+  height: 100%;
+  background: white;
+}
+
+.bep-modal-left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bep-modal-left::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.bep-modal-left::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.bep-modal-left::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.bep-modal-details {
+  width: 100%;
+}
+
+/* RIGHT SIDE - FIXED IMAGE (30%) */
+.bep-modal-right {
+  flex: 0 0 30%;
+  padding: 30px 30px 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  height: 100%;
+  overflow: hidden;
 }
 
 .bep-main-image-container {
   width: 100%;
-  height: 300px;
-  margin-bottom: 25px;
+  height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  position: relative;
 }
 
 .bep-main-image {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border: 2px solid white;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  transition: transform 0.3s ease;
   position: relative;
+}
+
+.bep-main-image:hover {
+  transform: scale(1.05);
 }
 
 .bep-image-overlay {
   position: absolute;
   bottom: 15px;
   right: 15px;
+  z-index: 10;
 }
 
 .bep-essentiality-badge-large {
@@ -531,6 +764,7 @@ html, body, #root {
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
 .bep-essentiality-badge-large.essential {
@@ -541,60 +775,113 @@ html, body, #root {
   background: rgba(245, 158, 11, 0.9);
 }
 
-.bep-essentiality-badge-large.regular {
+.bep-essentiality-badge-large.useful {
   background: rgba(34, 197, 94, 0.9);
 }
 
-/* COLOR CODED CARDS FOR BAKERY */
-/* Baking Basics Colors */
-.basics-flour { border-top: 4px solid #F59E0B; }
-.basics-sugar { border-top: 4px solid #EC4899; }
-.basics-salt { border-top: 4px solid #6366F1; }
-.basics-yeast { border-top: 4px solid #10B981; }
-.basics-baking-powder { border-top: 4px solid #8B5CF6; }
-.basics-baking-soda { border-top: 4px solid #3B82F6; }
+.bep-essentiality-badge-large.specialized {
+  background: rgba(139, 92, 246, 0.9);
+}
 
-/* Spices & Flavors Colors */
-.spices-cinnamon { border-top: 4px solid #92400E; }
-.spices-nutmeg { border-top: 4px solid #D97706; }
-.spices-vanilla { border-top: 4px solid #7C3AED; }
-.spices-cocoa { border-top: 4px solid #92400E; }
+/* QUICK INFO - RIGHT SIDE */
+.bep-quick-info {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-top: 20px;
+}
 
-/* Dairy Colors */
-.dairy-butter { border-top: 4px solid #FBBF24; }
-.dairy-milk { border-top: 4px solid #3B82F6; }
-.dairy-eggs { border-top: 4px solid #F59E0B; }
-.dairy-cream { border-top: 4px solid #EC4899; }
+.bep-quick-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.bep-quick-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bep-quick-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.bep-quick-info-item:last-child {
+  border-bottom: none;
+}
+
+.bep-quick-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.bep-quick-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+/* ===== CARD COLOR VARIANTS FOR BAKERY ===== */
+.bep-item-card.bakery-mixer { border-top: 4px solid #3b82f6; }
+.bep-item-card.bakery-scale { border-top: 4px solid #10b981; }
+.bep-item-card.bakery-thermometer { border-top: 4px solid #f59e0b; }
+.bep-item-card.bakery-mat { border-top: 4px solid #8b5cf6; }
+.bep-item-card.bakery-scraper { border-top: 4px solid #ef4444; }
+.bep-item-card.bakery-blender { border-top: 4px solid #ec4899; }
+.bep-item-card.bakery-turntable { border-top: 4px solid #6366f1; }
+.bep-item-card.bakery-basket { border-top: 4px solid #14b8a6; }
+
+/* Flour Types */
+.bep-item-card.flour-all { border-top: 4px solid #f59e0b; }
+.bep-item-card.flour-bread { border-top: 4px solid #b45309; }
+.bep-item-card.flour-cake { border-top: 4px solid #ec4899; }
+.bep-item-card.flour-pastry { border-top: 4px solid #8b5cf6; }
+
+/* Leavening Agents */
+.bep-item-card.leavening-soda { border-top: 4px solid #3b82f6; }
+.bep-item-card.leavening-powder { border-top: 4px solid #10b981; }
+.bep-item-card.leavening-yeast { border-top: 4px solid #92400e; }
+
+/* Fats */
+.bep-item-card.fat-butter { border-top: 4px solid #fbbf24; }
+.bep-item-card.fat-shortening { border-top: 4px solid #94a3b8; }
+.bep-item-card.fat-oil { border-top: 4px solid #f59e0b; }
+.bep-item-card.fat-lard { border-top: 4px solid #b45309; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
   .bep-items-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .bep-modal-layout {
-    flex-direction: column;
+  .bep-modal {
+    height: 90vh;
   }
   
-  .bep-modal-left {
-    flex: 0 0 100%;
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
-    max-height: 50vh;
-  }
-  
-  .bep-modal-right {
-    flex: 0 0 100%;
-    padding: 25px;
-  }
-  
-  .bep-main-image-container {
-    height: 250px;
-  }
-  
-  .bep-types-grid {
+  .bep-types-grid,
+  .bep-ingredient-types-grid,
+  .bep-agents-grid,
+  .bep-decorating-types-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .bep-features-grid,
+  .bep-mistakes-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -607,8 +894,6 @@ html, body, #root {
     width: 100%;
     height: auto;
     position: relative;
-    margin-bottom: 20px;
-    padding: 20px;
   }
   
   .bep-sidebar-title {
@@ -617,10 +902,19 @@ html, body, #root {
   
   .bep-main {
     padding: 20px;
+    height: auto;
   }
   
   .bep-page-title {
     margin-top: 20px;
+  }
+  
+  .bep-main-header {
+    margin-top: 20px;
+  }
+  
+  .bep-items-grid {
+    grid-template-columns: 1fr;
   }
   
   .bep-item-card {
@@ -635,12 +929,31 @@ html, body, #root {
     border-bottom: 1px solid #e2e8f0;
   }
   
-  .bep-modal {
-    width: 98%;
-    max-height: 98vh;
+  .bep-modal-content {
+    flex-direction: column-reverse;
   }
   
-  .bep-types-grid {
+  .bep-modal-left,
+  .bep-modal-right {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .bep-modal-right {
+    height: 300px;
+    padding: 20px;
+  }
+  
+  .bep-main-image-container {
+    height: 250px;
+  }
+  
+  .bep-types-grid,
+  .bep-ingredient-types-grid,
+  .bep-agents-grid,
+  .bep-decorating-types-grid,
+  .bep-functions-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -650,34 +963,51 @@ html, body, #root {
     font-size: 28px;
   }
   
+  .bep-section-heading {
+    font-size: 20px;
+  }
+  
+  .bep-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .bep-tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  
+  .bep-modal-left {
+    padding: 25px 20px;
+  }
+  
   .bep-modal-title h2 {
     font-size: 24px;
   }
   
-  .bep-modal-subtitle {
-    font-size: 14px;
-  }
-  
-  .bep-modal-left,
-  .bep-modal-right {
-    padding: 20px;
-  }
-  
-  .bep-types-grid {
+  .bep-types-grid,
+  .bep-ingredient-types-grid,
+  .bep-agents-grid,
+  .bep-decorating-types-grid,
+  .bep-functions-grid,
+  .bep-stages-grid,
+  .bep-methods-grid,
+  .bep-temperatures-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .bep-container {
     padding: 10px;
   }
   
-  .bep-main {
-    padding: 15px;
+  .bep-sidebar {
+    padding: 20px;
   }
   
-  .bep-sidebar {
+  .bep-main {
     padding: 15px;
   }
   
@@ -685,54 +1015,35 @@ html, body, #root {
     font-size: 24px;
   }
   
-  .bep-item-card {
-    height: auto;
+  .bep-section-heading {
+    font-size: 18px;
+  }
+  
+  .bep-tabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .bep-tab {
+    width: 100%;
+  }
+  
+  .bep-card-image {
+    height: 160px;
   }
   
   .bep-modal {
+    height: 95vh;
     width: 100%;
-    border-radius: 10px;
-    max-height: 100vh;
   }
   
-  .bep-modal-header {
-    padding: 20px 15px 10px 15px;
-  }
-  
-  .bep-modal-left,
-  .bep-modal-right {
-    padding: 15px;
-  }
-  
-  .bep-types-grid {
+  .bep-features-grid,
+  .bep-mistakes-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* SCROLLBAR STYLING */
-.bep-sidebar::-webkit-scrollbar,
-.bep-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.bep-sidebar::-webkit-scrollbar-track,
-.bep-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
-}
-
-.bep-sidebar::-webkit-scrollbar-thumb,
-.bep-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.bep-sidebar::-webkit-scrollbar-thumb:hover,
-.bep-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* CARD ANIMATION */
+/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -744,114 +1055,34 @@ html, body, #root {
   }
 }
 
-.bep-item-card, .bep-type-card {
+.bep-item-card,
+.bep-type-card {
   animation: fadeInUp 0.5s ease-out;
 }
-/* ===== MODAL LAYOUT - FIXED RIGHT SIDE ===== */
-.bep-modal-layout {
-  display: flex;
-  min-height: 500px;
+
+/* ===== SCROLLBAR STYLING ===== */
+.bep-sidebar::-webkit-scrollbar,
+.bep-main::-webkit-scrollbar,
+.bep-modal-left::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* LEFT SIDE - SCROLLABLE CONTENT */
-.bep-modal-left {
-  flex: 0 0 65%;
-  padding: 25px 30px;
-  border-right: 1px solid #e2e8f0;
-  overflow-y: auto;
-  max-height: 70vh;
+.bep-sidebar::-webkit-scrollbar-track,
+.bep-main::-webkit-scrollbar-track,
+.bep-modal-left::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
 }
 
-/* RIGHT SIDE - FIXED (NO SCROLL) */
-.bep-modal-right {
-  flex: 0 0 35%;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  height: fit-content;
-  overflow: hidden; /* No scroll */
+.bep-sidebar::-webkit-scrollbar-thumb,
+.bep-main::-webkit-scrollbar-thumb,
+.bep-modal-left::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
-.bep-main-image-container {
-  width: 100%;
-  height: 320px;
-  margin-bottom: 25px;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0; /* Prevent shrinking */
-}
-
-.bep-main-image {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border: 2px solid white;
-  position: relative;
-}
-
-.bep-image-overlay {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-}
-
-.bep-essentiality-badge-large {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-}
-
-.bep-quick-info {
-  background: #f8fafc;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  margin-top: auto; /* Push to bottom */
-  flex-shrink: 0; /* Prevent shrinking */
-}
-
-/* TYPES GRID IMAGES */
-.bep-type-image {
-  width: 100%;
-  height: 120px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-bottom: 1px solid #e2e8f0;
-  background-color: #f1f5f9;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-  .bep-modal-layout {
-    flex-direction: column;
-  }
-  
-  .bep-modal-left {
-    flex: 0 0 100%;
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
-    max-height: 50vh;
-  }
-  
-  .bep-modal-right {
-    flex: 0 0 100%;
-    padding: 25px;
-    position: static;
-  }
-  
-  .bep-main-image-container {
-    height: 250px;
-  }
+.bep-sidebar::-webkit-scrollbar-thumb:hover,
+.bep-main::-webkit-scrollbar-thumb:hover,
+.bep-modal-left::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

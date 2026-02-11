@@ -12,7 +12,7 @@ import KitchenAppliancesPage from './pages/KitchenAppliancesPage';
 import CuttingTechniquesPage from './pages/CuttingTechniquesPage';
 import KitchenToolsPage from './pages/KitchenToolsPage';
 import CookingMethodsPage from './pages/CookingMethodsPage';
-import MeatCutsPage from './pages/MeatCutsPage';
+import MeatProcessingPage from './pages/MeatProcessingPage';
 import RecipeFeature from './pages/RecipeFeature';
 import RecipeSoupPage from './pages/RecipeSoupPage';
 import RecipeBakingPage from './pages/RecipeBakingPage';
@@ -45,7 +45,7 @@ function App() {
         <Route path="/cutting-techniques" element={<CuttingTechniquesPage/>} />
         <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
         <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
-        <Route path="/meat-cuts" element={<MeatCutsPage/>} />  
+        <Route path="/meat-cuts" element={<MeatProcessingPage/>} />  
         <Route path="/pantry-basics" element={<PantryBasicsPage/>} />    
         <Route path="/recipes" element={<RecipeFeature/>} />    
         <Route path="/soups" element={<RecipeSoupPage/>} />    

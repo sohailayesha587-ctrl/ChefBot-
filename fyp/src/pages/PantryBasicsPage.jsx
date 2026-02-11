@@ -1077,7 +1077,7 @@ const PantryBasicsPage = () => {
         </main>
       </div>
 
-   {showDetailPanel && selectedItem && (
+{showDetailPanel && selectedItem && (
   <div className="pbp-modal-overlay" onClick={closeDetailPanel}>
     <div className="pbp-modal" onClick={(e) => e.stopPropagation()}>
       <button className="pbp-modal-close" onClick={closeDetailPanel}>×</button>
@@ -1089,96 +1089,94 @@ const PantryBasicsPage = () => {
         </div>
       </div>
 
+      {/* DIRECT 2-COLUMN LAYOUT - NO EXTRA WRAPPERS */}
       <div className="pbp-modal-content">
-        <div className="pbp-modal-layout">
-          {/* LEFT SIDE - ALL CONTENT + TYPES (65%) */}
-          <div className="pbp-modal-left">
-            {/* DESCRIPTION */}
-            <div className="pbp-detail-section">
-              <h3>Description</h3>
-              <div className="pbp-detail-content">
-                <p>{selectedItem.fullDesc}</p>
-              </div>
+        {/* LEFT SIDE - SCROLLABLE CONTENT (65%) */}
+        <div className="pbp-modal-left">
+          {/* DESCRIPTION */}
+          <div className="pbp-detail-section">
+            <h3>Description</h3>
+            <div className="pbp-detail-content">
+              <p>{selectedItem.fullDesc}</p>
             </div>
-
-            {/* STORAGE TIPS */}
-            <div className="pbp-detail-section">
-              <h3>Storage Tips</h3>
-              <div className="pbp-detail-content">
-                <p>{selectedItem.storageTips}</p>
-              </div>
-            </div>
-
-            {/* SHELF LIFE */}
-            <div className="pbp-detail-section">
-              <h3>Shelf Life</h3>
-              <div className="pbp-detail-content">
-                <p>{selectedItem.shelfLife}</p>
-              </div>
-            </div>
-
-            {/* COMMON USES */}
-            <div className="pbp-detail-section">
-              <h3>Common Uses</h3>
-              <div className="pbp-detail-content">
-                <div className="pbp-uses-list">
-                  {selectedItem.keyUses.map((use, idx) => (
-                    <div key={idx} className="pbp-use-item">
-                      <span className="pbp-use-check">✓</span>
-                      <span>{use}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* TYPES SECTION - SIDE BY SIDE CARDS */}
-            {selectedItem.types && selectedItem.types.length > 0 && (
-              <div className="pbp-types-section">
-                <h3 className="pbp-types-heading">Types & Varieties</h3>
-                <div className="pbp-types-grid">
-                  {selectedItem.types.map((type, index) => (
-                    <div key={index} className="pbp-type-card">
-                      <div 
-                        className="pbp-type-image"
-                        style={{ backgroundImage: `url(${type.image})` }}
-                      ></div>
-                      <div className="pbp-type-content">
-                        <h4>{type.name}</h4>
-                        <p className="pbp-type-desc">{type.description}</p>
-                        {type.cookingTime && (
-                          <div className="pbp-type-info">
-                            <span className="pbp-type-info-item">⏱️ {type.cookingTime}</span>
-                          </div>
-                        )}
-                        {type.smokePoint && (
-                          <div className="pbp-type-info">
-                            <span className="pbp-type-info-item">🔥 {type.smokePoint}</span>
-                          </div>
-                        )}
-                        <div className="pbp-type-best">
-                          <strong>Best For:</strong> {type.bestFor}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* RIGHT SIDE - SINGLE BIG IMAGE (35%) */}
-          <div className="pbp-modal-right">
-            <div className="pbp-main-image-container">
-              <div 
-                className="pbp-main-image"
-                style={{ backgroundImage: `url(${selectedItem.image})` }}
-              >
-                <div className="pbp-image-overlay">
-                  <div className={`pbp-essentiality-badge-large ${selectedItem.essentiality.toLowerCase()}`}>
-                    {selectedItem.essentiality}
+          {/* STORAGE TIPS */}
+          <div className="pbp-detail-section">
+            <h3>Storage Tips</h3>
+            <div className="pbp-detail-content">
+              <p>{selectedItem.storageTips}</p>
+            </div>
+          </div>
+
+          {/* SHELF LIFE */}
+          <div className="pbp-detail-section">
+            <h3>Shelf Life</h3>
+            <div className="pbp-detail-content">
+              <p>{selectedItem.shelfLife}</p>
+            </div>
+          </div>
+
+          {/* COMMON USES */}
+          <div className="pbp-detail-section">
+            <h3>Common Uses</h3>
+            <div className="pbp-detail-content">
+              <div className="pbp-uses-list">
+                {selectedItem.keyUses.map((use, idx) => (
+                  <div key={idx} className="pbp-use-item">
+                    <span className="pbp-use-check">✓</span>
+                    <span>{use}</span>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* TYPES SECTION - SIDE BY SIDE CARDS */}
+          {selectedItem.types && selectedItem.types.length > 0 && (
+            <div className="pbp-types-section">
+              <h3 className="pbp-types-heading">Types & Varieties</h3>
+              <div className="pbp-types-grid">
+                {selectedItem.types.map((type, index) => (
+                  <div key={index} className="pbp-type-card">
+                    <div 
+                      className="pbp-type-image"
+                      style={{ backgroundImage: `url(${type.image})` }}
+                    ></div>
+                    <div className="pbp-type-content">
+                      <h4>{type.name}</h4>
+                      <p className="pbp-type-desc">{type.description}</p>
+                      {type.cookingTime && (
+                        <div className="pbp-type-info">
+                          <span className="pbp-type-info-item">⏱️ {type.cookingTime}</span>
+                        </div>
+                      )}
+                      {type.smokePoint && (
+                        <div className="pbp-type-info">
+                          <span className="pbp-type-info-item">🔥 {type.smokePoint}</span>
+                        </div>
+                      )}
+                      <div className="pbp-type-best">
+                        <strong>Best For:</strong> {type.bestFor}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT SIDE - FIXED IMAGE (35%) */}
+        <div className="pbp-modal-right">
+          <div className="pbp-main-image-container">
+            <div 
+              className="pbp-main-image"
+              style={{ backgroundImage: `url(${selectedItem.image})` }}
+            ></div>
+            <div className="pbp-image-overlay">
+              <div className={`pbp-essentiality-badge-large ${selectedItem.essentiality.toLowerCase()}`}>
+                {selectedItem.essentiality}
               </div>
             </div>
           </div>

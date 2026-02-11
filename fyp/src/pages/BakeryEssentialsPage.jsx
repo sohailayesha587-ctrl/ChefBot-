@@ -1293,434 +1293,382 @@ const BakeryEssentialsPage = () => {
         </main>
       </div>
 
-   {/* DETAIL MODAL */}
-{showDetailPanel && selectedItem && (
-  <div className="bep-modal-overlay" onClick={closeDetailPanel}>
-    <div className="bep-modal" onClick={(e) => e.stopPropagation()}>
-      <button className="bep-modal-close" onClick={closeDetailPanel}>×</button>
-      
-      <div className="bep-modal-header">
-        <div className="bep-modal-title">
-          <h2>{selectedItem.name}</h2>
-          <p className="bep-modal-subtitle">{selectedItem.tagline}</p>
-        </div>
-      </div>
-
-      <div className="bep-modal-content">
-        <div className="bep-modal-layout">
-          {/* LEFT SIDE - DETAILED CONTENT */}
-          <div className="bep-modal-left">
-            <div className="bep-modal-details">
-              {/* DESCRIPTION SECTION - ALL CATEGORIES */}
-              <div className="bep-detail-section">
-                <h3>📋 Description</h3>
-                <div className="bep-detail-content">
-                  <p>{selectedItem.fullDesc}</p>
-                </div>
-              </div>
-
-              {/* TOOLS CATEGORY DETAILS */}
-              {selectedCategory === 'tools' && (
-                <>
-                  {selectedItem.keyFeatures && (
-                    <div className="bep-detail-section">
-                      <h3>✅ Key Features</h3>
-                      <div className="bep-features-grid">
-                        {selectedItem.keyFeatures.map((feature, idx) => (
-                          <div key={idx} className="bep-feature-item">
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.properUsage && (
-                    <div className="bep-detail-section">
-                      <h3>📝 Proper Usage</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.properUsage}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.commonMistakes && (
-                    <div className="bep-detail-section">
-                      <h3>❌ Common Mistakes</h3>
-                      <div className="bep-mistakes-grid">
-                        {selectedItem.commonMistakes.map((mistake, idx) => (
-                          <div key={idx} className="bep-mistake-item">
-                            {mistake}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.essentiality && (
-                    <div className="bep-detail-section">
-                      <h3>⭐ Importance Level</h3>
-                      <div className="bep-detail-content">
-                        <p><strong>{selectedItem.essentiality}</strong> - {
-                          selectedItem.essentiality === 'Essential' ? 'Must-have for every bakery' :
-                          selectedItem.essentiality === 'Important' ? 'Highly recommended for serious bakers' :
-                          selectedItem.essentiality === 'Useful' ? 'Good to have for specific tasks' :
-                          'Specialized tool for specific purposes'
-                        }</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.types && (
-                    <div className="bep-detail-section">
-                      <h3>🔧 Types & Varieties</h3>
-                      <div className="bep-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="bep-type-card">
-                            <div 
-                              className="bep-type-image"
-                              style={{ 
-                                backgroundImage: `url(${type.image || selectedItem.image || 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=300'})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center'
-                              }}
-                            ></div>
-                            <div className="bep-type-content">
-                              <h4>{type.name}</h4>
-                              <p className="bep-type-description">{type.description}</p>
-                              <div className="bep-type-details">
-                                {type.capacity && <p><strong>Capacity:</strong> {type.capacity}</p>}
-                                {type.power && <p><strong>Power:</strong> {type.power}</p>}
-                                {type.features && <p><strong>Features:</strong> {type.features}</p>}
-                                {type.size && <p><strong>Size:</strong> {type.size}</p>}
-                                {type.shape && <p><strong>Shape:</strong> {type.shape}</p>}
-                                {type.blades && <p><strong>Blades:</strong> {type.blades}</p>}
-                                {type.diameter && <p><strong>Diameter:</strong> {type.diameter}</p>}
-                              </div>
-                              <div className="bep-type-bestfor">
-                                <strong>Best For:</strong> {type.bestFor}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* TECHNIQUES CATEGORY DETAILS */}
-              {selectedCategory === 'techniques' && (
-                <>
-                  {selectedItem.steps && (
-                    <div className="bep-detail-section">
-                      <h3>📝 Step-by-Step Process</h3>
-                      <div className="bep-steps-list">
-                        {selectedItem.steps.map((step, idx) => (
-                          <div key={idx} className="bep-step">
-                            <span className="bep-step-number">{idx + 1}.</span>
-                            <span className="bep-step-text">{step}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.stages && (
-                    <div className="bep-detail-section">
-                      <h3>🌡️ Temperature Stages</h3>
-                      <div className="bep-stages-grid">
-                        {selectedItem.stages.map((stage, idx) => (
-                          <div key={idx} className="bep-stage-item">
-                            {stage}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.methods && (
-                    <div className="bep-detail-section">
-                      <h3>🛠️ Different Methods</h3>
-                      <div className="bep-methods-grid">
-                        {selectedItem.methods.map((method, idx) => (
-                          <div key={idx} className="bep-method-item">
-                            {method}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.tips && (
-                    <div className="bep-detail-section">
-                      <h3>💡 Pro Tips</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.tips}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.commonMistakes && (
-                    <div className="bep-detail-section">
-                      <h3>❌ Common Mistakes to Avoid</h3>
-                      <div className="bep-mistakes-list">
-                        {selectedItem.commonMistakes.map((mistake, idx) => (
-                          <li key={idx} className="bep-mistake-list-item">
-                            {mistake}
-                          </li>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.applications && (
-                    <div className="bep-detail-section">
-                      <h3>🎯 Applications</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.applications}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* INGREDIENTS CATEGORY DETAILS */}
-              {selectedCategory === 'ingredients' && (
-                <>
-                  {selectedItem.types && (
-                    <div className="bep-detail-section">
-                      <h3>📊 Types & Varieties</h3>
-                      <div className="bep-ingredient-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="bep-ingredient-type-card">
-                            <h4>{type.name}</h4>
-                            {type.protein && <p><strong>Protein:</strong> {type.protein}</p>}
-                            {type.uses && <p><strong>Uses:</strong> {type.uses}</p>}
-                            {type.description && <p><strong>Description:</strong> {type.description}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.agents && (
-                    <div className="bep-detail-section">
-                      <h3>⚗️ Leavening Agents</h3>
-                      <div className="bep-agents-grid">
-                        {selectedItem.agents.map((agent, idx) => (
-                          <div key={idx} className="bep-agent-card">
-                            <h4>{agent.name}</h4>
-                            {agent.activation && <p><strong>Activation:</strong> {agent.activation}</p>}
-                            {agent.ratio && <p><strong>Ratio:</strong> {agent.ratio}</p>}
-                            {agent.uses && <p><strong>Uses:</strong> {agent.uses}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.functions && (
-                    <div className="bep-detail-section">
-                      <h3>🥚 Functions in Baking</h3>
-                      <div className="bep-functions-grid">
-                        {selectedItem.functions.map((func, idx) => (
-                          <div key={idx} className="bep-function-item">
-                            {func}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.storage && (
-                    <div className="bep-detail-section">
-                      <h3>📦 Storage Guidelines</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.storage}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* TEMPERATURE CATEGORY DETAILS */}
-              {selectedCategory === 'temperature' && (
-                <>
-                  {selectedItem.temperatures && (
-                    <div className="bep-detail-section">
-                      <h3>🌡️ Temperature Ranges</h3>
-                      <div className="bep-temperatures-grid">
-                        {selectedItem.temperatures.map((temp, idx) => (
-                          <div key={idx} className="bep-temperature-item">
-                            {temp}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.tips && (
-                    <div className="bep-detail-section">
-                      <h3>💡 Pro Tips</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.tips}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {/* DECORATING CATEGORY DETAILS */}
-              {selectedCategory === 'decorating' && (
-                <>
-                  {selectedItem.types && (
-                    <div className="bep-detail-section">
-                      <h3>🎨 Types & Materials</h3>
-                      <div className="bep-decorating-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="bep-decorating-type-card">
-                            <h4>{type.name}</h4>
-                            {type.material && <p><strong>Material:</strong> {type.material}</p>}
-                            {type.sizes && <p><strong>Sizes:</strong> {type.sizes}</p>}
-                            {type.bestFor && <p><strong>Best For:</strong> {type.bestFor}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.techniques && (
-                    <div className="bep-detail-section">
-                      <h3>🎯 Techniques</h3>
-                      <div className="bep-techniques-grid">
-                        {selectedItem.techniques.map((technique, idx) => (
-                          <div key={idx} className="bep-technique-item">
-                            {technique}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem.cleaning && (
-                    <div className="bep-detail-section">
-                      <h3>🧼 Cleaning & Maintenance</h3>
-                      <div className="bep-detail-content">
-                        <p>{selectedItem.cleaning}</p>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* RIGHT SIDE - FIXED IMAGE AND QUICK INFO */}
-          <div className="bep-modal-right">
-            {/* MAIN FIXED IMAGE */}
-            <div className="bep-main-image-container">
-              <div 
-                className="bep-main-image"
-                style={{ 
-                  backgroundImage: `url(${selectedItem.image || 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800'})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
-              >
-                {/* Essentiality Badge on Image */}
-                <div className="bep-image-overlay">
-                  <div className={`bep-essentiality-badge-large ${selectedItem.essentiality?.toLowerCase() || 'important'}`}>
-                    {selectedItem.essentiality || 'Important'}
-                  </div>
-                </div>
-              </div>
-            </div>
+      {/* ===== FIXED MODAL - SIRF LEFT SIDE SCROLL, RIGHT IMAGE FIXED ===== */}
+      {showDetailPanel && selectedItem && (
+        <div className="bep-modal-overlay" onClick={closeDetailPanel}>
+          <div className="bep-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="bep-modal-close" onClick={closeDetailPanel}>×</button>
             
-            {/* QUICK INFO */}
-            <div className="bep-quick-info">
-              <h3>Quick Info</h3>
+            <div className="bep-modal-header">
+              <div className="bep-modal-title">
+                <h2>{selectedItem.name}</h2>
+                <p className="bep-modal-subtitle">{selectedItem.tagline}</p>
+              </div>
+            </div>
+
+            {/* DIRECT 2-COLUMN LAYOUT - NO EXTRA WRAPPERS */}
+            <div className="bep-modal-content">
               
-              {selectedCategory === 'tools' && (
-                <div className="bep-quick-info-content">
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Category:</span>
-                    <span className="bep-quick-value">Tools & Equipment</span>
+              {/* LEFT SIDE - SCROLLABLE CONTENT (65%) */}
+              <div className="bep-modal-left">
+                <div className="bep-modal-details">
+                  
+                  {/* DESCRIPTION SECTION - ALL CATEGORIES */}
+                  <div className="bep-detail-section">
+                    <h3>📋 Description</h3>
+                    <div className="bep-detail-content">
+                      <p>{selectedItem.fullDesc}</p>
+                    </div>
                   </div>
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Importance:</span>
-                    <span className={`bep-quick-value ${selectedItem.essentiality?.toLowerCase()}`}>
-                      {selectedItem.essentiality}
-                    </span>
-                  </div>
-                </div>
-              )}
 
-              {selectedCategory === 'techniques' && (
-                <div className="bep-quick-info-content">
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Category:</span>
-                    <span className="bep-quick-value">Baking Technique</span>
-                  </div>
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Skill Level:</span>
-                    <span className="bep-quick-value">
-                      {selectedItem.id <= 4 ? 'Beginner' : 
-                       selectedItem.id <= 6 ? 'Intermediate' : 'Advanced'}
-                    </span>
-                  </div>
-                </div>
-              )}
+                  {/* TOOLS CATEGORY DETAILS */}
+                  {selectedCategory === 'tools' && (
+                    <>
+                      {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>✅ Key Features</h3>
+                          <div className="bep-features-grid">
+                            {selectedItem.keyFeatures.map((feature, idx) => (
+                              <div key={idx} className="bep-feature-item">
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
-              {selectedCategory === 'ingredients' && (
-                <div className="bep-quick-info-content">
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Category:</span>
-                    <span className="bep-quick-value">Ingredient Guide</span>
-                  </div>
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Type:</span>
-                    <span className="bep-quick-value">{selectedItem.name}</span>
-                  </div>
-                </div>
-              )}
+                      {selectedItem.properUsage && (
+                        <div className="bep-detail-section">
+                          <h3>📝 Proper Usage</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.properUsage}</p>
+                          </div>
+                        </div>
+                      )}
 
-              {selectedCategory === 'temperature' && (
-                <div className="bep-quick-info-content">
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Category:</span>
-                    <span className="bep-quick-value">Temperature Control</span>
-                  </div>
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Critical:</span>
-                    <span className="bep-quick-value">High Importance</span>
-                  </div>
-                </div>
-              )}
+                      {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>❌ Common Mistakes</h3>
+                          <div className="bep-mistakes-grid">
+                            {selectedItem.commonMistakes.map((mistake, idx) => (
+                              <div key={idx} className="bep-mistake-item">
+                                {mistake}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
-              {selectedCategory === 'decorating' && (
-                <div className="bep-quick-info-content">
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Category:</span>
-                    <span className="bep-quick-value">Decorating Tools</span>
-                  </div>
-                  <div className="bep-quick-info-item">
-                    <span className="bep-quick-label">Skill Level:</span>
-                    <span className="bep-quick-value">
-                      {selectedItem.id <= 3 ? 'Beginner' : 
-                       selectedItem.id <= 5 ? 'Intermediate' : 'Advanced'}
-                    </span>
+                      {selectedItem.essentiality && (
+                        <div className="bep-detail-section">
+                          <h3>⭐ Importance Level</h3>
+                          <div className="bep-detail-content">
+                            <p><strong>{selectedItem.essentiality}</strong> - {
+                              selectedItem.essentiality === 'Essential' ? 'Must-have for every bakery' :
+                              selectedItem.essentiality === 'Important' ? 'Highly recommended for serious bakers' :
+                              selectedItem.essentiality === 'Useful' ? 'Good to have for specific tasks' :
+                              'Specialized tool for specific purposes'
+                            }</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.types && selectedItem.types.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🔧 Types & Varieties</h3>
+                          <div className="bep-types-grid">
+                            {selectedItem.types.map((type, idx) => (
+                              <div key={idx} className="bep-type-card">
+                                <div 
+                                  className="bep-type-image"
+                                  style={{ 
+                                    backgroundImage: `url(${type.image || selectedItem.image})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                  }}
+                                ></div>
+                                <div className="bep-type-content">
+                                  <h4>{type.name}</h4>
+                                  <p className="bep-type-desc">{type.description}</p>
+                                  <div className="bep-type-details">
+                                    {type.capacity && <p><strong>Capacity:</strong> {type.capacity}</p>}
+                                    {type.power && <p><strong>Power:</strong> {type.power}</p>}
+                                    {type.features && <p><strong>Features:</strong> {type.features}</p>}
+                                    {type.size && <p><strong>Size:</strong> {type.size}</p>}
+                                    {type.shape && <p><strong>Shape:</strong> {type.shape}</p>}
+                                    {type.blades && <p><strong>Blades:</strong> {type.blades}</p>}
+                                    {type.diameter && <p><strong>Diameter:</strong> {type.diameter}</p>}
+                                  </div>
+                                  <div className="bep-type-bestfor">
+                                    <strong>Best For:</strong> {type.bestFor}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* TECHNIQUES CATEGORY DETAILS */}
+                  {selectedCategory === 'techniques' && (
+                    <>
+                      {selectedItem.steps && selectedItem.steps.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📝 Step-by-Step Process</h3>
+                          <div className="bep-steps-list">
+                            {selectedItem.steps.map((step, idx) => (
+                              <div key={idx} className="bep-step">
+                                <span className="bep-step-number">{idx + 1}.</span>
+                                <span className="bep-step-text">{step}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.stages && selectedItem.stages.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🌡️ Temperature Stages</h3>
+                          <div className="bep-stages-grid">
+                            {selectedItem.stages.map((stage, idx) => (
+                              <div key={idx} className="bep-stage-item">
+                                {stage}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.methods && selectedItem.methods.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🛠️ Different Methods</h3>
+                          <div className="bep-methods-grid">
+                            {selectedItem.methods.map((method, idx) => (
+                              <div key={idx} className="bep-method-item">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tips && (
+                        <div className="bep-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>❌ Common Mistakes to Avoid</h3>
+                          <div className="bep-mistakes-list">
+                            {selectedItem.commonMistakes.map((mistake, idx) => (
+                              <div key={idx} className="bep-mistake-list-item">
+                                {mistake}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.applications && (
+                        <div className="bep-detail-section">
+                          <h3>🎯 Applications</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.applications}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* INGREDIENTS CATEGORY DETAILS */}
+                  {selectedCategory === 'ingredients' && (
+                    <>
+                      {selectedItem.types && selectedItem.types.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📊 Types & Varieties</h3>
+                          <div className="bep-ingredient-types-grid">
+                            {selectedItem.types.map((type, idx) => (
+                              <div key={idx} className="bep-ingredient-type-card">
+                                <h4>{type.name}</h4>
+                                {type.protein && <p><strong>Protein:</strong> {type.protein}</p>}
+                                {type.uses && <p><strong>Uses:</strong> {type.uses}</p>}
+                                {type.description && <p><strong>Description:</strong> {type.description}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.agents && selectedItem.agents.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>⚗️ Leavening Agents</h3>
+                          <div className="bep-agents-grid">
+                            {selectedItem.agents.map((agent, idx) => (
+                              <div key={idx} className="bep-agent-card">
+                                <h4>{agent.name}</h4>
+                                {agent.activation && <p><strong>Activation:</strong> {agent.activation}</p>}
+                                {agent.ratio && <p><strong>Ratio:</strong> {agent.ratio}</p>}
+                                {agent.uses && <p><strong>Uses:</strong> {agent.uses}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.functions && selectedItem.functions.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🥚 Functions in Baking</h3>
+                          <div className="bep-functions-grid">
+                            {selectedItem.functions.map((func, idx) => (
+                              <div key={idx} className="bep-function-item">
+                                {func}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.storage && (
+                        <div className="bep-detail-section">
+                          <h3>📦 Storage Guidelines</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.storage}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* TEMPERATURE CATEGORY DETAILS */}
+                  {selectedCategory === 'temperature' && (
+                    <>
+                      {selectedItem.temperatures && selectedItem.temperatures.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🌡️ Temperature Ranges</h3>
+                          <div className="bep-temperatures-grid">
+                            {selectedItem.temperatures.map((temp, idx) => (
+                              <div key={idx} className="bep-temperature-item">
+                                {temp}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tips && (
+                        <div className="bep-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* DECORATING CATEGORY DETAILS */}
+                  {selectedCategory === 'decorating' && (
+                    <>
+                      {selectedItem.types && selectedItem.types.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🎨 Types & Materials</h3>
+                          <div className="bep-decorating-types-grid">
+                            {selectedItem.types.map((type, idx) => (
+                              <div key={idx} className="bep-decorating-type-card">
+                                <h4>{type.name}</h4>
+                                {type.material && <p><strong>Material:</strong> {type.material}</p>}
+                                {type.sizes && <p><strong>Sizes:</strong> {type.sizes}</p>}
+                                {type.bestFor && <p><strong>Best For:</strong> {type.bestFor}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.techniques && selectedItem.techniques.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🎯 Techniques</h3>
+                          <div className="bep-techniques-grid">
+                            {selectedItem.techniques.map((technique, idx) => (
+                              <div key={idx} className="bep-technique-item">
+                                {technique}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.cleaning && (
+                        <div className="bep-detail-section">
+                          <h3>🧼 Cleaning & Maintenance</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.cleaning}</p>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* RIGHT SIDE - FIXED IMAGE (35%) - NO SCROLL */}
+              <div className="bep-modal-right">
+                <div className="bep-main-image-container">
+                  <div 
+                    className="bep-main-image"
+                    style={{ 
+                      backgroundImage: `url(${selectedItem.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  >
+                    <div className="bep-image-overlay">
+                      <div className={`bep-essentiality-badge-large ${selectedItem.essentiality?.toLowerCase() || 'important'}`}>
+                        {selectedItem.essentiality || 'Important'}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              )}
+                
+                {/* QUICK INFO */}
+                <div className="bep-quick-info">
+                  <h3>Quick Info</h3>
+                  
+                  <div className="bep-quick-info-content">
+                    <div className="bep-quick-info-item">
+                      <span className="bep-quick-label">Category:</span>
+                      <span className="bep-quick-value">
+                        {selectedCategory === 'tools' && 'Tools & Equipment'}
+                        {selectedCategory === 'techniques' && 'Baking Technique'}
+                        {selectedCategory === 'ingredients' && 'Ingredient Guide'}
+                        {selectedCategory === 'temperature' && 'Temperature Control'}
+                        {selectedCategory === 'decorating' && 'Decorating Tools'}
+                      </span>
+                    </div>
+                    
+                    {selectedItem.essentiality && (
+                      <div className="bep-quick-info-item">
+                        <span className="bep-quick-label">Importance:</span>
+                        <span className={`bep-quick-value ${selectedItem.essentiality?.toLowerCase()}`}>
+                          {selectedItem.essentiality}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

@@ -13,7 +13,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Matchstick-style thin strips",
       fullDesc: "Julienne is a knife technique that produces thin, matchstick-sized strips of vegetables or fruits. The standard dimensions are 4mm × 4mm × 5-7cm long. It's essential for dishes that require quick cooking and uniform texture.",
       keyUses: ["Stir-fries", "Salads", "Garnishes", "Asian dishes"],
-      previewImg: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=400",
+      previewImg: "JulienneCut.png",
       knife: "Chef's knife or Santoku",
       tips: ["Keep fingers curled under", "Create planks first, then strips", "Maintain uniform thickness"],
       steps: [
@@ -30,7 +30,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Fine 3mm cubes",
       fullDesc: "Brunoise is an extremely fine dice cut, typically 3mm × 3mm × 3mm. It's the smallest of the dice cuts and requires precision knife work. Often used for garnishes or ingredients that need to cook quickly or melt into dishes.",
       keyUses: ["Sauces", "Soups", "Garnishes", "Stuffings"],
-      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      previewImg: "BrunoiseCut.png",
       knife: "Sharp Chef's knife",
       tips: ["Start with julienne cuts", "Use claw grip for safety", "Keep knife very sharp"],
       steps: [
@@ -47,7 +47,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Fine ribbon cuts for leafy greens",
       fullDesc: "Chiffonade is a technique for cutting leafy herbs and vegetables into thin, ribbon-like strips. Literally meaning 'made of rags' in French, it's perfect for herbs and leafy greens where you want maximum flavor and elegant presentation.",
       keyUses: ["Herb garnishes", "Salads", "Pasta dishes", "Garnishes"],
-      previewImg: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400",
+      previewImg: "ChiffonadeCut.png",
       knife: "Chef's knife",
       tips: ["Stack leaves neatly", "Roll tightly before cutting", "Use gentle sawing motion"],
       steps: [
@@ -64,7 +64,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Uniform cube cuts",
       fullDesc: "Dicing involves cutting food into uniform cube-shaped pieces. There are different sizes: large dice (20mm), medium dice (12mm), and small dice (6mm). Uniform dicing ensures even cooking and professional presentation.",
       keyUses: ["Sautéing", "Soups", "Stews", "Salads"],
-      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      previewImg: "DiceCut.png",
       knife: "Chef's knife",
       tips: ["Create planks then batons", "Maintain consistent pressure", "Use cutting board anchors"],
       steps: [
@@ -81,7 +81,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Basic cross-sectional cuts",
       fullDesc: "Slicing is the most fundamental cutting technique, involving cutting food into flat, broad pieces. The thickness can vary from paper-thin to thick slices depending on the recipe requirements.",
       keyUses: ["Sandwiches", "Roasting", "Frying", "Presentation"],
-      previewImg: "https://images.unsplash.com/photo-1563379091339-03246963d9d6?auto=format&fit=crop&w=400",
+      previewImg: "SliceCut.png",
       knife: "Chef's knife or Santoku",
       tips: ["Use rocking motion", "Keep slices even", "Anchor food with flat side down"],
       steps: [
@@ -98,7 +98,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Finely chopped pieces",
       fullDesc: "Mincing involves cutting food into very small, irregular pieces that are smaller than a dice. The goal is to create tiny pieces that distribute flavor evenly throughout a dish without being noticeable.",
       keyUses: ["Garlic", "Onions", "Herbs", "Flavor bases"],
-      previewImg: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      previewImg: "MinceCut.png",
       knife: "Chef's knife",
       tips: ["Rock knife back and forth", "Gather and chop repeatedly", "Use curved blade efficiently"],
       steps: [
@@ -115,7 +115,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Stick-shaped cuts",
       fullDesc: "Batonnet produces stick-shaped pieces, typically 6mm × 6mm × 5-6cm long. It's larger than julienne and serves as a starting point for medium dice cuts. Perfect for vegetables that will be served as side dishes or in stews.",
       keyUses: ["French fries", "Vegetable sticks", "Stir-fries", "Crudités"],
-      previewImg: "Batonnet.png",
+      previewImg: "BatonnetCut.png",
       knife: "Chef's knife",
       tips: ["Trim sides first", "Measure thickness", "Keep consistent length"],
       steps: [
@@ -132,7 +132,7 @@ const CuttingTechniquesPage = () => {
       tagline: "Football-shaped decorative cuts",
       fullDesc: "Tourne (or 'turned') is an advanced knife technique that produces seven-sided, football-shaped pieces. It's a decorative cut used in fine dining to create elegant vegetable presentations that cook evenly.",
       keyUses: ["Fine dining", "Garnishes", "Roasted vegetables", "Special occasions"],
-      previewImg: "https://images.unsplash.com/photo-1563379091339-03246963d9d6?auto=format&fit=crop&w=400",
+      previewImg: "TourneCut.png",
       knife: "Paring knife or tourne knife",
       tips: ["Use small paring knife", "Practice on carrots first", "Maintain seven equal sides"],
       steps: [
