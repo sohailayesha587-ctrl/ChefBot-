@@ -7,6 +7,7 @@ const PantryBasicsPage = () => {
   const [showDetailPanel, setShowDetailPanel] = useState(false);
 const [spiceCategory, setSpiceCategory] = useState('all');
 const [staplesCategory, setStaplesCategory] = useState('all'); // Add this
+const [vegetablesCategory, setVegetablesCategory] = useState('all');
 
 const getFilteredSpices = () => {
     if (spiceCategory === 'all') return spicesData;
@@ -15,6 +16,10 @@ const getFilteredSpices = () => {
   const getFilteredStaples = () => {
   if (staplesCategory === 'all') return staplesData;
   return staplesData.filter(item => item.category === staplesCategory);
+};
+const getFilteredVegetables = () => {
+  if (vegetablesCategory === 'all') return dailyVegetablesData;
+  return dailyVegetablesData.filter(item => item.category === vegetablesCategory);
 };
 // SECTION 1: KITCHEN BASICS DATA WITH TYPES
   const kitchenBasicsData = [
@@ -3863,225 +3868,1308 @@ const staplesData = [
 
 // Add this to your getCurrentData function - it already uses getFilteredStaples
 // Make sure you have the staplesCategory state and getFilteredStaples function
+// SECTION 4: DAILY VEGETABLES DATA WITH CATEGORIES
+const dailyVegetablesData = [
+  // ===== 1. 🌱 ROOT VEGETABLES =====
+  {
+    id: 1001,
+    name: "Potatoes",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=800",
+    tagline: "Versatile staple vegetable",
+    fullDesc: "Potatoes are the most consumed vegetable worldwide. They can be boiled, fried, roasted, or mashed. Rich in carbohydrates, potassium, and vitamin C. Different varieties suit different cooking methods.",
+    storageTips: "Store in cool, dark, well-ventilated place. Don't refrigerate. Keep away from onions.",
+    shelfLife: "3-5 weeks",
+    season: "All year",
+    keyUses: ["Curries", "Snacks", "Mashed", "Roasted", "Fried"],
+    nutritionalInfo: "Rich in carbohydrates, potassium, vitamin C, and vitamin B6",
+    healthBenefits: ["Energy source", "Heart health", "Digestive health"],
+    cookingTips: "Store at room temperature. Don't refrigerate raw potatoes.",
+    types: [
+      {
+        name: "Russet Potatoes",
+        image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=300",
+        description: "Starchy, fluffy when cooked",
+        bestFor: "Mashing, Baking, Frying",
+        season: "All year",
+        texture: "Fluffy"
+      },
+      {
+        name: "Red Potatoes",
+        image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=300",
+        description: "Waxy, hold shape well",
+        bestFor: "Salads, Roasting, Curries",
+        season: "All year",
+        texture: "Firm"
+      },
+      {
+        name: "Yellow Potatoes",
+        image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=300",
+        description: "Buttery flavor, medium starch",
+        bestFor: "Roasting, Mashing",
+        season: "All year",
+        texture: "Creamy"
+      }
+    ]
+  },
+  {
+    id: 1002,
+    name: "Carrots",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet root vegetable, rich in vitamin A",
+    fullDesc: "Carrots are sweet, crunchy root vegetables packed with beta-carotene (vitamin A). They can be eaten raw in salads, cooked in curries, or juiced. Available in orange, purple, red, and yellow varieties.",
+    storageTips: "Remove greens before storing. Store in plastic bag in refrigerator.",
+    shelfLife: "3-4 weeks",
+    season: "Winter",
+    keyUses: ["Salads", "Curries", "Juices", "Snacks", "Gajar ka Halwa"],
+    nutritionalInfo: "Very high in vitamin A (beta-carotene), fiber, vitamin K, and potassium",
+    healthBenefits: ["Eye health", "Immune support", "Skin health", "Digestive health"],
+    cookingTips: "Peeling is optional. Grate for salads, chop for curries.",
+    types: [
+      {
+        name: "Orange Carrots",
+        image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=300",
+        description: "Most common variety",
+        bestFor: "All purposes",
+        season: "Winter",
+        color: "Orange"
+      },
+      {
+        name: "Red Carrots",
+        image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=300",
+        description: "Deep red, sweeter",
+        bestFor: "Gajar ka Halwa, Juicing",
+        season: "Winter",
+        color: "Red"
+      }
+    ]
+  },
+  {
+    id: 1003,
+    name: "Beetroot",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Deep red root, earthy and sweet",
+    fullDesc: "Beetroot has a deep crimson color and sweet, earthy flavor. It's packed with nutrients and antioxidants. Used in salads, curries, juices, and even desserts. The greens are also edible and nutritious.",
+    storageTips: "Remove greens, store in refrigerator in plastic bag.",
+    shelfLife: "2-3 weeks",
+    season: "Winter",
+    keyUses: ["Salads", "Juices", "Curries", "Roasted", "Pickled"],
+    nutritionalInfo: "Rich in folate, manganese, potassium, iron, and antioxidants",
+    healthBenefits: ["Blood pressure control", "Exercise performance", "Detoxifying", "Anti-inflammatory"],
+    cookingTips: "Roast to enhance sweetness. Wear gloves to avoid staining hands.",
+    types: [
+      {
+        name: "Red Beetroot",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common deep red variety",
+        bestFor: "All purposes",
+        season: "Winter",
+        color: "Red"
+      },
+      {
+        name: "Golden Beetroot",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Yellow-orange, less staining",
+        bestFor: "Salads, Roasting",
+        season: "Winter",
+        color: "Golden"
+      }
+    ]
+  },
+  {
+    id: 1004,
+    name: "Radish (White)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Crisp, peppery white root",
+    fullDesc: "White radish, or mooli, is a long white root with a crisp texture and peppery flavor. It's commonly eaten raw in salads, parathas, or cooked in curries. The leaves are also edible and nutritious.",
+    storageTips: "Remove greens, store in refrigerator in plastic bag.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Salads", "Paratha filling", "Curries", "Pickles"],
+    nutritionalInfo: "Rich in vitamin C, fiber, and digestive enzymes",
+    healthBenefits: ["Digestive health", "Respiratory health", "Hydration"],
+    cookingTips: "Peel if skin is tough. Grate for parathas, slice for salads.",
+    types: [
+      {
+        name: "Long White Radish",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common Indian variety",
+        bestFor: "Salads, Parathas",
+        season: "Winter",
+        flavor: "Peppery"
+      }
+    ]
+  },
+  {
+    id: 1005,
+    name: "Red Radish",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Small, spicy red roots",
+    fullDesc: "Red radishes are small, round or oblong roots with bright red skin and white flesh. They have a crisp texture and sharp, peppery flavor. Usually eaten raw in salads or as a garnish.",
+    storageTips: "Remove greens, store in refrigerator.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Salads", "Garnish", "Crudités"],
+    nutritionalInfo: "Rich in vitamin C, fiber, and antioxidants",
+    healthBenefits: ["Digestive health", "Immune support", "Hydration"],
+    cookingTips: "Slice thin for salads. Soak in ice water for extra crispness.",
+    types: [
+      {
+        name: "Round Red Radish",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, round, red",
+        bestFor: "Salads",
+        season: "Winter",
+        flavor: "Spicy"
+      }
+    ]
+  },
+  {
+    id: 1006,
+    name: "Turnip (Shaljam)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Purple-topped white root",
+    fullDesc: "Turnips are root vegetables with white flesh and purple-tinged skin. They have a mild, slightly sweet and peppery flavor. Popular in Kashmiri and Punjabi cuisine. The greens are also edible and nutritious.",
+    storageTips: "Remove greens, store in refrigerator.",
+    shelfLife: "2-3 weeks",
+    season: "Winter",
+    keyUses: ["Curries", "Stews", "Roasted", "Pickled"],
+    nutritionalInfo: "Rich in vitamin C, fiber, and potassium",
+    healthBenefits: ["Digestive health", "Heart health", "Immune support"],
+    cookingTips: "Peel if skin is thick. Great in winter curries.",
+    types: [
+      {
+        name: "Purple Top Turnip",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Most common variety",
+        bestFor: "Curries, Roasting",
+        season: "Winter",
+        flavor: "Mild"
+      }
+    ]
+  },
+  {
+    id: 1007,
+    name: "Sweet Potato (Shakarkandi)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, nutritious tuber",
+    fullDesc: "Sweet potatoes are sweet, starchy root vegetables packed with beta-carotene. They're not related to regular potatoes. Popular roasted, fried, or in chaat. Available in orange and purple varieties.",
+    storageTips: "Store in cool, dark, well-ventilated place. Do not refrigerate.",
+    shelfLife: "2-3 weeks",
+    season: "Winter",
+    keyUses: ["Roasted", "Chaat", "Fried", "Mashed", "Desserts"],
+    nutritionalInfo: "Very high in vitamin A, vitamin C, fiber, and potassium",
+    healthBenefits: ["Eye health", "Immune support", "Digestive health", "Anti-inflammatory"],
+    cookingTips: "Bake or roast to enhance sweetness. Skin is edible.",
+    types: [
+      {
+        name: "Orange Sweet Potato",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Most common, orange flesh",
+        bestFor: "Roasting, Chaat",
+        season: "Winter",
+        color: "Orange"
+      },
+      {
+        name: "Purple Sweet Potato",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Purple flesh, antioxidant rich",
+        bestFor: "Desserts, Healthy dishes",
+        season: "Winter",
+        color: "Purple"
+      }
+    ]
+  },
+  {
+    id: 1008,
+    name: "Arbi (Taro Root)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Earthy, nutty root vegetable",
+    fullDesc: "Arbi, or taro root, is a starchy root vegetable with brown, hairy skin and white or purple-spotted flesh. It has an earthy, nutty flavor and creamy texture when cooked. Popular fried, in curries, or as patties.",
+    storageTips: "Store in cool, dry place. Do not refrigerate.",
+    shelfLife: "1-2 weeks",
+    season: "Monsoon",
+    keyUses: ["Fried snacks", "Curries", "Patties", "Roasted"],
+    nutritionalInfo: "Rich in fiber, vitamin E, B vitamins, and potassium",
+    healthBenefits: ["Digestive health", "Energy source", "Heart health"],
+    cookingTips: "Must be cooked thoroughly (toxic raw). Wear gloves when peeling (can irritate skin).",
+    types: [
+      {
+        name: "Small Arbi",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, more tender",
+        bestFor: "Frying, Curries",
+        season: "Monsoon",
+        texture: "Creamy"
+      }
+    ]
+  },
+  {
+    id: 1009,
+    name: "Fresh Ginger (Adrak)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=800",
+    tagline: "Pungent, aromatic root",
+    fullDesc: "Fresh ginger is a knobby root with thin brown skin and pungent, spicy flavor. It's an essential ingredient in Indian cooking, used in curries, tea, and as a digestive aid. Contains gingerol with powerful anti-inflammatory properties.",
+    storageTips: "Store in cool, dry place or refrigerate. Can be frozen.",
+    shelfLife: "2-3 weeks fresh, longer frozen",
+    season: "All year",
+    keyUses: ["Curry paste", "Tea", "Marinades", "Digestive aid", "Ginger garlic paste"],
+    nutritionalInfo: "Rich in gingerol, antioxidants, and anti-inflammatory compounds",
+    healthBenefits: ["Digestive health", "Nausea relief", "Anti-inflammatory", "Immune support"],
+    cookingTips: "Peel before use. Grate, chop, or slice as needed.",
+    types: [
+      {
+        name: "Young Ginger",
+        image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=300",
+        description: "Tender, less fibrous",
+        bestFor: "Pickling, Salads",
+        season: "Monsoon",
+        flavor: "Mild"
+      },
+      {
+        name: "Mature Ginger",
+        image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=300",
+        description: "More fibrous, stronger flavor",
+        bestFor: "Cooking, Paste",
+        season: "All year",
+        flavor: "Strong"
+      }
+    ]
+  },
+  {
+    id: 1010,
+    name: "Fresh Turmeric (Kachi Haldi)",
+    category: "root",
+    categoryDisplay: "Root Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Vibrant orange root, fresh flavor",
+    fullDesc: "Fresh turmeric looks similar to ginger but has vibrant orange flesh. It has a more floral, earthy flavor than dried turmeric and stains everything yellow. Used in salads, pickles, and for its potent anti-inflammatory properties.",
+    storageTips: "Store in refrigerator. Can be frozen.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Salads", "Pickles", "Juices", "Medicinal use"],
+    nutritionalInfo: "High in curcumin (anti-inflammatory), iron, and potassium",
+    healthBenefits: ["Anti-inflammatory", "Antioxidant rich", "Digestive health", "Immunity"],
+    cookingTips: "Peel and grate fresh. Use gloves to avoid staining hands.",
+    types: [
+      {
+        name: "Fresh Turmeric",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh rhizomes",
+        bestFor: "Salads, Pickles",
+        season: "Winter",
+        color: "Orange"
+      }
+    ]
+  },
 
-  // SECTION 4: DAILY VEGETABLES DATA WITH TYPES
-  const dailyVegetablesData = [
-    {
-      id: 1,
-      name: "Onions",
-      image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=800",
-      tagline: "Base for most Indian dishes",
-      fullDesc: "Essential aromatic vegetable. Used raw in salads, sautéed as base for curries, or fried as garnish. Onions add depth and sweetness to dishes when cooked. Rich in antioxidants and anti-inflammatory compounds.",
-      storageTips: "Store in cool, dry, well-ventilated place. Avoid storing with potatoes.",
-      shelfLife: "2-3 months",
-      keyUses: ["Curry base", "Salads", "Garnish", "Pickles"],
-      types: [
-        {
-          name: "Red Onions",
-          image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
-          description: "Sharp flavor, purple-red skin",
-          bestFor: "Raw salads, Chutneys, Garnish"
-        },
-        {
-          name: "White Onions",
-          image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
-          description: "Milder flavor, white skin",
-          bestFor: "Mexican dishes, Cooking"
-        },
-        {
-          name: "Shallots",
-          image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
-          description: "Small, mild, multi-lobed",
-          bestFor: "South Indian, Thai cuisine"
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Garlic",
-      image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=800",
-      tagline: "Flavor enhancer",
-      fullDesc: "Pungent cloves used for flavor base. Can be used fresh, minced, paste, or powder. Garlic has medicinal properties including antibacterial and antiviral effects. Essential in most world cuisines.",
-      storageTips: "Store in cool, dry place with air circulation. Keep away from moisture.",
-      shelfLife: "3-5 months",
-      keyUses: ["Curry base", "Marinades", "Sauces", "Tempering"],
-      types: [
-        {
-          name: "Regular Garlic",
-          image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
-          description: "Common white garlic bulbs",
-          bestFor: "Daily cooking, Curries"
-        },
-        {
-          name: "Elephant Garlic",
-          image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=300",
-          description: "Large cloves, milder flavor",
-          bestFor: "Roasting, Mild dishes"
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Ginger",
-      image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=800",
-      tagline: "Versatile root with health benefits",
-      fullDesc: "Fresh root with spicy, warming flavor. Used in cooking, tea, and as digestive aid. Contains gingerol with anti-inflammatory and antioxidant effects. Helps with nausea, digestion, and cold symptoms.",
-      storageTips: "Store in cool, dry place or refrigerate. Can be frozen for longer storage.",
-      shelfLife: "2-3 weeks fresh, longer as paste",
-      keyUses: ["Curry paste", "Tea", "Marinades", "Digestive aid"],
-      types: [
-        {
-          name: "Fresh Ginger",
-          image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=300",
-          description: "Raw ginger root",
-          bestFor: "Cooking, Tea, Juices"
-        },
-        {
-          name: "Young Ginger",
-          image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=300",
-          description: "Tender, less fibrous",
-          bestFor: "Pickling, Salads"
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: "Tomatoes",
-      image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
-      tagline: "Adds tanginess and body to dishes",
-      fullDesc: "Versatile fruit/vegetable used fresh, cooked, or as paste. Base for many gravies and sauces. Rich in lycopene (antioxidant), vitamins C and K. Cooking increases lycopene availability.",
-      storageTips: "Store at room temperature until ripe, then refrigerate. Don't refrigerate unripe tomatoes.",
-      shelfLife: "1-2 weeks",
-      keyUses: ["Curries", "Salads", "Sauces", "Chutneys"],
-      types: [
-        {
-          name: "Roma Tomatoes",
-          image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
-          description: "Plum tomatoes, less seeds",
-          bestFor: "Sauces, Paste, Cooking"
-        },
-        {
-          name: "Cherry Tomatoes",
-          image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
-          description: "Small, sweet tomatoes",
-          bestFor: "Salads, Garnish"
-        },
-        {
-          name: "Beefsteak Tomatoes",
-          image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
-          description: "Large, juicy tomatoes",
-          bestFor: "Slicing, Sandwiches"
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: "Potatoes",
-      image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=800",
-      tagline: "Versatile staple vegetable",
-      fullDesc: "Can be boiled, fried, roasted, mashed. Stores well and used in numerous dishes. Good source of carbohydrates, potassium, and vitamin C. Different varieties have different textures for specific uses.",
-      storageTips: "Store in cool, dark, well-ventilated place. Don't store with onions.",
-      shelfLife: "3-5 weeks",
-      keyUses: ["Curries", "Snacks", "Side dishes", "Mashed"],
-      types: [
-        {
-          name: "Russet Potatoes",
-          image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=300",
-          description: "Starchy, fluffy when cooked",
-          bestFor: "Mashing, Baking, Frying"
-        },
-        {
-          name: "Red Potatoes",
-          image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=300",
-          description: "Waxy, hold shape well",
-          bestFor: "Salads, Roasting, Curries"
-        }
-      ]
-    },
-    {
-      id: 6,
-      name: "Carrots",
-      image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
-      tagline: "Sweet root vegetable",
-      fullDesc: "Orange root vegetable rich in beta-carotene. Can be eaten raw, cooked, or in salads. Beta-carotene converts to vitamin A in body, important for vision and immunity. Natural sweetness enhances dishes.",
-      storageTips: "Refrigerate in plastic bag, remove greens first. Can be stored in sand for months.",
-      shelfLife: "3-4 weeks",
-      keyUses: ["Salads", "Curries", "Juices", "Snacks"],
-      types: [
-        {
-          name: "Regular Carrots",
-          image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=300",
-          description: "Standard orange carrots",
-          bestFor: "Cooking, Juices, Salads"
-        },
-        {
-          name: "Baby Carrots",
-          image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=300",
-          description: "Small, tender carrots",
-          bestFor: "Snacking, Salads"
-        }
-      ]
-    },
-    {
-      id: 7,
-      name: "Cauliflower",
-      image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=800",
-      tagline: "Versatile cruciferous vegetable",
-      fullDesc: "White florets that can be roasted, curried, or made into rice substitute. High in fiber. Part of brassica family with cancer-fighting compounds. Low in calories, high in vitamins C and K.",
-      storageTips: "Refrigerate in perforated plastic bag. Store stem-side up to prevent moisture buildup.",
-      shelfLife: "1-2 weeks",
-      keyUses: ["Curries", "Roasted", "Rice substitute", "Snacks"],
-      types: [
-        {
-          name: "White Cauliflower",
-          image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
-          description: "Common white variety",
-          bestFor: "Curries, Roasting"
-        },
-        {
-          name: "Orange Cauliflower",
-          image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
-          description: "Rich in beta-carotene",
-          bestFor: "Colorful dishes"
-        }
-      ]
-    },
-    {
-      id: 8,
-      name: "Cabbage",
-      image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=800",
-      tagline: "Crunchy leafy vegetable",
-      fullDesc: "Green or purple leaves that can be cooked or eaten raw. Good for salads and stir-fries. High in vitamin C and fiber. Fermented cabbage makes sauerkraut and kimchi with probiotic benefits.",
-      storageTips: "Refrigerate in plastic bag. Remove outer leaves if wilted.",
-      shelfLife: "1-2 weeks",
-      keyUses: ["Salads", "Stir-fries", "Curries", "Pickles"],
-      types: [
-        {
-          name: "Green Cabbage",
-          image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
-          description: "Common variety, tightly packed",
-          bestFor: "Coleslaw, Cooking"
-        },
-        {
-          name: "Red Cabbage",
-          image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
-          description: "Purple-red color",
-          bestFor: "Salads, Pickling"
-        }
-      ]
-    }
-  ];
+  // ===== 2. 🧅 ONION FAMILY =====
+  {
+    id: 1101,
+    name: "Onions (Red)",
+    category: "onion",
+    categoryDisplay: "Onion Family",
+    image: "https://images.unsplash.com/photo-1587057706176-2f6c52f30c9b?auto=format&fit=crop&w=800",
+    tagline: "Base for most Indian dishes",
+    fullDesc: "Red onions are the most common onions in Indian cooking. They have a sharp, pungent flavor that mellows and sweetens when cooked. Used as a base for curries, in salads, and as garnish. Rich in quercetin, a powerful antioxidant.",
+    storageTips: "Store in cool, dry, well-ventilated place. Don't store with potatoes.",
+    shelfLife: "2-3 months",
+    season: "All year",
+    keyUses: ["Curry base", "Salads", "Garnish", "Pickles", "Onion pakoda"],
+    nutritionalInfo: "Rich in quercetin, vitamin C, fiber, and prebiotics",
+    healthBenefits: ["Heart health", "Antioxidant", "Digestive health", "Immune support"],
+    cookingTips: "Chill before cutting to reduce tears. Caramelize for sweetness.",
+    types: [
+      {
+        name: "Red Onions",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
+        description: "Sharp flavor, purple-red skin",
+        bestFor: "Raw salads, Curries, Pickles",
+        season: "All year",
+        flavor: "Sharp"
+      },
+      {
+        name: "White Onions",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Milder flavor, white skin",
+        bestFor: "Mexican dishes, Cooking",
+        season: "All year",
+        flavor: "Mild"
+      },
+      {
+        name: "Shallots",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, mild, multi-lobed",
+        bestFor: "South Indian, Thai cuisine",
+        season: "All year",
+        flavor: "Delicate"
+      }
+    ]
+  },
+  {
+    id: 1102,
+    name: "Garlic (Lehsan)",
+    category: "onion",
+    categoryDisplay: "Onion Family",
+    image: "https://images.unsplash.com/photo-1587734195503-904137cec4a6?auto=format&fit=crop&w=800",
+    tagline: "Pungent cloves for flavor base",
+    fullDesc: "Garlic is essential in virtually every cuisine. Each bulb contains multiple cloves with a pungent, spicy flavor that mellows and sweetens when cooked. Used in curry bases, marinades, and for its numerous health benefits.",
+    storageTips: "Store in cool, dry place with air circulation. Keep away from moisture.",
+    shelfLife: "3-5 months",
+    season: "All year",
+    keyUses: ["Curry base", "Marinades", "Ginger garlic paste", "Tempering", "Chutneys"],
+    nutritionalInfo: "Rich in allicin (antibacterial), manganese, vitamin B6, and vitamin C",
+    healthBenefits: ["Immune support", "Heart health", "Antibacterial", "Anti-inflammatory"],
+    cookingTips: "Crush or chop to activate beneficial compounds. Add early for mellow flavor, late for pungent kick.",
+    types: [
+      {
+        name: "Regular Garlic",
+        image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
+        description: "Common white garlic bulbs",
+        bestFor: "Daily cooking, Curries",
+        season: "All year",
+        flavor: "Pungent"
+      },
+      {
+        name: "Elephant Garlic",
+        image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=300",
+        description: "Large cloves, milder flavor",
+        bestFor: "Roasting, Mild dishes",
+        season: "All year",
+        flavor: "Mild"
+      },
+      {
+        name: "Black Garlic",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fermented, sweet, umami",
+        bestFor: "Gourmet dishes",
+        season: "All year",
+        flavor: "Sweet, umami"
+      }
+    ]
+  },
+  {
+    id: 1103,
+    name: "Spring Onions (Hara Piyaz)",
+    category: "onion",
+    categoryDisplay: "Onion Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Young onions with green tops",
+    fullDesc: "Spring onions are immature onions harvested before the bulb fully forms. Both the white bulb and green tops are edible. They have a milder, fresher flavor than mature onions. Used in salads, stir-fries, and as garnish.",
+    storageTips: "Store in refrigerator in plastic bag.",
+    shelfLife: "1 week",
+    season: "Winter",
+    keyUses: ["Salads", "Stir-fries", "Garnish", "Parathas"],
+    nutritionalInfo: "Rich in vitamin K, vitamin C, and fiber",
+    healthBenefits: ["Bone health", "Immune support", "Digestive health"],
+    cookingTips: "Use both white and green parts. Add at the end of cooking for fresh flavor.",
+    types: [
+      {
+        name: "Spring Onions",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "With white bulbs and green tops",
+        bestFor: "Salads, Garnish",
+        season: "Winter",
+        flavor: "Mild"
+      }
+    ]
+  },
+  {
+    id: 1104,
+    name: "Leeks",
+    category: "onion",
+    categoryDisplay: "Onion Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Mild, sweet onion family member",
+    fullDesc: "Leeks look like giant spring onions but have a much milder, sweeter, and more delicate flavor than onions. They're essential in soups (like potato leek soup) and stews. The white and light green parts are edible; dark green parts are tough.",
+    storageTips: "Store in refrigerator in plastic bag.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Soups", "Stews", "Quiches", "Stir-fries"],
+    nutritionalInfo: "Rich in vitamin K, vitamin A, and fiber",
+    healthBenefits: ["Heart health", "Digestive health", "Bone health"],
+    cookingTips: "Slice lengthwise and wash thoroughly (dirt hides between layers).",
+    types: [
+      {
+        name: "Leeks",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Long, thick stalks",
+        bestFor: "Soups, Stews",
+        season: "Winter",
+        flavor: "Mild, sweet"
+      }
+    ]
+  },
 
-  // Get current data based on selected category
-  const getCurrentData = () => {
+  // ===== 3. 🥬 LEAFY GREENS =====
+  {
+    id: 1201,
+    name: "Spinach (Palak)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Iron-rich leafy green",
+    fullDesc: "Spinach is a nutrient-dense leafy green with a mild, slightly sweet flavor. It's incredibly versatile - used in curries (palak paneer), soups, salads, and as a side dish. Rich in iron, calcium, and vitamins. Cooks down significantly.",
+    storageTips: "Store in refrigerator in plastic bag with paper towel to absorb moisture.",
+    shelfLife: "3-5 days",
+    season: "Winter",
+    keyUses: ["Palak Paneer", "Salads", "Soups", "Parathas", "Smoothies"],
+    nutritionalInfo: "Rich in iron, calcium, vitamin K, vitamin A, and folate",
+    healthBenefits: ["Bone health", "Blood health", "Eye health", "Antioxidant rich"],
+    cookingTips: "Wash thoroughly to remove grit. Cooks down to about 1/4 its volume.",
+    types: [
+      {
+        name: "Baby Spinach",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Tender young leaves",
+        bestFor: "Salads, Quick cooking",
+        season: "Winter",
+        texture: "Tender"
+      },
+      {
+        name: "Mature Spinach",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Larger, stronger flavor",
+        bestFor: "Cooking, Curries",
+        season: "Winter",
+        flavor: "Stronger"
+      }
+    ]
+  },
+  {
+    id: 1202,
+    name: "Fenugreek Leaves (Methi)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Slightly bitter, aromatic greens",
+    fullDesc: "Fresh fenugreek leaves, or methi, have a unique slightly bitter taste and distinct aroma. They're used to make methi paratha, methi malai matar, and the famous Gujarati dish 'methi thepla'. Also available dried as kasuri methi.",
+    storageTips: "Store in refrigerator. Use quickly as they wilt fast.",
+    shelfLife: "2-3 days",
+    season: "Winter",
+    keyUses: ["Methi Paratha", "Methi Malai Matar", "Thepla", "Curries", "Dried as Kasuri Methi"],
+    nutritionalInfo: "Rich in iron, calcium, fiber, and vitamin K",
+    healthBenefits: ["Digestive health", "Blood sugar control", "Bone health"],
+    cookingTips: "Remove thick stems. Use salt to help wash and remove bitterness.",
+    types: [
+      {
+        name: "Fresh Methi",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh green leaves",
+        bestFor: "Parathas, Curries",
+        season: "Winter",
+        flavor: "Bitter, aromatic"
+      }
+    ]
+  },
+  {
+    id: 1203,
+    name: "Mustard Greens (Sarson ka Saag)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Pungent greens for sarson ka saag",
+    fullDesc: "Mustard greens are large, slightly peppery leaves that are the star ingredient of the famous Punjabi dish 'sarson ka saag'. They're typically cooked with spinach and bathua, then served with makki di roti and butter.",
+    storageTips: "Store in refrigerator. Wash just before use.",
+    shelfLife: "3-4 days",
+    season: "Winter",
+    keyUses: ["Sarson ka Saag", "Curries"],
+    nutritionalInfo: "Rich in vitamin K, vitamin A, vitamin C, and antioxidants",
+    healthBenefits: ["Bone health", "Immune support", "Heart health"],
+    cookingTips: "Cook low and slow for traditional saag. Freezes well.",
+    types: [
+      {
+        name: "Fresh Sarson",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Large green leaves",
+        bestFor: "Sarson ka Saag",
+        season: "Winter",
+        flavor: "Peppery"
+      }
+    ]
+  },
+  {
+    id: 1204,
+    name: "Cabbage (Band Gobhi)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1605197581314-d2d0b3929a73?auto=format&fit=crop&w=800",
+    tagline: "Crunchy leafy head",
+    fullDesc: "Cabbage is a leafy vegetable that forms a dense head. It has a mild, slightly peppery flavor and crunchy texture. Used in stir-fries, curries, salads, and for making coleslaw. Also fermented to make sauerkraut and kimchi.",
+    storageTips: "Store whole in refrigerator. Cut cabbage should be wrapped.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Stir-fries", "Curries", "Salads", "Coleslaw", "Pickled"],
+    nutritionalInfo: "Rich in vitamin C, vitamin K, and fiber",
+    healthBenefits: ["Digestive health", "Immune support", "Bone health", "Anti-inflammatory"],
+    cookingTips: "Remove tough outer leaves. Shred or chop as needed.",
+    types: [
+      {
+        name: "Green Cabbage",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common variety, tightly packed",
+        bestFor: "Curries, Coleslaw",
+        season: "Winter",
+        texture: "Crunchy"
+      },
+      {
+        name: "Red Cabbage",
+        image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
+        description: "Purple-red color",
+        bestFor: "Salads, Pickling",
+        season: "Winter",
+        color: "Purple"
+      },
+      {
+        name: "Savoy Cabbage",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Crinkled leaves, milder",
+        bestFor: "Stir-fries, Wraps",
+        season: "Winter",
+        texture: "Tender"
+      }
+    ]
+  },
+  {
+    id: 1205,
+    name: "Lettuce (Salad Patta)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Crisp, refreshing salad base",
+    fullDesc: "Lettuce is the most common salad green, with a mild flavor and crisp texture. There are many varieties, from iceberg to romaine. Used primarily in salads, sandwiches, and as a garnish. Has high water content and few calories.",
+    storageTips: "Store in refrigerator, wrapped in paper towel to absorb moisture.",
+    shelfLife: "5-7 days",
+    season: "Winter",
+    keyUses: ["Salads", "Sandwiches", "Wraps", "Garnish"],
+    nutritionalInfo: "High in water, vitamin K, and vitamin A",
+    healthBenefits: ["Hydration", "Bone health", "Eye health"],
+    cookingTips: "Wash and dry thoroughly. Tear rather than cut to prevent browning.",
+    types: [
+      {
+        name: "Iceberg Lettuce",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Crisp head, mild flavor",
+        bestFor: "Burgers, Salads",
+        season: "Winter",
+        texture: "Very crisp"
+      },
+      {
+        name: "Romaine Lettuce",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Long leaves, crunchy",
+        bestFor: "Caesar salad",
+        season: "Winter",
+        texture: "Crunchy"
+      }
+    ]
+  },
+  {
+    id: 1206,
+    name: "Amaranth Leaves (Chaulai)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Nutritious red-green leaves",
+    fullDesc: "Amaranth leaves, also known as chaulai or chowlai, are leafy greens with a mild, slightly earthy flavor. They can be green or red and are highly nutritious. Used in stir-fries, curries, and dal. Popular during monsoon season.",
+    storageTips: "Store in refrigerator. Use quickly.",
+    shelfLife: "2-3 days",
+    season: "Monsoon",
+    keyUses: ["Stir-fries", "Curries", "Dal", "Parathas"],
+    nutritionalInfo: "Rich in iron, calcium, vitamin C, and protein",
+    healthBenefits: ["Blood health", "Bone health", "Immune support"],
+    cookingTips: "Cook like spinach. The red variety adds color to dishes.",
+    types: [
+      {
+        name: "Green Amaranth",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Green leaves",
+        bestFor: "Curries, Dal",
+        season: "Monsoon",
+        flavor: "Mild"
+      },
+      {
+        name: "Red Amaranth",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Red-tinged leaves",
+        bestFor: "Stir-fries, Colorful dishes",
+        season: "Monsoon",
+        color: "Red"
+      }
+    ]
+  },
+  {
+    id: 1207,
+    name: "Bathua",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Wild leafy green, winter special",
+    fullDesc: "Bathua is a leafy green that grows wild in winter and is highly nutritious. It's often mixed with sarson (mustard greens) to make sarson ka saag. Also used in raita, parathas, and as a side dish. Has a slightly salty, earthy flavor.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "2-3 days",
+    season: "Winter",
+    keyUses: ["Sarson ka Saag", "Raita", "Parathas", "Curries"],
+    nutritionalInfo: "Rich in iron, calcium, vitamin A, and vitamin C",
+    healthBenefits: ["Blood health", "Bone health", "Eye health", "Immune support"],
+    cookingTips: "Wash thoroughly. Can be used like spinach.",
+    types: [
+      {
+        name: "Bathua",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh bathua leaves",
+        bestFor: "Saag, Raita",
+        season: "Winter",
+        flavor: "Earthy, salty"
+      }
+    ]
+  },
+  {
+    id: 1208,
+    name: "Dill Leaves (Sowa)",
+    category: "leafy",
+    categoryDisplay: "Leafy Greens",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+    tagline: "Feathery, aromatic herb",
+    fullDesc: "Fresh dill leaves, or sowa, have a distinct sweet, slightly tangy flavor. Used in small amounts in vegetable dishes, curries, and raita. Popular in Punjabi cuisine for dishes like aloo sowa. Also used in pickling.",
+    storageTips: "Wrap in damp paper towel, store in refrigerator.",
+    shelfLife: "3-5 days",
+    season: "Winter",
+    keyUses: ["Aloo Sowa", "Raita", "Vegetable dishes", "Pickling"],
+    nutritionalInfo: "Rich in vitamin C, manganese, and antioxidants",
+    healthBenefits: ["Digestive health", "Antioxidant", "Immune support"],
+    cookingTips: "Add at the end of cooking to preserve flavor.",
+    types: [
+      {
+        name: "Fresh Dill",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh dill leaves",
+        bestFor: "Cooking, Garnish",
+        season: "Winter",
+        flavor: "Sweet, tangy"
+      }
+    ]
+  },
+
+  // ===== 4. 🥦 CRUCIFEROUS =====
+  {
+    id: 1301,
+    name: "Cauliflower (Phool Gobhi)",
+    category: "cruciferous",
+    categoryDisplay: "Cruciferous",
+    image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=800",
+    tagline: "Versatile white florets",
+    fullDesc: "Cauliflower is a cruciferous vegetable with compact white florets surrounded by green leaves. It's incredibly versatile - can be roasted, curried, made into rice substitute, or used in snacks like gobi manchurian. Mild flavor that absorbs spices well.",
+    storageTips: "Refrigerate in perforated plastic bag. Store stem-side up to prevent moisture buildup.",
+    shelfLife: "1-2 weeks",
+    season: "Winter",
+    keyUses: ["Gobi Matar", "Aloo Gobi", "Gobi Manchurian", "Roasted", "Cauliflower rice"],
+    nutritionalInfo: "Rich in vitamin C, vitamin K, fiber, and antioxidants",
+    healthBenefits: ["Cancer-fighting", "Anti-inflammatory", "Heart health", "Digestive health"],
+    cookingTips: "Cut into uniform florets for even cooking. Leaves are also edible.",
+    types: [
+      {
+        name: "White Cauliflower",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
+        description: "Common white variety",
+        bestFor: "Curries, Roasting",
+        season: "Winter",
+        color: "White"
+      },
+      {
+        name: "Orange Cauliflower",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Rich in beta-carotene",
+        bestFor: "Colorful dishes",
+        season: "Winter",
+        color: "Orange"
+      },
+      {
+        name: "Green Cauliflower",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Green variety, sweeter",
+        bestFor: "Salads, Roasting",
+        season: "Winter",
+        color: "Green"
+      },
+      {
+        name: "Purple Cauliflower",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Anthocyanin-rich",
+        bestFor: "Colorful dishes",
+        season: "Winter",
+        color: "Purple"
+      }
+    ]
+  },
+  {
+    id: 1302,
+    name: "Broccoli",
+    category: "cruciferous",
+    categoryDisplay: "Cruciferous",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Tree-like green vegetable",
+    fullDesc: "Broccoli is a nutrient powerhouse with green tree-like florets and thick stalks. It has a mild, slightly earthy flavor. Popular in Indo-Chinese dishes, stir-fries, and as a healthy side. Both florets and stalks are edible.",
+    storageTips: "Store in refrigerator in perforated plastic bag.",
+    shelfLife: "5-7 days",
+    season: "Winter",
+    keyUses: ["Stir-fries", "Indo-Chinese", "Salads", "Roasted", "Soups"],
+    nutritionalInfo: "Very high in vitamin C, vitamin K, fiber, and sulforaphane",
+    healthBenefits: ["Cancer-fighting", "Immune support", "Bone health", "Heart health"],
+    cookingTips: "Peel tough outer skin from stalks. Don't overcook to retain nutrients.",
+    types: [
+      {
+        name: "Broccoli",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common green broccoli",
+        bestFor: "All purposes",
+        season: "Winter",
+        texture: "Crunchy"
+      }
+    ]
+  },
+
+  // ===== 5. 🎃 GOURD FAMILY =====
+  {
+    id: 1401,
+    name: "Pumpkin (Kaddu)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, orange winter squash",
+    fullDesc: "Pumpkin is a sweet, orange winter squash with a rich, earthy flavor. Used in both sweet and savory dishes - from pumpkin curry and sabzi to pumpkin halwa and kheer. Packed with beta-carotene. The red variety is popular in North India.",
+    storageTips: "Store whole in cool, dry place. Refrigerate after cutting.",
+    shelfLife: "1-3 months (whole)",
+    season: "Winter",
+    keyUses: ["Kaddu ki Sabzi", "Pumpkin Curry", "Halwa", "Soup", "Kheer"],
+    nutritionalInfo: "Very high in vitamin A, fiber, vitamin C, and potassium",
+    healthBenefits: ["Eye health", "Immune support", "Heart health", "Skin health"],
+    cookingTips: "Peel and cube for sabzi. Roast for enhanced sweetness.",
+    types: [
+      {
+        name: "Red Pumpkin (Lal Kaddu)",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Red-skinned, common in India",
+        bestFor: "Curries, Sabzi",
+        season: "Winter",
+        color: "Red-orange"
+      },
+      {
+        name: "White Pumpkin (Petha)",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "White flesh, for sweets",
+        bestFor: "Petha sweet, Curries",
+        season: "Winter",
+        color: "White"
+      }
+    ]
+  },
+  {
+    id: 1402,
+    name: "Bottle Gourd (Lauki/Doodhi)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Mild, watery summer gourd",
+    fullDesc: "Bottle gourd, known as lauki or doodhi, is a long, pale green vegetable with a mild, slightly sweet flavor and high water content. It's light, easy to digest, and used in curries, raita, halwa, and kofta. Very popular in summer.",
+    storageTips: "Store in cool place. Refrigerate after cutting.",
+    shelfLife: "1-2 weeks",
+    season: "Summer",
+    keyUses: ["Lauki ki Sabzi", "Kofta", "Raita", "Halwa", "Juice"],
+    nutritionalInfo: "High in water, vitamin C, and fiber, low in calories",
+    healthBenefits: ["Hydration", "Digestive health", "Weight loss", "Cooling"],
+    cookingTips: "Peel if skin is thick. Remove seeds if large. Grate for kofta.",
+    types: [
+      {
+        name: "Bottle Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Long, pale green",
+        bestFor: "Sabzi, Kofta",
+        season: "Summer",
+        texture: "Soft when cooked"
+      }
+    ]
+  },
+  {
+    id: 1403,
+    name: "Bitter Gourd (Karela)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Bitter, acquired taste",
+    fullDesc: "Bitter gourd, or karela, lives up to its name with a distinct bitter flavor that's an acquired taste. It's highly prized for its medicinal properties, especially for blood sugar control. Usually stuffed with spices and fried, or used in curries.",
+    storageTips: "Store in refrigerator in plastic bag.",
+    shelfLife: "1 week",
+    season: "Summer",
+    keyUses: ["Stuffed Karela", "Karela Curry", "Chips", "Juice"],
+    nutritionalInfo: "Rich in vitamin C, iron, magnesium, and antioxidants",
+    healthBenefits: ["Blood sugar control", "Digestive health", "Liver health", "Blood purifier"],
+    cookingTips: "Scrape ridges, slice, and salt to reduce bitterness. Blanch before cooking.",
+    types: [
+      {
+        name: "Indian Karela",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, spiny, intense bitter",
+        bestFor: "Stuffed, Curry",
+        season: "Summer",
+        flavor: "Very bitter"
+      },
+      {
+        name: "Chinese Bitter Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Larger, smoother, milder",
+        bestFor: "Stir-fries",
+        season: "Summer",
+        flavor: "Milder"
+      }
+    ]
+  },
+  {
+    id: 1404,
+    name: "Ridge Gourd (Tori/Turai)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Ridged green summer vegetable",
+    fullDesc: "Ridge gourd, known as tori or turai, is a long green vegetable with prominent ridges. It has a mild, slightly sweet flavor and becomes soft when cooked. Used in simple stir-fries and curries. The sponge gourd (without ridges) is a close relative.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "1 week",
+    season: "Summer",
+    keyUses: ["Tori ki Sabzi", "Curries", "Chutney"],
+    nutritionalInfo: "High in fiber, vitamin C, and water content",
+    healthBenefits: ["Digestive health", "Hydration", "Weight management"],
+    cookingTips: "Peel ridges partially. Young ones are tender and don't need peeling.",
+    types: [
+      {
+        name: "Ridge Gourd (Tori)",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "With ridges",
+        bestFor: "Sabzi",
+        season: "Summer",
+        texture: "Soft when cooked"
+      }
+    ]
+  },
+  {
+    id: 1405,
+    name: "Sponge Gourd (Nenua/Ghia)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Smooth-skinned summer gourd",
+    fullDesc: "Sponge gourd, also known as nenua, ghia, or smooth luffa, is similar to ridge gourd but without ridges. It has a mild flavor and soft texture when cooked. Used in simple stir-fries and curries. Popular in North Indian and Bengali cuisine.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "1 week",
+    season: "Summer",
+    keyUses: ["Sabzi", "Curries", "Chokha"],
+    nutritionalInfo: "High in fiber, vitamin C, and water",
+    healthBenefits: ["Digestive health", "Hydration"],
+    cookingTips: "Peel if skin is tough. Cooks quickly.",
+    types: [
+      {
+        name: "Sponge Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Smooth skin, no ridges",
+        bestFor: "Sabzi",
+        season: "Summer",
+        texture: "Soft"
+      }
+    ]
+  },
+  {
+    id: 1406,
+    name: "Snake Gourd (Chachinda)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Long, curly gourd",
+    fullDesc: "Snake gourd is a long, thin gourd that can grow up to several feet. It has a mild, slightly sweet flavor and is used in South Indian and Bengali cuisine. Often used in curries, stir-fries, and chutneys.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "1 week",
+    season: "Summer",
+    keyUses: ["Curries", "Stir-fries", "Chutney"],
+    nutritionalInfo: "Low in calories, high in fiber and water",
+    healthBenefits: ["Digestive health", "Hydration"],
+    cookingTips: "Peel if skin is tough. Remove seeds if large.",
+    types: [
+      {
+        name: "Snake Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Long, curly shape",
+        bestFor: "Curries",
+        season: "Summer",
+        texture: "Soft"
+      }
+    ]
+  },
+  {
+    id: 1407,
+    name: "Ash Gourd (Petha)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Large, white-fleshed winter gourd",
+    fullDesc: "Ash gourd, also known as winter melon or petha, is a large gourd with white flesh and a mild, refreshing taste. It's used to make the famous Agra ka petha sweet, as well as in curries and juices. Has cooling properties.",
+    storageTips: "Store whole in cool place. Refrigerate after cutting.",
+    shelfLife: "1-3 months (whole)",
+    season: "Winter",
+    keyUses: ["Petha sweet", "Curries", "Juice", "Murabba"],
+    nutritionalInfo: "Low in calories, high in water and vitamin C",
+    healthBenefits: ["Cooling", "Digestive health", "Hydration"],
+    cookingTips: "Remove skin and seeds. Cube for cooking.",
+    types: [
+      {
+        name: "Ash Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Large, white flesh",
+        bestFor: "Sweets, Curries",
+        season: "Winter",
+        texture: "Firm"
+      }
+    ]
+  },
+  {
+    id: 1408,
+    name: "Ivy Gourd (Kundru/Tindora)",
+    category: "gourd",
+    categoryDisplay: "Gourd Family",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Small, cucumber-like gourd",
+    fullDesc: "Ivy gourd, known as kundru, tendli, or tindora, is a small, cucumber-like vegetable popular in Indian cuisine. It has a mild, slightly tangy flavor and stays crunchy when cooked. Used in stir-fries, curries, and as a side dish.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "1 week",
+    season: "Monsoon",
+    keyUses: ["Kundri ki Sabzi", "Stir-fry", "Curries", "Pickle"],
+    nutritionalInfo: "Rich in fiber, vitamin A, and antioxidants",
+    healthBenefits: ["Digestive health", "Blood sugar control"],
+    cookingTips: "Slice lengthwise or chop. Stays crunchy even after cooking.",
+    types: [
+      {
+        name: "Ivy Gourd",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, green, striped",
+        bestFor: "Sabzi, Pickle",
+        season: "Monsoon",
+        texture: "Crunchy"
+      }
+    ]
+  },
+
+  // ===== 6. 🍆 FRUIT VEGETABLES =====
+  {
+    id: 1501,
+    name: "Tomatoes",
+    category: "fruitveg",
+    categoryDisplay: "Fruit Vegetables",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
+    tagline: "Tangy base for gravies",
+    fullDesc: "Tomatoes are technically fruits but used as vegetables. They're the foundation of countless Indian gravies, adding tanginess, color, and body. Rich in lycopene, an antioxidant that's better absorbed when cooked. Available in many varieties.",
+    storageTips: "Store at room temperature until ripe, then refrigerate. Never refrigerate unripe tomatoes.",
+    shelfLife: "1-2 weeks",
+    season: "All year",
+    keyUses: ["Curry base", "Salads", "Sauces", "Chutneys", "Soup"],
+    nutritionalInfo: "Rich in lycopene, vitamin C, vitamin K, and potassium",
+    healthBenefits: ["Heart health", "Cancer prevention", "Eye health", "Skin health"],
+    cookingTips: "Add early in cooking for softened texture, late for fresh chunks.",
+    types: [
+      {
+        name: "Roma Tomatoes",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Plum tomatoes, less seeds",
+        bestFor: "Sauces, Paste, Cooking",
+        season: "All year",
+        texture: "Meaty"
+      },
+      {
+        name: "Cherry Tomatoes",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, sweet tomatoes",
+        bestFor: "Salads, Garnish",
+        season: "All year",
+        flavor: "Sweet"
+      },
+      {
+        name: "Beefsteak Tomatoes",
+        image: "https://images.unsplash.com/photo-1589923186741-b7d59d6b2c4c?auto=format&fit=crop&w=300",
+        description: "Large, juicy tomatoes",
+        bestFor: "Slicing, Sandwiches",
+        season: "Summer",
+        texture: "Juicy"
+      },
+      {
+        name: "Desi Tomatoes",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Indian variety, tangy",
+        bestFor: "Indian cooking",
+        season: "Winter",
+        flavor: "Tangy"
+      }
+    ]
+  },
+  {
+    id: 1502,
+    name: "Eggplant (Baingan/Brinjal)",
+    category: "fruitveg",
+    categoryDisplay: "Fruit Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Meaty purple vegetable",
+    fullDesc: "Eggplant, or baingan, is a versatile vegetable with a meaty texture that absorbs flavors beautifully. Used in baingan bharta, stuffed eggplant, curries, and pakoras. Available in various shapes, sizes, and colors.",
+    storageTips: "Store in cool place, use within a few days. Refrigerate in summer.",
+    shelfLife: "3-5 days",
+    season: "All year",
+    keyUses: ["Baingan Bharta", "Stuffed Baingan", "Curries", "Pakoras", "Parmigiana"],
+    nutritionalInfo: "Rich in fiber, antioxidants (nasunin), and potassium",
+    healthBenefits: ["Heart health", "Brain health", "Digestive health", "Weight management"],
+    cookingTips: "Salt and rest to remove bitterness. Roast for smoky flavor in bharta.",
+    types: [
+      {
+        name: "Purple Brinjal",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common purple variety",
+        bestFor: "Curries, Bharta",
+        season: "All year",
+        color: "Purple"
+      },
+      {
+        name: "Green Brinjal",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Green, milder flavor",
+        bestFor: "Stuffed, Curries",
+        season: "All year",
+        flavor: "Mild"
+      },
+      {
+        name: "Small Brinjals",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, round or oblong",
+        bestFor: "Stuffed, Curries",
+        season: "All year",
+        texture: "Tender"
+      },
+      {
+        name: "White Eggplant",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "White skin, less bitter",
+        bestFor: "Baking, Roasting",
+        season: "Summer",
+        flavor: "Mild"
+      }
+    ]
+  },
+  {
+    id: 1503,
+    name: "Bell Peppers (Shimla Mirch)",
+    category: "fruitveg",
+    categoryDisplay: "Fruit Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, crunchy capsicum",
+    fullDesc: "Bell peppers, or capsicum, are sweet, crunchy peppers with no heat. Available in green, red, yellow, and orange. Used in stir-fries, curries, stuffed dishes, and salads. Red peppers are just ripe green peppers, sweeter and more nutritious.",
+    storageTips: "Store in refrigerator in plastic bag.",
+    shelfLife: "1-2 weeks",
+    season: "All year",
+    keyUses: ["Stir-fries", "Curries", "Stuffed", "Salads", "Pizza topping"],
+    nutritionalInfo: "Very high in vitamin C, vitamin A, and antioxidants",
+    healthBenefits: ["Immune support", "Eye health", "Skin health", "Antioxidant rich"],
+    cookingTips: "Can be eaten raw or cooked. Roast for smoky flavor.",
+    types: [
+      {
+        name: "Green Bell Pepper",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Unripe, slightly bitter",
+        bestFor: "Cooking, Stir-fries",
+        season: "All year",
+        flavor: "Slightly bitter"
+      },
+      {
+        name: "Red Bell Pepper",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Ripe, sweet",
+        bestFor: "Salads, Roasted",
+        season: "All year",
+        flavor: "Sweet"
+      },
+      {
+        name: "Yellow Bell Pepper",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Sweet, fruity",
+        bestFor: "Colorful dishes",
+        season: "All year",
+        flavor: "Sweet"
+      }
+    ]
+  },
+
+  // ===== 7. 🫘 LEGUMES (FRESH) =====
+  {
+    id: 1601,
+    name: "Fresh Peas (Hara Matar)",
+    category: "legumes",
+    categoryDisplay: "Fresh Legumes",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, tender spring peas",
+    fullDesc: "Fresh green peas are sweet, tender, and a winter favorite in India. They're used in countless dishes - matar paneer, aloo matar, matar pulao, and as a side dish. Frozen peas are a good alternative when fresh aren't available.",
+    storageTips: "Refrigerate in pod. Shell just before use.",
+    shelfLife: "3-5 days (in pod)",
+    season: "Winter",
+    keyUses: ["Matar Paneer", "Aloo Matar", "Pulao", "Samosa filling", "Side dish"],
+    nutritionalInfo: "Rich in protein, fiber, vitamins A, C, K, and iron",
+    healthBenefits: ["Digestive health", "Heart health", "Immune support"],
+    cookingTips: "Add towards end of cooking to preserve color and texture.",
+    types: [
+      {
+        name: "Fresh Garden Peas",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh in pod",
+        bestFor: "All dishes",
+        season: "Winter",
+        flavor: "Sweet"
+      }
+    ]
+  },
+  {
+    id: 1602,
+    name: "Green Beans (Frans Bean)",
+    category: "legumes",
+    categoryDisplay: "Fresh Legumes",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Crunchy, tender green pods",
+    fullDesc: "Green beans are long, slender pods with tiny seeds inside. They have a crisp texture and mild, slightly sweet flavor. Used in stir-fries, curries, and as a side dish. Also known as French beans or string beans.",
+    storageTips: "Store in refrigerator in plastic bag.",
+    shelfLife: "1 week",
+    season: "All year",
+    keyUses: ["Stir-fries", "Curries", "Salads", "Side dish"],
+    nutritionalInfo: "Rich in vitamin C, vitamin K, fiber, and folate",
+    healthBenefits: ["Bone health", "Digestive health", "Heart health"],
+    cookingTips: "Trim ends before cooking. Blanch for salads.",
+    types: [
+      {
+        name: "Green Beans",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Fresh green beans",
+        bestFor: "Sabzi, Stir-fry",
+        season: "All year",
+        texture: "Crunchy"
+      }
+    ]
+  },
+  {
+    id: 1603,
+    name: "Cluster Beans (Gawar Phali)",
+    category: "legumes",
+    categoryDisplay: "Fresh Legumes",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Flat, slightly bitter beans",
+    fullDesc: "Cluster beans, or gawar phali, are flat, long beans with a unique slightly bitter flavor. They're popular in North Indian and Gujarati cuisine. Used in stir-fries and curries. They retain crunchiness even when cooked.",
+    storageTips: "Store in refrigerator.",
+    shelfLife: "1 week",
+    season: "Summer",
+    keyUses: ["Gawar ki Sabzi", "Curries", "Stir-fry"],
+    nutritionalInfo: "Rich in fiber, protein, and vitamins",
+    healthBenefits: ["Digestive health", "Blood sugar control"],
+    cookingTips: "Trim ends and chop. Cooks quickly, retains crunch.",
+    types: [
+      {
+        name: "Cluster Beans",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Flat, long beans",
+        bestFor: "Sabzi",
+        season: "Summer",
+        flavor: "Slightly bitter"
+      }
+    ]
+  },
+
+  // ===== 8. 🍄 OTHER VEGETABLES =====
+  {
+    id: 1701,
+    name: "Okra (Bhindi)",
+    category: "other",
+    categoryDisplay: "Other Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Slender green pods, bhindi masala",
+    fullDesc: "Okra, or bhindi, is a green pod with a unique texture - slightly crunchy when cooked with a mild, grassy flavor. When cut, it releases a mucilaginous (slimy) substance that thickens curries. Essential for bhindi masala and okra curry.",
+    storageTips: "Store dry in paper bag in refrigerator. Moisture makes it slimy.",
+    shelfLife: "2-3 days",
+    season: "Summer",
+    keyUses: ["Bhindi Masala", "Curries", "Stir-fry", "Fried okra"],
+    nutritionalInfo: "Rich in vitamin C, vitamin K, fiber, and folate",
+    healthBenefits: ["Digestive health", "Blood sugar control", "Heart health"],
+    cookingTips: "Wash and dry thoroughly before cutting. Cook quickly to reduce sliminess.",
+    types: [
+      {
+        name: "Fresh Okra",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Tender green pods",
+        bestFor: "Bhindi Masala",
+        season: "Summer",
+        texture: "Crunchy"
+      }
+    ]
+  },
+  {
+    id: 1702,
+    name: "Mushrooms",
+    category: "other",
+    categoryDisplay: "Other Vegetables",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Earthy fungi, meaty texture",
+    fullDesc: "Mushrooms are fungi, not plants, with a unique earthy flavor and meaty texture. They're a great source of umami and popular in Indo-Chinese dishes, curries, and stir-fries. Button mushrooms are most common, but cremini, shiitake, and oyster are also available.",
+    storageTips: "Store in paper bag in refrigerator. Don't wash until ready to use.",
+    shelfLife: "5-7 days",
+    season: "All year (cultivated)",
+    keyUses: ["Mushroom Masala", "Stir-fries", "Indo-Chinese", "Soup", "Curries"],
+    nutritionalInfo: "Rich in B vitamins, selenium, copper, and antioxidants",
+    healthBenefits: ["Immune support", "Heart health", "Brain health"],
+    cookingTips: "Clean with damp paper towel, don't soak. Cook until liquid releases and evaporates.",
+    types: [
+      {
+        name: "Button Mushrooms",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, white, mild",
+        bestFor: "All dishes",
+        season: "All year",
+        texture: "Firm"
+      },
+      {
+        name: "Cremini Mushrooms",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Brown, more flavor",
+        bestFor: "Curries, Stir-fries",
+        season: "All year",
+        flavor: "Earthy"
+      }
+    ]
+  }
+];
+
+ // Update getCurrentData
+const getCurrentData = () => {
   switch (selectedCategory) {
     case 'basics': return kitchenBasicsData;
     case 'spices': return getFilteredSpices();
-    case 'staples': return getFilteredStaples();  // Update this
-    case 'vegetables': return dailyVegetablesData;
+    case 'staples': return getFilteredStaples();
+    case 'vegetables': return getFilteredVegetables();  // Updated
     default: return kitchenBasicsData;
   }
 };
+
   const handleItemSelect = (item) => {
     setSelectedItem(item);
     setShowDetailPanel(true);
@@ -4293,6 +5381,65 @@ const staplesData = [
       onClick={() => setStaplesCategory('seeds')}
     >
       Seeds (8)
+    </button>
+  </div>
+)}
+{/* Vegetables Filter Buttons */}
+{selectedCategory === 'vegetables' && (
+  <div className="vegetables-filter-buttons">
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'all' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('all')}
+    >
+      All Vegetables (52)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'root' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('root')}
+    >
+      Root Veg (10)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'onion' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('onion')}
+    >
+      Onion Family (5)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'leafy' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('leafy')}
+    >
+      Leafy Greens (8)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'cruciferous' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('cruciferous')}
+    >
+      Cruciferous (5)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'gourd' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('gourd')}
+    >
+      Gourd Family (8)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'fruitveg' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('fruitveg')}
+    >
+      Fruit Veg (6)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'legumes' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('legumes')}
+    >
+      Fresh Legumes (5)
+    </button>
+    <button 
+      className={`vegetables-filter-btn ${vegetablesCategory === 'other' ? 'active' : ''}`}
+      onClick={() => setVegetablesCategory('other')}
+    >
+      Other Veg (5)
     </button>
   </div>
 )}
