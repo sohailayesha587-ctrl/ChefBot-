@@ -860,3 +860,184 @@ html, body, #root {
 .pbp-modal-left::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+.back-home-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-home-btn:hover {
+  background-color: #397d7c;
+  transform: scale(1.05);
+}
+/* ===== SPICE FILTER BUTTONS ===== */
+.spice-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.spice-filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  background: white;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.spice-filter-btn:hover {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 74, 75, 0.2);
+}
+
+.spice-filter-btn.active {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(40, 74, 75, 0.3);
+}
+
+/* Responsive for filter buttons */
+@media (max-width: 768px) {
+  .spice-filter-buttons {
+    justify-content: center;
+    padding: 12px;
+  }
+  
+  .spice-filter-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spice-filter-buttons {
+    gap: 8px;
+  }
+  
+  .spice-filter-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+/* Features Grid for Spices */
+.pbp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pbp-feature-item {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  color: #0369a1;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Mistakes Grid for Spices */
+.pbp-mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pbp-mistake-item {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  color: #dc2626;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pbp-features-grid,
+  .pbp-mistakes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Staples Filter Buttons */
+.staples-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.staples-filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  background: white;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.staples-filter-btn:hover {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
+  transform: translateY(-2px);
+}
+
+.staples-filter-btn.active {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .staples-filter-buttons {
+    justify-content: center;
+  }
+  
+  .staples-filter-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}

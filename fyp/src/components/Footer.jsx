@@ -7,7 +7,7 @@ function Footer() {
   console.log("🟢 FOOTER DEBUG: Current Path =", currentPath);
 
   // PAGES WHERE NO FOOTER SHOULD SHOW
-  const noFooterPages = ['/login', '/login-page', '/Alarm', '/alarm'];
+  const noFooterPages = ['/login', '/login-page', '/urdu-login','/Alarm', '/alarm'];
   
   if (noFooterPages.includes(currentPath)) {
     console.log("🟡 FOOTER: Hiding footer for", currentPath);

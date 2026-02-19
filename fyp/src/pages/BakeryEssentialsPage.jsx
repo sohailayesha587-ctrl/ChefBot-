@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './BakeryEssentialsPage.css';
-
+import { useNavigate } from 'react-router-dom';
 const BakeryEssentialsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('tools');
   const [selectedItem, setSelectedItem] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
+  const navigate = useNavigate();
 
   // FUNCTIONS
   const handleItemSelect = (item) => {
@@ -22,13 +23,12 @@ const BakeryEssentialsPage = () => {
     {
       id: 1,
       name: "Stand Mixer",
-      image: "https://images.unsplash.com/photo-1581235720854-7431a2d6d7b2?auto=format&fit=crop&w=800",
+      image: "StandMixer.png",
       tagline: "The workhorse of any bakery",
       fullDesc: "Essential for mixing doughs, batters, and creams. A powerful stand mixer with various attachments (dough hook, paddle, whisk) saves time and ensures consistent results in baking.",
       keyFeatures: ["Multiple speed settings", "Various attachments", "Powerful motor", "Tilt-head design", "Timer function"],
       properUsage: "Start on low speed, gradually increase, scrape bowl regularly, don't overload",
       commonMistakes: ["Overmixing dough", "Using wrong attachment", "Overloading capacity", "Not scraping bowl"],
-      essentiality: "Essential",
       types: [
         {
           name: "Professional Series",
@@ -51,13 +51,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 2,
       name: "Digital Kitchen Scale",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "KitchenScales.png",
       tagline: "Precision measurement for perfect baking",
       fullDesc: "Crucial for accurate baking where measurements must be precise. Digital scales provide exact weights in grams or ounces, essential for consistent results.",
       keyFeatures: ["1g precision", "Tare function", "Multiple units", "Auto-off", "Large display"],
       properUsage: "Place bowl, press tare, add ingredient, read weight",
       commonMistakes: ["Not using tare function", "Uneven surface", "Ignoring battery level"],
-      essentiality: "Essential",
+     
       types: [
         {
           name: "Precision Scale",
@@ -80,13 +80,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 3,
       name: "Oven Thermometer",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "OvenThermometer.png",
       tagline: "Accurate oven temperature reading",
       fullDesc: "Most ovens have inaccurate temperature displays. An oven thermometer ensures you're baking at the right temperature for perfect results every time.",
       keyFeatures: ["Easy to read", "Heat resistant", "Hangs from rack", "Wide range"],
       properUsage: "Hang in center of oven, preheat, check temperature",
       commonMistakes: ["Placing near door", "Not preheating fully", "Ignoring hot spots"],
-      essentiality: "Important",
+    
       types: [
         {
           name: "Analog Oven Thermometer",
@@ -109,13 +109,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 4,
       name: "Silicone Baking Mats",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "SiliconBakingMats.png",
       tagline: "Non-stick, reusable baking surface",
       fullDesc: "Replace parchment paper with these reusable mats. Provide even baking, prevent sticking, and are easy to clean.",
       keyFeatures: ["Non-stick surface", "Heat resistant", "Easy to clean", "Reusable"],
       properUsage: "Place on baking sheet, bake, cool, wipe clean",
       commonMistakes: ["Cutting on mat", "Using sharp utensils", "High heat beyond limit"],
-      essentiality: "Useful",
+    
       types: [
         {
           name: "Half Sheet Size",
@@ -138,13 +138,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 5,
       name: "Bench Scraper",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "BenchScrappers.png",
       tagline: "Multi-purpose dough tool",
       fullDesc: "Essential for working with dough. Used for cutting, scraping, cleaning surfaces, and portioning dough.",
       keyFeatures: ["Stainless steel blade", "Easy grip handle", "Measurement markings", "Durable"],
       properUsage: "Cut dough, scrape surfaces, portion, clean counters",
       commonMistakes: ["Using as hammer", "Cutting frozen items", "Not cleaning properly"],
-      essentiality: "Important",
+
       types: [
         {
           name: "Stainless Steel Scraper",
@@ -167,13 +167,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 6,
       name: "Pastry Blender",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "PastryBlenders.png",
       tagline: "Perfect for cutting fat into flour",
       fullDesc: "Essential tool for making pie crusts, biscuits, and scones. Cuts cold butter into flour without melting it.",
       keyFeatures: ["Multiple blades", "Comfortable handle", "Easy to clean", "Durable"],
       properUsage: "Press into flour-butter mixture, use rocking motion",
       commonMistakes: ["Overworking dough", "Using warm butter", "Washing in dishwasher"],
-      essentiality: "Useful",
+     
       types: [
         {
           name: "Wire Pastry Blender",
@@ -196,13 +196,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 7,
       name: "Cake Turntable",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CakeTurnTable.png",
       tagline: "Essential for cake decorating",
       fullDesc: "Rotating platform that makes cake decorating much easier. Allows smooth frosting application and even decorating.",
       keyFeatures: ["Smooth rotation", "Non-slip surface", "Adjustable height", "Sturdy base"],
       properUsage: "Place cake on turntable, rotate while frosting",
       commonMistakes: ["Overloading weight", "Not cleaning properly", "Forcing rotation"],
-      essentiality: "Specialized",
+    
       types: [
         {
           name: "Plastic Turntable",
@@ -225,13 +225,13 @@ const BakeryEssentialsPage = () => {
     {
       id: 8,
       name: "Dough Proofing Baskets",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "DoughBaskets.png",
       tagline: "For perfect bread shaping and proofing",
       fullDesc: "Also called bannetons. Used for the final proof of bread dough, giving it shape and beautiful patterns.",
       keyFeatures: ["Natural materials", "Creates patterns", "Allows air circulation", "Traditional"],
       properUsage: "Flour heavily, place shaped dough, cover, proof",
       commonMistakes: ["Not enough flour", "Washing with soap", "Storing wet"],
-      essentiality: "Specialized",
+    
       types: [
         {
           name: "Rattan Banneton",
@@ -258,7 +258,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 1,
       name: "Creaming Method",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CreamingMethod.png",
       tagline: "Foundation of cake making",
       fullDesc: "Beating butter and sugar together to incorporate air, creating light and fluffy baked goods. Essential for cakes, cookies, and some breads.",
       steps: [
@@ -275,7 +275,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 2,
       name: "Folding Technique",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "FoldingTechnique.png",
       tagline: "Gentle mixing for delicate batters",
       fullDesc: "Gentle mixing method used to combine light, airy ingredients with heavier mixtures without deflating the air bubbles.",
       steps: [
@@ -292,7 +292,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 3,
       name: "Kneading Dough",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "KneadingDough.png",
       tagline: "Developing gluten structure",
       fullDesc: "Working dough to develop gluten, which gives bread its structure and chewiness. Can be done by hand or with a mixer.",
       steps: [
@@ -309,7 +309,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 4,
       name: "Blind Baking",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "BlindBaking.png",
       tagline: "Pre-baking pie crusts",
       fullDesc: "Baking a pie crust before adding filling to prevent sogginess. Essential for custard pies and quiches.",
       steps: [
@@ -326,7 +326,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 5,
       name: "Tempering Chocolate",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "TempChocolate.png",
       tagline: "Perfect shiny chocolate",
       fullDesc: "Process of melting and cooling chocolate to specific temperatures to stabilize cocoa butter crystals, resulting in shiny, snap-able chocolate.",
       steps: [
@@ -343,7 +343,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 6,
       name: "Sugar Stages",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "SugarStages.png",
       tagline: "Cooking sugar to perfect consistency",
       fullDesc: "Heating sugar syrup to specific temperatures creates different textures for various confections.",
       stages: [
@@ -362,7 +362,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 7,
       name: "Lamination",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "Lamination.png",
       tagline: "Creating flaky pastry layers",
       fullDesc: "Technique of folding butter into dough multiple times to create hundreds of thin layers that puff up during baking.",
       steps: [
@@ -379,7 +379,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 8,
       name: "Egg Wash Application",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "EggWash.png",
       tagline: "Golden, shiny baked goods",
       fullDesc: "Brushing dough with egg wash before baking creates beautiful golden color and shiny finish.",
       methods: [
@@ -399,7 +399,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 1,
       name: "Flour Types",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "FlourTypes.png",
       tagline: "Choosing the right flour",
       fullDesc: "Different flours have different protein contents and gluten-forming abilities, making them suitable for specific baked goods.",
       types: [
@@ -434,7 +434,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 2,
       name: "Leavening Agents",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "LeaveningAgents.png",
       tagline: "Making baked goods rise",
       fullDesc: "Chemical agents that produce gas bubbles in batter or dough, causing it to expand and become light and porous.",
       agents: [
@@ -463,7 +463,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 3,
       name: "Fats in Baking",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "Fats.png",
       tagline: "Flavor, texture, and tenderness",
       fullDesc: "Fats contribute to flavor, tenderness, moisture, and structure in baked goods. Different fats have different properties.",
       fats: [
@@ -498,7 +498,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 4,
       name: "Sweeteners",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "Sweetners.png",
       tagline: "More than just sweetness",
       fullDesc: "Sweeteners provide sweetness, moisture, browning, and structure in baking. Each has unique properties.",
       sweeteners: [
@@ -533,7 +533,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 5,
       name: "Egg Functions",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "EggFunction.png",
       tagline: "The multi-purpose ingredient",
       fullDesc: "Eggs serve multiple functions in baking: structure, leavening, emulsification, flavor, and color.",
       functions: [
@@ -557,7 +557,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 6,
       name: "Dairy Products",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "DairyProducts.png",
       tagline: "Moisture, flavor, and richness",
       fullDesc: "Dairy adds moisture, fat, protein, and flavor to baked goods. Different products have different fat contents and consistencies.",
       dairy: [
@@ -592,7 +592,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 7,
       name: "Chocolate Types",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "ChocolateTypes.png",
       tagline: "From cocoa beans to baked goods",
       fullDesc: "Different percentages and types of chocolate are used for different purposes in baking.",
       chocolates: [
@@ -633,7 +633,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 8,
       name: "Flavorings & Extracts",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "Flavouring.png",
       tagline: "Adding personality to baked goods",
       fullDesc: "Concentrated flavors that add character without adding significant liquid to recipes.",
       flavorings: [
@@ -667,12 +667,12 @@ const BakeryEssentialsPage = () => {
     }
   ];
 
-  // SECTION 4: TEMPERATURE CONTROL
+  // SECTION 4: TEMPERATURE CONTROL - FIXED with all properties
   const temperatureData = [
     {
       id: 1,
       name: "Oven Temperatures",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "OvenTemp.png",
       tagline: "Perfect baking temperatures",
       fullDesc: "Different baked goods require specific oven temperatures for optimal results.",
       temperatures: [
@@ -690,7 +690,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 2,
       name: "Ingredient Temperatures",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "IngredientsTemp.png",
       tagline: "The importance of temperature",
       fullDesc: "Temperature of ingredients significantly affects baking results, especially in yeast doughs and butter-based recipes.",
       ingredients: [
@@ -721,7 +721,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 3,
       name: "Proofing Temperatures",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "ProofingTemp.png",
       tagline: "Perfect dough rising conditions",
       fullDesc: "Yeast activity is temperature dependent. Different temperatures create different fermentation characteristics.",
       proofingStages: [
@@ -742,7 +742,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 4,
       name: "Sugar Temperature Stages",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "SugarTemp.png",
       tagline: "Candy making precision",
       fullDesc: "Sugar syrup reaches different consistencies at specific temperatures, used for various confections.",
       stages: [
@@ -760,7 +760,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 5,
       name: "Chocolate Tempering",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "ChocolateTemp.png",
       tagline: "Perfect tempering temperatures",
       fullDesc: "Tempering chocolate involves precise temperature control to create stable cocoa butter crystals.",
       temperatures: [
@@ -779,7 +779,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 6,
       name: "Cooling & Setting",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CoolingStages.png",
       tagline: "Post-baking temperature control",
       fullDesc: "Proper cooling prevents sogginess, cracking, and ensures proper texture development.",
       items: [
@@ -814,7 +814,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 7,
       name: "Storage Temperatures",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "StorageTemp.png",
       tagline: "Keeping baked goods fresh",
       fullDesc: "Different baked goods require different storage conditions to maintain freshness and prevent spoilage.",
       storage: [
@@ -849,7 +849,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 8,
       name: "Temperature Troubleshooting",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "TempTrouble.png",
       tagline: "Fixing temperature-related issues",
       fullDesc: "Common baking problems often relate to temperature control issues.",
       problems: [
@@ -876,12 +876,12 @@ const BakeryEssentialsPage = () => {
     }
   ];
 
-  // SECTION 5: DECORATING TOOLS
+  // SECTION 5: DECORATING TOOLS - FIXED with all properties
   const decoratingData = [
     {
       id: 1,
       name: "Piping Bags & Tips",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "PipingBags.png",
       tagline: "Essential for cake decorating",
       fullDesc: "Tools for applying frosting, cream, and other decorations in controlled patterns and shapes.",
       types: [
@@ -916,7 +916,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 2,
       name: "Offset Spatulas",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "OffSetSpatulas.png",
       tagline: "Smooth frosting application",
       fullDesc: "Angled blades for easy frosting application and smoothing, especially on cake sides.",
       sizes: [
@@ -952,7 +952,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 3,
       name: "Cake Combs",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "CakeCombs.png",
       tagline: "Creating textured finishes",
       fullDesc: "Tools with various patterned edges for creating decorative textures on cake frosting.",
       patterns: [
@@ -979,7 +979,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 4,
       name: "Fondant Tools",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "FondantTools.png",
       tagline: "Working with sugar paste",
       fullDesc: "Specialized tools for rolling, cutting, shaping, and detailing fondant decorations.",
       tools: [
@@ -1020,7 +1020,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 5,
       name: "Airbrush Kit",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "AirBrushKit.png",
       tagline: "Professional coloring and effects",
       fullDesc: "Spray system for applying even color, creating gradients, and adding special effects to cakes.",
       components: [
@@ -1048,7 +1048,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 6,
       name: "Stencils & Molds",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "Stencils.png",
       tagline: "Creating consistent patterns",
       fullDesc: "Tools for creating repeated patterns and shapes with precision and consistency.",
       types: [
@@ -1083,7 +1083,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 7,
       name: "Coloring Tools",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "ColoringTools.png",
       tagline: "Adding vibrant colors",
       fullDesc: "Tools and materials for coloring frostings, fondants, chocolates, and other baking mediums.",
       colorTypes: [
@@ -1128,7 +1128,7 @@ const BakeryEssentialsPage = () => {
     {
       id: 8,
       name: "Finishing Tools",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800",
+      image: "FinishingTools.png",
       tagline: "The final touches",
       fullDesc: "Tools for adding final decorations and perfecting the presentation of baked goods.",
       tools: [
@@ -1210,31 +1210,31 @@ const BakeryEssentialsPage = () => {
                 className={`bep-category-item ${selectedCategory === 'tools' ? 'bep-active' : ''}`}
                 onClick={() => setSelectedCategory('tools')}
               >
-                <span className="bep-category-name">🍞 Tools & Equipment</span>
+                <span className="bep-category-name">Tools & Equipment</span>
               </li>
               <li 
                 className={`bep-category-item ${selectedCategory === 'techniques' ? 'bep-active' : ''}`}
                 onClick={() => setSelectedCategory('techniques')}
               >
-                <span className="bep-category-name">👨‍🍳 Baking Techniques</span>
+                <span className="bep-category-name">Baking Techniques</span>
               </li>
               <li 
                 className={`bep-category-item ${selectedCategory === 'ingredients' ? 'bep-active' : ''}`}
                 onClick={() => setSelectedCategory('ingredients')}
               >
-                <span className="bep-category-name">🥚 Ingredients Guide</span>
+                <span className="bep-category-name">Ingredients Guide</span>
               </li>
               <li 
                 className={`bep-category-item ${selectedCategory === 'temperature' ? 'bep-active' : ''}`}
                 onClick={() => setSelectedCategory('temperature')}
               >
-                <span className="bep-category-name">🌡️ Temperature Control</span>
+                <span className="bep-category-name">Temperature Control</span>
               </li>
               <li 
                 className={`bep-category-item ${selectedCategory === 'decorating' ? 'bep-active' : ''}`}
                 onClick={() => setSelectedCategory('decorating')}
               >
-                <span className="bep-category-name">🎂 Decorating Tools</span>
+                <span className="bep-category-name">Decorating Tools</span>
               </li>
             </ul>
           </div>
@@ -1546,7 +1546,7 @@ const BakeryEssentialsPage = () => {
                     </>
                   )}
 
-                  {/* TEMPERATURE CATEGORY DETAILS */}
+                  {/* TEMPERATURE CATEGORY DETAILS - FIXED */}
                   {selectedCategory === 'temperature' && (
                     <>
                       {selectedItem.temperatures && selectedItem.temperatures.length > 0 && (
@@ -1562,6 +1562,116 @@ const BakeryEssentialsPage = () => {
                         </div>
                       )}
 
+                      {selectedItem.ingredients && selectedItem.ingredients.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🥚 Ingredient Temperatures</h3>
+                          <div className="bep-ingredients-grid">
+                            {selectedItem.ingredients.map((ingredient, idx) => (
+                              <div key={idx} className="bep-ingredient-item">
+                                <strong>{ingredient.name}:</strong> {ingredient.temp} - {ingredient.reason}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.proofingStages && selectedItem.proofingStages.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🌱 Proofing Stages</h3>
+                          <div className="bep-proofing-grid">
+                            {selectedItem.proofingStages.map((stage, idx) => (
+                              <div key={idx} className="bep-proofing-item">
+                                {stage}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.stages && selectedItem.stages.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🍬 Sugar Stages</h3>
+                          <div className="bep-stages-grid">
+                            {selectedItem.stages.map((stage, idx) => (
+                              <div key={idx} className="bep-stage-item">
+                                {stage}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.methods && selectedItem.methods.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🛠️ Methods</h3>
+                          <div className="bep-methods-grid">
+                            {selectedItem.methods.map((method, idx) => (
+                              <div key={idx} className="bep-method-item">
+                                {method}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.items && selectedItem.items.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📋 Cooling Guidelines</h3>
+                          <div className="bep-items-grid">
+                            {selectedItem.items.map((item, idx) => (
+                              <div key={idx} className="bep-item-card-mini">
+                                <h4>{item.name}</h4>
+                                <p><strong>Cooling:</strong> {item.cooling}</p>
+                                <p><strong>Time:</strong> {item.time}</p>
+                                <p><em>{item.notes}</em></p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.storage && selectedItem.storage.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📦 Storage Guidelines</h3>
+                          <div className="bep-storage-grid">
+                            {selectedItem.storage.map((item, idx) => (
+                              <div key={idx} className="bep-storage-item">
+                                <h4>{item.name}</h4>
+                                <p><strong>Temperature:</strong> {item.temp}</p>
+                                <p><strong>Container:</strong> {item.container}</p>
+                                <p><strong>Duration:</strong> {item.duration}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.problems && selectedItem.problems.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>⚠️ Common Problems</h3>
+                          <div className="bep-problems-grid">
+                            {selectedItem.problems.map((problem, idx) => (
+                              <div key={idx} className="bep-problem-item">
+                                {problem}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.solutions && selectedItem.solutions.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>✅ Solutions</h3>
+                          <div className="bep-solutions-grid">
+                            {selectedItem.solutions.map((solution, idx) => (
+                              <div key={idx} className="bep-solution-item">
+                                {solution}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {selectedItem.tips && (
                         <div className="bep-detail-section">
                           <h3>💡 Pro Tips</h3>
@@ -1570,10 +1680,100 @@ const BakeryEssentialsPage = () => {
                           </div>
                         </div>
                       )}
+
+                      {selectedItem.warming && (
+                        <div className="bep-detail-section">
+                          <h3>🔥 Warming Tips</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.warming}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.cooling && (
+                        <div className="bep-detail-section">
+                          <h3>❄️ Cooling Tips</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.cooling}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.signs && (
+                        <div className="bep-detail-section">
+                          <h3>👀 Signs of Success</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.signs}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.overproofing && (
+                        <div className="bep-detail-section">
+                          <h3>⚠️ Overproofing Signs</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.overproofing}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.testing && (
+                        <div className="bep-detail-section">
+                          <h3>🧪 Testing Method</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.testing}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.equipment && (
+                        <div className="bep-detail-section">
+                          <h3>🔧 Required Equipment</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.equipment}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.conversion && (
+                        <div className="bep-detail-section">
+                          <h3>🔄 Temperature Conversion</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.conversion}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.rushing && (
+                        <div className="bep-detail-section">
+                          <h3>⏱️ Don't Rush</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.rushing}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.freezing && (
+                        <div className="bep-detail-section">
+                          <h3>❄️ Freezing Guidelines</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.freezing}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.thawing && (
+                        <div className="bep-detail-section">
+                          <h3>🧊 Thawing Guidelines</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.thawing}</p>
+                          </div>
+                        </div>
+                      )}
                     </>
                   )}
 
-                  {/* DECORATING CATEGORY DETAILS */}
+                  {/* DECORATING CATEGORY DETAILS - FIXED */}
                   {selectedCategory === 'decorating' && (
                     <>
                       {selectedItem.types && selectedItem.types.length > 0 && (
@@ -1586,6 +1786,49 @@ const BakeryEssentialsPage = () => {
                                 {type.material && <p><strong>Material:</strong> {type.material}</p>}
                                 {type.sizes && <p><strong>Sizes:</strong> {type.sizes}</p>}
                                 {type.bestFor && <p><strong>Best For:</strong> {type.bestFor}</p>}
+                                {type.function && <p><strong>Function:</strong> {type.function}</p>}
+                                {type.patterns && <p><strong>Patterns:</strong> {type.patterns}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tipTypes && selectedItem.tipTypes.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🎯 Tip Types</h3>
+                          <div className="bep-tiptypes-grid">
+                            {selectedItem.tipTypes.map((tip, idx) => (
+                              <div key={idx} className="bep-tiptype-item">
+                                {tip}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.sizes && selectedItem.sizes.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📏 Available Sizes</h3>
+                          <div className="bep-sizes-grid">
+                            {selectedItem.sizes.map((size, idx) => (
+                              <div key={idx} className="bep-size-card">
+                                <h4>{size.name}</h4>
+                                <p><strong>Length:</strong> {size.length}</p>
+                                <p><strong>Uses:</strong> {size.uses}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.materials && selectedItem.materials.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🧱 Materials</h3>
+                          <div className="bep-materials-grid">
+                            {selectedItem.materials.map((material, idx) => (
+                              <div key={idx} className="bep-material-item">
+                                {material}
                               </div>
                             ))}
                           </div>
@@ -1605,11 +1848,153 @@ const BakeryEssentialsPage = () => {
                         </div>
                       )}
 
+                      {selectedItem.patterns && selectedItem.patterns.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>✨ Patterns</h3>
+                          <div className="bep-patterns-grid">
+                            {selectedItem.patterns.map((pattern, idx) => (
+                              <div key={idx} className="bep-pattern-item">
+                                {pattern}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.usage && selectedItem.usage.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>📝 Usage Instructions</h3>
+                          <div className="bep-usage-list">
+                            {selectedItem.usage.map((step, idx) => (
+                              <div key={idx} className="bep-usage-item">
+                                {step}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tools && selectedItem.tools.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🔧 Tools Included</h3>
+                          <div className="bep-tools-grid">
+                            {selectedItem.tools.map((tool, idx) => (
+                              <div key={idx} className="bep-tool-card">
+                                <h4>{tool.name}</h4>
+                                {tool.type && <p><strong>Type:</strong> {tool.type}</p>}
+                                {tool.use && <p><strong>Use:</strong> {tool.use}</p>}
+                                {tool.function && <p><strong>Function:</strong> {tool.function}</p>}
+                                {tool.types && <p><strong>Types:</strong> {tool.types}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.essentials && selectedItem.essentials.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>✨ Essentials</h3>
+                          <div className="bep-essentials-list">
+                            {selectedItem.essentials.map((item, idx) => (
+                              <div key={idx} className="bep-essential-item">
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.components && selectedItem.components.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>⚙️ Components</h3>
+                          <div className="bep-components-list">
+                            {selectedItem.components.map((component, idx) => (
+                              <div key={idx} className="bep-component-item">
+                                {component}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.colors && selectedItem.colors.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🎨 Color Types</h3>
+                          <div className="bep-colors-list">
+                            {selectedItem.colors.map((color, idx) => (
+                              <div key={idx} className="bep-color-item">
+                                {color}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.colorTypes && selectedItem.colorTypes.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🌈 Color Types</h3>
+                          <div className="bep-colortypes-grid">
+                            {selectedItem.colorTypes.map((color, idx) => (
+                              <div key={idx} className="bep-colortype-card">
+                                <h4>{color.name}</h4>
+                                <p><strong>Intensity:</strong> {color.intensity}</p>
+                                <p><strong>Uses:</strong> {color.uses}</p>
+                                <p><em>{color.notes}</em></p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.presentation && selectedItem.presentation.length > 0 && (
+                        <div className="bep-detail-section">
+                          <h3>🎁 Presentation Ideas</h3>
+                          <div className="bep-presentation-list">
+                            {selectedItem.presentation.map((item, idx) => (
+                              <div key={idx} className="bep-presentation-item">
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {selectedItem.cleaning && (
                         <div className="bep-detail-section">
                           <h3>🧼 Cleaning & Maintenance</h3>
                           <div className="bep-detail-content">
                             <p>{selectedItem.cleaning}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.storage && typeof selectedItem.storage === 'string' && (
+                        <div className="bep-detail-section">
+                          <h3>📦 Storage</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.storage}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tips && typeof selectedItem.tips === 'string' && (
+                        <div className="bep-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="bep-detail-content">
+                            <p>{selectedItem.tips}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {selectedItem.tips && Array.isArray(selectedItem.tips) && (
+                        <div className="bep-detail-section">
+                          <h3>💡 Pro Tips</h3>
+                          <div className="bep-tips-list">
+                            {selectedItem.tips.map((tip, idx) => (
+                              <div key={idx} className="bep-tip-item">
+                                {tip}
+                              </div>
+                            ))}
                           </div>
                         </div>
                       )}
@@ -1630,45 +2015,31 @@ const BakeryEssentialsPage = () => {
                       backgroundRepeat: 'no-repeat'
                     }}
                   >
-                    <div className="bep-image-overlay">
-                      <div className={`bep-essentiality-badge-large ${selectedItem.essentiality?.toLowerCase() || 'important'}`}>
-                        {selectedItem.essentiality || 'Important'}
-                      </div>
-                    </div>
+                   
                   </div>
                 </div>
-                
-                {/* QUICK INFO */}
-                <div className="bep-quick-info">
-                  <h3>Quick Info</h3>
-                  
-                  <div className="bep-quick-info-content">
-                    <div className="bep-quick-info-item">
-                      <span className="bep-quick-label">Category:</span>
-                      <span className="bep-quick-value">
-                        {selectedCategory === 'tools' && 'Tools & Equipment'}
-                        {selectedCategory === 'techniques' && 'Baking Technique'}
-                        {selectedCategory === 'ingredients' && 'Ingredient Guide'}
-                        {selectedCategory === 'temperature' && 'Temperature Control'}
-                        {selectedCategory === 'decorating' && 'Decorating Tools'}
-                      </span>
-                    </div>
-                    
-                    {selectedItem.essentiality && (
-                      <div className="bep-quick-info-item">
-                        <span className="bep-quick-label">Importance:</span>
-                        <span className={`bep-quick-value ${selectedItem.essentiality?.toLowerCase()}`}>
-                          {selectedItem.essentiality}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+              
               </div>
             </div>
           </div>
         </div>
       )}
+      <div className="back-home-container">
+         <button 
+  className="back-home-btn"
+  onClick={() => {
+    try {
+      navigate('/guidance');
+    } catch (error) {
+      window.location.href = '/guidance';
+    }
+  }}
+>
+  ← Back to Guidance Page
+</button>
+      </div>
+ 
+
     </div>
   );
 };

@@ -1,7 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+
+// ✅ Headers & Footers
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UrduHeader from './components/Urdu/UrduHeader';
+import UrduFooter from './components/Urdu/UrduFooter';
+
+// ✅ Pages - English
 import HomePage from './pages/HomePage';
 import PublicHome from './pages/PublicHome';
 import PantryPage from './pages/PantryPage';
@@ -23,18 +29,34 @@ import MealCalendar from './pages/MealCalender';
 import MealFeature from './pages/MealFeature';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import AlarmModal from './components/AlarmModal'; // ✅ MODAL IMPORT
 import PantryBasicsPage from './pages/PantryBasicsPage';
 import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 
-function App() {
+// ✅ Pages - Urdu
+import UrduHomePage from './pages/Urdu/UrduHomePage';
+import UrduSignUpPage from './pages/Urdu/UrduSignUpPage';
+import UrduLoginPage from './pages/Urdu/UrduLoginPage';
+import UrduPublicHome from './pages/Urdu/UrduPublicHome';
+
+// ✅ Alarm Modal
+import AlarmModal from './components/AlarmModal';
+
+function AppWrapper() {
+  const location = useLocation();
+
+  // ✅ Urdu pages ka check
+  const isUrdu = location.pathname.startsWith('/urdu');
+
   return (
-    <Router>
-      {/* ✅ ALARM MODAL - SABSE UPAR */}
+    <>
+      {/* Alarm Modal - Top */}
       <AlarmModal />
-      
-      <Header />
+
+      {/* Dynamic Header */}
+      {isUrdu ? <UrduHeader /> : <Header />}
+
       <Routes>
+        {/* ===== English Routes ===== */}
         <Route path="/" element={<PublicHome />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/smart-pantry" element={<PantryPage />} />
@@ -57,13 +79,25 @@ function App() {
         <Route path="/meal-planner" element={<MealFeature/>} />
         <Route path="/login-page" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
+        <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
 
-        
-        {/* ❌ ALARM ROUTE HATA DIYA - Kyonki modal use karenge */}
-        {/* <Route path="/Alarm" element={<Alarm />} /> */}
+        {/* ===== Urdu Routes ===== */}
+        <Route path="/urdu-home" element={<UrduHomePage/>} />
+        <Route path="/urdu-signup" element={<UrduSignUpPage/>} />
+        <Route path="/urdu-login" element={<UrduLoginPage/>} />
+        <Route path="/urdu-public" element={<UrduPublicHome/>} />
       </Routes>
-      <Footer />
+
+      {/* Dynamic Footer */}
+      {isUrdu ? <UrduFooter /> : <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppWrapper />
     </Router>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // COMPLETE appliancesData - FIXED ALL ERRORS
 const appliancesData = [
   {
@@ -2473,6 +2473,22 @@ const KitchenAppliancesPage = () => {
           </div>
         </div>
       )}
+      {/* Back to Home Button */}
+ <div className="back-home-container">
+         <button 
+  className="back-home-btn"
+  onClick={() => {
+    try {
+      navigate('/guidance');
+    } catch (error) {
+      window.location.href = '/guidance';
+    }
+  }}
+>
+  ← Back to Guidance Page
+</button>
+      </div>
+
     </div>
   );
 };

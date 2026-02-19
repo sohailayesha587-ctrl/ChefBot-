@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './KitchenToolsPage.css';
-
+import { useNavigate } from 'react-router-dom';
 const KitchenToolsPage = () => {
   // ===== STATES =====
  
@@ -77,6 +77,8 @@ const KitchenToolsPage = () => {
   const [crockeryTab, setCrockeryTab] = useState('dining');
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  // ===== 1. PEHLE STATE ADD KARO =====
+const [servingTab, setServingTab] = useState('servingware');  // 👈 YEH ADD KARO
   // ===== 2. KNIVES DATA =====
   const knivesData = [
     {
@@ -236,7 +238,7 @@ const KitchenToolsPage = () => {
     {
       id: 1,
       name: "Stainless Steel",
-      image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400",
+      image: "SteelBowl.png",
       pros: ["Durable", "Non-reactive", "Dishwasher safe", "Won't absorb odors", "Lightweight"],
       cons: ["Can be noisy", "Can dent if dropped", "Not microwave safe"],
       bestFor: "Mixing, marinating, storing, baking",
@@ -249,7 +251,7 @@ const KitchenToolsPage = () => {
     {
       id: 2,
       name: "Glass",
-      image: "https://images.unsplash.com/photo-1576613109753-27804de2cba8?auto=format&fit=crop&w=400",
+      image: "GlassBowl.png",
       pros: ["Heat-resistant", "Microwave safe", "Easy to clean", "Non-staining", "See-through"],
       cons: ["Can break if dropped", "Heavier", "More expensive"],
       bestFor: "Baking, microwave use, serving, storage",
@@ -262,7 +264,7 @@ const KitchenToolsPage = () => {
     {
       id: 3,
       name: "Ceramic/Porcelain",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=400",
+      image: "CeramicBowl.png",
       pros: ["Oven-safe", "Stylish appearance", "Non-reactive surface", "Heat retention"],
       cons: ["Can chip or crack", "Heavier", "More expensive", "Bulky"],
       bestFor: "Serving, baking, mixing, table presentation",
@@ -275,7 +277,7 @@ const KitchenToolsPage = () => {
     {
       id: 4,
       name: "Plastic",
-      image: "https://images.unsplash.com/photo-1587334994507-9b731baa1e46?auto=format&fit=crop&w=400",
+      image: "PlasticBowl.png",
       pros: ["Lightweight", "Unbreakable", "Affordable", "Color variety", "Nesting"],
       cons: ["Can stain", "Not heat resistant", "Can absorb odors", "Scratches"],
       bestFor: "Everyday mixing, kids use, outdoor cooking, camping",
@@ -288,7 +290,7 @@ const KitchenToolsPage = () => {
     {
       id: 5,
       name: "Copper/Silicone",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=400",
+      image: "CopperBowl.png",
       pros: ["Professional quality", "Flexible rim", "Heat conductive", "Non-slip base", "Elegant"],
       cons: ["Expensive", "Requires special care", "Heavier", "Tarnishes"],
       bestFor: "Professional kitchens, candy making, precise cooking, whipping egg whites",
@@ -1405,39 +1407,60 @@ const KitchenToolsPage = () => {
             {/* ----- 8. SERVINGWARE SET - SERVINGWARE ----- */}
             {selectedTool.name === "Servingware Set" && (
               <div className="ktp-servingware-section">
-                <h3 className="ktp-section-heading">Servingware (8)</h3>
-                <div className="ktp-cards-grid">
-                  {servingwareItems.map((item) => (
-                    <div 
-                      key={item.id} 
-                      className={`ktp-card ktp-servingware-card ${getServingwareCardClass(item.name)}`}
-                      onClick={() => openModal({...item, type: 'servingware', category: 'Servingware'})}
-                    >
-                      <div className="ktp-card-image" style={{ backgroundImage: `url(${item.image})` }}></div>
-                      <div className="ktp-card-content">
-                        <h4 className="ktp-card-title">{item.name}</h4>
-                        <div className="ktp-card-material">{item.capacity || item.sizes || item.diameter}</div>
-                      </div>
-                    </div>
-                  ))}
+                {/* TABS */}
+                <div className="ktp-tabs">
+                  <button 
+                    className={`ktp-tab ${servingTab === 'servingware' ? 'ktp-tab-active' : ''}`}
+                    onClick={() => setServingTab('servingware')}
+                  >
+                    Servingware (8)
+                  </button>
+                  <button 
+                    className={`ktp-tab ${servingTab === 'cutlery' ? 'ktp-tab-active' : ''}`}
+                    onClick={() => setServingTab('cutlery')}
+                  >
+                    Serving Cutlery (1)
+                  </button>
                 </div>
 
-                {/* Serving Cutlery Collection */}
-                <div className="ktp-serving-cutlery-section">
-                  <h3 className="ktp-section-heading">Serving Cutlery Collection</h3>
-                  <div className="ktp-cards-grid">
-                    <div 
-                      className="ktp-card ktp-serving-cutlery-card"
-                      onClick={() => openModal({...servingCutleryItem, type: 'serving-cutlery', category: 'Serving Cutlery'})}
-                    >
-                      <div className="ktp-card-image" style={{ backgroundImage: `url(${servingCutleryItem.image})` }}></div>
-                      <div className="ktp-card-content">
-                        <h4 className="ktp-card-title">{servingCutleryItem.name}</h4>
-                        <div className="ktp-card-material">Complete Set</div>
+                {/* SERVINGWARE ITEMS (8) */}
+                {servingTab === 'servingware' && (
+                  <div className="ktp-servingware-items-section">
+                    <div className="ktp-cards-grid">
+                      {servingwareItems.map((item) => (
+                        <div 
+                          key={item.id} 
+                          className={`ktp-card ktp-servingware-card ${getServingwareCardClass(item.name)}`}
+                          onClick={() => openModal({...item, type: 'servingware', category: 'Servingware'})}
+                        >
+                          <div className="ktp-card-image" style={{ backgroundImage: `url(${item.image})` }}></div>
+                          <div className="ktp-card-content">
+                            <h4 className="ktp-card-title">{item.name}</h4>
+                            <div className="ktp-card-material">{item.capacity || item.sizes || item.diameter}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* SERVING CUTLERY (1) */}
+                {servingTab === 'cutlery' && (
+                  <div className="ktp-serving-cutlery-section">
+                    <div className="ktp-cards-grid">
+                      <div 
+                        className="ktp-card ktp-serving-cutlery-card"
+                        onClick={() => openModal({...servingCutleryItem, type: 'serving-cutlery', category: 'Serving Cutlery'})}
+                      >
+                        <div className="ktp-card-image" style={{ backgroundImage: `url(${servingCutleryItem.image})` }}></div>
+                        <div className="ktp-card-content">
+                          <h4 className="ktp-card-title">{servingCutleryItem.name}</h4>
+                          <div className="ktp-card-material">Complete Set</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
@@ -1557,6 +1580,21 @@ const KitchenToolsPage = () => {
           </div>
         </div>
       )}
+      {/* Back to Home Button */}
+ <div className="back-home-container">
+         <button 
+  className="back-home-btn"
+  onClick={() => {
+    try {
+      navigate('/guidance');
+    } catch (error) {
+      window.location.href = '/guidance';
+    }
+  }}
+>
+  ← Back to Guidance Page
+</button>
+      </div>
     </div>
   );
 };

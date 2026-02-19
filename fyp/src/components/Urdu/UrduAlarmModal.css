@@ -1,0 +1,356 @@
+/* Urdu Alarm Modal CSS - With Background Beep Support */
+
+/* ===== OVERLAY & MODAL ===== */
+.urdu-alarm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Sidebar Modal */
+.urdu-alarm-sidebar-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  animation: slideInRight 0.3s ease;
+  overflow-y: auto;
+  border-left: 3px solid #284a4b;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ===== HEADER ===== */
+.urdu-alarm-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: linear-gradient(135deg, #284a4b);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.urdu-alarm-sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 580;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  left: -20px;
+}
+
+.urdu-close-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+  line-height: 0.5;
+}
+
+.urdu-close-btn:hover {
+  color: #ffffff;
+  transform: rotate(90deg) scale(1.1);
+  background: none;
+}
+
+/* ===== MAIN CONTENT ===== */
+.urdu-alarm-sidebar-content {
+  padding: 25px;
+}
+
+/* ===== TIMER DISPLAY ===== */
+.urdu-timer-display-section {
+  text-align: center;
+  margin: 0.5px 0;
+  padding: 10px 10px;
+  background: #284a4b;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border: 2px solid #eaeaea;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.urdu-timer-display-section:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.urdu-time-display {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: white;
+  font-family: 'Courier New', monospace;
+  margin: 5px 0;
+  letter-spacing: 2px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  line-height: 1;
+}
+.urdu-time-display.running {
+  color: #397d7c;
+  animation: pulseTimer 2s infinite;
+}
+.urdu-time-display.completed {
+  color: white;
+  animation: alarmFlash 1s infinite;
+  position: relative;
+}
+.urdu-time-display.completed::after {
+  content: '🔊';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  animation: bounce 0.5s infinite alternate;
+}
+
+/* ===== TIME SETUP SECTION ===== */
+.urdu-time-setup-section {
+  background: rgba(57, 125, 124, 0.07);
+  padding: 15px 20px;
+  border-radius: 18px;
+  margin: 10px 0;
+  border: 1px solid rgba(57, 125, 124, 0.15);
+  height: auto;
+  min-height: 200px;
+}
+
+.urdu-time-setup-section h3 {
+  color: #284a4b;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Time Inputs */
+.urdu-time-inputs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.urdu-time-input {
+  flex: 1;
+  text-align: center;
+}
+
+.urdu-time-input label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.urdu-time-input input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 2px solid #284a4b;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  color: #284a4b;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.urdu-time-input input:focus {
+  outline: none;
+  border-color: #397d7c;
+  box-shadow: 0 0 0 3px rgba(57, 125, 124, 0.2);
+  transform: translateY(-2px);
+}
+
+.urdu-time-input input:disabled {
+  background: #f8f9fa;
+  border-color: #ddd;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== TIMER CONTROLS ===== */
+.urdu-timer-controls {
+  margin: 20px 0;
+}
+
+.urdu-start-btn {
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #284a4b, #397d7c);
+  color: white;
+  box-shadow: 0 6px 20px rgba(57, 125, 124, 0.3);
+}
+
+.urdu-start-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #397d7c, #284a4b);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(57, 125, 124, 0.4);
+}
+
+.urdu-start-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ===== BEEP STATUS ===== */
+.urdu-beep-status-active {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 86, 86, 0.15));
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  animation: statusPulse 2s infinite;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.urdu-beep-status-active button {
+  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.urdu-beep-status-active button:hover {
+  background: linear-gradient(135deg, #ff5252, #ff6b6b);
+  transform: translateY(-2px);
+  animation: none;
+}
+
+/* ===== FLOATING NOTIFICATION ===== */
+.urdu-floating-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  width: 320px;
+  max-width: 90%;
+  border-left: 5px solid #ff4757;
+  animation: slideIn 0.3s ease-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.urdu-floating-notification.active {
+  animation: pulseBorder 2s infinite;
+}
+
+.urdu-floating-stop-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff4757, #ff3838);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.urdu-floating-stop-btn:hover {
+  background: linear-gradient(135deg, #ff3838, #ff1e1e);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulseTimer {
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.9;transform:scale(1.01);}
+}
+@keyframes alarmFlash {
+  0%,100%{opacity:1;text-shadow:0 0 0 rgba(255,107,107,0);}
+  50%{opacity:0.8;text-shadow:0 0 20px #397d7c;}
+}
+@keyframes bounce {
+  from{transform:translateY(-50%) scale(1);}
+  to{transform:translateY(-50%) scale(1.2);}
+}
+@keyframes statusPulse{
+  0%,100%{border-color:rgba(255,107,107,0.3);box-shadow:0 0 0 rgba(255,107,107,0);}
+  50%{border-color:rgba(255,107,107,0.6);box-shadow:0 0 20px rgba(255,107,107,0.3);}
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width:768px){
+  .urdu-alarm-sidebar-modal{width:350px;}
+  .urdu-time-display{font-size:3.5rem;}
+}
+@media (max-width:480px){
+  .urdu-alarm-sidebar-modal{width:100%;}
+  .urdu-time-display{font-size:3rem;}
+  .urdu-time-inputs{flex-direction:column;}
+}

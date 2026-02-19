@@ -226,3 +226,40 @@
     display: none;
   }
 }
+.language-selector {
+  position: relative;
+}
+
+.language-dropdown {
+
+  position: absolute;
+
+  top: 35px;
+
+  right: 0;
+
+  background: white;
+
+  border: 1px solid #ddd;
+
+  border-radius: 6px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  width: 100px;
+
+}
+
+.language-dropdown div {
+
+  padding: 8px;
+
+  cursor: pointer;
+
+}
+
+.language-dropdown div:hover {
+
+  background: #f0f0f0;
+
+}

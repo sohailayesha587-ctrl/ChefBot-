@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CookingMethodsPage.css';
-
+import { useNavigate } from 'react-router-dom';
 const CookingMethodsPage = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
@@ -426,6 +426,22 @@ const CookingMethodsPage = () => {
     </div>
   </div>
 )}
+{/* Back to Home Button */}
+ <div className="back-home-container">
+         <button 
+  className="back-home-btn"
+  onClick={() => {
+    try {
+      navigate('/guidance');
+    } catch (error) {
+      window.location.href = '/guidance';
+    }
+  }}
+>
+  ← Back to Guidance Page
+</button>
+      </div>
+
     </div>
   );
 };

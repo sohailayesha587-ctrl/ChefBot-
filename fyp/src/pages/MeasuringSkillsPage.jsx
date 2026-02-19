@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './MeasuringSkillsPage.css';
-
+import { useNavigate } from 'react-router-dom';
 const MeasuringSkillsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('tools');
   const [selectedItem, setSelectedItem] = useState(null);
@@ -17,7 +17,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Spout for pouring", "Eye-level reading", "Metric & Imperial marks", "Heat resistant"],
       properUsage: "Place on flat surface, fill to mark, read at eye level, pour slowly from spout",
       commonMistakes: ["Holding cup while reading", "Not using flat surface", "Pouring too fast"],
-      essentiality: "Essential",
+      
       types: [
         {
           name: "Glass Measuring Cup",
@@ -44,7 +44,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Nested design", "Flat rim for leveling", "Easy storage", "Stackable"],
       properUsage: "Scoop ingredient, overfill, level with straight edge",
       commonMistakes: ["Packing flour", "Using for liquids", "Not leveling properly"],
-      essentiality: "Essential",
+      
       types: [
         {
           name: "Metal Measuring Cups",
@@ -71,7 +71,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Nested design", "Leveling edge", "Both dry & liquid use", "Compact storage"],
       properUsage: "Fill spoon, level with straight edge, pour carefully",
       commonMistakes: ["Using for large quantities", "Not leveling spices", "Confusing tbsp & tsp"],
-      essentiality: "Essential",
+      
       types: [
         {
           name: "Standard Measuring Spoons",
@@ -92,13 +92,13 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Kitchen Scale",
-      image: "KitScale.png",
+      image: "KitScaleMT.png",
       tagline: "Precision weight measurement",
       fullDesc: "Digital or analog scale for measuring ingredients by weight. Most accurate method for baking. Can measure in grams, ounces, pounds. Digital scales with tare function are most convenient.",
       keyFeatures: ["Digital display", "Tare function", "Multiple units", "Precise to 1g"],
       properUsage: "Place bowl, press tare, add ingredient, read weight",
       commonMistakes: ["Not using tare function", "Uneven surface", "Battery issues"],
-      essentiality: "Important",
+     
       types: [
         {
           name: "Digital Kitchen Scale",
@@ -125,7 +125,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Large capacity", "Easy-grip handle", "Pouring lip", "Clear markings"],
       properUsage: "Place on counter, fill to mark, lift to pour",
       commonMistakes: ["Holding while reading", "Spilling while pouring", "Not cleaning properly"],
-      essentiality: "Useful",
+     
       types: [
         {
           name: "Plastic Measuring Jug",
@@ -152,7 +152,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Instant read", "Digital display", "Food-safe probe", "Auto-off"],
       properUsage: "Insert into thickest part, wait for reading, clean after use",
       commonMistakes: ["Touching bone", "Not cleaning probe", "Wrong placement"],
-      essentiality: "Important",
+    
       types: [
         {
           name: "Instant-Read Thermometer",
@@ -179,7 +179,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Multiple timers", "Loud alarm", "Magnetic back", "Count up/down"],
       properUsage: "Set time, start timer, attend to other tasks",
       commonMistakes: ["Forgetting to start", "Setting wrong time", "Ignoring alarm"],
-      essentiality: "Useful",
+     
       types: [
         {
           name: "Digital Kitchen Timer",
@@ -206,7 +206,7 @@ const MeasuringSkillsPage = () => {
       keyFeatures: ["Release mechanism", "Ergonomic handle", "Standardized sizes", "Durable construction"],
       properUsage: "Scoop, level, release with trigger",
       commonMistakes: ["Wrong size selection", "Not leveling", "Forceful scooping"],
-      essentiality: "Specialized",
+      
       types: [
         {
           name: "Cookie Scoop",
@@ -455,7 +455,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Portion Estimation",
-      image: "PortionET",
+      image: "PortionET.png",
       tagline: "Serving size by eye",
       fullDesc: "Estimating proper serving sizes for balanced meals without weighing or measuring.",
       guidelines: [
@@ -596,7 +596,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 4,
       name: "Recipe Scaling",
-      image: "RecipeCS",
+      image: "RecipeCS.png",
       tagline: "Adjusting recipe quantities",
       fullDesc: "Increasing or decreasing recipe quantities while maintaining proper ratios and cooking times.",
       scalingRules: [
@@ -651,7 +651,7 @@ const MeasuringSkillsPage = () => {
     {
       id: 6,
       name: "Ingredient Substitutions",
-      image: "IngredieantCS.png",
+      image: "IngredientCS.png",
       tagline: "Converting ingredients",
       fullDesc: "Substituting ingredients when originals aren't available while maintaining similar properties.",
       commonSubstitutions: [
@@ -974,7 +974,7 @@ const MeasuringSkillsPage = () => {
         <aside className="msp-sidebar">
           <div className="msp-sidebar-header">
             <h2 className="msp-sidebar-title">Measuring Skills</h2>
-            <p className="msp-sidebar-subtitle">Master Kitchen Measurements</p>
+            
           </div>
 
           <div className="msp-sidebar-categories">
@@ -983,31 +983,31 @@ const MeasuringSkillsPage = () => {
                 className={`msp-category-item ${selectedCategory === 'tools' ? 'msp-active' : ''}`}
                 onClick={() => setSelectedCategory('tools')}
               >
-                <span className="msp-category-name">📏 Tools & Equipment</span>
+                <span className="msp-category-name">Tools & Equipment</span>
               </li>
               <li 
                 className={`msp-category-item ${selectedCategory === 'techniques' ? 'msp-active' : ''}`}
                 onClick={() => setSelectedCategory('techniques')}
               >
-                <span className="msp-category-name">👐 Measuring Techniques</span>
+                <span className="msp-category-name">Measuring Techniques</span>
               </li>
               <li 
                 className={`msp-category-item ${selectedCategory === 'estimation' ? 'msp-active' : ''}`}
                 onClick={() => setSelectedCategory('estimation')}
               >
-                <span className="msp-category-name">👁️ Estimation Skills</span>
+                <span className="msp-category-name">Estimation Skills</span>
               </li>
               <li 
                 className={`msp-category-item ${selectedCategory === 'conversions' ? 'msp-active' : ''}`}
                 onClick={() => setSelectedCategory('conversions')}
               >
-                <span className="msp-category-name">🔄 Conversion Skills</span>
+                <span className="msp-category-name">Conversion Skills</span>
               </li>
               <li 
                 className={`msp-category-item ${selectedCategory === 'precision' ? 'msp-active' : ''}`}
                 onClick={() => setSelectedCategory('precision')}
               >
-                <span className="msp-category-name">🎯 Precision Skills</span>
+                <span className="msp-category-name">Precision Skills</span>
               </li>
             </ul>
           </div>
@@ -2122,6 +2122,21 @@ const MeasuringSkillsPage = () => {
           </div>
         </div>
       )}
+      {/* Back to Home Button */}
+ <div className="back-home-container">
+         <button 
+  className="back-home-btn"
+  onClick={() => {
+    try {
+      navigate('/guidance');
+    } catch (error) {
+      window.location.href = '/guidance';
+    }
+  }}
+>
+  ← Back to Guidance Page
+</button>
+      </div>
     </div>
   );
 };

@@ -7,107 +7,76 @@ const BeginnersPage = () => {
 
   const skillCards = [
     {
-      
-      icon: 'fas fa-tools',
+      id: '01',
+      image: 'KitchenTools.png',  // REAL IMAGE
       title: 'Kitchen Tools',
       route: '/kitchen-tools',
       features: [
-        'Essential knives set',
-        'Cutting boards types',
-        'Pots & pans selection',
-      ],
-      tag: 'ESSENTIAL'
+        'Tools that make cooking easier and more precise.'
+      ]
     },
     {
-     
-      icon: 'fas fa-cut',
+      id: '02',
+      image: 'CuttingTechniques.png',  // REAL IMAGE
       title: 'Cutting Techniques',
       route: '/cutting-techniques',
       features: [
-        'Julienne & dice cuts',
-        'Mincing methods',
-        'Knife safety rules',
-        'Practice exercises'
-      ],
-      tag: 'SKILL'
+        'Tools that make cooking easier and more precise.'
+      ]
     },
     {
-    
-      icon: 'fas fa-fire',
+      id: '03',
+      image: 'CookingMethods.png',  // REAL IMAGE
       title: 'Cooking Methods',
       route: '/cooking-methods',
       features: [
-        'Boiling & steaming',
-        'Sautéing & frying',
-        'Roasting & baking',
-        'Grilling basics'
-      ],
-      tag: 'METHOD'
+        'Heat-based techniques used to prepare and cook food.'
+      ]
     },
     {
-      
-      icon: 'fas fa-drumstick-bite',
+      id: '04',
+      image: 'MeatCuts.png',  // REAL IMAGE
       title: 'Meat Cuts',
       route: '/meat-cuts',
       features: [
-        'Chicken parts guide',
-        'Beef cuts chart',
-        'Lamb pieces',
-        'Fish preparation'
-      ],
-      tag: 'PROTEIN'
+        'Different portions of meat from various animal parts.'
+      ]
     },
     {
-      
-      icon: 'fas fa-utensils',
+      id: '05',
+      image: 'KitchenAppliances.png',  // REAL IMAGE
       title: 'Kitchen Appliances',
       route: '/kitchen-appliances',
       features: [
-        'Casual setup guide',
-        'Formal arrangement',
-        'Glassware placement',
-        'Napkin folding'
-      ],
-      tag: 'ETIQUETTE'
+        'Electrical devices that assist with cooking and food preparation.'
+      ]
     },
     {
-      
-      icon: 'fas fa-mortar-pestle',
+      id: '06',
+      image: 'PantryBasics.png',  // REAL IMAGE
       title: 'Pantry Basics',
       route: '/pantry-basics',
       features: [
-        'Essential spices list',
-        'Flavor balancing',
-        'Herb pairing guide',
-        'Taste profiles'
-      ],
-      tag: 'FLAVOR'
+        'Staple ingredients that form the foundation of everyday cooking.'
+      ]
     },
     {
-     
-      icon: 'fas fa-weight',
+      id: '07',
+      image: 'MeasuringSkills.png',  // REAL IMAGE
       title: 'Measuring Skills',
       route: '/measuring-skills',
       features: [
-        'Weight vs volume',
-        'Measuring cups & spoons',
-        'Kitchen scale usage',
-        'Conversion charts'
-      ],
-      tag: 'PRECISION'
+        'Techniques for accurately measuring ingredients.'
+      ]
     },
     {
-      
-      icon: 'fas fa-birthday-cake',
+      id: '08',
+      image: 'BakingEssentials.png',  // REAL IMAGE
       title: 'Bakery Essentials',
       route: '/bakery-essentials',
       features: [
-        'Dough kneading techniques',
-        'Proofing & fermentation',
-        'Oven temperature control',
-        'Decorative piping skills'
-      ],
-      tag: 'BAKING'
+        'Must-have tools and ingredients for successful baking.'
+      ]
     }
   ];
 
@@ -117,14 +86,15 @@ const BeginnersPage = () => {
 
   return (
     <div className="beginners-page">
-      {/* ========== YEH NEW PICTURE SECTION ADD KARNA ========== */}
-  <div className="fullscreen-kitchen-image">
-    <div className="fullscreen-kitchen-content">
-      <h1>Kitchen Mastery Guide</h1>
-      <p>Essential skills every home cook needs to master</p>
-      <p>Step-by-step tutorials and expert tips</p>
-    </div>
-  </div>
+      {/* Fullscreen Kitchen Image */}
+      <div className="fullscreen-kitchen-image">
+        <div className="fullscreen-kitchen-content">
+          <h1>Kitchen Mastery Guide</h1>
+          <p>Essential skills every home cook needs to master</p>
+          <p>Step-by-step tutorials and expert tips</p>
+        </div>
+      </div>
+      
       {/* Kitchen Mastery Title */}
       <div className="guide-header">
         <h1>Kitchen Mastery Guide</h1>
@@ -144,22 +114,32 @@ const BeginnersPage = () => {
               tabIndex={0}
               onKeyPress={(e) => e.key === 'Enter' && handleCardClick(card.route)}
             >
-              <div className="guide-card-accent"></div>
-              
-              {/* Card Number */}
-              <div className="guide-card-number">
+              {/* HIDE Card Number */}
+              <div className="guide-card-number" style={{display: 'none'}}>
                 {card.id}
               </div>
               
+              {/* HIDE Card Accent */}
+              <div className="guide-card-accent" style={{display: 'none'}}></div>
+              
+              {/* TOP: Title */}
               <div className="guide-card-header">
-                <div className="guide-card-icon-wrapper">
-                  <i className={card.icon}></i>
-                </div>
                 <div className="guide-card-title">
                   <h3>{card.title}</h3>
                 </div>
               </div>
               
+              {/* CENTER: REAL IMAGE - Not emoji/icon */}
+              <div className="guide-card-image-container">
+                <img 
+                  src={card.image} 
+                  alt={card.title} 
+                  className="guide-card-real-image"
+                  loading="lazy"
+                />
+              </div>
+              
+              {/* BOTTOM: Description */}
               <div className="guide-card-content">
                 <ul className="guide-card-features">
                   {card.features.map((feature, index) => (
@@ -169,21 +149,19 @@ const BeginnersPage = () => {
                   ))}
                 </ul>
               </div>
-              
-              <div className="guide-card-footer">
-                <span className="guide-card-tag">{card.tag}</span>
-                <div className="guide-card-arrow">
-                  <i className="fas fa-arrow-right"></i>
-                </div>
-              </div>
             </div>
           ))}
-          
-          {/* Empty placeholders for layout if needed (optional) */}
-          <div className="guide-empty-card"></div>
-          <div className="guide-empty-card"></div>
         </div>
       </div>
+      {/* Back to Home Button */}
+<div className="back-home-container">
+  <button 
+    className="back-home-btn"
+    onClick={() => navigate('/home')}
+  >
+    ← Back to Home
+  </button>
+</div>
     </div>
   );
 };

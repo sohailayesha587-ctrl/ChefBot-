@@ -241,30 +241,6 @@ html, body, #root {
   flex-shrink: 0;
 }
 
-.bep-essentiality-badge.essential {
-  background: rgba(220, 38, 38, 0.1);
-  color: #dc2626;
-  border: 1px solid rgba(220, 38, 38, 0.3);
-}
-
-.bep-essentiality-badge.important {
-  background: rgba(245, 158, 11, 0.1);
-  color: #d97706;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.bep-essentiality-badge.useful {
-  background: rgba(34, 197, 94, 0.1);
-  color: #16a34a;
-  border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-.bep-essentiality-badge.specialized {
-  background: rgba(139, 92, 246, 0.1);
-  color: #8b5cf6;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-}
-
 .bep-card-description {
   font-size: 14px;
   color: #64748b;
@@ -323,6 +299,7 @@ html, body, #root {
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
   height: 100%;
+  width: 300px;
 }
 
 .bep-type-card:hover {
@@ -333,7 +310,7 @@ html, body, #root {
 
 .bep-type-image {
   width: 100%;
-  height: 120px;
+  height: 160px;
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid #e2e8f0;
@@ -597,6 +574,145 @@ html, body, #root {
   border-left: 3px solid #dc2626;
 }
 
+/* ===== TEMPERATURE SPECIFIC STYLES ===== */
+.bep-ingredients-grid,
+.bep-proofing-grid,
+.bep-items-grid-mini,
+.bep-storage-grid,
+.bep-problems-grid,
+.bep-solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-ingredient-item,
+.bep-proofing-item,
+.bep-item-card-mini,
+.bep-storage-item,
+.bep-problem-item,
+.bep-solution-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #1e293b;
+  transition: all 0.3s ease;
+}
+
+.bep-ingredient-item:hover,
+.bep-proofing-item:hover,
+.bep-item-card-mini:hover,
+.bep-storage-item:hover,
+.bep-problem-item:hover,
+.bep-solution-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: #284a4b;
+}
+
+.bep-item-card-mini h4,
+.bep-storage-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #284a4b;
+  margin-bottom: 8px;
+}
+
+.bep-item-card-mini p,
+.bep-storage-item p {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.bep-item-card-mini p strong,
+.bep-storage-item p strong {
+  color: #1e293b;
+}
+
+/* ===== DECORATING SPECIFIC STYLES ===== */
+.bep-tiptypes-grid,
+.bep-sizes-grid,
+.bep-materials-grid,
+.bep-patterns-grid,
+.bep-usage-list,
+.bep-tools-grid,
+.bep-essentials-list,
+.bep-components-list,
+.bep-colors-list,
+.bep-colortypes-grid,
+.bep-presentation-list,
+.bep-tips-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bep-tiptype-item,
+.bep-size-card,
+.bep-material-item,
+.bep-pattern-item,
+.bep-usage-item,
+.bep-tool-card,
+.bep-essential-item,
+.bep-component-item,
+.bep-color-item,
+.bep-colortype-card,
+.bep-presentation-item,
+.bep-tip-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #1e293b;
+  transition: all 0.3s ease;
+}
+
+.bep-tiptype-item:hover,
+.bep-size-card:hover,
+.bep-material-item:hover,
+.bep-pattern-item:hover,
+.bep-usage-item:hover,
+.bep-tool-card:hover,
+.bep-essential-item:hover,
+.bep-component-item:hover,
+.bep-color-item:hover,
+.bep-colortype-card:hover,
+.bep-presentation-item:hover,
+.bep-tip-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: #9d174d;
+}
+
+.bep-size-card h4,
+.bep-tool-card h4,
+.bep-colortype-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #9d174d;
+  margin-bottom: 8px;
+}
+
+.bep-size-card p,
+.bep-tool-card p,
+.bep-colortype-card p {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.bep-size-card p strong,
+.bep-tool-card p strong,
+.bep-colortype-card p strong {
+  color: #1e293b;
+}
+
 /* ===== MODAL - 2 PART LAYOUT (RIGHT IMAGE, LEFT SCROLL) ===== */
 .bep-modal-overlay {
   position: fixed;
@@ -634,7 +750,7 @@ html, body, #root {
   border-radius: 50%;
   background: white;
   border: 1px solid #e2e8f0;
-  color: #64748b;
+  color: #666;
   font-size: 24px;
   display: flex;
   align-items: center;
@@ -642,12 +758,11 @@ html, body, #root {
   cursor: pointer;
   z-index: 100;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px #397d7c;
 }
 
 .bep-modal-close:hover {
   background: #f1f5f9;
-  transform: rotate(90deg);
 }
 
 .bep-modal-content {
@@ -712,7 +827,7 @@ html, body, #root {
 /* RIGHT SIDE - FIXED IMAGE (30%) */
 .bep-modal-right {
   flex: 0 0 30%;
-  padding: 30px 30px 30px 0;
+  padding: 20px 10px 10px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,12 +842,12 @@ html, body, #root {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  background: #f8fafc;
+  background: #284a4b;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #e2e8f0;
-  position: relative;
+  position: center;
 }
 
 .bep-main-image {
@@ -883,6 +998,21 @@ html, body, #root {
   .bep-mistakes-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .bep-ingredients-grid,
+  .bep-proofing-grid,
+  .bep-items-grid-mini,
+  .bep-storage-grid,
+  .bep-problems-grid,
+  .bep-solutions-grid,
+  .bep-tiptypes-grid,
+  .bep-sizes-grid,
+  .bep-materials-grid,
+  .bep-patterns-grid,
+  .bep-tools-grid,
+  .bep-colortypes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -953,7 +1083,19 @@ html, body, #root {
   .bep-ingredient-types-grid,
   .bep-agents-grid,
   .bep-decorating-types-grid,
-  .bep-functions-grid {
+  .bep-functions-grid,
+  .bep-ingredients-grid,
+  .bep-proofing-grid,
+  .bep-items-grid-mini,
+  .bep-storage-grid,
+  .bep-problems-grid,
+  .bep-solutions-grid,
+  .bep-tiptypes-grid,
+  .bep-sizes-grid,
+  .bep-materials-grid,
+  .bep-patterns-grid,
+  .bep-tools-grid,
+  .bep-colortypes-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -993,7 +1135,19 @@ html, body, #root {
   .bep-functions-grid,
   .bep-stages-grid,
   .bep-methods-grid,
-  .bep-temperatures-grid {
+  .bep-temperatures-grid,
+  .bep-ingredients-grid,
+  .bep-proofing-grid,
+  .bep-items-grid-mini,
+  .bep-storage-grid,
+  .bep-problems-grid,
+  .bep-solutions-grid,
+  .bep-tiptypes-grid,
+  .bep-sizes-grid,
+  .bep-materials-grid,
+  .bep-patterns-grid,
+  .bep-tools-grid,
+  .bep-colortypes-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1085,4 +1239,26 @@ html, body, #root {
 .bep-main::-webkit-scrollbar-thumb:hover,
 .bep-modal-left::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+.back-home-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+}
+
+.back-home-btn:hover {
+  background-color: #397d7c;
+  transform: scale(1.05);
 }
