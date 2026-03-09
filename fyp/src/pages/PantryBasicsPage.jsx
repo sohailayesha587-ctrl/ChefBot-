@@ -3577,7 +3577,730 @@ const staplesData = [
       }
     ]
   },
-    // ===== 8. SEEDS (8 types) =====
+    // ===== 6. NUTS (10 types) =====
+  {
+    id: 701,
+    name: "Almonds (Badam)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800",
+    tagline: "Brain food, rich in vitamin E",
+    fullDesc: "Almonds are one of the most popular nuts worldwide, prized for their delicate flavor and impressive nutrient profile. They're rich in healthy fats, vitamin E, and magnesium. Regular consumption is linked to improved heart health and brain function.",
+    storageTips: "Store in airtight container in cool, dark place. Refrigerate for longer shelf life.",
+    shelfLife: "6-12 months",
+    keyUses: ["Snacking", "Almond milk", "Garnishing", "Baking", "Almond flour"],
+    nutritionalInfo: "Rich in healthy monounsaturated fats, vitamin E, magnesium, protein, and fiber",
+    healthBenefits: ["Brain health", "Heart health", "Blood sugar control", "Weight management", "Skin health"],
+    cookingTips: "Soak overnight for better digestion and nutrient absorption. Remove skin for blanched almonds.",
+    types: [
+      {
+        name: "Raw Almonds",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
+        description: "Unroasted, with skin",
+        bestFor: "Snacking, Soaking",
+        soaking: "8-10 hours",
+        benefits: "Vitamin E, magnesium"
+      },
+      {
+        name: "Blanched Almonds",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
+        description: "Skin removed, white color",
+        bestFor: "Almond milk, Baking, Garnishing",
+        soaking: "4-6 hours",
+        benefits: "Easier to digest"
+      },
+      {
+        name: "Roasted Almonds",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=300",
+        description: "Dry roasted, enhanced flavor",
+        bestFor: "Snacking, Trail mix",
+        benefits: "Rich flavor"
+      }
+    ]
+  },
+  {
+    id: 702,
+    name: "Cashews (Kaju)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800",
+    tagline: "Creamy nuts for curries and snacks",
+    fullDesc: "Cashews are kidney-shaped nuts with a sweet, buttery flavor and creamy texture. They're incredibly versatile in Indian cuisine - used in rich curries (like kaju curry), sweets (kaju katli), and as a snack. Also makes delicious cashew cream for vegan dishes.",
+    storageTips: "Store in airtight container away from moisture and heat. Refrigerate for longer life.",
+    shelfLife: "6-9 months",
+    keyUses: ["Kaju Curry", "Kaju Katli", "Snacking", "Garnishing", "Cashew cream"],
+    nutritionalInfo: "Rich in healthy monounsaturated fats, copper, magnesium, and zinc",
+    healthBenefits: ["Heart health", "Bone health", "Immune support", "Energy booster"],
+    cookingTips: "Soak for 2-3 hours for curries. Roast before use for enhanced flavor.",
+    types: [
+      {
+        name: "Whole Cashews",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Premium whole nuts",
+        bestFor: "Garnishing, Kaju Katli",
+        soaking: "2-3 hours",
+        benefits: "Rich in copper"
+      },
+      {
+        name: "Split Cashews",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Broken pieces, more affordable",
+        bestFor: "Curries, Snacking",
+        soaking: "2-3 hours",
+        benefits: "Good for everyday use"
+      },
+      {
+        name: "Roasted Cashews",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Salt roasted or plain",
+        bestFor: "Snacking, Trail mix",
+        benefits: "Crunchy texture"
+      }
+    ]
+  },
+  {
+    id: 703,
+    name: "Walnuts (Akhrot)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Brain-shaped nuts rich in omega-3",
+    fullDesc: "Walnuts are uniquely rich in omega-3 fatty acids (alpha-linolenic acid), making them exceptional for brain and heart health. Their brain-like shape is nature's hint at their benefits. They have a slightly bitter, earthy flavor that pairs well with sweets and salads.",
+    storageTips: "Store in airtight container in refrigerator (prone to rancidity due to high oil content).",
+    shelfLife: "6 months (refrigerated)",
+    keyUses: ["Snacking", "Baking", "Salads", "Walnut chutney", "Desserts"],
+    nutritionalInfo: "Very high in omega-3 fatty acids, antioxidants, copper, and manganese",
+    healthBenefits: ["Brain health", "Heart health", "Anti-inflammatory", "Antioxidant rich"],
+    cookingTips: "Toast lightly to enhance flavor and reduce bitterness. Soak overnight to reduce tannins.",
+    types: [
+      {
+        name: "English Walnuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Common variety, thin shell",
+        bestFor: "Snacking, Baking",
+        soaking: "6-8 hours",
+        benefits: "Omega-3 rich"
+      },
+      {
+        name: "Black Walnuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Stronger, earthier flavor",
+        bestFor: "Baking, Ice cream",
+        benefits: "Intense flavor"
+      }
+    ]
+  },
+  {
+    id: 704,
+    name: "Pistachios (Pista)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Green nuts for sweets and garnishing",
+    fullDesc: "Pistachios are distinctive with their green color and slightly sweet, unique flavor. They're prized in Indian cuisine for making sweets like pista barfi and kulfi, and as a garnish for biryanis and desserts. Also excellent for heart health.",
+    storageTips: "Store in airtight container in cool, dry place. Can be refrigerated.",
+    shelfLife: "6-12 months",
+    keyUses: ["Pista Barfi", "Kulfi", "Garnishing", "Snacking", "Ice cream"],
+    nutritionalInfo: "Rich in protein, fiber, healthy fats, vitamin B6, and antioxidants",
+    healthBenefits: ["Heart health", "Blood sugar control", "Weight management", "Eye health"],
+    cookingTips: "Blanch and peel for sweets. Roast for snacking.",
+    types: [
+      {
+        name: "Raw Pistachios",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Unroasted, natural",
+        bestFor: "Cooking, Sweets",
+        benefits: "Vitamin B6 rich"
+      },
+      {
+        name: "Roasted Pistachios",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Salt roasted",
+        bestFor: "Snacking",
+        benefits: "Crunchy flavor"
+      },
+      {
+        name: "Shelled Pistachios",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Already removed from shell",
+        bestFor: "Convenience, Baking",
+        benefits: "Ready to use"
+      }
+    ]
+  },
+  {
+    id: 705,
+    name: "Peanuts (Moongphali)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800",
+    tagline: "Affordable protein-rich ground nuts",
+    fullDesc: "Peanuts, also known as groundnuts, are technically legumes but used as nuts in cooking. They're incredibly affordable and protein-rich, making them a staple snack in India. Used in chutneys, curries (like peanut masala), snacks, and peanut butter.",
+    storageTips: "Store in airtight container away from moisture. Can develop mold if damp.",
+    shelfLife: "6-9 months",
+    keyUses: ["Peanut chutney", "Peanut masala", "Snacking", "Peanut butter", "Chikki (brittle)"],
+    nutritionalInfo: "High in protein, healthy fats, niacin, folate, and vitamin E",
+    healthBenefits: ["Heart health", "Energy booster", "Blood sugar control", "Weight management"],
+    cookingTips: "Roast and remove skin for better flavor. Grind for chutneys and sauces.",
+    types: [
+      {
+        name: "Raw Peanuts",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Unroasted, with skin",
+        bestFor: "Cooking, Boiling",
+        benefits: "High protein"
+      },
+      {
+        name: "Roasted Peanuts",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "Dry roasted, with or without salt",
+        bestFor: "Snacking, Chutneys",
+        benefits: "Enhanced flavor"
+      },
+      {
+        name: "Red Skin Peanuts",
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=300",
+        description: "With red papery skin",
+        bestFor: "Boiled peanuts",
+        benefits: "Antioxidants in skin"
+      }
+    ]
+  },
+  {
+    id: 706,
+    name: "Hazelnuts",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, rich nuts for baking",
+    fullDesc: "Hazelnuts have a sweet, rich, and slightly earthy flavor. They're famous for their use in chocolate spreads like Nutella and European desserts. Also delicious roasted and added to salads, baked goods, or enjoyed as a snack.",
+    storageTips: "Store in airtight container in refrigerator or freezer due to high oil content.",
+    shelfLife: "6-12 months (refrigerated)",
+    keyUses: ["Baking", "Chocolate spreads", "Desserts", "Salads", "Snacking"],
+    nutritionalInfo: "Rich in healthy fats, vitamin E, manganese, and antioxidants",
+    healthBenefits: ["Heart health", "Antioxidant rich", "Brain health", "Skin health"],
+    cookingTips: "Toast and rub with kitchen towel to remove skin. Grind for flour or spreads.",
+    types: [
+      {
+        name: "Whole Hazelnuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "With or without skin",
+        bestFor: "Snacking, Baking",
+        soaking: "Optional",
+        benefits: "Vitamin E rich"
+      },
+      {
+        name: "Chopped Hazelnuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Pre-chopped pieces",
+        bestFor: "Baking, Garnishing",
+        benefits: "Convenient"
+      }
+    ]
+  },
+  {
+    id: 707,
+    name: "Pecans",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Buttery, sweet nuts from North America",
+    fullDesc: "Pecans are native to North America and have a rich, buttery, and slightly sweet flavor. They're softer than walnuts and are famous for pecan pie. Also delicious in salads, baked goods, or caramelized as a snack.",
+    storageTips: "Store in airtight container in refrigerator due to high oil content.",
+    shelfLife: "6-9 months (refrigerated)",
+    keyUses: ["Pecan pie", "Baking", "Salads", "Caramelized pecans", "Snacking"],
+    nutritionalInfo: "Rich in healthy fats, fiber, manganese, and copper",
+    healthBenefits: ["Heart health", "Brain health", "Digestive health", "Antioxidant rich"],
+    cookingTips: "Toast to enhance buttery flavor. Great in both sweet and savory dishes.",
+    types: [
+      {
+        name: "Whole Pecans",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Whole halves",
+        bestFor: "Pie, Snacking",
+        benefits: "Buttery flavor"
+      },
+      {
+        name: "Pecan Pieces",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Chopped pieces",
+        bestFor: "Baking, Salads",
+        benefits: "Budget-friendly"
+      }
+    ]
+  },
+  {
+    id: 708,
+    name: "Brazil Nuts",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Large nuts from Amazon, selenium rich",
+    fullDesc: "Brazil nuts are large, rich nuts from the Amazon rainforest. They're the richest dietary source of selenium, a mineral crucial for thyroid function and immunity. They have a creamy, slightly earthy flavor and are usually eaten raw or roasted.",
+    storageTips: "Store in airtight container in refrigerator to prevent rancidity.",
+    shelfLife: "6-9 months (refrigerated)",
+    keyUses: ["Snacking", "Trail mix", "Baking", "Nut butters"],
+    nutritionalInfo: "Extremely high in selenium, rich in magnesium, healthy fats, and protein",
+    healthBenefits: ["Thyroid health", "Immune support", "Heart health", "Antioxidant rich"],
+    cookingTips: "Limit to 2-3 nuts per day due to high selenium content. Toast lightly for flavor.",
+    types: [
+      {
+        name: "Raw Brazil Nuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Unroasted, natural",
+        bestFor: "Snacking",
+        benefits: "Selenium rich"
+      }
+    ]
+  },
+  {
+    id: 709,
+    name: "Macadamia Nuts",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Buttery, rich, and luxurious nuts",
+    fullDesc: "Macadamia nuts are considered the most luxurious nuts due to their rich, buttery flavor and creamy texture. They're native to Australia and have the highest fat content of any nut. Delicious in cookies, crusts, or simply roasted with sea salt.",
+    storageTips: "Store in airtight container in refrigerator. They can last up to 2 years frozen.",
+    shelfLife: "1-2 years (refrigerated)",
+    keyUses: ["Macadamia cookies", "Baking", "Snacking", "Nut crust for fish", "Ice cream"],
+    nutritionalInfo: "Highest in healthy monounsaturated fats, rich in thiamine and manganese",
+    healthBenefits: ["Heart health", "Brain health", "Antioxidant rich", "Blood sugar control"],
+    cookingTips: "Toast lightly to enhance flavor. Great in both sweet and savory dishes.",
+    types: [
+      {
+        name: "Roasted Macadamia",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Lightly roasted",
+        bestFor: "Snacking",
+        benefits: "Rich buttery flavor"
+      },
+      {
+        name: "Raw Macadamia",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Unroasted",
+        bestFor: "Baking, Cooking",
+        benefits: "Creamy texture"
+      }
+    ]
+  },
+  {
+    id: 710,
+    name: "Pine Nuts (Chilgoza)",
+    category: "nuts",
+    categoryDisplay: "Nuts",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Small, delicate nuts from pine cones",
+    fullDesc: "Pine nuts are the edible seeds of pine trees, known for their delicate, buttery flavor and soft texture. They're essential for making pesto and are used in various Middle Eastern and Mediterranean dishes. In India, chilgoza is prized and quite expensive.",
+    storageTips: "Store in airtight container in refrigerator (prone to rancidity).",
+    shelfLife: "3-6 months (refrigerated)",
+    keyUses: ["Pesto", "Salads", "Garnishing", "Baking", "Mediterranean dishes"],
+    nutritionalInfo: "Rich in healthy fats, protein, iron, and magnesium",
+    healthBenefits: ["Heart health", "Energy booster", "Eye health", "Antioxidant rich"],
+    cookingTips: "Toast lightly in a dry pan to enhance flavor (watch carefully, they burn quickly).",
+    types: [
+      {
+        name: "Mediterranean Pine Nuts",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Long, slender nuts",
+        bestFor: "Pesto, Salads",
+        benefits: "Delicate flavor"
+      },
+      {
+        name: "Chilgoza (Indian)",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Larger, traditional Indian variety",
+        bestFor: "Snacking, Rich dishes",
+        benefits: "Premium quality"
+      }
+    ]
+  },
+  // ===== 7. DRY FRUITS (12 types) =====
+  {
+    id: 801,
+    name: "Raisins (Kishmish)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Dried grapes, natural sweetener",
+    fullDesc: "Raisins are dried grapes, available in various colors and sizes. They're naturally sweet and used in both sweet and savory dishes. Essential in pulao, biryani, desserts, and as a healthy snack. Rich in iron and natural sugars.",
+    storageTips: "Store in airtight container in cool, dry place. Can be refrigerated.",
+    shelfLife: "6-12 months",
+    keyUses: ["Pulao", "Biryani", "Desserts", "Baking", "Snacking", "Iron supplement"],
+    nutritionalInfo: "Rich in natural sugars, iron, potassium, and antioxidants",
+    healthBenefits: ["Iron source", "Digestive health", "Energy booster", "Bone health"],
+    cookingTips: "Soak in warm water before using in baking. Add to dishes at the end of cooking.",
+    types: [
+      {
+        name: "Golden Raisins",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Sulfur-treated, golden color",
+        bestFor: "Baking, Desserts",
+        soaking: "30 mins",
+        benefits: "Milder flavor"
+      },
+      {
+        name: "Black Raisins",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Sun-dried, dark color",
+        bestFor: "Iron supplement, Snacking",
+        soaking: "30 mins",
+        benefits: "Higher iron"
+      },
+      {
+        name: "Green Raisins",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Light green, sweet",
+        bestFor: "Pulao, Biryani",
+        soaking: "20 mins",
+        benefits: "Sweet flavor"
+      }
+    ]
+  },
+  {
+    id: 802,
+    name: "Golden Raisins",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Plump, golden dried grapes",
+    fullDesc: "Golden raisins are made from green grapes treated with sulfur dioxide and dried mechanically. They're plumper, moister, and have a milder, fruitier flavor than regular raisins. Excellent for baking, especially in cookies and cakes.",
+    storageTips: "Store in airtight container. They can become hard if exposed to air.",
+    shelfLife: "6-9 months",
+    keyUses: ["Baking", "Cookies", "Cakes", "Trail mix", "Cereal"],
+    nutritionalInfo: "Rich in natural sugars, antioxidants, and small amounts of iron",
+    healthBenefits: ["Quick energy", "Antioxidant rich", "Digestive health"],
+    cookingTips: "Soak in warm water or juice before baking to keep them plump.",
+    types: [
+      {
+        name: "Organic Golden Raisins",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "No preservatives",
+        bestFor: "Health-conscious baking",
+        benefits: "Natural flavor"
+      }
+    ]
+  },
+  {
+    id: 803,
+    name: "Dates (Khajoor)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Nature's candy, incredibly sweet",
+    fullDesc: "Dates are the fruit of the date palm tree, prized for their intense sweetness and chewy texture. They're a staple in Middle Eastern cuisine and increasingly popular worldwide as a natural sweetener. Used in desserts, energy balls, and even savory dishes.",
+    storageTips: "Store in airtight container. Can be refrigerated for longer life.",
+    shelfLife: "6-12 months",
+    keyUses: ["Date syrup", "Energy balls", "Desserts", "Snacking", "Natural sweetener"],
+    nutritionalInfo: "High in natural sugars, fiber, potassium, and antioxidants",
+    healthBenefits: ["Natural energy", "Digestive health", "Heart health", "Bone health"],
+    cookingTips: "Remove pit before use. Soak if too hard. Great for making date paste.",
+    types: [
+      {
+        name: "Medjool Dates",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Large, soft, caramel flavor",
+        bestFor: "Snacking, Stuffed dates",
+        benefits: "Premium quality"
+      },
+      {
+        name: "Deglet Noor Dates",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Medium, firmer, less sweet",
+        bestFor: "Baking, Cooking",
+        benefits: "Good for recipes"
+      },
+      {
+        name: "Kimia Dates",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Iranian variety",
+        bestFor: "Snacking",
+        benefits: "Affordable"
+      }
+    ]
+  },
+  {
+    id: 804,
+    name: "Dried Apricots (Khubani)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Tangy-sweet dried fruit",
+    fullDesc: "Dried apricots are made from fresh apricots with the moisture removed. They have an intense sweet-tart flavor and chewy texture. Rich in vitamin A and fiber. Used in chutneys, desserts, and as a healthy snack. Also popular in Middle Eastern cuisine.",
+    storageTips: "Store in airtight container. Refrigerate for longer shelf life.",
+    shelfLife: "6-12 months",
+    keyUses: ["Snacking", "Chutney", "Desserts", "Trail mix", "Tagine dishes"],
+    nutritionalInfo: "High in vitamin A, fiber, potassium, and iron",
+    healthBenefits: ["Eye health", "Digestive health", "Skin health", "Immune support"],
+    cookingTips: "Soak in warm water before using in cooking. Great in both sweet and savory dishes.",
+    types: [
+      {
+        name: "Turkish Apricots",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Orange, sweet, tender",
+        bestFor: "Snacking, Cooking",
+        benefits: "Rich in vitamin A"
+      },
+      {
+        name: "Organic Apricots",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "No sulfur, darker color",
+        bestFor: "Health-conscious",
+        benefits: "No preservatives"
+      }
+    ]
+  },
+  {
+    id: 805,
+    name: "Dried Figs (Anjeer)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet, chewy fruits with crunchy seeds",
+    fullDesc: "Dried figs are intensely sweet with a chewy texture and tiny crunchy seeds. They're packed with fiber, calcium, and antioxidants. In India, anjeer is often eaten as a snack, used in desserts, or soaked and eaten for health benefits.",
+    storageTips: "Store in airtight container. Can be refrigerated.",
+    shelfLife: "6-12 months",
+    keyUses: ["Snacking", "Anjeer barfi", "Desserts", "Salads", "Health supplement"],
+    nutritionalInfo: "High in fiber, calcium, potassium, and antioxidants",
+    healthBenefits: ["Digestive health", "Bone health", "Heart health", "Natural laxative"],
+    cookingTips: "Soak overnight for easier digestion. Great in smoothies and desserts.",
+    types: [
+      {
+        name: "Turkish Figs",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Large, soft, sweet",
+        bestFor: "Snacking, Desserts",
+        soaking: "6-8 hours",
+        benefits: "Calcium rich"
+      },
+      {
+        name: "Black Mission Figs",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Small, intense flavor",
+        bestFor: "Baking, Cooking",
+        soaking: "4-6 hours",
+        benefits: "Antioxidant rich"
+      }
+    ]
+  },
+  {
+    id: 806,
+    name: "Dried Prunes (Aloo Bukhara)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Dried plums, famous for digestion",
+    fullDesc: "Dried prunes are dried plums, renowned for their digestive benefits due to high fiber and sorbitol content. They have a sweet, slightly tart flavor and are used in chutneys, desserts, and as a snack. Also used in Middle Eastern and Moroccan cuisine.",
+    storageTips: "Store in airtight container. Can be refrigerated.",
+    shelfLife: "6-12 months",
+    keyUses: ["Digestive health", "Snacking", "Chutney", "Desserts", "Tagine"],
+    nutritionalInfo: "High in fiber, vitamin K, potassium, and antioxidants",
+    healthBenefits: ["Digestive health", "Bone health", "Heart health", "Natural laxative"],
+    cookingTips: "Soak in warm water before using. Prune juice is also popular for constipation.",
+    types: [
+      {
+        name: "Pitted Prunes",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Pit removed, ready to eat",
+        bestFor: "Snacking, Cooking",
+        benefits: "Convenient"
+      },
+      {
+        name: "Whole Prunes",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "With pit, firmer texture",
+        bestFor: "Cooking, Stewing",
+        benefits: "Longer shelf life"
+      }
+    ]
+  },
+  {
+    id: 807,
+    name: "Dried Cranberries",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Tart-sweet red berries",
+    fullDesc: "Dried cranberries are fresh cranberries that have been dried and usually sweetened with sugar to balance their natural tartness. They're popular in trail mixes, salads, and baking. Rich in antioxidants and give a pop of color to any dish.",
+    storageTips: "Store in airtight container in cool, dry place.",
+    shelfLife: "6-12 months",
+    keyUses: ["Salads", "Trail mix", "Baking", "Cereal", "Granola"],
+    nutritionalInfo: "High in antioxidants, vitamin C, and fiber",
+    healthBenefits: ["Urinary tract health", "Antioxidant rich", "Immune support"],
+    cookingTips: "Reduce sugar in recipes when using sweetened cranberries. Great in both sweet and savory dishes.",
+    types: [
+      {
+        name: "Sweetened Cranberries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Most common, sugar added",
+        bestFor: "Snacking, Salads",
+        benefits: "Balanced tartness"
+      },
+      {
+        name: "Unsweetened Cranberries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "No added sugar, very tart",
+        bestFor: "Cooking, Health foods",
+        benefits: "No added sugar"
+      }
+    ]
+  },
+  {
+    id: 808,
+    name: "Dried Blueberries",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Tiny blue antioxidant powerhouses",
+    fullDesc: "Dried blueberries are fresh blueberries that have been dried, concentrating their sweet-tart flavor and nutritional benefits. They're famous for being one of the highest antioxidant foods. Great in cereals, baked goods, and trail mixes.",
+    storageTips: "Store in airtight container away from light and heat.",
+    shelfLife: "6-12 months",
+    keyUses: ["Cereal", "Baking", "Trail mix", "Granola", "Salads"],
+    nutritionalInfo: "Extremely high in antioxidants, vitamin C, vitamin K, and fiber",
+    healthBenefits: ["Brain health", "Heart health", "Antioxidant rich", "Anti-aging"],
+    cookingTips: "Rehydrate in warm water for use in baking. Great in muffins and pancakes.",
+    types: [
+      {
+        name: "Wild Blueberries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Smaller, more intense flavor",
+        bestFor: "Baking, Snacking",
+        benefits: "Higher antioxidants"
+      },
+      {
+        name: "Cultivated Blueberries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Larger, sweeter",
+        bestFor: "Snacking, Cereal",
+        benefits: "Milder flavor"
+      }
+    ]
+  },
+  {
+    id: 809,
+    name: "Dried Cherries",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Sweet-tart ruby red gems",
+    fullDesc: "Dried cherries are fresh cherries that have been dried, resulting in a chewy, intensely flavored fruit. They have a perfect balance of sweetness and tartness. Excellent in baking, salads, trail mixes, and as a snack. Rich in antioxidants.",
+    storageTips: "Store in airtight container in cool, dry place.",
+    shelfLife: "6-12 months",
+    keyUses: ["Baking", "Salads", "Trail mix", "Granola", "Snacking"],
+    nutritionalInfo: "Rich in antioxidants, vitamin A, and fiber",
+    healthBenefits: ["Anti-inflammatory", "Sleep aid (melatonin)", "Heart health", "Antioxidant rich"],
+    cookingTips: "Chop before adding to baked goods. Rehydrate in warm water for plump texture.",
+    types: [
+      {
+        name: "Tart Cherries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Sour variety, usually sweetened",
+        bestFor: "Baking, Sleep aid",
+        benefits: "Melatonin rich"
+      },
+      {
+        name: "Sweet Cherries",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Naturally sweet",
+        bestFor: "Snacking, Salads",
+        benefits: "Naturally sweet"
+      }
+    ]
+  },
+  {
+    id: 810,
+    name: "Dried Mango (Aam Papad)",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Chewy, sweet-tart mango strips",
+    fullDesc: "Dried mango, also known as aam papad in India, is made from ripe mango pulp dried into sheets and cut into strips. It's a popular Indian snack with an intense sweet-tart mango flavor. Can be sweet or spicy (with chili powder).",
+    storageTips: "Store in airtight container away from moisture.",
+    shelfLife: "6-9 months",
+    keyUses: ["Snacking", "Desserts", "Trail mix", "Indian sweets"],
+    nutritionalInfo: "Rich in vitamin A, vitamin C, and natural sugars",
+    healthBenefits: ["Eye health", "Immune support", "Quick energy"],
+    cookingTips: "Can be cut into smaller pieces for use in desserts or granola.",
+    types: [
+      {
+        name: "Sweet Aam Papad",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Plain sweet mango strips",
+        bestFor: "Snacking, Kids",
+        benefits: "Natural mango flavor"
+      },
+      {
+        name: "Spicy Aam Papad",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "With chili powder",
+        bestFor: "Spicy snack lovers",
+        benefits: "Sweet-spicy combo"
+      }
+    ]
+  },
+  {
+    id: 811,
+    name: "Dried Apple",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Crisp, sweet apple rings",
+    fullDesc: "Dried apples are fresh apples with the moisture removed, resulting in a chewy, sweet, and slightly tangy snack. They retain most of the nutritional value of fresh apples and are excellent in cereals, baking, and as a healthy snack.",
+    storageTips: "Store in airtight container away from moisture.",
+    shelfLife: "6-12 months",
+    keyUses: ["Snacking", "Cereal", "Baking", "Trail mix", "Granola"],
+    nutritionalInfo: "Rich in fiber, vitamin C, and antioxidants",
+    healthBenefits: ["Digestive health", "Heart health", "Blood sugar control"],
+    cookingTips: "Chop for use in muffins and breads. Rehydrate in warm water for plumper texture.",
+    types: [
+      {
+        name: "Apple Rings",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Whole rings, no peel",
+        bestFor: "Snacking",
+        benefits: "Fun shape"
+      },
+      {
+        name: "Diced Apples",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Chopped pieces",
+        bestFor: "Baking, Cooking",
+        benefits: "Ready to use"
+      }
+    ]
+  },
+  {
+    id: 812,
+    name: "Dried Banana",
+    category: "dryfruits",
+    categoryDisplay: "Dry Fruits",
+    image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=800",
+    tagline: "Chewy, sweet banana chips",
+    fullDesc: "Dried bananas are fresh bananas that have been dehydrated, concentrating their natural sweetness. They can be found as soft, chewy dried banana slices or crispy banana chips. Popular in trail mixes, cereals, and as a healthy snack.",
+    storageTips: "Store in airtight container. Banana chips (fried) are more perishable.",
+    shelfLife: "Dried: 6 months, Chips: 3-4 months",
+    keyUses: ["Snacking", "Trail mix", "Cereal", "Baking", "Smoothies"],
+    nutritionalInfo: "Rich in potassium, vitamin B6, and natural sugars",
+    healthBenefits: ["Heart health", "Energy booster", "Muscle function", "Digestive health"],
+    cookingTips: "Soak dried bananas for use in smoothies. Banana chips are ready to eat.",
+    types: [
+      {
+        name: "Dried Banana Slices",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Soft, chewy, no oil",
+        bestFor: "Snacking, Smoothies",
+        benefits: "No added fat"
+      },
+     {
+        name: "Banana Chips",
+        image: "https://images.unsplash.com/photo-1593532842320-5dcd39c35ed5?auto=format&fit=crop&w=300",
+        description: "Crispy, fried or baked",
+        bestFor: "Crunchy snacking",
+        benefits: "Crunchy texture"
+      }
+    ]
+  },
+      // ===== 8. SEEDS (8 types) =====
   {
     id: 901,
     name: "Watermelon Seeds (Tarbooz ke Beej)",
@@ -5587,28 +6310,72 @@ const getCurrentData = () => {
     )}
 
     {/* TYPES SECTION - Sabke liye */}
-    {selectedItem.types && selectedItem.types.length > 0 && (
-      <div className="pbp-types-section">
-        <h3 className="pbp-types-heading">Types & Varieties</h3>
-        <div className="pbp-types-grid">
-          {selectedItem.types.map((type, index) => (
-            <div key={index} className="pbp-type-card">
-              <div 
-                className="pbp-type-image"
-                style={{ backgroundImage: `url(${type.image})` }}
-              ></div>
-              <div className="pbp-type-content">
-                <h4>{type.name}</h4>
-                <p className="pbp-type-desc">{type.description}</p>
-                <div className="pbp-type-best">
-                  <strong>Best For:</strong> {type.bestFor}
-                </div>
+{selectedItem.types && selectedItem.types.length > 0 && (
+  <div className="pbp-types-section">
+    <h3 className="pbp-types-heading">Types & Varieties</h3>
+    <div className="pbp-types-grid">
+      {selectedItem.types.map((type, index) => (
+        <div key={index} className="pbp-type-card">
+          <div 
+            className="pbp-type-image"
+            style={{ backgroundImage: `url(${type.image})` }}
+          ></div>
+          <div className="pbp-type-content">
+            <h4>{type.name}</h4>
+            <p className="pbp-type-desc">{type.description}</p>
+            
+            {/* Common properties for all */}
+            {type.bestFor && (
+              <div className="pbp-type-best">
+                <strong>Best For:</strong> {type.bestFor}
               </div>
-            </div>
-          ))}
+            )}
+            
+            {/* Nuts ke liye special properties */}
+            {type.benefits && (
+              <div className="pbp-type-benefits">
+                <strong>Benefits:</strong> {type.benefits}
+              </div>
+            )}
+            
+            {type.soaking && (
+              <div className="pbp-type-soaking">
+                <strong>Soaking Time:</strong> {type.soaking}
+              </div>
+            )}
+            
+            {/* Grains ke liye properties */}
+            {type.waterRatio && (
+              <div className="pbp-type-info-item">💧 {type.waterRatio}</div>
+            )}
+            
+            {type.glycemicIndex && (
+              <div className="pbp-type-info-item">📊 GI: {type.glycemicIndex}</div>
+            )}
+            
+            {/* Flours ke liye properties */}
+            {type.gluten && (
+              <div className="pbp-type-info-item">🌾 Gluten: {type.gluten}</div>
+            )}
+            
+            {type.fiber && (
+              <div className="pbp-type-info-item">🥗 Fiber: {type.fiber}</div>
+            )}
+            
+            {/* Pulses ke liye properties */}
+            {type.protein && (
+              <div className="pbp-type-info-item">💪 Protein: {type.protein}</div>
+            )}
+            
+            {type.cookingTime && (
+              <div className="pbp-type-info-item">⏱️ {type.cookingTime}</div>
+            )}
+          </div>
         </div>
-      </div>
-    )}
+      ))}
+    </div>
+  </div>
+)}
     
   </div>
 </div>

@@ -1,20 +1,15 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeBakingPage.css';
 
 const RecipeBakingPage = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCake, setSelectedCake] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showVoiceInstructions, setShowVoiceInstructions] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
-  const autoPlayStartedRef = useRef(false);
 
   // Cake images array
   const cakeImages = [
@@ -55,6 +50,8 @@ const RecipeBakingPage = () => {
     { 
       id: 1, 
       name: "Vanilla Sponge Cake",
+      tagline: "Light and fluffy classic vanilla cake",
+      image: cakeImages[0],
       ingredients: [
         "2 cups maida (all-purpose flour)",
         "2 cups sugar",
@@ -65,7 +62,7 @@ const RecipeBakingPage = () => {
         "1 tbsp baking powder",
         "1/2 tsp salt"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C).",
         "Grease and flour two 9-inch round cake pans.",
         "Cream butter and sugar until light and fluffy.",
@@ -81,6 +78,8 @@ const RecipeBakingPage = () => {
     { 
       id: 2, 
       name: "Chocolate Mug Cake",
+      tagline: "Quick single-serving chocolate cake in minutes",
+      image: cakeImages[1],
       ingredients: [
         "4 tbsp all-purpose flour",
         "4 tbsp sugar",
@@ -91,7 +90,7 @@ const RecipeBakingPage = () => {
         "1/4 tsp vanilla essence",
         "1 tbsp chocolate chips (optional)"
       ],
-      instructions: [
+      steps: [
         "In microwave-safe mug, mix flour, sugar, cocoa powder, and baking powder.",
         "Add milk, oil, and vanilla essence. Mix until smooth.",
         "Stir in chocolate chips if using.",
@@ -103,6 +102,8 @@ const RecipeBakingPage = () => {
     { 
       id: 3, 
       name: "Banana Bread",
+      tagline: "Moist and delicious quick bread with ripe bananas",
+      image: cakeImages[2],
       ingredients: [
         "3 ripe bananas, mashed",
         "1/3 cup melted butter",
@@ -114,7 +115,7 @@ const RecipeBakingPage = () => {
         "1 1/2 cups all-purpose flour",
         "1/2 cup chopped walnuts (optional)"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease a 9x5 inch loaf pan.",
         "Mash bananas with fork until smooth.",
         "Stir melted butter into bananas.",
@@ -130,6 +131,8 @@ const RecipeBakingPage = () => {
     { 
       id: 4, 
       name: "Butter Pound Cake",
+      tagline: "Rich, dense buttery classic pound cake",
+      image: cakeImages[3],
       ingredients: [
         "2 cups all-purpose flour",
         "2 cups sugar",
@@ -140,7 +143,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp baking powder",
         "1/4 tsp salt"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 325°F (165°C). Grease a tube pan.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time, beating well after each.",
@@ -155,6 +158,8 @@ const RecipeBakingPage = () => {
     { 
       id: 5, 
       name: "Coffee Cake",
+      tagline: "Cinnamon streusel topped coffee cake",
+      image: cakeImages[4],
       ingredients: [
         "2 cups all-purpose flour",
         "1 cup sugar",
@@ -167,7 +172,7 @@ const RecipeBakingPage = () => {
         "1/4 tsp salt",
         "For topping: 1/2 cup brown sugar, 1/2 cup chopped walnuts, 2 tsp cinnamon"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease a 9-inch square pan.",
         "Make topping: Mix brown sugar, walnuts, and cinnamon.",
         "Cream butter and sugar until fluffy.",
@@ -184,6 +189,8 @@ const RecipeBakingPage = () => {
     { 
       id: 6, 
       name: "Vegan Sugar Cookies",
+      tagline: "Plant-based buttery sugar cookies",
+      image: cakeImages[5],
       ingredients: [
         "2 1/2 cups all-purpose flour",
         "1 cup vegan butter, softened",
@@ -194,7 +201,7 @@ const RecipeBakingPage = () => {
         "1 tsp baking powder",
         "1/2 tsp salt"
       ],
-      instructions: [
+      steps: [
         "Cream vegan butter and sugar until fluffy.",
         "Add almond milk and vanilla essence, mix well.",
         "In separate bowl, whisk flour, cornstarch, baking powder, and salt.",
@@ -210,6 +217,8 @@ const RecipeBakingPage = () => {
     { 
       id: 7, 
       name: "Peanut Butter Cookies",
+      tagline: "Soft and chewy peanut butter cookies",
+      image: cakeImages[6],
       ingredients: [
         "1 cup creamy peanut butter",
         "1 cup sugar",
@@ -219,7 +228,7 @@ const RecipeBakingPage = () => {
         "Pinch of salt",
         "Sugar for rolling"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C).",
         "Mix peanut butter, sugar, egg, vanilla, baking soda, and salt.",
         "Form dough into 1-inch balls and roll in sugar.",
@@ -232,6 +241,8 @@ const RecipeBakingPage = () => {
     { 
       id: 8, 
       name: "Vegan Chocolate Cake",
+      tagline: "Rich and moist eggless chocolate cake",
+      image: cakeImages[7],
       ingredients: [
         "1 1/2 cups all-purpose flour",
         "1 cup sugar",
@@ -243,7 +254,7 @@ const RecipeBakingPage = () => {
         "1 tsp vanilla essence",
         "1 tsp vinegar"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease an 8-inch pan.",
         "Whisk together flour, sugar, cocoa powder, baking soda, and salt.",
         "Make a well and add water, oil, vanilla, and vinegar.",
@@ -257,6 +268,8 @@ const RecipeBakingPage = () => {
     { 
       id: 9, 
       name: "American Red Velvet",
+      tagline: "Classic red velvet cake with cream cheese frosting",
+      image: cakeImages[8],
       ingredients: [
         "2 1/2 cups all-purpose flour",
         "1 1/2 cups sugar",
@@ -270,7 +283,7 @@ const RecipeBakingPage = () => {
         "1 tsp cocoa powder",
         "1/2 tsp salt"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease two 9-inch pans.",
         "Whisk flour, cocoa powder, and salt.",
         "Cream butter and sugar until fluffy.",
@@ -286,6 +299,8 @@ const RecipeBakingPage = () => {
     { 
       id: 10, 
       name: "Yogurt Pound Cake",
+      tagline: "Moist pound cake made with yogurt",
+      image: cakeImages[9],
       ingredients: [
         "1 1/2 cups all-purpose flour",
         "1 cup plain yogurt",
@@ -297,7 +312,7 @@ const RecipeBakingPage = () => {
         "1 tsp vanilla essence",
         "Pinch of salt"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease a loaf pan.",
         "Whisk flour, baking powder, baking soda, and salt.",
         "Beat eggs and sugar until pale and fluffy.",
@@ -312,6 +327,8 @@ const RecipeBakingPage = () => {
     { 
       id: 11, 
       name: "Japanese Cheesecake",
+      tagline: "Light and fluffy Japanese-style cheesecake",
+      image: cakeImages[10],
       ingredients: [
         "250g cream cheese",
         "50g butter",
@@ -323,7 +340,7 @@ const RecipeBakingPage = () => {
         "1 tsp lemon juice",
         "1/4 tsp cream of tartar"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 320°F (160°C). Prepare water bath.",
         "Melt cream cheese, butter, and milk over double boiler.",
         "Remove from heat, sift in flour and cornstarch, mix well.",
@@ -340,6 +357,8 @@ const RecipeBakingPage = () => {
     { 
       id: 12, 
       name: "Spanish Orange Cake",
+      tagline: "Bright and citrusy orange-flavored cake",
+      image: cakeImages[11],
       ingredients: [
         "2 cups all-purpose flour",
         "1 1/2 cups sugar",
@@ -351,7 +370,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp salt",
         "Powdered sugar for dusting"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease a bundt pan.",
         "Whisk flour, baking powder, and salt.",
         "Beat eggs and sugar until pale and fluffy.",
@@ -366,6 +385,8 @@ const RecipeBakingPage = () => {
     { 
       id: 13, 
       name: "Cinnamon Rolls",
+      tagline: "Soft and gooey cinnamon rolls with cream cheese icing",
+      image: cakeImages[12],
       ingredients: [
         "For dough: 3 cups all-purpose flour",
         "1/4 cup sugar",
@@ -381,7 +402,7 @@ const RecipeBakingPage = () => {
         "2 tbsp milk",
         "1/2 tsp vanilla essence"
       ],
-      instructions: [
+      steps: [
         "Mix warm milk, sugar, and yeast, let sit for 5 minutes.",
         "Combine flour and salt.",
         "Add yeast mixture, melted butter, and egg to flour.",
@@ -402,6 +423,8 @@ const RecipeBakingPage = () => {
     { 
       id: 14, 
       name: "Blueberry Muffins",
+      tagline: "Soft and fluffy muffins bursting with blueberries",
+      image: cakeImages[13],
       ingredients: [
         "2 cups all-purpose flour",
         "1 cup sugar",
@@ -415,7 +438,7 @@ const RecipeBakingPage = () => {
         "1 1/2 cups fresh blueberries",
         "2 tbsp flour for coating blueberries"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 400°F (200°C). Line muffin tin.",
         "Whisk flour, baking powder, baking soda, and salt.",
         "Whisk melted butter and sugar until combined.",
@@ -433,6 +456,8 @@ const RecipeBakingPage = () => {
     { 
       id: 15, 
       name: "Cherry Almond Coffee Cake",
+      tagline: "Cherry and almond streusel coffee cake",
+      image: cakeImages[14],
       ingredients: [
         "2 cups all-purpose flour",
         "3/4 cup sugar",
@@ -446,7 +471,7 @@ const RecipeBakingPage = () => {
         "1 cup fresh or frozen cherries, pitted",
         "For topping: 1/4 cup sliced almonds, 2 tbsp sugar"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease a 9-inch square pan.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time.",
@@ -464,6 +489,8 @@ const RecipeBakingPage = () => {
     { 
       id: 16, 
       name: "Swedish Princess Cake",
+      tagline: "Classic Swedish layer cake with marzipan dome",
+      image: cakeImages[15],
       ingredients: [
         "For cake: 3 eggs",
         "3/4 cup sugar",
@@ -475,7 +502,7 @@ const RecipeBakingPage = () => {
         "For covering: Marzipan (almond paste)",
         "Green food coloring"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C).",
         "Beat eggs and sugar until fluffy.",
         "Sift flour and baking powder, fold into egg mixture.",
@@ -494,6 +521,8 @@ const RecipeBakingPage = () => {
     { 
       id: 17, 
       name: "Russian Honey Cake",
+      tagline: "Layered honey cake with sour cream frosting",
+      image: cakeImages[16],
       ingredients: [
         "3 eggs",
         "1 cup honey",
@@ -505,7 +534,7 @@ const RecipeBakingPage = () => {
         "1 cup whipped cream",
         "1/2 cup powdered sugar"
       ],
-      instructions: [
+      steps: [
         "Melt butter, honey, sugar together.",
         "Let cool slightly.",
         "Add eggs, mix well.",
@@ -522,6 +551,8 @@ const RecipeBakingPage = () => {
     { 
       id: 18, 
       name: "Almond Sponge Roll",
+      tagline: "Light almond sponge cake rolled with cream",
+      image: cakeImages[17],
       ingredients: [
         "4 eggs, separated",
         "3/4 cup sugar",
@@ -532,7 +563,7 @@ const RecipeBakingPage = () => {
         "1/2 cup powdered sugar",
         "Sliced almonds for decoration"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C).",
         "Line baking sheet with parchment paper.",
         "Beat egg whites until stiff peaks form.",
@@ -551,6 +582,8 @@ const RecipeBakingPage = () => {
     { 
       id: 19, 
       name: "Chocolate Butter Cake",
+      tagline: "Rich and moist chocolate butter cake",
+      image: cakeImages[18],
       ingredients: [
         "1 3/4 cups all-purpose flour",
         "2 cups sugar",
@@ -564,7 +597,7 @@ const RecipeBakingPage = () => {
         "2 tsp vanilla essence",
         "1 cup boiling water"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease cake pans.",
         "Mix flour, sugar, cocoa, baking powder, baking soda, salt.",
         "Beat eggs, milk, oil, vanilla essence together.",
@@ -578,12 +611,14 @@ const RecipeBakingPage = () => {
     { 
       id: 20, 
       name: "Whipped Cream Frosting",
+      tagline: "Light and fluffy homemade whipped cream",
+      image: cakeImages[19],
       ingredients: [
         "2 cups heavy cream",
         "1/2 cup powdered sugar",
         "1 tsp vanilla essence"
       ],
-      instructions: [
+      steps: [
         "Chill bowl and beaters in refrigerator.",
         "Pour heavy cream into cold bowl.",
         "Beat on medium speed until soft peaks form.",
@@ -597,6 +632,8 @@ const RecipeBakingPage = () => {
     { 
       id: 21, 
       name: "Chocolate Fudge Cake",
+      tagline: "Decadent chocolate cake with fudge frosting",
+      image: cakeImages[20],
       ingredients: [
         "1 3/4 cups all-purpose flour",
         "2 cups sugar",
@@ -611,7 +648,7 @@ const RecipeBakingPage = () => {
         "1 cup boiling water",
         "For fudge frosting: 1 cup chocolate chips, 1/2 cup cream"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Prepare cake pans.",
         "Mix dry ingredients in large bowl.",
         "Beat eggs, milk, oil, vanilla together.",
@@ -628,6 +665,8 @@ const RecipeBakingPage = () => {
     { 
       id: 22, 
       name: "Lemon Drizzle Cake",
+      tagline: "Tangy lemon cake with sweet drizzle",
+      image: cakeImages[21],
       ingredients: [
         "1 3/4 cups all-purpose flour",
         "1 cup sugar",
@@ -641,7 +680,7 @@ const RecipeBakingPage = () => {
         "1/4 tsp salt",
         "For drizzle: 1/2 cup powdered sugar, 2 tbsp lemon juice"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease loaf pan.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time.",
@@ -659,6 +698,8 @@ const RecipeBakingPage = () => {
     { 
       id: 23, 
       name: "Carrot Cake",
+      tagline: "Spiced carrot cake with cream cheese frosting",
+      image: cakeImages[22],
       ingredients: [
         "2 cups grated carrots",
         "2 cups all-purpose flour",
@@ -673,7 +714,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp salt",
         "For cream cheese frosting: 200g cream cheese, 1/2 cup butter, 2 cups powdered sugar"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease cake pans.",
         "Beat eggs and sugar until fluffy.",
         "Add oil, mix well.",
@@ -691,6 +732,8 @@ const RecipeBakingPage = () => {
     { 
       id: 24, 
       name: "Marble Cake",
+      tagline: "Beautiful swirls of vanilla and chocolate",
+      image: cakeImages[23],
       ingredients: [
         "2 cups all-purpose flour",
         "1 1/2 cups sugar",
@@ -704,7 +747,7 @@ const RecipeBakingPage = () => {
         "1/4 cup cocoa powder",
         "2 tbsp hot water"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease bundt pan.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time.",
@@ -722,6 +765,8 @@ const RecipeBakingPage = () => {
     { 
       id: 25, 
       name: "Coconut Cake",
+      tagline: "Moist coconut cake with coconut frosting",
+      image: cakeImages[24],
       ingredients: [
         "2 cups all-purpose flour",
         "1 1/2 cups sugar",
@@ -735,7 +780,7 @@ const RecipeBakingPage = () => {
         "1 tsp vanilla essence",
         "For frosting: 2 cups whipped cream, 1 cup grated coconut"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease cake pans.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time.",
@@ -753,6 +798,8 @@ const RecipeBakingPage = () => {
     { 
       id: 26, 
       name: "Strawberry Shortcake",
+      tagline: "Biscuit-style cake with fresh strawberries",
+      image: cakeImages[25],
       ingredients: [
         "2 cups all-purpose flour",
         "1/3 cup sugar",
@@ -764,7 +811,7 @@ const RecipeBakingPage = () => {
         "For filling: 2 cups sliced strawberries, 2 tbsp sugar",
         "For cream: 2 cups whipped cream"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 425°F (220°C).",
         "Mix flour, sugar, baking powder, salt.",
         "Cut cold butter into flour mixture.",
@@ -781,6 +828,8 @@ const RecipeBakingPage = () => {
     { 
       id: 27, 
       name: "Pineapple Upside Down Cake",
+      tagline: "Caramelized pineapple ring cake",
+      image: cakeImages[26],
       ingredients: [
         "For topping: 1/4 cup butter",
         "1/2 cup brown sugar",
@@ -795,7 +844,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp baking soda",
         "1/4 tsp salt"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C).",
         "Melt butter in cake pan.",
         "Sprinkle brown sugar over butter.",
@@ -813,6 +862,8 @@ const RecipeBakingPage = () => {
     { 
       id: 28, 
       name: "Fluffy Vanilla Cake",
+      tagline: "Extra fluffy and light vanilla layer cake",
+      image: cakeImages[27],
       ingredients: [
         "2 1/4 cups all-purpose flour",
         "1 1/2 cups sugar",
@@ -823,7 +874,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp salt",
         "2 tsp vanilla essence"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (180°C). Grease cake pans.",
         "Cream butter and sugar until fluffy.",
         "Add eggs one at a time.",
@@ -838,6 +889,8 @@ const RecipeBakingPage = () => {
     { 
       id: 29, 
       name: "French Heart Puff",
+      tagline: "Flaky puff pastry hearts with chocolate",
+      image: cakeImages[28],
       ingredients: [
         "1 sheet puff pastry",
         "1 cup chocolate hazelnut spread",
@@ -845,7 +898,7 @@ const RecipeBakingPage = () => {
         "1 tbsp milk",
         "Powdered sugar for dusting"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 400°F (200°C).",
         "Roll out puff pastry.",
         "Cut heart shapes with cookie cutter.",
@@ -861,6 +914,8 @@ const RecipeBakingPage = () => {
     { 
       id: 30, 
       name: "Cake Rusk",
+      tagline: "Crispy twice-baked cake perfect with tea",
+      image: cakeImages[29],
       ingredients: [
         "Leftover cake or plain cake",
         "1/2 cup sugar",
@@ -868,7 +923,7 @@ const RecipeBakingPage = () => {
         "1/2 tsp cardamom powder",
         "Ghee for frying"
       ],
-      instructions: [
+      steps: [
         "Cut cake into 1-inch thick slices.",
         "Boil sugar and milk to make syrup.",
         "Add cardamom powder to syrup.",
@@ -884,24 +939,26 @@ const RecipeBakingPage = () => {
   ];
 
   // Voice instructions handler
-  const speakInstructions = (instructions, stepIndex = 0, autoStart = true) => {
+  const speakInstructions = (steps, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
       if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
         setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
         speechSynthesisRef.current = null;
         return;
       }
 
-      if (stepIndex >= 0 && stepIndex < instructions.length) {
+      if (stepIndex >= 0 && stepIndex < steps.length) {
         const utterance = new SpeechSynthesisUtterance();
-        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
         utterance.rate = 1.0;
         utterance.pitch = 1;
         utterance.volume = 1;
         
         setCurrentStep(stepIndex + 1);
-        const stepProgress = ((stepIndex + 1) / instructions.length) * 100;
+        const stepProgress = ((stepIndex + 1) / steps.length) * 100;
         setProgress(stepProgress);
         
         utterance.onstart = () => {
@@ -911,65 +968,10 @@ const RecipeBakingPage = () => {
         utterance.onend = () => {
           setIsPlaying(false);
           speechSynthesisRef.current = null;
-          
-          if (stepIndex < instructions.length - 1) {
-            setTimeout(() => {
-              if (showVoiceInstructions && !speechSynthesisRef.current) {
-                speakInstructions(instructions, stepIndex + 1, true);
-              }
-            }, 1000);
-          }
         };
         
         utterance.onerror = () => {
           setIsPlaying(false);
-          speechSynthesisRef.current = null;
-        };
-        
-        speechSynthesisRef.current = utterance;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        const utterance = new SpeechSynthesisUtterance();
-        let fullText = "";
-        instructions.forEach((step, index) => {
-          fullText += `Step ${index + 1}: ${step}. `;
-        });
-        
-        utterance.text = fullText;
-        utterance.rate = 1.0;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-        
-        utterance.onstart = () => {
-          setIsPlaying(true);
-          setCurrentStep(1);
-          setProgress(10);
-        };
-        
-        const totalTime = fullText.length * 0.05;
-        const intervalTime = totalTime * 10;
-        let currentProgress = 10;
-        
-        const progressInterval = setInterval(() => {
-          if (currentProgress < 90) {
-            currentProgress += 5;
-            setProgress(currentProgress);
-          }
-        }, intervalTime / 18);
-        
-        utterance.onend = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(instructions.length);
-          setProgress(100);
-          speechSynthesisRef.current = null;
-        };
-        
-        utterance.onerror = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(0);
-          setProgress(0);
           speechSynthesisRef.current = null;
         };
         
@@ -977,7 +979,7 @@ const RecipeBakingPage = () => {
         window.speechSynthesis.speak(utterance);
       }
     } else {
-      alert('Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.');
+      alert('Your browser does not support text-to-speech.');
     }
   };
 
@@ -985,338 +987,181 @@ const RecipeBakingPage = () => {
     if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      setCurrentStep(0);
+      setProgress(0);
       speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedCake && currentStep < selectedCake.instructions.length) {
+    if (selectedCake && currentStep < selectedCake.steps.length) {
       stopSpeaking();
-      speakInstructions(selectedCake.instructions, currentStep);
+      speakInstructions(selectedCake.steps, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
     if (selectedCake && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedCake.instructions, currentStep - 2);
+      speakInstructions(selectedCake.steps, currentStep - 2);
     }
   };
 
-  const speakStep = (stepIndex) => {
-    if (selectedCake && stepIndex >= 0 && stepIndex < selectedCake.instructions.length) {
-      stopSpeaking();
-      speakInstructions(selectedCake.instructions, stepIndex);
-    }
-  };
-
-  const toggleVoiceInstructions = () => {
-    const newState = !showVoiceInstructions;
-    setShowVoiceInstructions(newState);
-    
-    if (newState && selectedCake && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedCake) {
-          speakInstructions(selectedCake.instructions, 0, true);
-        }
-      }, 500);
-    } else if (!newState && isPlaying) {
-      stopSpeaking();
-      setCurrentStep(0);
-      setProgress(0);
-      autoPlayStartedRef.current = false;
-    }
-  };
-
-  useEffect(() => {
-    if (isModalOpen && showVoiceInstructions && selectedCake && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedCake && isModalOpen) {
-          speakInstructions(selectedCake.instructions, 0, true);
-        }
-      }, 800);
-    }
-    
-    return () => {
-      stopSpeaking();
-      autoPlayStartedRef.current = false;
-    };
-  }, [isModalOpen, showVoiceInstructions, selectedCake]);
-
-  useEffect(() => {
-    return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      autoPlayStartedRef.current = false;
-    };
-  }, []);
-
-  // Navigation Handlers
-  const handleViewRecipe = (cake) => {
+  const handleCakeSelect = (cake) => {
     setSelectedCake(cake);
-    setIsModalOpen(true);
+    setShowDetailPanel(true);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
-  const closeModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
-    setIsModalOpen(false);
+    setShowDetailPanel(false);
     setSelectedCake(null);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
   const handleGoBack = () => {
     navigate('/');
   };
 
-  // Filter cakes based on search
-  const filteredCakes = cakes.filter(cake =>
-    cake.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Handle Search
-  const handleSearch = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="baking-page">
       {/* Header */}
       <header className="baking-header">
-        <div className="header-content">
-          <h1>Cakes & Bakes Collection</h1>
-          <p>Discover delicious cakes and baked goods from around the world</p>
+        <div className="baking-header-content">
+          <h1 className="baking-page-title">Cakes & Bakes Collection</h1>
+          <p className="baking-page-description">
+            Discover delicious cakes and baked goods from around the world.
+          </p>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Cakes Grid */}
       <main className="baking-main">
-        <div className="baking-container">
-          {filteredCakes.length === 0 ? (
-            <div className="no-results">
-              <i className="fas fa-search"></i>
-              <h3>No cakes found matching "{searchTerm}"</h3>
-              <p>Try searching for something else</p>
-              <button 
-                className="clear-search-button"
-                onClick={() => setSearchTerm('')}
+        <div className="baking-grid-section">
+          <div className="baking-grid">
+            {cakes.map(cake => (
+              <div 
+                key={cake.id} 
+                className="baking-technique-card"
+                onClick={() => handleCakeSelect(cake)}
               >
-                Clear Search
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="cakes-grid">
-                {filteredCakes.map((cake) => (
-                  <div key={cake.id} className="cake-card">
-                    <div className="cake-card-image">
-                      <img 
-                        src={cakeImages[cake.id - 1] || cakeImages[0]}
-                        alt={cake.name}
-                        className="cake-image"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="cake-card-content">
-                      <h3 className="cake-name">{cake.name}</h3>
-                      <button 
-                        className="view-recipe-btn"
-                        onClick={() => handleViewRecipe(cake)}
-                      >
-                        <i className="fas fa-birthday-cake"></i> View Recipe
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <div 
+                  className="baking-card-image"
+                  style={{ backgroundImage: `url(${cake.image})` }}
+                ></div>
+                
+                <div className="baking-card-content">
+                  <h3 className="baking-card-title">{cake.name}</h3>
+                  <p className="baking-card-description">{cake.tagline}</p>
+                </div>
               </div>
-              
-              <div className="back-button-container">
-                <button className="back-home-btn" onClick={handleGoBack}>
-                  <i className="fas fa-arrow-left"></i> Back to Home
-                </button>
-              </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </main>
 
-      {/* Recipe Modal */}
-      {isModalOpen && selectedCake && (
-        <div className="recipe-modal-overlay">
-          <div className="recipe-modal">
-            <div className="modal-header">
-              <h2 className="modal-title" style={{color: 'white'}}>{selectedCake.name}</h2>
-              <button className="modal-close-btn" onClick={closeModal}>
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
+      {/* Back to Home Button */}
+      <div className="back-button-container">
+        <button className="back-home-btn" onClick={handleGoBack}>
+          <i className="fas fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      {/* DETAIL MODAL with SELECTED CAKE IMAGE as Background */}
+      {showDetailPanel && selectedCake && (
+        <div className="baking-modal-overlay" onClick={closeDetailPanel}>
+          <div 
+            className="baking-modal" 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundImage: `url(${selectedCake.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <button className="baking-modal-close" onClick={closeDetailPanel}>×</button>
             
-            <div className="instructions-toggle-container">
-              <div className="instructions-toggle">
-                <button 
-                  className={`instruction-tab ${!showVoiceInstructions ? 'active' : ''}`}
-                  onClick={() => setShowVoiceInstructions(false)}
-                >
-                  <i className="fas fa-file-alt"></i> Text Instructions
-                </button>
-                <button 
-                  className={`instruction-tab ${showVoiceInstructions ? 'active' : ''}`}
-                  onClick={toggleVoiceInstructions}
-                >
-                  <i className="fas fa-volume-up"></i> Voice Instructions
-                </button>
+            <div className="baking-modal-header">
+              <div className="baking-modal-title">
+                <h2>{selectedCake.name}</h2>
               </div>
             </div>
-            
-            <div className="modal-content">
-              {!showVoiceInstructions && (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-clipboard-list"></i> Ingredients</h3>
-                  </div>
-                  <div className="section-content">
-                    <ul className="ingredients-list">
-                      {selectedCake.ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+            <div className="baking-modal-content">
+              {/* COLUMN 1 - INGREDIENTS */}
+              <div className="baking-modal-ingredients">
+                <h3>Ingredients</h3>
+                <div className="baking-ingredients-list">
+                  {selectedCake.ingredients.map((ingredient, idx) => (
+                    <div key={idx} className="baking-ingredient-item">
+                      <span className="baking-ingredient-bullet">•</span>
+                      <span className="baking-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-              
-              {!showVoiceInstructions ? (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-list-ol"></i> Instructions</h3>
-                  </div>
-                  <div className="section-content">
-                    <ol className="instructions-list">
-                      {selectedCake.instructions.map((step, index) => (
-                        <li key={index}>
-                          <div className="instruction-step">
-                            <span className="step-number">{index + 1}.</span>
-                            <span className="step-text">{step}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+              </div>
+
+              {/* COLUMN 2 - STEPS TO MAKE */}
+              <div className="baking-modal-steps">
+                <h3>Steps to Make</h3>
+                <div className="baking-steps-list">
+                  {selectedCake.steps.map((step, idx) => (
+                    <div key={idx} className="baking-step-item">
+                      <span className="baking-step-number">{idx + 1}.</span>
+                      <span className="baking-step-text">{step}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
-                    <div className="voice-status">
-                      <div className={`voice-status-indicator ${isPlaying ? 'playing' : 'paused'}`}>
-                        <i className={`fas fa-${isPlaying ? 'volume-up' : 'volume-mute'}`}></i>
-                        <span>{isPlaying ? 'Playing Automatically' : 'Ready to Play'}</span>
-                      </div>
+              </div>
+
+              {/* COLUMN 3 - VOICE INSTRUCTIONS */}
+              <div className="baking-modal-voice-container">
+                <div className="voice-panel">
+                  <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
+                  
+                  <div className="voice-progress">
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
+                    </div>
+                    <div className="progress-info">
+                      <span>Step {currentStep} of {selectedCake.steps.length}</span>
+                      <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
-                  <div className="section-content">
-                    <div className="voice-player">
-                      <div className="voice-player-header">
-                        <div className="voice-recipe-info">
-                          <h4>🎤 Voice Guide for {selectedCake.name}</h4>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-controls-main">
-                        <div className="voice-progress-container">
-                          <div className="voice-progress-bar">
-                            <div 
-                              className="voice-progress-fill" 
-                              style={{width: `${progress}%`}}
-                            ></div>
-                          </div>
-                          <div className="voice-progress-info">
-                            <span>Progress: {Math.round(progress)}%</span>
-                            <span>Step {currentStep} of {selectedCake.instructions.length}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="voice-buttons">
-                          <button 
-                            className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                            onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedCake.instructions)}
-                          >
-                            <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
-                            {isPlaying ? ' Stop Auto-Play' : ' Restart Guide'}
-                          </button>
-                        </div>
-                        
-                        <div className="step-navigation">
-                          <button 
-                            className="step-nav-btn prev"
-                            onClick={speakPreviousStep}
-                            disabled={currentStep <= 1}
-                          >
-                            <i className="fas fa-backward"></i> Previous Step
-                          </button>
-                          
-                          <button 
-                            className="step-nav-btn next"
-                            onClick={speakNextStep}
-                            disabled={currentStep >= selectedCake.instructions.length}
-                          >
-                            Next Step <i className="fas fa-forward"></i>
-                          </button>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-steps-overview">
-                        <h5>
-                          <i className="fas fa-list-ol"></i> Steps Overview
-                          <span className="steps-count">
-                            {currentStep}/{selectedCake.instructions.length} Completed
-                          </span>
-                        </h5>
-                        <div className="steps-container">
-                          {selectedCake.instructions.map((step, index) => (
-                            <div 
-                              key={index} 
-                              className={`step-item ${index < currentStep ? 'completed' : ''} ${index === currentStep - 1 && isPlaying ? 'current' : ''}`}
-                              onClick={() => speakStep(index)}
-                              style={{cursor: 'pointer'}}
-                            >
-                              <div className="step-number-circle">
-                                {index < currentStep ? (
-                                  <i className="fas fa-check"></i>
-                                ) : (
-                                  <span>{index + 1}</span>
-                                )}
-                              </div>
-                              <div className="step-content">
-                                <div className="step-title">Step {index + 1}</div>
-                                <div className="step-text-preview">{step.substring(0, 60)}...</div>
-                              </div>
-                              <div className="step-play-btn">
-                                <i className="fas fa-play"></i>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
+                  <div className="voice-controls">
+                    <button 
+                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedCake.steps)}
+                    >
+                      <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
+                      {isPlaying ? ' Stop' : ' Start Voice Guide'}
+                    </button>
+
+                    <div className="step-controls">
+                      <button 
+                        className="step-btn prev"
+                        onClick={speakPreviousStep}
+                        disabled={currentStep <= 1}
+                      >
+                        <i className="fas fa-backward"></i> Prev
+                      </button>
+                      <button 
+                        className="step-btn next"
+                        onClick={speakNextStep}
+                        disabled={currentStep >= selectedCake.steps.length}
+                      >
+                        Next <i className="fas fa-forward"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="modal-actions">
-                <button className="close-modal-btn" onClick={closeModal}>
-                  <i className="fas fa-times"></i> Close
-                </button>
               </div>
             </div>
           </div>

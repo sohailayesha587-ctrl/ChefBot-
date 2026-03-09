@@ -1,21 +1,15 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeBeveragesPage.css';
 
-
 const RecipeBeveragesPage = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedDrink, setSelectedDrink] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showVoiceInstructions, setShowVoiceInstructions] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
-  const autoPlayStartedRef = useRef(false);
 
   // Beverage images array
   const drinkImages = [
@@ -69,12 +63,14 @@ const RecipeBeveragesPage = () => {
     "https://www.cookwithmanali.com/wp-content/uploads/2015/03/Thandai-Indian-Drink-500x500.jpg" // Thandai
   ];
 
-  // All Beverages Data with Complete Recipes
+  // All Beverages Data with Complete Recipes (48 drinks)
   const allDrinks = [
     { 
       id: 1, 
-      name: "Chai (Tea) Recipe",
+      name: "Chai (Tea)",
+      tagline: "Traditional spiced milk tea",
       category: "Hot Drinks",
+      image: drinkImages[0],
       ingredients: [
         "2 cups water",
         "2 cups milk",
@@ -84,7 +80,7 @@ const RecipeBeveragesPage = () => {
         "1 inch ginger, grated",
         "2-3 cloves (optional)"
       ],
-      instructions: [
+      steps: [
         "In a saucepan, add water and bring it to boil.",
         "Add tea leaves, crushed cardamom, ginger, and cloves.",
         "Let it boil for 2 minutes until tea leaves release their color.",
@@ -97,8 +93,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 2, 
-      name: "Coffee Recipe",
+      name: "Coffee",
+      tagline: "Rich and aromatic brewed coffee",
       category: "Hot Drinks",
+      image: drinkImages[1],
       ingredients: [
         "2 tablespoons coffee powder",
         "2 tablespoons sugar",
@@ -106,7 +104,7 @@ const RecipeBeveragesPage = () => {
         "1 cup milk",
         "1 teaspoon cocoa powder (optional)"
       ],
-      instructions: [
+      steps: [
         "Boil water in a saucepan.",
         "Add coffee powder and sugar to boiling water.",
         "Let it simmer for 5 minutes until strong aroma develops.",
@@ -119,8 +117,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 3, 
-      name: "Hot Chocolate Recipe",
+      name: "Hot Chocolate",
+      tagline: "Creamy and indulgent hot chocolate",
       category: "Hot Drinks",
+      image: drinkImages[2],
       ingredients: [
         "2 cups milk",
         "4 tablespoons cocoa powder",
@@ -130,7 +130,7 @@ const RecipeBeveragesPage = () => {
         "Whipped cream for topping",
         "Chocolate shavings for garnish"
       ],
-      instructions: [
+      steps: [
         "In a saucepan, heat milk on medium flame.",
         "Add cocoa powder and sugar, whisk until dissolved.",
         "Add chocolate chips and stir continuously.",
@@ -143,8 +143,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 4, 
-      name: "Kashmiri Chai Recipe",
+      name: "Kashmiri Chai",
+      tagline: "Pink-hued traditional Kashmiri tea",
       category: "Hot Drinks",
+      image: drinkImages[3],
       ingredients: [
         "4 tablespoons Kashmiri tea leaves",
         "8 cups water",
@@ -155,7 +157,7 @@ const RecipeBeveragesPage = () => {
         "1/4 cup crushed almonds",
         "Pink food color (optional)"
       ],
-      instructions: [
+      steps: [
         "Boil tea leaves in 4 cups water for 15 minutes.",
         "Add baking soda and boil until color changes to red.",
         "Strain the tea concentrate and set aside.",
@@ -168,8 +170,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 5, 
-      name: "Masala Chai Recipe",
+      name: "Masala Chai",
+      tagline: "Spiced Indian tea with aromatic spices",
       category: "Hot Drinks",
+      image: drinkImages[4],
       ingredients: [
         "4 cups water",
         "4 cups milk",
@@ -182,7 +186,7 @@ const RecipeBeveragesPage = () => {
         "2 black peppercorns",
         "1 star anise (optional)"
       ],
-      instructions: [
+      steps: [
         "Crush all spices lightly in mortar and pestle.",
         "In saucepan, add water and bring to boil.",
         "Add crushed spices and boil for 5 minutes.",
@@ -195,8 +199,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 6, 
-      name: "Green Tea Recipe",
+      name: "Green Tea",
+      tagline: "Light and refreshing antioxidant tea",
       category: "Hot Drinks",
+      image: drinkImages[5],
       ingredients: [
         "2 cups water",
         "2 green tea bags or 2 teaspoons loose green tea",
@@ -204,7 +210,7 @@ const RecipeBeveragesPage = () => {
         "1 slice lemon",
         "Fresh mint leaves (optional)"
       ],
-      instructions: [
+      steps: [
         "Boil water and let it cool for 2 minutes (80°C).",
         "Place tea bags or leaves in teapot.",
         "Pour hot water over tea and steep for 3 minutes.",
@@ -217,8 +223,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 7, 
-      name: "Ginger Tea Recipe",
+      name: "Ginger Tea",
+      tagline: "Zesty and soothing ginger-infused tea",
       category: "Hot Drinks",
+      image: drinkImages[6],
       ingredients: [
         "2 cups water",
         "2 cups milk",
@@ -228,7 +236,7 @@ const RecipeBeveragesPage = () => {
         "4-5 mint leaves (optional)",
         "1 teaspoon lemon juice (optional)"
       ],
-      instructions: [
+      steps: [
         "In saucepan, boil water with grated ginger.",
         "Add tea leaves and boil for 3 minutes.",
         "Add milk and bring to boil.",
@@ -241,8 +249,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 8, 
-      name: "Cardamom Tea Recipe",
+      name: "Cardamom Tea",
+      tagline: "Fragrant tea with green cardamom",
       category: "Hot Drinks",
+      image: drinkImages[7],
       ingredients: [
         "2 cups water",
         "2 cups milk",
@@ -251,7 +261,7 @@ const RecipeBeveragesPage = () => {
         "4 teaspoons sugar",
         "Saffron strands (optional)"
       ],
-      instructions: [
+      steps: [
         "Crush cardamom pods to release flavor.",
         "Boil water with crushed cardamom for 5 minutes.",
         "Add tea leaves and boil for 2 minutes.",
@@ -264,8 +274,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 9, 
-      name: "Lemonade Recipe",
+      name: "Lemonade",
+      tagline: "Classic refreshing lemon drink",
       category: "Cold Drinks",
+      image: drinkImages[8],
       ingredients: [
         "4 lemons, juiced (about 1 cup)",
         "1 cup sugar",
@@ -274,7 +286,7 @@ const RecipeBeveragesPage = () => {
         "Fresh mint leaves",
         "Lemon slices for garnish"
       ],
-      instructions: [
+      steps: [
         "Make simple syrup: mix sugar with 1 cup hot water.",
         "Stir until sugar completely dissolves.",
         "Let syrup cool to room temperature.",
@@ -287,8 +299,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 10, 
-      name: "Mango Lassi Recipe",
+      name: "Mango Lassi",
+      tagline: "Creamy yogurt drink with sweet mango",
       category: "Cold Drinks",
+      image: drinkImages[9],
       ingredients: [
         "2 ripe mangoes, peeled and chopped",
         "2 cups plain yogurt",
@@ -298,7 +312,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Chopped pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel and chop ripe mangoes into pieces.",
         "In blender, add mango pieces and yogurt.",
         "Add milk, sugar, and cardamom powder.",
@@ -311,8 +325,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 11, 
-      name: "Sweet Lassi Recipe",
+      name: "Sweet Lassi",
+      tagline: "Traditional sweet yogurt drink",
       category: "Cold Drinks",
+      image: drinkImages[10],
       ingredients: [
         "3 cups plain yogurt",
         "1 cup cold water",
@@ -322,7 +338,7 @@ const RecipeBeveragesPage = () => {
         "Rose water (optional)",
         "Saffron strands for garnish"
       ],
-      instructions: [
+      steps: [
         "In blender, combine yogurt and cold water.",
         "Add sugar and cardamom powder.",
         "Blend until smooth and frothy.",
@@ -335,8 +351,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 12, 
-      name: "Salted Lassi Recipe",
+      name: "Salted Lassi",
+      tagline: "Savory yogurt drink with roasted cumin",
       category: "Cold Drinks",
+      image: drinkImages[11],
       ingredients: [
         "3 cups plain yogurt",
         "1 cup cold water",
@@ -346,7 +364,7 @@ const RecipeBeveragesPage = () => {
         "Fresh mint leaves",
         "Black salt (optional)"
       ],
-      instructions: [
+      steps: [
         "Combine yogurt and water in blender.",
         "Add salt and blend until smooth.",
         "Add ice cubes and blend briefly.",
@@ -359,8 +377,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 13, 
-      name: "Iced Tea Recipe",
+      name: "Iced Tea",
+      tagline: "Chilled black tea with lemon",
       category: "Cold Drinks",
+      image: drinkImages[12],
       ingredients: [
         "4 black tea bags",
         "4 cups boiling water",
@@ -370,7 +390,7 @@ const RecipeBeveragesPage = () => {
         "Lemon slices",
         "Fresh mint leaves"
       ],
-      instructions: [
+      steps: [
         "Steep tea bags in boiling water for 5 minutes.",
         "Remove tea bags and let tea cool.",
         "Make simple syrup: dissolve sugar in 1/2 cup hot water.",
@@ -383,8 +403,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 14, 
-      name: "Cold Coffee Recipe",
+      name: "Cold Coffee",
+      tagline: "Frothy chilled coffee with ice cream",
       category: "Cold Drinks",
+      image: drinkImages[13],
       ingredients: [
         "4 tablespoons instant coffee",
         "4 tablespoons sugar",
@@ -394,7 +416,7 @@ const RecipeBeveragesPage = () => {
         "Chocolate syrup",
         "Whipped cream for topping"
       ],
-      instructions: [
+      steps: [
         "Mix coffee powder with 2 tablespoons hot water.",
         "Add sugar and stir until dissolved.",
         "In blender, combine coffee mixture and milk.",
@@ -407,8 +429,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 15, 
-      name: "Falooda Recipe",
+      name: "Falooda",
+      tagline: "Layered dessert drink with ice cream",
       category: "Cold Drinks",
+      image: drinkImages[14],
       ingredients: [
         "1/2 cup falooda seeds (sabja)",
         "1/2 cup cooked vermicelli",
@@ -419,7 +443,7 @@ const RecipeBeveragesPage = () => {
         "1/4 cup basil seeds soaked",
         "Jelly cubes (optional)"
       ],
-      instructions: [
+      steps: [
         "Soak falooda seeds in water for 30 minutes.",
         "Cook vermicelli according to package instructions.",
         "In tall glasses, add soaked falooda seeds.",
@@ -432,8 +456,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 16, 
-      name: "Sugarcane Juice Recipe",
+      name: "Sugarcane Juice",
+      tagline: "Fresh and sweet sugarcane extract",
       category: "Cold Drinks",
+      image: drinkImages[15],
       ingredients: [
         "4-5 sugarcane sticks",
         "1 inch ginger",
@@ -443,7 +469,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Lemon slices for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel sugarcane and cut into small pieces.",
         "Run sugarcane through juicer extractor.",
         "Add ginger and mint while juicing.",
@@ -457,7 +483,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 17, 
       name: "Strawberry Banana Smoothie",
+      tagline: "Creamy blend of berries and banana",
       category: "Smoothies",
+      image: drinkImages[16],
       ingredients: [
         "1 cup strawberries, hulled",
         "1 ripe banana",
@@ -467,7 +495,7 @@ const RecipeBeveragesPage = () => {
         "1/2 cup ice cubes",
         "Fresh strawberries for garnish"
       ],
-      instructions: [
+      steps: [
         "Wash and hull fresh strawberries.",
         "Peel and slice ripe banana.",
         "In blender, combine strawberries and banana.",
@@ -480,8 +508,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 18, 
-      name: "Mango Smoothie Recipe",
+      name: "Mango Smoothie",
+      tagline: "Tropical mango and yogurt blend",
       category: "Smoothies",
+      image: drinkImages[17],
       ingredients: [
         "2 ripe mangoes, peeled and chopped",
         "1 cup plain yogurt",
@@ -491,7 +521,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Mint leaves for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel and chop ripe mangoes into chunks.",
         "In blender, add mango chunks and yogurt.",
         "Add orange juice and honey.",
@@ -505,7 +535,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 19, 
       name: "Berry Blast Smoothie",
+      tagline: "Mixed berry antioxidant smoothie",
       category: "Smoothies",
+      image: drinkImages[18],
       ingredients: [
         "1 cup mixed berries (strawberries, blueberries, raspberries)",
         "1 banana",
@@ -516,7 +548,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Fresh berries for garnish"
       ],
-      instructions: [
+      steps: [
         "Wash and prepare all berries.",
         "Peel and slice banana.",
         "In blender, combine berries and banana.",
@@ -530,7 +562,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 20, 
       name: "Green Detox Smoothie",
+      tagline: "Healthy green vegetable smoothie",
       category: "Smoothies",
+      image: drinkImages[19],
       ingredients: [
         "1 cup spinach leaves",
         "1 green apple, chopped",
@@ -541,7 +575,7 @@ const RecipeBeveragesPage = () => {
         "1 tablespoon honey",
         "Ice cubes"
       ],
-      instructions: [
+      steps: [
         "Wash spinach leaves thoroughly.",
         "Chop green apple and peel cucumber.",
         "Peel and slice banana.",
@@ -555,7 +589,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 21, 
       name: "Peanut Butter Smoothie",
+      tagline: "Protein-packed peanut butter blend",
       category: "Smoothies",
+      image: drinkImages[20],
       ingredients: [
         "2 bananas",
         "3 tablespoons peanut butter",
@@ -565,7 +601,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Chopped peanuts for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel and slice ripe bananas.",
         "In blender, combine bananas and peanut butter.",
         "Add milk and honey.",
@@ -578,8 +614,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 22, 
-      name: "Chocolate Smoothie Recipe",
+      name: "Chocolate Smoothie",
+      tagline: "Rich chocolate milkshake",
       category: "Smoothies",
+      image: drinkImages[21],
       ingredients: [
         "2 bananas",
         "3 tablespoons cocoa powder",
@@ -590,7 +628,7 @@ const RecipeBeveragesPage = () => {
         "Chocolate shavings for topping",
         "Whipped cream (optional)"
       ],
-      instructions: [
+      steps: [
         "Peel and slice ripe bananas.",
         "In blender, combine bananas and cocoa powder.",
         "Add milk, honey, and vanilla extract.",
@@ -603,8 +641,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 23, 
-      name: "Avocado Smoothie Recipe",
+      name: "Avocado Smoothie",
+      tagline: "Creamy and nutritious avocado drink",
       category: "Smoothies",
+      image: drinkImages[22],
       ingredients: [
         "1 ripe avocado",
         "1 banana",
@@ -614,7 +654,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Mint leaves for garnish"
       ],
-      instructions: [
+      steps: [
         "Cut avocado, remove pit and scoop flesh.",
         "Peel and slice banana.",
         "In blender, combine avocado and banana.",
@@ -628,7 +668,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 24, 
       name: "Protein Power Smoothie",
+      tagline: "Post-workout protein shake",
       category: "Smoothies",
+      image: drinkImages[23],
       ingredients: [
         "1 banana",
         "1 cup Greek yogurt",
@@ -639,7 +681,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Sliced almonds for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel and slice banana.",
         "In blender, combine banana and Greek yogurt.",
         "Add milk and protein powder.",
@@ -652,8 +694,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 25, 
-      name: "Virgin Mojito Recipe",
+      name: "Virgin Mojito",
+      tagline: "Non-alcoholic mint and lime refresher",
       category: "Mocktails",
+      image: drinkImages[24],
       ingredients: [
         "10-12 fresh mint leaves",
         "2 limes, cut into wedges",
@@ -663,7 +707,7 @@ const RecipeBeveragesPage = () => {
         "Fresh mint sprigs for garnish",
         "Lime slices for garnish"
       ],
-      instructions: [
+      steps: [
         "In tall glass, muddle mint leaves with lime wedges.",
         "Add sugar and muddle until sugar dissolves.",
         "Fill glass with ice cubes.",
@@ -677,7 +721,9 @@ const RecipeBeveragesPage = () => {
     { 
       id: 26, 
       name: "Pina Colada (Non-Alcoholic)",
+      tagline: "Tropical pineapple and coconut drink",
       category: "Mocktails",
+      image: drinkImages[25],
       ingredients: [
         "2 cups pineapple juice",
         "1 cup coconut cream",
@@ -687,7 +733,7 @@ const RecipeBeveragesPage = () => {
         "Maraschino cherries",
         "Umbrella for decoration"
       ],
-      instructions: [
+      steps: [
         "In blender, combine pineapple juice and coconut cream.",
         "Add crushed ice and sugar syrup.",
         "Blend until smooth and creamy.",
@@ -700,8 +746,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 27, 
-      name: "Shirley Temple Recipe",
+      name: "Shirley Temple",
+      tagline: "Sweet non-alcoholic mocktail",
       category: "Mocktails",
+      image: drinkImages[26],
       ingredients: [
         "1 cup ginger ale",
         "1/2 cup lemon-lime soda",
@@ -711,7 +759,7 @@ const RecipeBeveragesPage = () => {
         "Orange slice for garnish",
         "Lemon slice for garnish"
       ],
-      instructions: [
+      steps: [
         "Fill tall glass with ice cubes.",
         "Pour ginger ale over ice.",
         "Add lemon-lime soda gently.",
@@ -724,8 +772,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 28, 
-      name: "Fruit Punch Recipe",
+      name: "Fruit Punch",
+      tagline: "Colorful mixed fruit beverage",
       category: "Mocktails",
+      image: drinkImages[27],
       ingredients: [
         "2 cups orange juice",
         "1 cup pineapple juice",
@@ -736,7 +786,7 @@ const RecipeBeveragesPage = () => {
         "Mixed fruit slices",
         "Fresh mint leaves"
       ],
-      instructions: [
+      steps: [
         "In large pitcher, combine all juices.",
         "Add lemon juice and sugar syrup.",
         "Stir well until completely mixed.",
@@ -749,8 +799,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 29, 
-      name: "Blue Lagoon Mocktail",
+      name: "Blue Lagoon",
+      tagline: "Vibrant blue citrus mocktail",
       category: "Mocktails",
+      image: drinkImages[28],
       ingredients: [
         "1 cup lemonade",
         "1/2 cup blue curacao syrup",
@@ -760,7 +812,7 @@ const RecipeBeveragesPage = () => {
         "Maraschino cherries",
         "Sugar rim (optional)"
       ],
-      instructions: [
+      steps: [
         "If desired, rim glass with sugar.",
         "Fill glass with ice cubes.",
         "Pour lemonade over ice.",
@@ -773,8 +825,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 30, 
-      name: "Mango Tango Mocktail",
+      name: "Mango Tango",
+      tagline: "Tropical mango mocktail",
       category: "Mocktails",
+      image: drinkImages[29],
       ingredients: [
         "1 cup mango juice",
         "1/2 cup orange juice",
@@ -784,7 +838,7 @@ const RecipeBeveragesPage = () => {
         "Mango slices for garnish",
         "Fresh mint sprig"
       ],
-      instructions: [
+      steps: [
         "In shaker, combine all fruit juices.",
         "Add lime juice and ice cubes.",
         "Shake well for 30 seconds.",
@@ -797,8 +851,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 31, 
-      name: "Sunrise Mocktail Recipe",
+      name: "Sunrise Mocktail",
+      tagline: "Beautiful layered orange drink",
       category: "Mocktails",
+      image: drinkImages[30],
       ingredients: [
         "1 cup orange juice",
         "2 tablespoons grenadine syrup",
@@ -807,7 +863,7 @@ const RecipeBeveragesPage = () => {
         "Maraschino cherry",
         "Umbrella for decoration"
       ],
-      instructions: [
+      steps: [
         "Fill tall glass with ice cubes.",
         "Pour orange juice over ice.",
         "Slowly pour grenadine down side.",
@@ -820,8 +876,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 32, 
-      name: "Berry Bliss Mocktail",
+      name: "Berry Bliss",
+      tagline: "Mixed berry refreshing cooler",
       category: "Mocktails",
+      image: drinkImages[31],
       ingredients: [
         "1/2 cup mixed berry puree",
         "1/2 cup cranberry juice",
@@ -831,7 +889,7 @@ const RecipeBeveragesPage = () => {
         "Fresh berries for garnish",
         "Mint leaves"
       ],
-      instructions: [
+      steps: [
         "Make berry puree by blending fresh berries.",
         "Strain puree to remove seeds.",
         "In glass, add berry puree first.",
@@ -844,8 +902,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 33, 
-      name: "Mojito Recipe",
+      name: "Mojito",
+      tagline: "Classic Cuban mint cocktail",
       category: "Cocktails",
+      image: drinkImages[32],
       ingredients: [
         "10-12 fresh mint leaves",
         "2 limes, cut into wedges",
@@ -856,7 +916,7 @@ const RecipeBeveragesPage = () => {
         "Mint sprig for garnish",
         "Lime wheel for garnish"
       ],
-      instructions: [
+      steps: [
         "In glass, muddle mint leaves with lime wedges.",
         "Add sugar and muddle until dissolved.",
         "Add white rum and stir well.",
@@ -869,8 +929,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 34, 
-      name: "Margarita Recipe",
+      name: "Margarita",
+      tagline: "Classic tequila lime cocktail",
       category: "Cocktails",
+      image: drinkImages[33],
       ingredients: [
         "2 ounces tequila",
         "1 ounce lime juice",
@@ -880,7 +942,7 @@ const RecipeBeveragesPage = () => {
         "Salt for rim",
         "Lime wedge for garnish"
       ],
-      instructions: [
+      steps: [
         "Rim glass with salt by rubbing lime.",
         "In shaker, combine tequila and lime juice.",
         "Add triple sec and simple syrup.",
@@ -893,8 +955,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 35, 
-      name: "Pina Colada Recipe",
+      name: "Pina Colada",
+      tagline: "Creamy tropical coconut cocktail",
       category: "Cocktails",
+      image: drinkImages[34],
       ingredients: [
         "2 ounces white rum",
         "3 ounces pineapple juice",
@@ -904,7 +968,7 @@ const RecipeBeveragesPage = () => {
         "Maraschino cherry",
         "Umbrella for decoration"
       ],
-      instructions: [
+      steps: [
         "In blender, combine rum and pineapple juice.",
         "Add coconut cream and crushed ice.",
         "Blend until smooth and creamy.",
@@ -917,8 +981,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 36, 
-      name: "Mai Tai Recipe",
+      name: "Mai Tai",
+      tagline: "Tropical rum cocktail",
       category: "Cocktails",
+      image: drinkImages[35],
       ingredients: [
         "2 ounces dark rum",
         "1 ounce lime juice",
@@ -928,7 +994,7 @@ const RecipeBeveragesPage = () => {
         "Mint sprig for garnish",
         "Lime wheel for garnish"
       ],
-      instructions: [
+      steps: [
         "In shaker, combine dark rum and lime juice.",
         "Add orange curaçao and orgeat syrup.",
         "Add ice and shake for 15 seconds.",
@@ -941,8 +1007,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 37, 
-      name: "Old Fashioned Recipe",
+      name: "Old Fashioned",
+      tagline: "Classic whiskey cocktail",
       category: "Cocktails",
+      image: drinkImages[36],
       ingredients: [
         "2 ounces bourbon whiskey",
         "1 sugar cube",
@@ -951,7 +1019,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Maraschino cherry (optional)"
       ],
-      instructions: [
+      steps: [
         "Place sugar cube in old fashioned glass.",
         "Add bitters directly onto sugar cube.",
         "Muddle until sugar dissolves.",
@@ -964,8 +1032,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 38, 
-      name: "Martini Recipe",
+      name: "Martini",
+      tagline: "Elegant gin and vermouth cocktail",
       category: "Cocktails",
+      image: drinkImages[37],
       ingredients: [
         "2 1/2 ounces gin",
         "1/2 ounce dry vermouth",
@@ -973,7 +1043,7 @@ const RecipeBeveragesPage = () => {
         "Lemon twist or olive for garnish",
         "Cocktail pick"
       ],
-      instructions: [
+      steps: [
         "Chill martini glass in freezer.",
         "In mixing glass, combine gin and vermouth.",
         "Add ice cubes and stir for 30 seconds.",
@@ -986,8 +1056,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 39, 
-      name: "Cosmopolitan Recipe",
+      name: "Cosmopolitan",
+      tagline: "Fashionable cranberry vodka cocktail",
       category: "Cocktails",
+      image: drinkImages[38],
       ingredients: [
         "1 1/2 ounces vodka",
         "1 ounce cranberry juice",
@@ -997,7 +1069,7 @@ const RecipeBeveragesPage = () => {
         "Lime wheel for garnish",
         "Cocktail shaker"
       ],
-      instructions: [
+      steps: [
         "Chill cocktail glass with ice.",
         "In shaker, combine vodka and cranberry juice.",
         "Add lime juice and triple sec.",
@@ -1010,8 +1082,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 40, 
-      name: "Whiskey Sour Recipe",
+      name: "Whiskey Sour",
+      tagline: "Tangy whiskey with lemon",
       category: "Cocktails",
+      image: drinkImages[39],
       ingredients: [
         "2 ounces whiskey",
         "3/4 ounce lemon juice",
@@ -1021,7 +1095,7 @@ const RecipeBeveragesPage = () => {
         "Maraschino cherry",
         "Egg white (optional)"
       ],
-      instructions: [
+      steps: [
         "In shaker, combine whiskey and lemon juice.",
         "Add simple syrup and ice cubes.",
         "For frothy version: add egg white.",
@@ -1034,8 +1108,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 41, 
-      name: "Rooh Afza Recipe",
+      name: "Rooh Afza",
+      tagline: "Traditional rose-flavored drink",
       category: "Traditional Beverages",
+      image: drinkImages[40],
       ingredients: [
         "4 tablespoons Rooh Afza syrup",
         "4 cups chilled milk or water",
@@ -1044,7 +1120,7 @@ const RecipeBeveragesPage = () => {
         "1 tablespoon basil seeds (optional)",
         "Rose petals for garnish"
       ],
-      instructions: [
+      steps: [
         "In glass, add Rooh Afza syrup.",
         "Add chilled milk or water as preferred.",
         "Stir well until syrup dissolves completely.",
@@ -1057,8 +1133,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 42, 
-      name: "Sharbat-e-Sandal Recipe",
+      name: "Sharbat-e-Sandal",
+      tagline: "Cooling sandalwood summer drink",
       category: "Traditional Beverages",
+      image: drinkImages[41],
       ingredients: [
         "2 teaspoons sandalwood powder",
         "4 cups water",
@@ -1068,7 +1146,7 @@ const RecipeBeveragesPage = () => {
         "Rose water for flavor",
         "Pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "Make sugar syrup by dissolving sugar in water.",
         "Add sandalwood powder to syrup.",
         "Cook on low heat for 10 minutes.",
@@ -1081,8 +1159,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 43, 
-      name: "Sattu Sharbat Recipe",
+      name: "Sattu Sharbat",
+      tagline: "Nutritious roasted gram flour drink",
       category: "Traditional Beverages",
+      image: drinkImages[42],
       ingredients: [
         "1/2 cup sattu flour",
         "4 cups cold water",
@@ -1092,7 +1172,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Fresh mint leaves"
       ],
-      instructions: [
+      steps: [
         "In pitcher, mix sattu flour with little water.",
         "Make smooth paste without lumps.",
         "Add remaining water and mix well.",
@@ -1105,8 +1185,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 44, 
-      name: "Jal Jeera Recipe",
+      name: "Jal Jeera",
+      tagline: "Spicy Indian cumin cooler",
       category: "Traditional Beverages",
+      image: drinkImages[43],
       ingredients: [
         "1/4 cup mint leaves",
         "1/4 cup coriander leaves",
@@ -1117,7 +1199,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Cumin powder for garnish"
       ],
-      instructions: [
+      steps: [
         "Dry roast cumin seeds until fragrant.",
         "Grind roasted cumin with mint and coriander.",
         "Mix paste with water in pitcher.",
@@ -1130,8 +1212,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 45, 
-      name: "Aam Panna Recipe",
+      name: "Aam Panna",
+      tagline: "Raw mango summer cooler",
       category: "Traditional Beverages",
+      image: drinkImages[44],
       ingredients: [
         "2 raw mangoes",
         "1/2 cup sugar",
@@ -1141,7 +1225,7 @@ const RecipeBeveragesPage = () => {
         "Ice cubes",
         "Fresh mint leaves"
       ],
-      instructions: [
+      steps: [
         "Pressure cook raw mangoes until soft.",
         "Peel and scoop pulp from mangoes.",
         "Blend pulp with sugar and water.",
@@ -1154,8 +1238,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 46, 
-      name: "Badam Milk Recipe",
+      name: "Badam Milk",
+      tagline: "Rich almond-flavored milk",
       category: "Traditional Beverages",
+      image: drinkImages[45],
       ingredients: [
         "1/2 cup almonds, soaked overnight",
         "4 cups milk",
@@ -1164,7 +1250,7 @@ const RecipeBeveragesPage = () => {
         "4 tablespoons sugar",
         "Chopped pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "Peel soaked almonds after overnight soaking.",
         "Blend almonds with little milk to paste.",
         "Heat remaining milk in saucepan.",
@@ -1177,8 +1263,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 47, 
-      name: "Masala Milk Recipe",
+      name: "Masala Milk",
+      tagline: "Spiced warm milk",
       category: "Traditional Beverages",
+      image: drinkImages[46],
       ingredients: [
         "4 cups milk",
         "2 tablespoons sugar",
@@ -1188,7 +1276,7 @@ const RecipeBeveragesPage = () => {
         "Saffron strands (optional)",
         "Chopped nuts for garnish"
       ],
-      instructions: [
+      steps: [
         "Heat milk in heavy-bottomed pan.",
         "Bring to boil and then lower heat.",
         "Simmer for 10 minutes to reduce slightly.",
@@ -1201,8 +1289,10 @@ const RecipeBeveragesPage = () => {
     },
     { 
       id: 48, 
-      name: "Thandai Recipe",
+      name: "Thandai",
+      tagline: "Festive spiced milk drink",
       category: "Traditional Beverages",
+      image: drinkImages[47],
       ingredients: [
         "1/2 cup almonds",
         "2 tablespoons poppy seeds",
@@ -1213,7 +1303,7 @@ const RecipeBeveragesPage = () => {
         "1/2 cup sugar",
         "Rose water for flavor"
       ],
-      instructions: [
+      steps: [
         "Soak all nuts and seeds overnight.",
         "Drain water and grind to fine paste.",
         "Add little milk while grinding.",
@@ -1227,24 +1317,26 @@ const RecipeBeveragesPage = () => {
   ];
 
   // Voice instructions handler
-  const speakInstructions = (instructions, stepIndex = 0, autoStart = true) => {
+  const speakInstructions = (steps, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
       if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
         setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
         speechSynthesisRef.current = null;
         return;
       }
 
-      if (stepIndex >= 0 && stepIndex < instructions.length) {
+      if (stepIndex >= 0 && stepIndex < steps.length) {
         const utterance = new SpeechSynthesisUtterance();
-        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
         utterance.rate = 1.0;
         utterance.pitch = 1;
         utterance.volume = 1;
         
         setCurrentStep(stepIndex + 1);
-        const stepProgress = ((stepIndex + 1) / instructions.length) * 100;
+        const stepProgress = ((stepIndex + 1) / steps.length) * 100;
         setProgress(stepProgress);
         
         utterance.onstart = () => {
@@ -1254,65 +1346,10 @@ const RecipeBeveragesPage = () => {
         utterance.onend = () => {
           setIsPlaying(false);
           speechSynthesisRef.current = null;
-          
-          if (stepIndex < instructions.length - 1) {
-            setTimeout(() => {
-              if (showVoiceInstructions && !speechSynthesisRef.current) {
-                speakInstructions(instructions, stepIndex + 1, true);
-              }
-            }, 1000);
-          }
         };
         
         utterance.onerror = () => {
           setIsPlaying(false);
-          speechSynthesisRef.current = null;
-        };
-        
-        speechSynthesisRef.current = utterance;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        const utterance = new SpeechSynthesisUtterance();
-        let fullText = "";
-        instructions.forEach((step, index) => {
-          fullText += `Step ${index + 1}: ${step}. `;
-        });
-        
-        utterance.text = fullText;
-        utterance.rate = 1.0;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-        
-        utterance.onstart = () => {
-          setIsPlaying(true);
-          setCurrentStep(1);
-          setProgress(10);
-        };
-        
-        const totalTime = fullText.length * 0.05;
-        const intervalTime = totalTime * 10;
-        let currentProgress = 10;
-        
-        const progressInterval = setInterval(() => {
-          if (currentProgress < 90) {
-            currentProgress += 5;
-            setProgress(currentProgress);
-          }
-        }, intervalTime / 18);
-        
-        utterance.onend = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(instructions.length);
-          setProgress(100);
-          speechSynthesisRef.current = null;
-        };
-        
-        utterance.onerror = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(0);
-          setProgress(0);
           speechSynthesisRef.current = null;
         };
         
@@ -1320,7 +1357,7 @@ const RecipeBeveragesPage = () => {
         window.speechSynthesis.speak(utterance);
       }
     } else {
-      alert('Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.');
+      alert('Your browser does not support text-to-speech.');
     }
   };
 
@@ -1328,339 +1365,181 @@ const RecipeBeveragesPage = () => {
     if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      setCurrentStep(0);
+      setProgress(0);
       speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedDrink && currentStep < selectedDrink.instructions.length) {
+    if (selectedDrink && currentStep < selectedDrink.steps.length) {
       stopSpeaking();
-      speakInstructions(selectedDrink.instructions, currentStep);
+      speakInstructions(selectedDrink.steps, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
     if (selectedDrink && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedDrink.instructions, currentStep - 2);
+      speakInstructions(selectedDrink.steps, currentStep - 2);
     }
   };
 
-  const speakStep = (stepIndex) => {
-    if (selectedDrink && stepIndex >= 0 && stepIndex < selectedDrink.instructions.length) {
-      stopSpeaking();
-      speakInstructions(selectedDrink.instructions, stepIndex);
-    }
-  };
-
-  const toggleVoiceInstructions = () => {
-    const newState = !showVoiceInstructions;
-    setShowVoiceInstructions(newState);
-    
-    if (newState && selectedDrink && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedDrink) {
-          speakInstructions(selectedDrink.instructions, 0, true);
-        }
-      }, 500);
-    } else if (!newState && isPlaying) {
-      stopSpeaking();
-      setCurrentStep(0);
-      setProgress(0);
-      autoPlayStartedRef.current = false;
-    }
-  };
-
-  useEffect(() => {
-    if (isModalOpen && showVoiceInstructions && selectedDrink && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedDrink && isModalOpen) {
-          speakInstructions(selectedDrink.instructions, 0, true);
-        }
-      }, 800);
-    }
-    
-    return () => {
-      stopSpeaking();
-      autoPlayStartedRef.current = false;
-    };
-  }, [isModalOpen, showVoiceInstructions, selectedDrink]);
-
-  useEffect(() => {
-    return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      autoPlayStartedRef.current = false;
-    };
-  }, []);
-
-  // Navigation Handlers
-  const handleViewRecipe = (drink) => {
+  const handleDrinkSelect = (drink) => {
     setSelectedDrink(drink);
-    setIsModalOpen(true);
+    setShowDetailPanel(true);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
-  const closeModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
-    setIsModalOpen(false);
+    setShowDetailPanel(false);
     setSelectedDrink(null);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
   const handleGoBack = () => {
     navigate('/');
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log('Search term:', searchTerm);
-  };
-
-  // Filter drinks based on search
-  const filteredDrinks = allDrinks.filter(drink =>
-    drink.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className="beverages-page">
       {/* Header */}
       <header className="beverages-header">
-        <div className="header-content">
-          <h1>Signature Drinks Collection</h1>
-          <p>Exquisite beverages crafted to refresh and delight</p>
+        <div className="beverages-header-content">
+          <h1 className="beverages-page-title">Beverage Collection</h1>
+          <p className="beverages-page-description">
+            A curated selection of refreshing drinks from around the world.
+          </p>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Beverages Grid */}
       <main className="beverages-main">
-        <div className="beverages-container">
-          {filteredDrinks.length === 0 ? (
-            <div className="no-results">
-              <i className="fas fa-search"></i>
-              <h3>No beverages found matching "{searchTerm}"</h3>
-              <p>Try searching for something else</p>
-              <button 
-                className="clear-search-button"
-                onClick={() => setSearchTerm('')}
+        <div className="beverages-grid-section">
+          <div className="beverages-grid">
+            {allDrinks.map(drink => (
+              <div 
+                key={drink.id} 
+                className="beverages-technique-card"
+                onClick={() => handleDrinkSelect(drink)}
               >
-                Clear Search
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="beverages-grid">
-                {filteredDrinks.map((drink) => (
-                  <div key={drink.id} className="beverage-card">
-                    <div className="beverage-card-image">
-                      <img 
-                        src={drinkImages[drink.id - 1] || drinkImages[0]}
-                        alt={drink.name}
-                        className="beverage-image"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="beverage-card-content">
-                      <h3 className="beverage-name">{drink.name}</h3>
-                      <p className="beverage-category">{drink.category}</p>
-                      <button 
-                        className="view-recipe-btn"
-                        onClick={() => handleViewRecipe(drink)}
-                      >
-                        <i className="fas fa-glass-whiskey"></i> View Recipe
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <div 
+                  className="beverages-card-image"
+                  style={{ backgroundImage: `url(${drink.image})` }}
+                ></div>
+                
+                <div className="beverages-card-content">
+                  <h3 className="beverages-card-title">{drink.name}</h3>
+                  <p className="beverages-card-description">{drink.tagline}</p>
+                </div>
               </div>
-              
-              <div className="back-button-container">
-                <button className="back-home-btn" onClick={handleGoBack}>
-                  <i className="fas fa-arrow-left"></i> Back to Home
-                </button>
-              </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </main>
 
-      {/* Recipe Modal */}
-      {isModalOpen && selectedDrink && (
-        <div className="recipe-modal-overlay">
-          <div className="recipe-modal">
-            <div className="modal-header">
-              <h2 className="modal-title" style={{color: 'white'}}>{selectedDrink.name}</h2>
-              <button className="modal-close-btn" onClick={closeModal}>
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
+      {/* Back to Home Button */}
+      <div className="back-button-container">
+        <button className="back-home-btn" onClick={handleGoBack}>
+          <i className="fas fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      {/* DETAIL MODAL with SELECTED DRINK IMAGE as Background */}
+      {showDetailPanel && selectedDrink && (
+        <div className="beverages-modal-overlay" onClick={closeDetailPanel}>
+          <div 
+            className="beverages-modal" 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundImage: `url(${selectedDrink.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <button className="beverages-modal-close" onClick={closeDetailPanel}>×</button>
             
-            <div className="instructions-toggle-container">
-              <div className="instructions-toggle">
-                <button 
-                  className={`instruction-tab ${!showVoiceInstructions ? 'active' : ''}`}
-                  onClick={() => setShowVoiceInstructions(false)}
-                >
-                  <i className="fas fa-file-alt"></i> Text Instructions
-                </button>
-                <button 
-                  className={`instruction-tab ${showVoiceInstructions ? 'active' : ''}`}
-                  onClick={toggleVoiceInstructions}
-                >
-                  <i className="fas fa-volume-up"></i> Voice Instructions
-                </button>
+            <div className="beverages-modal-header">
+              <div className="beverages-modal-title">
+                <h2>{selectedDrink.name}</h2>
               </div>
             </div>
-            
-            <div className="modal-content">
-              {!showVoiceInstructions && (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-clipboard-list"></i> Ingredients</h3>
-                  </div>
-                  <div className="section-content">
-                    <ul className="ingredients-list">
-                      {selectedDrink.ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+            <div className="beverages-modal-content">
+              {/* COLUMN 1 - INGREDIENTS */}
+              <div className="beverages-modal-ingredients">
+                <h3>Ingredients</h3>
+                <div className="beverages-ingredients-list">
+                  {selectedDrink.ingredients.map((ingredient, idx) => (
+                    <div key={idx} className="beverages-ingredient-item">
+                      <span className="beverages-ingredient-bullet">•</span>
+                      <span className="beverages-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-              
-              {!showVoiceInstructions ? (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-list-ol"></i> Instructions</h3>
-                  </div>
-                  <div className="section-content">
-                    <ol className="instructions-list">
-                      {selectedDrink.instructions.map((step, index) => (
-                        <li key={index}>
-                          <div className="instruction-step">
-                            <span className="step-number">{index + 1}.</span>
-                            <span className="step-text">{step}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+              </div>
+
+              {/* COLUMN 2 - STEPS TO MAKE */}
+              <div className="beverages-modal-steps">
+                <h3>Steps to Make</h3>
+                <div className="beverages-steps-list">
+                  {selectedDrink.steps.map((step, idx) => (
+                    <div key={idx} className="beverages-step-item">
+                      <span className="beverages-step-number">{idx + 1}.</span>
+                      <span className="beverages-step-text">{step}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
-                    <div className="voice-status">
-                      <div className={`voice-status-indicator ${isPlaying ? 'playing' : 'paused'}`}>
-                        <i className={`fas fa-${isPlaying ? 'volume-up' : 'volume-mute'}`}></i>
-                        <span>{isPlaying ? 'Playing Automatically' : 'Ready to Play'}</span>
-                      </div>
+              </div>
+
+              {/* COLUMN 3 - VOICE INSTRUCTIONS */}
+              <div className="beverages-modal-voice-container">
+                <div className="voice-panel">
+                  <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
+                  
+                  <div className="voice-progress">
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
+                    </div>
+                    <div className="progress-info">
+                      <span>Step {currentStep} of {selectedDrink.steps.length}</span>
+                      <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
-                  <div className="section-content">
-                    <div className="voice-player">
-                      <div className="voice-player-header">
-                        <div className="voice-recipe-info">
-                          <h4>🎤 Voice Guide for {selectedDrink.name}</h4>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-controls-main">
-                        <div className="voice-progress-container">
-                          <div className="voice-progress-bar">
-                            <div 
-                              className="voice-progress-fill" 
-                              style={{width: `${progress}%`}}
-                            ></div>
-                          </div>
-                          <div className="voice-progress-info">
-                            <span>Progress: {Math.round(progress)}%</span>
-                            <span>Step {currentStep} of {selectedDrink.instructions.length}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="voice-buttons">
-                          <button 
-                            className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                            onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDrink.instructions)}
-                          >
-                            <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
-                            {isPlaying ? ' Stop Auto-Play' : ' Restart Guide'}
-                          </button>
-                        </div>
-                        
-                        <div className="step-navigation">
-                          <button 
-                            className="step-nav-btn prev"
-                            onClick={speakPreviousStep}
-                            disabled={currentStep <= 1}
-                          >
-                            <i className="fas fa-backward"></i> Previous Step
-                          </button>
-                          
-                          <button 
-                            className="step-nav-btn next"
-                            onClick={speakNextStep}
-                            disabled={currentStep >= selectedDrink.instructions.length}
-                          >
-                            Next Step <i className="fas fa-forward"></i>
-                          </button>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-steps-overview">
-                        <h5>
-                          <i className="fas fa-list-ol"></i> Steps Overview
-                          <span className="steps-count">
-                            {currentStep}/{selectedDrink.instructions.length} Completed
-                          </span>
-                        </h5>
-                        <div className="steps-container">
-                          {selectedDrink.instructions.map((step, index) => (
-                            <div 
-                              key={index} 
-                              className={`step-item ${index < currentStep ? 'completed' : ''} ${index === currentStep - 1 && isPlaying ? 'current' : ''}`}
-                              onClick={() => speakStep(index)}
-                              style={{cursor: 'pointer'}}
-                            >
-                              <div className="step-number-circle">
-                                {index < currentStep ? (
-                                  <i className="fas fa-check"></i>
-                                ) : (
-                                  <span>{index + 1}</span>
-                                )}
-                              </div>
-                              <div className="step-content">
-                                <div className="step-title">Step {index + 1}</div>
-                                <div className="step-text-preview">{step.substring(0, 60)}...</div>
-                              </div>
-                              <div className="step-play-btn">
-                                <i className="fas fa-play"></i>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
+                  <div className="voice-controls">
+                    <button 
+                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDrink.steps)}
+                    >
+                      <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
+                      {isPlaying ? ' Stop' : ' Start Voice Guide'}
+                    </button>
+
+                    <div className="step-controls">
+                      <button 
+                        className="step-btn prev"
+                        onClick={speakPreviousStep}
+                        disabled={currentStep <= 1}
+                      >
+                        <i className="fas fa-backward"></i> Prev
+                      </button>
+                      <button 
+                        className="step-btn next"
+                        onClick={speakNextStep}
+                        disabled={currentStep >= selectedDrink.steps.length}
+                      >
+                        Next <i className="fas fa-forward"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="modal-actions">
-                <button className="close-modal-btn" onClick={closeModal}>
-                  <i className="fas fa-times"></i> Close
-                </button>
               </div>
             </div>
           </div>

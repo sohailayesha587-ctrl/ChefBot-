@@ -28,9 +28,14 @@ const HomePage = () => {
 
   // FEATURES ARRAY - 5 ITEMS ONLY
   const features = [
+ {
+      image: 'pantry-staples.jpg',
+      title: 'Meal Suggestion',
+      path: '/meal-suggestion'
+    },
     {
       image: 'pantry-staples.jpg',
-      title: 'Smart Pantry',
+      title: 'Pantry List',
       path: '/smart-pantry'
     },
     {
@@ -45,7 +50,7 @@ const HomePage = () => {
     },
     {
       image: 'shoppinglist.png',
-      title: 'Smart Shopping',
+      title: 'Shopping List',
       path: '/smart-shopping'
     },
     {
@@ -102,21 +107,7 @@ const HomePage = () => {
       <section className="h-features-section">
         <h2 className="h-features-title">Our Amazing Features</h2>
         
-        {/* Circle with dotted lines on sides */}
-        <div className="circle-with-lines">
-          <div className="dotted-line left-line"></div>
-          
-          {/* Circle Feature */}
-          <div className="feature-circle clickable-circle" onClick={toggleMealSuggestor}>
-            <div className="circle-icon">🍽️</div>
-            
-            <div className="circle-click-hint">
-             
-            </div>
-          </div>
-          
-          <div className="dotted-line right-line"></div>
-        </div>
+     
         
         <div className="h-features-grid">
           {features.map((feature, index) => (

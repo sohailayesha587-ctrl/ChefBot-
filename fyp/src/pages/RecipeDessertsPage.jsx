@@ -1,20 +1,15 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeDessertsPage.css';
 
 const RecipeDessertsPage = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedDessert, setSelectedDessert] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showVoiceInstructions, setShowVoiceInstructions] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
-  const autoPlayStartedRef = useRef(false);
 
   // Dessert images array
   const dessertImages = [
@@ -40,11 +35,13 @@ const RecipeDessertsPage = () => {
     "https://i.ytimg.com/vi/iDcekQeBGOY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD3qP3vvqf2_13B9Aqippq2G5QxXA"  // Sweet Milk Balls
   ];
 
-  // All Desserts Data with Complete Recipes
+  // All Desserts Data with Complete Recipes (20 desserts)
   const desserts = [
     { 
       id: 1, 
       name: "Banana Bread Recipe",
+      tagline: "Moist and delicious classic banana bread",
+      image: dessertImages[0],
       ingredients: [
         "3 ripe bananas, mashed",
         "1/3 cup melted butter",
@@ -56,7 +53,7 @@ const RecipeDessertsPage = () => {
         "1 1/2 cups all-purpose flour",
         "1/2 cup chopped walnuts (optional)"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (175°C). Grease a 9x5 inch loaf pan.",
         "In a large bowl, mash the ripe bananas with a fork until smooth.",
         "Stir the melted butter into the mashed bananas.",
@@ -71,7 +68,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 2, 
-      name: "Mango Caramel Delight Recipe",
+      name: "Mango Caramel Delight",
+      tagline: "Luscious mango dessert with caramel sauce",
+      image: dessertImages[1],
       ingredients: [
         "2 large ripe mangoes, peeled and diced",
         "1 cup sugar (for caramel)",
@@ -82,7 +81,7 @@ const RecipeDessertsPage = () => {
         "1/2 cup whipped cream",
         "1/4 cup chopped pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "To make caramel: Heat sugar and water in a pan on medium heat.",
         "Cook without stirring until sugar melts and turns golden brown.",
         "Carefully add heavy cream while stirring continuously.",
@@ -97,7 +96,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 3, 
-      name: "Chocolate Delight Recipe",
+      name: "Chocolate Delight",
+      tagline: "Decadent layered chocolate dessert",
+      image: dessertImages[2],
       ingredients: [
         "1 1/2 cups chocolate cookies, crushed",
         "1/2 cup melted butter",
@@ -108,7 +109,7 @@ const RecipeDessertsPage = () => {
         "2 cups whipped cream",
         "Chocolate shavings for garnish"
       ],
-      instructions: [
+      steps: [
         "Mix crushed cookies with melted butter until well combined.",
         "Press mixture into bottom of serving glasses to form base.",
         "Refrigerate for 15 minutes to set.",
@@ -125,7 +126,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 4, 
-      name: "Suji Cake Recipe",
+      name: "Suji Cake",
+      tagline: "Traditional semolina cake with nuts",
+      image: dessertImages[3],
       ingredients: [
         "1 cup semolina (suji)",
         "1 cup sugar",
@@ -138,7 +141,7 @@ const RecipeDessertsPage = () => {
         "1/4 cup chopped nuts (almonds, cashews)",
         "1 tablespoon ghee"
       ],
-      instructions: [
+      steps: [
         "Preheat oven to 350°F (175°C). Grease a cake pan.",
         "In a large bowl, combine semolina and yogurt.",
         "Let the mixture rest for 20 minutes to soften semolina.",
@@ -155,7 +158,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 5, 
-      name: "Sweet Dumplings Recipe",
+      name: "Sweet Dumplings",
+      tagline: "Deep-fried dumplings in sugar syrup",
+      image: dessertImages[4],
       ingredients: [
         "1 cup all-purpose flour",
         "2 tablespoons semolina",
@@ -168,7 +173,7 @@ const RecipeDessertsPage = () => {
         "Oil for frying",
         "Chopped pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "For syrup: Combine sugar, water, and cardamom pods in pan.",
         "Bring to boil, simmer for 10 minutes until slightly thickened.",
         "Remove from heat and keep syrup warm.",
@@ -186,7 +191,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 6, 
-      name: "Cherry Delight Recipe",
+      name: "Cherry Delight",
+      tagline: "Layered cherry dessert with custard",
+      image: dessertImages[5],
       ingredients: [
         "2 cups fresh cherries, pitted",
         "1 cup cherry juice",
@@ -198,7 +205,7 @@ const RecipeDessertsPage = () => {
         "1/2 cup crushed digestive biscuits",
         "2 tablespoons melted butter"
       ],
-      instructions: [
+      steps: [
         "Mix crushed biscuits with melted butter for base.",
         "Press mixture into bottom of serving glasses.",
         "Refrigerate for 15 minutes.",
@@ -216,7 +223,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 7, 
-      name: "Watermelon Pudding Recipe",
+      name: "Watermelon Pudding",
+      tagline: "Refreshing watermelon dessert",
+      image: dessertImages[6],
       ingredients: [
         "3 cups watermelon, deseeded and chopped",
         "1/2 cup sugar",
@@ -227,7 +236,7 @@ const RecipeDessertsPage = () => {
         "1 teaspoon vanilla extract",
         "Fresh mint leaves for garnish"
       ],
-      instructions: [
+      steps: [
         "Blend watermelon until smooth puree forms.",
         "Strain through sieve to remove any pulp.",
         "In small bowl, soak agar-agar in cold water for 10 minutes.",
@@ -244,7 +253,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 8, 
-      name: "Custard Falooda Recipe",
+      name: "Custard Falooda",
+      tagline: "Indian-style layered dessert with ice cream",
+      image: dessertImages[7],
       ingredients: [
         "2 cups milk",
         "3 tablespoons custard powder",
@@ -256,7 +267,7 @@ const RecipeDessertsPage = () => {
         "1/4 cup rose syrup",
         "Chopped nuts for garnish"
       ],
-      instructions: [
+      steps: [
         "Soak falooda seeds in water for 30 minutes, drain.",
         "Cook vermicelli according to package instructions, drain.",
         "Mix custard powder with 1/4 cup cold milk to smooth paste.",
@@ -275,7 +286,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 9, 
-      name: "Custard Ice Cream Recipe",
+      name: "Custard Ice Cream",
+      tagline: "Rich homemade custard ice cream",
+      image: dessertImages[8],
       ingredients: [
         "2 cups heavy cream",
         "1 cup whole milk",
@@ -286,7 +299,7 @@ const RecipeDessertsPage = () => {
         "Pinch of salt",
         "1/4 cup chopped nuts (optional)"
       ],
-      instructions: [
+      steps: [
         "Mix custard powder with 2 tablespoons milk to smooth paste.",
         "In saucepan, heat milk and heavy cream until steaming.",
         "In separate bowl, whisk egg yolks and sugar until pale.",
@@ -304,7 +317,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 10, 
-      name: "Bread Malai Pudding Recipe",
+      name: "Bread Malai Pudding",
+      tagline: "Creamy bread pudding with nuts",
+      image: dessertImages[9],
       ingredients: [
         "6 slices white bread, crusts removed",
         "2 cups milk",
@@ -316,7 +331,7 @@ const RecipeDessertsPage = () => {
         "2 tablespoons ghee",
         "Saffron strands for garnish"
       ],
-      instructions: [
+      steps: [
         "Cut bread slices into small pieces or triangles.",
         "Heat ghee in pan, lightly toast bread pieces until golden.",
         "In saucepan, heat milk until it comes to boil.",
@@ -334,7 +349,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 11, 
-      name: "Custard Panna Cotta Recipe",
+      name: "Custard Panna Cotta",
+      tagline: "Italian-style creamy custard dessert",
+      image: dessertImages[10],
       ingredients: [
         "2 cups heavy cream",
         "1/2 cup sugar",
@@ -344,7 +361,7 @@ const RecipeDessertsPage = () => {
         "1 cup mixed berry compote",
         "Fresh mint leaves for garnish"
       ],
-      instructions: [
+      steps: [
         "Soak gelatin in cold water for 5 minutes to bloom.",
         "Heat heavy cream and sugar in saucepan until steaming.",
         "Remove from heat, add bloomed gelatin, stir until dissolved.",
@@ -362,7 +379,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 12, 
-      name: "Qissa Khawani Kheer Recipe",
+      name: "Qissa Khawani Kheer",
+      tagline: "Traditional rice pudding with nuts",
+      image: dessertImages[11],
       ingredients: [
         "1/2 cup basmati rice",
         "1 liter full-fat milk",
@@ -374,7 +393,7 @@ const RecipeDessertsPage = () => {
         "Saffron strands soaked in 2 tablespoons milk",
         "Rose water for flavor (optional)"
       ],
-      instructions: [
+      steps: [
         "Wash rice and soak in water for 30 minutes.",
         "Heat ghee in heavy-bottomed pan, fry nuts until golden, set aside.",
         "Drain rice and add to same pan, lightly roast for 2 minutes.",
@@ -392,7 +411,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 13, 
-      name: "Walnut Halwa Recipe",
+      name: "Walnut Halwa",
+      tagline: "Rich nutty Indian dessert",
+      image: dessertImages[12],
       ingredients: [
         "2 cups walnuts, finely ground",
         "1 cup sugar",
@@ -404,7 +425,7 @@ const RecipeDessertsPage = () => {
         "Saffron strands soaked in 2 tablespoons milk",
         "Silver leaf (varq) for garnish"
       ],
-      instructions: [
+      steps: [
         "Soak ground walnuts in milk for 30 minutes.",
         "Make sugar syrup: Combine sugar and water in pan.",
         "Cook until one-string consistency syrup forms.",
@@ -422,7 +443,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 14, 
-      name: "Cinnamon Rolls Recipe",
+      name: "Cinnamon Rolls",
+      tagline: "Soft sweet rolls with cinnamon sugar",
+      image: dessertImages[13],
       ingredients: [
         "For dough: 3 cups all-purpose flour",
         "1/4 cup sugar",
@@ -438,7 +461,7 @@ const RecipeDessertsPage = () => {
         "2 tablespoons milk",
         "1/2 teaspoon vanilla extract"
       ],
-      instructions: [
+      steps: [
         "Mix warm milk, sugar, and yeast, let sit for 5 minutes until foamy.",
         "In large bowl, combine flour and salt.",
         "Add yeast mixture, melted butter, and egg to flour.",
@@ -458,7 +481,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 15, 
-      name: "Bread Gulab Jamun Recipe",
+      name: "Bread Gulab Jamun",
+      tagline: "Quick bread version of classic Indian sweet",
+      image: dessertImages[14],
       ingredients: [
         "6 slices white bread, crusts removed",
         "1/4 cup milk powder",
@@ -473,7 +498,7 @@ const RecipeDessertsPage = () => {
         "1 teaspoon rose water",
         "Chopped pistachios for garnish"
       ],
-      instructions: [
+      steps: [
         "Make syrup: Combine sugar, water, and cardamom in pan.",
         "Boil for 10 minutes until slightly thickened, add rose water.",
         "Keep syrup warm.",
@@ -492,7 +517,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 16, 
-      name: "Creamy Mango Delight Recipe",
+      name: "Creamy Mango Delight",
+      tagline: "No-bake mango dessert with biscuits",
+      image: dessertImages[15],
       ingredients: [
         "2 large ripe mangoes, pureed",
         "1 cup whipped cream",
@@ -503,7 +530,7 @@ const RecipeDessertsPage = () => {
         "1 teaspoon vanilla extract",
         "1/4 cup chopped nuts for garnish"
       ],
-      instructions: [
+      steps: [
         "Mix crushed biscuits with melted butter for base.",
         "Press mixture into bottom of serving glasses.",
         "Refrigerate for 15 minutes.",
@@ -521,7 +548,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 17, 
-      name: "Kunafa Dates Recipe",
+      name: "Kunafa Dates",
+      tagline: "Middle Eastern pastry with dates",
+      image: dessertImages[16],
       ingredients: [
         "250g kunafa dough (kataifi), thawed",
         "1 cup pitted dates, chopped",
@@ -534,7 +563,7 @@ const RecipeDessertsPage = () => {
         "1 teaspoon orange blossom water",
         "1/4 cup pistachios, crushed for garnish"
       ],
-      instructions: [
+      steps: [
         "Make syrup: Combine sugar, water, and lemon juice.",
         "Boil for 10 minutes until slightly thickened.",
         "Remove from heat, add orange blossom water.",
@@ -555,7 +584,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 18, 
-      name: "Kunafa Chocolate Recipe",
+      name: "Kunafa Chocolate",
+      tagline: "Crispy pastry with chocolate filling",
+      image: dessertImages[17],
       ingredients: [
         "250g kunafa dough (kataifi), thawed",
         "200g dark chocolate, chopped",
@@ -567,7 +598,7 @@ const RecipeDessertsPage = () => {
         "1/4 cup cream",
         "Chopped almonds for garnish"
       ],
-      instructions: [
+      steps: [
         "Make chocolate ganache: Heat cream until steaming.",
         "Pour over chopped chocolate, let sit 2 minutes.",
         "Whisk until smooth, add vanilla extract.",
@@ -588,7 +619,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 19, 
-      name: "Chocolate Strawberry Crepes Recipe",
+      name: "Chocolate Strawberry Crepes",
+      tagline: "Thin pancakes with chocolate and berries",
+      image: dessertImages[18],
       ingredients: [
         "For crepes: 1 cup all-purpose flour",
         "2 eggs",
@@ -603,7 +636,7 @@ const RecipeDessertsPage = () => {
         "1/4 cup cream",
         "Powdered sugar for dusting"
       ],
-      instructions: [
+      steps: [
         "Make crepe batter: Whisk eggs, milk, and melted butter.",
         "Add flour, sugar, and salt, whisk until smooth.",
         "Let batter rest for 30 minutes.",
@@ -624,7 +657,9 @@ const RecipeDessertsPage = () => {
     },
     { 
       id: 20, 
-      name: "Sweet Milk Balls Recipe",
+      name: "Sweet Milk Balls",
+      tagline: "Fried milk balls in spiced sugar coating",
+      image: dessertImages[19],
       ingredients: [
         "1 liter full-fat milk",
         "1/2 cup sugar",
@@ -636,7 +671,7 @@ const RecipeDessertsPage = () => {
         "For coating: 1/4 cup powdered sugar",
         "1 teaspoon cinnamon powder"
       ],
-      instructions: [
+      steps: [
         "Boil milk in heavy-bottomed pan.",
         "Reduce heat, simmer until milk reduces to half.",
         "Add sugar and milk powder, stir continuously.",
@@ -657,11 +692,13 @@ const RecipeDessertsPage = () => {
   ];
 
   // Voice instructions handler
-  const speakInstructions = (instructions, stepIndex = 0, autoStart = true) => {
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
       if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
         setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
         speechSynthesisRef.current = null;
         return;
       }
@@ -684,65 +721,10 @@ const RecipeDessertsPage = () => {
         utterance.onend = () => {
           setIsPlaying(false);
           speechSynthesisRef.current = null;
-          
-          if (stepIndex < instructions.length - 1) {
-            setTimeout(() => {
-              if (showVoiceInstructions && !speechSynthesisRef.current) {
-                speakInstructions(instructions, stepIndex + 1, true);
-              }
-            }, 1000);
-          }
         };
         
         utterance.onerror = () => {
           setIsPlaying(false);
-          speechSynthesisRef.current = null;
-        };
-        
-        speechSynthesisRef.current = utterance;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        const utterance = new SpeechSynthesisUtterance();
-        let fullText = "";
-        instructions.forEach((step, index) => {
-          fullText += `Step ${index + 1}: ${step}. `;
-        });
-        
-        utterance.text = fullText;
-        utterance.rate = 1.0;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-        
-        utterance.onstart = () => {
-          setIsPlaying(true);
-          setCurrentStep(1);
-          setProgress(10);
-        };
-        
-        const totalTime = fullText.length * 0.05;
-        const intervalTime = totalTime * 10;
-        let currentProgress = 10;
-        
-        const progressInterval = setInterval(() => {
-          if (currentProgress < 90) {
-            currentProgress += 5;
-            setProgress(currentProgress);
-          }
-        }, intervalTime / 18);
-        
-        utterance.onend = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(instructions.length);
-          setProgress(100);
-          speechSynthesisRef.current = null;
-        };
-        
-        utterance.onerror = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(0);
-          setProgress(0);
           speechSynthesisRef.current = null;
         };
         
@@ -750,7 +732,7 @@ const RecipeDessertsPage = () => {
         window.speechSynthesis.speak(utterance);
       }
     } else {
-      alert('Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.');
+      alert('Your browser does not support text-to-speech.');
     }
   };
 
@@ -758,341 +740,181 @@ const RecipeDessertsPage = () => {
     if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      setCurrentStep(0);
+      setProgress(0);
       speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedDessert && currentStep < selectedDessert.instructions.length) {
+    if (selectedDessert && currentStep < selectedDessert.steps.length) {
       stopSpeaking();
-      speakInstructions(selectedDessert.instructions, currentStep);
+      speakInstructions(selectedDessert.steps, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
     if (selectedDessert && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedDessert.instructions, currentStep - 2);
+      speakInstructions(selectedDessert.steps, currentStep - 2);
     }
   };
 
-  const speakStep = (stepIndex) => {
-    if (selectedDessert && stepIndex >= 0 && stepIndex < selectedDessert.instructions.length) {
-      stopSpeaking();
-      speakInstructions(selectedDessert.instructions, stepIndex);
-    }
-  };
-
-  const toggleVoiceInstructions = () => {
-    const newState = !showVoiceInstructions;
-    setShowVoiceInstructions(newState);
-    
-    if (newState && selectedDessert && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedDessert) {
-          speakInstructions(selectedDessert.instructions, 0, true);
-        }
-      }, 500);
-    } else if (!newState && isPlaying) {
-      stopSpeaking();
-      setCurrentStep(0);
-      setProgress(0);
-      autoPlayStartedRef.current = false;
-    }
-  };
-
-  useEffect(() => {
-    if (isModalOpen && showVoiceInstructions && selectedDessert && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedDessert && isModalOpen) {
-          speakInstructions(selectedDessert.instructions, 0, true);
-        }
-      }, 800);
-    }
-    
-    return () => {
-      stopSpeaking();
-      autoPlayStartedRef.current = false;
-    };
-  }, [isModalOpen, showVoiceInstructions, selectedDessert]);
-
-  useEffect(() => {
-    return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      autoPlayStartedRef.current = false;
-    };
-  }, []);
-
-  // Navigation Handlers
-  const handleViewRecipe = (dessert) => {
+  const handleDessertSelect = (dessert) => {
     setSelectedDessert(dessert);
-    setIsModalOpen(true);
+    setShowDetailPanel(true);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
-  const closeModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
-    setIsModalOpen(false);
+    setShowDetailPanel(false);
     setSelectedDessert(null);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
   const handleGoBack = () => {
     navigate('/');
   };
 
-  // Filter desserts based on search
-  const filteredDesserts = desserts.filter(dessert =>
-    dessert.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Handle Search
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log('Search term:', searchTerm);
-  };
-
   return (
     <div className="desserts-page">
       {/* Header */}
       <header className="desserts-header">
-        <div className="header-content">
-          <h1>Signature Dessert Selection</h1>
-          <p>A refined selection of traditional and classic sweet dishes</p>
+        <div className="desserts-header-content">
+          <h1 className="desserts-page-title">Dessert Recipe Collection</h1>
+          <p className="desserts-page-description">
+            A curated selection of delightful sweet treats from around the world.
+          </p>
         </div>
       </header>
 
-      
-
-      {/* Main Content */}
+      {/* Desserts Grid */}
       <main className="desserts-main">
-        <div className="desserts-container">
-          {filteredDesserts.length === 0 ? (
-            <div className="no-results">
-              <i className="fas fa-search"></i>
-              <h3>No desserts found matching "{searchTerm}"</h3>
-              <p>Try searching for something else</p>
-              <button 
-                className="clear-search-button"
-                onClick={() => setSearchTerm('')}
+        <div className="desserts-grid-section">
+          <div className="desserts-grid">
+            {desserts.map(dessert => (
+              <div 
+                key={dessert.id} 
+                className="desserts-technique-card"
+                onClick={() => handleDessertSelect(dessert)}
               >
-                Clear Search
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="desserts-grid">
-                {filteredDesserts.map((dessert) => (
-                  <div key={dessert.id} className="dessert-card">
-                    <div className="dessert-card-image">
-                      <img 
-                        src={dessertImages[dessert.id - 1] || dessertImages[0]}
-                        alt={dessert.name}
-                        className="dessert-image"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="dessert-card-content">
-                      <h3 className="dessert-name">{dessert.name}</h3>
-                      <button 
-                        className="view-recipe-btn"
-                        onClick={() => handleViewRecipe(dessert)}
-                      >
-                        <i className="fas fa-cookie-bite"></i> View Recipe
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <div 
+                  className="desserts-card-image"
+                  style={{ backgroundImage: `url(${dessert.image})` }}
+                ></div>
+                
+                <div className="desserts-card-content">
+                  <h3 className="desserts-card-title">{dessert.name}</h3>
+                  <p className="desserts-card-description">{dessert.tagline}</p>
+                </div>
               </div>
-              
-              <div className="back-button-container">
-                <button className="back-home-btn" onClick={handleGoBack}>
-                  <i className="fas fa-arrow-left"></i> Back to Home
-                </button>
-              </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </main>
 
-      {/* Recipe Modal */}
-      {isModalOpen && selectedDessert && (
-        <div className="recipe-modal-overlay">
-          <div className="recipe-modal">
-            <div className="modal-header">
-              <h2 className="modal-title" style={{color: 'white'}}>{selectedDessert.name}</h2>
-              <button className="modal-close-btn" onClick={closeModal}>
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
+      {/* Back to Home Button */}
+      <div className="back-button-container">
+        <button className="back-home-btn" onClick={handleGoBack}>
+          <i className="fas fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      {/* DETAIL MODAL with SELECTED DESSERT IMAGE as Background */}
+      {showDetailPanel && selectedDessert && (
+        <div className="desserts-modal-overlay" onClick={closeDetailPanel}>
+          <div 
+            className="desserts-modal" 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundImage: `url(${selectedDessert.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <button className="desserts-modal-close" onClick={closeDetailPanel}>×</button>
             
-            <div className="instructions-toggle-container">
-              <div className="instructions-toggle">
-                <button 
-                  className={`instruction-tab ${!showVoiceInstructions ? 'active' : ''}`}
-                  onClick={() => setShowVoiceInstructions(false)}
-                >
-                  <i className="fas fa-file-alt"></i> Text Instructions
-                </button>
-                <button 
-                  className={`instruction-tab ${showVoiceInstructions ? 'active' : ''}`}
-                  onClick={toggleVoiceInstructions}
-                >
-                  <i className="fas fa-volume-up"></i> Voice Instructions
-                </button>
+            <div className="desserts-modal-header">
+              <div className="desserts-modal-title">
+                <h2>{selectedDessert.name}</h2>
               </div>
             </div>
-            
-            <div className="modal-content">
-              {!showVoiceInstructions && (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-clipboard-list"></i> Ingredients</h3>
-                  </div>
-                  <div className="section-content">
-                    <ul className="ingredients-list">
-                      {selectedDessert.ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+            <div className="desserts-modal-content">
+              {/* COLUMN 1 - INGREDIENTS */}
+              <div className="desserts-modal-ingredients">
+                <h3>Ingredients</h3>
+                <div className="desserts-ingredients-list">
+                  {selectedDessert.ingredients.map((ingredient, idx) => (
+                    <div key={idx} className="desserts-ingredient-item">
+                      <span className="desserts-ingredient-bullet">•</span>
+                      <span className="desserts-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-              
-              {!showVoiceInstructions ? (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-list-ol"></i> Instructions</h3>
-                  </div>
-                  <div className="section-content">
-                    <ol className="instructions-list">
-                      {selectedDessert.instructions.map((step, index) => (
-                        <li key={index}>
-                          <div className="instruction-step">
-                            <span className="step-number">{index + 1}.</span>
-                            <span className="step-text">{step}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+              </div>
+
+              {/* COLUMN 2 - STEPS TO MAKE */}
+              <div className="desserts-modal-steps">
+                <h3>Steps to Make</h3>
+                <div className="desserts-steps-list">
+                  {selectedDessert.steps.map((step, idx) => (
+                    <div key={idx} className="desserts-step-item">
+                      <span className="desserts-step-number">{idx + 1}.</span>
+                      <span className="desserts-step-text">{step}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
-                    <div className="voice-status">
-                      <div className={`voice-status-indicator ${isPlaying ? 'playing' : 'paused'}`}>
-                        <i className={`fas fa-${isPlaying ? 'volume-up' : 'volume-mute'}`}></i>
-                        <span>{isPlaying ? 'Playing Automatically' : 'Ready to Play'}</span>
-                      </div>
+              </div>
+
+              {/* COLUMN 3 - VOICE INSTRUCTIONS */}
+              <div className="desserts-modal-voice-container">
+                <div className="voice-panel">
+                  <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
+                  
+                  <div className="voice-progress">
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
+                    </div>
+                    <div className="progress-info">
+                      <span>Step {currentStep} of {selectedDessert.steps.length}</span>
+                      <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
-                  <div className="section-content">
-                    <div className="voice-player">
-                      <div className="voice-player-header">
-                        <div className="voice-recipe-info">
-                          <h4>🎤 Voice Guide for {selectedDessert.name}</h4>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-controls-main">
-                        <div className="voice-progress-container">
-                          <div className="voice-progress-bar">
-                            <div 
-                              className="voice-progress-fill" 
-                              style={{width: `${progress}%`}}
-                            ></div>
-                          </div>
-                          <div className="voice-progress-info">
-                            <span>Progress: {Math.round(progress)}%</span>
-                            <span>Step {currentStep} of {selectedDessert.instructions.length}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="voice-buttons">
-                          <button 
-                            className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                            onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDessert.instructions)}
-                          >
-                            <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
-                            {isPlaying ? ' Stop Auto-Play' : ' Restart Guide'}
-                          </button>
-                        </div>
-                        
-                        <div className="step-navigation">
-                          <button 
-                            className="step-nav-btn prev"
-                            onClick={speakPreviousStep}
-                            disabled={currentStep <= 1}
-                          >
-                            <i className="fas fa-backward"></i> Previous Step
-                          </button>
-                          
-                          <button 
-                            className="step-nav-btn next"
-                            onClick={speakNextStep}
-                            disabled={currentStep >= selectedDessert.instructions.length}
-                          >
-                            Next Step <i className="fas fa-forward"></i>
-                          </button>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-steps-overview">
-                        <h5>
-                          <i className="fas fa-list-ol"></i> Steps Overview
-                          <span className="steps-count">
-                            {currentStep}/{selectedDessert.instructions.length} Completed
-                          </span>
-                        </h5>
-                        <div className="steps-container">
-                          {selectedDessert.instructions.map((step, index) => (
-                            <div 
-                              key={index} 
-                              className={`step-item ${index < currentStep ? 'completed' : ''} ${index === currentStep - 1 && isPlaying ? 'current' : ''}`}
-                              onClick={() => speakStep(index)}
-                              style={{cursor: 'pointer'}}
-                            >
-                              <div className="step-number-circle">
-                                {index < currentStep ? (
-                                  <i className="fas fa-check"></i>
-                                ) : (
-                                  <span>{index + 1}</span>
-                                )}
-                              </div>
-                              <div className="step-content">
-                                <div className="step-title">Step {index + 1}</div>
-                                <div className="step-text-preview">{step.substring(0, 60)}...</div>
-                              </div>
-                              <div className="step-play-btn">
-                                <i className="fas fa-play"></i>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
+                  <div className="voice-controls">
+                    <button 
+                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDessert.steps)}
+                    >
+                      <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
+                      {isPlaying ? ' Stop' : ' Start Voice Guide'}
+                    </button>
+
+                    <div className="step-controls">
+                      <button 
+                        className="step-btn prev"
+                        onClick={speakPreviousStep}
+                        disabled={currentStep <= 1}
+                      >
+                        <i className="fas fa-backward"></i> Prev
+                      </button>
+                      <button 
+                        className="step-btn next"
+                        onClick={speakNextStep}
+                        disabled={currentStep >= selectedDessert.steps.length}
+                      >
+                        Next <i className="fas fa-forward"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="modal-actions">
-                <button className="close-modal-btn" onClick={closeModal}>
-                  <i className="fas fa-times"></i> Close
-                </button>
               </div>
             </div>
           </div>

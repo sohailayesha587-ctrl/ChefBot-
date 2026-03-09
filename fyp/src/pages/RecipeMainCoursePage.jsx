@@ -1,20 +1,15 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeMainCoursePage.css';
 
 const RecipeMainCoursePage = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showVoiceInstructions, setShowVoiceInstructions] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
-  const autoPlayStartedRef = useRef(false);
 
   // Main Course images array
   const mainCourseImages = [
@@ -60,11 +55,13 @@ const RecipeMainCoursePage = () => {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH5dLdtHbB5gJeq_70QmjNSMsILUie7tnpdA&s"  // Chicken Quesadilla
   ];
 
-  // All Main Course Recipes with Complete Details
+  // All Main Course Recipes with Complete Details (40 recipes)
   const mainCourseRecipes = [
     { 
       id: 1, 
-      name: "Biryani Recipe",
+      name: "Biryani",
+      tagline: "Aromatic layered rice dish with tender meat and exotic spices",
+      image: mainCourseImages[0],
       ingredients: [
         "2 cups basmati rice",
         "500g chicken/mutton pieces",
@@ -81,7 +78,7 @@ const RecipeMainCoursePage = () => {
         "4 tbsp ghee or oil",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Wash and soak basmati rice for 30 minutes.",
         "Heat oil in large pan, fry onions until golden brown.",
         "Add ginger-garlic paste and sauté for 2 minutes.",
@@ -99,7 +96,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 2, 
-      name: "White Karahi Recipe",
+      name: "White Karahi",
+      tagline: "Creamy white chicken curry with aromatic spices",
+      image: mainCourseImages[1],
       ingredients: [
         "500g boneless chicken",
         "1 cup yogurt",
@@ -114,7 +113,7 @@ const RecipeMainCoursePage = () => {
         "1 tsp salt",
         "1 tbsp ginger julienne"
       ],
-      instructions: [
+      steps: [
         "Heat butter in karahi, add ginger-garlic paste.",
         "Sauté for 1 minute until fragrant.",
         "Add chicken pieces, cook on high heat for 5 minutes.",
@@ -129,7 +128,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 3, 
-      name: "Chicken Changezi Recipe",
+      name: "Chicken Changezi",
+      tagline: "Rich Mughlai curry with creamy tomato gravy",
+      image: mainCourseImages[2],
       ingredients: [
         "500g chicken, cut into pieces",
         "2 large onions, chopped",
@@ -145,7 +146,7 @@ const RecipeMainCoursePage = () => {
         "Salt to taste",
         "1 tbsp kasuri methi"
       ],
-      instructions: [
+      steps: [
         "Heat oil in pan, fry onions until golden brown.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
         "Add tomato puree, cook until oil separates.",
@@ -161,7 +162,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 4, 
-      name: "Nihari Recipe",
+      name: "Nihari",
+      tagline: "Slow-cooked beef stew with aromatic spices",
+      image: mainCourseImages[3],
       ingredients: [
         "1kg beef/mutton with bones",
         "2 tbsp wheat flour",
@@ -176,7 +179,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat oil in large pot, fry onions until golden.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
         "Add meat and nihari masala, cook for 10 minutes.",
@@ -191,7 +194,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 5, 
-      name: "Pulao Recipe",
+      name: "Pulao",
+      tagline: "Fragrant rice cooked with meat and whole spices",
+      image: mainCourseImages[4],
       ingredients: [
         "2 cups basmati rice",
         "500g chicken/mutton (optional)",
@@ -207,7 +212,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Wash and soak rice for 30 minutes.",
         "Heat oil/ghee in pot, add whole spices and cumin.",
         "Add onions, fry until golden brown.",
@@ -224,7 +229,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 6, 
-      name: "Seekh Kabab Recipe",
+      name: "Seekh Kabab",
+      tagline: "Spiced minced meat skewers grilled to perfection",
+      image: mainCourseImages[5],
       ingredients: [
         "500g minced beef/chicken",
         "1 large onion, finely chopped",
@@ -239,7 +246,7 @@ const RecipeMainCoursePage = () => {
         "Salt to taste",
         "Skewers for shaping"
       ],
-      instructions: [
+      steps: [
         "Mix all ingredients thoroughly in large bowl.",
         "Knead mixture for 5-10 minutes.",
         "Cover and refrigerate for 2 hours.",
@@ -253,7 +260,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 7, 
-      name: "Chapli Kabab Recipe",
+      name: "Chapli Kabab",
+      tagline: "Peshawari-style spiced flattened beef patties",
+      image: mainCourseImages[6],
       ingredients: [
         "500g minced beef",
         "1 large onion, finely chopped",
@@ -268,7 +277,7 @@ const RecipeMainCoursePage = () => {
         "Oil for frying",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Mix all ingredients in large bowl.",
         "Knead mixture for 5 minutes.",
         "Divide into equal portions.",
@@ -281,7 +290,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 8, 
-      name: "Kofta Recipe",
+      name: "Kofta",
+      tagline: "Tender meatballs in rich and creamy gravy",
+      image: mainCourseImages[7],
       ingredients: [
         "For koftas: 500g minced meat",
         "1 onion, grated",
@@ -297,7 +308,7 @@ const RecipeMainCoursePage = () => {
         "Oil for frying",
         "Fresh coriander for garnish"
       ],
-      instructions: [
+      steps: [
         "Mix all kofta ingredients thoroughly.",
         "Shape into round balls.",
         "Heat oil, fry koftas until golden brown.",
@@ -313,7 +324,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 9, 
-      name: "Chicken Handi Recipe",
+      name: "Chicken Handi",
+      tagline: "Creamy and flavorful chicken cooked in a handi",
+      image: mainCourseImages[8],
       ingredients: [
         "500g boneless chicken",
         "1 cup yogurt",
@@ -328,7 +341,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat butter in handi, fry onions until golden.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
         "Add tomatoes, cook until soft.",
@@ -342,7 +355,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 10, 
-      name: "Mutton Korma Recipe",
+      name: "Mutton Korma",
+      tagline: "Royal Mughlai curry with tender mutton",
+      image: mainCourseImages[9],
       ingredients: [
         "1kg mutton with bones",
         "2 cups yogurt",
@@ -357,7 +372,7 @@ const RecipeMainCoursePage = () => {
         "Saffron strands",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat ghee in heavy-bottomed pot.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
         "Add mutton, cook for 10 minutes.",
@@ -373,7 +388,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 11, 
-      name: "Aloo Gosht Recipe",
+      name: "Aloo Gosht",
+      tagline: "Classic meat and potato curry",
+      image: mainCourseImages[10],
       ingredients: [
         "500g mutton/beef",
         "4 potatoes, peeled and cubed",
@@ -387,7 +404,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat oil in pressure cooker.",
         "Fry onions until golden brown.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
@@ -402,7 +419,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 12, 
-      name: "Daal Chawal Recipe",
+      name: "Daal Chawal",
+      tagline: "Comforting lentils served with steamed rice",
+      image: mainCourseImages[11],
       ingredients: [
         "1 cup yellow lentils (moong daal)",
         "1/2 cup red lentils (masoor daal)",
@@ -416,7 +435,7 @@ const RecipeMainCoursePage = () => {
         "For rice: 2 cups basmati rice",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Wash and soak lentils for 30 minutes.",
         "Boil lentils with turmeric and salt until soft.",
         "Heat ghee in separate pan.",
@@ -432,7 +451,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 13, 
-      name: "Keema Recipe",
+      name: "Keema",
+      tagline: "Spiced minced meat with green peas",
+      image: mainCourseImages[12],
       ingredients: [
         "500g minced meat (beef/chicken)",
         "2 onions, finely chopped",
@@ -446,7 +467,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat oil in pan, fry onions until golden.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
         "Add tomatoes, cook until soft.",
@@ -461,7 +482,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 14, 
-      name: "Tandoori Champ Masala Gravy Recipe",
+      name: "Tandoori Champ Masala",
+      tagline: "Grilled lamb chops in rich masala gravy",
+      image: mainCourseImages[13],
       ingredients: [
         "8 lamb chops",
         "1 cup yogurt",
@@ -476,7 +499,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Marinate lamb chops in yogurt and spices for 4 hours.",
         "Grill or bake until cooked.",
         "For gravy: Heat oil, fry onion puree until golden.",
@@ -490,7 +513,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 15, 
-      name: "Fish Curry Recipe",
+      name: "Fish Curry",
+      tagline: "Tangy and spicy coastal-style fish curry",
+      image: mainCourseImages[14],
       ingredients: [
         "500g fish fillets",
         "2 onions, chopped",
@@ -505,7 +530,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Marinate fish with turmeric and salt for 15 minutes.",
         "Shallow fry fish until golden, set aside.",
         "Heat oil, fry onions until golden.",
@@ -521,7 +546,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 16, 
-      name: "Chicken Tikka Recipe",
+      name: "Chicken Tikka",
+      tagline: "Grilled chicken pieces marinated in spices",
+      image: mainCourseImages[15],
       ingredients: [
         "500g boneless chicken, cubed",
         "1 cup yogurt",
@@ -535,7 +562,7 @@ const RecipeMainCoursePage = () => {
         "Salt to taste",
         "Skewers for grilling"
       ],
-      instructions: [
+      steps: [
         "Mix all ingredients except vegetables.",
         "Marinate chicken for 4 hours or overnight.",
         "Thread chicken and vegetables on skewers.",
@@ -548,7 +575,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 17, 
-      name: "Mutton Roast Recipe",
+      name: "Mutton Roast",
+      tagline: "Slow-roasted mutton with potatoes",
+      image: mainCourseImages[16],
       ingredients: [
         "1kg mutton with bones",
         "4 potatoes, peeled and halved",
@@ -562,7 +591,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Heat oil in pressure cooker.",
         "Add whole spices, let them splutter.",
         "Fry onions until golden brown.",
@@ -579,7 +608,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 18, 
-      name: "Chicken Roast Recipe",
+      name: "Chicken Roast",
+      tagline: "Whole roasted chicken with aromatic spices",
+      image: mainCourseImages[17],
       ingredients: [
         "1 whole chicken (1.5kg)",
         "2 tbsp ginger-garlic paste",
@@ -592,7 +623,7 @@ const RecipeMainCoursePage = () => {
         "Potatoes for roasting",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Clean and pat dry chicken.",
         "Make marinade with all ingredients except butter.",
         "Apply marinade inside and outside chicken.",
@@ -608,7 +639,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 19, 
-      name: "Lobia Recipe",
+      name: "Lobia",
+      tagline: "Creamy black-eyed peas curry",
+      image: mainCourseImages[18],
       ingredients: [
         "2 cups black-eyed peas (lobia), soaked overnight",
         "2 onions, chopped",
@@ -622,7 +655,7 @@ const RecipeMainCoursePage = () => {
         "Fresh coriander for garnish",
         "Salt to taste"
       ],
-      instructions: [
+      steps: [
         "Pressure cook soaked lobia until soft.",
         "Heat oil in pan, fry onions until golden.",
         "Add ginger-garlic paste, sauté for 2 minutes.",
@@ -638,7 +671,9 @@ const RecipeMainCoursePage = () => {
     },
     { 
       id: 20, 
-      name: "Shahi Tukda Recipe",
+      name: "Shahi Tukda",
+      tagline: "Royal bread pudding with saffron and nuts",
+      image: mainCourseImages[19],
       ingredients: [
         "6 slices white bread",
         "2 cups milk",
@@ -651,7 +686,7 @@ const RecipeMainCoursePage = () => {
         "Ghee for frying",
         "Silver leaf for decoration (optional)"
       ],
-      instructions: [
+      steps: [
         "Cut bread slices into triangles or squares.",
         "Heat ghee, fry bread until golden brown.",
         "Drain on paper towels.",
@@ -670,6 +705,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 21, 
       name: "Spaghetti Carbonara",
+      tagline: "Classic Italian pasta with creamy egg sauce",
+      image: mainCourseImages[20],
       ingredients: [
         "400g spaghetti",
         "200g bacon or pancetta, diced",
@@ -680,7 +717,7 @@ const RecipeMainCoursePage = () => {
         "Salt to taste",
         "Fresh parsley for garnish"
       ],
-      instructions: [
+      steps: [
         "Cook spaghetti according to package directions.",
         "While pasta cooks, fry bacon until crispy.",
         "In bowl, whisk eggs with Parmesan cheese.",
@@ -696,6 +733,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 22, 
       name: "Beef Steak",
+      tagline: "Perfectly seared steak with herb butter",
+      image: mainCourseImages[21],
       ingredients: [
         "2 beef steaks (250g each)",
         "2 tbsp olive oil",
@@ -706,7 +745,7 @@ const RecipeMainCoursePage = () => {
         "For sauce: 1/2 cup red wine",
         "1/2 cup beef broth"
       ],
-      instructions: [
+      steps: [
         "Bring steaks to room temperature.",
         "Season generously with salt and pepper.",
         "Heat oil in heavy skillet until smoking.",
@@ -723,6 +762,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 23, 
       name: "Grilled Chicken",
+      tagline: "Juicy grilled chicken with lemon and herbs",
+      image: mainCourseImages[22],
       ingredients: [
         "4 chicken breasts",
         "1/4 cup olive oil",
@@ -734,7 +775,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper to taste",
         "Fresh herbs for garnish"
       ],
-      instructions: [
+      steps: [
         "Mix oil, lemon juice, honey, and spices.",
         "Marinate chicken for 2 hours.",
         "Preheat grill to medium-high.",
@@ -749,6 +790,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 24, 
       name: "Fish and Chips",
+      tagline: "Crispy beer-battered fish with golden fries",
+      image: mainCourseImages[23],
       ingredients: [
         "4 white fish fillets",
         "1 cup flour",
@@ -760,7 +803,7 @@ const RecipeMainCoursePage = () => {
         "Lemon wedges",
         "Tartar sauce for serving"
       ],
-      instructions: [
+      steps: [
         "Cut potatoes into thick chips.",
         "Soak chips in cold water for 30 minutes.",
         "Make batter with flour, beer, and baking powder.",
@@ -777,6 +820,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 25, 
       name: "Beef Burger",
+      tagline: "Classic juicy beef burger with all toppings",
+      image: mainCourseImages[24],
       ingredients: [
         "500g ground beef",
         "1 onion, finely chopped",
@@ -789,7 +834,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper",
         "Butter for toasting buns"
       ],
-      instructions: [
+      steps: [
         "Mix beef, onion, egg, and breadcrumbs.",
         "Season with salt and pepper.",
         "Form into 4 patties.",
@@ -804,6 +849,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 26, 
       name: "Pizza Margherita",
+      tagline: "Simple and authentic Italian pizza",
+      image: mainCourseImages[25],
       ingredients: [
         "Pizza dough for 1 large pizza",
         "1 cup pizza sauce",
@@ -813,7 +860,7 @@ const RecipeMainCoursePage = () => {
         "Salt to taste",
         "Cornmeal for dusting"
       ],
-      instructions: [
+      steps: [
         "Preheat oven with pizza stone to 250°C.",
         "Roll out pizza dough on floured surface.",
         "Dust pizza peel with cornmeal.",
@@ -830,6 +877,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 27, 
       name: "Lasagna",
+      tagline: "Layered pasta bake with meat sauce and cheese",
+      image: mainCourseImages[26],
       ingredients: [
         "12 lasagna noodles",
         "500g ground beef",
@@ -843,7 +892,7 @@ const RecipeMainCoursePage = () => {
         "Fresh basil",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Cook lasagna noodles according to package.",
         "Brown beef with onion and garlic.",
         "Add tomato sauce, simmer for 20 minutes.",
@@ -859,6 +908,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 28, 
       name: "Chicken Alfredo",
+      tagline: "Creamy fettuccine with tender chicken",
+      image: mainCourseImages[27],
       ingredients: [
         "400g fettuccine",
         "2 chicken breasts, sliced",
@@ -870,7 +921,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper",
         "Olive oil"
       ],
-      instructions: [
+      steps: [
         "Cook pasta according to package directions.",
         "Season chicken with salt and pepper.",
         "Heat oil, cook chicken until golden.",
@@ -887,6 +938,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 29, 
       name: "Beef Stroganoff",
+      tagline: "Tender beef in creamy mushroom sauce",
+      image: mainCourseImages[28],
       ingredients: [
         "500g beef sirloin, sliced",
         "1 onion, sliced",
@@ -899,7 +952,7 @@ const RecipeMainCoursePage = () => {
         "Egg noodles for serving",
         "Fresh dill for garnish"
       ],
-      instructions: [
+      steps: [
         "Cook egg noodles according to package.",
         "Season beef with salt and pepper.",
         "Heat butter, sear beef quickly, set aside.",
@@ -917,6 +970,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 30, 
       name: "Chicken Parmesan",
+      tagline: "Breaded chicken topped with marinara and cheese",
+      image: mainCourseImages[29],
       ingredients: [
         "4 chicken breasts",
         "1 cup flour",
@@ -929,7 +984,7 @@ const RecipeMainCoursePage = () => {
         "Fresh basil",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Pound chicken breasts to even thickness.",
         "Season with salt and pepper.",
         "Dredge in flour, then eggs, then breadcrumbs.",
@@ -946,6 +1001,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 31, 
       name: "Ratatouille",
+      tagline: "French Provençal stewed vegetables",
+      image: mainCourseImages[30],
       ingredients: [
         "1 eggplant, diced",
         "2 zucchinis, sliced",
@@ -958,7 +1015,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper",
         "Fresh basil for garnish"
       ],
-      instructions: [
+      steps: [
         "Salt eggplant, let sit for 30 minutes, rinse.",
         "Heat oil in large pot.",
         "Cook onions until translucent.",
@@ -976,6 +1033,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 32, 
       name: "Shepherd's Pie",
+      tagline: "Hearty meat pie with mashed potato topping",
+      image: mainCourseImages[31],
       ingredients: [
         "500g ground lamb/beef",
         "1 onion, chopped",
@@ -989,7 +1048,7 @@ const RecipeMainCoursePage = () => {
         "4 tbsp butter",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Boil potatoes until soft, mash with milk and butter.",
         "Brown meat in pan, set aside.",
         "In same pan, cook onions and carrots until soft.",
@@ -1007,6 +1066,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 33, 
       name: "Chicken Cordon Bleu",
+      tagline: "Chicken breast stuffed with ham and cheese",
+      image: mainCourseImages[32],
       ingredients: [
         "4 chicken breasts",
         "4 slices ham",
@@ -1018,7 +1079,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper",
         "Toothpicks for securing"
       ],
-      instructions: [
+      steps: [
         "Pound chicken breasts thin.",
         "Season with salt and pepper.",
         "Place ham and cheese on each breast.",
@@ -1035,6 +1096,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 34, 
       name: "Beef Wellington",
+      tagline: "Beef tenderloin wrapped in puff pastry",
+      image: mainCourseImages[33],
       ingredients: [
         "500g beef tenderloin",
         "200g mushrooms, finely chopped",
@@ -1045,7 +1108,7 @@ const RecipeMainCoursePage = () => {
         "Salt and pepper",
         "2 tbsp olive oil"
       ],
-      instructions: [
+      steps: [
         "Season beef, sear in hot oil on all sides.",
         "Brush with mustard, let cool.",
         "Cook mushrooms until dry, season, cool.",
@@ -1062,6 +1125,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 35, 
       name: "Chicken Kiev",
+      tagline: "Fried chicken breast filled with garlic butter",
+      image: mainCourseImages[34],
       ingredients: [
         "4 chicken breasts",
         "1/2 cup butter, softened",
@@ -1073,7 +1138,7 @@ const RecipeMainCoursePage = () => {
         "Oil for frying",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Mix butter with parsley and garlic.",
         "Form into 4 logs, freeze for 30 minutes.",
         "Cut pocket in each chicken breast.",
@@ -1089,6 +1154,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 36, 
       name: "Paella",
+      tagline: "Spanish saffron rice with seafood and chicken",
+      image: mainCourseImages[35],
       ingredients: [
         "2 cups short-grain rice",
         "500g chicken, cubed",
@@ -1104,7 +1171,7 @@ const RecipeMainCoursePage = () => {
         "Olive oil",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Heat oil in paella pan.",
         "Brown chicken, set aside.",
         "Cook onions and peppers until soft.",
@@ -1122,6 +1189,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 37, 
       name: "Moussaka",
+      tagline: "Greek baked eggplant casserole with meat sauce",
+      image: mainCourseImages[36],
       ingredients: [
         "2 eggplants, sliced",
         "500g ground lamb",
@@ -1136,7 +1205,7 @@ const RecipeMainCoursePage = () => {
         "1/2 cup Parmesan",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Salt eggplant, let sit for 30 minutes, rinse and pat dry.",
         "Brown eggplant in oil, set aside.",
         "Brown lamb with onions and garlic.",
@@ -1154,6 +1223,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 38, 
       name: "Chicken Fajitas",
+      tagline: "Sizzling chicken with peppers and onions",
+      image: mainCourseImages[37],
       ingredients: [
         "3 chicken breasts, sliced",
         "2 bell peppers, sliced",
@@ -1165,7 +1236,7 @@ const RecipeMainCoursePage = () => {
         "Lime wedges",
         "Fresh cilantro"
       ],
-      instructions: [
+      steps: [
         "Marinate chicken with 1 tbsp oil and seasoning.",
         "Heat remaining oil in large skillet.",
         "Cook chicken until browned, set aside.",
@@ -1181,6 +1252,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 39, 
       name: "Beef Tacos",
+      tagline: "Mexican-style beef tacos with fresh toppings",
+      image: mainCourseImages[38],
       ingredients: [
         "500g ground beef",
         "1 onion, chopped",
@@ -1193,7 +1266,7 @@ const RecipeMainCoursePage = () => {
         "Lime wedges",
         "Oil for cooking"
       ],
-      instructions: [
+      steps: [
         "Brown beef in pan, drain excess fat.",
         "Add onions and garlic, cook until soft.",
         "Add taco seasoning and water.",
@@ -1209,6 +1282,8 @@ const RecipeMainCoursePage = () => {
     { 
       id: 40, 
       name: "Chicken Quesadilla",
+      tagline: "Grilled tortilla filled with chicken and cheese",
+      image: mainCourseImages[39],
       ingredients: [
         "2 chicken breasts, cooked and shredded",
         "4 large flour tortillas",
@@ -1221,7 +1296,7 @@ const RecipeMainCoursePage = () => {
         "Guacamole for serving",
         "Salt and pepper"
       ],
-      instructions: [
+      steps: [
         "Heat 1 tbsp oil in pan.",
         "Cook peppers and onions until soft.",
         "Mix with shredded chicken.",
@@ -1239,24 +1314,26 @@ const RecipeMainCoursePage = () => {
   ];
 
   // Voice instructions handler
-  const speakInstructions = (instructions, stepIndex = 0, autoStart = true) => {
+  const speakInstructions = (steps, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
       if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
         setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
         speechSynthesisRef.current = null;
         return;
       }
 
-      if (stepIndex >= 0 && stepIndex < instructions.length) {
+      if (stepIndex >= 0 && stepIndex < steps.length) {
         const utterance = new SpeechSynthesisUtterance();
-        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
         utterance.rate = 1.0;
         utterance.pitch = 1;
         utterance.volume = 1;
         
         setCurrentStep(stepIndex + 1);
-        const stepProgress = ((stepIndex + 1) / instructions.length) * 100;
+        const stepProgress = ((stepIndex + 1) / steps.length) * 100;
         setProgress(stepProgress);
         
         utterance.onstart = () => {
@@ -1266,65 +1343,10 @@ const RecipeMainCoursePage = () => {
         utterance.onend = () => {
           setIsPlaying(false);
           speechSynthesisRef.current = null;
-          
-          if (stepIndex < instructions.length - 1) {
-            setTimeout(() => {
-              if (showVoiceInstructions && !speechSynthesisRef.current) {
-                speakInstructions(instructions, stepIndex + 1, true);
-              }
-            }, 1000);
-          }
         };
         
         utterance.onerror = () => {
           setIsPlaying(false);
-          speechSynthesisRef.current = null;
-        };
-        
-        speechSynthesisRef.current = utterance;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        const utterance = new SpeechSynthesisUtterance();
-        let fullText = "";
-        instructions.forEach((step, index) => {
-          fullText += `Step ${index + 1}: ${step}. `;
-        });
-        
-        utterance.text = fullText;
-        utterance.rate = 1.0;
-        utterance.pitch = 1;
-        utterance.volume = 1;
-        
-        utterance.onstart = () => {
-          setIsPlaying(true);
-          setCurrentStep(1);
-          setProgress(10);
-        };
-        
-        const totalTime = fullText.length * 0.05;
-        const intervalTime = totalTime * 10;
-        let currentProgress = 10;
-        
-        const progressInterval = setInterval(() => {
-          if (currentProgress < 90) {
-            currentProgress += 5;
-            setProgress(currentProgress);
-          }
-        }, intervalTime / 18);
-        
-        utterance.onend = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(instructions.length);
-          setProgress(100);
-          speechSynthesisRef.current = null;
-        };
-        
-        utterance.onerror = () => {
-          clearInterval(progressInterval);
-          setIsPlaying(false);
-          setCurrentStep(0);
-          setProgress(0);
           speechSynthesisRef.current = null;
         };
         
@@ -1332,7 +1354,7 @@ const RecipeMainCoursePage = () => {
         window.speechSynthesis.speak(utterance);
       }
     } else {
-      alert('Your browser does not support text-to-speech. Please use a modern browser like Chrome or Edge.');
+      alert('Your browser does not support text-to-speech.');
     }
   };
 
@@ -1340,338 +1362,181 @@ const RecipeMainCoursePage = () => {
     if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
+      setCurrentStep(0);
+      setProgress(0);
       speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.instructions.length) {
+    if (selectedRecipe && currentStep < selectedRecipe.steps.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.instructions, currentStep);
+      speakInstructions(selectedRecipe.steps, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
     if (selectedRecipe && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.instructions, currentStep - 2);
+      speakInstructions(selectedRecipe.steps, currentStep - 2);
     }
   };
 
-  const speakStep = (stepIndex) => {
-    if (selectedRecipe && stepIndex >= 0 && stepIndex < selectedRecipe.instructions.length) {
-      stopSpeaking();
-      speakInstructions(selectedRecipe.instructions, stepIndex);
-    }
-  };
-
-  const toggleVoiceInstructions = () => {
-    const newState = !showVoiceInstructions;
-    setShowVoiceInstructions(newState);
-    
-    if (newState && selectedRecipe && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedRecipe) {
-          speakInstructions(selectedRecipe.instructions, 0, true);
-        }
-      }, 500);
-    } else if (!newState && isPlaying) {
-      stopSpeaking();
-      setCurrentStep(0);
-      setProgress(0);
-      autoPlayStartedRef.current = false;
-    }
-  };
-
-  useEffect(() => {
-    if (isModalOpen && showVoiceInstructions && selectedRecipe && !autoPlayStartedRef.current) {
-      autoPlayStartedRef.current = true;
-      setTimeout(() => {
-        if (showVoiceInstructions && selectedRecipe && isModalOpen) {
-          speakInstructions(selectedRecipe.instructions, 0, true);
-        }
-      }, 800);
-    }
-    
-    return () => {
-      stopSpeaking();
-      autoPlayStartedRef.current = false;
-    };
-  }, [isModalOpen, showVoiceInstructions, selectedRecipe]);
-
-  useEffect(() => {
-    return () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-      autoPlayStartedRef.current = false;
-    };
-  }, []);
-
-  // Navigation Handlers
-  const handleViewRecipe = (recipe) => {
+  const handleRecipeSelect = (recipe) => {
     setSelectedRecipe(recipe);
-    setIsModalOpen(true);
+    setShowDetailPanel(true);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
-  const closeModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
-    setIsModalOpen(false);
+    setShowDetailPanel(false);
     setSelectedRecipe(null);
     setIsPlaying(false);
-    setShowVoiceInstructions(false);
     setCurrentStep(0);
     setProgress(0);
-    autoPlayStartedRef.current = false;
   };
 
   const handleGoBack = () => {
     navigate('/');
   };
 
-  // Filter recipes based on search
-  const filteredRecipes = mainCourseRecipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Handle Search
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log('Search term:', searchTerm);
-  };
-
   return (
     <div className="maincourse-page">
       {/* Header */}
       <header className="maincourse-header">
-        <div className="header-content">
-          <h1>Global Main Course Selection</h1>
-          <p>Delicious dishes inspired by world cuisines</p>
+        <div className="maincourse-header-content">
+          <h1 className="maincourse-page-title">Main Course Collection</h1>
+          <p className="maincourse-page-description">
+            A curated selection of delicious main courses from around the world.
+          </p>
         </div>
       </header>
-      {/* Main Content */}
+
+      {/* Main Course Grid */}
       <main className="maincourse-main">
-        <div className="maincourse-container">
-          {filteredRecipes.length === 0 ? (
-            <div className="no-results">
-              <i className="fas fa-search"></i>
-              <h3>No recipes found matching "{searchTerm}"</h3>
-              <p>Try searching for something else</p>
-              <button 
-                className="clear-search-button"
-                onClick={() => setSearchTerm('')}
+        <div className="maincourse-grid-section">
+          <div className="maincourse-grid">
+            {mainCourseRecipes.map(recipe => (
+              <div 
+                key={recipe.id} 
+                className="maincourse-technique-card"
+                onClick={() => handleRecipeSelect(recipe)}
               >
-                Clear Search
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="recipes-grid">
-                {filteredRecipes.map((recipe) => (
-                  <div key={recipe.id} className="recipe-card">
-                    <div className="recipe-card-image">
-                      <img 
-                        src={mainCourseImages[recipe.id - 1] || mainCourseImages[0]}
-                        alt={recipe.name}
-                        className="recipe-image"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="recipe-card-content">
-                      <h3 className="recipe-name">{recipe.name}</h3>
-                      <button 
-                        className="view-recipe-btn"
-                        onClick={() => handleViewRecipe(recipe)}
-                      >
-                        <i className="fas fa-utensils"></i> View Recipe
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <div 
+                  className="maincourse-card-image"
+                  style={{ backgroundImage: `url(${recipe.image})` }}
+                ></div>
+                
+                <div className="maincourse-card-content">
+                  <h3 className="maincourse-card-title">{recipe.name}</h3>
+                  <p className="maincourse-card-description">{recipe.tagline}</p>
+                </div>
               </div>
-              
-              <div className="back-button-container">
-                <button className="back-home-btn" onClick={handleGoBack}>
-                  <i className="fas fa-arrow-left"></i> Back to Home
-                </button>
-              </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </main>
 
-      {/* Recipe Modal */}
-      {isModalOpen && selectedRecipe && (
-        <div className="recipe-modal-overlay">
-          <div className="recipe-modal">
-            <div className="modal-header">
-              <h2 className="modal-title" style={{color: 'white'}}>{selectedRecipe.name}</h2>
-              <button className="modal-close-btn" onClick={closeModal}>
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
+      {/* Back to Home Button */}
+      <div className="back-button-container">
+        <button className="back-home-btn" onClick={handleGoBack}>
+          <i className="fas fa-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      {/* DETAIL MODAL with SELECTED RECIPE IMAGE as Background */}
+      {showDetailPanel && selectedRecipe && (
+        <div className="maincourse-modal-overlay" onClick={closeDetailPanel}>
+          <div 
+            className="maincourse-modal" 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundImage: `url(${selectedRecipe.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <button className="maincourse-modal-close" onClick={closeDetailPanel}>×</button>
             
-            <div className="instructions-toggle-container">
-              <div className="instructions-toggle">
-                <button 
-                  className={`instruction-tab ${!showVoiceInstructions ? 'active' : ''}`}
-                  onClick={() => setShowVoiceInstructions(false)}
-                >
-                  <i className="fas fa-file-alt"></i> Text Instructions
-                </button>
-                <button 
-                  className={`instruction-tab ${showVoiceInstructions ? 'active' : ''}`}
-                  onClick={toggleVoiceInstructions}
-                >
-                  <i className="fas fa-volume-up"></i> Voice Instructions
-                </button>
+            <div className="maincourse-modal-header">
+              <div className="maincourse-modal-title">
+                <h2>{selectedRecipe.name}</h2>
               </div>
             </div>
-            
-            <div className="modal-content">
-              {!showVoiceInstructions && (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-clipboard-list"></i> Ingredients</h3>
-                  </div>
-                  <div className="section-content">
-                    <ul className="ingredients-list">
-                      {selectedRecipe.ingredients.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+            <div className="maincourse-modal-content">
+              {/* COLUMN 1 - INGREDIENTS */}
+              <div className="maincourse-modal-ingredients">
+                <h3>Ingredients</h3>
+                <div className="maincourse-ingredients-list">
+                  {selectedRecipe.ingredients.map((ingredient, idx) => (
+                    <div key={idx} className="maincourse-ingredient-item">
+                      <span className="maincourse-ingredient-bullet">•</span>
+                      <span className="maincourse-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-              
-              {!showVoiceInstructions ? (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-list-ol"></i> Instructions</h3>
-                  </div>
-                  <div className="section-content">
-                    <ol className="instructions-list">
-                      {selectedRecipe.instructions.map((step, index) => (
-                        <li key={index}>
-                          <div className="instruction-step">
-                            <span className="step-number">{index + 1}.</span>
-                            <span className="step-text">{step}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+              </div>
+
+              {/* COLUMN 2 - STEPS TO MAKE */}
+              <div className="maincourse-modal-steps">
+                <h3>Steps to Make</h3>
+                <div className="maincourse-steps-list">
+                  {selectedRecipe.steps.map((step, idx) => (
+                    <div key={idx} className="maincourse-step-item">
+                      <span className="maincourse-step-number">{idx + 1}.</span>
+                      <span className="maincourse-step-text">{step}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : (
-                <div className="recipe-section">
-                  <div className="section-header">
-                    <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
-                    <div className="voice-status">
-                      <div className={`voice-status-indicator ${isPlaying ? 'playing' : 'paused'}`}>
-                        <i className={`fas fa-${isPlaying ? 'volume-up' : 'volume-mute'}`}></i>
-                        <span>{isPlaying ? 'Playing Automatically' : 'Ready to Play'}</span>
-                      </div>
+              </div>
+
+              {/* COLUMN 3 - VOICE INSTRUCTIONS */}
+              <div className="maincourse-modal-voice-container">
+                <div className="voice-panel">
+                  <h3><i className="fas fa-volume-up"></i> Voice Instructions</h3>
+                  
+                  <div className="voice-progress">
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
+                    </div>
+                    <div className="progress-info">
+                      <span>Step {currentStep} of {selectedRecipe.steps.length}</span>
+                      <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
-                  <div className="section-content">
-                    <div className="voice-player">
-                      <div className="voice-player-header">
-                        <div className="voice-recipe-info">
-                          <h4>🎤 Voice Guide for {selectedRecipe.name}</h4>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-controls-main">
-                        <div className="voice-progress-container">
-                          <div className="voice-progress-bar">
-                            <div 
-                              className="voice-progress-fill" 
-                              style={{width: `${progress}%`}}
-                            ></div>
-                          </div>
-                          <div className="voice-progress-info">
-                            <span>Progress: {Math.round(progress)}%</span>
-                            <span>Step {currentStep} of {selectedRecipe.instructions.length}</span>
-                          </div>
-                        </div>
-                        
-                        <div className="voice-buttons">
-                          <button 
-                            className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                            onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.instructions)}
-                          >
-                            <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
-                            {isPlaying ? ' Stop Auto-Play' : ' Restart Guide'}
-                          </button>
-                        </div>
-                        
-                        <div className="step-navigation">
-                          <button 
-                            className="step-nav-btn prev"
-                            onClick={speakPreviousStep}
-                            disabled={currentStep <= 1}
-                          >
-                            <i className="fas fa-backward"></i> Previous Step
-                          </button>
-                          
-                          <button 
-                            className="step-nav-btn next"
-                            onClick={speakNextStep}
-                            disabled={currentStep >= selectedRecipe.instructions.length}
-                          >
-                            Next Step <i className="fas fa-forward"></i>
-                          </button>
-                        </div>
-                      </div>
-                      
-                      <div className="voice-steps-overview">
-                        <h5>
-                          <i className="fas fa-list-ol"></i> Steps Overview
-                          <span className="steps-count">
-                            {currentStep}/{selectedRecipe.instructions.length} Completed
-                          </span>
-                        </h5>
-                        <div className="steps-container">
-                          {selectedRecipe.instructions.map((step, index) => (
-                            <div 
-                              key={index} 
-                              className={`step-item ${index < currentStep ? 'completed' : ''} ${index === currentStep - 1 && isPlaying ? 'current' : ''}`}
-                              onClick={() => speakStep(index)}
-                              style={{cursor: 'pointer'}}
-                            >
-                              <div className="step-number-circle">
-                                {index < currentStep ? (
-                                  <i className="fas fa-check"></i>
-                                ) : (
-                                  <span>{index + 1}</span>
-                                )}
-                              </div>
-                              <div className="step-content">
-                                <div className="step-title">Step {index + 1}</div>
-                                <div className="step-text-preview">{step.substring(0, 60)}...</div>
-                              </div>
-                              <div className="step-play-btn">
-                                <i className="fas fa-play"></i>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
+                  <div className="voice-controls">
+                    <button 
+                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.steps)}
+                    >
+                      <i className={`fas fa-${isPlaying ? 'stop' : 'play'}`}></i>
+                      {isPlaying ? ' Stop' : ' Start Voice Guide'}
+                    </button>
+
+                    <div className="step-controls">
+                      <button 
+                        className="step-btn prev"
+                        onClick={speakPreviousStep}
+                        disabled={currentStep <= 1}
+                      >
+                        <i className="fas fa-backward"></i> Prev
+                      </button>
+                      <button 
+                        className="step-btn next"
+                        onClick={speakNextStep}
+                        disabled={currentStep >= selectedRecipe.steps.length}
+                      >
+                        Next <i className="fas fa-forward"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="modal-actions">
-                <button className="close-modal-btn" onClick={closeModal}>
-                  <i className="fas fa-times"></i> Close
-                </button>
               </div>
             </div>
           </div>

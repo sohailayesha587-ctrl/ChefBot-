@@ -31,65 +31,127 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import PantryBasicsPage from './pages/PantryBasicsPage';
 import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import RecipeVegetablePage from './pages/RecipeVegetablePage';
+import RecipeStudentPage from './pages/RecipeStudentPage';
+import RecipeRegionalPage from './pages/RecipeRegionalPage';
+import RecipeSaladsPage from './pages/RecipeSaladsPage';
+import RecipeSnacksPage from './pages/RecipeSnacksPage';
+import RecipeQuickPage from './pages/RecipeQuickPage';
+import Lunch from './pages/Lunch';
+import RecipesLunch from './pages/RecipesLunch';
+import RecipeBreakFast from './pages/RecipeBreakFast';
+import RecipePlainVegetables from './pages/RecipePlainVegetables';
+
 
 // ✅ Pages - Urdu
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduSignUpPage from './pages/Urdu/UrduSignUpPage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
+import UrduBeginnersPage from './pages/Urdu/UrduBeginnersPage';
+import UrduCookingMethodsPage from './pages/Urdu/UrduCookingMethodsPage';
+import UrduCuttingTechniquesPage from './pages/Urdu/UrduCuttingTechniquesPage';
+import UrduMeasuringSkillsPage from './pages/Urdu/UrduMeasuringSkillsPage';
+import UrduMeatProcessingPage from './pages/Urdu/UrduMeatProcessingPage';
+import UrduKitchenToolsPage from './pages/Urdu/UrduKitchenToolsPage';
 
 // ✅ Alarm Modal
 import AlarmModal from './components/AlarmModal';
+import UrduAlarmModal from './components/Urdu/UrduAlarmModal';
+
+// ✅ Import RTL CSS
+import './App.css';
+import RecipesVegChicken from './pages/RecipesVegChicken';
+import RecipesVegMutton from './pages/RecipesVegMutton';
+import RecipesPlainDal from './pages/RecipesPlainDal';
+import RecipesDalChicken from './pages/RecipesDalChicken';
 
 function AppWrapper() {
   const location = useLocation();
 
-  // ✅ Urdu pages ka check
+  // ✅ Urdu pages ka check - /urdu se start hone wale all pages
   const isUrdu = location.pathname.startsWith('/urdu');
 
   return (
     <>
-      {/* Alarm Modal - Top */}
-      <AlarmModal />
+      {/* ✅ ONLY ONE ALARM MODAL - Language ke hisab se */}
+      {isUrdu ? <UrduAlarmModal /> : <AlarmModal />}
+      
+      {/* ✅ Apply dir attribute to main wrapper */}
+      <div 
+        className={`app-wrapper ${isUrdu ? 'urdu-mode' : 'english-mode'}`} 
+        dir={isUrdu ? "rtl" : "ltr"}
+      >
+        {/* Dynamic Header */}
+        {isUrdu ? <UrduHeader /> : <Header />}
 
-      {/* Dynamic Header */}
-      {isUrdu ? <UrduHeader /> : <Header />}
+        <Routes>
+          {/* ===== English Routes ===== */}
+          <Route path="/" element={<PublicHome />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/smart-pantry" element={<PantryPage />} />
+          <Route path="/smart-shopping" element={<ShoppingList />} />
+          <Route path="/guidance" element={<BeginnersPage/>} />
+          <Route path="/measuring-skills" element={<MeasuringSkillsPage/>} />
+          <Route path="/kitchen-appliances" element={<KitchenAppliancesPage/>} />
+          <Route path="/cutting-techniques" element={<CuttingTechniquesPage/>} />
+          <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
+          <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
+          <Route path="/meat-cuts" element={<MeatProcessingPage/>} />  
+          <Route path="/pantry-basics" element={<PantryBasicsPage/>} />    
+          <Route path="/recipes" element={<RecipeFeature/>} />    
+          <Route path="/soups" element={<RecipeSoupPage/>} />    
+          <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
+          <Route path="/Beverages" element={<RecipeBeveragesPage/>} />    
+          <Route path="/desserts" element={<RecipeDessertsPage/>} />    
+          <Route path="/baking" element={<RecipeBakingPage/>} />    
+          <Route path="/calender" element={<MealCalendar/>} />
+          <Route path="/meal-planner" element={<MealFeature/>} />
+          <Route path="/login-page" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/Vege" element={<RecipeVegetablePage />} />
+          <Route path="/QuickRecipe" element={<RecipeQuickPage />} />
+          <Route path="/StudentRecipe" element={<RecipeStudentPage />} />
+          <Route path="/Beverage" element={<RecipeBeveragesPage />} />
+          <Route path="/Regional" element={<RecipeRegionalPage />} />
+          <Route path="/Salads" element={<RecipeSaladsPage />} />
+          <Route path="/Snack" element={<RecipeSnacksPage />} />
+                    <Route path="/lunch" element={<Lunch />} />
+                    <Route path="/recipe-lunch" element={<RecipesLunch />} />
+                    <Route path="/BreakFast" element={<RecipeBreakFast />} />
+                    <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
+                                        <Route path="/veg-mutton" element={<RecipesVegMutton />} />
+                                        <Route path="/plain-dal" element={<RecipesPlainDal />} />
+                                        <Route path="/dal-chick" element={<RecipesDalChicken />} />
 
-      <Routes>
-        {/* ===== English Routes ===== */}
-        <Route path="/" element={<PublicHome />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/smart-pantry" element={<PantryPage />} />
-        <Route path="/smart-shopping" element={<ShoppingList />} />
-        <Route path="/guidance" element={<BeginnersPage/>} />
-        <Route path="/measuring-skills" element={<MeasuringSkillsPage/>} />
-        <Route path="/kitchen-appliances" element={<KitchenAppliancesPage/>} />
-        <Route path="/cutting-techniques" element={<CuttingTechniquesPage/>} />
-        <Route path="/kitchen-tools" element={<KitchenToolsPage/>} />
-        <Route path="/cooking-methods" element={<CookingMethodsPage/>} />
-        <Route path="/meat-cuts" element={<MeatProcessingPage/>} />  
-        <Route path="/pantry-basics" element={<PantryBasicsPage/>} />    
-        <Route path="/recipes" element={<RecipeFeature/>} />    
-        <Route path="/soups" element={<RecipeSoupPage/>} />    
-        <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
-        <Route path="/Beverages" element={<RecipeBeveragesPage/>} />    
-        <Route path="/desserts" element={<RecipeDessertsPage/>} />    
-        <Route path="/baking" element={<RecipeBakingPage/>} />    
-        <Route path="/calender" element={<MealCalendar/>} />
-        <Route path="/meal-planner" element={<MealFeature/>} />
-        <Route path="/login-page" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
 
-        {/* ===== Urdu Routes ===== */}
-        <Route path="/urdu-home" element={<UrduHomePage/>} />
-        <Route path="/urdu-signup" element={<UrduSignUpPage/>} />
-        <Route path="/urdu-login" element={<UrduLoginPage/>} />
-        <Route path="/urdu-public" element={<UrduPublicHome/>} />
-      </Routes>
 
-      {/* Dynamic Footer */}
-      {isUrdu ? <UrduFooter /> : <Footer />}
+
+          {/* ===== Urdu Routes ===== */}
+          <Route path="/urdu" element={<UrduPublicHome />} />
+          <Route path="/urdu-home" element={<UrduHomePage />} />
+          <Route path="/urdu-signup" element={<UrduSignUpPage />} />
+          <Route path="/urdu-login" element={<UrduLoginPage />} />
+          <Route path="/urdu-public" element={<UrduPublicHome />} />
+          <Route path="/urdu-guidance" element={<UrduBeginnersPage />} />
+          <Route path="/urdu-cooking-methods" element={<UrduCookingMethodsPage />} />
+          <Route path="/urdu-cutting-techniques" element={<UrduCuttingTechniquesPage />} />
+          <Route path="/urdu-measuring-skills" element={<UrduMeasuringSkillsPage />} />
+          <Route path="/urdu-meat-processing" element={<UrduMeatProcessingPage />} />
+                    <Route path="/urdu-kitchen-tools" element={<UrduKitchenToolsPage />} />
+
+          {/* ✅ Optional: Add more Urdu routes as needed */}
+        </Routes>
+
+        {/* Dynamic Footer */}
+        {isUrdu ? <UrduFooter /> : <Footer />}
+      </div>
     </>
   );
 }

@@ -1,0 +1,331 @@
+/* ===== URDU BEGINNERS PAGE CSS ===== */
+/* All classes prefixed with urdu- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.urdu-beginners-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+  direction: rtl; /* Urdu text right-to-left */
+  font-family: 'Segoe UI', 'Jameel Noori Nastaleeq', 'Urdu Naskh', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== FULLSCREEN KITCHEN IMAGE ===== */
+.urdu-fullscreen-kitchen-image {
+  height: 500px;
+  width: 100%;
+  background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.urdu-fullscreen-kitchen-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(40, 74, 75, 0.6),
+    rgba(0, 0, 0, 0.4)
+  );
+}
+
+.urdu-fullscreen-kitchen-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+  animation: urdu-fadeInUp 1s ease;
+}
+
+.urdu-fullscreen-kitchen-content h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Jameel Noori Nastaleeq', 'Urdu Naskh', sans-serif;
+}
+
+.urdu-fullscreen-kitchen-content p {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== GUIDE HEADER ===== */
+.urdu-guide-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.urdu-guide-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #284a4b;
+  margin-bottom: 15px;
+  font-family: 'Jameel Noori Nastaleeq', 'Urdu Naskh', sans-serif;
+}
+
+.urdu-guide-header p {
+  font-size: 20px;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===== SECTIONS GRID ===== */
+.urdu-guide-sections-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.urdu-guide-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* ===== SECTION CARD ===== */
+.urdu-guide-section-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: 1px solid #e2e8f0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.urdu-guide-section-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(40, 74, 75, 0.15);
+  border-color: #284a4b;
+}
+
+/* Card Header */
+.urdu-guide-card-header {
+  padding: 20px 20px 10px;
+  text-align: center;
+}
+
+.urdu-guide-card-title h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #284a4b;
+  margin-bottom: 5px;
+  font-family: 'Jameel Noori Nastaleeq', 'Urdu Naskh', sans-serif;
+}
+
+.urdu-guide-card-title-en {
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Image Container */
+.urdu-guide-card-image-container {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  padding: 0 20px;
+  margin: 10px 0;
+}
+
+.urdu-guide-card-real-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.urdu-guide-section-card:hover .urdu-guide-card-real-image {
+  transform: scale(1.05);
+}
+
+/* Card Content */
+.urdu-guide-card-content {
+  padding: 15px 20px 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.urdu-guide-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.urdu-guide-card-features li {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  position: relative;
+  padding-right: 0;
+}
+
+/* ===== BACK TO HOME BUTTON ===== */
+.urdu-back-home-container {
+  text-align: center;
+  padding: 20px 20px 60px;
+}
+
+.urdu-back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Jameel Noori Nastaleeq', 'Urdu Naskh', sans-serif;
+  box-shadow: 0 4px 15px rgba(40, 74, 75, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.urdu-back-home-btn:hover {
+  background-color: #1e3a3b;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(40, 74, 75, 0.4);
+}
+
+.urdu-back-home-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes urdu-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+  .urdu-guide-sections-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .urdu-guide-sections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .urdu-fullscreen-kitchen-content h1 {
+    font-size: 42px;
+  }
+  
+  .urdu-guide-header h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .urdu-fullscreen-kitchen-image {
+    height: 400px;
+  }
+  
+  .urdu-fullscreen-kitchen-content h1 {
+    font-size: 32px;
+  }
+  
+  .urdu-fullscreen-kitchen-content p {
+    font-size: 16px;
+  }
+  
+  .urdu-guide-header h1 {
+    font-size: 28px;
+  }
+  
+  .urdu-guide-header p {
+    font-size: 16px;
+  }
+  
+  .urdu-guide-sections-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .urdu-guide-card-image-container {
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .urdu-fullscreen-kitchen-image {
+    height: 350px;
+  }
+  
+  .urdu-fullscreen-kitchen-content h1 {
+    font-size: 24px;
+  }
+  
+  .urdu-fullscreen-kitchen-content p {
+    font-size: 14px;
+  }
+  
+  .urdu-guide-header h1 {
+    font-size: 24px;
+  }
+  
+  .urdu-guide-card-title h3 {
+    font-size: 18px;
+  }
+  
+  .urdu-back-home-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* UTILITY CLASSES */
+.urdu-text-center {
+  text-align: center;
+}
+
+.urdu-text-right {
+  text-align: right;
+}
+
+.urdu-mb-20 {
+  margin-bottom: 20px;
+}
+
+.urdu-mt-20 {
+  margin-top: 20px;
+}

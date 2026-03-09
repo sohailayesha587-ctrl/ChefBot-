@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './AlarmModal.css';
+import './UrduAlarmModal.css';
 
 const UrduAlarmModal = () => {
   const [isOpen, setIsOpen] = useState(false);

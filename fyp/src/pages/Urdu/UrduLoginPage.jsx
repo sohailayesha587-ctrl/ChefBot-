@@ -128,7 +128,7 @@ const UrduLoginPage = () => {
             <button type="submit" className="urdu-login-submit-btn">لاگ ان کریں</button>
             
             <div className="urdu-login-signup-link">
-              اکاؤنٹ نہیں ہے؟ <Link to="/signup">ابھی سائن اپ کریں</Link>
+              اکاؤنٹ نہیں ہے؟ <Link to="/urdu-signup">ابھی سائن اپ کریں</Link>
             </div>
             
             <div className="urdu-login-divider">

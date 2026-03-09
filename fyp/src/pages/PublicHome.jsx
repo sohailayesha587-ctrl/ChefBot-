@@ -19,7 +19,7 @@ const PublicHome = () => {
       title: "Save Pantry Items",
       description: "Keep, organize and track all your pantry essentials in one place so you never run out of ingredients again.",
       image: "pantry-staples.jpg",
-      bgImage: "pantryitems.jpg"
+      bgImage: "pantry-staples.jpg"
     },
     {
       id: 3,
@@ -74,16 +74,7 @@ const PublicHome = () => {
     };
   }, [currentCenterIndex]);
 
-  // Next item
-  const nextItem = () => {
-    setCurrentCenterIndex((prevIndex) => (prevIndex + 1) % furnitureItems.length);
-  };
-
-  // Previous item
-  const prevItem = () => {
-    setCurrentCenterIndex((prevIndex) => (prevIndex - 1 + furnitureItems.length) % furnitureItems.length);
-  };
-
+ 
   // Handle card hover
   const handleCardHover = (bgImage) => {
     if (heroBackgroundRef.current) {
@@ -209,14 +200,7 @@ const PublicHome = () => {
               ))}
             </div>
             
-            <div className="navigation-buttons">
-              <button className="nav-btn" onClick={prevItem}>
-                <i className="fas fa-chevron-left"></i>
-              </button>
-              <button className="nav-btn" onClick={nextItem}>
-                <i className="fas fa-chevron-right"></i>
-              </button>
-            </div>
+           
           </div>
         </div>
       </section>

@@ -280,8 +280,7 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0.8rem;
-  width: 850px;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;
@@ -296,6 +295,7 @@ body {
   padding: 40px 1rem;
   text-align: center;
   background: white;
+
   position: relative;
   overflow: hidden;
   width: 100%;

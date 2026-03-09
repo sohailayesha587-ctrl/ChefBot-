@@ -209,14 +209,7 @@ const UrduPublicHome = () => {
               ))}
             </div>
             
-            <div className="urdu-navigation-buttons">
-              <button className="urdu-nav-btn" onClick={prevItem}>
-                <i className="fas fa-chevron-left"></i>
-              </button>
-              <button className="urdu-nav-btn" onClick={nextItem}>
-                <i className="fas fa-chevron-right"></i>
-              </button>
-            </div>
+           
           </div>
         </div>
       </section>
@@ -227,7 +220,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>AI شیف بوٹ اسسٹنٹ</h2>
             <p className="urdu-box-description">اپنی پینٹری میں موجود اشیاء کی بنیاد پر فوری کھانے کے مشورے حاصل کریں۔ ہمارا AI شیف بوٹ آپ کے لیے ذاتی نوعیت کے کھانے تیار کرتا ہے!</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               شیف بوٹ سے پوچھیں 
             </button>
           </div>
@@ -237,7 +230,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>ریسیپی ڈائری</h2>
             <p className="urdu-box-description">اپنی ترکیبوں کے مجموعے سے ترکیبیں دریافت کریں اور اپنے کھانا پکانے کے سفر کو ٹریک کریں۔</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               آزمائیں
             </button>
           </div>
@@ -247,7 +240,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>ابتدائی افراد کے لیے مکمل رہنمائی</h2>
             <p className="urdu-box-description">ابتدائی افراد کے لیے خاص طور پر تیار کردہ مکمل رہنمائی اور تجاویز حاصل کریں تاکہ آسانی سے شروع کریں۔</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               گائیڈ دیکھیں
             </button>
           </div>
@@ -257,7 +250,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>پینٹری اشیاء محفوظ کریں</h2>
             <p className="urdu-box-description">اپنی تمام پینٹری کی ضروری اشیاء کو ایک جگہ منظم اور ٹریک کریں تاکہ آپ کبھی بھی اجزاء ختم نہ ہونے پائیں۔</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               پینٹری بھریں
             </button>
           </div>
@@ -271,25 +264,25 @@ const UrduPublicHome = () => {
               <img src="speghetti_public.jpg" alt="اسپگیٹی کاربونارا" />
               <h3>اسپگیٹی</h3>
               <p>انڈے، پنیر اور پینسیٹا کے ساتھ کریمی اطالوی پاستا</p>
-             <button className="urdu-btn" onClick={() => navigate('/login-page')}>ریسیپی دیکھیں</button>
+             <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
             <div className="urdu-recipe-card">
               <img src="tikka_public.jpg" alt="چکن تکہ مصالحہ" />
               <h3>چکن تکہ مصالحہ</h3>
               <p>غنی اور کریمی ٹماٹر ساس میں نرم چکن</p>
-             <button className="urdu-btn" onClick={() => navigate('/login-page')}>ریسیپی دیکھیں</button>
+             <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
             <div className="urdu-recipe-card">
               <img src="pizza_public.jpg" alt="مارگریٹا پیزا" />
               <h3>مارگریٹا پیزا</h3>
               <p>تازہ ٹماٹر، موزاریلا اور تلسی کے ساتھ کلاسک پیزا</p>
-              <button className="urdu-btn" onClick={() => navigate('/login-page')}>ریسیپی دیکھیں</button>
+              <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
             <div className="urdu-recipe-card">
               <img src="cake_public.jpg" alt="چاکلیٹ کیک" />
               <h3>چاکلیٹ کیک</h3>
               <p>نم کیک جس میں بھرپور فراسٹنگ جو منہ میں پگھل جائے۔</p>
-              <button className="urdu-btn" onClick={() => navigate('/login-page')}>ریسیپی دیکھیں</button>
+              <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
           </div>
         </section>
@@ -298,7 +291,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>اپنی شاپنگ لسٹ بنائیں</h2>
             <p className="urdu-box-description">آسانی سے اپنی شاپنگ لسٹ بنائیں اور منظم کریں تاکہ آپ کبھی بھی خریدنے والی چیز نہ بھولیں۔</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               شاپنگ کریں
             </button>
           </div>
@@ -308,7 +301,7 @@ const UrduPublicHome = () => {
           <div className="urdu-colored-box">
             <h2>سمارٹ کھانے کی منصوبہ بندی</h2>
             <p className="urdu-box-description">گروسری کی فہرست سے لے کر اپنے کھانا پکانے کے شیڈول کو منظم کرنے تک ہفتہ وار کھانے کی منصوبہ بندی کریں۔</p>
-            <button className="urdu-btn" onClick={() => navigate('/login-page')}>
+            <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>
               منصوبہ بندی شروع کریں
             </button>
           </div>

@@ -166,7 +166,7 @@ const UrduSignUpPage = () => {
             </div>
             
             <div className="urdu-login-link">
-              پہلے سے اکاؤنٹ ہے؟ <Link to="/login-page">لاگ ان کریں</Link>
+              پہلے سے اکاؤنٹ ہے؟ <Link to="/urdu-login">لاگ ان کریں</Link>
             </div>
           </form>
         </div>

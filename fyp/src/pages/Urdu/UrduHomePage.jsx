@@ -31,27 +31,27 @@ const UrduHomePage = () => {
     {
       image: 'pantry-staples.jpg',
       title: 'سمارٹ پینٹری',
-      path: '/smart-pantry'
+      path: '/urdu-smart-pantry'
     },
     {
       image: 'recipe.jpg',
       title: 'ریسیپی ڈیٹا بیس',
-      path: '/recipes'
+      path: '/urdu-recipes'
     },
     {
       image: 'plannermeal.jpg',
       title: 'کھانے کا منصوبہ',
-      path: '/meal-planner'
+      path: '/urdu-meal-planner'
     },
     {
       image: 'shoppinglist.png',
       title: 'سمارٹ شاپنگ',
-      path: '/smart-shopping'
+      path: '/urdu-smart-shopping'
     },
     {
       image: 'beginners.jpg',
       title: 'ابتدائی رہنمائی',
-      path: '/guidance'
+      path: '/urdu-guidance'
     }
   ];
 
@@ -145,7 +145,7 @@ const UrduHomePage = () => {
         <div className="urdu-hero-left">
           <h2>ڈیجیٹل کھانا پکانا</h2>
           <p>شیف بوٹ کی ریسیپی تجاویز کے ساتھ پینٹری کی اشیاء کو مزیدار کھانوں میں تبدیل کریں۔</p>
-          <Link to="/" className="urdu-contact-link">سیکھنا شروع کریں →</Link>
+          <Link to="/urdu-contact" className="urdu-contact-link">سیکھنا شروع کریں →</Link>
         </div>
         <div className="urdu-hero-center">
           <h1>گروسری کی ضرورت نہیں! شیف بوٹ کے ساتھ پینٹری کی اشیاء سے پکائیں۔</h1>
@@ -191,7 +191,7 @@ const UrduHomePage = () => {
             <div className="urdu-section-label">کھانے کا منصوبہ</div>
             <h2>سمارٹ کھانے کی منصوبہ بندی کے ساتھ پھر کبھی نہ سوچیں 'رات کے کھانے میں کیا بنائیں؟'</h2>
           </div>
-          <Link to="/meal-planner" className="urdu-btn">منصوبہ بنائیں</Link>
+          <Link to="/urdu-meal-planner" className="urdu-btn">منصوبہ بنائیں</Link>
         </div>
         <div className="urdu-m-plan-grid">
           {guidanceImages.map((image, index) => (
@@ -219,7 +219,7 @@ const UrduHomePage = () => {
                 <div className="urdu-h-recipe-content">
                   <h3 className="urdu-h-recipe-name">{recipe.name}</h3>
                   <p className="urdu-h-recipe-description">{recipe.description}</p>
-                  <Link to="/recipes" className="urdu-h-recipe-btn">ریسیپی دیکھیں</Link>
+                  <Link to="/urdu-recipes" className="urdu-h-recipe-btn">ریسیپی دیکھیں</Link>
                 </div>
               </div>
             ))}

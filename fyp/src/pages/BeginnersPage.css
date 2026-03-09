@@ -133,7 +133,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(40, 74, 75, 0.08);
   border: 1px solid #e0eae9;
-  height: 320px;
+  height: 325px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -212,9 +212,9 @@
 
 .guide-card-features li {
   padding: 0.3rem 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: white;
-  line-height: 1.4;
+  line-height: 1.2;
   text-align: center;
   border-bottom: 1px dashed #e0eae9;
 }
