@@ -7,7 +7,7 @@
 
 body {
   background-color: white;
-  color: #285B5A;
+  color: #284a4b;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -141,7 +141,7 @@ body {
 
 .rf-recipe-types-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
   justify-items: center;
   padding: 1rem;

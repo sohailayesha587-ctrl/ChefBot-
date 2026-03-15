@@ -12,22 +12,22 @@ html, body, #root {
   overflow-y: auto;
 }
 
-/* ===== RECIPES LUNCH PAGE - FIXED ===== */
-.recipes-lunch-page {
+/* ===== RECIPES DINNER PAGE - FIXED ===== */
+.recipes-dinner-page {
   width: 100%;
-  min-height: 100vh;        /* height:100vh ki jagah min-height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  overflow-y: auto;         /* vertical scroll allowed */
+  overflow-y: auto;
   position: relative;
   background-color: transparent;
 }
 
 /* Background Image with Blur - FIXED position */
-.recipes-lunch-page::before {
+.recipes-dinner-page::before {
   content: '';
-  position: fixed;           /* absolute ki jagah fixed */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -42,9 +42,9 @@ html, body, #root {
 }
 
 /* Overlay - FIXED position */
-.recipes-lunch-page::after {
+.recipes-dinner-page::after {
   content: '';
-  position: fixed;           /* absolute ki jagah fixed */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -54,12 +54,12 @@ html, body, #root {
 }
 
 /* Hide decorative pattern */
-.recipes-lunch-bg-pattern {
+.recipes-dinner-bg-pattern {
   display: none;
 }
 
 /* ===== HEADER ===== */
-.recipes-lunch-header {
+.recipes-dinner-header {
   background: linear-gradient(135deg, #284a4b, #1d3a3b);
   backdrop-filter: blur(10px);
   color: white;
@@ -70,11 +70,10 @@ html, body, #root {
   z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   width: 100%;
-    margin-top: 120px;
-
+  margin-top: 120px;
 }
 
-.recipes-lunch-header-content {
+.recipes-dinner-header-content {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
@@ -82,7 +81,7 @@ html, body, #root {
 }
 
 /* Title */
-.recipes-lunch-title {
+.recipes-dinner-title {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 8px;
@@ -96,8 +95,8 @@ html, body, #root {
 }
 
 /* Decorative lines */
-.recipes-lunch-title::before,
-.recipes-lunch-title::after {
+.recipes-dinner-title::before,
+.recipes-dinner-title::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -106,16 +105,16 @@ html, body, #root {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
-.recipes-lunch-title::before {
+.recipes-dinner-title::before {
   left: -30px;
 }
 
-.recipes-lunch-title::after {
+.recipes-dinner-title::after {
   right: -30px;
 }
 
 /* Description */
-.recipes-lunch-description {
+.recipes-dinner-description {
   font-size: 1.1rem;
   opacity: 0.95;
   font-weight: 300;
@@ -128,7 +127,7 @@ html, body, #root {
   font-style: italic;
 }
 
-.recipes-lunch-description::before {
+.recipes-dinner-description::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -140,7 +139,7 @@ html, body, #root {
 }
 
 /* ===== MAIN CONTENT ===== */
-.recipes-lunch-main {
+.recipes-dinner-main {
   flex: 1;
   display: flex;
   align-items: center;
@@ -150,11 +149,11 @@ html, body, #root {
   width: 100%;
   position: relative;
   z-index: 2;
-  min-height: 0;           /* Important for flex child */
+  min-height: 0;
 }
 
 /* ===== CAROUSEL CONTAINER ===== */
-.recipes-lunch-carousel {
+.recipes-dinner-carousel {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -167,7 +166,7 @@ html, body, #root {
 }
 
 /* ===== ARROWS ===== */
-.recipes-lunch-arrow {
+.recipes-dinner-arrow {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -185,7 +184,7 @@ html, body, #root {
   z-index: 10;
 }
 
-.recipes-lunch-arrow:hover {
+.recipes-dinner-arrow:hover {
   background: #1f4e4f;
   color: white;
   border-color: transparent;
@@ -193,26 +192,26 @@ html, body, #root {
   transform: scale(1.05);
 }
 
-.recipes-lunch-arrow svg {
+.recipes-dinner-arrow svg {
   width: 50px;
   height: 44px;
 }
 
 /* Left arrow specific */
-.recipes-lunch-arrow-left {
+.recipes-dinner-arrow-left {
   margin-right: 5px;
 }
 
 /* Right arrow specific */
-.recipes-lunch-arrow-right {
+.recipes-dinner-arrow-right {
   margin-left: 5px;
 }
 
 /* ===== SCROLL WRAPPER ===== */
-.recipes-lunch-scroll-wrapper {
+.recipes-dinner-scroll-wrapper {
   flex: 1;
   overflow-x: auto;
-  overflow-y: hidden;        /* Horizontal scroll ke liye vertical hidden */
+  overflow-y: hidden;
   padding: 25px 0 15px 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -223,12 +222,12 @@ html, body, #root {
   min-height: 280px;
 }
 
-.recipes-lunch-scroll-wrapper::-webkit-scrollbar {
+.recipes-dinner-scroll-wrapper::-webkit-scrollbar {
   display: none;
 }
 
 /* ===== GRID ===== */
-.recipes-lunch-grid {
+.recipes-dinner-grid {
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -241,7 +240,7 @@ html, body, #root {
 }
 
 /* ===== CARDS ===== */
-.recipes-lunch-card {
+.recipes-dinner-card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   border-radius: 24px;
@@ -264,27 +263,27 @@ html, body, #root {
 }
 
 /* Card positions */
-.recipes-lunch-card.recipes-lunch-card-up {
+.recipes-dinner-card.recipes-dinner-card-up {
   transform: translateY(-12px);
 }
 
-.recipes-lunch-card.recipes-lunch-card-down {
+.recipes-dinner-card.recipes-dinner-card-down {
   transform: translateY(12px);
 }
 
 /* Card index variables */
-.recipes-lunch-card:nth-child(1) { --card-index: 1; }
-.recipes-lunch-card:nth-child(2) { --card-index: 2; }
-.recipes-lunch-card:nth-child(3) { --card-index: 3; }
-.recipes-lunch-card:nth-child(4) { --card-index: 4; }
-.recipes-lunch-card:nth-child(5) { --card-index: 5; }
-.recipes-lunch-card:nth-child(6) { --card-index: 6; }
-.recipes-lunch-card:nth-child(7) { --card-index: 7; }
-.recipes-lunch-card:nth-child(8) { --card-index: 8; }
-.recipes-lunch-card:nth-child(9) { --card-index: 9; }
-.recipes-lunch-card:nth-child(10) { --card-index: 10; }
-.recipes-lunch-card:nth-child(11) { --card-index: 11; }
-
+.recipes-dinner-card:nth-child(1) { --card-index: 1; }
+.recipes-dinner-card:nth-child(2) { --card-index: 2; }
+.recipes-dinner-card:nth-child(3) { --card-index: 3; }
+.recipes-dinner-card:nth-child(4) { --card-index: 4; }
+.recipes-dinner-card:nth-child(5) { --card-index: 5; }
+.recipes-dinner-card:nth-child(6) { --card-index: 6; }
+.recipes-dinner-card:nth-child(7) { --card-index: 7; }
+.recipes-dinner-card:nth-child(8) { --card-index: 8; }
+.recipes-dinner-card:nth-child(9) { --card-index: 9; }
+.recipes-dinner-card:nth-child(10) { --card-index: 10; }
+.recipes-dinner-card:nth-child(11) { --card-index: 11; }
+.recipes-dinner-card:nth-child(12) { --card-index: 12; }
 
 /* Animations */
 @keyframes floatZigzag {
@@ -327,16 +326,16 @@ html, body, #root {
 }
 
 /* Apply animations */
-.recipes-lunch-card.recipes-lunch-card-up {
+.recipes-dinner-card.recipes-dinner-card-up {
   animation: floatUp 4s ease-in-out infinite;
 }
 
-.recipes-lunch-card.recipes-lunch-card-down {
+.recipes-dinner-card.recipes-dinner-card-down {
   animation: floatDown 4s ease-in-out infinite;
 }
 
 /* Shine effect */
-.recipes-lunch-card::after {
+.recipes-dinner-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -349,12 +348,12 @@ html, body, #root {
   z-index: 2;
 }
 
-.recipes-lunch-card:hover::after {
+.recipes-dinner-card:hover::after {
   left: 100%;
 }
 
 /* Hover effects */
-.recipes-lunch-card:hover {
+.recipes-dinner-card:hover {
   animation-play-state: paused;
   transform: scale(1.02) translateY(0);
   background: rgba(255, 255, 255, 0.95);
@@ -363,34 +362,34 @@ html, body, #root {
   z-index: 5;
 }
 
-.recipes-lunch-card.recipes-lunch-card-up:hover {
+.recipes-dinner-card.recipes-dinner-card-up:hover {
   transform: scale(1.02) translateY(-12px);
 }
 
-.recipes-lunch-card.recipes-lunch-card-down:hover {
+.recipes-dinner-card.recipes-dinner-card-down:hover {
   transform: scale(1.02) translateY(12px);
 }
 
 /* ===== CARD IMAGE ===== */
-.recipes-lunch-card-image-container {
+.recipes-dinner-card-image-container {
   position: relative;
   height: 125px;
   overflow: hidden;
   flex-shrink: 0;
 }
 
-.recipes-lunch-card-img {
+.recipes-dinner-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
 
-.recipes-lunch-card:hover .recipes-lunch-card-img {
+.recipes-dinner-card:hover .recipes-dinner-card-img {
   transform: scale(1.05);
 }
 
-.recipes-lunch-card-overlay {
+.recipes-dinner-card-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
@@ -398,11 +397,11 @@ html, body, #root {
   transition: opacity 0.4s ease;
 }
 
-.recipes-lunch-card:hover .recipes-lunch-card-overlay {
+.recipes-dinner-card:hover .recipes-dinner-card-overlay {
   opacity: 1;
 }
 
-.recipes-lunch-card-badge {
+.recipes-dinner-card-badge {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -420,7 +419,7 @@ html, body, #root {
 }
 
 /* ===== CARD CONTENT ===== */
-.recipes-lunch-card-content {
+.recipes-dinner-card-content {
   padding: 15px 14px 14px 14px;
   flex: 1;
   display: flex;
@@ -430,7 +429,7 @@ html, body, #root {
   background: transparent;
 }
 
-.recipes-lunch-card-title {
+.recipes-dinner-card-title {
   font-size: 1rem;
   font-weight: 600;
   color: #143334;
@@ -443,11 +442,11 @@ html, body, #root {
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
-.recipes-lunch-card:hover .recipes-lunch-card-title {
+.recipes-dinner-card:hover .recipes-dinner-card-title {
   color: #1f4e4f;
 }
 
-.recipes-lunch-card-description {
+.recipes-dinner-card-description {
   font-size: 0.75rem;
   color: #2c4a4b;
   line-height: 1.4;
@@ -459,7 +458,7 @@ html, body, #root {
   font-weight: 500;
 }
 
-.recipes-lunch-card:hover .recipes-lunch-card-description {
+.recipes-dinner-card:hover .recipes-dinner-card-description {
   color: #1f4e4f;
 }
 
@@ -467,24 +466,24 @@ html, body, #root {
 
 /* Extra Large Screens */
 @media (min-width: 1600px) {
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 210px;
     min-width: 210px;
     height: 280px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 135px;
   }
   
-  .recipes-lunch-card-title {
+  .recipes-dinner-card-title {
     font-size: 1.05rem;
   }
 }
 
 /* Large Screens */
 @media (min-width: 1400px) and (max-width: 1599px) {
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 200px;
     min-width: 200px;
   }
@@ -492,38 +491,38 @@ html, body, #root {
 
 /* Small Desktop / Tablet Landscape */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 180px;
     min-width: 180px;
     height: 250px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 115px;
   }
   
-  .recipes-lunch-title {
+  .recipes-dinner-title {
     font-size: 2.5rem;
   }
 }
 
 /* Tablet Portrait */
 @media (min-width: 768px) and (max-width: 991px) {
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 165px;
     min-width: 165px;
     height: 240px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 110px;
   }
   
-  .recipes-lunch-title {
+  .recipes-dinner-title {
     font-size: 2.2rem;
   }
   
-  .recipes-lunch-arrow {
+  .recipes-dinner-arrow {
     width: 40px;
     height: 40px;
   }
@@ -531,91 +530,91 @@ html, body, #root {
 
 /* Mobile Large */
 @media (min-width: 576px) and (max-width: 767px) {
-  .recipes-lunch-header {
+  .recipes-dinner-header {
     padding: 18px;
   }
   
-  .recipes-lunch-title {
+  .recipes-dinner-title {
     font-size: 2rem;
   }
   
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 150px;
     min-width: 150px;
     height: 230px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 100px;
   }
   
-  .recipes-lunch-arrow {
+  .recipes-dinner-arrow {
     width: 36px;
     height: 36px;
   }
   
-  .recipes-lunch-title::before,
-  .recipes-lunch-title::after {
+  .recipes-dinner-title::before,
+  .recipes-dinner-title::after {
     display: none;
   }
   
-  .recipes-lunch-carousel {
+  .recipes-dinner-carousel {
     gap: 10px;
   }
 }
 
 /* Mobile Small */
 @media (max-width: 575px) {
-  .recipes-lunch-header {
+  .recipes-dinner-header {
     padding: 15px;
   }
   
-  .recipes-lunch-title {
+  .recipes-dinner-title {
     font-size: 1.8rem;
   }
   
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 140px;
     min-width: 140px;
     height: 220px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 95px;
   }
   
-  .recipes-lunch-arrow {
+  .recipes-dinner-arrow {
     width: 32px;
     height: 32px;
   }
   
-  .recipes-lunch-title::before,
-  .recipes-lunch-title::after {
+  .recipes-dinner-title::before,
+  .recipes-dinner-title::after {
     display: none;
   }
   
-  .recipes-lunch-carousel {
+  .recipes-dinner-carousel {
     gap: 8px;
   }
 }
 
 /* Extra Small Mobile */
 @media (max-width: 399px) {
-  .recipes-lunch-card {
+  .recipes-dinner-card {
     width: 130px;
     min-width: 130px;
     height: 210px;
   }
   
-  .recipes-lunch-card-image-container {
+  .recipes-dinner-card-image-container {
     height: 85px;
   }
   
-  .recipes-lunch-title {
+  .recipes-dinner-title {
     font-size: 1.6rem;
   }
   
-  .recipes-lunch-carousel {
+  .recipes-dinner-carousel {
     gap: 5px;
   }
 }

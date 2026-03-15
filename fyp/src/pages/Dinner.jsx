@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './Lunch.css';
+import './Dinner.css';
 
-const Lunch = () => {
+const Dinner = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeCategory, setActiveCategory] = useState('veg');
+  const [activeCategory, setActiveCategory] = useState('veg'); // Default veg
 
   // 📌 Vegetables ki 3 categories
   const vegCategories = [
@@ -82,14 +82,14 @@ const Lunch = () => {
   };
 
   return (
-    <div className="lunch-page">
+    <div className="dinner-page">
       {/* Header Section */}
-      <header className="lunch-header">
-        <div className="lunch-header-content">
-          <h1 className="lunch-page-title">
+      <header className="dinner-header">
+        <div className="dinner-header-content">
+          <h1 className="dinner-page-title">
             {activeCategory === 'veg' ? 'Vegetarian Delights' : 'Lentil Specialties'}
           </h1>
-          <p className="lunch-page-description">
+          <p className="dinner-page-description">
             {activeCategory === 'veg' 
               ? 'Fresh aur healthy sabziyon ke saath - 3 varieties'
               : 'Protein-rich daalon ke mazedar recipes - 3 varieties'}
@@ -98,8 +98,8 @@ const Lunch = () => {
       </header>
 
       {/* Main Content */}
-      <main className="lunch-main">
-        {/* Category Tabs - Sirf 2 tabs */}
+      <main className="dinner-main">
+        {/* Category Tabs - Sirf 2 tabs (Vegetables aur Daal) */}
         <div className="category-tabs">
           <button 
             className={`category-tab ${activeCategory === 'veg' ? 'active' : ''}`}
@@ -115,25 +115,23 @@ const Lunch = () => {
           </button>
         </div>
 
-        {/* ✅ Category Info REMOVE KAR DI - ab sirf tabs aur cards hain */}
-
-        {/* Categories Grid - 3 cards show honge */}
-        <div className="lunch-grid-section">
-          <div className="lunch-grid">
+        {/* Categories Grid */}
+        <div className="dinner-grid-section">
+          <div className="dinner-grid">
             {filteredCategories.map((category) => (
               <div
                 key={category.id}
-                className="lunch-category-card"
+                className="dinner-category-card"
                 onClick={() => navigate(category.route)}
               >
                 <div
-                  className="lunch-card-image"
+                  className="dinner-card-image"
                   style={{ backgroundImage: `url(${category.image})` }}
                 />
-                <div className="lunch-card-content">
-                  <h3 className="lunch-card-title">{category.name}</h3>
-                  <p className="lunch-card-description">{category.tagline}</p>
-                  <div className="lunch-card-button">
+                <div className="dinner-card-content">
+                  <h3 className="dinner-card-title">{category.name}</h3>
+                  <p className="dinner-card-description">{category.tagline}</p>
+                  <div className="dinner-card-button">
                     <span>Explore Recipes</span>
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -146,9 +144,9 @@ const Lunch = () => {
         </div>
       </main>
 
-      {/* Back Button - RecipeLunch par jayega */}
+      {/* Back Button - RecipesDinner par jayega */}
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/recipe-lunch')}>
+        <button className="back-home-btn" onClick={() => navigate('/recipe-dinner')}>
           <span>←</span> Back to Categories
         </button>
       </div>
@@ -156,4 +154,4 @@ const Lunch = () => {
   );
 };
 
-export default Lunch;
+export default Dinner;

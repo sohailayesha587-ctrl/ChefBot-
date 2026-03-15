@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -13,8 +12,8 @@ html, body, #root {
   overflow-y: auto;
 }
 
-/* ===== CHICKEN DAL PAGE ===== */
-.chicken-dal-page {
+/* ===== PURE CHICKEN PAGE ===== */
+.pure-chicken-page {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -22,12 +21,11 @@ html, body, #root {
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
-  margin-top: 120px;
   background-color: #f8fafc;
 }
 
 /* ===== HEADER ===== */
-.chicken-dal-header {
+.pure-chicken-header {
   background: linear-gradient(135deg, #284a4b, #1d3a3b);
   color: white;
   padding: 30px 20px;
@@ -36,14 +34,16 @@ html, body, #root {
   position: relative;
   z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 120px;
+
 }
 
-.chicken-dal-header-content {
+.pure-chicken-header-content {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.chicken-dal-title {
+.pure-chicken-title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -53,7 +53,7 @@ html, body, #root {
   font-family: 'Playfair Display', serif;
 }
 
-.chicken-dal-description {
+.pure-chicken-description {
   font-size: 1rem;
   opacity: 0.95;
   font-weight: 300;
@@ -63,7 +63,7 @@ html, body, #root {
 }
 
 /* ===== MAIN CONTENT ===== */
-.chicken-dal-main {
+.pure-chicken-main {
   flex: 1;
   padding: 30px 20px;
   overflow: visible;
@@ -73,18 +73,18 @@ html, body, #root {
 }
 
 /* ===== GRID ===== */
-.chicken-dal-grid-section {
+.pure-chicken-grid-section {
   width: 100%;
 }
 
-.chicken-dal-grid {
+.pure-chicken-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
 /* Card */
-.chicken-dal-card {
+.pure-chicken-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
@@ -97,13 +97,13 @@ html, body, #root {
   width: 100%;
 }
 
-.chicken-dal-card:hover {
+.pure-chicken-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   border-color: #284a4b;
 }
 
-.chicken-dal-card-image {
+.pure-chicken-card-image {
   width: 120px;
   height: 100%;
   background-size: cover;
@@ -112,7 +112,7 @@ html, body, #root {
   border-right: 1px solid #e2e8f0;
 }
 
-.chicken-dal-card-content {
+.pure-chicken-card-content {
   padding: 15px 20px;
   flex: 1;
   display: flex;
@@ -121,7 +121,7 @@ html, body, #root {
   overflow: hidden;
 }
 
-.chicken-dal-card-title {
+.pure-chicken-card-title {
   font-size: 18px;
   font-weight: 700;
   color: #1e293b;
@@ -131,7 +131,7 @@ html, body, #root {
   text-overflow: ellipsis;
 }
 
-.chicken-dal-card-description {
+.pure-chicken-card-description {
   font-size: 14px;
   color: #64748b;
   line-height: 1.4;
@@ -171,7 +171,7 @@ html, body, #root {
 }
 
 /* ===== MODAL ===== */
-.chicken-dal-modal-overlay {
+.pure-chicken-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -185,7 +185,7 @@ html, body, #root {
   padding: 15px;
 }
 
-.chicken-dal-modal {
+.pure-chicken-modal {
   border-radius: 15px;
   width: 95%;
   max-width: 1400px;
@@ -197,12 +197,12 @@ html, body, #root {
   overflow: hidden;
 }
 
-.chicken-dal-modal > * {
+.pure-chicken-modal > * {
   position: relative;
   z-index: 2;
 }
 
-.chicken-dal-modal-close {
+.pure-chicken-modal-close {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -221,13 +221,13 @@ html, body, #root {
   transition: all 0.3s ease;
 }
 
-.chicken-dal-modal-close:hover {
+.pure-chicken-modal-close:hover {
   background: white;
   color: #1d3a3b;
   transform: rotate(90deg);
 }
 
-.chicken-dal-modal-header {
+.pure-chicken-modal-header {
   padding: 15px 25px 10px 25px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.2);
@@ -235,7 +235,7 @@ html, body, #root {
   z-index: 5;
 }
 
-.chicken-dal-modal-title h2 {
+.pure-chicken-modal-title h2 {
   font-size: 1.8rem;
   font-weight: 700;
   color: white;
@@ -248,7 +248,7 @@ html, body, #root {
 }
 
 /* ===== THREE COLUMN LAYOUT ===== */
-.chicken-dal-modal-content {
+.pure-chicken-modal-content {
   display: flex;
   flex: 1;
   padding: 15px 20px 20px 20px;
@@ -259,7 +259,7 @@ html, body, #root {
 }
 
 /* Column 1 - Ingredients */
-.chicken-dal-modal-ingredients {
+.pure-chicken-modal-ingredients {
   width: 33.33%;
   display: flex;
   flex-direction: column;
@@ -272,7 +272,7 @@ html, body, #root {
   overflow-y: auto;
 }
 
-.chicken-dal-modal-ingredients h3 {
+.pure-chicken-modal-ingredients h3 {
   font-size: 1.3rem;
   font-weight: 700;
   color: white;
@@ -282,20 +282,20 @@ html, body, #root {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.chicken-dal-ingredients-list {
+.pure-chicken-ingredients-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.chicken-dal-ingredient-item {
+.pure-chicken-ingredient-item {
   display: flex;
   gap: 10px;
   align-items: flex-start;
   line-height: 1.4;
 }
 
-.chicken-dal-ingredient-bullet {
+.pure-chicken-ingredient-bullet {
   color: white;
   font-weight: bold;
   min-width: 18px;
@@ -303,7 +303,7 @@ html, body, #root {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.chicken-dal-ingredient-text {
+.pure-chicken-ingredient-text {
   font-size: 14px;
   color: white;
   flex: 1;
@@ -314,7 +314,7 @@ html, body, #root {
 }
 
 /* Column 2 - Steps */
-.chicken-dal-modal-steps {
+.pure-chicken-modal-steps {
   width: 33.33%;
   display: flex;
   flex-direction: column;
@@ -327,7 +327,7 @@ html, body, #root {
   overflow-y: auto;
 }
 
-.chicken-dal-modal-steps h3 {
+.pure-chicken-modal-steps h3 {
   font-size: 1.3rem;
   font-weight: 700;
   color: white;
@@ -337,20 +337,20 @@ html, body, #root {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.chicken-dal-steps-list {
+.pure-chicken-steps-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.chicken-dal-step-item {
+.pure-chicken-step-item {
   display: flex;
   gap: 10px;
   align-items: flex-start;
   line-height: 1.4;
 }
 
-.chicken-dal-step-number {
+.pure-chicken-step-number {
   font-weight: 700;
   color: white;
   min-width: 26px;
@@ -359,7 +359,7 @@ html, body, #root {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.chicken-dal-step-text {
+.pure-chicken-step-text {
   flex: 1;
   line-height: 1.4;
   color: white;
@@ -370,7 +370,7 @@ html, body, #root {
 }
 
 /* Column 3 - Voice */
-.chicken-dal-modal-voice-container {
+.pure-chicken-modal-voice-container {
   width: 33.33%;
   display: flex;
   flex-direction: column;
@@ -530,24 +530,24 @@ html, body, #root {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
-  .chicken-dal-grid {
+  .pure-chicken-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 900px) {
-  .chicken-dal-grid {
+  .pure-chicken-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .chicken-dal-modal-content {
+  .pure-chicken-modal-content {
     flex-direction: column;
     overflow-y: auto;
   }
   
-  .chicken-dal-modal-ingredients,
-  .chicken-dal-modal-steps,
-  .chicken-dal-modal-voice-container {
+  .pure-chicken-modal-ingredients,
+  .pure-chicken-modal-steps,
+  .pure-chicken-modal-voice-container {
     width: 100%;
     height: auto;
     min-height: 300px;
@@ -556,19 +556,19 @@ html, body, #root {
 }
 
 @media (max-width: 600px) {
-  .chicken-dal-grid {
+  .pure-chicken-grid {
     grid-template-columns: 1fr;
   }
   
-  .chicken-dal-card {
+  .pure-chicken-card {
     height: 100px;
   }
   
-  .chicken-dal-card-image {
+  .pure-chicken-card-image {
     width: 100px;
   }
   
-  .chicken-dal-title {
+  .pure-chicken-title {
     font-size: 2rem;
   }
 }

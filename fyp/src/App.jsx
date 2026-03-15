@@ -22,7 +22,6 @@ import MeatProcessingPage from './pages/MeatProcessingPage';
 import RecipeFeature from './pages/RecipeFeature';
 import RecipeSoupPage from './pages/RecipeSoupPage';
 import RecipeBakingPage from './pages/RecipeBakingPage';
-import RecipeMainCoursePage from './pages/RecipeMainCoursePage';
 import RecipeBeveragesPage from './pages/RecipeBeveragesPage';
 import RecipeDessertsPage from './pages/RecipeDessertsPage';
 import MealCalendar from './pages/MealCalender';
@@ -43,6 +42,26 @@ import Lunch from './pages/Lunch';
 import RecipesLunch from './pages/RecipesLunch';
 import RecipeBreakFast from './pages/RecipeBreakFast';
 import RecipePlainVegetables from './pages/RecipePlainVegetables';
+import RecipesVegChicken from './pages/RecipesVegChicken';
+import RecipesVegMutton from './pages/RecipesVegMutton';
+import RecipesPlainDal from './pages/RecipesPlainDal';
+import RecipesDalChicken from './pages/RecipesDalChicken';
+import RecipesDalMutton from './pages/RecipesDalMutton';
+import RecipesEggDishes from './pages/RecipesEggDishes';
+import RecipesFish from './pages/RecipesFish';
+import RecipesPureChicken from './pages/RecipesPureChicken';
+import RecipesPureMutton from './pages/RecipesPureMutton';
+import RecipesQeema from './pages/RecipesQeema';
+import RecipesRice from './pages/RecipesRice';
+import RecipesHeavyGravy from './pages/RecipesHeavyGravy';
+import RecipesBread from './pages/RecipesBread';
+import RecipesBBQ from './pages/RecipesBBQ';
+import RecipesLightDinner from './pages/RecipesLightDinner';
+import Dinner from './pages/Dinner';
+import RecipesDinner from './pages/RecipesDinner';
+import RecipesAppetizers from './pages/RecipesAppetizers';
+
+
 
 
 // ✅ Pages - Urdu
@@ -63,10 +82,7 @@ import UrduAlarmModal from './components/Urdu/UrduAlarmModal';
 
 // ✅ Import RTL CSS
 import './App.css';
-import RecipesVegChicken from './pages/RecipesVegChicken';
-import RecipesVegMutton from './pages/RecipesVegMutton';
-import RecipesPlainDal from './pages/RecipesPlainDal';
-import RecipesDalChicken from './pages/RecipesDalChicken';
+
 
 function AppWrapper() {
   const location = useLocation();
@@ -103,7 +119,6 @@ function AppWrapper() {
           <Route path="/pantry-basics" element={<PantryBasicsPage/>} />    
           <Route path="/recipes" element={<RecipeFeature/>} />    
           <Route path="/soups" element={<RecipeSoupPage/>} />    
-          <Route path="/MainCourse" element={<RecipeMainCoursePage/>} />    
           <Route path="/Beverages" element={<RecipeBeveragesPage/>} />    
           <Route path="/desserts" element={<RecipeDessertsPage/>} />    
           <Route path="/baking" element={<RecipeBakingPage/>} />    
@@ -129,6 +144,23 @@ function AppWrapper() {
                                         <Route path="/veg-mutton" element={<RecipesVegMutton />} />
                                         <Route path="/plain-dal" element={<RecipesPlainDal />} />
                                         <Route path="/dal-chick" element={<RecipesDalChicken />} />
+                                        <Route path="/dal-mutton" element={<RecipesDalMutton />} />
+                                        <Route path="/egg-dishes" element={<RecipesEggDishes />} />
+                                        <Route path="/fish-dishes" element={<RecipesFish/>} />
+                                        <Route path="/chicken" element={<RecipesPureChicken/>} />
+                                        <Route path="/mutton" element={<RecipesPureMutton/>} />
+                                        <Route path="/qeema" element={<RecipesQeema/>} />
+                                        <Route path="/rice" element={<RecipesRice/>} />
+                                        <Route path="/gravy" element={<RecipesHeavyGravy/>} />
+                                        <Route path="/BBQ" element={<RecipesBBQ/>} />
+                                        <Route path="/dinner" element={<Dinner/>} />
+                                        <Route path="/recipe-dinner" element={<RecipesDinner/>} />
+
+                                        <Route path="/breads" element={<RecipesBread/>} />
+                                        <Route path="/appetizers" element={<RecipesAppetizers/>} />
+
+                                        <Route path="/dinner-light" element={<RecipesLightDinner/>} />
+
 
 
 

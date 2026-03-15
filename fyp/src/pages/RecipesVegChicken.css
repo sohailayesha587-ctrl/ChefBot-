@@ -26,7 +26,7 @@ html, body, #root {
 
 /* ===== HEADER ===== */
 .chicken-veg-header {
-  background: linear-gradient(135deg, #c94b4b, #b33c3c);
+  background: linear-gradient(135deg, #284a4b, #1d3a3b);
   color: white;
   padding: 30px 20px;
   text-align: center;
@@ -34,6 +34,8 @@ html, body, #root {
   position: relative;
   z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 120px;
+
 }
 
 .chicken-veg-header-content {
