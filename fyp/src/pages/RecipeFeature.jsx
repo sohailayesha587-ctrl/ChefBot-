@@ -8,21 +8,31 @@ const RecipeFeature = () => {
   const [email, setEmail] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const recipeTypes = [
-    { id: 1, title: 'SOUPS', description: 'Warm and comforting soups for all seasons', path: '/soups', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-    { id: 2, title: 'Appetizers', description: 'Sweet delights and delicious treats', path: '/appetizers', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 3, title: 'Lunch', description: 'Warm and comforting soups for all seasons', path: '/recipe-lunch', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-    { id: 4, title: 'Dinner(MAIN COURSE)', description: 'Warm and comforting soups for all seasons', path: '/recipe-dinner', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-        { id: 5, title: 'Dinner(MAIN COURSE)', description: 'Warm and comforting soups for all seasons', path: '/recipe-dinner', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-
-    { id: 6, title: 'DESSERTS', description: 'Sweet delights and delicious treats', path: '/desserts', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 7, title: 'BREAKFAST', description: 'Hearty main dishes for every occasion', path: '/BreakFast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAAkO6PiyzExlXgDE-kZFg0VQlAt1sOqclhA&s' },
-    { id: 8, title: 'BEVERAGES', description: 'Refreshing drinks for every mood', path: '/Beverage', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 9, title: 'BAKING', description: 'Freshly baked goods and pastries', path: '/Baking', image: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 10, title: 'REGIONAL', description: 'Traditional and modern sweet dishes', path: '/Regional', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 11, title: 'SALADS', description: 'Fresh and healthy salad recipes', path: '/Salads', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 12, title: 'SNACKS', description: 'Quick bites and appetizers', path: '/Snack', image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }
-  ];
+ const recipeTypes = [
+  // --- MEALS ---
+  { id: 1, title: 'BREAKFAST', description: 'Start your day with delicious morning meals', path: '/BreakFast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAAkO6PiyzExlXgDE-kZFg0VQlAt1sOqclhA&s' },
+  { id: 2, title: 'LUNCH', description: 'Hearty and satisfying midday meals', path: '/recipe-lunch', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
+  { id: 3, title: 'DINNER', description: 'Perfect main courses for evening meals', path: '/recipe-dinner', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
+  
+  // --- APPETIZERS & SOUPS ---
+  { id: 4, title: 'SOUPS', description: 'Warm and comforting soups for all seasons', path: '/soups', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
+  { id: 5, title: 'APPETIZERS', description: 'Perfect starters and finger foods', path: '/appetizers', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { id: 6, title: 'SNACKS', description: 'Quick bites for any time of day', path: '/Snack', image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  
+  // --- DESSERTS & BAKING ---
+  { id: 7, title: 'DESSERTS', description: 'Sweet delights and indulgent treats', path: '/desserts', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { id: 8, title: 'BAKING', description: 'Freshly baked goods and pastries', path: '/Baking', image: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  
+  // --- BEVERAGES ---
+  { id: 9, title: 'BEVERAGES', description: 'Refreshing drinks for every mood', path: '/Beverage', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  
+  // --- HEALTHY OPTIONS ---
+  { id: 10, title: 'SALADS', description: 'Fresh and healthy salad recipes', path: '/Salads', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  
+  // --- SPECIALTY ---
+  { id: 11, title: 'REGIONAL', description: 'Traditional and authentic regional dishes', path: '/Regional', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { id: 12, title: 'JUNK FOOD', description: 'Indulgent comfort food favorites', path: '/cheat-meal', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' }
+];
 
   const budgetCategories = [
     { id: 1, title: 'BUDGET-FRIENDLY', path: '/BudgetFriendly', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', features: ['Budget-friendly meals', 'Save money cooking', 'Affordable ingredients', 'Meal prep tips'] },

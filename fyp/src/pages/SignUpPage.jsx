@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignUpPage.css';
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -24,7 +26,7 @@ const SignUpPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
@@ -44,9 +46,44 @@ const SignUpPage = () => {
       return;
     }
 
-    // Simulate successful signup
-    alert("Account created successfully! Welcome to ChefBot!");
-    window.location.href = "/home";
+    if (formData.password.length < 6) {
+      alert("Password must be at least 6 characters long!");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // ✅ Backend API call - field names match karo
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.fullname,        // Backend expects 'name'
+          email: formData.email,
+          password: formData.password,
+          agreeToTerms: formData.terms    // Backend expects 'agreeToTerms'
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Success
+        alert(data.message || "Account created successfully! Welcome to ChefBot!");
+        navigate('/login-page');  // Redirect to login page
+      } else {
+        // Error from backend
+        alert(data.message || "Signup failed! Please try again.");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Something went wrong! Please check your internet connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -108,7 +145,7 @@ const SignUpPage = () => {
                   id="password" 
                   name="password"
                   className="form-control" 
-                  placeholder="Create a password" 
+                  placeholder="Create a password (min. 6 characters)" 
                   value={formData.password}
                   onChange={handleInputChange}
                   required
@@ -119,7 +156,6 @@ const SignUpPage = () => {
                   onClick={togglePasswordVisibility}
                   title={showPassword ? "Hide password" : "Show password"}
                 >
-                  {/* ✅ Eye-slash when HIDDEN, Normal eye when VISIBLE */}
                   <i className={showPassword ? "far fa-eye" : "far fa-eye-slash"}></i>
                 </button>
               </div>
@@ -151,7 +187,9 @@ const SignUpPage = () => {
               <label htmlFor="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
             </div>
             
-            <button type="submit" className="btn-signup">Create Account</button>
+            <button type="submit" className="btn-signup" disabled={loading}>
+              {loading ? 'Creating Account...' : 'Create Account'}
+            </button>
             
             <div className="divider">
               <span>Or sign up with</span>
@@ -160,7 +198,7 @@ const SignUpPage = () => {
             <div className="social-login">
               <button type="button" className="btn-social">
                 <i className="fab fa-google" style={{color: "#DB4437"}}></i> Google
-                 </button>
+              </button>
               <button type="button" className="btn-social">
                 <i className="fab fa-facebook-f" style={{color: "#4267B2"}}></i> Facebook
               </button>

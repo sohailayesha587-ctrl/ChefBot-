@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './PantryPage.css';
 import { useNavigate } from 'react-router-dom';
+import { showToast } from '../components/Toast';
+import './PantryPage.css';
 
 const PantryPage = () => {
   const [items, setItems] = useState([]);
+  const [pantryShoppingList, setPantryShoppingList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentItem, setCurrentItem] = useState({ 
@@ -13,89 +15,271 @@ const PantryPage = () => {
     category: 'Vegetables' 
   });
   const [searchTerm, setSearchTerm] = useState('');
-  const [shoppingList, setShoppingList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [addingAll, setAddingAll] = useState(false);
   
   const navigate = useNavigate();
 
   const categories = ['Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Other'];
   const units = ['kg', 'g', 'liters', 'ml', 'pieces', 'dozen'];
 
-  // ✅ FIXED: Load BOTH pantry items AND shopping list from localStorage
-  useEffect(() => {
-    console.log("🔄 PantryPage: Loading data from localStorage");
-    window.scrollTo(0, 0);
-    
-    // Load pantry items
-    const savedItems = localStorage.getItem('pantryItems');
-    console.log("📦 Saved pantry items:", savedItems);
-    
-    if (savedItems && savedItems !== "[]" && savedItems !== "null") {
-      try {
-        const parsedItems = JSON.parse(savedItems);
-        setItems(parsedItems);
-        console.log("✅ Loaded pantry items:", parsedItems.length);
-      } catch (error) {
-        console.error("❌ Error parsing pantry items:", error);
-        setItems([]);
+  const getToken = () => localStorage.getItem('token');
+
+  // Fetch pantry items
+  const fetchPantryItems = async () => {
+    try {
+      setLoading(true);
+      const token = getToken();
+      if (!token) {
+        navigate('/login-page');
+        return;
       }
-    } else {
-      setItems([]);
-    }
-    
-    // Load shopping list
-    const savedShoppingList = localStorage.getItem('shoppingList');
-    console.log("🛒 Saved shopping list:", savedShoppingList);
-    
-    if (savedShoppingList && savedShoppingList !== "[]" && savedShoppingList !== "null") {
-      try {
-        const parsedShoppingList = JSON.parse(savedShoppingList);
-        setShoppingList(parsedShoppingList);
-        console.log("✅ Loaded shopping list:", parsedShoppingList.length);
-      } catch (error) {
-        console.error("❌ Error parsing shopping list:", error);
-        setShoppingList([]);
+
+      const response = await fetch('http://localhost:5000/api/pantry', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setItems(data.items || []);
       }
-    } else {
-      setShoppingList([]);
+    } catch (err) {
+      console.error(err);
+      showToast('Server error', 'error');
+    } finally {
+      setLoading(false);
     }
-  }, []); // Empty dependency array - runs only on mount
+  };
 
-  // ✅ Save pantry items to localStorage whenever they change
-  useEffect(() => {
-    console.log("💾 Saving pantry items to localStorage:", items.length);
-    localStorage.setItem('pantryItems', JSON.stringify(items));
-  }, [items]);
+  // Fetch pantry shopping list
+  const fetchPantryShoppingList = async () => {
+    try {
+      const token = getToken();
+      if (!token) return;
 
-  // ✅ Save shopping list to localStorage whenever it changes
-  useEffect(() => {
-    console.log("🛒 Saving shopping list to localStorage:", shoppingList.length);
-    localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
-  }, [shoppingList]);
+      const response = await fetch('http://localhost:5000/api/pantry-shopping', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
 
-  const handleSaveItem = () => {
-    if (!currentItem.name || !currentItem.quantity) {
-      alert('Please fill all fields!');
+      const data = await response.json();
+      if (response.ok) {
+        setPantryShoppingList(data.items || []);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Add single item to pantry shopping list
+  const addToPantryShoppingList = async (item) => {
+    try {
+      const token = getToken();
+      
+      const response = await fetch('http://localhost:5000/api/pantry-shopping', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: item.name,
+          quantity: item.quantity,
+          unit: item.unit,
+          category: item.category
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setPantryShoppingList(data.items);
+        showToast(`${item.name} added!`, 'success');
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  // Remove single item from pantry shopping list
+  const removeFromPantryShoppingList = async (id) => {
+    try {
+      const token = getToken();
+      const response = await fetch(`http://localhost:5000/api/pantry-shopping/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setPantryShoppingList(data.items);
+        showToast('Item removed', 'info');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  // Clear pantry shopping list
+  const clearPantryShoppingList = async () => {
+    try {
+      const token = getToken();
+      const response = await fetch('http://localhost:5000/api/pantry-shopping', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setPantryShoppingList([]);
+        showToast('Shopping list cleared!', 'success');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  // ✅ ADD ALL TO MAIN SHOPPING LIST + REDIRECT + CLEAR
+  const addAllToShoppingAndRedirect = async () => {
+    if (pantryShoppingList.length === 0) {
+      showToast('No items to add!', 'warning');
       return;
     }
 
-    if (editMode) {
-      setItems(items.map(item => item.id === currentItem.id ? currentItem : item));
-    } else {
-      setItems([...items, { ...currentItem, id: Date.now() }]);
-    }
+    setAddingAll(true);
+    let successCount = 0;
 
-    handleCloseModal();
+    try {
+      const token = getToken();
+      
+      // Add each item to main shopping list
+      for (const item of pantryShoppingList) {
+        const response = await fetch('http://localhost:5000/api/shopping', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: item.name,
+            quantity: item.quantity,
+            unit: item.unit,
+            category: item.category,
+            fromPantry: true
+          })
+        });
+
+        if (response.ok) {
+          successCount++;
+        }
+      }
+
+      if (successCount > 0) {
+        showToast(`${successCount} items added to shopping list!`, 'success');
+        
+        // Clear pantry shopping list
+        await clearPantryShoppingList();
+        
+        // Redirect to shopping page
+        navigate('/smart-shopping');
+      } else {
+        showToast('Failed to add items', 'error');
+      }
+      
+    } catch (err) {
+      console.error(err);
+      showToast('Server error', 'error');
+    } finally {
+      setAddingAll(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
-      setItems(items.filter(item => item.id !== id));
-      setShoppingList(shoppingList.filter(item => item.id !== id));
+  // Pantry CRUD
+  const handleSaveItem = async () => {
+    if (!currentItem.name || !currentItem.quantity) {
+      showToast('Please fill all fields!', 'warning');
+      return;
+    }
+
+    try {
+      const token = getToken();
+      const url = editMode 
+        ? `http://localhost:5000/api/pantry/${currentItem._id}`
+        : 'http://localhost:5000/api/pantry';
+      
+      const method = editMode ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: currentItem.name,
+          quantity: parseInt(currentItem.quantity),
+          unit: currentItem.unit,
+          category: currentItem.category
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setItems(data.items);
+        handleCloseModal();
+        showToast(editMode ? 'Updated!' : 'Added!', 'success');
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const token = getToken();
+      const response = await fetch(`http://localhost:5000/api/pantry/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setItems(data.items);
+        showToast('Item deleted!', 'success');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
     }
   };
 
   const handleEdit = (item) => {
-    setCurrentItem(item);
+    setCurrentItem({
+      _id: item._id,
+      name: item.name,
+      quantity: item.quantity,
+      unit: item.unit,
+      category: item.category
+    });
     setEditMode(true);
     setShowModal(true);
   };
@@ -112,51 +296,29 @@ const PantryPage = () => {
     setCurrentItem({ name: '', quantity: '', unit: 'kg', category: 'Vegetables' });
   };
 
+  useEffect(() => {
+    fetchPantryItems();
+    fetchPantryShoppingList();
+  }, []);
+
   const filteredItems = items.filter(item =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // ✅ LOW STOCK ITEMS: Sirf shopping list mein add kare (NO REDIRECT)
-  const addToShoppingList = (item) => {
-    if (!shoppingList.some(i => i.id === item.id)) {
-      const updatedList = [...shoppingList, item];
-      setShoppingList(updatedList);
-      alert(`${item.name} shopping list mein add ho gaya!`);
-    } else {
-      alert('Ye item pehle se shopping list mein hai!');
-    }
-  };
-
-  // ✅ NORMAL ITEMS: Shopping list mein add kare AUR redirect kare
-  const addToShoppingListAndRedirect = (item) => {
-    if (!shoppingList.some(i => i.id === item.id)) {
-      const updatedShoppingList = [...shoppingList, item];
-      setShoppingList(updatedShoppingList);
-    }
-    navigate('/smart-shopping');
-  };
-
-  const removeFromShoppingList = (id) => {
-    setShoppingList(shoppingList.filter(item => item.id !== id));
-  };
-
-  const clearShoppingList = () => {
-    if (window.confirm('Clear entire shopping list?')) {
-      setShoppingList([]);
-    }
-  };
-
-  const isInShoppingList = (id) => {
-    return shoppingList.some(item => item.id === id);
-  };
-
-  const goToShoppingPage = () => {
-    navigate('/smart-shopping');
-  };
-
   const totalItems = items.length;
-  const lowStockItems = items.filter(item => parseInt(item.quantity) <= 1).length;
+  const lowStockItems = items.filter(item => item.quantity <= 2).length;
   const totalCategories = [...new Set(items.map(item => item.category))].length;
+
+  if (loading) {
+    return (
+      <div className="pantry-page">
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pantry-page">
@@ -167,13 +329,17 @@ const PantryPage = () => {
         </div>
       </div>
       
-      {/* Hero Section */}
       <div className="p-hero-section">
-        <h1 className="p-hero-title">Add your pantry items</h1>
+        <h1 className="p-hero-title">Your Pantry Items</h1>
         <p className="p-hero-subtitle">Manage your kitchen inventory efficiently</p>
       </div>
 
-      {/* Stats Section */}
+      {error && (
+        <div className="pantry-error-message">
+          <i className="fas fa-exclamation-circle"></i> {error}
+        </div>
+      )}
+
       {items.length > 0 && (
         <div className="stats-section">
           <div className="stat-card">
@@ -191,7 +357,6 @@ const PantryPage = () => {
         </div>
       )}
 
-      {/* Search + Add */}
       <div className="search-add-section">
         <input
           type="text"
@@ -205,51 +370,49 @@ const PantryPage = () => {
         </button>
       </div>
 
-      {/* Shopping List Section */}
-      {shoppingList.length > 0 && (
-        <div className="shopping-list-section">
-          <div className="shopping-list-header">
-            <h3 className="shopping-list-title">🛒 Shopping List ({shoppingList.length})</h3>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button 
-                className="btn-view-shopping-list" 
-                onClick={goToShoppingPage}
-              >
-                View Full List
-              </button>
-              <button className="btn-clear-shopping-list" onClick={clearShoppingList}>
-                Clear All
-              </button>
-            </div>
+      {/* Pantry Shopping List Section */}
+      <div className="shopping-list-section">
+        <div className="shopping-list-header">
+          <h3 className="shopping-list-title">🛒 Shopping List ({pantryShoppingList.length})</h3>
+          <div className="shopping-list-actions">
+            <button 
+              className="btn-add-all-to-shopping" 
+              onClick={addAllToShoppingAndRedirect}
+              disabled={addingAll || pantryShoppingList.length === 0}
+            >
+              {addingAll ? 'Adding...' : '➕ Add All to Shopping List'}
+            </button>
+            <button 
+              className="btn-clear-shopping-list" 
+              onClick={clearPantryShoppingList}
+            >
+              Clear All
+            </button>
           </div>
-          <div className="checklist-items">
-            {shoppingList.slice(0, 3).map(item => (
-              <div key={item.id} className="shopping-list-item">
+        </div>
+        <div className="checklist-items">
+          {pantryShoppingList.length === 0 ? (
+            <div className="empty-shopping-message">
+              <p>No items. Click 🛒 on items to add.</p>
+            </div>
+          ) : (
+            pantryShoppingList.map(item => (
+              <div key={item._id} className="shopping-list-item">
                 <span className="quantity-badge-simple">{item.quantity} {item.unit}</span>
                 <h4 className="shopping-item-name">{item.name}</h4>
                 <button 
                   className="btn-remove-shopping-item" 
-                  onClick={() => removeFromShoppingList(item.id)}
+                  onClick={() => removeFromPantryShoppingList(item._id)}
                 >
                   Remove
                 </button>
               </div>
-            ))}
-            {shoppingList.length > 3 && (
-              <div className="shopping-list-item" style={{ justifyContent: 'center', background: 'transparent' }}>
-                <button 
-                  className="btn-view-more-items" 
-                  onClick={goToShoppingPage}
-                >
-                  View {shoppingList.length - 3} more items →
-                </button>
-              </div>
-            )}
-          </div>
+            ))
+          )}
         </div>
-      )}
+      </div>
 
-      {/* Categories Checklist */}
+      {/* Pantry Items List */}
       {items.length === 0 ? (
         <div className="p-empty-message">
           <h4>Your pantry is empty</h4>
@@ -271,35 +434,23 @@ const PantryPage = () => {
                 </div>
                 <div className="checklist-items">
                   {categoryItems.map(item => {
-                    const isLowStock = parseInt(item.quantity) <= 2;
+                    const isLowStock = item.quantity <= 2;
+                    const isInShoppingList = pantryShoppingList.some(i => i.name === item.name);
                     
                     return (
-                      <div key={item.id} className={`checklist-item ${isLowStock ? 'low-stock-checklist' : ''}`}>
+                      <div key={item._id} className={`checklist-item ${isLowStock ? 'low-stock-checklist' : ''}`}>
                         <span className="quantity-badge-simple">{item.quantity} {item.unit}</span>
                         <h4 className="item-name-simple">{item.name}</h4>
                         <div className="checklist-actions">
-                          {/* ✅ LOW STOCK ITEMS: Sirf shopping list mein add kare */}
-                          {isLowStock ? (
-                            <button 
-                              className={`btn-shopping-cart ${isInShoppingList(item.id) ? 'in-list' : ''}`}
-                              onClick={() => addToShoppingList(item)}
-                              title={isInShoppingList(item.id) ? "Already in Shopping List" : "Add to Shopping List"}
-                            >
-                              {isInShoppingList(item.id) ? '✓' : '🛒'}
-                            </button>
-                          ) : (
-                            /* ✅ NORMAL ITEMS: Shopping list mein add kare AUR redirect kare */
-                            <button 
-                              className={`btn-shopping-cart ${isInShoppingList(item.id) ? 'in-list' : ''}`}
-                              onClick={() => addToShoppingListAndRedirect(item)}
-                              title={isInShoppingList(item.id) ? "Go to Shopping List" : "Add to Shopping List & Go"}
-                            >
-                              {isInShoppingList(item.id) ? '✓' : '🛒'}
-                            </button>
-                          )}
-                          
-                          <button className="btn-edit-item" onClick={() => handleEdit(item)} title="Edit">✏️</button>
-                          <button className="btn-delete-item" onClick={() => handleDelete(item.id)} title="Delete">🗑️</button>
+                          <button 
+                            className={`btn-add-item ${isInShoppingList ? 'added' : ''}`}
+                            onClick={() => addToPantryShoppingList(item)}
+                            disabled={isInShoppingList}
+                          >
+                            {isInShoppingList ? '✓ Added' : '🛒 Add'}
+                          </button>
+                          <button className="btn-edit-item" onClick={() => handleEdit(item)}>✏️</button>
+                          <button className="btn-delete-item" onClick={() => handleDelete(item._id)}>🗑️</button>
                         </div>
                       </div>
                     );
@@ -317,18 +468,26 @@ const PantryPage = () => {
           <div className="pantry-modal" onClick={(e) => e.stopPropagation()}>
             <div className="pantry-modal-header-custom">
               <h2>{editMode ? 'Edit Item' : 'Add New Item'}</h2>
-              <button className="btn-close-modal" onClick={handleCloseModal} title="Close">
-                ×
-              </button>
+              <button className="btn-close-modal" onClick={handleCloseModal}>×</button>
             </div>
             <div className="pantry-modal-body">
               <div className="form-group">
                 <label>Name</label>
-                <input type="text" value={currentItem.name} onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}/>
+                <input 
+                  type="text" 
+                  value={currentItem.name} 
+                  onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}
+                  placeholder="e.g., Tomato, Rice, Milk"
+                />
               </div>
               <div className="form-group">
                 <label>Quantity</label>
-                <input type="number" value={currentItem.quantity} onChange={(e) => setCurrentItem({ ...currentItem, quantity: e.target.value })}/>
+                <input 
+                  type="number" 
+                  value={currentItem.quantity} 
+                  onChange={(e) => setCurrentItem({ ...currentItem, quantity: e.target.value })}
+                  placeholder="Enter quantity"
+                />
               </div>
               <div className="form-group">
                 <label>Unit</label>
@@ -352,7 +511,6 @@ const PantryPage = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

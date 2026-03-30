@@ -11,40 +11,41 @@ const RecipesPlainDal = () => {
   const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
 
-  // All Plain Dal Recipes (30+ recipes)
+  // All Plain Dal Recipes (30+ recipes) with detailed instructions
   const dalRecipes = [
     // ==================== CHANA DAL BASED (5) ====================
     { 
       id: 1, 
       name: "Chana Dal",
-      tagline: "Simple split Bengal gram lentils",
+      tagline: "Simple split Bengal gram lentils - protein packed",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal (split Bengal gram)",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric powder",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "1 tsp garam masala",
-        "2 tbsp oil or ghee",
+        "1 cup chana dal (split Bengal gram) - washed and soaked",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil or ghee",
         "Salt to taste",
-        "Fresh coriander for garnish",
-        "2 green chilies, slit"
+        "Fresh coriander leaves for garnish",
+        "2 green chilies - slit lengthwise"
       ],
       steps: [
-        "Wash chana dal thoroughly and soak for 30 minutes.",
-        "Pressure cook dal with 2 cups water, turmeric and salt for 3-4 whistles until soft.",
-        "Heat oil in a pan, add cumin seeds and let them splutter.",
-        "Add chopped onions and sauté until golden brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add chopped tomatoes and cook until soft and mushy.",
-        "Add red chili powder, coriander powder and salt. Mix well.",
-        "Add cooked dal and simmer for 10-15 minutes.",
-        "Sprinkle garam masala and garnish with fresh coriander and green chilies.",
-        "Serve hot with rice or roti."
+        "Wash chana dal thoroughly under running water until water runs clear. Soak in fresh water for 30 minutes. Drain before cooking.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Close the lid and pressure cook on medium heat for 3-4 whistles or until the dal is soft and mushy.",
+        "Let the pressure release naturally. Open the lid and mash the dal slightly with the back of a spoon. Set aside.",
+        "Heat oil or ghee in a separate pan over medium heat. Add cumin seeds and let them crackle for 30 seconds until fragrant.",
+        "Add finely chopped onions and sauté for 5-6 minutes until they turn golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until the raw smell disappears.",
+        "Add chopped tomatoes and cook for 5-6 minutes until they become soft and mushy.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes until the spices are fragrant.",
+        "Add the cooked dal and stir well. Add 1/2 cup of water if the dal is too thick. Let it simmer for 10-12 minutes on low heat.",
+        "Sprinkle garam masala and garnish with fresh coriander leaves and green chilies.",
+        "Serve hot with steamed rice, jeera rice, or roti."
       ]
     },
     { 
@@ -53,93 +54,101 @@ const RecipesPlainDal = () => {
       tagline: "Tempered chana dal with onions and tomatoes",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "1 onion, finely chopped",
-        "2 tomatoes, finely chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp mustard seeds",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1 cup chana dal - washed and soaked",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon mustard seeds",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander",
-        "1 lemon, juiced"
+        "Fresh coriander leaves for garnish",
+        "1 lemon - juiced"
       ],
       steps: [
-        "Wash and soak chana dal for 30 minutes.",
-        "Pressure cook dal with turmeric and salt until soft but not mushy.",
-        "Heat ghee in a pan, add mustard and cumin seeds.",
-        "Add onions and sauté until golden brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili, coriander powder and salt. Mix well.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Add garam masala, lemon juice and coriander.",
-        "Serve hot with naan or rice."
+        "Wash chana dal thoroughly and soak in water for 30 minutes. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until the dal is soft but not completely mushy.",
+        "Release pressure naturally. Open the lid and set the cooked dal aside.",
+        "Heat ghee in a pan over medium heat. Add mustard seeds and cumin seeds. Let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and oil starts separating.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat, stirring occasionally.",
+        "Add garam masala, lemon juice, and fresh coriander leaves. Mix well.",
+        "Serve hot with naan, roti, or steamed rice."
       ]
     },
     { 
       id: 3, 
       name: "Chana Dal Palak",
-      tagline: "Chana dal with spinach",
+      tagline: "Chana dal with spinach - healthy and delicious",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
-        "Salt to taste"
+        "1 cup chana dal - washed and soaked",
+        "2 cups fresh spinach (palak) - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak chana dal for 30 minutes.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add spinach and cook until wilted.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash chana dal and soak for 30 minutes. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Set the cooked dal aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped spinach and cook for 3-4 minutes until the spinach wilts completely.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "Sprinkle garam masala and garnish with fresh coriander leaves.",
+        "Serve hot with roti or steamed rice."
       ]
     },
     { 
       id: 4, 
       name: "Chana Dal Louki",
-      tagline: "Chana dal with bottle gourd",
+      tagline: "Chana dal with bottle gourd - light and nutritious",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "2 cups louki (bottle gourd), peeled and cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
-        "Salt to taste"
+        "1 cup chana dal - washed and soaked",
+        "2 cups louki (bottle gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak chana dal for 30 minutes.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add louki and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until louki is tender.",
-        "Serve hot with rice."
+        "Wash chana dal and soak for 30 minutes. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add louki cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes until the louki is completely tender.",
+        "Garnish with fresh coriander leaves and serve hot with steamed rice."
       ]
     },
     { 
@@ -148,28 +157,33 @@ const RecipesPlainDal = () => {
       tagline: "Healthy chana dal and spinach combination",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, pureed",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
-        "Salt to taste"
+        "1 cup chana dal - washed and soaked",
+        "2 cups fresh spinach - blanched and pureed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - blended into smooth puree",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
+        "Salt to taste",
+        "2 tablespoons fresh cream (optional)"
       ],
       steps: [
-        "Wash and soak chana dal for 30 minutes.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat ghee, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomato puree and cook until oil separates.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash chana dal and soak for 30 minutes. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly with a spoon. Set aside.",
+        "Blanch spinach in hot water for 2 minutes, then blend into a smooth puree. Set aside.",
+        "Heat ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add tomato puree and cook for 5-6 minutes until the ghee separates from the masala.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add spinach puree and cook for 3-4 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "Sprinkle garam masala and add fresh cream if using. Mix well.",
+        "Serve hot with naan or roti."
       ]
     },
 
@@ -177,31 +191,32 @@ const RecipesPlainDal = () => {
     { 
       id: 6, 
       name: "Moong Dal",
-      tagline: "Simple split yellow moong dal",
+      tagline: "Simple split yellow moong dal - light and easy to digest",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal (split yellow lentils)",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric powder",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil or ghee",
+        "1 cup moong dal (split yellow lentils) - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil or ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash moong dal thoroughly. No need to soak.",
-        "Pressure cook dal with 2 cups water, turmeric and salt for 2-3 whistles.",
-        "Heat oil in a pan, add cumin seeds and let them splutter.",
-        "Add chopped onions and sauté until golden brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add chopped tomatoes and cook until soft.",
-        "Add red chili powder, coriander powder and salt. Mix well.",
-        "Add cooked dal and simmer for 5-7 minutes.",
-        "Garnish with fresh coriander and serve hot."
+        "Wash moong dal thoroughly under running water until water runs clear. Moong dal does not need soaking.",
+        "In a pressure cooker, add washed dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. The dal should be soft and slightly mushy. Set aside.",
+        "Heat oil or ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until the raw smell disappears.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and mushy.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes until the spices are fragrant.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Garnish with fresh coriander leaves and serve hot with steamed rice or roti."
       ]
     },
     { 
@@ -210,147 +225,165 @@ const RecipesPlainDal = () => {
       tagline: "Tempered moong dal with onions",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp mustard seeds",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1 cup moong dal - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon mustard seeds",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash moong dal and pressure cook with turmeric and salt.",
-        "Heat ghee, add mustard and cumin seeds.",
-        "Add onions and sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Add garam masala and coriander. Serve."
+        "Wash moong dal thoroughly. No need to soak.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat ghee in a pan over medium heat. Add mustard seeds and cumin seeds. Let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and oil starts separating.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Add garam masala and fresh coriander leaves. Mix well.",
+        "Serve hot with naan or roti."
       ]
     },
     { 
       id: 8, 
       name: "Moong Dal Palak",
-      tagline: "Moong dal with spinach",
+      tagline: "Moong dal with spinach - healthy green dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
-        "Salt to taste"
+        "1 cup moong dal - washed",
+        "2 cups fresh spinach - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash moong dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash moong dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped spinach and cook for 3-4 minutes until wilted completely.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Sprinkle garam masala and garnish with fresh coriander leaves.",
+        "Serve hot with roti or steamed rice."
       ]
     },
     { 
       id: 9, 
       name: "Moong Dal Louki",
-      tagline: "Moong dal with bottle gourd",
+      tagline: "Moong dal with bottle gourd - light summer dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "2 cups louki, peeled and cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
-        "Salt to taste"
+        "1 cup moong dal - washed",
+        "2 cups louki (bottle gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash moong dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add louki and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until louki is tender.",
-        "Serve hot."
+        "Wash moong dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add louki cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes until louki is tender.",
+        "Garnish with fresh coriander leaves and serve hot with steamed rice."
       ]
     },
     { 
       id: 10, 
       name: "Moong Dal with Spinach",
-      tagline: "Healthy moong dal and spinach",
+      tagline: "Healthy moong dal and spinach puree",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, pureed",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1 cup moong dal - washed",
+        "2 cups fresh spinach - blanched and pureed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - blended into smooth puree",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste"
       ],
       steps: [
-        "Wash moong dal and pressure cook with turmeric and salt.",
-        "Heat ghee, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomato puree and cook until oil separates.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash moong dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly. Set aside.",
+        "Blanch spinach in hot water for 2 minutes, then blend into a smooth puree.",
+        "Heat ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add tomato puree and cook for 5-6 minutes until the ghee separates.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add spinach puree and cook for 3-4 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Sprinkle garam masala and serve hot with roti."
       ]
     },
     { 
       id: 11, 
       name: "Moong Dal Khichdi",
-      tagline: "Comforting rice and lentil porridge",
+      tagline: "Comforting rice and lentil porridge - perfect for sick days",
       image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0",
       ingredients: [
-        "1/2 cup moong dal",
-        "1/2 cup rice",
-        "1 onion, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "2 tbsp ghee",
+        "1/2 cup moong dal - washed",
+        "1/2 cup basmati rice - washed",
+        "1 medium onion - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish",
+        "3 cups water"
       ],
       steps: [
-        "Wash rice and dal together.",
-        "Heat ghee in a pressure cooker, add cumin seeds.",
-        "Add onions and sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add rice and dal, turmeric and salt.",
-        "Add 3 cups water and pressure cook for 3-4 whistles.",
-        "Let pressure release naturally.",
-        "Garnish with coriander and serve with yogurt."
+        "Wash rice and moong dal together thoroughly under running water. Drain well.",
+        "Heat ghee in a pressure cooker over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 3-4 minutes until light golden.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add the washed rice and dal. Stir well to coat with ghee for 2 minutes.",
+        "Add turmeric powder and salt. Mix well.",
+        "Add 3 cups of water and stir everything together.",
+        "Close the pressure cooker lid and cook on medium heat for 3-4 whistles.",
+        "Let the pressure release naturally. Open the lid and check the consistency. It should be soft and porridge-like.",
+        "If too thick, add some hot water and mix well.",
+        "Garnish with fresh coriander leaves and serve hot with yogurt, pickle, or papad."
       ]
-    }
-  ];
-    // More recipes continue...
-  const moreDalRecipes = [
+    },
+
     // ==================== MAASH DAL BASED (4) ====================
     { 
       id: 12, 
@@ -358,122 +391,129 @@ const RecipesPlainDal = () => {
       tagline: "Black lentils with rich creamy texture",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup maash dal (black lentils)",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric powder",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "1 tsp garam masala",
-        "2 tbsp oil or ghee",
+        "1 cup maash dal (black lentils / urad dal) - washed and soaked",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil or ghee",
         "Salt to taste",
-        "Fresh coriander",
-        "2 green chilies, slit"
+        "Fresh coriander leaves for garnish",
+        "2 green chilies - slit lengthwise"
       ],
       steps: [
-        "Wash maash dal thoroughly and soak for 2 hours.",
-        "Pressure cook dal with 2 cups water, turmeric and salt for 4-5 whistles until soft.",
-        "Heat oil in a pan, add cumin seeds and let them splutter.",
-        "Add chopped onions and sauté until golden brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add chopped tomatoes and cook until soft and mushy.",
-        "Add red chili powder, coriander powder and salt. Mix well.",
-        "Add cooked dal and simmer for 15-20 minutes.",
-        "Sprinkle garam masala and garnish with fresh coriander and green chilies.",
-        "Serve hot with rice or roti."
+        "Wash maash dal thoroughly under running water. Soak in fresh water for 2 hours. Drain before cooking.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 4-5 whistles until the dal is very soft and mushy.",
+        "Let the pressure release naturally. Open the lid and mash the dal well with a spoon. Set aside.",
+        "Heat oil or ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until the raw smell disappears.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and mushy.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes until the spices are fragrant.",
+        "Add the cooked dal and stir well. Add 1/2 cup of water if the dal is too thick. Let it simmer for 15-20 minutes on low heat.",
+        "Sprinkle garam masala and garnish with fresh coriander leaves and green chilies.",
+        "Serve hot with steamed rice, naan, or roti."
       ]
     },
     { 
       id: 13, 
       name: "Maash Dal Fry",
-      tagline: "Tempered black lentils",
+      tagline: "Tempered black lentils - restaurant style",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup maash dal",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp mustard seeds",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1 cup maash dal - washed and soaked",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon mustard seeds",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak maash dal for 2 hours.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat ghee, add mustard and cumin seeds.",
-        "Add onions and sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Add garam masala and coriander. Serve."
+        "Wash maash dal and soak for 2 hours. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 4-5 whistles until very soft.",
+        "Release pressure naturally. Mash the dal well and set aside.",
+        "Heat ghee in a pan over medium heat. Add mustard seeds and cumin seeds. Let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and ghee separates.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes on low heat.",
+        "Add garam masala and fresh coriander leaves. Mix well.",
+        "Serve hot with naan or roti."
       ]
     },
     { 
       id: 14, 
       name: "Maash Dal Palak",
-      tagline: "Black lentils with spinach",
+      tagline: "Black lentils with spinach - nutritious and delicious",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup maash dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
+        "1 cup maash dal - washed and soaked",
+        "2 cups fresh spinach - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash and soak maash dal for 2 hours.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash maash dal and soak for 2 hours. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 4-5 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly and set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped spinach and cook for 3-4 minutes until wilted.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes on low heat.",
+        "Sprinkle garam masala and serve hot with roti or naan."
       ]
     },
     { 
       id: 15, 
       name: "Maash Dal Louki",
-      tagline: "Black lentils with bottle gourd",
+      tagline: "Black lentils with bottle gourd - creamy and light",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup maash dal",
-        "2 cups louki, peeled and cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
+        "1 cup maash dal - washed and soaked",
+        "2 cups louki (bottle gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash and soak maash dal for 2 hours.",
-        "Pressure cook dal with turmeric and salt until soft.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add louki and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until louki is tender.",
-        "Serve hot."
+        "Wash maash dal and soak for 2 hours. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 4-5 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly and set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add louki cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes until louki is tender.",
+        "Serve hot with steamed rice."
       ]
     },
 
@@ -481,31 +521,32 @@ const RecipesPlainDal = () => {
     { 
       id: 16, 
       name: "Masoor Dal",
-      tagline: "Simple red lentils",
+      tagline: "Simple red lentils - quick and easy",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup masoor dal (red lentils)",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric powder",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
+        "1 cup masoor dal (red lentils) - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash masoor dal thoroughly. No need to soak.",
-        "Pressure cook dal with 2 cups water, turmeric and salt for 2-3 whistles.",
-        "Heat oil in a pan, add cumin seeds.",
-        "Add onions and sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder, coriander powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Garnish with coriander and serve."
+        "Wash masoor dal thoroughly under running water until water runs clear. Masoor dal does not need soaking.",
+        "In a pressure cooker, add washed dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. The dal should be soft and mushy. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and mushy.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Garnish with fresh coriander leaves and serve hot with steamed rice or roti."
       ]
     },
     { 
@@ -514,57 +555,63 @@ const RecipesPlainDal = () => {
       tagline: "Tempered red lentils",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup masoor dal",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp mustard seeds",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1 cup masoor dal - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon mustard seeds",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash masoor dal and pressure cook with turmeric and salt.",
-        "Heat ghee, add mustard and cumin seeds.",
-        "Add onions and sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Add garam masala and coriander. Serve."
+        "Wash masoor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat ghee in a pan over medium heat. Add mustard seeds and cumin seeds. Let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and ghee separates.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Add garam masala and fresh coriander leaves. Mix well.",
+        "Serve hot with naan or roti."
       ]
     },
     { 
       id: 18, 
       name: "Masoor Dal Palak",
-      tagline: "Red lentils with spinach",
+      tagline: "Red lentils with spinach - quick healthy dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup masoor dal",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
+        "1 cup masoor dal - washed",
+        "2 cups fresh spinach - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash masoor dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash masoor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped spinach and cook for 3-4 minutes until wilted.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Sprinkle garam masala and serve hot with roti or rice."
       ]
     },
     { 
@@ -573,27 +620,30 @@ const RecipesPlainDal = () => {
       tagline: "Red lentils with bottle gourd",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup masoor dal",
-        "2 cups louki, peeled and cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
+        "1 cup masoor dal - washed",
+        "2 cups louki (bottle gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash masoor dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add louki and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until louki is tender.",
-        "Serve hot."
+        "Wash masoor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add louki cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes until louki is tender.",
+        "Serve hot with steamed rice."
       ]
     },
 
@@ -601,244 +651,274 @@ const RecipesPlainDal = () => {
     { 
       id: 20, 
       name: "Mix Dal",
-      tagline: "Mili juli dal - combination of lentils",
+      tagline: "Mixed lentils - best of all dals together",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1/3 cup chana dal",
-        "1/3 cup moong dal",
-        "1/3 cup masoor dal",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric powder",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
+        "1/3 cup chana dal - washed and soaked",
+        "1/3 cup moong dal - washed",
+        "1/3 cup masoor dal - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash all dals together and soak chana dal separately for 30 minutes.",
-        "Mix all dals and pressure cook with turmeric and salt for 3-4 whistles.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Sprinkle garam masala and coriander. Serve."
+        "Wash all dals together. Soak chana dal separately for 30 minutes as it takes longer to cook.",
+        "Mix all dals together in a pressure cooker. Add 2.5 cups of water, turmeric powder, and salt.",
+        "Pressure cook for 3-4 whistles until all dals are soft and well-cooked.",
+        "Release pressure naturally. Mash the dals slightly with a spoon. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and mushy.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "Sprinkle garam masala and garnish with fresh coriander leaves.",
+        "Serve hot with steamed rice or roti."
       ]
     },
     { 
       id: 21, 
       name: "Panchmel Dal",
-      tagline: "Five lentils Rajasthani style",
+      tagline: "Five lentils Rajasthani style - authentic and flavorful",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1/4 cup each: chana dal, moong dal, masoor dal, urad dal, toor dal",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "2 tbsp ginger-garlic-green chili paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
+        "1/4 cup chana dal - washed and soaked",
+        "1/4 cup moong dal - washed",
+        "1/4 cup masoor dal - washed",
+        "1/4 cup urad dal - washed and soaked",
+        "1/4 cup toor dal - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "2 tablespoons ginger-garlic-green chili paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash all dals and soak for 1 hour.",
-        "Pressure cook with turmeric and salt for 4-5 whistles.",
-        "Heat ghee, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic-chili paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Add garam masala and coriander. Serve."
+        "Wash all dals together. Soak chana dal and urad dal for 1 hour as they take longer to cook.",
+        "Mix all dals in a pressure cooker. Add 3 cups of water, turmeric powder, and salt.",
+        "Pressure cook for 4-5 whistles until all dals are very soft and well-cooked.",
+        "Release pressure naturally. Mash the dals well with a spoon. Set aside.",
+        "Heat ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic-green chili paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and ghee separates.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes on low heat.",
+        "Add garam masala and fresh coriander leaves. Mix well.",
+        "Serve hot with steamed rice or roti."
       ]
     },
     { 
       id: 22, 
       name: "Dal Makhani",
-      tagline: "Creamy black lentils",
+      tagline: "Creamy black lentils - restaurant style",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup whole urad dal (sabut urad)",
-        "1/4 cup rajma (kidney beans)",
-        "1 onion, finely chopped",
-        "2 tomatoes, pureed",
-        "2 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "1/4 cup cream",
-        "3 tbsp butter",
-        "Salt to taste"
+        "1 cup whole urad dal (sabut urad) - washed and soaked overnight",
+        "1/4 cup rajma (kidney beans) - washed and soaked overnight",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - blended into smooth puree",
+        "2 tablespoons ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "1/4 cup heavy cream",
+        "3 tablespoons butter",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak urad dal and rajma overnight.",
-        "Pressure cook with turmeric and salt for 5-6 whistles until very soft.",
-        "Mash some dal with the back of spoon.",
-        "Heat butter, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomato puree and cook until butter separates.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer on low heat for 30 minutes.",
-        "Add cream and garam masala. Simmer for 5 minutes.",
-        "Serve hot with naan or rice."
+        "Wash urad dal and rajma together. Soak in plenty of water overnight (8-10 hours). Drain before cooking.",
+        "In a pressure cooker, add soaked dal and rajma, 3 cups of water, turmeric powder, and salt.",
+        "Pressure cook for 5-6 whistles until the dal and rajma are very soft and mushy.",
+        "Let the pressure release naturally. Open the lid and mash the dal well with a masher or the back of a spoon. Set aside.",
+        "Heat butter in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 6-7 minutes until dark golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add tomato puree and cook for 7-8 minutes until the butter separates from the masala.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Add 1/2 cup of water if needed.",
+        "Simmer on very low heat for 30-40 minutes, stirring occasionally. The longer it simmers, the better the flavor.",
+        "Add cream and garam masala. Mix well and simmer for another 5-7 minutes.",
+        "Garnish with fresh coriander leaves and a dollop of butter.",
+        "Serve hot with butter naan or steamed rice."
       ]
-    }
-  ];
-    // Add more recipes...
-  const finalDalRecipes = [
+    },
+
     // ==================== DAL + SABZI (5) ====================
     { 
       id: 23, 
       name: "Dal Palak",
-      tagline: "Lentils with spinach",
+      tagline: "Lentils with spinach - iron rich dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup mixed dal (moong + masoor)",
-        "2 cups spinach, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp oil",
+        "1 cup mixed dal (moong dal + masoor dal) - washed",
+        "2 cups fresh spinach - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add spinach and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Sprinkle garam masala and serve."
+        "Wash the mixed dals thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped spinach and cook for 3-4 minutes until wilted.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Sprinkle garam masala and serve hot with roti or steamed rice."
       ]
     },
     { 
       id: 24, 
       name: "Dal Louki",
-      tagline: "Lentils with bottle gourd",
+      tagline: "Lentils with bottle gourd - light summer dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "2 cups louki, cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
+        "1 cup moong dal - washed",
+        "2 cups louki (bottle gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add louki and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until louki is tender.",
-        "Serve hot."
+        "Wash moong dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add louki cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes until louki is tender.",
+        "Serve hot with steamed rice."
       ]
     },
     { 
       id: 25, 
       name: "Dal Tori",
-      tagline: "Lentils with ridge gourd",
+      tagline: "Lentils with ridge gourd - unique and tasty",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "2 cups tori, peeled and cubed",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp coriander powder",
-        "2 tbsp oil",
+        "1 cup chana dal - washed and soaked",
+        "2 cups tori (ridge gourd) - peeled and cut into small cubes",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon coriander powder",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Wash and soak chana dal for 30 minutes.",
-        "Pressure cook dal with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add tori and cook for 5 minutes.",
-        "Add red chili, coriander powder and salt.",
-        "Add cooked dal and simmer until tori is tender.",
-        "Serve hot."
+        "Wash chana dal and soak for 30 minutes. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add tori cubes and cook for 5-6 minutes, stirring occasionally.",
+        "Add red chili powder, coriander powder, and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes until tori is tender.",
+        "Serve hot with steamed rice."
       ]
     },
     { 
       id: 26, 
       name: "Dal Karela",
-      tagline: "Lentils with bitter gourd",
+      tagline: "Lentils with bitter gourd - healthy bitter-sweet dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup toor dal",
-        "2 karela, sliced",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp amchur powder",
-        "2 tbsp oil",
+        "1 cup toor dal - washed",
+        "2 medium karela (bitter gourd) - thinly sliced",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon dry mango powder (amchur)",
+        "2 tablespoons oil",
         "Salt to taste"
       ],
       steps: [
-        "Rub karela with salt, keep for 30 mins, rinse and squeeze.",
-        "Wash dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add karela and fry for 5 minutes.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Sprinkle amchur and serve."
+        "Rub karela slices with 1 teaspoon salt and set aside for 30 minutes to reduce bitterness. Rinse well with water and squeeze out the bitter juice completely.",
+        "Wash toor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add the prepared karela slices and fry for 5-6 minutes until lightly browned.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "Sprinkle amchur powder and serve hot with steamed rice."
       ]
     },
     { 
       id: 27, 
       name: "Dal Methi",
-      tagline: "Lentils with fenugreek leaves",
+      tagline: "Lentils with fenugreek leaves - aromatic and healthy",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup moong dal",
-        "1 bunch methi, chopped",
-        "1 onion, chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "2 tbsp oil",
-        "Salt to taste"
+        "1 cup moong dal - washed",
+        "1 large bunch fresh methi (fenugreek leaves) - washed and finely chopped",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "2 tablespoons oil",
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash dal and pressure cook with turmeric and salt.",
-        "Heat oil, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add methi and cook until wilted.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 5 minutes.",
-        "Serve hot."
+        "Wash moong dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 2-3 whistles until soft.",
+        "Release pressure naturally. Set aside.",
+        "Heat oil in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5 minutes until soft.",
+        "Add chopped methi leaves and cook for 3-4 minutes until wilted.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 5-7 minutes on low heat.",
+        "Garnish with fresh coriander leaves and serve hot with roti or steamed rice."
       ]
     },
 
@@ -846,34 +926,37 @@ const RecipesPlainDal = () => {
     { 
       id: 28, 
       name: "Dal Tadka",
-      tagline: "Tempered lentils with ghee",
+      tagline: "Tempered lentils with ghee - restaurant style",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup toor dal",
-        "1 onion, finely chopped",
-        "2 tomatoes, chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp ghee",
-        "1 tsp mustard seeds",
+        "1 cup toor dal - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons ghee",
+        "1 teaspoon mustard seeds",
         "2 dried red chilies",
         "Few curry leaves",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash toor dal and pressure cook with turmeric and salt until soft.",
-        "Heat 1 tbsp ghee, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "For tadka: Heat remaining ghee, add mustard seeds, red chilies, curry leaves.",
-        "Pour tadka over dal, add garam masala and coriander.",
-        "Serve hot with rice or roti."
+        "Wash toor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft and mushy.",
+        "Release pressure naturally. Whisk the dal well until smooth. Set aside.",
+        "Heat 1 tablespoon of ghee in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and mushy.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "For the tadka: In a small pan, heat the remaining 1 tablespoon of ghee. Add mustard seeds, dried red chilies, and curry leaves. Let them crackle for 30 seconds.",
+        "Pour the hot tadka over the dal. Add garam masala and fresh coriander leaves.",
+        "Serve hot with steamed rice or jeera rice."
       ]
     },
     { 
@@ -882,61 +965,68 @@ const RecipesPlainDal = () => {
       tagline: "Restaurant style dal fry",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup mixed dal (toor + moong)",
-        "1 onion, finely chopped",
-        "2 tomatoes, pureed",
-        "1 capsicum, finely chopped",
-        "1 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "2 tbsp butter",
-        "1 tsp kasuri methi",
+        "1 cup mixed dal (toor dal + moong dal) - washed",
+        "1 medium onion - finely chopped",
+        "2 medium tomatoes - blended into smooth puree",
+        "1 small capsicum - finely chopped",
+        "1 tablespoon ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "2 tablespoons butter",
+        "1 teaspoon kasuri methi (dried fenugreek leaves)",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash dal and pressure cook with turmeric and salt.",
-        "Heat butter, add cumin seeds and onions. Sauté until golden.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add capsicum and cook for 2 minutes.",
-        "Add tomato puree and cook until butter separates.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Add kasuri methi, garam masala and coriander.",
-        "Serve hot with naan."
+        "Wash the mixed dals thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Whisk the dal well until smooth. Set aside.",
+        "Heat butter in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 5-6 minutes until golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add finely chopped capsicum and cook for 2-3 minutes.",
+        "Add tomato puree and cook for 5-6 minutes until the butter separates from the masala.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 8-10 minutes on low heat.",
+        "Crush kasuri methi between your palms and add to the dal. Add garam masala and fresh coriander leaves.",
+        "Serve hot with naan or roti."
       ]
     },
     { 
       id: 30, 
       name: "Dal Bukhara",
-      tagline: "Creamy black dal from Peshawar",
+      tagline: "Creamy black dal from Peshawar - royal dish",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup whole urad dal",
-        "1/4 cup rajma",
-        "2 onions, finely chopped",
-        "2 tomatoes, pureed",
-        "2 tbsp ginger-garlic paste",
-        "1 tsp cumin seeds",
-        "1 tsp red chili powder",
-        "1 tsp garam masala",
-        "1/2 cup cream",
+        "1 cup whole urad dal (sabut urad) - washed and soaked overnight",
+        "1/4 cup rajma (kidney beans) - washed and soaked overnight",
+        "2 medium onions - finely chopped",
+        "2 medium tomatoes - blended into smooth puree",
+        "2 tablespoons ginger-garlic paste",
+        "1 teaspoon cumin seeds",
+        "1 teaspoon red chili powder",
+        "1 teaspoon garam masala",
+        "1/2 cup heavy cream",
         "1/4 cup butter",
-        "Salt to taste"
+        "Salt to taste",
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak dal and rajma overnight.",
-        "Pressure cook with salt for 5-6 whistles until very soft.",
-        "Mash dal well with a masher.",
-        "Heat butter, add cumin seeds and onions. Cook until brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomato puree and cook until butter separates.",
-        "Add red chili powder and salt.",
-        "Add dal and simmer on low heat for 1 hour.",
-        "Add cream and garam masala. Simmer for 10 minutes.",
-        "Serve with butter naan."
+        "Wash urad dal and rajma together. Soak in plenty of water overnight (8-10 hours). Drain before cooking.",
+        "In a pressure cooker, add soaked dal and rajma, 3 cups of water, and salt. Pressure cook for 5-6 whistles until very soft and mushy.",
+        "Let the pressure release naturally. Open the lid and mash the dal well with a masher. Set aside.",
+        "Heat butter in a pan over medium heat. Add cumin seeds and let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 7-8 minutes until dark golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add tomato puree and cook for 7-8 minutes until the butter separates from the masala.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Add 1/2 cup of water if needed.",
+        "Simmer on very low heat for 45-60 minutes, stirring occasionally. The longer it simmers, the better the flavor.",
+        "Add cream and garam masala. Mix well and simmer for another 10-15 minutes.",
+        "Garnish with fresh coriander leaves and a dollop of butter.",
+        "Serve hot with butter naan or steamed rice."
       ]
     },
     { 
@@ -945,29 +1035,32 @@ const RecipesPlainDal = () => {
       tagline: "Sweet and sour Gujarati style dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup toor dal",
-        "1 tbsp ginger-green chili paste",
-        "1/2 tsp turmeric",
-        "1 tsp red chili powder",
-        "1 tsp mustard seeds",
-        "1 tsp cumin seeds",
-        "1/2 tsp asafoetida",
+        "1 cup toor dal - washed",
+        "1 tablespoon ginger-green chili paste",
+        "1/2 teaspoon turmeric powder",
+        "1 teaspoon red chili powder",
+        "1 teaspoon mustard seeds",
+        "1 teaspoon cumin seeds",
+        "1/2 teaspoon asafoetida (hing)",
         "Few curry leaves",
-        "1 tbsp jaggery",
-        "1 tbsp lemon juice",
-        "2 tbsp oil",
+        "1 tablespoon jaggery (gur) - grated",
+        "1 tablespoon lemon juice",
+        "2 tablespoons oil",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash toor dal and pressure cook with turmeric until soft.",
-        "Whisk dal until smooth.",
-        "Heat oil, add mustard seeds, cumin seeds, asafoetida and curry leaves.",
-        "Add ginger-chili paste and cook for 1 minute.",
-        "Add red chili powder and salt.",
-        "Add dal and bring to boil.",
-        "Add jaggery and lemon juice. Simmer for 5 minutes.",
-        "Garnish with coriander and serve with rice."
+        "Wash toor dal thoroughly.",
+        "In a pressure cooker, add dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Whisk the dal well until smooth. Set aside.",
+        "Heat oil in a pan over medium heat. Add mustard seeds, cumin seeds, asafoetida, and curry leaves. Let them crackle for 30 seconds.",
+        "Add ginger-green chili paste and cook for 1 minute until fragrant.",
+        "Add red chili powder and salt. Mix well and cook for 1 minute.",
+        "Add the cooked dal and bring to a boil.",
+        "Add grated jaggery and mix well until dissolved.",
+        "Simmer for 5-7 minutes on low heat.",
+        "Add lemon juice and mix well.",
+        "Garnish with fresh coriander leaves and serve hot with steamed rice or khichdi."
       ]
     },
     { 
@@ -976,42 +1069,40 @@ const RecipesPlainDal = () => {
       tagline: "Spicy Rajasthani style dal",
       image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996d",
       ingredients: [
-        "1 cup chana dal",
-        "2 tbsp ghee",
-        "1 tsp cumin seeds",
-        "1 tsp mustard seeds",
+        "1 cup chana dal - washed and soaked",
+        "2 tablespoons ghee",
+        "1 teaspoon cumin seeds",
+        "1 teaspoon mustard seeds",
         "2 dried red chilies",
-        "1 onion, chopped",
-        "2 tbsp ginger-garlic paste",
-        "2 tomatoes, chopped",
-        "1 tsp turmeric",
-        "2 tsp red chili powder",
-        "1 tsp garam masala",
+        "1 medium onion - finely chopped",
+        "2 tablespoons ginger-garlic paste",
+        "2 medium tomatoes - finely chopped",
+        "1 teaspoon turmeric powder",
+        "2 teaspoons red chili powder",
+        "1 teaspoon garam masala",
         "Salt to taste",
-        "Fresh coriander"
+        "Fresh coriander leaves for garnish"
       ],
       steps: [
-        "Wash and soak chana dal for 1 hour.",
-        "Pressure cook dal with turmeric and salt.",
-        "Heat ghee, add cumin, mustard and red chilies.",
-        "Add onions and sauté until brown.",
-        "Add ginger-garlic paste and cook for 2 minutes.",
-        "Add tomatoes and cook until soft.",
-        "Add red chili powder and salt.",
-        "Add cooked dal and simmer for 10 minutes.",
-        "Add garam masala and coriander. Serve."
+        "Wash chana dal and soak for 1 hour. Drain well.",
+        "In a pressure cooker, add soaked dal, 2 cups of water, turmeric powder, and salt. Pressure cook for 3-4 whistles until soft.",
+        "Release pressure naturally. Mash the dal slightly. Set aside.",
+        "Heat ghee in a pan over medium heat. Add cumin seeds, mustard seeds, and dried red chilies. Let them crackle for 30 seconds.",
+        "Add finely chopped onions and sauté for 6-7 minutes until dark golden brown.",
+        "Add ginger-garlic paste and cook for 2 minutes until fragrant.",
+        "Add chopped tomatoes and cook for 5-6 minutes until soft and ghee separates.",
+        "Add red chili powder and salt. Mix well and cook for 2 minutes.",
+        "Add the cooked dal and stir well. Simmer for 10-12 minutes on low heat.",
+        "Add garam masala and fresh coriander leaves. Mix well.",
+        "Serve hot with steamed rice or roti."
       ]
     }
   ];
 
-  // Combine all arrays
-  const allDalRecipes = [...dalRecipes, ...moreDalRecipes, ...finalDalRecipes];
-    // ==================== FUNCTIONS & LOGIC ====================
+  const allDalRecipes = dalRecipes;
 
-  // Filter to show all recipes
   const recipesList = allDalRecipes;
 
-  // Handle card click
   const handleDalClick = (dal) => {
     setSelectedDal(dal);
     setShowDetailPanel(true);
@@ -1019,13 +1110,11 @@ const RecipesPlainDal = () => {
     setProgress(0);
     setIsPlaying(false);
     
-    // Cancel any ongoing speech
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
     }
   };
 
-  // Close modal
   const handleCloseModal = () => {
     setShowDetailPanel(false);
     setSelectedDal(null);
@@ -1033,15 +1122,12 @@ const RecipesPlainDal = () => {
     setProgress(0);
     setIsPlaying(false);
     
-    // Cancel any ongoing speech
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
     }
   };
 
-  // Voice synthesis functions
   const speakStep = (stepText) => {
-    // Cancel any ongoing speech
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
     }
@@ -1052,7 +1138,6 @@ const RecipesPlainDal = () => {
     utterance.pitch = 1;
     
     utterance.onend = () => {
-      // Move to next step automatically if playing
       if (isPlaying && currentStep < selectedDal.steps.length - 1) {
         setCurrentStep(prev => prev + 1);
       } else if (isPlaying && currentStep === selectedDal.steps.length - 1) {
@@ -1074,11 +1159,9 @@ const RecipesPlainDal = () => {
     if (!selectedDal) return;
 
     if (isPlaying) {
-      // Pause
       window.speechSynthesis.cancel();
       setIsPlaying(false);
     } else {
-      // Start playing from current step
       setIsPlaying(true);
       speakStep(selectedDal.steps[currentStep]);
     }
@@ -1088,13 +1171,8 @@ const RecipesPlainDal = () => {
     if (!selectedDal) return;
     
     if (currentStep < selectedDal.steps.length - 1) {
-      // Cancel current speech
       window.speechSynthesis.cancel();
-      
-      // Move to next step
       setCurrentStep(prev => prev + 1);
-      
-      // If was playing, start speaking new step
       if (isPlaying) {
         speakStep(selectedDal.steps[currentStep + 1]);
       }
@@ -1105,13 +1183,8 @@ const RecipesPlainDal = () => {
     if (!selectedDal) return;
     
     if (currentStep > 0) {
-      // Cancel current speech
       window.speechSynthesis.cancel();
-      
-      // Move to previous step
       setCurrentStep(prev => prev - 1);
-      
-      // If was playing, start speaking new step
       if (isPlaying) {
         speakStep(selectedDal.steps[currentStep - 1]);
       }
@@ -1121,26 +1194,19 @@ const RecipesPlainDal = () => {
   const handleRestart = () => {
     if (!selectedDal) return;
     
-    // Cancel current speech
     window.speechSynthesis.cancel();
-    
-    // Reset to first step
     setCurrentStep(0);
-    
-    // If was playing, start from beginning
     if (isPlaying) {
       speakStep(selectedDal.steps[0]);
     }
   };
 
-  // Update progress when current step changes
   useEffect(() => {
     if (selectedDal) {
       setProgress(((currentStep + 1) / selectedDal.steps.length) * 100);
     }
   }, [currentStep, selectedDal]);
 
-  // Cleanup speech on unmount
   useEffect(() => {
     return () => {
       if (window.speechSynthesis) {
@@ -1149,21 +1215,17 @@ const RecipesPlainDal = () => {
     };
   }, []);
 
-  // ==================== RENDER UI ====================
-
   return (
     <div className="dal-page">
-      {/* Header */}
       <header className="dal-header">
         <div className="dal-header-content">
-          <h1 className="dal-title">🫘 Plain Dal</h1>
+          <h1 className="dal-title">Plain Dal</h1>
           <p className="dal-description">
-            Discover 30+ traditional Pakistani dal recipes - healthy, protein-rich aur ghar jaisa taste
+            Discover 30+ traditional dal recipes - healthy, protein-rich, and homestyle taste
           </p>
         </div>
       </header>
 
-      {/* Main Content - Grid */}
       <main className="dal-main">
         <div className="dal-grid-section">
           <div className="dal-grid">
@@ -1187,14 +1249,12 @@ const RecipesPlainDal = () => {
         </div>
       </main>
 
-      {/* Back Button */}
       <div className="back-button-container">
         <button className="back-home-btn" onClick={() => navigate(-1)}>
           <span>←</span> Back to Lunch Categories
         </button>
       </div>
 
-      {/* Modal for Recipe Details */}
       {showDetailPanel && selectedDal && (
         <div className="dal-modal-overlay" onClick={handleCloseModal}>
           <div
@@ -1215,7 +1275,6 @@ const RecipesPlainDal = () => {
             </div>
 
             <div className="dal-modal-content">
-              {/* Column 1: Ingredients */}
               <div className="dal-modal-ingredients">
                 <h3>Ingredients</h3>
                 <div className="dal-ingredients-list">
@@ -1228,7 +1287,6 @@ const RecipesPlainDal = () => {
                 </div>
               </div>
 
-              {/* Column 2: Steps */}
               <div className="dal-modal-steps">
                 <h3>Steps to Make</h3>
                 <div className="dal-steps-list">
@@ -1241,14 +1299,12 @@ const RecipesPlainDal = () => {
                 </div>
               </div>
 
-              {/* Column 3: Voice Instructions */}
               <div className="dal-modal-voice-container">
                 <div className="voice-panel">
                   <h3>
-                    <i>🔊</i> Voice Instructions
+                    <span>🔊</span> Voice Instructions
                   </h3>
                   
-                  {/* Progress Bar */}
                   <div className="voice-progress">
                     <div className="progress-bar">
                       <div className="progress-fill" style={{ width: `${progress}%` }}></div>
@@ -1259,14 +1315,12 @@ const RecipesPlainDal = () => {
                     </div>
                   </div>
 
-                  {/* Current Step Display */}
                   <div className="current-step-display">
                     <p>
                       <strong>Step {currentStep + 1}:</strong> {selectedDal.steps[currentStep]}
                     </p>
                   </div>
 
-                  {/* Voice Controls */}
                   <button
                     className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
                     onClick={handlePlayPause}
@@ -1302,9 +1356,8 @@ const RecipesPlainDal = () => {
                     </button>
                   </div>
 
-                  {/* Keyboard Instructions */}
                   <div className="voice-hint">
-                    <small>Use ⏮️ ⏭️ buttons or restart to navigate</small>
+                    <small>Use buttons to navigate through steps</small>
                   </div>
                 </div>
               </div>

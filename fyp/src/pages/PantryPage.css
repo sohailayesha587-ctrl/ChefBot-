@@ -860,3 +860,483 @@ body, html {
     width: 100%;
   }
 }
+/* ==================== SHOPPING LIST SECTION (New) ==================== */
+
+.shopping-list-section {
+  background: linear-gradient(135deg, #ffffff, #fafafa);
+  border-radius: 16px;
+  padding: 25px;
+  margin: 0 20px 30px;
+  width: calc(100% - 40px);
+  box-shadow: 0 6px 20px rgba(40, 91, 90, 0.1);
+  border: 1px solid #e8f0f0;
+}
+
+.shopping-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.shopping-list-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #284a4b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shopping-list-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Send All to Shopping List Button */
+.btn-send-all-to-shopping {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+.btn-send-all-to-shopping:hover:not(:disabled) {
+  background: #e55a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-send-all-to-shopping:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* View Shopping List Button */
+.btn-view-shopping-list {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+.btn-view-shopping-list:hover {
+  background: #1e3a3b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.3);
+}
+
+/* Clear Shopping List Button */
+.btn-clear-shopping-list {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+.btn-clear-shopping-list:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Remove Shopping Item Button */
+.btn-remove-shopping-item {
+  background: #ffcccc;
+  color: #ff6b6b;
+  border: 1px solid #ffcccc;
+  padding: 6px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-shopping-item:hover {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+/* View More Items Button */
+.btn-view-more-items {
+  background: linear-gradient(135deg, #284a4b, #1e3a3b);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-view-more-items:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.3);
+}
+
+/* View More Item Container */
+.view-more-item {
+  justify-content: center !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.view-more-item:hover {
+  transform: none !important;
+  background: transparent !important;
+}
+
+/* Shopping List Item */
+.shopping-list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #284a4b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  gap: 15px;
+}
+
+.shopping-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-item-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Quantity Badge (Already exists, but ensure these styles) */
+.quantity-badge-simple {
+  background: #285b5a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.low-stock-checklist .quantity-badge-simple {
+  background: #ff6b6b;
+}
+
+/* Shopping Cart Button (Checklist items) - Already exists, update styles */
+.btn-shopping-cart {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #284a4b;
+  background: white;
+  color: #284a4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn-shopping-cart:hover {
+  background: #397d7c;
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-shopping-cart.in-list {
+  background: #284a4b;
+  color: white;
+  border-color: #284a4b;
+}
+
+/* Edit Item Button - Update */
+.btn-edit-item {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #285b5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.btn-edit-item:hover {
+  background: #285b5a;
+  color: white;
+  border-color: #285b5a;
+  transform: scale(1.05);
+}
+
+/* Delete Item Button - Update */
+.btn-delete-item {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.btn-delete-item:hover {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+  transform: scale(1.05);
+}
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #285b5a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pantry Error Message */
+.pantry-error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .shopping-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .shopping-list-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .shopping-list-item {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .shopping-item-name {
+    width: 100%;
+    order: 2;
+    margin-left: 0;
+  }
+  
+  .quantity-badge-simple {
+    order: 1;
+  }
+  
+  .btn-remove-shopping-item {
+    order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .shopping-list-section {
+    padding: 15px;
+  }
+  
+  .btn-send-all-to-shopping,
+  .btn-view-shopping-list,
+  .btn-clear-shopping-list {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-width: auto;
+  }
+  
+  .shopping-list-title {
+    font-size: 1.2rem;
+  }
+}
+/* ==================== ADD ALL BUTTON STYLES ==================== */
+
+.btn-add-all-to-shopping {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.btn-add-all-to-shopping:hover:not(:disabled) {
+  background: #e55a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-add-all-to-shopping:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==================== EMPTY SHOPPING MESSAGE ==================== */
+
+.empty-shopping-message {
+  text-align: center;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  color: #666;
+  font-size: 14px;
+}
+
+.empty-shopping-message p {
+  margin: 0;
+}
+
+/* ==================== ADD ITEM BUTTON (Pantry Items Mein) ==================== */
+
+.btn-add-item {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 15px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-add-item:hover:not(:disabled) {
+  background: #e55a2a;
+  transform: scale(1.05);
+}
+
+.btn-add-item.added {
+  background: #28a745;
+  cursor: default;
+}
+
+.btn-add-item.added:hover {
+  transform: none;
+}
+
+/* ==================== REMOVE BUTTON STYLE ==================== */
+
+.btn-remove-shopping-item {
+  background: #ffcccc;
+  color: #ff6b6b;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-remove-shopping-item:hover {
+  background: #ff6b6b;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ==================== SHOPPING LIST ACTIONS ==================== */
+
+.shopping-list-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .btn-add-all-to-shopping {
+    min-width: auto;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  
+  .shopping-list-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .empty-shopping-message {
+    padding: 20px;
+    font-size: 12px;
+  }
+}

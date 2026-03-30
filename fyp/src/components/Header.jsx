@@ -169,11 +169,24 @@ const Header = () => {
 
 
           {/* User */}
-          <div className="simple-icon">
+          {/* User / Logout */}
+<div 
+  className="simple-icon logout-icon" 
+  title="Logout"
+  onClick={() => {
+    // 1️⃣ Clear session or tokens (if using localStorage)
+    localStorage.removeItem("userToken"); // example
+    localStorage.removeItem("userEmail");
 
-            <i className="fas fa-sign-out-alt"></i>
+    // 2️⃣ Optional: show alert or toast
+    alert("You have been logged out!");
 
-          </div>
+    // 3️⃣ Redirect to login page
+    navigate("/login-page");
+  }}
+>
+  <i className="fas fa-sign-out-alt"></i>
+</div>
 
 
         </div>

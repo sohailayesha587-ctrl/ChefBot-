@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ✅ Headers & Footers
 import Header from './components/Header';
@@ -60,9 +62,10 @@ import RecipesLightDinner from './pages/RecipesLightDinner';
 import Dinner from './pages/Dinner';
 import RecipesDinner from './pages/RecipesDinner';
 import RecipesAppetizers from './pages/RecipesAppetizers';
-
-
-
+import RecipeCheatMeal from './pages/RecipeCheatMeal';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import VerifyOTPPage from './pages/VerifyOTPPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 // ✅ Pages - Urdu
 import UrduHomePage from './pages/Urdu/UrduHomePage';
@@ -83,7 +86,6 @@ import UrduAlarmModal from './components/Urdu/UrduAlarmModal';
 // ✅ Import RTL CSS
 import './App.css';
 
-
 function AppWrapper() {
   const location = useLocation();
 
@@ -92,6 +94,20 @@ function AppWrapper() {
 
   return (
     <>
+      {/* ✅ Toast Container - Ek baar global level pe */}
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={isUrdu}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      
       {/* ✅ ONLY ONE ALARM MODAL - Language ke hisab se */}
       {isUrdu ? <UrduAlarmModal /> : <AlarmModal />}
       
@@ -136,34 +152,32 @@ function AppWrapper() {
           <Route path="/Regional" element={<RecipeRegionalPage />} />
           <Route path="/Salads" element={<RecipeSaladsPage />} />
           <Route path="/Snack" element={<RecipeSnacksPage />} />
-                    <Route path="/lunch" element={<Lunch />} />
-                    <Route path="/recipe-lunch" element={<RecipesLunch />} />
-                    <Route path="/BreakFast" element={<RecipeBreakFast />} />
-                    <Route path="/plain-veg" element={<RecipePlainVegetables />} />
-                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
-                                        <Route path="/veg-mutton" element={<RecipesVegMutton />} />
-                                        <Route path="/plain-dal" element={<RecipesPlainDal />} />
-                                        <Route path="/dal-chick" element={<RecipesDalChicken />} />
-                                        <Route path="/dal-mutton" element={<RecipesDalMutton />} />
-                                        <Route path="/egg-dishes" element={<RecipesEggDishes />} />
-                                        <Route path="/fish-dishes" element={<RecipesFish/>} />
-                                        <Route path="/chicken" element={<RecipesPureChicken/>} />
-                                        <Route path="/mutton" element={<RecipesPureMutton/>} />
-                                        <Route path="/qeema" element={<RecipesQeema/>} />
-                                        <Route path="/rice" element={<RecipesRice/>} />
-                                        <Route path="/gravy" element={<RecipesHeavyGravy/>} />
-                                        <Route path="/BBQ" element={<RecipesBBQ/>} />
-                                        <Route path="/dinner" element={<Dinner/>} />
-                                        <Route path="/recipe-dinner" element={<RecipesDinner/>} />
-
-                                        <Route path="/breads" element={<RecipesBread/>} />
-                                        <Route path="/appetizers" element={<RecipesAppetizers/>} />
-
-                                        <Route path="/dinner-light" element={<RecipesLightDinner/>} />
-
-
-
-
+          <Route path="/lunch" element={<Lunch />} />
+          <Route path="/recipe-lunch" element={<RecipesLunch />} />
+          <Route path="/BreakFast" element={<RecipeBreakFast />} />
+          <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+          <Route path="/veg-chick" element={<RecipesVegChicken />} />
+          <Route path="/veg-mutton" element={<RecipesVegMutton />} />
+          <Route path="/plain-dal" element={<RecipesPlainDal />} />
+          <Route path="/dal-chick" element={<RecipesDalChicken />} />
+          <Route path="/dal-mutton" element={<RecipesDalMutton />} />
+          <Route path="/egg-dishes" element={<RecipesEggDishes />} />
+          <Route path="/fish-dishes" element={<RecipesFish/>} />
+          <Route path="/chicken" element={<RecipesPureChicken/>} />
+          <Route path="/mutton" element={<RecipesPureMutton/>} />
+          <Route path="/qeema" element={<RecipesQeema/>} />
+          <Route path="/rice" element={<RecipesRice/>} />
+          <Route path="/gravy" element={<RecipesHeavyGravy/>} />
+          <Route path="/BBQ" element={<RecipesBBQ/>} />
+          <Route path="/dinner" element={<Dinner/>} />
+          <Route path="/recipe-dinner" element={<RecipesDinner/>} />
+          <Route path="/breads" element={<RecipesBread/>} />
+          <Route path="/appetizers" element={<RecipesAppetizers/>} />
+          <Route path="/dinner-light" element={<RecipesLightDinner/>} />
+          <Route path="/cheat-meal" element={<RecipeCheatMeal/>} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/verify-otp" element={<VerifyOTPPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
           {/* ===== Urdu Routes ===== */}
           <Route path="/urdu" element={<UrduPublicHome />} />
@@ -176,9 +190,7 @@ function AppWrapper() {
           <Route path="/urdu-cutting-techniques" element={<UrduCuttingTechniquesPage />} />
           <Route path="/urdu-measuring-skills" element={<UrduMeasuringSkillsPage />} />
           <Route path="/urdu-meat-processing" element={<UrduMeatProcessingPage />} />
-                    <Route path="/urdu-kitchen-tools" element={<UrduKitchenToolsPage />} />
-
-          {/* ✅ Optional: Add more Urdu routes as needed */}
+          <Route path="/urdu-kitchen-tools" element={<UrduKitchenToolsPage />} />
         </Routes>
 
         {/* Dynamic Footer */}
