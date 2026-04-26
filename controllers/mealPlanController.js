@@ -21,7 +21,7 @@ const generateMealPlan = async (req, res) => {
     } = req.body;
 
     // ✅ Get user's pantry items
-    const pantry = await Pantry.findOne({ userId: req.user?._id });
+const pantry = await Pantry.findOne({ userId: req.body.userId || req.user?._id });
     const pantryItems = pantry?.items || [];
     const pantryItemNames = pantryItems.map(item => item.name.toLowerCase());
     

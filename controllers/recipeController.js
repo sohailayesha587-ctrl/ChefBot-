@@ -118,18 +118,35 @@ const searchRecipes = async (req, res) => {
   try {
     const { q } = req.query;
 
-    if (!q) {
-      return res.status(400).json({ message: 'Search query is required' });
+    if (!q || q.trim().length === 0) {
+      return res.status(200).json({
+        success: true,
+        recipes: [],
+        total: 0
+      });
     }
 
     const recipes = await Recipe.find({
       isActive: true,
-      $text: { $search: q },
-    }).select('title tagline image category subCategory cuisine isVegetarian');
+      $or: [
+        { title: { $regex: q, $options: 'i' } },
+        { tagline: { $regex: q, $options: 'i' } },
+        { description: { $regex: q, $options: 'i' } }
+      ]
+    })
+    .select('title tagline image category subCategory cuisine dietType')
+    .limit(20);
 
-    res.status(200).json({ total: recipes.length, recipes });
+    res.status(200).json({
+      success: true,
+      total: recipes.length,
+      recipes: recipes
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
   }
 };
 

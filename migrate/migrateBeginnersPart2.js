@@ -8848,7 +8848,7 @@ const migrate = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connected');
 
-    const admin = await User.findOne({ email: 'admin@chefbot.com' });
+const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
     if (!admin) throw new Error('Admin not found');
 
     // Filter out any invalid guides (just in case)

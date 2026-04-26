@@ -123,7 +123,7 @@ const recipeSchema = new mongoose.Schema(
     // ────────── MEAL TYPE (SINGLE FIELD - Lunch/Dinner/Breakfast) ──────────
     suitableForMeals: {
       type: [String],
-      enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Appetizer', 'Dessert'],
+      enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Appetizer', 'Dessert','Anytime'],
       default: ['Lunch', 'Dinner']
     },
     

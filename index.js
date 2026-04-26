@@ -38,6 +38,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// ✅✅✅ YEH LINE ADD KARO (Static files serve karne ke liye) ✅✅✅
+app.use('/uploads', express.static('uploads'));
+
 // Request Logger
 app.use((req, res, next) => {
   console.log(`📨 ${req.method} ${req.url}`);

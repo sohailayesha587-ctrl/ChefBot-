@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Recipe = require('../models/Appliance');
 require('dotenv').config({ path: '../.env' });
+const User = require('../models/User');  // ← YEH LINE ADD KARO
+
+
 // ======================
 // YAHAN APNA APPLIANCES DATA COPY-PASTE KAREIN
 // ======================
@@ -27008,7 +27011,7 @@ await mongoose.connect(mongoURI);
     }
 
     // Optional: Agar admin se link karna hai to admin fetch karein
-    // const admin = await User.findOne({ email: 'admin@chefbot.com' });
+const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
     // if (!admin) { console.error('Admin not found'); process.exit(1); }
     // const dataWithAdmin = appliancesData.map(app => ({ ...app, createdBy: admin._id }));
 

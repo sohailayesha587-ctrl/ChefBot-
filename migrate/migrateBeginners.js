@@ -786,7 +786,7 @@ const migrate = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connected');
 
-    const admin = await User.findOne({ email: 'admin@chefbot.com' });
+const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
     if (!admin) {
       console.error('Admin not found! Please create admin first.');
       process.exit(1);
