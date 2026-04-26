@@ -28,11 +28,8 @@
   color: #333;
 }
 
-/* Hide header/footer when this page is active */
-.otp-page-wrapper ~ header,
-.otp-page-wrapper ~ footer,
-body header,
-body footer {
+.otp-page-wrapper header,
+.otp-page-wrapper footer {
   display: none !important;
 }
 

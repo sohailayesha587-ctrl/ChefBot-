@@ -30,7 +30,7 @@ body {
 .chefbot-slider {
   position: relative;
   width: 100%;
-  height: 85vh; /* Increased height */
+  height: 80vh; /* Increased height */
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   background: white; /* Added background */
@@ -265,7 +265,7 @@ body {
  
   max-width: 1300px;
   height: 250px;
-  margin: 0 auto;
+  margin: 0 2rem;
   padding: 1rem 2.5rem;
   position: relative;
   z-index: 1;
@@ -537,31 +537,34 @@ body {
     font-size: 0.65rem;
   }
 }
-/* ---------- HERO 2 ---------- */
+/* ----/* ========== SECTIONS BELOW FEATURES - CONCISE ========== */
+
+/* Hero 2 Section */
 .hero-section1 {
   background-color: #284a4b;
-  padding: 60px 80px;
+  padding: 40px 60px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .hero-left {
-  max-width: 300px;
+  max-width: 280px;
 }
 
 .hero-left h2 {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   color: white;
 }
 
 .hero-left p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  color: #ddd;
+  margin-bottom: 16px;
 }
 
 .contact-link {
@@ -569,9 +572,9 @@ body {
   align-items: center;
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 0.8rem;
   border: 1px solid white;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
   transition: all 0.3s;
 }
@@ -582,144 +585,132 @@ body {
 }
 
 .hero-center h1 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 400;
   font-style: italic;
   color: white;
-  text-align: left;
-  margin-bottom: 7px;
-margin-top: 30px;
-width:500px;
+  max-width: 450px;
 }
+
 .hero-right img {
-  width: 200px;
+  width: 160px;
   height: auto;
   border-radius: 10px;
 }
 
-/* ---------- FOOD SHOWCASE ---------- */
+/* Food Showcase */
 .food-showcase {
-  display:flex;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  padding: 60px 80px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 50px 60px;
   background-color: white;
-
+  flex-wrap: wrap;
 }
 
 .food-image {
-  width: 350px;
-  height: 280px;
+  width: 300px;
+  height: 240px;
   object-fit: cover;
   border-radius: 10px;
-
+  transition: transform 0.3s;
 }
 
 .food-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-/* ---------- CLASSES SECTION ---------- */
+/* Classes Section */
 .classes-section {
   display: flex;
-  padding: 80px;
-  gap: 50px;
+  padding: 50px 60px;
+  gap: 40px;
   background-color: white;
-  margin-top: -80px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .classes-image {
-  width: 400px;
-  height: 300px;
+  width: 350px;
+  height: 280px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .classes-content {
   flex: 1;
+  min-width: 260px;
 }
 
 .section-label {
-  font-size: 12px;
-  color: white;
+  font-size: 11px;
+  color: #284a4b;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 
 .classes-content h2 {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 400;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: #284a4b;
 }
-
-
-
-
-/* ---------- Meal SECTION ---------- */
-.section-label {
-  font-size: 12px;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-}
-
+/* Meal Plan Section - CONCISE */
 .m_plan-section {
   background-color: #284a4b;
-  padding: 70px;
+  padding: 30px 40px;
 }
 
 .m_plan-header {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .m_plan-title {
-  max-width: 600px;
+  max-width: 550px;
 }
 
 .m_plan-title h2 {
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 26px;
+  font-weight: 420;
   color: white;
-  margin-bottom: 5px;
-}
-
-.m_plan-title h2 .italic {
-  font-style: italic;
-  font-weight: 300;
+  margin: 0;
 }
 
 .m_plan-grid {
   display: flex;
-  gap: 30px;
-  justify-content: space-between;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .m_plan-card {
-  width: 280px;
+  width: 200px;
+  text-align: center;
 }
 
 .m_plan-card img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s;
 }
 
 .m_plan-card img:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-/* ---------- RECIPES ---------- */
+/* Recipes Section */
 .h-recipes-section {
   background: white;
-  padding: 80px 2rem;
+  padding: 50px 2rem;
   text-align: center;
 }
 
@@ -729,52 +720,45 @@ width:500px;
 }
 
 .h-recipes-title {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #284a4b;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   font-weight: 700;
 }
 
 .h-recipes-subtitle {
-  font-size: 1.2rem;
+  font-size: 0.80rem;
   color: #666;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
-/* ✅ RECIPE GRID - FIXED */
 .h-recipes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 1.5rem;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* ✅ RECIPE CARD - FIX OVERFLOW */
 .h-recipe-card {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  width: 100%;
-  height: 400px; /* ✅ Adjusted height */
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .h-recipe-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 30px #397d7c;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(57, 125, 124, 0.25);
 }
 
-/* ✅ RECIPE IMAGE - FIXED HEIGHT */
 .h-recipe-image {
   position: relative;
-  height: 220px; /* ✅ Adjusted height */
+  height: 160px;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .h-recipe-image img {
@@ -785,246 +769,193 @@ width:500px;
 }
 
 .h-recipe-card:hover .h-recipe-image img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .h-recipe-category {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 0.8rem;
+  left: 0.8rem;
   background: white;
   color: #284a4b;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.7rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  z-index: 2;
 }
 
-/* ✅ RECIPE CONTENT - FIX PADDING & HEIGHT */
 .h-recipe-content {
-  padding: 1.2rem; /* ✅ Equal padding on all sides */
+  padding: 0.8rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* ✅ Space distribute karega */
 }
 
-/* ✅ FIX TYPO: h-ecipe-name to h-recipe-name */
 .h-recipe-name {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #284a4b;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   font-weight: 600;
-  line-height: 1.3;
-  min-height: 2.4em; /* ✅ Ensures title doesn't overflow */
 }
 
-/* ✅ RECIPE DESCRIPTION - FIXED */
 .h-recipe-description {
   color: #666;
-  font-size: 1rem;
+  font-size: 0.75rem;
   line-height: 1.4;
-  margin-bottom: 0.8rem;
-  flex: 1; /* ✅ Takes available space */
-  overflow: hidden;
-  display: -webkit-box;
-   /* ✅ Max 2 lines */
-  -webkit-box-orient: vertical;
+  margin-bottom: 0.6rem;
+  flex: 1;
 }
 
-/* ✅ RECIPE META - COMPACT */
 .h-recipe-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.7rem;
   color: #666;
 }
 
-/* ✅ RECIPE BUTTON - FIX TO FIT INSIDE */
 .h-recipe-btn {
   background: #284a4b;
   color: white;
   border: none;
-  padding: 0.7rem 1.5rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 20px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%; /* ✅ Full width of content area */
-  font-size: 0.9rem;
+  width: 100%;
+  font-size: 0.75rem;
   text-align: center;
-  display: block;
   text-decoration: none;
+  display: block;
 }
 
 .h-recipe-btn:hover {
   background: #397d7c;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px #397d7c;
-  color:white;
+  transform: translateY(-1px);
 }
 
-/* ✅ RESPONSIVE FIXES */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 1200px) {
+  .h-features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
   .h-recipes-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem;
-    max-width: 800px;
   }
   
-  .h-recipe-card {
-    height: 380px;
+  .hero-section1 {
+    padding: 35px 40px;
   }
   
-  .h-recipe-image {
-    height: 200px;
+  .food-showcase {
+    padding: 40px;
   }
   
-  .h-recipe-content {
-    padding: 1rem;
+  .classes-section {
+    padding: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .h-recipes-section {
-    padding: 60px 1rem;
+  .chefbot-slider {
+    height: 50vh;
   }
   
-  .h-recipes-title {
-    font-size: 2rem;
-  }
-  
-  .h-recipes-subtitle {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+  .h-features-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .h-recipes-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
-    gap: 1.5rem;
+    max-width: 350px;
   }
   
-  .h-recipe-card {
-    height: 360px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .h-recipe-image {
-    height: 180px;
-  }
-  
-  .h-recipe-content {
-    padding: 1rem;
-  }
-  
-  .h-recipe-name {
-    font-size: 1.1rem;
-  }
-  
-  .h-recipe-btn {
-    padding: 0.6rem 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .h-recipes-grid {
-    max-width: 320px;
-  }
-  
-  .h-recipe-card {
-    height: 340px;
-    max-width: 320px;
-  }
-  
-  .h-recipe-image {
-    height: 160px;
-  }
-  
-  .h-recipe-content {
-    padding: 0.8rem;
-  }
-  
-  .h-recipe-name {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
-  
-  .h-recipe-description {
-    font-size: 0.8rem;
-    margin-bottom: 0.6rem;
-  }
-  
-  .h-recipe-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-}
-/* ---------- MEDIA QUERIES ---------- */
-@media (max-width: 1200px) {
   .hero-section1 {
-    flex-wrap: wrap;
-    padding: 40px;
+    flex-direction: column;
+    text-align: center;
   }
-
+  
+  .hero-left {
+    max-width: 100%;
+  }
+  
+  .hero-center h1 {
+    font-size: 26px;
+  }
+  
+  .hero-right img {
+    width: 140px;
+  }
+  
   .food-showcase {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 40px;
+    flex-direction: column;
+    align-items: center;
   }
-
+  
+  .food-image {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+  }
+  
   .classes-section {
     flex-direction: column;
-    padding: 40px;
-  }
-
-  .h-recipes-section {
-    padding: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .food-showcase {
-    grid-template-columns: 1fr;
+    text-align: center;
   }
   
-  .features-section,
-  .h-recipes-section {
-    padding: 60px 1rem;
+  .classes-image {
+    width: 100%;
+    max-width: 350px;
   }
   
-  .features-title,
+  .m_plan-section {
+    padding: 35px 20px;
+  }
+  
+  .m_plan-title h2 {
+    font-size: 24px;
+  }
+  
+  .h-recipes-section {
+    padding: 40px 1rem;
+  }
+  
   .h-recipes-title {
-    font-size: 2rem;
-  }
-  
-  .features-grid,
-  .h-recipes-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .chefbot-hero {
-    padding: 115px 0 1rem;
-  }
-  
-  .chefbot-slider {
-    height: 300px;
-  }
-  
-  .chefbot-slide-image {
-    height: 300px;
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .chefbot-slider {
-    height: 250px;
+    height: 40vh;
   }
   
-  .chefbot-slide-image {
-    height: 250px;
+  .h-features-title {
+    font-size: 1.8rem;
+  }
+  
+  .h-features-grid {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+  }
+  
+  .hero-center h1 {
+    font-size: 22px;
+  }
+  
+  .classes-content h2 {
+    font-size: 22px;
+  }
+  
+  .m_plan-card {
+    width: 100%;
+    max-width: 260px;
+  }
+  
+  .h-recipes-title {
+    font-size: 1.5rem;
   }
 }

@@ -1,299 +1,295 @@
+// frontend/src/components/AlarmModal.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import timerService from '../services/timerService';
 import './AlarmModal.css';
 
-const AlarmModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // ✅ Global function for Header to call
-  window.openAlarmModal = () => {
-    console.log("✅ AlarmModal opening...");
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
+const AlarmModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
     <>
-      {/* Overlay */}
-      <div className="alarm-modal-overlay" onClick={closeModal}></div>
-      
-      {/* Sidebar Modal */}
+      <div className="alarm-modal-overlay" onClick={onClose}></div>
       <div className="alarm-sidebar-modal">
         <div className="alarm-sidebar-header">
           <h2>⏰ ChefBot Timer</h2>
-          <button className="close-btn" onClick={closeModal}>×</button>
+          <button className="close-btn" onClick={onClose}>×</button>
         </div>
-        
         <AlarmTimerComponent />
       </div>
     </>
   );
 };
 
-// Timer Component with INSTANT Background Timer
 const AlarmTimerComponent = () => {
-  const [minutes, setMinutes] = useState(5);
-  const [seconds, setSeconds] = useState(0);
-  const [totalSeconds, setTotalSeconds] = useState(300);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(5);
+  const [totalSeconds, setTotalSeconds] = useState(5);
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isSoundPlaying, setIsSoundPlaying] = useState(false);
+  const [isBeeping, setIsBeeping] = useState(false);
+  const [backendTimers, setBackendTimers] = useState([]);
+  const [loading, setLoading] = useState(false);
   
-  const audioContextRef = useRef(null);
-  const oscillatorRef = useRef(null);
-  const gainNodeRef = useRef(null);
   const timerIntervalRef = useRef(null);
+  const currentTimerIdRef = useRef(null);
   const beepIntervalRef = useRef(null);
-  const floatingNotificationRef = useRef(null);
-  const titleBlinkIntervalRef = useRef(null);
+  const titleIntervalRef = useRef(null);
+  const backgroundTimerRef = useRef(null); // ✅ NEW: Background ke liye
 
-  // ✅ Global beep state for Header
-  window.isAlarmBeeping = isSoundPlaying;
-
-  // ✅ Check for existing timer/beep on mount
+  // Update total seconds when minutes/seconds change
   useEffect(() => {
-    // Check for existing beep
-    const wasBeeping = localStorage.getItem('chefbot_beep_active');
-    if (wasBeeping === 'true') {
-      console.log("Resuming previous beep...");
-      startContinuousBeep();
+    if (!isRunning) {
+      setTotalSeconds((minutes * 60) + seconds);
     }
-    
-    // Check for running timer
-    const checkRunningTimer = () => {
-      const timerRunning = localStorage.getItem('chefbot_timer_running');
-      const endTime = localStorage.getItem('chefbot_timer_endTime');
-      const storedTotalSeconds = localStorage.getItem('chefbot_timer_totalSeconds');
-      
-      if (timerRunning === 'true' && endTime && storedTotalSeconds) {
-        const remainingTime = parseInt(endTime) - Date.now();
-        
-        if (remainingTime > 0) {
-          // Timer is still running
-          const remainingSeconds = Math.ceil(remainingTime / 1000);
-          setTotalSeconds(remainingSeconds);
-          setIsRunning(true);
-          
-          console.log(`⏰ Resuming background timer: ${remainingSeconds}s left`);
-          
-          // Start foreground timer for display
-          timerIntervalRef.current = setInterval(() => {
-            const timeLeft = parseInt(endTime) - Date.now();
-            const secondsLeft = Math.max(0, Math.ceil(timeLeft / 1000));
-            
-            if (secondsLeft <= 0) {
-              clearInterval(timerIntervalRef.current);
-              setIsRunning(false);
-              setIsCompleted(true);
-              startContinuousBeep();
-              clearBackgroundTimer();
-            } else {
-              setTotalSeconds(secondsLeft);
-            }
-          }, 1000);
-        } else {
-          // Timer already completed
-          clearBackgroundTimer();
-          startContinuousBeep();
-        }
-      }
-    };
+  }, [minutes, seconds, isRunning]);
 
-    checkRunningTimer();
+  // Check for existing beep on mount
+  // frontend/src/components/AlarmModal.jsx (Sirf changes dikha raha hoon)
 
-    // Request notification permission
-    if ("Notification" in window && Notification.permission === "default") {
-      Notification.requestPermission();
-    }
-    
-    // Cleanup floating notification on unmount
-    return () => {
-      if (timerIntervalRef.current) {
-        clearInterval(timerIntervalRef.current);
-      }
-      removeFloatingNotification();
-      clearTitleBlinking();
-    };
-  }, []);
+// AlarmTimerComponent mein ye changes karo:
 
-  // ✅ Clear background timer from localStorage
-  const clearBackgroundTimer = () => {
-    localStorage.removeItem('chefbot_timer_running');
-    localStorage.removeItem('chefbot_timer_endTime');
-    localStorage.removeItem('chefbot_timer_totalSeconds');
-  };
-
-  // ✅ Clear title blinking
-  const clearTitleBlinking = () => {
-    if (titleBlinkIntervalRef.current) {
-      clearInterval(titleBlinkIntervalRef.current);
-      titleBlinkIntervalRef.current = null;
-    }
-    document.title = "ChefBot";
-  };
-
-  // ✅ NEW: Create floating notification on screen
-  const showFloatingStopNotification = () => {
-    // Remove any existing notification
-    removeFloatingNotification();
-    
-    // Create floating notification element
-    const floatingDiv = document.createElement('div');
-    floatingDiv.id = 'chefbot-floating-notification';
-    floatingDiv.className = 'floating-notification active';
-    
-    floatingDiv.innerHTML = `
-      <div class="floating-notification-content">
-        <div class="floating-notification-header">
-          <span class="floating-icon">🔔</span>
-          <span class="floating-title">ChefBot Timer Complete!</span>
-          <button class="floating-close-btn" id="floating-close-btn">×</button>
-        </div>
-        <div class="floating-notification-body">
-          <p>Your timer has finished! Alarm is beeping.</p>
-          <button class="floating-stop-btn" id="floating-stop-btn">
-            ⏹️ STOP BEEP
-          </button>
-        </div>
-      </div>
-    `;
-    
-    document.body.appendChild(floatingDiv);
-    floatingNotificationRef.current = floatingDiv;
-    
-    // Add event listeners
-    setTimeout(() => {
-      const closeBtn = document.getElementById('floating-close-btn');
-      const stopBtn = document.getElementById('floating-stop-btn');
-      
-      if (closeBtn) {
-        closeBtn.onclick = () => {
-          removeFloatingNotification();
-        };
-      }
-      
-      if (stopBtn) {
-        stopBtn.onclick = () => {
-          stopAllBeeps();
-          removeFloatingNotification();
-        };
-      }
-    }, 100);
-    
-    // Auto-remove after 30 seconds (optional)
-    setTimeout(() => {
-      if (floatingNotificationRef.current && document.body.contains(floatingNotificationRef.current)) {
-        removeFloatingNotification();
-      }
-    }, 30000);
-  };
-
-  // ✅ NEW: Remove floating notification
-  const removeFloatingNotification = () => {
-    if (floatingNotificationRef.current && document.body.contains(floatingNotificationRef.current)) {
-      document.body.removeChild(floatingNotificationRef.current);
-      floatingNotificationRef.current = null;
-    }
-    
-    // Also remove any orphaned notifications
-    const existingNotification = document.getElementById('chefbot-floating-notification');
-    if (existingNotification && existingNotification.parentNode) {
-      existingNotification.parentNode.removeChild(existingNotification);
-    }
-  };
-
-  const startContinuousBeep = () => {
-    try {
-      const audioContext = initializeAudioContext();
-      if (!audioContext) return;
-      
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
-      
-      oscillatorRef.current = audioContext.createOscillator();
-      gainNodeRef.current = audioContext.createGain();
-      
-      oscillatorRef.current.connect(gainNodeRef.current);
-      gainNodeRef.current.connect(audioContext.destination);
-      
-      oscillatorRef.current.frequency.value = 800;
-      oscillatorRef.current.type = 'sine';
-      
-      const startTime = audioContext.currentTime;
-      const beepDuration = 0.3;
-      const pauseDuration = 0.2;
-      const totalCycle = beepDuration + pauseDuration;
-      
-      gainNodeRef.current.gain.setValueAtTime(0, startTime);
-      gainNodeRef.current.gain.linearRampToValueAtTime(0.5, startTime + 0.05);
-      gainNodeRef.current.gain.linearRampToValueAtTime(0, startTime + beepDuration);
-      
-      beepIntervalRef.current = setInterval(() => {
-        if (oscillatorRef.current && gainNodeRef.current) {
-          const currentTime = audioContext.currentTime;
-          gainNodeRef.current.gain.cancelScheduledValues(currentTime);
-          gainNodeRef.current.gain.setValueAtTime(0, currentTime);
-          gainNodeRef.current.gain.linearRampToValueAtTime(0.5, currentTime + 0.05);
-          gainNodeRef.current.gain.linearRampToValueAtTime(0, currentTime + beepDuration);
-        }
-      }, totalCycle * 1000);
-      
-      oscillatorRef.current.start();
-      setIsSoundPlaying(true);
-      
-      // Store beep state
+useEffect(() => {
+  loadTimersFromBackend();
+  checkExistingBeep();
+  
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission();
+  }
+  
+  // ✅ Register background alarm callback
+  timerService.onAlarmTrigger((label) => {
+    console.log("🔔 Background alarm received:", label);
+    startBeep();
+  });
+  
+  // ✅ Start background polling (ye modal band hone par bhi chalega)
+  timerService.startBackgroundPolling();
+  
+  window.addEventListener('beforeunload', () => {
+    if (isBeeping) {
       localStorage.setItem('chefbot_beep_active', 'true');
+    }
+  });
+  
+  return () => {
+    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+    if (titleIntervalRef.current) clearInterval(titleIntervalRef.current);
+    if (backgroundTimerRef.current) clearTimeout(backgroundTimerRef.current);
+    // ⚠️ Polling mat roko - background mein chalne do
+    // timerService.stopBackgroundPolling(); // COMMENT THIS
+  };
+}, []);  // ✅ Empty dependency array - sirf ek baar run hoga
+  // Check if beep was playing
+  const checkExistingBeep = () => {
+    const beepActive = localStorage.getItem('chefbot_beep_active');
+    if (beepActive === 'true') {
+      console.log("🔊 Restoring beep...");
+      setIsCompleted(true);
+      setIsBeeping(true);
+      startBeep();
+      showFloatingNotification();
+    }
+  };
+
+  // Load timers from backend
+  const loadTimersFromBackend = async () => {
+    try {
+      const timers = await timerService.getAllTimers();
+      setBackendTimers(timers);
       
-      console.log("🔊 Alarm beep started!");
-      
-      // ✅ Show floating notification on front screen
-      showFloatingStopNotification();
-      
-      // Browser Notification
-      if ("Notification" in window && Notification.permission === "granted") {
-        const notification = new Notification("⏰ ChefBot Timer Complete!", {
-          body: `Time's up! Click this notification to stop the alarm.`,
-          icon: "/logo.png",
-          requireInteraction: true
-        });
+      const activeTimer = timers.find(t => t.status === 'running');
+      if (activeTimer) {
+        const now = new Date();
+        const endTime = new Date(activeTimer.endTime);
+        let remaining = Math.max(0, Math.floor((endTime - now) / 1000));
         
-        notification.onclick = () => {
-          stopAllBeeps();
-          notification.close();
-        };
-      }
-      
-      // Page Title Blink - with proper cleanup
-      clearTitleBlinking();
-      let blinkCount = 0;
-      titleBlinkIntervalRef.current = setInterval(() => {
-        document.title = document.title === "⏰ TIME'S UP!" 
-          ? "ChefBot" 
-          : "⏰ TIME'S UP!";
-        
-        blinkCount++;
-        if (blinkCount > 100) {
-          clearInterval(titleBlinkIntervalRef.current);
-          titleBlinkIntervalRef.current = null;
-          document.title = "ChefBot";
+        if (remaining > 0) {
+          setTotalSeconds(remaining);
+          setIsRunning(true);
+          currentTimerIdRef.current = activeTimer._id;
+          startCountdown(remaining);
+        } else {
+          await timerService.completeTimer(activeTimer._id);
+          startBeep();
         }
-      }, 500);
+      }
+    } catch (error) {
+      console.error('Error loading timers:', error);
+    }
+  };
+
+  // Countdown timer
+  const startCountdown = (duration) => {
+    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+    
+    let timeLeft = duration;
+    
+    timerIntervalRef.current = setInterval(async () => {
+      if (timeLeft <= 1) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+        setIsRunning(false);
+        setIsCompleted(true);
+        setTotalSeconds(0);
+        
+        if (currentTimerIdRef.current) {
+          await timerService.completeTimer(currentTimerIdRef.current);
+        }
+        
+        startBeep();
+      } else {
+        timeLeft--;
+        setTotalSeconds(timeLeft);
+      }
+    }, 1000);
+  };
+
+  // Start timer
+  const startTimer = async () => {
+    if (isRunning || totalSeconds <= 0) return;
+    
+    setLoading(true);
+    
+    try {
+      const duration = totalSeconds;
+      const response = await timerService.createTimer(
+        duration, 
+        `${minutes}m ${seconds}s Timer`
+      );
+      
+      const newTimer = response.timer;
+      currentTimerIdRef.current = newTimer._id;
+      setIsRunning(true);
+      setIsCompleted(false);
+      stopBeep();
+      
+      startCountdown(duration);
+      
+      // ✅ NEW: Background alarm schedule karo
+      scheduleBackgroundAlarm(duration, `${minutes}m ${seconds}s Timer`);
+      
+      console.log(`✅ Timer started: ${duration} seconds`);
       
     } catch (error) {
-      console.error("Error starting continuous beep:", error);
-      startFallbackBeep();
+      console.error('Error:', error);
+      alert('Failed to start timer');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const startFallbackBeep = () => {
-    const beep = () => {
+  // ✅ NEW: Background alarm schedule karne ke liye
+  const scheduleBackgroundAlarm = (duration, label) => {
+    if (backgroundTimerRef.current) clearTimeout(backgroundTimerRef.current);
+    
+    backgroundTimerRef.current = setTimeout(() => {
+      // Ye tab band ya background mein bhi kaam karega
+      triggerBackgroundAlarm(label);
+    }, duration * 1000);
+  };
+
+  // ✅ NEW: Background alarm trigger
+  const triggerBackgroundAlarm = (label) => {
+    console.log("🔔 Background alarm triggered!");
+    
+    // Background notification (ye tab band hone par bhi dikhegi)
+    if ("Notification" in window && Notification.permission === "granted") {
+      const notification = new Notification("⏰ Timer Complete!", {
+        body: `${label} - Time's up!`,
+        requireInteraction: true,
+        tag: "chefbot-background",
+        renotify: true
+      });
+      
+      notification.onclick = () => {
+        window.focus();
+        notification.close();
+      };
+    }
+    
+    // Agar app open hai to beep bhi bajao
+    if (!document.hidden) {
+      startBeep();
+    } else {
+      // Background mein bhi sound try karo
+      try {
+        const audio = new Audio();
+        // Small beep sound
+        audio.src = 'data:audio/wav;base64,U3RlYWx0aCBMYWJz';
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log("BG audio error:", e));
+      } catch(e) {}
+      
+      // Store for when page opens again
+      localStorage.setItem('chefbot_beep_active', 'true');
+      setIsBeeping(true);
+    }
+  };
+
+  // Stop timer
+  const stopTimer = async () => {
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+    
+    if (backgroundTimerRef.current) {
+      clearTimeout(backgroundTimerRef.current);
+      backgroundTimerRef.current = null;
+    }
+    
+    if (currentTimerIdRef.current) {
+      await timerService.completeTimer(currentTimerIdRef.current);
+      currentTimerIdRef.current = null;
+    }
+    
+    setIsRunning(false);
+  };
+
+  // Reset timer
+  const resetTimer = async () => {
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+    
+    if (backgroundTimerRef.current) {
+      clearTimeout(backgroundTimerRef.current);
+      backgroundTimerRef.current = null;
+    }
+    
+    if (currentTimerIdRef.current) {
+      await timerService.deleteTimer(currentTimerIdRef.current);
+      currentTimerIdRef.current = null;
+    }
+    
+    stopBeep();
+    timerService.stopAlarm();
+    removeFloatingNotification();
+    
+    setTotalSeconds((minutes * 60) + seconds);
+    setIsRunning(false);
+    setIsCompleted(false);
+    
+    await loadTimersFromBackend();
+  };
+
+  // Start beep
+  const startBeep = () => {
+    stopBeep();
+    
+    setIsBeeping(true);
+    setIsCompleted(true);
+    localStorage.setItem('chefbot_beep_active', 'true');
+    
+    const playBeep = () => {
       try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+        
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
         
@@ -307,217 +303,154 @@ const AlarmTimerComponent = () => {
         oscillator.start();
         setTimeout(() => {
           oscillator.stop();
+          audioContext.close();
         }, 300);
       } catch (e) {
-        console.log("Fallback beep failed");
+        console.log("Beep error:", e);
       }
     };
     
-    beepIntervalRef.current = setInterval(beep, 500);
-    setIsSoundPlaying(true);
-    localStorage.setItem('chefbot_beep_active', 'true');
+    playBeep();
+    beepIntervalRef.current = setInterval(playBeep, 1000);
     
-    // ✅ Show floating notification for fallback beep too
-    showFloatingStopNotification();
+    console.log("🔊 Beep started!");
     
-    // Page Title Blink for fallback too
-    clearTitleBlinking();
-    let blinkCount = 0;
-    titleBlinkIntervalRef.current = setInterval(() => {
-      document.title = document.title === "⏰ TIME'S UP!" 
-        ? "ChefBot" 
-        : "⏰ TIME'S UP!";
-      
-      blinkCount++;
-      if (blinkCount > 100) {
-        clearInterval(titleBlinkIntervalRef.current);
-        titleBlinkIntervalRef.current = null;
-        document.title = "ChefBot";
+    showFloatingNotification();
+    
+    // Browser notification
+    if ("Notification" in window && Notification.permission === "granted") {
+      const notification = new Notification("⏰ Timer Complete!", {
+        body: "Click to stop alarm",
+        requireInteraction: true,
+        vibrate: [200, 100, 200]
+      });
+      notification.onclick = () => {
+        stopBeep();
+        notification.close();
+      };
+    }
+    
+    // Title blink
+    let count = 0;
+    const originalTitle = document.title;
+    titleIntervalRef.current = setInterval(() => {
+      if (isBeeping) {
+        document.title = count % 2 === 0 ? "⏰ TIME'S UP!" : "ChefBot";
+        count++;
+        if (count > 100) {
+          clearInterval(titleIntervalRef.current);
+          document.title = originalTitle;
+        }
+      } else {
+        clearInterval(titleIntervalRef.current);
+        document.title = originalTitle;
       }
     }, 500);
-  };
-
-  const initializeAudioContext = () => {
-    if (!audioContextRef.current) {
-      try {
-        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
-      } catch (error) {
-        console.error("AudioContext initialization failed:", error);
-      }
+    
+    // Vibrate for mobile
+    if ('vibrate' in navigator) {
+      navigator.vibrate([200, 100, 200, 100, 200]);
     }
-    return audioContextRef.current;
   };
 
-  const stopAllBeeps = () => {
-    // Stop the beep intervals and audio
+  // Stop beep
+  const stopBeep = () => {
     if (beepIntervalRef.current) {
       clearInterval(beepIntervalRef.current);
       beepIntervalRef.current = null;
     }
     
-    if (oscillatorRef.current) {
-      try {
-        oscillatorRef.current.stop();
-        oscillatorRef.current.disconnect();
-      } catch (error) {}
-      oscillatorRef.current = null;
+    if (titleIntervalRef.current) {
+      clearInterval(titleIntervalRef.current);
+      titleIntervalRef.current = null;
     }
     
-    if (gainNodeRef.current) {
-      try {
-        gainNodeRef.current.disconnect();
-      } catch (error) {}
-      gainNodeRef.current = null;
-    }
-    
-    // Clear any title blinking intervals
-    clearTitleBlinking();
-    
-    // Reset state
-    setIsSoundPlaying(false);
+    setIsBeeping(false);
     setIsCompleted(false);
     localStorage.removeItem('chefbot_beep_active');
+    removeFloatingNotification();
     document.title = "ChefBot";
     
-    // Remove floating notification when beep stops
+    if ('vibrate' in navigator) {
+      navigator.vibrate(0);
+    }
+    
+    console.log("🔕 Beep stopped!");
+  };
+
+  // Floating notification
+  const showFloatingNotification = () => {
     removeFloatingNotification();
     
-    console.log("🔕 All beeps stopped and title reset");
+    const div = document.createElement('div');
+    div.id = 'chefbot-floating-notification';
+    div.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 99999;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      width: 300px;
+      border-left: 5px solid #ff4757;
+      font-family: Arial, sans-serif;
+    `;
+    div.innerHTML = `
+      <div style="padding: 15px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <span>🔔</span>
+          <strong>ChefBot Timer Complete!</strong>
+          <button id="floating-close-btn" style="background:none;border:none;font-size:20px;cursor:pointer;">×</button>
+        </div>
+        <div>
+          <p>⏰ Time's up! Alarm is beeping.</p>
+          <button id="floating-stop-btn" style="width:100%;padding:10px;background:#ff4757;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">
+            ⏹️ STOP BEEP
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(div);
+    
+    document.getElementById('floating-close-btn')?.addEventListener('click', () => removeFloatingNotification());
+    document.getElementById('floating-stop-btn')?.addEventListener('click', () => stopBeep());
   };
 
-  const formatTime = (timeInSeconds) => {
-    const mins = Math.floor(timeInSeconds / 60);
-    const secs = timeInSeconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  const removeFloatingNotification = () => {
+    const existing = document.getElementById('chefbot-floating-notification');
+    if (existing) existing.remove();
   };
 
-  const handleTimeChange = (e) => {
-    const { name, value } = e.target;
-    const numValue = parseInt(value) || 0;
-    
-    if (name === 'minutes') {
-      const newTotalSeconds = Math.min(numValue, 120) * 60 + seconds;
-      setMinutes(Math.min(numValue, 120));
-      setTotalSeconds(newTotalSeconds);
-    } else if (name === 'seconds') {
-      const newSeconds = Math.min(numValue, 59);
-      const newTotalSeconds = minutes * 60 + newSeconds;
-      setSeconds(newSeconds);
-      setTotalSeconds(newTotalSeconds);
-    }
+  const formatTime = (secs) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const startTimer = () => {
-    if (isRunning || totalSeconds <= 0) return;
-    
-    setIsRunning(true);
-    setIsCompleted(false);
-    stopAllBeeps();
-    
-    // ✅ CRITICAL: Save timer to localStorage IMMEDIATELY
-    const endTime = Date.now() + (totalSeconds * 1000);
-    localStorage.setItem('chefbot_timer_running', 'true');
-    localStorage.setItem('chefbot_timer_endTime', endTime.toString());
-    localStorage.setItem('chefbot_timer_totalSeconds', totalSeconds.toString());
-    
-    console.log(`⏰ Timer INSTANTLY saved: ${totalSeconds}s, ends: ${new Date(endTime).toLocaleTimeString()}`);
-    
-    // Start foreground timer for display
-    timerIntervalRef.current = setInterval(() => {
-      const timeLeft = endTime - Date.now();
-      const secondsLeft = Math.max(0, Math.ceil(timeLeft / 1000));
-      
-      if (secondsLeft <= 0) {
-        clearInterval(timerIntervalRef.current);
-        setIsRunning(false);
-        setIsCompleted(true);
-        startContinuousBeep();
-        clearBackgroundTimer();
-      } else {
-        setTotalSeconds(secondsLeft);
+  const deleteTimer = async (timerId) => {
+    try {
+      await timerService.deleteTimer(timerId);
+      await loadTimersFromBackend();
+      if (currentTimerIdRef.current === timerId) {
+        stopTimer();
       }
-    }, 1000);
-    
-    // ✅ Start background interval checker
-    const backgroundChecker = setInterval(() => {
-      const timeLeft = endTime - Date.now();
-      
-      if (timeLeft <= 0) {
-        clearInterval(backgroundChecker);
-        
-        // Check if we're still on the page
-        if (document.visibilityState === 'visible') {
-          // Page is visible, update state
-          if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
-          setIsRunning(false);
-          setIsCompleted(true);
-          startContinuousBeep();
-        } else {
-          // Page is hidden/closed, just start beep
-          startContinuousBeep();
-        }
-        
-        clearBackgroundTimer();
-      }
-    }, 1000);
-    
-    // Store checker reference
-    window.chefbotBackgroundChecker = backgroundChecker;
-  };
-
-  const pauseTimer = () => {
-    if (timerIntervalRef.current) {
-      clearInterval(timerIntervalRef.current);
+    } catch (error) {
+      console.error('Error deleting timer:', error);
     }
-    
-    if (window.chefbotBackgroundChecker) {
-      clearInterval(window.chefbotBackgroundChecker);
-    }
-    
-    setIsRunning(false);
-    clearBackgroundTimer();
-  };
-
-  const resetTimer = () => {
-    if (timerIntervalRef.current) {
-      clearInterval(timerIntervalRef.current);
-    }
-    
-    if (window.chefbotBackgroundChecker) {
-      clearInterval(window.chefbotBackgroundChecker);
-    }
-    
-    stopAllBeeps();
-    clearBackgroundTimer();
-    
-    const initialSeconds = minutes * 60 + seconds;
-    setTotalSeconds(initialSeconds);
-    setIsRunning(false);
-    setIsCompleted(false);
-  };
-
-  const setQuickTime = (mins) => {
-    if (isRunning) return;
-    
-    stopAllBeeps();
-    setMinutes(mins);
-    setSeconds(0);
-    setTotalSeconds(mins * 60);
-    setIsCompleted(false);
   };
 
   return (
     <div className="alarm-sidebar-content">
-      {/* Instant Save Indicator */}
-      
-      
+      {/* Timer Display */}
       <div className="timer-display-section">
-        <div className={`time-display ${isCompleted ? 'completed' : ''} ${isRunning ? 'running' : ''}`}>
+        <div className={`time-display ${isCompleted ? 'completed' : ''}`}>
           {formatTime(totalSeconds)}
-         
         </div>
       </div>
       
+      {/* Time Setup */}
       <div className="time-setup-section">
         <h3>Set Timer Duration</h3>
         <div className="time-inputs">
@@ -525,11 +458,10 @@ const AlarmTimerComponent = () => {
             <label>Minutes</label>
             <input
               type="number"
-              name="minutes"
-              min="1"
+              min="0"
               max="120"
               value={minutes}
-              onChange={handleTimeChange}
+              onChange={(e) => setMinutes(Math.min(parseInt(e.target.value) || 0, 120))}
               disabled={isRunning}
             />
           </div>
@@ -537,11 +469,10 @@ const AlarmTimerComponent = () => {
             <label>Seconds</label>
             <input
               type="number"
-              name="seconds"
               min="0"
               max="59"
               value={seconds}
-              onChange={handleTimeChange}
+              onChange={(e) => setSeconds(Math.min(parseInt(e.target.value) || 0, 59))}
               disabled={isRunning}
             />
           </div>
@@ -554,7 +485,13 @@ const AlarmTimerComponent = () => {
               <button
                 key={mins}
                 className="preset-btn"
-                onClick={() => setQuickTime(mins)}
+                onClick={() => {
+                  if (!isRunning) {
+                    setMinutes(mins);
+                    setSeconds(0);
+                    stopBeep();
+                  }
+                }}
                 disabled={isRunning}
               >
                 {mins} min
@@ -564,35 +501,53 @@ const AlarmTimerComponent = () => {
         </div>
       </div>
       
+      {/* Controls */}
       <div className="timer-controls">
         <div className="main-buttons">
           {!isRunning && !isCompleted ? (
             <button 
-              className="start-btn instant-save-btn" 
+              className="start-btn" 
               onClick={startTimer} 
-              disabled={totalSeconds <= 0}
+              disabled={totalSeconds <= 0 || loading}
             >
-              START TIME
+              {loading ? '⏳ STARTING...' : '🚀 START TIMER'}
             </button>
           ) : isRunning ? (
-            <button className="pause-btn" onClick={pauseTimer}>
-              ⏸ PAUSE
+            <button className="pause-btn" onClick={stopTimer}>
+              ⏸ STOP TIMER
             </button>
           ) : null}
           
           <button className="reset-btn" onClick={resetTimer}>
-            🔄 RESET ALL
+            🔄 RESET
           </button>
         </div>
       </div>
       
+      {/* Saved Timers */}
+      {backendTimers.length > 0 && (
+        <div className="saved-timers-section">
+          <h4>📋 Your Timers</h4>
+          <div className="saved-timers-list">
+            {backendTimers.map(timer => (
+              <div key={timer._id} className="saved-timer-item">
+                <div>
+                  <div>{timer.label}</div>
+                  <small>{timer.status === 'running' ? '🔴 Running' : '✅ Completed'}</small>
+                </div>
+                <button onClick={() => deleteTimer(timer._id)}>🗑️</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
       {/* Beep Status */}
-      {isSoundPlaying && (
+      {isBeeping && (
         <div className="beep-status-active">
-          <div className="beep-status-content">
-            <span className="beep-icon">🔊</span>
-            <span>Alarm is beeping!</span>
-            <button className="stop-beep-btn" onClick={stopAllBeeps}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>🔊 Alarm is beeping!</span>
+            <button onClick={stopBeep} style={{ padding: '8px 16px', background: '#ff4757', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
               STOP BEEP
             </button>
           </div>

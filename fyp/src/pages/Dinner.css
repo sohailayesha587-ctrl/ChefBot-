@@ -21,42 +21,89 @@ html, body, #root {
 }
 
 /* ===== HEADER ===== */
+/* ===== DINNER PAGE ===== */
+.dinner-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ===== HEADER - UPDATED EXACT SAME AS ABOUT PAGE ===== */
 .dinner-header {
   background: linear-gradient(135deg, #284a4b, #1d3a3b);
+  backdrop-filter: blur(10px);
   color: white;
-  padding: 40px 20px;
+  padding: 22px 20px;
   text-align: center;
+  flex-shrink: 0;
   position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
   margin-top: 120px;
 }
 
 .dinner-header-content {
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 3;
 }
 
 .dinner-page-title {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   letter-spacing: -0.5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: white;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.dinner-page-title::before,
+.dinner-page-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.dinner-page-title::before {
+  left: -30px;
+}
+
+.dinner-page-title::after {
+  right: -30px;
 }
 
 .dinner-page-description {
-  font-size: 1rem;
-  opacity: 0.9;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  max-height: 3em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+  font-size: 16px;
+  opacity: 0.95;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0;
+  font-style: italic;
 }
 
+.dinner-page-description::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
 /* ===== MAIN CONTENT ===== */
 .dinner-main {
   max-width: 1400px;

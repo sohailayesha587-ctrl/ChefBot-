@@ -100,6 +100,9 @@ html, body, #root {
   background-position: center;
   flex-shrink: 0;
   border-right: 1px solid #e2e8f0;
+  /* FALLBACK - agar image load na ho to */
+  background-color: #284a4b;
+  background-image: url('https://placehold.co/600x400/284a4b/white?text=No+Image');
 }
 
 .soups-card-content {

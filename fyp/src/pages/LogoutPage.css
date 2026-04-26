@@ -27,10 +27,8 @@
   color: #333;
 }
 
-.logout-page-wrapper ~ header,
-.logout-page-wrapper ~ footer,
-body header,
-body footer {
+.logout-page-wrapper header,
+.logout-page-wrapper footer {
   display: none !important;
 }
 

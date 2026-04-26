@@ -29,7 +29,7 @@ const HomePage = () => {
   // FEATURES ARRAY - 5 ITEMS ONLY
   const features = [
  {
-      image: 'pantry-staples.jpg',
+      image: 'image.png',
       title: 'Meal Suggestion',
       path: '/meal-suggestion'
     },

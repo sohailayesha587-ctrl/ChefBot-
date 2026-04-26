@@ -573,3 +573,66 @@ html, body, #root {
     font-size: 2rem;
   }
 }
+/* Category Filter Styles */
+.category-filter-container {
+  max-width: 1400px;
+  margin: 20px auto 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.category-filter-label {
+  font-weight: 600;
+  color: #284a4b;
+  font-size: 1rem;
+}
+
+.category-filter-select {
+  padding: 10px 15px;
+  border: 2px solid #284a4b;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.category-filter-select:hover {
+  border-color: #1d3a3b;
+  background: #f8fafc;
+}
+
+.recipe-count {
+  margin-left: auto;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.recipe-category-badge {
+  display: inline-block;
+  background: #284a4b;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  margin-top: 8px;
+}
+
+.recipe-category-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-left: 10px;
+}

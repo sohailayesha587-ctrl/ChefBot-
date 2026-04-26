@@ -1,0 +1,720 @@
+/* Meal Suggestion Page Styles */
+.meal-suggestion-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+    flex-direction: column;  /* Add this */
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+/* ===== HEADER - EXACT SAME AS LUNCH PAGE ===== */
+.suggestion-header {
+  background: linear-gradient(135deg, #284a4b, #1d3a3b);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 22px 20px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+  margin-top: 120px;
+}
+
+.suggestion-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+/* Title - Same as lunch */
+.suggestion-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  color: white;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+/* Decorative lines - Same as lunch */
+.suggestion-title::before,
+.suggestion-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.suggestion-title::before {
+  left: -30px;
+}
+
+.suggestion-title::after {
+  right: -30px;
+}
+
+/* Description - Same as lunch */
+.suggestion-description {
+  font-size: 16px;
+  opacity: 0.95;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0;
+  font-style: italic;
+}
+
+/* Decorative line below description */
+.suggestion-description::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+/* Search Section */
+.search-section {
+  max-width: 1000px;
+  margin: 30px auto 30px;
+  padding: 0 20px;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+
+}
+
+.search-icon {
+  position: absolute;
+  left: 4.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #284a4b;
+  font-size: 1.1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 30px 20px 30px 50px;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 50px;
+  background: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #284a4b;
+  box-shadow: 0 4px 20px rgba(40, 74, 75, 0.15);
+        max-width: 780px;
+
+}
+
+/* Category Section */
+.category-section {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+}
+
+.category-container {
+  display: flex;
+  gap: 12px;
+  
+  justify-content: center;
+  height: 50px;
+  
+}
+
+.category-btn {
+    display: flex;
+ height: 50px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #284a4b;
+}
+
+.category-btn:hover {
+  border-color: #284a4b;
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: #284a4b;
+  border-color: #284a4b;
+  color: white;
+}
+
+.category-icon {
+  font-size: 1.1rem;
+}
+
+/* Results Info */
+.results-info {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  color: #284a4b;
+  font-size: 0.9rem;
+}
+
+.results-info .count {
+  color: #284a4b;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Suggestions Grid */
+.suggestions-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.suggestion-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: #284a4b;
+}
+
+.card-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.recipe-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.match-badge {
+  background: #e2e8f0;
+  color: #284a4b;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.match-badge.full-match {
+  background: #284a4b;
+  color: white;
+}
+
+.recipe-category {
+  color: #666;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+
+.missing-ingredients {
+  background: #fef3c7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+}
+
+.missing-label {
+  font-weight: 600;
+  color: #284a4b;
+  margin-right: 6px;
+}
+
+.missing-items {
+  color: #284a4b;
+}
+
+.full-match-message {
+  background: #d1fae5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  color: #397d7c;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.full-match-message i {
+  color: #397d7c;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-view-recipe {
+  flex: 1;
+  padding: 10px;
+  background: #284a4b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-recipe:hover {
+  background: #284a4b;
+  transform: translateY(-1px);
+}
+
+.btn-add-shopping {
+  flex: 1;
+  padding: 10px;
+  background: #397d7c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-add-shopping:hover {
+  background: #397d7c;
+  transform: translateY(-1px);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.empty-state p {
+  color: #666;
+}
+
+/* Back Button */
+.back-button-container {
+  max-width: 1400px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.back-home-btn {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-home-btn:hover {
+  background: #284a4b;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .suggestion-header {
+    margin-top: 100px;
+    padding: 30px 20px;
+  }
+  
+  .suggestion-title {
+    font-size: 1.6rem;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .category-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+  
+  .search-input {
+    padding: 14px 18px 14px 45px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .suggestion-header {
+    margin-top: 80px;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+  }
+}
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #284a4b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pantry Badge */
+.pantry-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  padding: 40px;
+  background: #fee;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.error-message i {
+  font-size: 48px;
+  color: #284a4b;
+  margin-bottom: 10px;
+}
+
+.retry-btn {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.retry-btn:hover {
+  background: #397d7c;
+}
+
+/* Match Progress Bar */
+.match-progress {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.match-progress-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+/* Recipe Name Clickable */
+.recipe-name {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.recipe-name:hover {
+  color: #284a4b;
+}
+
+/* Go to Pantry Button */
+.go-to-pantry-btn {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.go-to-pantry-btn:hover {
+  background: #397d7c;
+}
+/* Search Form */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  padding: 5px 5px 5px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 15px 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-btn {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.search-btn:hover {
+  background: #397d7c;
+}
+
+/* Example Searches */
+.example-searches {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.example-title {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.example-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.example-btn {
+  background: #284a4b;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.example-btn:hover {
+  background: #397d7c;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #284a4b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Results Info */
+.results-info {
+  text-align: center;
+  margin: 20px;
+  color: #666;
+}
+
+.results-info .count {
+  color: #284a4b;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  padding: 40px;
+  background: #fee;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.retry-btn {
+  background: #284a4b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Match Progress Bar */
+.match-progress {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.match-progress-bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Recipe Name */
+.recipe-name {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.recipe-name:hover {
+  color: #284a4b;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state i {
+  font-size: 64px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.empty-state p {
+  color: #666;
+}
+
+/* Back Button */
+.back-button-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.back-home-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #666;
+  padding: 10px 20px;
+}
+
+.back-home-btn:hover {
+  color: #284a4b;
+}

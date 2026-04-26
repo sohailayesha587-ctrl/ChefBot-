@@ -46,10 +46,7 @@ function Footer() {
 
       <div className="footer-cta">
         <h2>Let's cook something amazing together.</h2>
-        <form onSubmit={handleSubmit}>
-          <input type="email" id="search-footer" placeholder="Enter your email" required />
-          <button type="submit">Join Now</button>
-        </form>
+        
       </div>
 
       <div className="footer-main">
@@ -71,11 +68,7 @@ function Footer() {
 
         <div className="footer-column">
           <h4>Stay Connected</h4>
-          <ul>
-            <li><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
-          </ul>
+         
         </div>
       </div>
 

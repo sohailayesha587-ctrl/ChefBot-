@@ -24,6 +24,41 @@ const ShoppingList = () => {
 
   const getToken = () => localStorage.getItem('token');
 
+  // WhatsApp Share Function
+  const shareOnWhatsApp = () => {
+    if (items.length === 0) {
+      showToast('No items to share!', 'warning');
+      return;
+    }
+
+    let message = "🛒 *MY SHOPPING LIST* 🛒\n";
+    message += "─────────────────\n\n";
+    
+    categories.forEach(category => {
+      const categoryItems = items.filter(item => item.category === category);
+      if (categoryItems.length > 0) {
+        message += `📁 *${category.toUpperCase()}* (${categoryItems.length})\n`;
+        message += "─────────────────\n";
+        categoryItems.forEach((item, index) => {
+          message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}\n`;
+        });
+        message += "\n";
+      }
+    });
+    
+    message += "─────────────────\n";
+    message += `📊 Total Items: ${items.length}\n`;
+    message += `📅 ${new Date().toLocaleDateString()}\n`;
+    message += `📍 ChefBot - Smart Kitchen\n`;
+    message += "─────────────────\n";
+    message += "✅ Happy Shopping! 🛒";
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
+
   const fetchShoppingItems = async () => {
     try {
       setLoading(true);
@@ -196,9 +231,12 @@ const ShoppingList = () => {
         </div>
       </div>
 
+      {/* ✅ FIXED HERO SECTION - with content wrapper */}
       <div className="shopping-hero-section">
-        <h1 className="shopping-hero-title">My Shopping List</h1>
-        <p className="shopping-hero-subtitle">Manage items you need to purchase</p>
+        <div className="shopping-hero-content">
+          <h1 className="shopping-hero-title">My Shopping List</h1>
+          <p className="shopping-hero-subtitle">Manage items you need to purchase</p>
+        </div>
       </div>
 
       {error && (
@@ -234,6 +272,13 @@ const ShoppingList = () => {
         />
         <button className="shopping-btn-primary-custom" onClick={handleAddNew}>
           + Add New Item
+        </button>
+      </div>
+
+      {/* WhatsApp Share Button */}
+      <div className="whatsapp-share-container">
+        <button className="btn-whatsapp-share" onClick={shareOnWhatsApp}>
+          📱 Share on WhatsApp
         </button>
       </div>
 
@@ -344,6 +389,13 @@ const ShoppingList = () => {
           </div>
         </div>
       )}
+    
+      {/* Back to Home Button */}
+      <div className="back-home-container">
+        <button className="btn-back-home" onClick={() => navigate('/')}>
+          ← Back to Home
+        </button>
+      </div>
     </div>
   );
 };

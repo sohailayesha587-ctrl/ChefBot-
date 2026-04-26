@@ -18,6 +18,7 @@ const PantryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [addingAll, setAddingAll] = useState(false);
+  const [openCategories, setOpenCategories] = useState({});
   
   const navigate = useNavigate();
 
@@ -25,6 +26,14 @@ const PantryPage = () => {
   const units = ['kg', 'g', 'liters', 'ml', 'pieces', 'dozen'];
 
   const getToken = () => localStorage.getItem('token');
+
+  // Toggle category function
+  const toggleCategory = (categoryName) => {
+    setOpenCategories(prev => ({
+      ...prev,
+      [categoryName]: !prev[categoryName]
+    }));
+  };
 
   // Fetch pantry items
   const fetchPantryItems = async () => {
@@ -154,7 +163,7 @@ const PantryPage = () => {
     }
   };
 
-  // ✅ ADD ALL TO MAIN SHOPPING LIST + REDIRECT + CLEAR
+  // Add all to main shopping list and redirect
   const addAllToShoppingAndRedirect = async () => {
     if (pantryShoppingList.length === 0) {
       showToast('No items to add!', 'warning');
@@ -167,7 +176,6 @@ const PantryPage = () => {
     try {
       const token = getToken();
       
-      // Add each item to main shopping list
       for (const item of pantryShoppingList) {
         const response = await fetch('http://localhost:5000/api/shopping', {
           method: 'POST',
@@ -191,11 +199,7 @@ const PantryPage = () => {
 
       if (successCount > 0) {
         showToast(`${successCount} items added to shopping list!`, 'success');
-        
-        // Clear pantry shopping list
         await clearPantryShoppingList();
-        
-        // Redirect to shopping page
         navigate('/smart-shopping');
       } else {
         showToast('Failed to add items', 'error');
@@ -308,6 +312,9 @@ const PantryPage = () => {
   const totalItems = items.length;
   const lowStockItems = items.filter(item => item.quantity <= 2).length;
   const totalCategories = [...new Set(items.map(item => item.category))].length;
+  
+  // Check if search is active
+  const isSearchActive = searchTerm.trim().length > 0;
 
   if (loading) {
     return (
@@ -325,13 +332,15 @@ const PantryPage = () => {
       <div className="fullscreen-food-image">
         <div className="fullscreen-food-content">
           <h1>Your Smart Kitchen Pantry</h1>
-          <p>Track ingredients, reduce waste, and cook smarter</p>
         </div>
       </div>
       
+      {/* Pantry Hero Section */}
       <div className="p-hero-section">
-        <h1 className="p-hero-title">Your Pantry Items</h1>
-        <p className="p-hero-subtitle">Manage your kitchen inventory efficiently</p>
+        <div className="p-hero-content">
+          <h1 className="p-hero-title">Your Pantry Items</h1>
+          <p className="p-hero-subtitle">Manage your kitchen inventory efficiently</p>
+        </div>
       </div>
 
       {error && (
@@ -370,7 +379,7 @@ const PantryPage = () => {
         </button>
       </div>
 
-      {/* Pantry Shopping List Section */}
+      {/* Pantry Shopping List Section - Direct Show (No Arrow) */}
       <div className="shopping-list-section">
         <div className="shopping-list-header">
           <h3 className="shopping-list-title">🛒 Shopping List ({pantryShoppingList.length})</h3>
@@ -390,7 +399,7 @@ const PantryPage = () => {
             </button>
           </div>
         </div>
-        <div className="checklist-items">
+        <div className="shopping-items-list">
           {pantryShoppingList.length === 0 ? (
             <div className="empty-shopping-message">
               <p>No items. Click 🛒 on items to add.</p>
@@ -421,7 +430,49 @@ const PantryPage = () => {
             + Add First Item
           </button>
         </div>
+      ) : isSearchActive ? (
+        /* ✅ SEARCH ACTIVE - Flat list, no categories */
+        <div className="search-results-section">
+          <div className="category-section">
+            <div className="search-results-header">
+              <h3 className="category-title-simple">
+                Search Results ({filteredItems.length})
+              </h3>
+            </div>
+            {filteredItems.length === 0 ? (
+              <div className="no-results-message">
+                <p>No items found matching "{searchTerm}"</p>
+              </div>
+            ) : (
+              <div className="checklist-items open">
+                {filteredItems.map(item => {
+                  const isLowStock = item.quantity <= 2;
+                  const isInShoppingList = pantryShoppingList.some(i => i.name === item.name);
+                  
+                  return (
+                    <div key={item._id} className={`checklist-item ${isLowStock ? 'low-stock-checklist' : ''}`}>
+                      <span className="quantity-badge-simple">{item.quantity} {item.unit}</span>
+                      <h4 className="item-name-simple">{item.name}</h4>
+                      <div className="checklist-actions">
+                        <button 
+                          className={`btn-add-item ${isInShoppingList ? 'added' : ''}`}
+                          onClick={() => addToPantryShoppingList(item)}
+                          disabled={isInShoppingList}
+                        >
+                          {isInShoppingList ? '✓ Added' : '🛒 Add'}
+                        </button>
+                        <button className="btn-edit-item" onClick={() => handleEdit(item)}>✏️</button>
+                        <button className="btn-delete-item" onClick={() => handleDelete(item._id)}>🗑️</button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
+        /* ✅ NO SEARCH - Collapsible Categories */
         <div className="categories-checklist">
           {categories.map(category => {
             const categoryItems = filteredItems.filter(item => item.category === category);
@@ -429,10 +480,19 @@ const PantryPage = () => {
             
             return (
               <div key={category} className="category-section">
-                <div className="category-header-simple">
-                  <h3 className="category-title-simple">{category}</h3>
+                <div 
+                  className="category-header-simple" 
+                  onClick={() => toggleCategory(category)}
+                >
+                  <div className="category-title-simple">
+                    {category}
+                    <span className="category-count">({categoryItems.length})</span>
+                  </div>
+                  <div className={`category-arrow ${openCategories[category] ? 'open' : ''}`}>
+                    ▼
+                  </div>
                 </div>
-                <div className="checklist-items">
+                <div className={`checklist-items ${openCategories[category] ? 'open' : ''}`}>
                   {categoryItems.map(item => {
                     const isLowStock = item.quantity <= 2;
                     const isInShoppingList = pantryShoppingList.some(i => i.name === item.name);
@@ -510,7 +570,14 @@ const PantryPage = () => {
             </div>
           </div>
         </div>
+        
       )}
+     {/* ✅ Back to Home Button - LAST MEIN */}
+      <div className="back-home-container">
+        <button className="btn-back-home" onClick={() => navigate('/')}>
+          ← Back to Home
+        </button>
+      </div>
     </div>
   );
 };

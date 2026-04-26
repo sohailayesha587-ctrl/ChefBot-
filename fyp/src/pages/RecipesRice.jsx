@@ -4,20 +4,35 @@ import './RecipesRice.css';
 
 const RecipesRice = () => {
   const navigate = useNavigate();
-  const [selectedRecipe, setSelectedRecipe] = useState(null);  // ✅ Fixed
-  const [showDetailPanel, setShowDetailPanel] = useState(false);  // ✅ Fixed
-  const [isPlaying, setIsPlaying] = useState(false);  // ✅ Fixed
-  const [currentStep, setCurrentStep] = useState(0);  // ✅ Fixed
-  const [progress, setProgress] = useState(0);  // ✅ Fixed
+  const [riceRecipes, setRiceRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [showDetailPanel, setShowDetailPanel] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [progress, setProgress] = useState(0);
   const speechSynthesisRef = useRef(null);
 
-  // All Rice Recipes (40 recipes) with detailed instructions
-  const riceRecipes = [
-    // ... (apke saare recipes yahan hain)
-    // Aap apne poore recipes yahan rakhein
-  ];
-
-  const recipesList = riceRecipes;
+  // ✅ FETCH RICE RECIPES FROM BACKEND
+  useEffect(() => {
+fetch('http://localhost:5000/api/recipes/subCategory/rice?limit=200')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch rice recipes');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setRiceRecipes(data.recipes || []);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching rice recipes:', error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
 
   const handleRecipeClick = (recipe) => {
     setSelectedRecipe(recipe);
@@ -54,9 +69,9 @@ const RecipesRice = () => {
     utterance.pitch = 1;
     
     utterance.onend = () => {
-      if (isPlaying && currentStep < selectedRecipe.steps.length - 1) {
+      if (isPlaying && currentStep < selectedRecipe.stepsRaw.length - 1) {
         setCurrentStep(prev => prev + 1);
-      } else if (isPlaying && currentStep === selectedRecipe.steps.length - 1) {
+      } else if (isPlaying && currentStep === selectedRecipe.stepsRaw.length - 1) {
         setIsPlaying(false);
         setCurrentStep(0);
       }
@@ -79,18 +94,18 @@ const RecipesRice = () => {
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
-      speakStep(selectedRecipe.steps[currentStep]);
+      speakStep(selectedRecipe.stepsRaw[currentStep]);
     }
   };
 
   const handleNextStep = () => {
     if (!selectedRecipe) return;
     
-    if (currentStep < selectedRecipe.steps.length - 1) {
+    if (currentStep < selectedRecipe.stepsRaw.length - 1) {
       window.speechSynthesis.cancel();
       setCurrentStep(prev => prev + 1);
       if (isPlaying) {
-        speakStep(selectedRecipe.steps[currentStep + 1]);
+        speakStep(selectedRecipe.stepsRaw[currentStep + 1]);
       }
     }
   };
@@ -102,7 +117,7 @@ const RecipesRice = () => {
       window.speechSynthesis.cancel();
       setCurrentStep(prev => prev - 1);
       if (isPlaying) {
-        speakStep(selectedRecipe.steps[currentStep - 1]);
+        speakStep(selectedRecipe.stepsRaw[currentStep - 1]);
       }
     }
   };
@@ -113,13 +128,13 @@ const RecipesRice = () => {
     window.speechSynthesis.cancel();
     setCurrentStep(0);
     if (isPlaying) {
-      speakStep(selectedRecipe.steps[0]);
+      speakStep(selectedRecipe.stepsRaw[0]);
     }
   };
 
   useEffect(() => {
     if (selectedRecipe) {
-      setProgress(((currentStep + 1) / selectedRecipe.steps.length) * 100);
+      setProgress(((currentStep + 1) / selectedRecipe.stepsRaw.length) * 100);
     }
   }, [currentStep, selectedRecipe]);
 
@@ -130,6 +145,30 @@ const RecipesRice = () => {
       }
     };
   }, []);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="rice-page">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading delicious rice recipes...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="rice-page">
+        <div className="error-container">
+          <p>Error loading recipes: {error}</p>
+          <button onClick={() => window.location.reload()}>Try Again</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rice-page">
@@ -145,9 +184,9 @@ const RecipesRice = () => {
       <main className="rice-main">
         <div className="rice-grid-section">
           <div className="rice-grid">
-            {recipesList.map((recipe) => (
+            {riceRecipes.map((recipe) => (
               <div
-                key={recipe.id}
+                key={recipe._id}
                 className="rice-card"
                 onClick={() => handleRecipeClick(recipe)}
               >
@@ -156,7 +195,7 @@ const RecipesRice = () => {
                   style={{ backgroundImage: `url(${recipe.image})` }}
                 />
                 <div className="rice-card-content">
-                  <h3 className="rice-card-title">{recipe.name}</h3>
+                  <h3 className="rice-card-title">{recipe.title}</h3>
                   <p className="rice-card-description">{recipe.tagline}</p>
                 </div>
               </div>
@@ -186,7 +225,7 @@ const RecipesRice = () => {
             
             <div className="rice-modal-header">
               <div className="rice-modal-title">
-                <h2>{selectedRecipe.name}</h2>
+                <h2>{selectedRecipe.title}</h2>
               </div>
             </div>
 
@@ -194,7 +233,7 @@ const RecipesRice = () => {
               <div className="rice-modal-ingredients">
                 <h3>Ingredients</h3>
                 <div className="rice-ingredients-list">
-                  {selectedRecipe.ingredients.map((ingredient, index) => (
+                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
                     <div key={index} className="rice-ingredient-item">
                       <span className="rice-ingredient-bullet">•</span>
                       <span className="rice-ingredient-text">{ingredient}</span>
@@ -206,7 +245,7 @@ const RecipesRice = () => {
               <div className="rice-modal-steps">
                 <h3>Steps to Make</h3>
                 <div className="rice-steps-list">
-                  {selectedRecipe.steps.map((step, index) => (
+                  {selectedRecipe.stepsRaw?.map((step, index) => (
                     <div key={index} className="rice-step-item">
                       <span className="rice-step-number">{index + 1}.</span>
                       <span className="rice-step-text">{step}</span>
@@ -226,14 +265,14 @@ const RecipesRice = () => {
                       <div className="progress-fill" style={{ width: `${progress}%` }}></div>
                     </div>
                     <div className="progress-info">
-                      <span>Step {currentStep + 1} of {selectedRecipe.steps.length}</span>
+                      <span>Step {currentStep + 1} of {selectedRecipe.stepsRaw?.length || 0}</span>
                       <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
 
                   <div className="current-step-display">
                     <p>
-                      <strong>Step {currentStep + 1}:</strong> {selectedRecipe.steps[currentStep]}
+                      <strong>Step {currentStep + 1}:</strong> {selectedRecipe.stepsRaw?.[currentStep]}
                     </p>
                   </div>
 
@@ -266,7 +305,7 @@ const RecipesRice = () => {
                     <button
                       className="step-btn"
                       onClick={handleNextStep}
-                      disabled={currentStep === selectedRecipe.steps.length - 1}
+                      disabled={currentStep === (selectedRecipe.stepsRaw?.length || 0) - 1}
                     >
                       Next ⏭️
                     </button>
@@ -285,5 +324,4 @@ const RecipesRice = () => {
   );
 };
 
-// ✅ ONLY ONE export default at the END
 export default RecipesRice;

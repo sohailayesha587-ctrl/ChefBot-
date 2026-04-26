@@ -32,7 +32,7 @@ const UrduLoginPage = () => {
 
     console.log("Login attempt with:", formData);
     alert("لاگ ان کامیاب! شیف بوٹ میں خوش آمدید!");
-    window.location.href = "/home";
+    window.location.href = "/urdu-home";
   };
 
   return (

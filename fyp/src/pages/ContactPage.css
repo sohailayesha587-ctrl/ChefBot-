@@ -12,41 +12,85 @@
    HERO - Compact
    =========================== */
 
+/* ===== HEADER - EXACT SAME AS ABOUT PAGE ===== */
 .contact-hero {
-  width: 100vw;
-  height: 160px;
-  background: linear-gradient(135deg, #285b5a 0%, #1f4141 100%);
+  background: linear-gradient(135deg, #284a4b, #1d3a3b);
+  backdrop-filter: blur(10px);
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 22px 20px;
   text-align: center;
+  flex-shrink: 0;
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+  margin-top: 0;
 }
 
 .contact-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 300px;
-  height: 300px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
+  display: none;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
 }
 
 .hero-content h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 6px;
-  letter-spacing: -1px;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  color: white;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.hero-content h1::before,
+.hero-content h1::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.hero-content h1::before {
+  left: -30px;
+}
+
+.hero-content h1::after {
+  right: -30px;
 }
 
 .hero-content p {
-  font-size: 1rem;
-  opacity: 0.9;
+  font-size: 16px;
+  opacity: 0.95;
   font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0;
+  font-style: italic;
+}
+
+.hero-content p::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
 /* ===========================
