@@ -1,6 +1,6 @@
-// frontend/src/components/AlarmModal.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import timerService from '../services/timerService';
+import axiosInstance from '../services/axiosConfig';
 import './AlarmModal.css';
 
 const AlarmModal = ({ isOpen, onClose }) => {
@@ -30,11 +30,16 @@ const AlarmTimerComponent = () => {
   const [backendTimers, setBackendTimers] = useState([]);
   const [loading, setLoading] = useState(false);
   
+  // ✅ Settings States
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [vibrationEnabled, setVibrationEnabled] = useState(true);
+  const [notificationEnabled, setNotificationEnabled] = useState(true);
+  
   const timerIntervalRef = useRef(null);
   const currentTimerIdRef = useRef(null);
   const beepIntervalRef = useRef(null);
   const titleIntervalRef = useRef(null);
-  const backgroundTimerRef = useRef(null); // ✅ NEW: Background ke liye
+  const backgroundTimerRef = useRef(null);
 
   // Update total seconds when minutes/seconds change
   useEffect(() => {
@@ -43,43 +48,51 @@ const AlarmTimerComponent = () => {
     }
   }, [minutes, seconds, isRunning]);
 
-  // Check for existing beep on mount
-  // frontend/src/components/AlarmModal.jsx (Sirf changes dikha raha hoon)
-
-// AlarmTimerComponent mein ye changes karo:
-
-useEffect(() => {
-  loadTimersFromBackend();
-  checkExistingBeep();
-  
-  if ("Notification" in window && Notification.permission === "default") {
-    Notification.requestPermission();
-  }
-  
-  // ✅ Register background alarm callback
-  timerService.onAlarmTrigger((label) => {
-    console.log("🔔 Background alarm received:", label);
-    startBeep();
-  });
-  
-  // ✅ Start background polling (ye modal band hone par bhi chalega)
-  timerService.startBackgroundPolling();
-  
-  window.addEventListener('beforeunload', () => {
-    if (isBeeping) {
-      localStorage.setItem('chefbot_beep_active', 'true');
+  // ✅ Fetch all settings from backend
+  const fetchSettings = async () => {
+    try {
+      const response = await axiosInstance.get('/users/settings');
+      setSoundEnabled(response.data.settings?.soundPreferences?.beepEnabled ?? true);
+      setVibrationEnabled(response.data.settings?.soundPreferences?.vibrationEnabled ?? true);
+      setNotificationEnabled(response.data.settings?.notificationPreferences?.browserNotification ?? true);
+      console.log("🔊 Settings loaded:", { 
+        sound: response.data.settings?.soundPreferences?.beepEnabled,
+        notification: response.data.settings?.notificationPreferences?.browserNotification 
+      });
+    } catch (error) {
+      console.error('Error fetching settings:', error);
     }
-  });
-  
-  return () => {
-    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
-    if (titleIntervalRef.current) clearInterval(titleIntervalRef.current);
-    if (backgroundTimerRef.current) clearTimeout(backgroundTimerRef.current);
-    // ⚠️ Polling mat roko - background mein chalne do
-    // timerService.stopBackgroundPolling(); // COMMENT THIS
   };
-}, []);  // ✅ Empty dependency array - sirf ek baar run hoga
-  // Check if beep was playing
+
+  useEffect(() => {
+    fetchSettings();
+    loadTimersFromBackend();
+    checkExistingBeep();
+    
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+    
+    timerService.onAlarmTrigger((label) => {
+      console.log("🔔 Background alarm received:", label);
+      startBeep();
+    });
+    
+    timerService.startBackgroundPolling();
+    
+    window.addEventListener('beforeunload', () => {
+      if (isBeeping) {
+        localStorage.setItem('chefbot_beep_active', 'true');
+      }
+    });
+    
+    return () => {
+      if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+      if (titleIntervalRef.current) clearInterval(titleIntervalRef.current);
+      if (backgroundTimerRef.current) clearTimeout(backgroundTimerRef.current);
+    };
+  }, []);
+
   const checkExistingBeep = () => {
     const beepActive = localStorage.getItem('chefbot_beep_active');
     if (beepActive === 'true') {
@@ -91,7 +104,6 @@ useEffect(() => {
     }
   };
 
-  // Load timers from backend
   const loadTimersFromBackend = async () => {
     try {
       const timers = await timerService.getAllTimers();
@@ -118,7 +130,6 @@ useEffect(() => {
     }
   };
 
-  // Countdown timer
   const startCountdown = (duration) => {
     if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     
@@ -144,7 +155,6 @@ useEffect(() => {
     }, 1000);
   };
 
-  // Start timer
   const startTimer = async () => {
     if (isRunning || totalSeconds <= 0) return;
     
@@ -164,8 +174,6 @@ useEffect(() => {
       stopBeep();
       
       startCountdown(duration);
-      
-      // ✅ NEW: Background alarm schedule karo
       scheduleBackgroundAlarm(duration, `${minutes}m ${seconds}s Timer`);
       
       console.log(`✅ Timer started: ${duration} seconds`);
@@ -178,22 +186,20 @@ useEffect(() => {
     }
   };
 
-  // ✅ NEW: Background alarm schedule karne ke liye
   const scheduleBackgroundAlarm = (duration, label) => {
     if (backgroundTimerRef.current) clearTimeout(backgroundTimerRef.current);
     
     backgroundTimerRef.current = setTimeout(() => {
-      // Ye tab band ya background mein bhi kaam karega
       triggerBackgroundAlarm(label);
     }, duration * 1000);
   };
 
-  // ✅ NEW: Background alarm trigger
+  // ✅ BACKGROUND ALARM - WITH NOTIFICATION CHECK
   const triggerBackgroundAlarm = (label) => {
     console.log("🔔 Background alarm triggered!");
     
-    // Background notification (ye tab band hone par bhi dikhegi)
-    if ("Notification" in window && Notification.permission === "granted") {
+    // ✅ Notification check
+    if (notificationEnabled && "Notification" in window && Notification.permission === "granted") {
       const notification = new Notification("⏰ Timer Complete!", {
         body: `${label} - Time's up!`,
         requireInteraction: true,
@@ -207,26 +213,14 @@ useEffect(() => {
       };
     }
     
-    // Agar app open hai to beep bhi bajao
     if (!document.hidden) {
       startBeep();
     } else {
-      // Background mein bhi sound try karo
-      try {
-        const audio = new Audio();
-        // Small beep sound
-        audio.src = 'data:audio/wav;base64,U3RlYWx0aCBMYWJz';
-        audio.volume = 0.5;
-        audio.play().catch(e => console.log("BG audio error:", e));
-      } catch(e) {}
-      
-      // Store for when page opens again
       localStorage.setItem('chefbot_beep_active', 'true');
       setIsBeeping(true);
     }
   };
 
-  // Stop timer
   const stopTimer = async () => {
     if (timerIntervalRef.current) {
       clearInterval(timerIntervalRef.current);
@@ -246,7 +240,6 @@ useEffect(() => {
     setIsRunning(false);
   };
 
-  // Reset timer
   const resetTimer = async () => {
     if (timerIntervalRef.current) {
       clearInterval(timerIntervalRef.current);
@@ -274,8 +267,14 @@ useEffect(() => {
     await loadTimersFromBackend();
   };
 
-  // Start beep
+  // ✅ START BEEP - WITH SOUND CHECK
   const startBeep = () => {
+    // ✅ AGAR SOUND DISABLED HAI TO BEEP MAT BAJAO
+    if (!soundEnabled) {
+      console.log("🔇 Sound is disabled, not beeping");
+      return;
+    }
+    
     stopBeep();
     
     setIsBeeping(true);
@@ -317,8 +316,8 @@ useEffect(() => {
     
     showFloatingNotification();
     
-    // Browser notification
-    if ("Notification" in window && Notification.permission === "granted") {
+    // ✅ NOTIFICATION CHECK - Browser Notification
+    if (notificationEnabled && "Notification" in window && Notification.permission === "granted") {
       const notification = new Notification("⏰ Timer Complete!", {
         body: "Click to stop alarm",
         requireInteraction: true,
@@ -330,7 +329,6 @@ useEffect(() => {
       };
     }
     
-    // Title blink
     let count = 0;
     const originalTitle = document.title;
     titleIntervalRef.current = setInterval(() => {
@@ -347,13 +345,12 @@ useEffect(() => {
       }
     }, 500);
     
-    // Vibrate for mobile
-    if ('vibrate' in navigator) {
+    // ✅ Vibration check
+    if (vibrationEnabled && 'vibrate' in navigator) {
       navigator.vibrate([200, 100, 200, 100, 200]);
     }
   };
 
-  // Stop beep
   const stopBeep = () => {
     if (beepIntervalRef.current) {
       clearInterval(beepIntervalRef.current);
@@ -378,8 +375,11 @@ useEffect(() => {
     console.log("🔕 Beep stopped!");
   };
 
-  // Floating notification
+  // ✅ FLOATING NOTIFICATION - WITH NOTIFICATION CHECK
   const showFloatingNotification = () => {
+    // Floating notification (popup) ko notification setting pe mat lagaao
+    // Ye alag hai - sirf UI element hai, browser notification nahi
+    
     removeFloatingNotification();
     
     const div = document.createElement('div');
@@ -443,14 +443,12 @@ useEffect(() => {
 
   return (
     <div className="alarm-sidebar-content">
-      {/* Timer Display */}
       <div className="timer-display-section">
         <div className={`time-display ${isCompleted ? 'completed' : ''}`}>
           {formatTime(totalSeconds)}
         </div>
       </div>
       
-      {/* Time Setup */}
       <div className="time-setup-section">
         <h3>Set Timer Duration</h3>
         <div className="time-inputs">
@@ -501,7 +499,6 @@ useEffect(() => {
         </div>
       </div>
       
-      {/* Controls */}
       <div className="timer-controls">
         <div className="main-buttons">
           {!isRunning && !isCompleted ? (
@@ -524,7 +521,6 @@ useEffect(() => {
         </div>
       </div>
       
-      {/* Saved Timers */}
       {backendTimers.length > 0 && (
         <div className="saved-timers-section">
           <h4>📋 Your Timers</h4>
@@ -542,7 +538,6 @@ useEffect(() => {
         </div>
       )}
       
-      {/* Beep Status */}
       {isBeeping && (
         <div className="beep-status-active">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

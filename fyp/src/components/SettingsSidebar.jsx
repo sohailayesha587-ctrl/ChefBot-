@@ -13,29 +13,29 @@ import {
 const SettingsSidebar = ({ isOpen, onClose }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState(false);
+  const [isProfileExpanded, setIsProfileExpanded] = useState(false);
+  const [editingName, setEditingName] = useState(false);
   const [name, setName] = useState('');
   
+  // Sound, Notification, Vibration ke liye states
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
   
+  const [showEditMenu, setShowEditMenu] = useState(false);
   const [stats, setStats] = useState({
     totalTimers: 0,
     activeTimers: 0
   });
 
-  // Daily Report State
   const [showDailyReport, setShowDailyReport] = useState(false);
   const [missingNotifications, setMissingNotifications] = useState([]);
   const [loadingReport, setLoadingReport] = useState(false);
-  
-  // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentReport, setCurrentReport] = useState(null);
   const [currentNotificationId, setCurrentNotificationId] = useState(null);
 
+  // ========== SIDEBAR OPEN/CLOSE EFFECT ==========
   useEffect(() => {
     if (isOpen) {
       fetchProfile();
@@ -44,6 +44,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       fetchMissingNotifications();
       document.body.style.overflow = 'hidden';
     } else {
+      setIsProfileExpanded(false);
+      setEditingName(false);
+      setShowEditMenu(false);
       document.body.style.overflow = 'auto';
     }
     return () => {
@@ -51,21 +54,14 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-  }, [darkMode]);
-
+  // ========== FETCH FUNCTIONS ==========
   const fetchProfile = async () => {
     try {
       const response = await axiosInstance.get('/users/profile');
       setUser(response.data.user);
       setName(response.data.user.name);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching profile:', error);
     }
   };
 
@@ -76,10 +72,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
         setSoundEnabled(response.data.settings.soundPreferences?.beepEnabled ?? true);
         setNotificationEnabled(response.data.settings.notificationPreferences?.browserNotification ?? true);
         setVibrationEnabled(response.data.settings.soundPreferences?.vibrationEnabled ?? true);
-        setDarkMode(response.data.settings.displayPreferences?.theme === 'dark');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching settings:', error);
     } finally {
       setLoading(false);
     }
@@ -93,11 +88,10 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
         activeTimers: response.data.stats?.activeTimers || 0
       });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching stats:', error);
     }
   };
 
-  // Fetch missing notifications
   const fetchMissingNotifications = async () => {
     try {
       setLoadingReport(true);
@@ -111,7 +105,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     }
   };
 
-  // Handle Answer Now button click
   const handleAnswerNow = async (notificationId, reportId) => {
     try {
       setCurrentNotificationId(notificationId);
@@ -119,37 +112,28 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       setCurrentReport(response.report);
       setIsModalOpen(true);
     } catch (error) {
-      console.error('Error loading report questions:', error);
+      console.error('Error:', error);
       alert('Failed to load report questions');
     }
   };
 
-  // Handle submit report answers
   const handleSubmitReport = async (reportId, answers) => {
     try {
-      // Submit answers
       const response = await submitReportAnswers(reportId, answers);
       alert(response.message);
-      
-      // Mark notification as replied
       if (currentNotificationId) {
         await markAsReplied(currentNotificationId);
       }
-      
-      // Refresh the missing notifications list
       await fetchMissingNotifications();
-      
-      // Close modal
       setIsModalOpen(false);
       setCurrentReport(null);
       setCurrentNotificationId(null);
     } catch (error) {
-      console.error('Error submitting report:', error);
+      console.error('Error:', error);
       alert('Failed to submit report');
     }
   };
 
-  // Handle generate report
   const handleGenerateReport = async () => {
     try {
       setLoadingReport(true);
@@ -157,26 +141,27 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       alert(`✅ ${response.message}`);
       await fetchMissingNotifications();
     } catch (error) {
-      console.error('Error generating report:', error);
+      console.error('Error:', error);
       alert('Failed to generate report');
-    } finally {
-      setLoadingReport(false);
     }
   };
 
-  const updateProfile = async () => {
+  const updateName = async () => {
     try {
       await axiosInstance.put('/users/profile', { name });
       setUser({ ...user, name });
-      setEditing(false);
-      alert('Profile updated!');
+      setEditingName(false);
+      setIsProfileExpanded(false);
+      alert('Name updated successfully!');
     } catch (error) {
-      alert('Failed to update profile');
+      alert('Failed to update name');
     }
   };
 
+  // ========== UPDATE SETTINGS - SOUND, NOTIFICATION, VIBRATION ==========
   const updateSettings = async () => {
     try {
+      // Sound preferences update karo
       await axiosInstance.put('/users/settings', {
         soundPreferences: { 
           beepEnabled: soundEnabled,
@@ -184,15 +169,60 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
         },
         notificationPreferences: { 
           browserNotification: notificationEnabled 
-        },
-        displayPreferences: { 
-          theme: darkMode ? 'dark' : 'light'
         }
       });
-      alert('Settings saved!');
+      
+      // ✅ Save karne ke baad global variables update karo
+      // Timer component mein sound enable/disable ke liye
+      localStorage.setItem('soundEnabled', soundEnabled);
+      localStorage.setItem('vibrationEnabled', vibrationEnabled);
+      localStorage.setItem('notificationEnabled', notificationEnabled);
+      
+      // ✅ Browser notification permission request
+      if (notificationEnabled && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+      
+      alert('Settings saved successfully!');
     } catch (error) {
+      console.error('Error saving settings:', error);
       alert('Failed to save settings');
     }
+  };
+
+  // ========== SOUND PLAY/STOP FUNCTION (Global) ==========
+  const playSound = () => {
+    if (soundEnabled) {
+      const audio = new Audio('/timer-sound.mp3'); // apni sound file ka path
+      audio.play().catch(e => console.log('Sound play failed:', e));
+    }
+  };
+
+  const stopSound = () => {
+    // Sound stop karne ka logic agar chahiye to
+  };
+
+  // Make functions available globally for timer component
+  useEffect(() => {
+    window.playTimerSound = playSound;
+    window.stopTimerSound = stopSound;
+    window.isSoundEnabled = () => soundEnabled;
+    window.isVibrationEnabled = () => vibrationEnabled;
+  }, [soundEnabled, vibrationEnabled]);
+
+  // ========== EDIT PROFILE FUNCTIONS ==========
+  const handleChangeName = () => {
+    console.log("Change Name clicked");
+    setEditingName(true);
+    setIsProfileExpanded(false);
+  };
+
+  const handleChangeEmail = () => {
+    window.location.href = '/change-account?type=email';
+  };
+
+  const handleChangePassword = () => {
+    window.location.href = '/forgot-password';
   };
 
   const handleLogout = () => {
@@ -206,267 +236,209 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       <div className={`sidebar-overlay ${isOpen ? 'active' : ''}`} onClick={onClose} />
       
       <div className={`settings-sidebar ${isOpen ? 'open' : ''}`}>
-        {/* Header with Close Button - RIGHT */}
         <div className="sidebar-header">
           <div className="header-title-section">
-            <div className="title-icon">⚙️</div>
+            <span className="title-icon">⚙️</span>
             <h2>Settings</h2>
           </div>
-          <button className="close-btn-modern" onClick={onClose}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </button>
+          <button className="close-btn" onClick={onClose}>✕</button>
         </div>
 
         {loading ? (
           <div className="loading-container">
-            <div className="professional-spinner"></div>
-            <p>Loading your profile...</p>
+            <div className="spinner"></div>
+            <p>Loading...</p>
           </div>
         ) : (
           <div className="sidebar-content">
-            {/* Professional User Card */}
-            <div className="user-card">
-              <div className="user-card-bg"></div>
-              <div className="user-avatar-professional">
+            {/* Profile Card */}
+            <div className="profile-card">
+              <div className="profile-avatar">
                 {user?.profilePicture ? (
                   <img src={user.profilePicture} alt={user?.name} />
                 ) : (
-                  <div className="avatar-gradient">
+                  <div className="avatar">
                     {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                   </div>
                 )}
-                <div className="online-badge"></div>
               </div>
               
-              {editing ? (
-                <div className="edit-profile-container">
+              {editingName ? (
+                <div className="edit-name-container">
                   <input 
                     type="text" 
                     value={name} 
                     onChange={(e) => setName(e.target.value)}
-                    className="professional-input"
+                    className="name-input"
                     autoFocus
                   />
-                  <div className="edit-buttons">
-                    <button className="btn-save" onClick={updateProfile}>Save</button>
-                    <button className="btn-cancel" onClick={() => setEditing(false)}>Cancel</button>
+                  <div className="edit-btns">
+                    <button className="save-btn" onClick={updateName}>Save</button>
+                    <button className="cancel-btn" onClick={() => setEditingName(false)}>Cancel</button>
                   </div>
                 </div>
               ) : (
-                <div className="user-details">
-                  <h3 className="user-name-professional">{user?.name}</h3>
-                  <p className="user-email-professional">{user?.email}</p>
-                  <button className="edit-profile-btn-modern" onClick={() => setEditing(true)}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17 3L21 7L7 21H3V17L17 3Z"/>
-                    </svg>
-                    Edit Profile
+                <div className="profile-info">
+                  <h3 className="profile-name">{user?.name}</h3>
+                  <p className="profile-email">{user?.email}</p>
+                  
+                  <button 
+                    className="edit-profile-btn" 
+                    onClick={() => setIsProfileExpanded(!isProfileExpanded)}
+                  >
+                    ✏️ Edit Profile
+                    <span className={`arrow ${isProfileExpanded ? 'rotate' : ''}`}>▼</span>
                   </button>
+
+                  {isProfileExpanded && (
+                    <div className="profile-options">
+                      <div className="divider"></div>
+                      <button className="option-btn" onClick={handleChangeName}>
+                        ✏️ Change Name
+                      </button>
+                      <button className="option-btn" onClick={handleChangeEmail}>
+                        📧 Change Email
+                      </button>
+                      <button className="option-btn" onClick={handleChangePassword}>
+                        🔒 Change Password
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Professional Stats Cards */}
-            <div className="stats-container">
-              <div className="stat-card-modern">
-                <div className="stat-icon-wrapper">
-                  <span>⏱️</span>
-                </div>
-                <div className="stat-content">
-                  <span className="stat-number">{stats.totalTimers}</span>
-                  <span className="stat-label-modern">Total Timers</span>
+            {/* Stats */}
+            <div className="stats-row">
+              <div className="stat-card">
+                <span className="stat-icon">⏱️</span>
+                <div>
+                  <div className="stat-number">{stats.totalTimers}</div>
+                  <div className="stat-label">Total Timers</div>
                 </div>
               </div>
-              <div className="stat-card-modern">
-                <div className="stat-icon-wrapper">
-                  <span>🔔</span>
-                </div>
-                <div className="stat-content">
-                  <span className="stat-number">{stats.activeTimers}</span>
-                  <span className="stat-label-modern">Active Timers</span>
+              <div className="stat-card">
+                <span className="stat-icon">🔔</span>
+                <div>
+                  <div className="stat-number">{stats.activeTimers}</div>
+                  <div className="stat-label">Active Timers</div>
                 </div>
               </div>
             </div>
 
-            {/* DAILY REPORT BUTTON */}
-            <div className="settings-container">
-              <div className="section-header-left">
-                <span className="section-indicator"></span>
+            {/* Daily Report */}
+            <div className="settings-block">
+              <div className="block-title">
+                <span className="title-line"></span>
                 <h4>Daily Report</h4>
               </div>
 
               <button 
-                className="daily-report-btn"
+                className="report-btn"
                 onClick={() => setShowDailyReport(!showDailyReport)}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-                {showDailyReport ? 'Hide Daily Report' : 'View Daily Report'}
+                📋 {showDailyReport ? 'Hide Daily Report' : 'View Daily Report'}
                 {missingNotifications.length > 0 && (
-                  <span className="report-badge">{missingNotifications.length}</span>
+                  <span className="badge">{missingNotifications.length}</span>
                 )}
               </button>
 
-              {/* Daily Report Panel */}
               {showDailyReport && (
-                <div className="daily-report-panel">
-                  <div className="daily-report-header">
-                    <span>📋 Missing Notifications</span>
-                    <button className="refresh-report-btn" onClick={fetchMissingNotifications}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M23 4v6h-6M1 20v-6h6"/>
-                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-                      </svg>
-                    </button>
-                  </div>
-
+                <div className="report-panel">
                   {loadingReport ? (
-                    <div className="report-loading">Loading...</div>
+                    <p>Loading...</p>
                   ) : missingNotifications.length === 0 ? (
-                    <div className="no-missing">
-                      <span>✅ No missing notifications!</span>
-                      <p>All notifications have been replied to.</p>
-                    </div>
+                    <div className="empty-state">✅ No missing notifications!</div>
                   ) : (
                     <>
-                      <div className="missing-list">
-                        {missingNotifications.map((notif, index) => (
-                          <div key={notif.id || index} className="missing-item">
-                            <div className="missing-info">
-                              <span className="missing-icon">🔔</span>
-                              <div className="missing-details">
-                                <div className="missing-title">{notif.title || 'Notification'}</div>
-                                <div className="missing-message">{notif.message || 'No response received'}</div>
-                                <div className="missing-time">
-                                  Sent: {new Date(notif.sentAt).toLocaleString()}
-                                </div>
-                              </div>
-                            </div>
-                            <button 
-                              className="answer-now-btn"
-                              onClick={() => handleAnswerNow(notif.id, notif.reportId)}
-                            >
-                              📝 Answer Now
-                            </button>
+                      {missingNotifications.map((notif, idx) => (
+                        <div key={idx} className="notification-item">
+                          <div>
+                            <div className="notif-title">{notif.title}</div>
+                            <div className="notif-msg">{notif.message}</div>
                           </div>
-                        ))}
-                      </div>
-
-                      <div className="report-actions">
-                        <button className="generate-report-btn" onClick={handleGenerateReport}>
-                          📧 Generate & Send Report
-                        </button>
-                      </div>
+                          <button 
+                            className="answer-btn"
+                            onClick={() => handleAnswerNow(notif.id, notif.reportId)}
+                          >
+                            Answer
+                          </button>
+                        </div>
+                      ))}
+                      <button className="generate-btn" onClick={handleGenerateReport}>
+                        📧 Generate Report
+                      </button>
                     </>
                   )}
                 </div>
               )}
             </div>
 
-            {/* Settings Section */}
-            <div className="settings-container">
-              <div className="section-header-left">
-                <span className="section-indicator"></span>
+            {/* Preferences */}
+            <div className="settings-block">
+              <div className="block-title">
+                <span className="title-line"></span>
                 <h4>Preferences</h4>
               </div>
 
-              <div className="settings-list-modern">
-                <div className="setting-item-modern">
-                  <div className="setting-left">
-                    <div className="setting-icon-modern">🔊</div>
-                    <div className="setting-info-modern">
-                      <span className="setting-title">Sound Effects</span>
-                      <span className="setting-description">Play sound when timer ends</span>
-                    </div>
+              {/* Sound Effects Toggle */}
+              <div className="setting-item">
+                <div className="setting-left">
+                  <span>🔊</span>
+                  <div>
+                    <div className="setting-title">Sound Effects</div>
+                    <div className="setting-desc">Play sound when timer ends</div>
                   </div>
-                  <label className="toggle-modern">
-                    <input type="checkbox" checked={soundEnabled} onChange={(e) => setSoundEnabled(e.target.checked)} />
-                    <span className="toggle-track">
-                      <span className="toggle-thumb"></span>
-                    </span>
-                  </label>
                 </div>
+                <label className="toggle">
+                  <input type="checkbox" checked={soundEnabled} onChange={(e) => setSoundEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
 
-                <div className="setting-item-modern">
-                  <div className="setting-left">
-                    <div className="setting-icon-modern">🔔</div>
-                    <div className="setting-info-modern">
-                      <span className="setting-title">Notifications</span>
-                      <span className="setting-description">Receive browser notifications</span>
-                    </div>
+              {/* Notifications Toggle */}
+              <div className="setting-item">
+                <div className="setting-left">
+                  <span>🔔</span>
+                  <div>
+                    <div className="setting-title">Notifications</div>
+                    <div className="setting-desc">Receive browser notifications</div>
                   </div>
-                  <label className="toggle-modern">
-                    <input type="checkbox" checked={notificationEnabled} onChange={(e) => setNotificationEnabled(e.target.checked)} />
-                    <span className="toggle-track">
-                      <span className="toggle-thumb"></span>
-                    </span>
-                  </label>
                 </div>
+                <label className="toggle">
+                  <input type="checkbox" checked={notificationEnabled} onChange={(e) => setNotificationEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
 
-                <div className="setting-item-modern">
-                  <div className="setting-left">
-                    <div className="setting-icon-modern">📳</div>
-                    <div className="setting-info-modern">
-                      <span className="setting-title">Vibration</span>
-                      <span className="setting-description">Haptic feedback on completion</span>
-                    </div>
+              {/* Vibration Toggle */}
+              <div className="setting-item">
+                <div className="setting-left">
+                  <span>📳</span>
+                  <div>
+                    <div className="setting-title">Vibration</div>
+                    <div className="setting-desc">Haptic feedback on completion</div>
                   </div>
-                  <label className="toggle-modern">
-                    <input type="checkbox" checked={vibrationEnabled} onChange={(e) => setVibrationEnabled(e.target.checked)} />
-                    <span className="toggle-track">
-                      <span className="toggle-thumb"></span>
-                    </span>
-                  </label>
                 </div>
-
-                <div className="setting-item-modern">
-                  <div className="setting-left">
-                    <div className="setting-icon-modern">🌙</div>
-                    <div className="setting-info-modern">
-                      <span className="setting-title">Dark Mode</span>
-                      <span className="setting-description">Switch to dark theme</span>
-                    </div>
-                  </div>
-                  <label className="toggle-modern">
-                    <input type="checkbox" checked={darkMode} onChange={(e) => setDarkMode(e.target.checked)} />
-                    <span className="toggle-track">
-                      <span className="toggle-thumb"></span>
-                    </span>
-                  </label>
-                </div>
+                <label className="toggle">
+                  <input type="checkbox" checked={vibrationEnabled} onChange={(e) => setVibrationEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="action-buttons-modern">
-              <button className="btn-primary-modern" onClick={updateSettings}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/>
-                  <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/>
-                </svg>
-                Save Changes
-              </button>
-              
-              <button className="btn-secondary-modern" onClick={handleLogout}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                  <polyline points="16 17 21 12 16 7"/>
-                  <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
-                Sign Out
-              </button>
-            </div>
+            {/* Actions */}
+            <button className="save-btn-main" onClick={updateSettings}>
+              💾 Save Changes
+            </button>
+            
+            <button className="logout-btn" onClick={handleLogout}>
+              🚪 Sign Out
+            </button>
           </div>
         )}
       </div>
 
-      {/* Daily Report Modal */}
       <DailyReportModal
         isOpen={isModalOpen}
         onClose={() => {

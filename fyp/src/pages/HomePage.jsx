@@ -136,7 +136,7 @@ const HomePage = () => {
         <div className="hero-left">
           <h2>Digital Cooking</h2>
           <p>Turn pantry items into delicious meals with ChefBot's recipe suggestions.</p>
-          <Link to="/" className="contact-link">Start Learning →</Link>
+          <Link to="/smart-pantry" className="contact-link">Start Learning →</Link>
         </div>
         <div className="hero-center">
           <h1>No grocery trip needed! Cook from pantry items with ChefBot.</h1>
@@ -253,38 +253,9 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* ========== CHATBOT ICON ========== */}
-      <div className="chatbot-icon" onClick={toggleChatbot}>
-        <i className="fas fa-robot"></i>
-        {unreadMessages > 0 && (
-          <span className="chatbot-badge">{unreadMessages}</span>
-        )}
-      </div>
+      
 
-      {/* Chatbot Modal */}
-      {showChatbot && (
-        <div className="chatbot-modal active">
-          <div className="chatbot-header">
-            <h3><i className="fas fa-robot"></i> ChefBot Assistant</h3>
-            <button className="close-chatbot" onClick={toggleChatbot}>
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-          <div className="chatbot-body">
-            <p>Hello! I'm ChefBot. How can I help you with cooking today? 🍳</p>
-          </div>
-          <div className="chatbot-footer">
-            <input 
-              type="text" 
-              className="chatbot-input" 
-              placeholder="Type your message..."
-            />
-            <button className="chatbot-send">
-              <i className="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };

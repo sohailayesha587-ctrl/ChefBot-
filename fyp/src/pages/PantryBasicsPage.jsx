@@ -26,93 +26,98 @@ const PantryBasicsPage = () => {
 
   // ==================== PARSE GUIDE DATA ====================
   const parseGuideToItem = (guide) => {
-    // First try to parse content as JSON (for migration data)
-    if (guide.content && guide.content.trim().startsWith('{')) {
-      try {
-        const parsed = JSON.parse(guide.content);
-        return {
-          id: guide._id,
-          ...parsed,
-          image: parsed.image || guide.image,
-          // Ensure all fields exist
-          tagline: parsed.tagline || guide.tagline || parsed.name || guide.title,
-          fullDesc: parsed.fullDesc || parsed.description || guide.fullDesc || guide.content,
-          storageTips: parsed.storageTips || guide.storageTips || "Store in cool, dry place",
-          shelfLife: parsed.shelfLife || guide.shelfLife || "Varies by item",
-          keyUses: parsed.keyUses || guide.keyUses || [],
-          types: parsed.types || guide.types || [],
-          keyFeatures: parsed.keyFeatures || guide.keyFeatures || [],
-          properUsage: parsed.properUsage || guide.properUsage || "",
-          commonMistakes: parsed.commonMistakes || guide.commonMistakes || [],
-          urduName: parsed.urduName || guide.urduName || "",
-          season: parsed.season || guide.season || "All year",
-          category: parsed.category || guide.category
-        };
-      } catch (e) {
-        console.warn('JSON parse error for:', guide.title, e.message);
-      }
-    }
+    const content = guide.content || {};
     
-    // If not JSON, create from direct fields
     return {
       id: guide._id,
-      name: guide.title,
-      tagline: guide.tagline || guide.title,
-      fullDesc: guide.fullDesc || guide.description || guide.content || `${guide.title} is an essential kitchen item.`,
-      image: guide.image || 'https://via.placeholder.com/300',
-      storageTips: guide.storageTips || "Store in cool, dry place",
-      shelfLife: guide.shelfLife || "Varies by item",
-      keyUses: guide.keyUses || [],
-      types: guide.types || [],
-      category: guide.category,
-      keyFeatures: guide.keyFeatures || [],
-      properUsage: guide.properUsage || "",
-      commonMistakes: guide.commonMistakes || [],
-      urduName: guide.urduName || "",
-      season: guide.season || "All year",
-      nutritionalInfo: guide.nutritionalInfo || "",
-      healthBenefits: guide.healthBenefits || [],
-      cookingTips: guide.cookingTips || ""
+      name: guide.title || content.name || '',
+      tagline: content.tagline || guide.tagline || '',
+      fullDesc: content.fullDesc || content.description || guide.fullDesc || '',
+      description: content.description || guide.description || '',
+      image: guide.image || content.image || 'https://via.placeholder.com/300',
+      
+      // Storage & Shelf Life
+      storageTips: content.storageTips || guide.storageTips || "Store in a cool, dry place",
+      shelfLife: content.shelfLife || guide.shelfLife || "Varies by item",
+      
+      // Usage
+      keyUses: content.keyUses || guide.keyUses || [],
+      bestFor: content.bestFor || guide.bestFor || '',
+      
+      // Types & Varieties
+      types: content.types || guide.types || [],
+      
+      // Key Features (Spices)
+      keyFeatures: content.keyFeatures || guide.keyFeatures || [],
+      properUsage: content.properUsage || guide.properUsage || '',
+      commonMistakes: content.commonMistakes || guide.commonMistakes || [],
+      
+      // Additional Info
+      urduName: content.urduName || guide.urduName || '',
+      season: content.season || guide.season || "All year",
+      nutritionalInfo: content.nutritionalInfo || guide.nutritionalInfo || '',
+      healthBenefits: content.healthBenefits || guide.healthBenefits || [],
+      cookingTips: content.cookingTips || guide.cookingTips || '',
+      
+      // Physical Properties
+      type: content.type || guide.type || '',
+      material: content.material || guide.material || '',
+      price: content.price || guide.price || '',
+      priceRange: content.priceRange || guide.priceRange || '',
+      durability: content.durability || guide.durability || '',
+      
+      // Pros & Cons
+      pros: content.pros || guide.pros || [],
+      cons: content.cons || guide.cons || [],
+      care: content.care || guide.care || '',
+      
+      // Size/Capacity
+      size: content.size || guide.size || '',
+      sizes: content.sizes || guide.sizes || '',
+      capacity: content.capacity || guide.capacity || '',
+      diameter: content.diameter || guide.diameter || '',
+      length: content.length || guide.length || '',
+      
+      // Spice specific
+      spiceType: content.spiceType || guide.spiceType || '',
+      
+      // Vegetable specific
+      vegetableType: content.vegetableType || guide.vegetableType || '',
+      
+      // Category for filtering
+      category: content.category || guide.category || '',
+      subCategory: guide.subCategory || ''
     };
   };
 
   // ==================== FETCH DATA FROM API ====================
-  const fetchCategoryData = async (category, setData) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/beginners-guide`, {
-        params: { category }
-      });
-      
-      console.log(`Fetched ${category}:`, response.data);
-      
-      if (response.data && response.data.guides && response.data.guides.length > 0) {
-        const parsedData = response.data.guides.map(parseGuideToItem);
-        setData(parsedData);
-        return true;
-      } else {
-        console.log(`No data found for ${category}`);
-        setData([]);
-        return false;
-      }
-    } catch (error) {
-      console.error(`Error fetching ${category}:`, error.message);
-      setData([]);
-      return false;
-    }
-  };
-
   useEffect(() => {
     const fetchAllData = async () => {
       setLoading(true);
       setError(null);
       
-      // Fetch all categories
-      await Promise.all([
-        fetchCategoryData('pantry-basics', setKitchenBasicsData),
-        fetchCategoryData('spices', setSpicesData),
-        fetchCategoryData('staples', setStaplesData),
-        fetchCategoryData('vegetables', setDailyVegetablesData)
-      ]);
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/beginners-guide`, {
+          params: { mainCategory: 'pantry-basics' }
+        });
+        
+        const allGuides = response.data.guides || [];
+        console.log('Total guides fetched:', allGuides.length);
+        
+        const basics = allGuides.filter(g => g.subCategory === 'kitchen-basics');
+        const spices = allGuides.filter(g => g.subCategory === 'spices');
+        const staples = allGuides.filter(g => g.subCategory === 'staples');
+        const vegetables = allGuides.filter(g => g.subCategory === 'vegetables');
+        
+        setKitchenBasicsData(basics.map(parseGuideToItem));
+        setSpicesData(spices.map(parseGuideToItem));
+        setStaplesData(staples.map(parseGuideToItem));
+        setDailyVegetablesData(vegetables.map(parseGuideToItem));
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Failed to load data. Please check connection.');
+      }
       
       setLoading(false);
     };
@@ -120,10 +125,15 @@ const PantryBasicsPage = () => {
     fetchAllData();
   }, []);
 
-  // Filter functions
+  // ==================== FILTER FUNCTIONS ====================
   const getFilteredSpices = () => {
     if (spiceCategory === 'all') return spicesData;
-    return spicesData.filter(spice => spice.category === spiceCategory);
+    if (spiceCategory === 'whole') return spicesData.filter(spice => spice.spiceType === 'whole');
+    if (spiceCategory === 'ground') return spicesData.filter(spice => spice.spiceType === 'ground');
+    if (spiceCategory === 'dried-herb') return spicesData.filter(spice => spice.spiceType === 'dried-herb');
+    if (spiceCategory === 'aromatic') return spicesData.filter(spice => spice.filterTags?.includes('aromatic'));
+    if (spiceCategory === 'temper') return spicesData.filter(spice => spice.filterTags?.includes('temper'));
+    return spicesData;
   };
 
   const getFilteredStaples = () => {
@@ -133,7 +143,7 @@ const PantryBasicsPage = () => {
 
   const getFilteredVegetables = () => {
     if (vegetablesCategory === 'all') return dailyVegetablesData;
-    return dailyVegetablesData.filter(item => item.category === vegetablesCategory);
+    return dailyVegetablesData.filter(item => item.vegetableType === vegetablesCategory);
   };
 
   const getCurrentData = () => {
@@ -144,6 +154,12 @@ const PantryBasicsPage = () => {
       case 'vegetables': return getFilteredVegetables();
       default: return kitchenBasicsData;
     }
+  };
+
+  // Helper functions to get counts
+  const getStaplesCount = (cat) => {
+    if (cat === 'all') return staplesData.length;
+    return staplesData.filter(item => item.category === cat).length;
   };
 
   const handleItemSelect = (item) => {
@@ -165,7 +181,6 @@ const PantryBasicsPage = () => {
       if (name.includes('salt')) return 'basics-salt';
       if (name.includes('sugar')) return 'basics-sugar';
       if (name.includes('tea') || name.includes('coffee')) return 'basics-beverage';
-      if (name.includes('milk')) return 'basics-dairy';
       if (name.includes('vinegar')) return 'basics-vinegar';
     }
     return '';
@@ -193,28 +208,16 @@ const PantryBasicsPage = () => {
           </div>
           <div className="pbp-sidebar-categories">
             <ul className="pbp-categories-list">
-              <li 
-                className={`pbp-category-item ${selectedCategory === 'basics' ? 'pbp-active' : ''}`} 
-                onClick={() => setSelectedCategory('basics')}
-              >
+              <li className={`pbp-category-item ${selectedCategory === 'basics' ? 'pbp-active' : ''}`} onClick={() => setSelectedCategory('basics')}>
                 <span className="pbp-category-name">Kitchen Basics ({kitchenBasicsData.length})</span>
               </li>
-              <li 
-                className={`pbp-category-item ${selectedCategory === 'spices' ? 'pbp-active' : ''}`} 
-                onClick={() => setSelectedCategory('spices')}
-              >
+              <li className={`pbp-category-item ${selectedCategory === 'spices' ? 'pbp-active' : ''}`} onClick={() => setSelectedCategory('spices')}>
                 <span className="pbp-category-name">Spices ({spicesData.length})</span>
               </li>
-              <li 
-                className={`pbp-category-item ${selectedCategory === 'staples' ? 'pbp-active' : ''}`} 
-                onClick={() => setSelectedCategory('staples')}
-              >
+              <li className={`pbp-category-item ${selectedCategory === 'staples' ? 'pbp-active' : ''}`} onClick={() => setSelectedCategory('staples')}>
                 <span className="pbp-category-name">Staples ({staplesData.length})</span>
               </li>
-              <li 
-                className={`pbp-category-item ${selectedCategory === 'vegetables' ? 'pbp-active' : ''}`} 
-                onClick={() => setSelectedCategory('vegetables')}
-              >
+              <li className={`pbp-category-item ${selectedCategory === 'vegetables' ? 'pbp-active' : ''}`} onClick={() => setSelectedCategory('vegetables')}>
                 <span className="pbp-category-name">Vegetables ({dailyVegetablesData.length})</span>
               </li>
             </ul>
@@ -249,34 +252,42 @@ const PantryBasicsPage = () => {
           {/* SPICES FILTER BUTTONS */}
           {selectedCategory === 'spices' && spicesData.length > 0 && (
             <div className="spice-filter-buttons">
-              <button className={`spice-filter-btn ${spiceCategory === 'all' ? 'active' : ''}`} onClick={() => setSpiceCategory('all')}>All Spices ({spicesData.length})</button>
-              <button className={`spice-filter-btn ${spiceCategory === 'whole' ? 'active' : ''}`} onClick={() => setSpiceCategory('whole')}>Whole Spices</button>
-              <button className={`spice-filter-btn ${spiceCategory === 'ground' ? 'active' : ''}`} onClick={() => setSpiceCategory('ground')}>Ground Spices</button>
-              <button className={`spice-filter-btn ${spiceCategory === 'aromatic' ? 'active' : ''}`} onClick={() => setSpiceCategory('aromatic')}>Aromatic Spices</button>
-              <button className={`spice-filter-btn ${spiceCategory === 'temper' ? 'active' : ''}`} onClick={() => setSpiceCategory('temper')}>Temper Spices</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'all' ? 'active' : ''}`} onClick={() => setSpiceCategory('all')}>All ({spicesData.length})</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'whole' ? 'active' : ''}`} onClick={() => setSpiceCategory('whole')}>Whole ({spicesData.filter(s => s.spiceType === 'whole').length})</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'ground' ? 'active' : ''}`} onClick={() => setSpiceCategory('ground')}>Ground ({spicesData.filter(s => s.spiceType === 'ground').length})</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'dried-herb' ? 'active' : ''}`} onClick={() => setSpiceCategory('dried-herb')}>Dried Herbs ({spicesData.filter(s => s.spiceType === 'dried-herb').length})</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'aromatic' ? 'active' : ''}`} onClick={() => setSpiceCategory('aromatic')}>Aromatic</button>
+              <button className={`spice-filter-btn ${spiceCategory === 'temper' ? 'active' : ''}`} onClick={() => setSpiceCategory('temper')}>Temper</button>
             </div>
           )}
 
-          {/* STAPLES FILTER BUTTONS */}
+          {/* STAPLES FILTER BUTTONS - COMPLETE */}
           {selectedCategory === 'staples' && staplesData.length > 0 && (
             <div className="staples-filter-buttons">
-              <button className={`staples-filter-btn ${staplesCategory === 'all' ? 'active' : ''}`} onClick={() => setStaplesCategory('all')}>All Staples ({staplesData.length})</button>
-              <button className={`staples-filter-btn ${staplesCategory === 'rice' ? 'active' : ''}`} onClick={() => setStaplesCategory('rice')}>Rice</button>
-              <button className={`staples-filter-btn ${staplesCategory === 'pulses' ? 'active' : ''}`} onClick={() => setStaplesCategory('pulses')}>Pulses</button>
-              <button className={`staples-filter-btn ${staplesCategory === 'nuts' ? 'active' : ''}`} onClick={() => setStaplesCategory('nuts')}>Nuts</button>
-              <button className={`staples-filter-btn ${staplesCategory === 'dryfruits' ? 'active' : ''}`} onClick={() => setStaplesCategory('dryfruits')}>Dry Fruits</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'all' ? 'active' : ''}`} onClick={() => setStaplesCategory('all')}>All ({staplesData.length})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'rice' ? 'active' : ''}`} onClick={() => setStaplesCategory('rice')}>Rice/Grains ({getStaplesCount('rice')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'flour' ? 'active' : ''}`} onClick={() => setStaplesCategory('flour')}>Flours ({getStaplesCount('flour')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'pulses' ? 'active' : ''}`} onClick={() => setStaplesCategory('pulses')}>Pulses ({getStaplesCount('pulses')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'nuts' ? 'active' : ''}`} onClick={() => setStaplesCategory('nuts')}>Nuts ({getStaplesCount('nuts')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'dryfruits' ? 'active' : ''}`} onClick={() => setStaplesCategory('dryfruits')}>Dry Fruits ({getStaplesCount('dryfruits')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'seeds' ? 'active' : ''}`} onClick={() => setStaplesCategory('seeds')}>Seeds ({getStaplesCount('seeds')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'sweetener' ? 'active' : ''}`} onClick={() => setStaplesCategory('sweetener')}>Sweeteners ({getStaplesCount('sweetener')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'oil' ? 'active' : ''}`} onClick={() => setStaplesCategory('oil')}>Oils & Ghee ({getStaplesCount('oil')})</button>
+              <button className={`staples-filter-btn ${staplesCategory === 'vinegar' ? 'active' : ''}`} onClick={() => setStaplesCategory('vinegar')}>Vinegars ({getStaplesCount('vinegar')})</button>
             </div>
           )}
 
           {/* VEGETABLES FILTER BUTTONS */}
           {selectedCategory === 'vegetables' && dailyVegetablesData.length > 0 && (
             <div className="vegetables-filter-buttons">
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'all' ? 'active' : ''}`} onClick={() => setVegetablesCategory('all')}>All Vegetables ({dailyVegetablesData.length})</button>
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'root' ? 'active' : ''}`} onClick={() => setVegetablesCategory('root')}>Root Vegetables</button>
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'leafy' ? 'active' : ''}`} onClick={() => setVegetablesCategory('leafy')}>Leafy Greens</button>
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'gourd' ? 'active' : ''}`} onClick={() => setVegetablesCategory('gourd')}>Gourds</button>
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'cruciferous' ? 'active' : ''}`} onClick={() => setVegetablesCategory('cruciferous')}>Cruciferous</button>
-              <button className={`vegetables-filter-btn ${vegetablesCategory === 'fruitveg' ? 'active' : ''}`} onClick={() => setVegetablesCategory('fruitveg')}>Fruit Vegetables</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'all' ? 'active' : ''}`} onClick={() => setVegetablesCategory('all')}>All ({dailyVegetablesData.length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'root' ? 'active' : ''}`} onClick={() => setVegetablesCategory('root')}>Root ({dailyVegetablesData.filter(v => v.vegetableType === 'root').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'leafy' ? 'active' : ''}`} onClick={() => setVegetablesCategory('leafy')}>Leafy ({dailyVegetablesData.filter(v => v.vegetableType === 'leafy').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'cruciferous' ? 'active' : ''}`} onClick={() => setVegetablesCategory('cruciferous')}>Cruciferous ({dailyVegetablesData.filter(v => v.vegetableType === 'cruciferous').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'gourd' ? 'active' : ''}`} onClick={() => setVegetablesCategory('gourd')}>Gourds ({dailyVegetablesData.filter(v => v.vegetableType === 'gourd').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'fruitveg' ? 'active' : ''}`} onClick={() => setVegetablesCategory('fruitveg')}>Fruit Veg ({dailyVegetablesData.filter(v => v.vegetableType === 'fruitveg').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'flower' ? 'active' : ''}`} onClick={() => setVegetablesCategory('flower')}>Flower ({dailyVegetablesData.filter(v => v.vegetableType === 'flower').length})</button>
+              <button className={`vegetables-filter-btn ${vegetablesCategory === 'mushroom' ? 'active' : ''}`} onClick={() => setVegetablesCategory('mushroom')}>Mushrooms ({dailyVegetablesData.filter(v => v.vegetableType === 'mushroom').length})</button>
             </div>
           )}
 
@@ -315,23 +326,35 @@ const PantryBasicsPage = () => {
             <div className="pbp-modal-header">
               <div className="pbp-modal-title">
                 <h2>{selectedItem.name}</h2>
-                <p className="pbp-modal-subtitle">{selectedItem.tagline || (selectedItem.urduName ? `(${selectedItem.urduName})` : '')}</p>
+                {selectedItem.tagline && <p className="pbp-modal-subtitle">{selectedItem.tagline}</p>}
+                {selectedItem.urduName && !selectedItem.tagline && <p className="pbp-modal-subtitle">({selectedItem.urduName})</p>}
               </div>
             </div>
             <div className="pbp-modal-content">
               <div className="pbp-modal-left">
                 <div className="pbp-modal-details">
-                  {/* Description */}
-                  <div className="pbp-detail-section">
-                    <h3>Description</h3>
-                    <p>{selectedItem.fullDesc || `${selectedItem.name} is an essential kitchen item.`}</p>
-                  </div>
                   
-                  {/* Urdu Name for Spices */}
+                  {/* Description */}
+                  {(selectedItem.fullDesc || selectedItem.description) && (
+                    <div className="pbp-detail-section">
+                      <h3>📝 Description</h3>
+                      <p>{selectedItem.fullDesc || selectedItem.description}</p>
+                    </div>
+                  )}
+                  
+                  {/* Urdu Name */}
                   {selectedItem.urduName && (
                     <div className="pbp-detail-section">
-                      <h3>Urdu Name</h3>
+                      <h3>📖 Urdu Name</h3>
                       <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{selectedItem.urduName}</p>
+                    </div>
+                  )}
+                  
+                  {/* Best For */}
+                  {selectedItem.bestFor && (
+                    <div className="pbp-detail-section">
+                      <h3>🎯 Best For</h3>
+                      <p>{selectedItem.bestFor}</p>
                     </div>
                   )}
                   
@@ -351,19 +374,19 @@ const PantryBasicsPage = () => {
                     </div>
                   )}
                   
-                  {/* Key Features (Spices) */}
+                  {/* Key Features */}
                   {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
                     <div className="pbp-detail-section">
                       <h3>✨ Key Features</h3>
                       <div className="pbp-features-grid">
                         {selectedItem.keyFeatures.map((feature, idx) => (
-                          <div key={idx} className="pbp-feature-item">{feature}</div>
+                          <div key={idx} className="pbp-feature-item">✓ {feature}</div>
                         ))}
                       </div>
                     </div>
                   )}
                   
-                  {/* Proper Usage (Spices) */}
+                  {/* Proper Usage */}
                   {selectedItem.properUsage && (
                     <div className="pbp-detail-section">
                       <h3>📝 Proper Usage</h3>
@@ -371,13 +394,13 @@ const PantryBasicsPage = () => {
                     </div>
                   )}
                   
-                  {/* Common Mistakes (Spices) */}
+                  {/* Common Mistakes */}
                   {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
                     <div className="pbp-detail-section">
                       <h3>❌ Common Mistakes</h3>
                       <div className="pbp-mistakes-grid">
                         {selectedItem.commonMistakes.map((mistake, idx) => (
-                          <div key={idx} className="pbp-mistake-item">{mistake}</div>
+                          <div key={idx} className="pbp-mistake-item">⚠️ {mistake}</div>
                         ))}
                       </div>
                     </div>
@@ -395,18 +418,70 @@ const PantryBasicsPage = () => {
                     </div>
                   )}
                   
-                  {/* Season (Vegetables) */}
-                  {selectedItem.season && (
+                  {/* Season */}
+                  {selectedItem.season && selectedItem.season !== "All year" && (
                     <div className="pbp-detail-section">
                       <h3>🌿 Best Season</h3>
                       <p>{selectedItem.season}</p>
                     </div>
                   )}
                   
+                  {/* Nutritional Info */}
+                  {selectedItem.nutritionalInfo && (
+                    <div className="pbp-detail-section">
+                      <h3>🥗 Nutritional Info</h3>
+                      <p>{selectedItem.nutritionalInfo}</p>
+                    </div>
+                  )}
+                  
+                  {/* Health Benefits */}
+                  {selectedItem.healthBenefits && selectedItem.healthBenefits.length > 0 && (
+                    <div className="pbp-detail-section">
+                      <h3>💚 Health Benefits</h3>
+                      <div className="pbp-health-grid">
+                        {selectedItem.healthBenefits.map((benefit, idx) => (
+                          <div key={idx} className="pbp-health-item">🌱 {benefit}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Cooking Tips */}
+                  {selectedItem.cookingTips && (
+                    <div className="pbp-detail-section">
+                      <h3>👨‍🍳 Cooking Tips</h3>
+                      <p>{selectedItem.cookingTips}</p>
+                    </div>
+                  )}
+                  
+                  {/* Pros */}
+                  {selectedItem.pros && selectedItem.pros.length > 0 && (
+                    <div className="pbp-detail-section">
+                      <h3>✅ Pros</h3>
+                      <div className="pbp-pros-grid">
+                        {selectedItem.pros.map((pro, idx) => (
+                          <div key={idx} className="pbp-pros-item">✓ {pro}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Cons */}
+                  {selectedItem.cons && selectedItem.cons.length > 0 && (
+                    <div className="pbp-detail-section">
+                      <h3>❌ Cons</h3>
+                      <div className="pbp-cons-grid">
+                        {selectedItem.cons.map((con, idx) => (
+                          <div key={idx} className="pbp-cons-item">✗ {con}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
                   {/* Types & Varieties */}
                   {selectedItem.types && selectedItem.types.length > 0 && (
                     <div className="pbp-types-section">
-                      <h3 className="pbp-types-heading">Types & Varieties</h3>
+                      <h3>📌 Types & Varieties</h3>
                       <div className="pbp-types-grid">
                         {selectedItem.types.map((type, idx) => (
                           <div key={idx} className="pbp-type-card">
@@ -414,16 +489,14 @@ const PantryBasicsPage = () => {
                             <div className="pbp-type-content">
                               <h4>{type.name}</h4>
                               <p className="pbp-type-desc">{type.description}</p>
-                              {type.bestFor && <div className="pbp-type-best"><strong>Best For:</strong> {type.bestFor}</div>}
-                              {type.cookingTime && <div className="pbp-type-info-item">⏱️ {type.cookingTime}</div>}
-                              {type.waterRatio && <div className="pbp-type-info-item">💧 {type.waterRatio}</div>}
-                              {type.glycemicIndex && <div className="pbp-type-info-item">📊 GI: {type.glycemicIndex}</div>}
+                              {type.bestFor && <div><strong>Best For:</strong> {type.bestFor}</div>}
                             </div>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
+                  
                 </div>
               </div>
               <div className="pbp-modal-right">
@@ -444,6 +517,51 @@ const PantryBasicsPage = () => {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        .pbp-features-grid, .pbp-mistakes-grid, .pbp-pros-grid, .pbp-cons-grid, .pbp-health-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 8px;
+        }
+        .pbp-feature-item, .pbp-mistake-item, .pbp-health-item {
+          background: #f3f4f6;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 13px;
+        }
+        .pbp-pros-item, .pbp-cons-item {
+          padding: 6px 0;
+          font-size: 14px;
+        }
+        .pbp-use-item {
+          padding: 4px 0;
+        }
+        .staples-filter-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 20px 0;
+          padding: 10px;
+          background: #f9fafb;
+          border-radius: 12px;
+        }
+        .staples-filter-btn {
+          padding: 8px 16px;
+          border: none;
+          background: white;
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #4b5563;
+          transition: all 0.2s;
+        }
+        .staples-filter-btn.active {
+          background: #284a4b;
+          color: white;
+        }
+        .staples-filter-btn:hover {
+          background: #e5e7eb;
         }
       `}</style>
     </div>

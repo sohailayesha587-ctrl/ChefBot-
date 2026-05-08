@@ -71,6 +71,7 @@ import VerifyOTPPage from './pages/VerifyOTPPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import MealSuggestion from './pages/MealSuggestion';
 import RecipeDetail from './pages/RecipeDetail';
+import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 
 // ✅ Pages - Urdu
 import UrduHomePage from './pages/Urdu/UrduHomePage';
@@ -107,49 +108,32 @@ const PrivateRoute = ({ children }) => {
     return <div className="loading-spinner">Loading...</div>;
   }
   
-  // Agar user hai ya token hai to page open karo
   if (user || token) {
     return children;
   }
   
-  // Nahi to login pe bhejo
   return <Navigate to="/login-page" state={{ from: location.pathname }} replace />;
 };
 
 function AppWrapper() {
   const location = useLocation();
   
-  // State for Alarm Modal
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isUrduAlarmModalOpen, setIsUrduAlarmModalOpen] = useState(false);
-  
-  // State for Settings Sidebar
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  
-  // State for Daily Report Modal
   const [isDailyReportOpen, setIsDailyReportOpen] = useState(false);
   const [dailyReportData, setDailyReportData] = useState(null);
 
-  // Urdu pages ka check
   const isUrdu = location.pathname.startsWith('/urdu');
 
-  // Function to open settings
-  const openSettings = () => {
-    setIsSettingsOpen(true);
-  };
-
-  // Function to close settings
-  const closeSettings = () => {
-    setIsSettingsOpen(false);
-  };
+  const openSettings = () => setIsSettingsOpen(true);
+  const closeSettings = () => setIsSettingsOpen(false);
   
-  // Function to open daily report modal
   const openDailyReport = (reportData) => {
     setDailyReportData(reportData);
     setIsDailyReportOpen(true);
   };
   
-  // Function to close daily report modal
   const closeDailyReport = () => {
     setIsDailyReportOpen(false);
     setDailyReportData(null);
@@ -169,11 +153,8 @@ function AppWrapper() {
     }
   }, [isUrdu]);
 
-  // Auth pages jahan header nahi dikhna chahiye
   const authPages = ['/login-page', '/signup', '/forgot-password', '/verify-otp', '/reset-password'];
   const hideHeaderOnPages = authPages.includes(location.pathname) || location.pathname === '/urdu-login' || location.pathname === '/urdu-signup';
-  
-  // Header show karna hai ya nahi
   const shouldShowHeader = !hideHeaderOnPages && !isSettingsOpen;
 
   return (
@@ -191,22 +172,11 @@ function AppWrapper() {
         theme="light"
       />
       
-      <AlarmModal 
-        isOpen={isAlarmModalOpen}
-        onClose={() => setIsAlarmModalOpen(false)}
-      />
-      <UrduAlarmModal 
-        isOpen={isUrduAlarmModalOpen}
-        onClose={() => setIsUrduAlarmModalOpen(false)}
-      />
+      <AlarmModal isOpen={isAlarmModalOpen} onClose={() => setIsAlarmModalOpen(false)} />
+      <UrduAlarmModal isOpen={isUrduAlarmModalOpen} onClose={() => setIsUrduAlarmModalOpen(false)} />
       
-      {/* Settings Sidebar */}
-      <SettingsSidebar 
-        isOpen={isSettingsOpen}
-        onClose={closeSettings}
-      />
+      <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
       
-      {/* Daily Report Modal */}
       <DailyReportModal 
         isOpen={isDailyReportOpen}
         onClose={closeDailyReport}
@@ -217,11 +187,7 @@ function AppWrapper() {
         }}
       />
       
-      <div 
-        className={`app-wrapper ${isUrdu ? 'urdu-mode' : 'english-mode'}`} 
-        dir={isUrdu ? "rtl" : "ltr"}
-      >
-        {/* Header - Sirf tab show hoga jab settings band ho aur auth page na ho */}
+      <div className={`app-wrapper ${isUrdu ? 'urdu-mode' : 'english-mode'}`} dir={isUrdu ? "rtl" : "ltr"}>
         {shouldShowHeader && (
           isUrdu ? 
             <UrduHeader onSettingsClick={openSettings} /> : 
@@ -229,8 +195,10 @@ function AppWrapper() {
         )}
 
         <Routes>
-          {/* ===== PUBLIC ROUTES (Bina Login) ===== */}
+          {/* ===== PUBLIC ROUTES (No Login Required) ===== */}
           <Route path="/" element={<PublicHome />} />
+          <Route path="/urdu" element={<UrduPublicHome />} />
+          <Route path="/urdu-public" element={<UrduPublicHome />} />
           <Route path="/login-page" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -238,9 +206,6 @@ function AppWrapper() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          
-          {/* ===== Urdu Public Routes ===== */}
-          <Route path="/urdu" element={<UrduPublicHome />} />
           <Route path="/urdu-signup" element={<UrduSignUpPage />} />
           <Route path="/urdu-login" element={<UrduLoginPage />} />
 
@@ -295,6 +260,7 @@ function AppWrapper() {
           <Route path="/meal-suggestion" element={<PrivateRoute><MealSuggestion /></PrivateRoute>} />
           <Route path="/recipe/:id" element={<PrivateRoute><RecipeDetail /></PrivateRoute>} />
           <Route path="/meal-calendar" element={<PrivateRoute><MealCalendar /></PrivateRoute>} />
+          <Route path="/change-account" element={<PrivateRoute><ChangeAccountInfoPage /></PrivateRoute>} />
 
           {/* ===== Urdu Private Routes ===== */}
           <Route path="/urdu-home" element={<PrivateRoute><UrduHomePage /></PrivateRoute>} />
@@ -304,7 +270,6 @@ function AppWrapper() {
           <Route path="/urdu-measuring-skills" element={<PrivateRoute><UrduMeasuringSkillsPage /></PrivateRoute>} />
           <Route path="/urdu-meat-processing" element={<PrivateRoute><UrduMeatProcessingPage /></PrivateRoute>} />
           <Route path="/urdu-kitchen-tools" element={<PrivateRoute><UrduKitchenToolsPage /></PrivateRoute>} />
-                    <Route path="/urdu-public" element={<PrivateRoute><UrduPublicHome /></PrivateRoute>} />
 
           {/* ===== Catch All ===== */}
           <Route path="*" element={<Navigate to="/" />} />

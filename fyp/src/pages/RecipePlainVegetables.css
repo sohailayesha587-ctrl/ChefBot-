@@ -193,7 +193,7 @@ html, body, #root {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
 }
 
 .vegetables-modal > * {
@@ -570,4 +570,11 @@ html, body, #root {
   .vegetables-page-title {
     font-size: 2rem;
   }
+}
+/* Modal Background Image Fix */
+.vegetables-modal {
+
+  /* YEH 2 LINES ADD KARO */
+  background-size: cover !important;
+  background-position: center !important;
 }

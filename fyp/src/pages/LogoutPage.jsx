@@ -27,11 +27,11 @@ const LogoutPage = () => {
       // Clear local storage
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('userLanguage');
 
       setLoading(false);
       setShowModal(false);
       
-      // Show success message and redirect
       setTimeout(() => {
         navigate('/login-page');
       }, 500);
@@ -41,6 +41,7 @@ const LogoutPage = () => {
       // Still clear local storage even if API fails
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('userLanguage');
       setLoading(false);
       setShowModal(false);
       

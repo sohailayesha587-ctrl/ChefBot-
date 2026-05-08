@@ -171,10 +171,14 @@ fetch('http://localhost:5000/api/recipes/subCategory/plain-vegetables?limit=200'
                 className="vegetables-technique-card"
                 onClick={() => handleVegetableClick(vegetable)}
               >
-                <div
-                  className="vegetables-card-image"
-                  style={{ backgroundImage: `url(${vegetable.image})` }}
-                />
+               <div className="vegetables-card-image-container">
+  <img 
+    src={vegetable.image} 
+    alt={vegetable.title}
+    className="vegetables-card-image"
+    onError={(e) => { e.target.src = 'https://via.placeholder.com/120x120?text=No+Image'; }}
+  />
+</div>
                 <div className="vegetables-card-content">
                   <h3 className="vegetables-card-title">{vegetable.title}</h3>
                   <p className="vegetables-card-description">{vegetable.tagline}</p>

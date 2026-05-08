@@ -204,6 +204,8 @@ html, body, #root {
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
+    background-repeat: no-repeat;  /* ✅ YEH LINE ADD KARO */
+
   border-right: 1px solid #e2e8f0;
 }
 

@@ -40,7 +40,8 @@ const ShoppingList = () => {
         message += `📁 *${category.toUpperCase()}* (${categoryItems.length})\n`;
         message += "─────────────────\n";
         categoryItems.forEach((item, index) => {
-          message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}\n`;
+          const sourceText = item.source === 'meal-suggestion' ? ' (from meal suggestion)' : (item.fromPantry ? ' (from pantry)' : '');
+          message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}${sourceText}\n`;
         });
         message += "\n";
       }
@@ -231,7 +232,6 @@ const ShoppingList = () => {
         </div>
       </div>
 
-      {/* ✅ FIXED HERO SECTION - with content wrapper */}
       <div className="shopping-hero-section">
         <div className="shopping-hero-content">
           <h1 className="shopping-hero-title">My Shopping List</h1>
@@ -307,7 +307,12 @@ const ShoppingList = () => {
                       <span className="shopping-quantity-badge-simple">{item.quantity} {item.unit}</span>
                       <h4 className="shopping-item-name-simple">
                         {item.name}
-                        {item.fromPantry && <span className="from-pantry-badge"> (from pantry)</span>}
+                        {/* ✅ FROM PANTRY */}
+                        {item.source === 'pantry' && <span className="from-pantry-badge"> (from pantry)</span>}
+                        {/* ✅ FROM MEAL SUGGESTION */}
+                        {item.source === 'meal-suggestion' && <span className="from-meal-badge"> (from meal suggestion)</span>}
+                        {/* ✅ OLD fromPantry field (backward compatibility) */}
+                        {!item.source && item.fromPantry && <span className="from-pantry-badge"> (from pantry)</span>}
                       </h4>
                       <div className="shopping-checklist-actions">
                         <button 

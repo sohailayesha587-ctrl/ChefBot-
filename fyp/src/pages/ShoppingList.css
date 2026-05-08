@@ -787,3 +787,16 @@ body, html {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px;
 }
+.from-meal-badge {
+  font-size: 10px;
+  color: #397d7c;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+.from-pantry-badge {
+  font-size: 10px;
+  color: #666;
+  font-weight: normal;
+  margin-left: 5px;
+}

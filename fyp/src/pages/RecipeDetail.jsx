@@ -1,56 +1,101 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import './RecipeDetail.css';
 
 const RecipeDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
+  
+  // ✅ Scaling state
+  const [selectedMembers, setSelectedMembers] = useState(4);
+  const [showMembersDropdown, setShowMembersDropdown] = useState(false);
+  
   const speechSynthesisRef = useRef(null);
 
-  // Fetch recipe by ID
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('token');
-        
-        console.log("Fetching recipe with ID:", id);
-        
-        const response = await fetch(`http://localhost:5000/api/recipes/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        const data = await response.json();
-        console.log("API Response:", data);
-        
-        if (response.ok) {
-          setRecipe(data.recipe);
-        } else {
-          setError(data.message || "Recipe not found");
-        }
-      } catch (error) {
-        console.error("Error fetching recipe:", error);
-        setError("Failed to load recipe");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    if (id) {
-      fetchRecipe();
-    }
-  }, [id]);
+  // ✅ Member options for scaling
+  const memberOptions = [2, 4, 6, 8, 10];
 
-  // Voice functions
+  useEffect(() => {
+    // ✅ Check URL for members parameter
+    const params = new URLSearchParams(location.search);
+    const membersParam = params.get('members');
+    if (membersParam) {
+      setSelectedMembers(parseInt(membersParam));
+    }
+    
+    fetchRecipe();
+  }, [id, location.search]);
+
+  const fetchRecipe = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      
+      // ✅ Pass members to API for scaling
+      const response = await fetch(`http://localhost:5000/api/recipes/${id}?members=${selectedMembers}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data) {
+        console.log("Setting recipe:", data);
+        console.log("Scale factor:", data.scaleFactor);
+        console.log("Requested members:", data.requestedMembers);
+        setRecipe(data);
+      } else {
+        setError(data.message || "Recipe not found");
+      }
+    } catch (error) {
+      console.error("Error fetching recipe:", error);
+      setError("Failed to load recipe");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Handle member change for scaling
+  const handleMemberChange = async (members) => {
+    setSelectedMembers(members);
+    setShowMembersDropdown(false);
+    
+    // Refetch recipe with new members
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/recipes/${id}?members=${members}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data) {
+        setRecipe(data);
+      } else {
+        setError(data.message || "Recipe not found");
+      }
+    } catch (error) {
+      console.error("Error fetching scaled recipe:", error);
+      setError("Failed to load recipe");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const speakStep = (stepText) => {
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
@@ -87,46 +132,48 @@ const RecipeDetail = () => {
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
-      speakStep(recipe.stepsRaw[currentStep]);
+      if (recipe.stepsRaw && recipe.stepsRaw[currentStep]) {
+        speakStep(recipe.stepsRaw[currentStep]);
+      }
     }
   };
 
   const handleNextStep = () => {
-    if (!recipe) return;
+    if (!recipe || !recipe.stepsRaw) return;
     
     if (currentStep < recipe.stepsRaw.length - 1) {
       window.speechSynthesis.cancel();
       setCurrentStep(prev => prev + 1);
-      if (isPlaying) {
+      if (isPlaying && recipe.stepsRaw[currentStep + 1]) {
         speakStep(recipe.stepsRaw[currentStep + 1]);
       }
     }
   };
 
   const handlePrevStep = () => {
-    if (!recipe) return;
+    if (!recipe || !recipe.stepsRaw) return;
     
     if (currentStep > 0) {
       window.speechSynthesis.cancel();
       setCurrentStep(prev => prev - 1);
-      if (isPlaying) {
+      if (isPlaying && recipe.stepsRaw[currentStep - 1]) {
         speakStep(recipe.stepsRaw[currentStep - 1]);
       }
     }
   };
 
   const handleRestart = () => {
-    if (!recipe) return;
+    if (!recipe || !recipe.stepsRaw) return;
     
     window.speechSynthesis.cancel();
     setCurrentStep(0);
-    if (isPlaying) {
+    if (isPlaying && recipe.stepsRaw[0]) {
       speakStep(recipe.stepsRaw[0]);
     }
   };
 
   useEffect(() => {
-    if (recipe && recipe.stepsRaw) {
+    if (recipe && recipe.stepsRaw && recipe.stepsRaw.length > 0) {
       setProgress(((currentStep + 1) / recipe.stepsRaw.length) * 100);
     }
   }, [currentStep, recipe]);
@@ -163,83 +210,138 @@ const RecipeDetail = () => {
 
   return (
     <div className="recipe-detail-page">
-      {/* Hero Section */}
-      <div className="recipe-hero" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${recipe.image})` }}>
-        <div className="recipe-hero-content">
-          <h1 className="recipe-title">{recipe.title}</h1>
-          <p className="recipe-tagline">{recipe.tagline}</p>
-          <div className="recipe-meta">
-            {recipe.cookingTime && <span>⏱️ {recipe.cookingTime} mins</span>}
-            {recipe.difficulty && <span>📊 {recipe.difficulty}</span>}
-            {recipe.category && <span>🍽️ {recipe.category}</span>}
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="recipe-content">
-        {/* Ingredients */}
-        <div className="recipe-section ingredients-section">
-          <h2>🛒 Ingredients</h2>
-          <div className="ingredients-list">
-            {recipe.ingredientsRaw?.map((ingredient, index) => (
-              <div key={index} className="ingredient-item">
-                <span className="ingredient-bullet">•</span>
-                <span className="ingredient-text">{ingredient}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Steps */}
-        <div className="recipe-section steps-section">
-          <h2>👨‍🍳 Steps to Make</h2>
-          <div className="steps-list">
-            {recipe.stepsRaw?.map((step, index) => (
-              <div key={index} className="step-item">
-                <div className="step-number">{index + 1}</div>
-                <div className="step-text">{step}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Voice Instructions */}
-        <div className="recipe-section voice-section">
-          <h2>🔊 Voice Instructions</h2>
+      <div 
+        className="recipe-modal-overlay"
+        onClick={() => navigate(-1)}
+      >
+        <div 
+          className="recipe-modal"
+          style={{ backgroundImage: `url(${recipe.image})` }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="recipe-modal-close" onClick={() => navigate(-1)}>✕</button>
           
-          <div className="voice-progress">
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+          <div className="recipe-modal-header">
+            <div className="recipe-modal-title">
+              <h2>{recipe.title}</h2>
+              {recipe.tagline && <p className="recipe-modal-tagline">{recipe.tagline}</p>}
             </div>
-            <div className="progress-info">
-              <span>Step {currentStep + 1} of {recipe.stepsRaw?.length || 0}</span>
-              <span>{Math.round(progress)}%</span>
+            
+            {/* ✅ Members Selection for Scaling */}
+            <div className="recipe-members-selector">
+              <div className="members-dropdown-container">
+                <button 
+                  className="members-dropdown-btn"
+                  onClick={() => setShowMembersDropdown(!showMembersDropdown)}
+                >
+                  👥 {selectedMembers} persons 
+                  <span className="dropdown-arrow">{showMembersDropdown ? '▲' : '▼'}</span>
+                </button>
+                {showMembersDropdown && (
+                  <div className="members-dropdown-menu">
+                    {memberOptions.map(members => (
+                      <div 
+                        key={members}
+                        className={`members-option ${selectedMembers === members ? 'active' : ''}`}
+                        onClick={() => handleMemberChange(members)}
+                      >
+                        {members} persons
+                        {recipe.baseServings === members && <span className="base-badge">Base</span>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="recipe-meta-info">
+                {recipe.cookingTime && <span className="meta-badge">⏱️ {recipe.cookingTime} mins</span>}
+                {recipe.difficulty && <span className="meta-badge">📊 {recipe.difficulty}</span>}
+                {recipe.category && <span className="meta-badge">🍽️ {recipe.category}</span>}
+              </div>
             </div>
           </div>
 
-          <div className="current-step">
-            <p><strong>Current Step:</strong> {recipe.stepsRaw?.[currentStep]}</p>
-          </div>
+          {/* ✅ Scaling info banner */}
+          {recipe.scaleFactor && recipe.scaleFactor !== 1 && (
+            <div className="scaling-info-banner">
+              <span className="scaling-icon">⚖️</span>
+              <span>Scaled from {recipe.baseServings} to {selectedMembers} persons</span>
+              <span className="scaling-factor">({recipe.scaleFactor}x)</span>
+            </div>
+          )}
 
-          <div className="voice-controls">
-            <button className={`voice-btn ${isPlaying ? 'pause' : 'play'}`} onClick={handlePlayPause}>
-              {isPlaying ? '⏸️ Pause' : '▶️ Play'}
-            </button>
-            <button className="step-btn" onClick={handlePrevStep} disabled={currentStep === 0}>
-              ⏮️ Previous
-            </button>
-            <button className="step-btn" onClick={handleRestart}>
-              🔄 Restart
-            </button>
-            <button className="step-btn" onClick={handleNextStep} disabled={currentStep === (recipe.stepsRaw?.length || 0) - 1}>
-              Next ⏭️
-            </button>
+          <div className="recipe-modal-content">
+            {/* INGREDIENTS - Scaled */}
+            <div className="recipe-modal-ingredients">
+              <h3>🛒 Ingredients {selectedMembers !== recipe.baseServings && `(for ${selectedMembers} persons)`}</h3>
+              <div className="ingredients-list">
+                {recipe.ingredientsRaw?.map((ingredient, idx) => (
+                  <div key={idx} className="ingredient-item">
+                    <span className="ingredient-bullet">•</span>
+                    <span className="ingredient-text">{ingredient}</span>
+                  </div>
+                ))}
+              </div>
+              {recipe.scaleFactor && recipe.scaleFactor !== 1 && (
+                <p className="scale-note">✨ Ingredients scaled from original recipe</p>
+              )}
+            </div>
+
+            {/* STEPS */}
+            <div className="recipe-modal-steps">
+              <h3>👨‍🍳 Steps to Make</h3>
+              <div className="steps-list">
+                {recipe.stepsRaw && recipe.stepsRaw.length > 0 ? (
+                  recipe.stepsRaw.map((step, idx) => (
+                    <div key={idx} className="step-item">
+                      <div className="step-number">{idx + 1}</div>
+                      <div className="step-text">{step}</div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No steps available</p>
+                )}
+              </div>
+            </div>
+
+            {/* VOICE INSTRUCTIONS */}
+            <div className="recipe-modal-voice">
+              <h3>🔊 Voice Instructions</h3>
+              
+              <div className="voice-progress">
+                <div className="progress-bar">
+                  <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="progress-info">
+                  <span>Step {currentStep + 1} of {recipe.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
+                </div>
+              </div>
+
+              <div className="current-step">
+                <p><strong>Current Step:</strong> {recipe.stepsRaw?.[currentStep] || 'Complete!'}</p>
+              </div>
+
+              <div className="voice-controls">
+                <button className={`voice-btn ${isPlaying ? 'pause' : 'play'}`} onClick={handlePlayPause}>
+                  {isPlaying ? '⏸️ Pause' : '▶️ Play'}
+                </button>
+                <div className="step-buttons">
+                  <button className="step-btn" onClick={handlePrevStep} disabled={currentStep === 0}>
+                    ⏮️ Prev
+                  </button>
+                  <button className="step-btn" onClick={handleRestart}>
+                    🔄 Restart
+                  </button>
+                  <button className="step-btn" onClick={handleNextStep} disabled={currentStep === (recipe.stepsRaw?.length || 0) - 1}>
+                    Next ⏭️
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Back Button */}
+      
       <div className="back-button-container">
         <button className="back-home-btn" onClick={() => navigate(-1)}>
           <span>←</span> Back

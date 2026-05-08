@@ -358,203 +358,249 @@ const KitchenAppliancesPage = () => {
           )}
         </main>
       </div>
-{/* MODEL DETAIL MODAL */}
-{showModal && selectedModel && (
-  <div className="kap-modal-overlay" onClick={closeModal}>
-    <div className="kap-modal" onClick={(e) => e.stopPropagation()}>
-      <button className="kap-modal-close" onClick={closeModal}>×</button>
-      
-      <div className="kap-modal-header">
-        <div className="kap-modal-title">
-          <h2>{selectedModel.name}</h2>
-          <p className="kap-modal-subtitle">
-            {currentCompany?.name} • {selectedModel.type} • Complete Guide
-          </p>
-        </div>
-      </div>
 
-      <div className="kap-modal-content">
-        <div className="kap-modal-layout">
-          <div className="kap-modal-left">
-            <div className="kap-modal-details">
-              
-              {/* Product Overview */}
-              <div className="kap-detail-section">
-                <h3>📋 Product Overview</h3>
-                <p>
-                  <strong>{selectedModel.name}</strong> is a {selectedModel.type} {currentAppliance?.name?.toLowerCase() || 'appliance'} 
-                  with <strong>{selectedModel.capacity}</strong> capacity.
-                </p>
-                {selectedModel.bestFor && (
-                  <p><strong>🎯 Best For:</strong> {selectedModel.bestFor}</p>
-                )}
-                {selectedModel.estimatedConsumption && (
-                  <p><strong>⚡ Energy Consumption:</strong> {selectedModel.estimatedConsumption}</p>
-                )}
-                {selectedModel.estimatedPowerConsumption && (
-                  <p><strong>⚡ Power Consumption:</strong> {selectedModel.estimatedPowerConsumption}</p>
-                )}
-                {selectedModel.estimatedGasConsumption && (
-                  <p><strong>🔥 Gas Consumption:</strong> {selectedModel.estimatedGasConsumption}</p>
-                )}
-              </div>
-
-              {/* Key Features */}
-              {selectedModel.features && selectedModel.features.length > 0 && (
-                <div className="kap-detail-section">
-                  <h3>✅ Key Features</h3>
-                  <div className="kap-features-list">
-                    {selectedModel.features.map((feature, idx) => (
-                      <div key={idx} className="kap-feature-item">
-                        <span className="kap-feature-check">✓</span>
-                        <span className="kap-feature-text">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Technical Specifications */}
-              {selectedModel.specifications && Object.keys(selectedModel.specifications).length > 0 && (
-                <div className="kap-detail-section">
-                  <h3>📊 Technical Specifications</h3>
-                  <div className="kap-specifications-grid">
-                    {Object.entries(selectedModel.specifications).map(([key, value]) => (
-                      <div key={key} className="kap-spec-item">
-                        <span className="kap-spec-label">{key}:</span>
-                        <span className="kap-spec-value">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Price */}
-              <div className="kap-detail-section">
-                <h3>💰 Price Range</h3>
-                <p><strong>{selectedModel.price}</strong></p>
-              </div>
-
-              {/* Warranty */}
-              {selectedModel.warranty && (
-                <div className="kap-detail-section">
-                  <h3>🛡️ Warranty</h3>
-                  <p>{selectedModel.warranty}</p>
-                </div>
-              )}
-
-              {/* Usage Guide */}
-              {selectedModel.usageGuide && (
-                <div className="kap-detail-section">
-                  <h3>📖 Usage Guide</h3>
-                  <p>{selectedModel.usageGuide}</p>
-                </div>
-              )}
-
-              {/* Maintenance Tips */}
-              {selectedModel.maintenance && (
-                <div className="kap-detail-section">
-                  <h3>🔧 Maintenance Tips</h3>
-                  <p>{selectedModel.maintenance}</p>
-                </div>
-              )}
-
-              {/* Installation Tips */}
-              {selectedModel.installationTips && (
-                <div className="kap-detail-section">
-                  <h3>🛠️ Installation Tips</h3>
-                  <p>{selectedModel.installationTips}</p>
-                </div>
-              )}
-
-              {/* Energy Saving Tips */}
-              {selectedModel.energySavingTips && (
-                <div className="kap-detail-section">
-                  <h3>💡 Energy Saving Tips</h3>
-                  <p>{selectedModel.energySavingTips}</p>
-                </div>
-              )}
-
-              {/* Safety Tips */}
-              {selectedModel.safetyTips && (
-                <div className="kap-detail-section">
-                  <h3>⚠️ Safety Tips</h3>
-                  <p>{selectedModel.safetyTips}</p>
-                </div>
-              )}
-
-              {/* Troubleshooting */}
-              {selectedModel.troubleshooting && selectedModel.troubleshooting.length > 0 && (
-                <div className="kap-detail-section">
-                  <h3>🔧 Troubleshooting Guide</h3>
-                  <ul className="kap-troubleshooting-list">
-                    {selectedModel.troubleshooting.map((tip, idx) => (
-                      <li key={idx}>{tip}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-            </div>
-          </div>
-
-          <div className="kap-modal-right">
-            <div className="kap-modal-image-container">
-              <div 
-                className="kap-modal-image-large"
-                style={{ 
-                  backgroundImage: `url(${selectedModel.image || 'https://via.placeholder.com/400x300?text=' + selectedModel.name})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              ></div>
-            </div>
+      {/* MODEL DETAIL MODAL - ALL FIELDS INCLUDED */}
+      {showModal && selectedModel && (
+        <div className="kap-modal-overlay" onClick={closeModal}>
+          <div className="kap-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="kap-modal-close" onClick={closeModal}>×</button>
             
-            <div className="kap-quick-info">
-              <h3>Quick Information</h3>
-              <div className="kap-quick-info-content">
-                <div className="kap-quick-info-item">
-                  <span className="kap-quick-label">Type</span>
-                  <span className="kap-quick-value">{selectedModel.type}</span>
-                </div>
-                {selectedModel.capacity && (
-                  <div className="kap-quick-info-item">
-                    <span className="kap-quick-label">Capacity</span>
-                    <span className="kap-quick-value">{selectedModel.capacity}</span>
-                  </div>
-                )}
-                {selectedModel.burners && (
-                  <div className="kap-quick-info-item">
-                    <span className="kap-quick-label">Burners</span>
-                    <span className="kap-quick-value">{selectedModel.burners}</span>
-                  </div>
-                )}
-                {selectedModel.estimatedConsumption && (
-                  <div className="kap-quick-info-item">
-                    <span className="kap-quick-label">Energy</span>
-                    <span className="kap-quick-value">{selectedModel.estimatedConsumption}</span>
-                  </div>
-                )}
-                {selectedModel.warranty && (
-                  <div className="kap-quick-info-item">
-                    <span className="kap-quick-label">Warranty</span>
-                    <span className="kap-quick-value">{selectedModel.warranty.substring(0, 30)}...</span>
-                  </div>
-                )}
+            <div className="kap-modal-header">
+              <div className="kap-modal-title">
+                <h2>{selectedModel.name}</h2>
+                <p className="kap-modal-subtitle">
+                  {currentCompany?.name} • {selectedModel.type} • Complete Guide
+                </p>
               </div>
+            </div>
+
+            <div className="kap-modal-content">
+              <div className="kap-modal-layout">
+                <div className="kap-modal-left">
+                  <div className="kap-modal-details">
+                    
+                    {/* Product Overview */}
+                    <div className="kap-detail-section">
+                      <h3>📋 Product Overview</h3>
+                      <p>
+                        <strong>{selectedModel.name}</strong> is a {selectedModel.type} {currentAppliance?.name?.toLowerCase() || 'appliance'} 
+                        {selectedModel.capacity && ` with <strong>${selectedModel.capacity}</strong> capacity.`}
+                      </p>
+                      {selectedModel.bestFor && (
+                        <p><strong>🎯 Best For:</strong> {selectedModel.bestFor}</p>
+                      )}
+                      {selectedModel.estimatedConsumption && (
+                        <p><strong>⚡ Energy Consumption:</strong> {selectedModel.estimatedConsumption}</p>
+                      )}
+                      {selectedModel.estimatedPowerConsumption && (
+                        <p><strong>🔌 Power Consumption:</strong> {selectedModel.estimatedPowerConsumption}</p>
+                      )}
+                      {selectedModel.estimatedGasConsumption && (
+                        <p><strong>🔥 Gas Consumption:</strong> {selectedModel.estimatedGasConsumption}</p>
+                      )}
+                      {selectedModel.dryCapacity && (
+                        <p><strong>🌀 Dry Capacity:</strong> {selectedModel.dryCapacity}</p>
+                      )}
+                      {selectedModel.coolingCapacity && (
+                        <p><strong>❄️ Cooling Capacity:</strong> {selectedModel.coolingCapacity}</p>
+                      )}
+                      {selectedModel.hotWaterTemp && (
+                        <p><strong>🌡️ Hot Water Temp:</strong> {selectedModel.hotWaterTemp}</p>
+                      )}
+                      {selectedModel.coldWaterTemp && (
+                        <p><strong>🧊 Cold Water Temp:</strong> {selectedModel.coldWaterTemp}</p>
+                      )}
+                    </div>
+
+                    {/* Key Features */}
+                    {selectedModel.features && selectedModel.features.length > 0 && (
+                      <div className="kap-detail-section">
+                        <h3>✅ Key Features</h3>
+                        <div className="kap-features-list">
+                          {selectedModel.features.map((feature, idx) => (
+                            <div key={idx} className="kap-feature-item">
+                              <span className="kap-feature-check">✓</span>
+                              <span className="kap-feature-text">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Technical Specifications */}
+                    {selectedModel.specifications && Object.keys(selectedModel.specifications).length > 0 && (
+                      <div className="kap-detail-section">
+                        <h3>📊 Technical Specifications</h3>
+                        <div className="kap-specifications-grid">
+                          {Object.entries(selectedModel.specifications).map(([key, value]) => (
+                            <div key={key} className="kap-spec-item">
+                              <span className="kap-spec-label">{key}:</span>
+                              <span className="kap-spec-value">{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Price */}
+                    <div className="kap-detail-section">
+                      <h3>💰 Price Range</h3>
+                      <p><strong>{selectedModel.price}</strong></p>
+                    </div>
+
+                    {/* Warranty */}
+                    {selectedModel.warranty && (
+                      <div className="kap-detail-section">
+                        <h3>🛡️ Warranty</h3>
+                        <p>{selectedModel.warranty}</p>
+                      </div>
+                    )}
+
+                    {/* Usage Guide */}
+                    {selectedModel.usageGuide && (
+                      <div className="kap-detail-section">
+                        <h3>📖 Usage Guide</h3>
+                        <p>{selectedModel.usageGuide}</p>
+                      </div>
+                    )}
+
+                    {/* Maintenance Tips */}
+                    {selectedModel.maintenance && (
+                      <div className="kap-detail-section">
+                        <h3>🔧 Maintenance Tips</h3>
+                        <p>{selectedModel.maintenance}</p>
+                      </div>
+                    )}
+
+                    {/* Installation Tips */}
+                    {selectedModel.installationTips && (
+                      <div className="kap-detail-section">
+                        <h3>🛠️ Installation Tips</h3>
+                        <p>{selectedModel.installationTips}</p>
+                      </div>
+                    )}
+
+                    {/* Energy Saving Tips */}
+                    {selectedModel.energySavingTips && (
+                      <div className="kap-detail-section">
+                        <h3>💡 Energy Saving Tips</h3>
+                        <p>{selectedModel.energySavingTips}</p>
+                      </div>
+                    )}
+
+                    {/* Safety Tips */}
+                    {selectedModel.safetyTips && (
+                      <div className="kap-detail-section">
+                        <h3>⚠️ Safety Tips</h3>
+                        <p>{selectedModel.safetyTips}</p>
+                      </div>
+                    )}
+
+                    {/* Cooking Tips (Microwaves) */}
+                    {selectedModel.cookingTips && (
+                      <div className="kap-detail-section">
+                        <h3>🍳 Cooking Tips</h3>
+                        <p>{selectedModel.cookingTips}</p>
+                      </div>
+                    )}
+
+                    {/* Place Settings (Dishwashers) */}
+                    {selectedModel.placeSettings && (
+                      <div className="kap-detail-section">
+                        <h3>🍽️ Place Settings</h3>
+                        <p>{selectedModel.placeSettings}</p>
+                      </div>
+                    )}
+
+                    {/* Wash Programs (Washing Machines) */}
+                    {selectedModel.washPrograms && (
+                      <div className="kap-detail-section">
+                        <h3>🧺 Wash Programs</h3>
+                        <p>{selectedModel.washPrograms}</p>
+                      </div>
+                    )}
+
+                    {/* Troubleshooting */}
+                    {selectedModel.troubleshooting && selectedModel.troubleshooting.length > 0 && (
+                      <div className="kap-detail-section">
+                        <h3>🔧 Troubleshooting Guide</h3>
+                        <ul className="kap-troubleshooting-list">
+                          {selectedModel.troubleshooting.map((tip, idx) => (
+                            <li key={idx}>{tip}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                  </div>
+                </div>
+
+                <div className="kap-modal-right">
+                  <div className="kap-modal-image-container">
+                    <div 
+                      className="kap-modal-image-large"
+                      style={{ 
+                        backgroundImage: `url(${selectedModel.image || 'https://via.placeholder.com/400x300?text=' + selectedModel.name})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        height: '250px',
+                        borderRadius: '12px'
+                      }}
+                    ></div>
+                  </div>
+                  
+                  <div className="kap-quick-info">
+                    <h3>Quick Information</h3>
+                    <div className="kap-quick-info-content">
+                      <div className="kap-quick-info-item">
+                        <span className="kap-quick-label">Type</span>
+                        <span className="kap-quick-value">{selectedModel.type}</span>
+                      </div>
+                      {selectedModel.capacity && (
+                        <div className="kap-quick-info-item">
+                          <span className="kap-quick-label">Capacity</span>
+                          <span className="kap-quick-value">{selectedModel.capacity}</span>
+                        </div>
+                      )}
+                      {selectedModel.burners && (
+                        <div className="kap-quick-info-item">
+                          <span className="kap-quick-label">Burners</span>
+                          <span className="kap-quick-value">{selectedModel.burners}</span>
+                        </div>
+                      )}
+                      {selectedModel.estimatedConsumption && (
+                        <div className="kap-quick-info-item">
+                          <span className="kap-quick-label">Energy</span>
+                          <span className="kap-quick-value">{selectedModel.estimatedConsumption}</span>
+                        </div>
+                      )}
+                      {selectedModel.dryCapacity && (
+                        <div className="kap-quick-info-item">
+                          <span className="kap-quick-label">Dry Capacity</span>
+                          <span className="kap-quick-value">{selectedModel.dryCapacity}</span>
+                        </div>
+                      )}
+                      {selectedModel.warranty && (
+                        <div className="kap-quick-info-item">
+                          <span className="kap-quick-label">Warranty</span>
+                          <span className="kap-quick-value">{selectedModel.warranty.substring(0, 40)}...</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="kap-modal-footer">
+              <button className="kap-modal-close-btn" onClick={closeModal}>
+                Close Guide
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <div className="kap-modal-footer">
-        <button className="kap-modal-close-btn" onClick={closeModal}>
-          Close Guide
-        </button>
-      </div>
-    </div>
-  </div>
-)}
       <div className="back-home-container">
         <button 
           className="back-home-btn"
