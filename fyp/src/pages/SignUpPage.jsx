@@ -26,10 +26,9 @@ const SignUpPage = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validation
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -53,37 +52,21 @@ const SignUpPage = () => {
 
     setLoading(true);
 
-    try {
-      // ✅ Backend API call - field names match karo
-      const response = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.fullname,        // Backend expects 'name'
-          email: formData.email,
-          password: formData.password,
-          agreeToTerms: formData.terms    // Backend expects 'agreeToTerms'
-        })
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Success
-        alert(data.message || "Account created successfully! Welcome to ChefBot!");
-        navigate('/login-page');  // Redirect to login page
-      } else {
-        // Error from backend
-        alert(data.message || "Signup failed! Please try again.");
-      }
-    } catch (error) {
-      console.error("Signup error:", error);
-      alert("Something went wrong! Please check your internet connection and try again.");
-    } finally {
+    setTimeout(() => {
+      const userData = {
+        id: Date.now().toString(),
+        name: formData.fullname,
+        email: formData.email,
+        registeredAt: new Date().toISOString()
+      };
+      
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('isAuthenticated', 'true');
+      
+      alert("Account created successfully! Welcome to ChefBot!");
       setLoading(false);
-    }
+      navigate('/home');
+    }, 1500);
   };
 
   return (
@@ -94,11 +77,26 @@ const SignUpPage = () => {
           <p>Create your account and unlock a world of delicious recipes, smart meal planning, and AI-powered cooking assistance.</p>
           
           <ul className="features">
-            <li><i className="fas fa-check-circle"></i> Personalized recipe recommendations</li>
-            <li><i className="fas fa-check-circle"></i> Smart meal planning tools</li>
-            <li><i className="fas fa-check-circle"></i> Step-by-step cooking guidance</li>
-            <li><i className="fas fa-check-circle"></i> Nutritional tracking</li>
-            <li><i className="fas fa-check-circle"></i> Save and organize your favorite recipes</li>
+            <li>
+              <span className="check-icon">✓</span>
+              Personalized recipe recommendations
+            </li>
+            <li>
+              <span className="check-icon">✓</span>
+              Smart meal planning tools
+            </li>
+            <li>
+              <span className="check-icon">✓</span>
+              Step-by-step cooking guidance
+            </li>
+            <li>
+              <span className="check-icon">✓</span>
+              Nutritional tracking
+            </li>
+            <li>
+              <span className="check-icon">✓</span>
+              Save and organize your favorite recipes
+            </li>
           </ul>
         </div>
       </div>
@@ -154,9 +152,8 @@ const SignUpPage = () => {
                   type="button" 
                   className="toggle-password" 
                   onClick={togglePasswordVisibility}
-                  title={showPassword ? "Hide password" : "Show password"}
                 >
-                  <i className={showPassword ? "far fa-eye" : "far fa-eye-slash"}></i>
+                  {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </div>
@@ -184,25 +181,12 @@ const SignUpPage = () => {
                 onChange={handleInputChange}
                 required
               />
-              <label htmlFor="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+              <label htmlFor="terms">I agree to the Terms of Service and Privacy Policy</label>
             </div>
             
             <button type="submit" className="btn-signup" disabled={loading}>
               {loading ? 'Creating Account...' : 'Create Account'}
             </button>
-            
-            <div className="divider">
-              <span>Or sign up with</span>
-            </div>
-            
-            <div className="social-login">
-              <button type="button" className="btn-social">
-                <i className="fab fa-google" style={{color: "#DB4437"}}></i> Google
-              </button>
-              <button type="button" className="btn-social">
-                <i className="fab fa-facebook-f" style={{color: "#4267B2"}}></i> Facebook
-              </button>
-            </div>
             
             <div className="login-link">
               Already have an account? <Link to="/login-page">Log in</Link>

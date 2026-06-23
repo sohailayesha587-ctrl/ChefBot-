@@ -21,14 +21,12 @@ const HomePage = () => {
     }
   };
 
-  // ADD THIS FUNCTION
   const toggleMealSuggestor = () => {
     setShowMealSuggestor(!showMealSuggestor);
   };
 
-  // FEATURES ARRAY - 5 ITEMS ONLY
   const features = [
- {
+    {
       image: 'image.png',
       title: 'Meal Suggestion',
       path: '/meal-suggestion'
@@ -76,7 +74,7 @@ const HomePage = () => {
     {
       image: "home_icecream.jpg",
       name: "Chocolate Ice Cream",
-      description: "Rich,moist with creamy frosting ice cream.",
+      description: "Rich, moist with creamy frosting ice cream.",
       category: "Dessert",
     }
   ];
@@ -95,20 +93,15 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
       <section className="chefbot-hero">
         <div className="chefbot-slider">
-          <img src="/1.png" alt="ChefBot Image 1" className="chefbot-slide-image" />
-          <img src="/2.png" alt="ChefBot Image 2" className="chefbot-slide-image" />
+          <img src="/1.png" alt="ChefBot" className="chefbot-slide-image" />
+          <img src="/2.png" alt="ChefBot" className="chefbot-slide-image" />
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="h-features-section">
         <h2 className="h-features-title">Our Amazing Features</h2>
-        
-     
-        
         <div className="h-features-grid">
           {features.map((feature, index) => (
             <Link 
@@ -131,12 +124,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* HERO 2 */}
       <section className="hero-section1">
         <div className="hero-left">
           <h2>Digital Cooking</h2>
           <p>Turn pantry items into delicious meals with ChefBot's recipe suggestions.</p>
-          <Link to="/smart-pantry" className="contact-link">Start Learning →</Link>
+          <Link to="/" className="contact-link">Start Learning →</Link>
         </div>
         <div className="hero-center">
           <h1>No grocery trip needed! Cook from pantry items with ChefBot.</h1>
@@ -146,7 +138,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* FOOD SHOWCASE */}
       <section className="food-showcase">
         {foodImages.map((image, index) => (
           <img 
@@ -158,7 +149,6 @@ const HomePage = () => {
         ))}
       </section>
 
-      {/* CLASSES SECTION */}
       <section className="classes-section">
         <img 
           src="home_gui.jpg" 
@@ -175,7 +165,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Meal plan SECTION */}
       <section className="m_plan-section">
         <div className="m_plan-header">
           <div className="m_plan-title">
@@ -187,13 +176,12 @@ const HomePage = () => {
         <div className="m_plan-grid">
           {guidanceImages.map((image, index) => (
             <div className="m_plan-card" key={index}>
-              <img src={image} alt={`m_plan${index + 1}`} />
+              <img src={image} alt={`plan ${index + 1}`} />
             </div>
           ))}
         </div>
       </section>
        
-      {/* Recipes Section */}
       <section className="h-recipes-section">
         <div className="h-recipes-container">
           <h2 className="h-recipes-title">Popular Recipes</h2>
@@ -218,7 +206,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* MEAL SUGGESTOR POPUP */}
       {showMealSuggestor && (
         <div className="meal-suggestor-popup active">
           <div className="meal-suggestor-popup-header">
@@ -227,7 +214,6 @@ const HomePage = () => {
               <i className="fas fa-times"></i>
             </button>
           </div>
-          
           <div className="meal-suggestor-chat-body">
             <div className="chat-message bot">
               <div className="message-content">
@@ -239,7 +225,6 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          
           <div className="meal-suggestor-chat-footer">
             <input 
               type="text" 
@@ -253,9 +238,36 @@ const HomePage = () => {
         </div>
       )}
 
-      
+      <div className="chatbot-icon" onClick={toggleChatbot}>
+        <i className="fas fa-robot"></i>
+        {unreadMessages > 0 && (
+          <span className="chatbot-badge">{unreadMessages}</span>
+        )}
+      </div>
 
-      
+      {showChatbot && (
+        <div className="chatbot-modal active">
+          <div className="chatbot-header">
+            <h3><i className="fas fa-robot"></i> ChefBot Assistant</h3>
+            <button className="close-chatbot" onClick={toggleChatbot}>
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
+          <div className="chatbot-body">
+            <p>Hello! I'm ChefBot. How can I help you with cooking today? 🍳</p>
+          </div>
+          <div className="chatbot-footer">
+            <input 
+              type="text" 
+              className="chatbot-input" 
+              placeholder="Type your message..."
+            />
+            <button className="chatbot-send">
+              <i className="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

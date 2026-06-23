@@ -13,9 +13,8 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- CHEFBOT HERO ---------- */
 .urdu-chefbot-hero {
-  margin-top:-8px;
+  margin-top: -8px;
   padding-top: 0;
   min-height: 100%;
   width: 100%;
@@ -24,7 +23,7 @@ body {
   justify-content: center;
   background: white;
   margin-bottom: -100px;
-  height:auto;
+  height: auto;
 }
 
 .urdu-chefbot-slider {
@@ -32,7 +31,7 @@ body {
   width: 100%;
   height: 85vh;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 40px #0a0a0a;
   background: white;
 }
 
@@ -65,7 +64,6 @@ body {
   50%, 100% { opacity: 1; }
 }
 
-/* Container for circle with lines */
 .urdu-circle-with-lines {
   display: flex;
   align-items: center;
@@ -74,7 +72,6 @@ body {
   gap: 25px;
 }
 
-/* Dotted lines on sides */
 .urdu-dotted-line {
   flex: 1;
   height: 6px;
@@ -89,7 +86,6 @@ body {
   margin-left: 20px;
 }
 
-/* Circle Feature */
 .urdu-feature-circle {
   width: 80px;
   height: 80px;
@@ -127,7 +123,6 @@ body {
   opacity: 0.9;
 }
 
-/* ========== CHATBOT ICON ========== */
 .urdu-chatbot-icon {
   position: fixed;
   bottom: 30px;
@@ -173,7 +168,6 @@ body {
   border: 2px solid white;
 }
 
-/* Chatbot Modal */
 .urdu-chatbot-modal {
   position: fixed;
   bottom: 100px;
@@ -275,7 +269,6 @@ body {
   transform: scale(1.1);
 }
 
-/* ========== FEATURES GRID ========== */
 .urdu-h-features-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -286,20 +279,16 @@ body {
   position: relative;
   z-index: 1;
   height: auto;
-
   background-color: white;
 }
 
-/* ========== FEATURES SECTION ========== */
 .urdu-h-features-section {
   padding: 40px 1rem;
   text-align: center;
   background: white;
-
   position: relative;
   overflow: hidden;
   width: 100%;
-  
 }
 
 .urdu-h-features-section::before {
@@ -321,10 +310,9 @@ body {
   position: relative;
   display: inline-block;
   z-index: 1;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-shadow: 0 2px 10px #0a0a0a;
 }
 
-/* ========== FEATURE BOX ========== */
 .urdu-h-feature-box {
   position: relative;
   border-radius: 12px;
@@ -332,7 +320,7 @@ body {
   text-align: center;
   transition: all 0.3s ease;
   border: 1px solid #284a4b;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 15px #0a0a0a;
   color: white;
   min-height: 220px;
   height: 100%;
@@ -346,11 +334,10 @@ body {
 
 .urdu-h-feature-box:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px #0a0a0a;
   border-color: #284a4b;
 }
 
-/* Feature Image Container */
 .urdu-h-feature-image {
   width: 100%;
   height: 100px;
@@ -374,7 +361,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Content Container */
 .urdu-h-feature-content {
   position: relative;
   z-index: 2;
@@ -438,133 +424,11 @@ body {
   transform: translateX(3px);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 1200px) {
-  .urdu-h-features-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1000px;
-    gap: 1.2rem;
-  }
-  
-  .urdu-h-feature-title {
-    font-size: 1rem;
-  }
-  
-  .urdu-h-feature-description {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .urdu-h-features-section {
-    padding: 30px 1rem;
-    margin-top: 20px;
-  }
-  
-  .urdu-h-features-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .urdu-h-features-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-width: 600px;
-    padding: 0 1rem;
-  }
-  
-  .urdu-h-feature-box {
-    padding: 0.8rem 0.6rem;
-    min-height: 200px;
-  }
-  
-  .urdu-h-feature-image {
-    height: 90px;
-    margin-bottom: 0.6rem;
-  }
-  
-  .urdu-h-feature-box:nth-child(5) {
-    grid-column: span 2;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .urdu-h-features-section {
-    padding: 20px 0.5rem;
-    margin-top: 30px;
-  }
-  
-  .urdu-h-features-title {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .urdu-h-features-grid {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    max-width: 320px;
-  }
-  
-  .urdu-h-feature-box {
-    padding: 0.8rem;
-    min-height: 180px;
-  }
-  
-  .urdu-h-feature-image {
-    height: 80px;
-    margin-bottom: 0.5rem;
-  }
-  
-  .urdu-h-feature-title {
-    font-size: 0.9rem;
-    min-height: auto;
-  }
-  
-  .urdu-h-feature-description {
-    font-size: 0.7rem;
-    min-height: auto;
-    margin-bottom: 0.5rem;
-  }
-  
-  .urdu-h-feature-link {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-  }
-  
-  .urdu-h-feature-box:nth-child(5) {
-    grid-column: 1;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 360px) {
-  .urdu-h-features-grid {
-    padding: 0 0.5rem;
-  }
-  
-  .urdu-h-feature-box {
-    padding: 0.7rem;
-  }
-  
-  .urdu-h-feature-title {
-    font-size: 0.85rem;
-  }
-  
-  .urdu-h-feature-description {
-    font-size: 0.65rem;
-  }
-}
-
-/* ---------- HERO 2 ---------- */
 .urdu-hero-section1 {
-  
   background-color: #284a4b;
   padding: 60px 80px;
   display: flex;
   justify-content: space-between;
-  
 }
 
 .urdu-hero-left {
@@ -610,7 +474,7 @@ body {
   text-align: left;
   margin-bottom: 7px;
   margin-top: 30px;
-  width:500px;
+  width: 500px;
 }
 
 .urdu-hero-right img {
@@ -619,9 +483,8 @@ body {
   border-radius: 10px;
 }
 
-/* ---------- FOOD SHOWCASE ---------- */
 .urdu-food-showcase {
-  display:flex;
+  display: flex;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   padding: 60px 80px;
@@ -639,7 +502,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ---------- CLASSES SECTION ---------- */
 .urdu-classes-section {
   display: flex;
   padding: 80px;
@@ -674,7 +536,6 @@ body {
   color: #284a4b;
 }
 
-/* ---------- MEAL SECTION ---------- */
 .urdu-m-plan-section {
   background-color: #284a4b;
   padding: 70px;
@@ -725,7 +586,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ---------- RECIPES ---------- */
 .urdu-h-recipes-section {
   background: white;
   padding: 80px 2rem;
@@ -762,7 +622,7 @@ body {
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 20px #0a0a0a;
   transition: transform 0.3s ease;
   width: 100%;
   height: 400px;
@@ -864,10 +724,9 @@ body {
   background: #397d7c;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px #397d7c;
-  color:white;
+  color: white;
 }
 
-/* ========== MEAL SUGGESTOR POPUP ========== */
 .urdu-meal-suggestor-popup {
   position: fixed;
   bottom: 100px;
@@ -875,7 +734,7 @@ body {
   width: 350px;
   background: white;
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px #0a0a0a;
   z-index: 1001;
   display: none;
   overflow: hidden;
@@ -950,7 +809,6 @@ body {
   cursor: pointer;
 }
 
-/* ---------- MEDIA QUERIES ---------- */
 @media (max-width: 1200px) {
   .urdu-hero-section1 {
     flex-wrap: wrap;
@@ -969,6 +827,20 @@ body {
 
   .urdu-h-recipes-section {
     padding: 40px;
+  }
+  
+  .urdu-h-features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1000px;
+    gap: 1.2rem;
+  }
+  
+  .urdu-h-feature-title {
+    font-size: 1rem;
+  }
+  
+  .urdu-h-feature-description {
+    font-size: 0.8rem;
   }
 }
 
@@ -1003,6 +875,39 @@ body {
   .urdu-chefbot-slide-image {
     height: 300px;
   }
+  
+  .urdu-h-features-section {
+    padding: 30px 1rem;
+    margin-top: 20px;
+  }
+  
+  .urdu-h-features-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .urdu-h-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    padding: 0 1rem;
+  }
+  
+  .urdu-h-feature-box {
+    padding: 0.8rem 0.6rem;
+    min-height: 200px;
+  }
+  
+  .urdu-h-feature-image {
+    height: 90px;
+    margin-bottom: 0.6rem;
+  }
+  
+  .urdu-h-feature-box:nth-child(5) {
+    grid-column: span 2;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1012,5 +917,70 @@ body {
   
   .urdu-chefbot-slide-image {
     height: 250px;
+  }
+  
+  .urdu-h-features-section {
+    padding: 20px 0.5rem;
+    margin-top: 30px;
+  }
+  
+  .urdu-h-features-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .urdu-h-features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    max-width: 320px;
+  }
+  
+  .urdu-h-feature-box {
+    padding: 0.8rem;
+    min-height: 180px;
+  }
+  
+  .urdu-h-feature-image {
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .urdu-h-feature-title {
+    font-size: 0.9rem;
+    min-height: auto;
+  }
+  
+  .urdu-h-feature-description {
+    font-size: 0.7rem;
+    min-height: auto;
+    margin-bottom: 0.5rem;
+  }
+  
+  .urdu-h-feature-link {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .urdu-h-feature-box:nth-child(5) {
+    grid-column: 1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .urdu-h-features-grid {
+    padding: 0 0.5rem;
+  }
+  
+  .urdu-h-feature-box {
+    padding: 0.7rem;
+  }
+  
+  .urdu-h-feature-title {
+    font-size: 0.85rem;
+  }
+  
+  .urdu-h-feature-description {
+    font-size: 0.65rem;
   }
 }

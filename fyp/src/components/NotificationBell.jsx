@@ -1,7 +1,5 @@
-// components/NotificationBell.jsx
-
 import React, { useState, useEffect } from 'react';
-import { getPendingReport } from '../services/dailyReportService';  
+import { getPendingReport } from '../services/dailyReportService';
 import './NotificationBell.css';
 
 const NotificationBell = ({ onNotificationClick }) => {
@@ -20,7 +18,6 @@ const NotificationBell = ({ onNotificationClick }) => {
   useEffect(() => {
     checkPendingReport();
     
-    // Check every 5 minutes
     const interval = setInterval(checkPendingReport, 5 * 60 * 1000);
     
     return () => clearInterval(interval);
@@ -31,7 +28,7 @@ const NotificationBell = ({ onNotificationClick }) => {
       className={`notification-bell ${hasPending ? 'has-notification' : ''}`}
       onClick={onNotificationClick}
     >
-      <span className="bell-icon">🔔</span>
+      <span className="bell-icon">Bell</span>
       {hasPending && <span className="notification-dot"></span>}
     </button>
   );

@@ -38,7 +38,6 @@ const UrduLoginPage = () => {
   return (
     <div className="urdu-login-page-wrapper">
       <div className="urdu-login-page-container">
-        {/* LEFT PANEL - Branding */}
         <div className="urdu-login-left-panel">
           <div className="urdu-login-logo-container">
             <div className="urdu-login-logo-circle">
@@ -63,7 +62,6 @@ const UrduLoginPage = () => {
           </ul>
         </div>
         
-        {/* RIGHT PANEL - Form */}
         <div className="urdu-login-right-panel">
           <div className="urdu-login-form-header">
             <h2>اپنے اکاؤنٹ میں لاگ ان کریں</h2>
@@ -135,17 +133,7 @@ const UrduLoginPage = () => {
               <span>یا جاری رکھیں</span>
             </div>
             
-            <div className="urdu-login-social-login">
-              <button type="button" className="urdu-login-social-btn urdu-login-social-google">
-                G
-              </button>
-              <button type="button" className="urdu-login-social-btn urdu-login-social-facebook">
-                f
-              </button>
-              <button type="button" className="urdu-login-social-btn urdu-login-social-twitter">
-                𝕏
-              </button>
-            </div>
+            
           </form>
         </div>
       </div>

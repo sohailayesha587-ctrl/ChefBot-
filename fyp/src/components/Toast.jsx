@@ -9,7 +9,6 @@ export const showToast = (message, type = 'success') => {
   const event = new CustomEvent('show-toast', { detail: { id, message, type } });
   window.dispatchEvent(event);
   
-  // Auto close after 3 seconds
   if (timeouts[id]) clearTimeout(timeouts[id]);
   timeouts[id] = setTimeout(() => {
     const closeEvent = new CustomEvent('close-toast', { detail: { id } });
@@ -40,7 +39,6 @@ const Toast = () => {
     return () => {
       window.removeEventListener('show-toast', handleShow);
       window.removeEventListener('close-toast', handleClose);
-      // Clear all timeouts
       Object.values(timeouts).forEach(clearTimeout);
     };
   }, []);

@@ -27,7 +27,6 @@ const UrduSignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validation
     if (formData.password !== formData.confirmPassword) {
       alert("پاسورڈز مماثل نہیں ہیں!");
       return;
@@ -44,7 +43,6 @@ const UrduSignUpPage = () => {
       return;
     }
 
-    // Simulate successful signup
     alert("اکاؤنٹ کامیابی سے بن گیا! شیف بوٹ میں خوش آمدید!");
     window.location.href = "/home";
   };

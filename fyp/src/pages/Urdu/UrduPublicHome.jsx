@@ -5,7 +5,6 @@ import './UrduPublicHome.css';
 const UrduPublicHome = () => {
   const navigate = useNavigate();
   
-  // Carousel Data - AI Assistant as FIRST item
   const furnitureItems = [
     {
       id: 1,
@@ -51,17 +50,14 @@ const UrduPublicHome = () => {
     }
   ];
 
-  // State
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0);
   const heroBackgroundRef = useRef(null);
 
-  // Initialize Carousel
   useEffect(() => {
     if (heroBackgroundRef.current) {
       heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
     }
     
-    // Keyboard navigation
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') prevItem();
       if (e.key === 'ArrowRight') nextItem();
@@ -74,40 +70,33 @@ const UrduPublicHome = () => {
     };
   }, [currentCenterIndex]);
 
-  // Next item
   const nextItem = () => {
     setCurrentCenterIndex((prevIndex) => (prevIndex + 1) % furnitureItems.length);
   };
 
-  // Previous item
   const prevItem = () => {
     setCurrentCenterIndex((prevIndex) => (prevIndex - 1 + furnitureItems.length) % furnitureItems.length);
   };
 
-  // Handle card hover
   const handleCardHover = (bgImage) => {
     if (heroBackgroundRef.current) {
       heroBackgroundRef.current.style.backgroundImage = `url('${bgImage}')`;
     }
   };
 
-  // Handle mouse leave - reset to current center card
   const handleCardLeave = () => {
     if (heroBackgroundRef.current) {
       heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
     }
   };
 
-  // Handle card click
   const handleCardClick = (index) => {
     setCurrentCenterIndex(index);
-    // Click par confirm karne ke liye background set karein
     if (heroBackgroundRef.current) {
       heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[index].bgImage}')`;
     }
   };
 
-  // Calculate card position for 6 items
   const getCardStyle = (index) => {
     const position = index - currentCenterIndex;
     
@@ -151,13 +140,10 @@ const UrduPublicHome = () => {
 
   return (
     <>
-      {/* HERO + CAROUSEL SECTION - ONLY MAIN CONTENT */}
       <section className="urdu-hero-carousel-section">
-        {/* Background ONLY for hero section */}
         <div className="urdu-hero-background-container" ref={heroBackgroundRef}></div>
         <div className="urdu-hero-background-overlay"></div>
 
-        {/* Left Content */}
         <div className="urdu-hero-left-section">
           <div className="urdu-hero-section-tag"></div>
           
@@ -167,11 +153,9 @@ const UrduPublicHome = () => {
           <p className="urdu-hero-description">"شیف بوٹ: آپ کا سمارٹ کچن AI جو آپ کے پاس موجود چیزوں سے آئیڈیاز پکاتا ہے!"</p>
         </div>
 
-        {/* Right Carousel */}
         <div className="urdu-hero-right-section">
           <div className="urdu-carousel-container" id="carouselContainer">
             <div className="urdu-carousel-track" id="carouselTrack">
-              {/* Cards - AI Assistant as FIRST item */}
               {furnitureItems.map((item, index) => {
                 const isCenterCard = index === currentCenterIndex;
                 const cardStyle = getCardStyle(index);
@@ -186,7 +170,6 @@ const UrduPublicHome = () => {
                     onMouseLeave={handleCardLeave}
                     onClick={() => handleCardClick(index)}
                   >
-                    {/* Sabhi cards ke liye same content */}
                     <div className="urdu-item-image" style={{backgroundImage: `url('${item.image}')`}}></div>
                     <div className="urdu-item-content">
                       <h3 className="urdu-item-title">{item.title}</h3>
@@ -198,7 +181,6 @@ const UrduPublicHome = () => {
             </div>
             
             <div className="urdu-carousel-indicators" id="indicators">
-              {/* Indicators - NOW 6 INDICATORS */}
               {furnitureItems.map((item, index) => (
                 <div
                   key={item.id}
@@ -208,13 +190,10 @@ const UrduPublicHome = () => {
                 ></div>
               ))}
             </div>
-            
-           
           </div>
         </div>
       </section>
 
-      {/* EXISTING SECTIONS - ONLY MAIN CONTENT */}
       <section className="urdu-section-boxes">
         <div className="urdu-content-box urdu-box-1 urdu-content-left">
           <div className="urdu-colored-box">
@@ -256,7 +235,6 @@ const UrduPublicHome = () => {
           </div>
         </div>
 
-        {/* RECIPE CARDS SECTION */}
         <section className="urdu-recipe-section-container">
           <h2 className="urdu-section-title">مشہور ریسیپیز</h2>
           <div className="urdu-recipe-section">
@@ -264,13 +242,13 @@ const UrduPublicHome = () => {
               <img src="speghetti_public.jpg" alt="اسپگیٹی کاربونارا" />
               <h3>اسپگیٹی</h3>
               <p>انڈے، پنیر اور پینسیٹا کے ساتھ کریمی اطالوی پاستا</p>
-             <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
+              <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
             <div className="urdu-recipe-card">
               <img src="tikka_public.jpg" alt="چکن تکہ مصالحہ" />
               <h3>چکن تکہ مصالحہ</h3>
               <p>غنی اور کریمی ٹماٹر ساس میں نرم چکن</p>
-             <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
+              <button className="urdu-btn" onClick={() => navigate('/urdu-login')}>ریسیپی دیکھیں</button>
             </div>
             <div className="urdu-recipe-card">
               <img src="pizza_public.jpg" alt="مارگریٹا پیزا" />

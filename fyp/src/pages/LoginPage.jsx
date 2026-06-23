@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth();
   
-  // Jis page se aaya tha wahan wapas jayega
   const from = location.state?.from || '/home';
   
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +29,7 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.username || !formData.password) {
@@ -40,30 +37,32 @@ const LoginPage = () => {
       return;
     }
 
-    try {
-      setLoading(true);
-      setError('');
+    setLoading(true);
+    setError('');
+
+    setTimeout(() => {
+      const userData = {
+        id: Date.now().toString(),
+        name: formData.username,
+        email: formData.username,
+        registeredAt: new Date().toISOString()
+      };
       
-      const result = await login(formData.username, formData.password);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('isAuthenticated', 'true');
       
-      if (result.success) {
-        // ✅ Login ke baad wahi page open hoga jahan se aaya tha
-        navigate(from, { replace: true });
-      } else {
-        setError(result.error);
+      if (formData.remember) {
+        localStorage.setItem('rememberMe', 'true');
       }
-    } catch (err) {
-      console.error(err);
-      setError("Something went wrong! Try again.");
-    } finally {
+      
       setLoading(false);
-    }
+      navigate(from, { replace: true });
+    }, 800);
   };
 
   return (
     <div className="login-page-wrapper">
       <div className="login-page-container">
-        {/* LEFT PANEL */}
         <div className="login-left-panel">
           <div className="login-logo-container">
             <div className="login-logo-circle">
@@ -86,7 +85,6 @@ const LoginPage = () => {
           </ul>
         </div>
 
-        {/* RIGHT PANEL */}
         <div className="login-right-panel">
           <div className="login-form-header">
             <h2>Login to Your Account</h2>
@@ -132,7 +130,7 @@ const LoginPage = () => {
                   className="login-password-toggle"
                   onClick={togglePasswordVisibility}
                 >
-                  <i className={showPassword ? "far fa-eye" : "far fa-eye-slash"}></i>
+                  <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
                 </button>
               </div>
             </div>
@@ -155,7 +153,7 @@ const LoginPage = () => {
             </button>
 
             <div className="login-signup-link">
-              Don't have an account? <Link to="/signup">Sign up now</Link>
+              Don't have an account? <Link to="/signup-page">Sign up now</Link>
             </div>
           </form>
         </div>

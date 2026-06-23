@@ -1,4 +1,9 @@
-/* ---------- CHANGE ACCOUNT INFO PAGE - FULL SCREEN NO SCROLL ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .change-info-wrapper {
   height: 100vh;
   width: 100vw;
@@ -8,22 +13,14 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  
-  background: 
-    linear-gradient(rgba(40, 90, 91, 0.7), rgba(40, 90, 91, 0.7)),
-    url('home1.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
+  background: #285a5b;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 1000;
-  
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
   color: #333;
 }
 
@@ -40,18 +37,16 @@
   max-height: 700px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  background: white;
   position: relative;
   z-index: 1001;
   margin: 0 auto;
 }
 
-/* LEFT PANEL - Branding */
 .change-left-panel {
   flex: 1;
-  background: linear-gradient(135deg, #285a5b, #1e4546);
+  background: #285a5b;
   padding: 40px 35px;
   display: flex;
   flex-direction: column;
@@ -74,20 +69,6 @@
 .change-left-panel::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-}
-
-.change-left-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('home1.jpg');
-  background-size: cover;
-  opacity: 0.08;
-  mix-blend-mode: overlay;
-  pointer-events: none;
 }
 
 .change-logo-container {
@@ -175,7 +156,6 @@
   color: #ffcc00;
 }
 
-/* RIGHT PANEL - Form */
 .change-right-panel {
   flex: 1;
   padding: 40px 35px;
@@ -274,30 +254,29 @@
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: normal;
   transition: all 0.3s;
-  background: #ffffff;
+  background: white;
   box-sizing: border-box;
-  color: #000000;
+  color: #000;
 }
 
 .change-input:focus {
   outline: none;
   border-color: #285a5b;
-  background: #ffffff;
+  background: white;
   box-shadow: 0 0 0 3px rgba(40, 90, 91, 0.1);
-  color: #000000;
+  color: #000;
 }
 
 .change-input::placeholder {
-  color: #aaaaaa;
+  color: #aaa;
   font-size: 13px;
 }
 
 .change-submit-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #285a5b, #1e4546);
+  background: #285a5b;
   color: white;
   border: none;
   border-radius: 8px;
@@ -314,6 +293,7 @@
 }
 
 .change-submit-btn:hover:not(:disabled) {
+  background: #1e4546;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(40, 90, 91, 0.4);
 }
@@ -366,7 +346,6 @@
   gap: 10px;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .change-info-container {
     width: 90%;
@@ -496,7 +475,6 @@
   }
 }
 
-/* Prevent body scroll when page is open */
 body:has(.change-info-wrapper) {
   overflow: hidden;
   height: 100vh;

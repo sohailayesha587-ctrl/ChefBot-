@@ -28,6 +28,7 @@
   border-left-color: #28a745;
   background: #f0f9f0;
 }
+
 .toast-success .toast-icon {
   color: #28a745;
 }
@@ -36,6 +37,7 @@
   border-left-color: #dc3545;
   background: #fff5f5;
 }
+
 .toast-error .toast-icon {
   color: #dc3545;
 }
@@ -44,6 +46,7 @@
   border-left-color: #ffc107;
   background: #fffaf0;
 }
+
 .toast-warning .toast-icon {
   color: #ffc107;
 }
@@ -52,6 +55,7 @@
   border-left-color: #17a2b8;
   background: #f0f9ff;
 }
+
 .toast-info .toast-icon {
   color: #17a2b8;
 }

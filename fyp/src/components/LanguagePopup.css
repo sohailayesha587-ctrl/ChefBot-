@@ -1,11 +1,10 @@
-/* Popup Overlay */
 .lang-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: #0a0a0a;
     backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
@@ -14,7 +13,6 @@
     animation: fadeIn 0.3s ease;
 }
 
-/* Popup Box */
 .lang-popup-box {
     background: #284a4b;
     border-radius: 28px;
@@ -22,11 +20,10 @@
     text-align: center;
     width: 90%;
     max-width: 380px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 60px #0a0a0a;
     animation: slideUp 0.4s ease;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -47,7 +44,6 @@
     }
 }
 
-/* Typography */
 .lang-popup-box h2 {
     color: white;
     font-size: 1.8rem;
@@ -61,7 +57,6 @@
     margin-bottom: 28px;
 }
 
-/* Language Buttons */
 .lang-btn {
     width: 100%;
     padding: 14px 20px;
@@ -78,20 +73,18 @@
 
 .lang-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px #0a0a0a;
 }
 
 .lang-btn:active {
     transform: translateY(0);
 }
 
-/* English Button */
 .english-btn:hover {
     background: #397d7c;
     color: white;
 }
 
-/* Urdu Button */
 .urdu-btn:hover {
     background: #284a4b;
     color: white;
@@ -102,7 +95,6 @@
     font-size: 1.2rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .lang-popup-box {
         padding: 30px 24px;

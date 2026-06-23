@@ -1,5 +1,3 @@
-/* src/components/Footer.css */
-
 .chefbot-footer {
   font-family: 'Poppins', sans-serif;
   background-color: #284a4b;
@@ -8,7 +6,6 @@
   overflow: hidden;
 }
 
-/* Simple footer for signup page */
 .simple-footer {
   background: #284a4b;
   color: white;
@@ -30,7 +27,6 @@
   text-decoration: underline;
 }
 
-/* Top Image Row - Gallery */
 .footer-gallery {
   display: flex;
   height: 85px;
@@ -49,12 +45,11 @@
   filter: brightness(100%);
 }
 
-/* Middle CTA Section - Green Line (FIXED - Kam gap) */
 .footer-cta {
   background: #284a4b;
   color: white;
   text-align: center;
-  padding: 40px 20px;
+  padding: 30px 20px;
   margin: 0;
 }
 
@@ -66,36 +61,11 @@
   letter-spacing: 0.5px;
 }
 
-.footer-cta form {
-  margin-bottom: 5px;
-  margin-top: 0;
-}
-
-#search-footer {
-  background-color: white;
-  color: #284a4b;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-.footer-cta button {
-  background-color: white;
-  color: #284a4b;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-/* Main Footer Section - Full Width White Section */
 .footer-main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 50px;
-  padding: 30px 80px;
+  padding: 20px 80px;
   background-color: white;
   width: 100%;
   margin: 0;
@@ -149,7 +119,6 @@
   text-decoration: underline;
 }
 
-/* Bottom Bar */
 .footer-bottom {
   background-color: #284a4b;
   color: white;
@@ -157,33 +126,115 @@
   padding: 12px;
   font-size: 14px;
   letter-spacing: 0.3px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #4a6b6c;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .footer-gallery {
-    height: 80px;
+    height: 70px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 2px;
+  }
+  
+  .footer-gallery img {
+    width: 96px;
+    height: 70px;
   }
   
   .footer-cta {
-    padding: 10px 15px;
+    padding: 25px 15px;
   }
   
   .footer-cta h2 {
     font-size: 18px;
-    margin-bottom: 8px;
+    line-height: 1.4;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .footer-main {
-    padding: 30px 20px;
+    display: block !important;
     text-align: center;
-    gap: 30px;
+    padding: 20px 20px;
+  }
+  
+  .footer-column {
+    gap: 10px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column h3,
+  .footer-column h4 {
+    display: none;
   }
   
   .footer-column p {
+    display: inline;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .footer-column ul {
+    display: inline;
+  }
+  
+  .footer-column ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  .footer-column ul li a {
+    font-size: 14px;
+    color: #1a3334;
+    font-weight: 300;
+    padding: 0;
+  }
+  
+  .footer-column ul li a:hover {
+    padding-left: 0;
+    color: #397d7c;
+  }
+  
+  .footer-column br {
+    display: none;
+  }
+  
+  .footer-bottom {
+    padding: 10px 5px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-gallery {
+    height: 60px;
+  }
+  
+  .footer-gallery img {
+    width: 100px;
+    min-width: 100px;
+    height: 60px;
+  }
+  
+  .footer-cta h2 {
+    font-size: 16px;
+  }
+  
+  .footer-main {
+    padding: 15px 10px;
+  }
+  
+  .footer-column p,
+  .footer-column ul li a {
+    font-size: 11px;
+  }
+  
+  .footer-bottom {
+    font-size: 10px;
   }
 }

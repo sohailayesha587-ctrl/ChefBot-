@@ -1,7 +1,3 @@
-/* ===== MEAT PROCESSING PAGE CSS ===== */
-/* EXACT KITCHEN TOOLS PAGE STYLE - #284a4b COLOR */
-
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +11,6 @@ html, body, #root {
   background: #f8fafc;
 }
 
-/* MAIN CONTAINER */
 .mep-container {
   width: 100%;
   min-height: 100vh;
@@ -27,7 +22,6 @@ html, body, #root {
   min-height: 100vh;
 }
 
-/* ===== SIDEBAR - EXACT PANTRY BASICS STYLE (#284a4b) ===== */
 .mep-sidebar {
   width: 280px;
   background: #284a4b;
@@ -46,7 +40,7 @@ html, body, #root {
   margin-top: 155px;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+  border-bottom: 1px solid #cbd5e1;
 }
 
 .mep-sidebar-title {
@@ -60,7 +54,7 @@ html, body, #root {
 
 .mep-sidebar-subtitle {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #e2e8f0;
   font-weight: 500;
   text-align: center;
 }
@@ -84,19 +78,19 @@ html, body, #root {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #4a6b6c;
+  background-color: #3a5a5b;
 }
 
 .mep-category-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #4a6b6c;
   transform: translateX(5px);
 }
 
 .mep-category-item.mep-active {
-  background: rgba(255, 255, 255, 0.25);
+  background: #5a7b7c;
   border-color: #4FD1C5;
-  box-shadow: 0 2px 10px rgba(79, 209, 197, 0.2);
+  box-shadow: 0 2px 10px #4FD1C5;
 }
 
 .mep-category-name {
@@ -106,7 +100,6 @@ html, body, #root {
   text-align: center;
 }
 
-/* ===== MAIN CONTENT ===== */
 .mep-main {
   flex: 1;
   padding: 30px 40px;
@@ -139,12 +132,10 @@ html, body, #root {
   margin-bottom: 20px;
 }
 
-/* ===== CONTENT AREA ===== */
 .mep-content-area {
   width: 100%;
 }
 
-/* ===== TABS STYLES (LIKE COOKWARE) ===== */
 .mep-tabs {
   display: flex;
   gap: 15px;
@@ -176,7 +167,6 @@ html, body, #root {
   border-color: #284a4b;
 }
 
-/* ===== ITEMS GRID - 2 CARDS PER ROW ===== */
 .mep-items-grid-section {
   margin-bottom: 40px;
 }
@@ -188,12 +178,11 @@ html, body, #root {
   margin-bottom: 30px;
 }
 
-/* ===== BASE CARD STYLES - EXACT PANTRY BASICS ===== */
 .mep-item-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px #e2e8f0;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
@@ -204,7 +193,7 @@ html, body, #root {
 
 .mep-item-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 35px #cbd5e1;
   border-color: #6366f1;
 }
 
@@ -241,20 +230,16 @@ html, body, #root {
   font-size: 14px;
   color: #64748b;
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ===== MODAL - 2 PART LAYOUT (RIGHT IMAGE, LEFT SCROLL) ===== */
 .mep-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -271,7 +256,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 60px #0a0a0a;
   overflow: hidden;
 }
 
@@ -292,7 +277,7 @@ html, body, #root {
   cursor: pointer;
   z-index: 100;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px #e2e8f0;
 }
 
 .mep-modal-close:hover {
@@ -300,7 +285,6 @@ html, body, #root {
   transform: rotate(90deg);
 }
 
-/* MODAL HEADER */
 .mep-modal-header {
   padding: 30px 30px 15px 30px;
   background: linear-gradient(135deg, #f8fafc, #ffffff);
@@ -321,7 +305,6 @@ html, body, #root {
   font-weight: 500;
 }
 
-/* MODAL CONTENT - 2 COLUMN LAYOUT */
 .mep-modal-content {
   display: flex;
   flex: 1;
@@ -329,7 +312,6 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* LEFT SIDE - SCROLLABLE CONTENT (70%) */
 .mep-modal-left {
   flex: 0 0 70%;
   padding: 35px 30px 35px 35px;
@@ -338,25 +320,6 @@ html, body, #root {
   background: white;
 }
 
-.mep-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mep-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 10px;
-}
-
-.mep-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-.mep-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* RIGHT SIDE - FIXED IMAGE (30%) */
 .mep-modal-right {
   flex: 0 0 30%;
   padding: 30px 30px 30px 0;
@@ -373,7 +336,7 @@ html, body, #root {
   height: 350px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px #e2e8f0;
   background: #f8fafc;
   display: flex;
   align-items: center;
@@ -384,9 +347,9 @@ html, body, #root {
 .mep-main-image {
   width: 100%;
   height: 100%;
-  background-size: contain !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   transition: transform 0.3s ease;
 }
 
@@ -394,7 +357,6 @@ html, body, #root {
   transform: scale(1.05);
 }
 
-/* ===== DETAIL SECTIONS ===== */
 .mep-detail-section {
   margin-bottom: 25px;
   padding-bottom: 25px;
@@ -420,7 +382,6 @@ html, body, #root {
   color: #475569;
 }
 
-/* TOOLS LIST */
 .mep-tools-list {
   display: flex;
   flex-wrap: wrap;
@@ -445,7 +406,6 @@ html, body, #root {
   font-size: 16px;
 }
 
-/* STEPS LIST */
 .mep-steps-list {
   display: flex;
   flex-direction: column;
@@ -475,7 +435,6 @@ html, body, #root {
   color: #475569;
 }
 
-/* TIPS TEXT */
 .mep-tips-text {
   background: #fef3c7;
   padding: 15px;
@@ -485,7 +444,27 @@ html, body, #root {
   font-weight: 500;
 }
 
-/* ===== RESPONSIVE ===== */
+.back-home-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-home-btn:hover {
+  background-color: #397d7c;
+  transform: scale(1.05);
+}
+
 @media (max-width: 1200px) {
   .mep-items-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -622,7 +601,6 @@ html, body, #root {
   }
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -636,51 +614,4 @@ html, body, #root {
 
 .mep-item-card {
   animation: fadeInUp 0.5s ease-out;
-}
-
-/* ===== SCROLLBAR STYLING ===== */
-.mep-sidebar::-webkit-scrollbar,
-.mep-main::-webkit-scrollbar,
-.mep-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mep-sidebar::-webkit-scrollbar-track,
-.mep-main::-webkit-scrollbar-track,
-.mep-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
-}
-
-.mep-sidebar::-webkit-scrollbar-thumb,
-.mep-main::-webkit-scrollbar-thumb,
-.mep-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.mep-sidebar::-webkit-scrollbar-thumb:hover,
-.mep-main::-webkit-scrollbar-thumb:hover,
-.mep-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-.back-home-container {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.back-home-btn {
-  background-color: #284a4b;
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.back-home-btn:hover {
-  background-color: #397d7c;
-  transform: scale(1.05);
 }

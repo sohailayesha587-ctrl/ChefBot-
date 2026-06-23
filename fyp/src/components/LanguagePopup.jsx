@@ -7,7 +7,6 @@ const LanguagePopup = () => {
     const isLoggedIn = !!token;
     
     if (isLoggedIn) {
-      // Logged in user → permanent storage (localStorage)
       localStorage.setItem('userLanguage', lang);
       localStorage.setItem('languageSelectedByLoggedInUser', 'true');
       
@@ -17,11 +16,9 @@ const LanguagePopup = () => {
         window.location.href = '/home';
       }
     } else {
-      // Not logged in → temporary storage (sessionStorage)
       sessionStorage.setItem('sessionLanguage', lang);
       sessionStorage.setItem('sessionLanguageSelected', 'true');
       
-      // Redirect based on language
       if (lang === 'urdu') {
         window.location.href = '/urdu-public';
       } else {
@@ -33,7 +30,7 @@ const LanguagePopup = () => {
   return (
     <div className="lang-popup-overlay">
       <div className="lang-popup-box">
-        <h2>🌐 Select Language</h2>
+        <h2>Select Language</h2>
         <p>Choose your preferred language</p>
         <button className="lang-btn english-btn" onClick={() => handleLanguageSelect('en')}>
           English

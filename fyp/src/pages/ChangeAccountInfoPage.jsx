@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import './ChangeAccountInfoPage.css';
 
 const ChangeAccountInfoPage = () => {
@@ -8,13 +7,12 @@ const ChangeAccountInfoPage = () => {
   const location = useLocation();
   
   const queryParams = new URLSearchParams(location.search);
-  const changeType = queryParams.get('type'); // 'email' or 'mobile'
+  const changeType = queryParams.get('type');
   
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1); // 1: verify old, 2: enter new
+  const [step, setStep] = useState(1);
   const [otp, setOtp] = useState('');
-  const [sentOtp, setSentOtp] = useState('');
+  const [sentOtp] = useState('123456');
   const [oldValue, setOldValue] = useState('');
   const [newValue, setNewValue] = useState('');
   const [message, setMessage] = useState('');
@@ -46,8 +44,7 @@ const ChangeAccountInfoPage = () => {
       : 'Mobile number changed successfully!';
   };
 
-  // Step 1: Send OTP to verify old value
-  const sendOTP = async () => {
+  const sendOTP = () => {
     if (!oldValue) {
       setError(`Please enter your ${changeType === 'email' ? 'email' : 'mobile number'}`);
       return;
@@ -57,31 +54,21 @@ const ChangeAccountInfoPage = () => {
     setError('');
     setMessage('');
 
-    try {
-      const endpoint = changeType === 'email' 
-        ? '/api/auth/send-otp-email' 
-        : '/api/auth/send-otp-mobile';
-      
-      const payload = changeType === 'email' 
-        ? { email: oldValue } 
-        : { mobile: oldValue };
-
-      const response = await axios.post(`http://localhost:5000${endpoint}`, payload);
-      
-      setSentOtp(response.data.otp || '123456');
+    setTimeout(() => {
       setStep(2);
       setMessage(`OTP sent to your ${changeType === 'email' ? 'email address' : 'mobile number'}`);
-    } catch (err) {
-      setError(err.response?.data?.message || `Failed to send OTP. ${changeType === 'email' ? 'Email' : 'Mobile number'} not found.`);
-    } finally {
       setLoading(false);
-    }
+    }, 800);
   };
 
-  // Step 2: Verify OTP and update value
-  const verifyAndUpdate = async () => {
+  const verifyAndUpdate = () => {
     if (!otp) {
       setError('Please enter OTP');
+      return;
+    }
+
+    if (otp !== sentOtp) {
+      setError('Invalid OTP. Please try again.');
       return;
     }
 
@@ -94,48 +81,27 @@ const ChangeAccountInfoPage = () => {
     setError('');
     setMessage('');
 
-    try {
-      // First verify OTP
-      const verifyEndpoint = changeType === 'email' 
-        ? '/api/auth/verify-otp-email' 
-        : '/api/auth/verify-otp-mobile';
+    setTimeout(() => {
+      const userData = JSON.parse(localStorage.getItem('user') || '{}');
+      if (changeType === 'email') {
+        userData.email = newValue;
+      } else {
+        userData.mobile = newValue;
+      }
+      localStorage.setItem('user', JSON.stringify(userData));
       
-      await axios.post(`http://localhost:5000${verifyEndpoint}`, {
-        otp: otp,
-        [changeType === 'email' ? 'email' : 'mobile']: oldValue
-      });
-
-      // Then update the value
-      const updateEndpoint = changeType === 'email' 
-        ? '/api/auth/update-email' 
-        : '/api/auth/update-mobile';
-      
-      await axios.put(`http://localhost:5000${updateEndpoint}`, {
-        oldValue: oldValue,
-        newValue: newValue
-      }, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      });
-
       setMessage(getSuccessMessage());
+      setLoading(false);
+      
       setTimeout(() => {
         navigate('/home');
-      }, 2000);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Verification failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+      }, 1500);
+    }, 800);
   };
 
   return (
     <div className="change-info-wrapper">
       <div className="change-info-container">
-        {/* LEFT PANEL */}
         <div className="change-left-panel">
           <div className="change-logo-container">
             <div className="change-logo-circle">
@@ -170,7 +136,6 @@ const ChangeAccountInfoPage = () => {
           )}
         </div>
 
-        {/* RIGHT PANEL */}
         <div className="change-right-panel">
           {message && (
             <div className="change-success-message">
@@ -234,6 +199,9 @@ const ChangeAccountInfoPage = () => {
                     onChange={(e) => setOtp(e.target.value)}
                   />
                 </div>
+                <small style={{color: '#666', fontSize: '0.75rem', marginTop: '5px', display: 'block'}}>
+                  Demo OTP: 123456
+                </small>
               </div>
 
               <div className="change-form-group">

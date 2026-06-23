@@ -1,11 +1,10 @@
-/* ========== OVERLAY ========== */
 .sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: #0a0a0a;
   backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
@@ -18,7 +17,6 @@
   visibility: visible;
 }
 
-/* ========== SIDEBAR ========== */
 .settings-sidebar {
   position: fixed;
   top: 0;
@@ -27,7 +25,7 @@
   max-width: 90vw;
   height: 100vh;
   background: #ffffff;
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 0 25px #0a0a0a;
   transition: right 0.3s ease;
   z-index: 1000;
   overflow-y: auto;
@@ -38,7 +36,6 @@
   right: 0;
 }
 
-/* ========== SCROLLBAR ========== */
 .settings-sidebar::-webkit-scrollbar {
   width: 5px;
 }
@@ -52,7 +49,6 @@
   border-radius: 3px;
 }
 
-/* ========== HEADER ========== */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -100,13 +96,11 @@
   color: white;
 }
 
-/* ========== CONTENT ========== */
 .sidebar-content {
   padding: 24px;
   direction: ltr;
 }
 
-/* ========== PROFILE CARD ========== */
 .profile-card {
   background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
   border-radius: 24px;
@@ -155,7 +149,6 @@
   direction: ltr;
 }
 
-/* ========== EDIT PROFILE BUTTON ========== */
 .edit-profile-btn {
   background: transparent;
   border: 1.5px solid #284a4b;
@@ -185,7 +178,6 @@
   transform: rotate(180deg);
 }
 
-/* ========== PROFILE OPTIONS (EXPANDABLE) ========== */
 .profile-options {
   margin-top: 16px;
   animation: fadeIn 0.2s ease;
@@ -233,7 +225,6 @@
   transform: translateX(4px);
 }
 
-/* ========== EDIT NAME SECTION ========== */
 .edit-name-container {
   margin-top: 8px;
   direction: ltr;
@@ -249,7 +240,7 @@
   margin-bottom: 12px;
   outline: none;
   direction: ltr;
-  color: white
+  color: white;
 }
 
 .edit-btns {
@@ -276,7 +267,6 @@
   color: #666;
 }
 
-/* ========== STATS SECTION ========== */
 .stats-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -313,7 +303,6 @@
   direction: ltr;
 }
 
-/* ========== SETTINGS BLOCK ========== */
 .settings-block {
   margin-bottom: 28px;
   direction: ltr;
@@ -343,7 +332,6 @@
   direction: ltr;
 }
 
-/* ========== SETTING ITEMS ========== */
 .setting-item {
   display: flex;
   justify-content: space-between;
@@ -377,7 +365,6 @@
   direction: ltr;
 }
 
-/* ========== TOGGLE ========== */
 .toggle {
   position: relative;
   display: inline-block;
@@ -421,7 +408,6 @@
   transform: translateX(24px);
 }
 
-/* ========== DAILY REPORT ========== */
 .report-btn {
   width: 100%;
   padding: 12px;
@@ -510,7 +496,6 @@
   direction: ltr;
 }
 
-/* ========== MAIN BUTTONS ========== */
 .save-btn-main {
   width: 100%;
   padding: 14px;
@@ -542,7 +527,6 @@
   color: #ff4757;
 }
 
-/* ========== LOADING ========== */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -565,7 +549,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ========== DARK MODE ========== */
 body.dark-mode .settings-sidebar {
   background: #0f0f0f;
 }
@@ -645,7 +628,6 @@ body.dark-mode .name-input {
   border-color: #397d7c;
 }
 
-/* ========== RESPONSIVE ========== */
 @media (max-width: 480px) {
   .sidebar-content {
     padding: 16px;

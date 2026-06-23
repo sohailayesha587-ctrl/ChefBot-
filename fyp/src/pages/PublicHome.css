@@ -1,8 +1,3 @@
-/* ChefBot.css - Only styles for main content (no header/footer) */
-
-
-
-
 * {
   margin: 0;
   padding: 0;
@@ -17,9 +12,8 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- HERO + CAROUSEL SECTION ---------- */
 .hero-carousel-section {
-  margin-top: 50px; /* Changed from 115px since no navbar */
+  margin-top: 50px;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -27,7 +21,6 @@ body {
   overflow: hidden;
 }
 
-/* BACKGROUND ONLY FOR HERO SECTION */
 .hero-background-container {
   position: absolute;
   top: 0;
@@ -49,7 +42,6 @@ body {
   background: rgba(40, 74, 75, 0.85);
 }
 
-/* Left Content */
 .hero-left-section {
   width: 40%;
   height: 100%;
@@ -96,9 +88,6 @@ body {
   max-width: 300px;
 }
 
-
-
-/* Right Carousel */
 .hero-right-section {
   width: 60%;
   height: 100%;
@@ -127,11 +116,10 @@ body {
   justify-content: center;
 }
 
-/* Sabhi cards ke liye same styling */
 .carousel-item {
   position: absolute;
   width: 260px;
-  height: 360px;
+  height: 400px;
   background: white;
   border-radius: 16px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
@@ -142,15 +130,13 @@ body {
   cursor: pointer;
 }
 
-/* SIDE CARDS - Pehle display: none tha, ab visible karein */
 .carousel-item.side-card .item-content {
-  display: flex; /* Pehle none tha */
+  display: flex;
   flex-direction: column;
-  padding: 20px; /* Thoda kam padding side cards ke liye */
+  padding: 20px;
   flex-grow: 1;
 }
 
-/* CENTER CARD - Full content */
 .carousel-item.center-card .item-image {
   width: 100%;
   height: 220px;
@@ -160,17 +146,15 @@ body {
   transition: all 0.5s ease;
 }
 
-/* SIDE CARDS ke liye bhi image styling */
 .carousel-item.side-card .item-image {
   width: 100%;
-  height: 180px; /* Thoda chhota height side cards ke liye */
+  height: 180px;
   background-size: cover;
   background-position: center;
   opacity: 0.7;
   transition: all 0.5s ease;
 }
 
-/* Center card aur side cards dono ke liye same content styling */
 .carousel-item .item-content {
   padding: 20px;
   flex-grow: 1;
@@ -179,7 +163,7 @@ body {
 }
 
 .item-title {
-  font-size: 1.3rem; /* Thoda chhota font size */
+  font-size: 1.3rem;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 10px;
@@ -187,14 +171,13 @@ body {
 }
 
 .item-description {
-  font-size: 0.85rem; /* Thoda chhota font size */
+  font-size: 0.85rem;
   color: #666;
   line-height: 1.5;
   margin-bottom: 15px;
   flex-grow: 1;
 }
 
-/* Navigation */
 .navigation-buttons {
   position: absolute;
   bottom: 30px;
@@ -251,7 +234,40 @@ body {
   transform: scale(1.5);
 }
 
-/* RESPONSIVE FOR HERO CAROUSEL */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  color: #284a4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover {
+  background: #284a4b;
+  color: white;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
 @media (max-width: 1200px) {
   .hero-left-section {
     width: 45%;
@@ -282,9 +298,16 @@ body {
     height: 600px;
     margin-top: 0;
   }
+
+  .prev-btn {
+    left: 10px;
+  }
+
+  .next-btn {
+    right: 10px;
+  }
 }
 
-/* ---------- EXISTING SECTIONS ---------- */
 .section-boxes {
   background-color: white;
   align-items: center;
@@ -299,10 +322,10 @@ body {
   padding: 6rem 4rem;
   border-radius: 20px;
   width: 90%;
-  max-width: 1300px;
+  max-width: 1400px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   margin: 2rem auto;
-  height: 400px;
+  min-height: 500px;
   display: flex;
   align-items: center;
   position: relative;
@@ -345,8 +368,9 @@ body {
 }
 
 .box-1 {
-  background-image: url('ai.jpg')
+  background-image: url('ai.jpg');
 }
+
 .box-2 {
   background-image: url('recipe.jpg');
 }
@@ -367,13 +391,11 @@ body {
   background-image: url('plannermeal.jpg');
 }
 
-/* RECIPE CARDS SECTION - FIXED SCROLLING */
 .recipe-section-container {
   background: #f8f9fa;
-  padding: -30rem 0;
+  padding: 2rem 0;
   margin-top: 2rem;
   overflow-x: auto;
-  
 }
 
 .section-title {
@@ -383,24 +405,25 @@ body {
   color: #284a4b;
   margin-bottom: 2rem;
   padding: 0 1rem;
-  max-width:1400px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .recipe-section {
- display: flex;
+  display: flex;
   overflow-x: auto;
   gap: 20px;
   padding: 20px 20px 30px 20px;
   scroll-behavior: smooth;
-max-width: 1100px;
-  margin: 0;
- margin: 0 auto;
-position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .recipe-card {
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 320px;
+  max-width: 320px;
   background: white;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
@@ -411,7 +434,7 @@ position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
- }
+}
 
 .recipe-card:hover {
   transform: translateY(-8px);
@@ -420,7 +443,7 @@ position: relative;
 
 .recipe-card img {
   width: 100%;
-  height: 150px;
+  height: 200px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 15px;
@@ -428,22 +451,19 @@ position: relative;
 
 .recipe-card h3 {
   margin: 0 0 10px 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #284a4b;
 }
 
 .recipe-card p {
-  font-size: 0.80rem;
+  font-size: 0.95rem;
   color: #666;
   line-height: 1.5;
   margin-bottom: 15px;
   flex-grow: 1;
 }
 
-
-
-/* Recipe card buttons */
 .recipe-card button {
   background: #284a4b;
   color: white;
@@ -464,16 +484,13 @@ position: relative;
   box-shadow: 0 5px 15px rgba(40, 91, 90, 0.3);
 }
 
-/* Scrollbar styling */
 .recipe-section::-webkit-scrollbar {
-  height: 30px;
- 
+  height: 8px;
 }
 
 .recipe-section::-webkit-scrollbar-thumb {
   background-color: #284a4b;
   border-radius: 10px;
-  
 }
 
 .recipe-section::-webkit-scrollbar-track {
@@ -489,7 +506,6 @@ position: relative;
   color: rgba(255,255,255,0.95);
 }
 
-/* BUTTON STYLES */
 .btn {
   background-color: white;
   color: #284a4b;
@@ -511,7 +527,6 @@ position: relative;
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Login Link Button */
 .login-link {
   background-color: white;
   color: #397d7c;
@@ -534,3 +549,55 @@ position: relative;
   text-decoration: none;
 }
 
+@media (max-width: 576px) {
+  .carousel-item {
+    width: 200px;
+    height: 320px;
+  }
+
+  .carousel-item.center-card .item-image {
+    height: 160px;
+  }
+
+  .carousel-item.side-card .item-image {
+    height: 140px;
+  }
+
+  .item-title {
+    font-size: 1rem;
+  }
+
+  .item-description {
+    font-size: 0.75rem;
+  }
+
+  .hero-main-heading {
+    font-size: 2.5rem;
+  }
+
+  .hero-second-heading {
+    font-size: 1.5rem;
+  }
+
+  .hero-left-section {
+    padding: 40px 20px;
+  }
+
+  .colored-box {
+    padding: 2rem;
+  }
+
+  .colored-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .content-box {
+    padding: 3rem 2rem;
+    min-height: 350px;
+  }
+
+  .recipe-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+}

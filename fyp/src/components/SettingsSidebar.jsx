@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../services/axiosConfig';
 import './SettingsSidebar.css';
-import DailyReportModal from './DailyReportModal';
-import { 
-  getMissingNotifications, 
-  markAsReplied, 
-  generateReport,
-  getDailyReportQuestions,
-  submitReportAnswers
-} from '../services/mockDailyReportService';
 
 const SettingsSidebar = ({ isOpen, onClose }) => {
   const [user, setUser] = useState(null);
@@ -17,7 +9,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   const [editingName, setEditingName] = useState(false);
   const [name, setName] = useState('');
   
-  // Sound, Notification, Vibration ke liye states
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
@@ -35,7 +26,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   const [currentReport, setCurrentReport] = useState(null);
   const [currentNotificationId, setCurrentNotificationId] = useState(null);
 
-  // ========== SIDEBAR OPEN/CLOSE EFFECT ==========
   useEffect(() => {
     if (isOpen) {
       fetchProfile();
@@ -54,7 +44,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  // ========== FETCH FUNCTIONS ==========
   const fetchProfile = async () => {
     try {
       const response = await axiosInstance.get('/users/profile');
@@ -138,7 +127,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     try {
       setLoadingReport(true);
       const response = await generateReport();
-      alert(`✅ ${response.message}`);
+      alert(response.message);
       await fetchMissingNotifications();
     } catch (error) {
       console.error('Error:', error);
@@ -158,10 +147,8 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     }
   };
 
-  // ========== UPDATE SETTINGS - SOUND, NOTIFICATION, VIBRATION ==========
   const updateSettings = async () => {
     try {
-      // Sound preferences update karo
       await axiosInstance.put('/users/settings', {
         soundPreferences: { 
           beepEnabled: soundEnabled,
@@ -172,13 +159,10 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
         }
       });
       
-      // ✅ Save karne ke baad global variables update karo
-      // Timer component mein sound enable/disable ke liye
       localStorage.setItem('soundEnabled', soundEnabled);
       localStorage.setItem('vibrationEnabled', vibrationEnabled);
       localStorage.setItem('notificationEnabled', notificationEnabled);
       
-      // ✅ Browser notification permission request
       if (notificationEnabled && Notification.permission === 'default') {
         Notification.requestPermission();
       }
@@ -190,19 +174,15 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     }
   };
 
-  // ========== SOUND PLAY/STOP FUNCTION (Global) ==========
   const playSound = () => {
     if (soundEnabled) {
-      const audio = new Audio('/timer-sound.mp3'); // apni sound file ka path
+      const audio = new Audio('/timer-sound.mp3');
       audio.play().catch(e => console.log('Sound play failed:', e));
     }
   };
 
-  const stopSound = () => {
-    // Sound stop karne ka logic agar chahiye to
-  };
+  const stopSound = () => {};
 
-  // Make functions available globally for timer component
   useEffect(() => {
     window.playTimerSound = playSound;
     window.stopTimerSound = stopSound;
@@ -210,9 +190,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     window.isVibrationEnabled = () => vibrationEnabled;
   }, [soundEnabled, vibrationEnabled]);
 
-  // ========== EDIT PROFILE FUNCTIONS ==========
   const handleChangeName = () => {
-    console.log("Change Name clicked");
     setEditingName(true);
     setIsProfileExpanded(false);
   };
@@ -238,10 +216,10 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       <div className={`settings-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <div className="header-title-section">
-            <span className="title-icon">⚙️</span>
+            <span className="title-icon"></span>
             <h2>Settings</h2>
           </div>
-          <button className="close-btn" onClick={onClose}>✕</button>
+          <button className="close-btn" onClick={onClose}>X</button>
         </div>
 
         {loading ? (
@@ -251,7 +229,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
           </div>
         ) : (
           <div className="sidebar-content">
-            {/* Profile Card */}
             <div className="profile-card">
               <div className="profile-avatar">
                 {user?.profilePicture ? (
@@ -286,7 +263,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                     className="edit-profile-btn" 
                     onClick={() => setIsProfileExpanded(!isProfileExpanded)}
                   >
-                    ✏️ Edit Profile
+                    Edit Profile
                     <span className={`arrow ${isProfileExpanded ? 'rotate' : ''}`}>▼</span>
                   </button>
 
@@ -294,13 +271,13 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                     <div className="profile-options">
                       <div className="divider"></div>
                       <button className="option-btn" onClick={handleChangeName}>
-                        ✏️ Change Name
+                        Change Name
                       </button>
                       <button className="option-btn" onClick={handleChangeEmail}>
-                        📧 Change Email
+                        Change Email
                       </button>
                       <button className="option-btn" onClick={handleChangePassword}>
-                        🔒 Change Password
+                        Change Password
                       </button>
                     </div>
                   )}
@@ -308,17 +285,16 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               )}
             </div>
 
-            {/* Stats */}
             <div className="stats-row">
               <div className="stat-card">
-                <span className="stat-icon">⏱️</span>
+                <span className="stat-icon"></span>
                 <div>
                   <div className="stat-number">{stats.totalTimers}</div>
                   <div className="stat-label">Total Timers</div>
                 </div>
               </div>
               <div className="stat-card">
-                <span className="stat-icon">🔔</span>
+                <span className="stat-icon"></span>
                 <div>
                   <div className="stat-number">{stats.activeTimers}</div>
                   <div className="stat-label">Active Timers</div>
@@ -326,7 +302,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* Daily Report */}
             <div className="settings-block">
               <div className="block-title">
                 <span className="title-line"></span>
@@ -337,7 +312,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                 className="report-btn"
                 onClick={() => setShowDailyReport(!showDailyReport)}
               >
-                📋 {showDailyReport ? 'Hide Daily Report' : 'View Daily Report'}
+                {showDailyReport ? 'Hide Daily Report' : 'View Daily Report'}
                 {missingNotifications.length > 0 && (
                   <span className="badge">{missingNotifications.length}</span>
                 )}
@@ -348,7 +323,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                   {loadingReport ? (
                     <p>Loading...</p>
                   ) : missingNotifications.length === 0 ? (
-                    <div className="empty-state">✅ No missing notifications!</div>
+                    <div className="empty-state">No missing notifications!</div>
                   ) : (
                     <>
                       {missingNotifications.map((notif, idx) => (
@@ -366,7 +341,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                         </div>
                       ))}
                       <button className="generate-btn" onClick={handleGenerateReport}>
-                        📧 Generate Report
+                        Generate Report
                       </button>
                     </>
                   )}
@@ -374,17 +349,15 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               )}
             </div>
 
-            {/* Preferences */}
             <div className="settings-block">
               <div className="block-title">
                 <span className="title-line"></span>
                 <h4>Preferences</h4>
               </div>
 
-              {/* Sound Effects Toggle */}
               <div className="setting-item">
                 <div className="setting-left">
-                  <span>🔊</span>
+                  <span></span>
                   <div>
                     <div className="setting-title">Sound Effects</div>
                     <div className="setting-desc">Play sound when timer ends</div>
@@ -396,10 +369,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                 </label>
               </div>
 
-              {/* Notifications Toggle */}
               <div className="setting-item">
                 <div className="setting-left">
-                  <span>🔔</span>
+                  <span></span>
                   <div>
                     <div className="setting-title">Notifications</div>
                     <div className="setting-desc">Receive browser notifications</div>
@@ -411,10 +383,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                 </label>
               </div>
 
-              {/* Vibration Toggle */}
               <div className="setting-item">
                 <div className="setting-left">
-                  <span>📳</span>
+                  <span></span>
                   <div>
                     <div className="setting-title">Vibration</div>
                     <div className="setting-desc">Haptic feedback on completion</div>
@@ -427,28 +398,16 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* Actions */}
             <button className="save-btn-main" onClick={updateSettings}>
-              💾 Save Changes
+              Save Changes
             </button>
             
             <button className="logout-btn" onClick={handleLogout}>
-              🚪 Sign Out
+              Sign Out
             </button>
           </div>
         )}
       </div>
-
-      <DailyReportModal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setCurrentReport(null);
-          setCurrentNotificationId(null);
-        }}
-        report={currentReport}
-        onSubmit={handleSubmitReport}
-      />
     </>
   );
 };

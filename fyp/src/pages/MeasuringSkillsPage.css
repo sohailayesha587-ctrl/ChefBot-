@@ -1,8 +1,3 @@
-/* ===== MEASURING SKILLS PAGE CSS ===== */
-/* FIXED MODAL - SIRF LEFT SIDE SCROLL, RIGHT IMAGE FIXED */
-/* PANTRY BASICS STYLE - SIDEBAR + CARDS */
-
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +11,6 @@ html, body, #root {
   background: #f8fafc;
 }
 
-/* MAIN CONTAINER */
 .msp-container {
   width: 100%;
   min-height: 100vh;
@@ -28,7 +22,6 @@ html, body, #root {
   min-height: 100vh;
 }
 
-/* ===== SIDEBAR - PANTRY BASICS STYLE ===== */
 .msp-sidebar {
   width: 280px;
   background: #284a4b;
@@ -44,10 +37,10 @@ html, body, #root {
 }
 
 .msp-sidebar-header {
-    margin-bottom: 70px;
-margin-bottom: 30px;
+  margin-bottom: 70px;
+  margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+  border-bottom: 1px solid #cbd5e1;
 }
 
 .msp-sidebar-title {
@@ -58,8 +51,6 @@ margin-bottom: 30px;
   margin-top: 120px;
   text-align: center;
 }
-
-
 
 .msp-sidebar-categories {
   flex: 1;
@@ -80,19 +71,19 @@ margin-bottom: 30px;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #4a6b6c;
+  background-color: #3a5a5b;
 }
 
 .msp-category-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #4a6b6c;
   transform: translateX(5px);
 }
 
 .msp-category-item.msp-active {
-  background: rgba(255, 255, 255, 0.25);
+  background: #5a7b7c;
   border-color: #4FD1C5;
-  box-shadow: 0 2px 10px rgba(79, 209, 197, 0.2);
+  box-shadow: 0 2px 10px #4FD1C5;
 }
 
 .msp-category-name {
@@ -102,7 +93,6 @@ margin-bottom: 30px;
   text-align: center;
 }
 
-/* ===== MAIN CONTENT ===== */
 .msp-main {
   flex: 1;
   padding: 30px 40px;
@@ -112,8 +102,8 @@ margin-bottom: 30px;
 }
 
 .msp-main-header {
-    margin-bottom: 180px;
- margin-bottom: 20px;
+  margin-bottom: 180px;
+  margin-bottom: 20px;
   padding-bottom: 2px;
   border-bottom: 1px solid #e2e8f0;
 }
@@ -136,7 +126,6 @@ margin-bottom: 30px;
   margin-bottom: 20px;
 }
 
-/* ===== ITEMS GRID - PANTRY BASICS STYLE ===== */
 .msp-items-grid-section {
   margin-bottom: 40px;
 }
@@ -151,7 +140,7 @@ margin-bottom: 30px;
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px #e2e8f0;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
@@ -162,7 +151,7 @@ margin-bottom: 30px;
 
 .msp-item-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 35px #cbd5e1;
   border-color: #6366f1;
 }
 
@@ -215,47 +204,43 @@ margin-bottom: 30px;
 }
 
 .msp-essentiality-badge.essential {
-  background: rgba(220, 38, 38, 0.1);
+  background: #fee2e2;
   color: #dc2626;
-  border: 1px solid rgba(220, 38, 38, 0.3);
+  border: 1px solid #fca5a5;
 }
 
 .msp-essentiality-badge.important {
-  background: rgba(245, 158, 11, 0.1);
+  background: #fef3c7;
   color: #d97706;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid #fcd34d;
 }
 
 .msp-essentiality-badge.useful {
-  background: rgba(34, 197, 94, 0.1);
+  background: #dcfce7;
   color: #16a34a;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 1px solid #86efac;
 }
 
 .msp-essentiality-badge.specialized {
-  background: rgba(139, 92, 246, 0.1);
+  background: #ede9fe;
   color: #8b5cf6;
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid #c4b5fd;
 }
 
 .msp-card-description {
   font-size: 14px;
   color: #64748b;
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ===== MODAL - FIXED LAYOUT (NO SCROLL ON MODAL) ===== */
 .msp-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,8 +257,8 @@ margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-  overflow: hidden; /* MODAL PE SCROLL NAHI */
+  box-shadow: 0 25px 60px #0a0a0a;
+  overflow: hidden;
 }
 
 .msp-modal-close {
@@ -293,14 +278,13 @@ margin-bottom: 30px;
   cursor: pointer;
   z-index: 100;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px #e2e8f0;
 }
 
 .msp-modal-close:hover {
   background: #f1f5f9;
 }
 
-/* MODAL HEADER */
 .msp-modal-header {
   padding: 25px 30px 15px 30px;
   background: linear-gradient(135deg, #f8fafc, #ffffff);
@@ -322,47 +306,25 @@ margin-bottom: 30px;
   font-weight: 500;
 }
 
-/* MODAL CONTENT - FLEX CONTAINER */
 .msp-modal-content {
   padding: 0;
   flex: 1;
   display: flex;
-  overflow: hidden; /* CONTAINER PE SCROLL NAHI */
+  overflow: hidden;
 }
 
-/* LEFT SIDE - SCROLLABLE CONTENT (65%) */
 .msp-modal-left {
   flex: 0 0 65%;
   padding: 25px 30px;
   border-right: 1px solid #e2e8f0;
-  overflow-y: auto; /* SIRF YAHAN SCROLL */
+  overflow-y: auto;
   height: 100%;
-}
-
-/* SCROLLBAR STYLING FOR LEFT SIDE */
-.msp-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.msp-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
-}
-
-.msp-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.msp-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
 }
 
 .msp-modal-details {
   width: 100%;
 }
 
-/* ===== DETAIL SECTIONS ===== */
 .msp-detail-section {
   margin-bottom: 25px;
   padding-bottom: 25px;
@@ -395,7 +357,6 @@ margin-bottom: 30px;
   color: #475569;
 }
 
-/* ===== FEATURES & MISTAKES HORIZONTAL GRIDS ===== */
 .msp-features-horizontal,
 .msp-mistakes-horizontal {
   display: grid;
@@ -405,14 +366,14 @@ margin-bottom: 30px;
 }
 
 .msp-feature-box {
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
   border-radius: 8px;
   padding: 12px;
   text-align: center;
   font-size: 13px;
   font-weight: 500;
-  color: #0369a1;
+  color: #1e40af;
 }
 
 .msp-mistake-box {
@@ -426,7 +387,6 @@ margin-bottom: 30px;
   color: #dc2626;
 }
 
-/* ===== STEPS LIST ===== */
 .msp-steps-list {
   list-style: none;
   counter-reset: step-counter;
@@ -460,7 +420,6 @@ margin-bottom: 30px;
   font-size: 14px;
 }
 
-/* ===== APPLICATIONS LIST ===== */
 .msp-applications-list {
   display: flex;
   flex-wrap: wrap;
@@ -486,7 +445,6 @@ margin-bottom: 30px;
   font-weight: bold;
 }
 
-/* ===== TYPES GRID ===== */
 .msp-types-section {
   margin-top: 30px;
   padding-top: 25px;
@@ -511,7 +469,7 @@ margin-bottom: 30px;
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px #e2e8f0;
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
   height: 100%;
@@ -520,7 +478,7 @@ margin-bottom: 30px;
 
 .msp-type-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px #cbd5e1;
   border-color: #6366f1;
 }
 
@@ -552,9 +510,6 @@ margin-bottom: 30px;
   margin-bottom: 8px;
   line-height: 1.3;
   min-height: 32px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -587,7 +542,6 @@ margin-bottom: 30px;
   color: #1e293b;
 }
 
-/* ===== ESTIMATION GRIDS ===== */
 .msp-measurements-grid,
 .msp-comparisons-grid,
 .msp-guidelines-grid,
@@ -618,7 +572,6 @@ margin-bottom: 30px;
   color: #92400e;
 }
 
-/* ===== CONVERSIONS GRIDS ===== */
 .msp-conversions-grid,
 .msp-metric-conversions-grid,
 .msp-baking-conversions-grid,
@@ -673,7 +626,6 @@ margin-bottom: 30px;
   color: #1e40af;
 }
 
-/* ===== PRECISION GRIDS ===== */
 .msp-critical-rules-grid,
 .msp-errors-grid,
 .msp-tools-required-grid,
@@ -738,7 +690,6 @@ margin-bottom: 30px;
   color: #831843;
 }
 
-/* ===== FORMULA GRID ===== */
 .msp-formula-grid,
 .msp-equivalents-grid {
   display: grid;
@@ -769,7 +720,6 @@ margin-bottom: 30px;
   color: #92400e;
 }
 
-/* ===== LISTS STYLES ===== */
 .msp-techniques-list,
 .msp-definitions-list,
 .msp-equivalents-list,
@@ -796,7 +746,6 @@ margin-bottom: 30px;
   color: #475569;
 }
 
-/* ===== METHODS LISTS ===== */
 .msp-methods-list,
 .msp-process-list,
 .msp-practice-tips-list {
@@ -868,7 +817,6 @@ margin-bottom: 30px;
   font-size: 14px;
 }
 
-/* ===== RIGHT SIDE - FIXED IMAGE (35%) ===== */
 .msp-modal-right {
   flex: 0 0 35%;
   padding: 25px 25px 25px 0;
@@ -878,7 +826,7 @@ margin-bottom: 30px;
   justify-content: center;
   background: white;
   height: 100%;
-  overflow: hidden; /* NO SCROLL */
+  overflow: hidden;
 }
 
 .msp-main-image-container {
@@ -886,7 +834,7 @@ margin-bottom: 30px;
   height: 350px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px #e2e8f0;
   border: 1px solid #e2e8f0;
   background: #f8fafc;
   position: relative;
@@ -895,9 +843,9 @@ margin-bottom: 30px;
 .msp-main-image {
   width: 100%;
   height: 100%;
-  background-size: contain !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   transition: transform 0.3s ease;
   position: relative;
 }
@@ -924,22 +872,42 @@ margin-bottom: 30px;
 }
 
 .msp-essentiality-badge-large.essential {
-  background: rgba(220, 38, 38, 0.9);
+  background: #dc2626;
 }
 
 .msp-essentiality-badge-large.important {
-  background: rgba(245, 158, 11, 0.9);
+  background: #d97706;
 }
 
 .msp-essentiality-badge-large.useful {
-  background: rgba(34, 197, 94, 0.9);
+  background: #16a34a;
 }
 
 .msp-essentiality-badge-large.specialized {
-  background: rgba(139, 92, 246, 0.9);
+  background: #8b5cf6;
 }
 
-/* ===== RESPONSIVE ===== */
+.back-home-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-home-btn:hover {
+  background-color: #397d7c;
+  transform: scale(1.05);
+}
+
 @media (max-width: 1200px) {
   .msp-items-grid {
     grid-template-columns: 1fr;
@@ -1153,30 +1121,6 @@ margin-bottom: 30px;
   }
 }
 
-/* ===== SCROLLBAR STYLING ===== */
-.msp-sidebar::-webkit-scrollbar,
-.msp-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.msp-sidebar::-webkit-scrollbar-track,
-.msp-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
-}
-
-.msp-sidebar::-webkit-scrollbar-thumb,
-.msp-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.msp-sidebar::-webkit-scrollbar-thumb:hover,
-.msp-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1191,24 +1135,4 @@ margin-bottom: 30px;
 .msp-item-card,
 .msp-type-card {
   animation: fadeInUp 0.5s ease-out;
-}
-.back-home-container {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.back-home-btn {
-  background-color: #284a4b;
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.back-home-btn:hover {
-  background-color: #397d7c;
-  transform: scale(1.05);
 }

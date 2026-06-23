@@ -1,13 +1,10 @@
-/* Alarm Modal CSS - With Background Beep Support */
-
-/* ===== OVERLAY & MODAL ===== */
 .alarm-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: #0a0a0a;
   z-index: 9998;
   animation: fadeIn 0.3s ease;
   backdrop-filter: blur(2px);
@@ -18,7 +15,6 @@
   to { opacity: 1; }
 }
 
-/* Sidebar Modal */
 .alarm-sidebar-modal {
   position: fixed;
   top: 0;
@@ -26,7 +22,7 @@
   width: 420px;
   height: 100vh;
   background: linear-gradient(135deg, #ffffff, #f8f9fa);
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  box-shadow: -5px 0 25px #0a0a0a;
   z-index: 9999;
   animation: slideInRight 0.3s ease;
   overflow-y: auto;
@@ -44,7 +40,6 @@
   }
 }
 
-/* ===== HEADER ===== */
 .alarm-sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -62,16 +57,16 @@
   font-size: 1.5rem;
   font-weight: 580;
   text-align: center;
-  flex: 1; /* ✅ Yeh line add karein - text ko center karega */
+  flex: 1;
   position: relative;
-  left: -20px; /* ✅ Cross button ke space ko adjust karega */
+  left: -20px;
 }
 
 .close-btn {
   background: none;
   border: none;
   color: #ffffff;
-  font-size: 2.5rem; /* Big cross */
+  font-size: 2.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -80,24 +75,22 @@
   padding: 0;
   margin: 0;
   line-height: 0.5;
-  width: auto; /* Remove fixed width */
-  height: auto; /* Remove fixed height */
+  width: auto;
+  height: auto;
 }
 
 .close-btn:hover {
   color: #ffffff;
   transform: rotate(90deg) scale(1.1);
-  background: none; /* Ensure no background on hover */
+  background: none;
 }
 
-/* ===== MAIN CONTENT ===== */
 .alarm-sidebar-content {
   padding: 25px;
 }
 
-/* Instant Save Notice */
 .instant-save-notice {
-  background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+  background: linear-gradient(135deg, #1a1a2e, #1a237e);
   padding: 12px 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -112,33 +105,32 @@
 @keyframes instantSavePulse {
   0%, 100% { 
     border-color: #666;
-    box-shadow: 0 0 0 rgba(106, 17, 203, 0);
+    box-shadow: 0 0 0 transparent;
   }
   50% { 
-    border-color:#666;
+    border-color: #666;
     box-shadow: 0 0 15px #666;
   }
 }
 
-/* ===== TIMER DISPLAY ===== */
 .timer-display-section {
   text-align: center;
-  margin: 0.5px 0; /* ✅ Margin kam karein (2px se 5px) */
-  padding: 10px 10px; /* ✅ Padding kam karein (2px se 5px) */
+  margin: 0.5px 0;
+  padding: 10px 10px;
   background: #284a4b;
   border-radius: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 25px #0a0a0a;
   border: 2px solid #eaeaea;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 120px; /* ✅ Height kam karein (150px se 120px) */
+  min-height: 120px;
 }
 
 .timer-display-section:hover {
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 35px #0a0a0a;
   transform: translateY(-3px);
 }
 
@@ -147,15 +139,16 @@
   font-weight: 900;
   color: white;
   font-family: 'Courier New', monospace;
-  margin: 5px 0; /* ✅ Margin kam karein (10px se 5px) */
+  margin: 5px 0;
   letter-spacing: 2px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  line-height: 1; /* ✅ Line height kam karein */
+  line-height: 1;
 }
+
 .time-display.running {
   color: #397d7c;
   animation: pulseTimer 2s infinite;
@@ -167,49 +160,37 @@
   position: relative;
 }
 
-.time-display.completed::after {
-  content: '🔊';
-  position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  animation: bounce 0.5s infinite alternate;
-}
-
 .time-label {
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  margin-top: 5px; /* ✅ Margin kam karein (10px se 5px) */
-  padding-top: 5px; /* ✅ Padding kam karein (10px se 5px) */
+  margin-top: 5px;
+  padding-top: 5px;
   border-top: none;
 }
 
-/* ===== TIME SETUP SECTION (REDUCED HEIGHT) ===== */
 .time-setup-section {
-  background: rgba(57, 125, 124, 0.07);
-  padding: 15px 20px; /* Reduced padding */
+  background: #1a2a2b;
+  padding: 15px 20px;
   border-radius: 18px;
   margin: 10px 0;
-  border: 1px solid rgba(57, 125, 124, 0.15);
+  border: 1px solid #2a4a4b;
   height: auto;
-  min-height: 200px; /* Reduced height */
+  min-height: 200px;
 }
 
 .time-setup-section h3 {
   color: #284a4b;
-  margin-bottom: 15px; /* Reduced margin */
+  margin-bottom: 15px;
   text-align: center;
-  font-size: 1.2rem; /* Smaller font */
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
-/* Time Inputs */
 .time-inputs {
   display: flex;
-  gap: 15px; /* Reduced gap */
-  margin-bottom: 15px; /* Reduced margin */
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .time-input {
@@ -219,18 +200,18 @@
 
 .time-input label {
   display: block;
-  margin-bottom: 8px; /* Reduced margin */
+  margin-bottom: 8px;
   font-weight: 600;
   color: #666;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .time-input input {
   width: 100%;
-  padding: 12px; /* Reduced padding */
-  font-size: 1.5rem; /* Smaller font */
+  padding: 12px;
+  font-size: 1.5rem;
   text-align: center;
   border: 2px solid #284a4b;
   border-radius: 10px;
@@ -244,7 +225,7 @@
 .time-input input:focus {
   outline: none;
   border-color: #397d7c;
-  box-shadow: 0 0 0 3px rgba(57, 125, 124, 0.2);
+  box-shadow: 0 0 0 3px #397d7c;
   transform: translateY(-2px);
 }
 
@@ -256,29 +237,28 @@
   transform: none;
 }
 
-/* ===== QUICK PRESETS (REDUCED HEIGHT) ===== */
 .quick-presets {
-  margin-top: 15px; /* Reduced margin */
-  padding-top: 15px; /* Reduced padding */
-  border-top: 2px solid rgba(57, 125, 124, 0.1);
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #1a2a2b;
 }
 
 .quick-presets h4 {
   color: #666;
-  margin-bottom: 12px; /* Reduced margin */
+  margin-bottom: 12px;
   text-align: center;
-  font-size: 1rem; /* Smaller font */
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .preset-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px; /* Reduced gap */
+  gap: 8px;
 }
 
 .preset-btn {
-  padding: 10px 5px; /* Reduced padding */
+  padding: 10px 5px;
   background: white;
   border: 2px solid #284a4b;
   border-radius: 8px;
@@ -286,7 +266,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem; /* Smaller font */
+  font-size: 0.9rem;
   position: relative;
   overflow: hidden;
 }
@@ -307,7 +287,7 @@
 .preset-btn:hover:not(:disabled) {
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(57, 125, 124, 0.2);
+  box-shadow: 0 5px 15px #397d7c;
 }
 
 .preset-btn:hover:not(:disabled)::before {
@@ -320,23 +300,22 @@
   transform: none !important;
 }
 
-/* ===== TIMER CONTROLS ===== */
 .timer-controls {
-  margin: 20px 0; /* Reduced margin */
+  margin: 20px 0;
 }
 
 .main-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Reduced gap */
+  gap: 12px;
 }
 
 .start-btn, .pause-btn, .reset-btn, .stop-beep-btn {
-  padding: 16px; /* Reduced padding */
+  padding: 16px;
   border: none;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 1.1rem; /* Slightly smaller */
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -349,13 +328,13 @@
 .start-btn {
   background: linear-gradient(135deg, #284a4b, #397d7c);
   color: white;
-  box-shadow: 0 6px 20px rgba(57, 125, 124, 0.3);
+  box-shadow: 0 6px 20px #397d7c;
 }
 
 .start-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #397d7c, #284a4b);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(57, 125, 124, 0.4);
+  box-shadow: 0 10px 25px #397d7c;
 }
 
 .start-btn:disabled {
@@ -367,48 +346,39 @@
 .pause-btn {
   background: linear-gradient(135deg, #f39c12, #e67e22);
   color: white;
-  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+  box-shadow: 0 6px 20px #f39c12;
 }
 
 .pause-btn:hover {
   background: linear-gradient(135deg, #e67e22, #f39c12);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(243, 156, 18, 0.4);
+  box-shadow: 0 10px 25px #f39c12;
 }
 
 .reset-btn {
   background: linear-gradient(135deg, #666, #888);
   color: white;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px #0a0a0a;
 }
 
 .reset-btn:hover {
   background: linear-gradient(135deg, #888, #666);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px #0a0a0a;
 }
 
-/* Instant Save Button */
 .instant-save-btn {
   background: linear-gradient(135deg, #284a4b) !important;
   position: relative;
   overflow: hidden;
 }
 
-
-
-@keyframes lightning {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
-}
-
-/* ===== BEEP STATUS ===== */
 .beep-status-active {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 86, 86, 0.15));
-  padding: 15px; /* Reduced padding */
+  background: linear-gradient(135deg, #2a1a1a, #3a1a1a);
+  padding: 15px;
   border-radius: 12px;
   margin-top: 20px;
-  border: 2px solid rgba(255, 107, 107, 0.3);
+  border: 2px solid #ff6b6b;
   animation: statusPulse 2s infinite;
 }
 
@@ -420,14 +390,14 @@
 }
 
 .beep-icon {
-  font-size: 1.8rem; /* Slightly smaller */
+  font-size: 1.8rem;
   animation: bounceIcon 0.5s infinite alternate;
 }
 
 .stop-beep-btn {
   background: linear-gradient(135deg, #ff6b6b, #ff5252);
   color: white;
-  padding: 10px 20px; /* Reduced padding */
+  padding: 10px 20px;
   border-radius: 8px;
   font-weight: 600;
   animation: pulseBtn 1s infinite;
@@ -440,7 +410,6 @@
   animation: none;
 }
 
-/* ===== FLOATING NOTIFICATION ===== */
 .floating-notification {
   position: fixed;
   top: 20px;
@@ -448,7 +417,7 @@
   z-index: 99999;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 20px #0a0a0a;
   width: 320px;
   max-width: 90%;
   border-left: 5px solid #ff4757;
@@ -540,10 +509,9 @@
 .floating-stop-btn:hover {
   background: linear-gradient(135deg, #ff3838, #ff1e1e);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+  box-shadow: 0 5px 15px #ff4757;
 }
 
-/* Blinking effect for attention */
 .floating-notification.active {
   animation: pulseBorder 2s infinite;
 }
@@ -557,7 +525,6 @@
   }
 }
 
-/* ===== BACKGROUND INDICATORS ===== */
 .background-beep-indicator {
   background: linear-gradient(135deg, #666);
   padding: 15px;
@@ -573,11 +540,11 @@
 }
 
 .background-timer-indicator {
-  background: linear-gradient(135deg, rgba(57, 125, 124, 0.1), rgba(40, 74, 75, 0.15));
+  background: linear-gradient(135deg, #1a2a2b, #1a2a2b);
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 25px;
-  border: 2px solid rgba(57, 125, 124, 0.3);
+  border: 2px solid #397d7c;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -605,12 +572,11 @@
   text-align: center;
   margin-top: 15px;
   padding: 10px;
-  background: rgba(57, 125, 124, 0.05);
+  background: #1a2a2b;
   border-radius: 8px;
   border-left: 3px solid #397d7c;
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes pulseBg {
   0%, 100% { 
     border-color: #397d7c;
@@ -624,12 +590,12 @@
 
 @keyframes pulseTimerBg {
   0%, 100% { 
-    border-color: rgba(57, 125, 124, 0.3);
-    background: linear-gradient(135deg, rgba(57, 125, 124, 0.1), rgba(40, 74, 75, 0.15));
+    border-color: #397d7c;
+    background: linear-gradient(135deg, #1a2a2b, #1a2a2b);
   }
   50% { 
-    border-color: rgba(57, 125, 124, 0.6);
-    background: linear-gradient(135deg, rgba(57, 125, 124, 0.2), rgba(40, 74, 75, 0.25));
+    border-color: #397d7c;
+    background: linear-gradient(135deg, #1a2a2b, #1a2a2b);
   }
 }
 
@@ -656,7 +622,7 @@
 @keyframes alarmFlash {
   0%, 100% { 
     opacity: 1; 
-    text-shadow: 0 0 0 rgba(255, 107, 107, 0);
+    text-shadow: 0 0 0 transparent;
   }
   50% { 
     opacity: 0.8; 
@@ -676,16 +642,15 @@
 
 @keyframes statusPulse {
   0%, 100% { 
-    border-color: rgba(255, 107, 107, 0.3);
-    box-shadow: 0 0 0 rgba(255, 107, 107, 0);
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 transparent;
   }
   50% { 
-    border-color: rgba(255, 107, 107, 0.6);
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+    border-color: #ff6b6b;
+    box-shadow: 0 0 20px #ff6b6b;
   }
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .alarm-sidebar-modal {
     width: 350px;
@@ -735,7 +700,6 @@
   }
 }
 
-/* ===== SCROLLBAR ===== */
 .alarm-sidebar-modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -753,13 +717,11 @@
 .alarm-sidebar-modal::-webkit-scrollbar-thumb:hover {
   background: #397d7c;
 }
-/* Add to existing AlarmModal.css */
 
-/* Saved Timers Section */
 .saved-timers-section {
   margin-top: 20px;
   padding: 15px;
-  background: rgba(57, 125, 124, 0.05);
+  background: #1a2a2b;
   border-radius: 12px;
 }
 
@@ -828,6 +790,7 @@
   background: #fee;
   transform: scale(1.1);
 }
+
 .stop-beep-section {
   margin-top: 20px;
   text-align: center;

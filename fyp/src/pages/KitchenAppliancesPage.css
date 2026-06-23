@@ -1,7 +1,3 @@
-/* ===== KITCHEN APPLIANCES PAGE CSS ===== */
-/* UPDATED WITH ALL NEW SECTIONS */
-
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +12,6 @@ html, body, #root {
   overflow-x: hidden;
 }
 
-/* MAIN CONTAINER */
 .kap-container {
   width: 100%;
   min-height: 100vh;
@@ -28,7 +23,6 @@ html, body, #root {
   min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
 .kap-sidebar {
   width: 280px;
   background: #284a4b;
@@ -47,7 +41,7 @@ html, body, #root {
 .kap-sidebar-header {
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+  border-bottom: 1px solid #cbd5e1;
 }
 
 .kap-sidebar-title {
@@ -61,17 +55,15 @@ html, body, #root {
 
 .kap-sidebar-subtitle {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #e2e8f0;
   font-weight: 500;
   text-align: center;
 }
 
-/* APPLIANCE WRAPPER */
 .kap-appliance-wrapper {
   margin-bottom: 10px;
 }
 
-/* APPLIANCE DROPDOWN */
 .kap-appliance-dropdown {
   padding: 14px 16px;
   border-radius: 10px;
@@ -80,16 +72,16 @@ html, body, #root {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #4a6b6c;
+  background-color: #3a5a5b;
 }
 
 .kap-appliance-dropdown:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: #4a6b6c;
 }
 
 .kap-appliance-dropdown.kap-expanded {
-  background: rgba(255, 255, 255, 0.2);
+  background: #5a7b7c;
   border-color: #4FD1C5;
   margin-bottom: 5px;
 }
@@ -109,7 +101,7 @@ html, body, #root {
 
 .kap-dropdown-arrow {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #e2e8f0;
   transition: transform 0.3s ease;
 }
 
@@ -119,17 +111,16 @@ html, body, #root {
 
 .kap-company-count {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(0, 0, 0, 0.2);
+  color: #e2e8f0;
+  background: #1a2a2b;
   padding: 3px 8px;
   border-radius: 12px;
 }
 
-/* TYPES LIST */
 .kap-types-list {
   margin-left: 10px;
   padding-left: 15px;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid #4a6b6c;
   margin-top: 8px;
   margin-bottom: 8px;
   animation: fadeIn 0.3s ease;
@@ -143,27 +134,26 @@ html, body, #root {
   align-items: center;
   transition: all 0.3s ease;
   margin-bottom: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #4a6b6c;
+  background-color: #2a4a4b;
 }
 
 .kap-type-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #4a6b6c;
   transform: translateX(3px);
 }
 
 .kap-type-item.kap-type-selected {
-  background: rgba(79, 209, 197, 0.2);
+  background: #3a7a7b;
   border-color: #4FD1C5;
 }
 
 .kap-type-name {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: #e2e8f0;
 }
 
-/* ===== MAIN CONTENT ===== */
 .kap-main {
   flex: 1;
   padding: 30px 40px;
@@ -174,7 +164,6 @@ html, body, #root {
   margin-top: 120px;
 }
 
-/* WELCOME SCREEN */
 .kap-welcome-screen {
   text-align: center;
   padding: 60px 20px;
@@ -211,7 +200,7 @@ html, body, #root {
   border-radius: 16px;
   padding: 25px;
   min-width: 150px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px #e2e8f0;
   border: 1px solid #e2e8f0;
 }
 
@@ -228,7 +217,6 @@ html, body, #root {
   font-weight: 500;
 }
 
-/* COMPANIES SCREEN */
 .kap-companies-screen {
   margin-top: 20px;
 }
@@ -258,7 +246,6 @@ html, body, #root {
   margin-bottom: 30px;
 }
 
-/* COMPANIES GRID */
 .kap-companies-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -273,12 +260,12 @@ html, body, #root {
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid #e2e8f0;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px #e2e8f0;
 }
 
 .kap-company-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 35px #cbd5e1;
   border-color: #4FD1C5;
 }
 
@@ -310,7 +297,6 @@ html, body, #root {
   line-height: 1.6;
 }
 
-/* COMPANY MODELS DROPDOWN */
 .kap-company-models-dropdown {
   margin-top: 20px;
   padding-top: 20px;
@@ -405,12 +391,10 @@ html, body, #root {
   background: #1e3a3b;
 }
 
-/* MODELS SCREEN */
 .kap-models-screen {
   margin-top: 20px;
 }
 
-/* MODELS HEADER */
 .kap-models-header {
   display: flex;
   justify-content: space-between;
@@ -457,7 +441,6 @@ html, body, #root {
   background: #cbd5e1;
 }
 
-/* TYPE TABS */
 .kap-type-tabs {
   display: flex;
   gap: 10px;
@@ -489,14 +472,12 @@ html, body, #root {
   color: white;
 }
 
-/* MODELS GRID */
 .kap-models-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 25px;
 }
 
-/* NO MODELS */
 .kap-no-models {
   grid-column: 1 / -1;
   text-align: center;
@@ -528,12 +509,11 @@ html, body, #root {
   background: #1e3a3b;
 }
 
-/* ===== MODEL CARD ===== */
 .kap-model-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px #e2e8f0;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
@@ -543,7 +523,7 @@ html, body, #root {
 
 .kap-model-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 35px #cbd5e1;
   border-color: #6366f1;
 }
 
@@ -650,14 +630,13 @@ html, body, #root {
   background: #2563eb;
 }
 
-/* ===== MODAL ===== */
 .kap-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -673,7 +652,7 @@ html, body, #root {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 60px #0a0a0a;
 }
 
 .kap-modal-close {
@@ -700,7 +679,6 @@ html, body, #root {
   transform: rotate(90deg);
 }
 
-/* MODAL HEADER */
 .kap-modal-header {
   padding: 30px 30px 15px 30px;
   background: linear-gradient(135deg, #f8fafc, #ffffff);
@@ -721,7 +699,6 @@ html, body, #root {
   font-weight: 500;
 }
 
-/* MODAL CONTENT */
 .kap-modal-content {
   padding: 0;
 }
@@ -731,7 +708,6 @@ html, body, #root {
   min-height: 500px;
 }
 
-/* LEFT SIDE */
 .kap-modal-left {
   flex: 0 0 65%;
   padding: 25px 30px;
@@ -765,7 +741,6 @@ html, body, #root {
   border-bottom: 2px solid #e2e8f0;
 }
 
-/* STEP BY STEP GUIDE */
 .kap-step-by-step-guide {
   display: flex;
   flex-direction: column;
@@ -816,7 +791,6 @@ html, body, #root {
   margin-bottom: 8px;
 }
 
-/* SPECIFICATIONS GRID */
 .kap-specifications-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -851,7 +825,6 @@ html, body, #root {
   color: #1e293b;
 }
 
-/* FEATURES LIST */
 .kap-features-list {
   display: flex;
   flex-direction: column;
@@ -892,7 +865,6 @@ html, body, #root {
   line-height: 1.5;
 }
 
-/* MAINTENANCE SCHEDULE */
 .kap-maintenance-schedule {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -929,7 +901,6 @@ html, body, #root {
   font-size: 15px;
 }
 
-/* TROUBLESHOOTING GUIDE */
 .kap-troubleshooting-guide {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -956,7 +927,6 @@ html, body, #root {
   line-height: 1.5;
 }
 
-/* ENERGY TIPS */
 .kap-energy-tips {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -993,7 +963,6 @@ html, body, #root {
   font-size: 15px;
 }
 
-/* SAFETY GUIDELINES */
 .kap-safety-guidelines {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1027,7 +996,6 @@ html, body, #root {
   line-height: 1.5;
 }
 
-/* RIGHT SIDE */
 .kap-modal-right {
   flex: 0 0 35%;
   padding: 25px;
@@ -1041,7 +1009,7 @@ html, body, #root {
   height: 300px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px #e2e8f0;
 }
 
 .kap-modal-image-large {
@@ -1057,7 +1025,6 @@ html, body, #root {
   transform: scale(1.05);
 }
 
-/* QUICK INFO */
 .kap-quick-info {
   background: #f8fafc;
   border-radius: 12px;
@@ -1117,7 +1084,6 @@ html, body, #root {
   border-color: #86efac;
 }
 
-/* WARRANTY INFO */
 .kap-warranty-info {
   background: #f0f9ff;
   border-radius: 12px;
@@ -1166,7 +1132,6 @@ html, body, #root {
   font-size: 14px;
 }
 
-/* BUYING GUIDE */
 .kap-buying-guide {
   background: #faf5ff;
   border-radius: 12px;
@@ -1213,7 +1178,6 @@ html, body, #root {
   font-size: 14px;
 }
 
-/* MODAL FOOTER */
 .kap-modal-footer {
   padding: 20px 30px;
   background: #f8fafc;
@@ -1262,7 +1226,56 @@ html, body, #root {
   background: #1e3a3b;
 }
 
-/* ===== RESPONSIVE ===== */
+.back-home-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.back-home-btn {
+  background-color: #284a4b;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-home-btn:hover {
+  background-color: #397d7c;
+  transform: scale(1.05);
+}
+
+.soups-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #0a0a0a, #1a4a4b, #0a0a0a);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.soups-modal-ingredients,
+.soups-modal-steps,
+.voice-panel {
+  background: #1a1a1a;
+  backdrop-filter: blur(2px);
+  border: 1px solid #4a6b6c;
+}
+
+.soups-ingredient-text,
+.soups-step-text,
+.soups-modal-title h2,
+.voice-panel h3 {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px #0a0a0a;
+  font-weight: 500;
+}
+
 @media (max-width: 1200px) {
   .kap-models-grid,
   .kap-companies-grid,
@@ -1438,30 +1451,6 @@ html, body, #root {
   }
 }
 
-/* SCROLLBAR STYLING */
-.kap-sidebar::-webkit-scrollbar,
-.kap-modal-left::-webkit-scrollbar {
-  width: 6px;
-}
-
-.kap-sidebar::-webkit-scrollbar-track,
-.kap-modal-left::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 4px;
-}
-
-.kap-sidebar::-webkit-scrollbar-thumb,
-.kap-modal-left::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-.kap-sidebar::-webkit-scrollbar-thumb:hover,
-.kap-modal-left::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* ANIMATIONS */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1491,7 +1480,6 @@ html, body, #root {
   animation: fadeInUp 0.5s ease-out;
 }
 
-/* LOADING STATES */
 .kap-loading {
   display: flex;
   justify-content: center;
@@ -1501,7 +1489,6 @@ html, body, #root {
   color: #64748b;
 }
 
-/* UTILITY CLASSES */
 .text-primary {
   color: #284a4b;
 }
@@ -1516,66 +1503,4 @@ html, body, #root {
 
 .bg-secondary {
   background: #f8fafc;
-}
-.back-home-container {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.back-home-btn {
-  background-color: #284a4b;
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.soups-modal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2),
-    rgba(36, 138, 139, 0.4),  /* #248a8b with 40% opacity */
-    rgba(0, 0, 0, 0.3)
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Columns - light background for readability */
-.soups-modal-ingredients,
-.soups-modal-steps,
-.voice-panel {
-  background: rgba(0, 0, 0, 0.3);  /* Dark background */
-  backdrop-filter: blur(2px);       /* Halka blur for readability */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Text - pure white with shadow */
-.soups-ingredient-text,
-.soups-step-text,
-.soups-modal-title h2,
-.voice-panel h3 {
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-weight: 500;
-}
-/* Add to KitchenAppliancesPage.css */
-.kap-troubleshooting-list {
-  margin: 10px 0;
-  padding-left: 20px;
-}
-
-.kap-troubleshooting-list li {
-  margin: 8px 0;
-  color: #555;
-  line-height: 1.4;
 }

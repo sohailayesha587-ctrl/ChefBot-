@@ -21,12 +21,10 @@ const UrduHomePage = () => {
     }
   };
 
-  // یہ فنکشن شامل کریں
   const toggleMealSuggestor = () => {
     setShowMealSuggestor(!showMealSuggestor);
   };
 
-  // فیچرز ارے - صرف 5 آئٹمز
   const features = [
     {
       image: 'pantry-staples.jpg',
@@ -90,7 +88,6 @@ const UrduHomePage = () => {
 
   return (
     <div className="urdu-home-container">
-      {/* ہیرو سیکشن */}
       <section className="urdu-chefbot-hero">
         <div className="urdu-chefbot-slider">
           <img src="/1.png" alt="شیف بوٹ تصویر 1" className="urdu-chefbot-slide-image" />
@@ -98,21 +95,14 @@ const UrduHomePage = () => {
         </div>
       </section>
 
-      {/* فیچرز سیکشن */}
       <section className="urdu-h-features-section">
         <h2 className="urdu-h-features-title">ہماری شاندار خصوصیات</h2>
         
-        {/* نقطوں والی لائنوں کے ساتھ دائرہ */}
         <div className="urdu-circle-with-lines">
           <div className="urdu-dotted-line urdu-left-line"></div>
           
-          {/* دائرہ فیچر */}
           <div className="urdu-feature-circle urdu-clickable-circle" onClick={toggleMealSuggestor}>
             <div className="urdu-circle-icon">🍽️</div>
-            
-            <div className="urdu-circle-click-hint">
-             
-            </div>
           </div>
           
           <div className="urdu-dotted-line urdu-right-line"></div>
@@ -140,7 +130,6 @@ const UrduHomePage = () => {
         </div>
       </section>
 
-      {/* ہیرو 2 */}
       <section className="urdu-hero-section1">
         <div className="urdu-hero-left">
           <h2>ڈیجیٹل کھانا پکانا</h2>
@@ -155,7 +144,6 @@ const UrduHomePage = () => {
         </div>
       </section>
 
-      {/* کھانے کی نمائش */}
       <section className="urdu-food-showcase">
         {foodImages.map((image, index) => (
           <img 
@@ -167,7 +155,6 @@ const UrduHomePage = () => {
         ))}
       </section>
 
-      {/* کلاسز سیکشن */}
       <section className="urdu-classes-section">
         <img 
           src="home_gui.jpg" 
@@ -184,7 +171,6 @@ const UrduHomePage = () => {
         </div>
       </section>
 
-      {/* کھانے کا منصوبہ سیکشن */}
       <section className="urdu-m-plan-section">
         <div className="urdu-m-plan-header">
           <div className="urdu-m-plan-title">
@@ -202,7 +188,6 @@ const UrduHomePage = () => {
         </div>
       </section>
        
-      {/* ریسیپی سیکشن */}
       <section className="urdu-h-recipes-section">
         <div className="urdu-h-recipes-container">
           <h2 className="urdu-h-recipes-title">مشہور ریسیپیز</h2>
@@ -227,7 +212,6 @@ const UrduHomePage = () => {
         </div>
       </section>
 
-      {/* کھانے کی تجویز پاپ اپ */}
       {showMealSuggestor && (
         <div className="urdu-meal-suggestor-popup active">
           <div className="urdu-meal-suggestor-popup-header">
@@ -262,7 +246,6 @@ const UrduHomePage = () => {
         </div>
       )}
 
-      {/* ========== چیٹ بوٹ آئیکون ========== */}
       <div className="urdu-chatbot-icon" onClick={toggleChatbot}>
         <i className="fas fa-robot"></i>
         {unreadMessages > 0 && (
@@ -270,7 +253,6 @@ const UrduHomePage = () => {
         )}
       </div>
 
-      {/* چیٹ بوٹ موڈل */}
       {showChatbot && (
         <div className="urdu-chatbot-modal active">
           <div className="urdu-chatbot-header">
