@@ -25,22 +25,11 @@ import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
-import UrduSignUpPage from './pages/Urdu/UrduSignUpPage';
 
 import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
 
 import './App.css';
-
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  
-  if (token) {
-    return children;
-  }
-  
-  return <Navigate to="/login-page" replace />;
-};
 
 function AppWrapper() {
   const location = useLocation();
@@ -91,33 +80,32 @@ function AppWrapper() {
 
           <Route path="/urdu" element={<UrduPublicHome />} />
           <Route path="/urdu-login" element={<UrduLoginPage />} />
-          <Route path="/urdu-signup" element={<UrduSignUpPage />} />
 
-          <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+          <Route path="/home" element={<HomePage />} />
           
-          <Route path="/urdu-home" element={<PrivateRoute><UrduHomePage /></PrivateRoute>} />
+          <Route path="/urdu-home" element={<UrduHomePage />} />
           
-          <Route path="/guidance" element={<PrivateRoute><BeginnersPage /></PrivateRoute>} />
+          <Route path="/guidance" element={<BeginnersPage />} />
           
-          <Route path="/measuring-skills" element={<PrivateRoute><MeasuringSkillsPage /></PrivateRoute>} />
+          <Route path="/measuring-skills" element={<MeasuringSkillsPage />} />
           
-          <Route path="/kitchen-appliances" element={<PrivateRoute><KitchenAppliancesPage /></PrivateRoute>} />
+          <Route path="/kitchen-appliances" element={<KitchenAppliancesPage />} />
           
-          <Route path="/cutting-techniques" element={<PrivateRoute><CuttingTechniquesPage /></PrivateRoute>} />
+          <Route path="/cutting-techniques" element={<CuttingTechniquesPage />} />
           
-          <Route path="/kitchen-tools" element={<PrivateRoute><KitchenToolsPage /></PrivateRoute>} />
+          <Route path="/kitchen-tools" element={<KitchenToolsPage />} />
           
-          <Route path="/cooking-methods" element={<PrivateRoute><CookingMethodsPage /></PrivateRoute>} />
+          <Route path="/cooking-methods" element={<CookingMethodsPage />} />
           
-          <Route path="/meat-cuts" element={<PrivateRoute><MeatProcessingPage /></PrivateRoute>} />
+          <Route path="/meat-cuts" element={<MeatProcessingPage />} />
           
-          <Route path="/pantry-basics" element={<PrivateRoute><PantryBasicsPage /></PrivateRoute>} />
+          <Route path="/pantry-basics" element={<PantryBasicsPage />} />
           
-          <Route path="/bakery-essentials" element={<PrivateRoute><BakeryEssentialsPage /></PrivateRoute>} />
+          <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
           
-          <Route path="/meal-suggestion" element={<PrivateRoute><MealSuggestion /></PrivateRoute>} />
+          <Route path="/meal-suggestion" element={<MealSuggestion />} />
           
-          <Route path="/change-account" element={<PrivateRoute><ChangeAccountInfoPage /></PrivateRoute>} />
+          <Route path="/change-account" element={<ChangeAccountInfoPage />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

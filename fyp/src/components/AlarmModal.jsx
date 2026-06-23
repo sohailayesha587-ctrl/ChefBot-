@@ -22,7 +22,9 @@ const AlarmModal = () => {
       <div className="alarm-sidebar-modal">
         <div className="alarm-sidebar-header">
           <h2>ChefBot Timer</h2>
-          <button className="close-btn" onClick={closeModal}>×</button>
+          <button className="close-btn" onClick={closeModal}>
+            <i className="fas fa-times"></i>
+          </button>
         </div>
         
         <AlarmTimerComponent />
@@ -131,14 +133,18 @@ const AlarmTimerComponent = () => {
     floatingDiv.innerHTML = `
       <div class="floating-notification-content">
         <div class="floating-notification-header">
-          <span class="floating-icon">🔔</span>
+          <span class="floating-icon">
+            <i class="fas fa-clock"></i>
+          </span>
           <span class="floating-title">ChefBot Timer Complete!</span>
-          <button class="floating-close-btn" id="floating-close-btn">×</button>
+          <button class="floating-close-btn" id="floating-close-btn">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
         <div class="floating-notification-body">
           <p>Your timer has finished! Alarm is beeping.</p>
           <button class="floating-stop-btn" id="floating-stop-btn">
-            STOP BEEP
+            <i class="fas fa-stop-circle"></i> STOP BEEP
           </button>
         </div>
       </div>
@@ -546,10 +552,12 @@ const AlarmTimerComponent = () => {
       {isSoundPlaying && (
         <div className="beep-status-active">
           <div className="beep-status-content">
-            <span className="beep-icon">🔊</span>
+            <span className="beep-icon">
+              <i className="fas fa-volume-up"></i>
+            </span>
             <span>Alarm is beeping!</span>
             <button className="stop-beep-btn" onClick={stopAllBeeps}>
-              STOP BEEP
+              <i className="fas fa-stop-circle"></i> STOP BEEP
             </button>
           </div>
         </div>

@@ -15,7 +15,7 @@ function Footer() {
     return (
       <footer className="simple-footer">
         <div className="simple-footer-content">
-          <p>© 2025 ChefBot | All rights reserved</p>
+          <p>© 2026 ChefBot | All rights reserved</p>
           <p>Need help? Contact us at: support@chefbot.com</p>
           <div className="simple-footer-links">
             <a href="/terms">Terms</a> | 

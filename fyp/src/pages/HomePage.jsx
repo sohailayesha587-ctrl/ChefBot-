@@ -219,9 +219,9 @@ const HomePage = () => {
               <div className="message-content">
                 <p>Hi! I'm your Meal Suggestor Bot.</p>
                 <p>Ask me for meal ideas like:</p>
-                <p>• "breakfast suggestions"</p>
-                <p>• "quick lunch ideas"</p>
-                <p>• "vegetarian dinner"</p>
+                <p>"breakfast suggestions"</p>
+                <p>"quick lunch ideas"</p>
+                <p>"vegetarian dinner"</p>
               </div>
             </div>
           </div>
