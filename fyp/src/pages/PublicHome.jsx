@@ -4,12 +4,14 @@ import './PublicHome.css';
 
 const PublicHome = () => {
   const navigate = useNavigate();
+  const [current, setCurrent] = useState(0);
+  const bgBox = useRef(null);
   
   const slides = [
     {
       id: 1,
-      heading: "AI ChefBot Assistant",
-      text: "Get instant meal suggestions based on what's in your pantry. Our AI ChefBot creates personalized meals just for you!",
+      heading: "ChefBot Assistant",
+      text: "Get instant meal suggestions based on what's in your pantry. ChefBot creates personalized meals just for you!",
       pic: "ai.jpg",
       back: "ai.jpg"
     },
@@ -50,8 +52,7 @@ const PublicHome = () => {
     }
   ];
 
-  const [current, setCurrent] = useState(0);
-  const bgBox = useRef(null);
+ 
 
   useEffect(() => {
     if (bgBox.current) {
