@@ -1,0 +1,295 @@
+.ms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ms-header {
+  text-align: center;
+  padding: 40px 0 30px;
+}
+
+.ms-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #284a4b;
+  margin-bottom: 10px;
+}
+
+.ms-description {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.ms-main-content {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.ms-search-section {
+  margin-bottom: 25px;
+}
+
+.ms-search-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.ms-search-input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.ms-search-input:focus {
+  border-color: #284a4b;
+  box-shadow: 0 0 0 3px rgba(40, 74, 75, 0.1);
+}
+
+.ms-search-btn {
+  padding: 14px 32px;
+  background: #284a4b;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ms-search-btn:hover {
+  background: #1f3a3b;
+  transform: translateY(-2px);
+}
+
+.ms-filters-bar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.ms-filter-select {
+  padding: 10px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: white;
+  cursor: pointer;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+}
+
+.ms-filter-select:focus {
+  border-color: #284a4b;
+}
+
+.ms-filter-btn {
+  padding: 10px 24px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #284a4b;
+  transition: all 0.3s;
+}
+
+.ms-filter-btn:hover {
+  background: #284a4b;
+  color: white;
+}
+
+.ms-results-info {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.ms-suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.ms-recipe-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+  transition: all 0.3s;
+}
+
+.ms-recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.ms-recipe-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.ms-match-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.ms-recipe-content {
+  padding: 18px 20px 20px;
+}
+
+.ms-recipe-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.ms-recipe-name:hover {
+  color: #284a4b;
+}
+
+.ms-recipe-category {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.ms-recipe-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ms-match-progress {
+  height: 6px;
+  background: #eef2f6;
+  border-radius: 10px;
+  margin: 12px 0 16px;
+  overflow: hidden;
+}
+
+.ms-match-progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.ms-recipe-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ms-btn-view, .ms-btn-cook {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ms-btn-view {
+  background: #f0f0f0;
+  color: #284a4b;
+}
+
+.ms-btn-view:hover {
+  background: #e0e0e0;
+}
+
+.ms-btn-cook {
+  background: #284a4b;
+  color: white;
+}
+
+.ms-btn-cook:hover {
+  background: #1f3a3b;
+  transform: translateY(-2px);
+}
+
+.ms-show-more {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.ms-show-more-btn {
+  padding: 12px 40px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #284a4b;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ms-show-more-btn:hover {
+  background: #284a4b;
+  color: white;
+}
+
+.ms-loading {
+  text-align: center;
+  padding: 60px 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.ms-back-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eef2f6;
+}
+
+.ms-back-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1.5px solid #284a4b;
+  border-radius: 10px;
+  color: #284a4b;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ms-back-btn:hover {
+  background: #284a4b;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .ms-container { padding: 12px; }
+  .ms-title { font-size: 1.8rem; }
+  .ms-main-content { padding: 16px; }
+  .ms-suggestions-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+}
+
+@media (max-width: 480px) {
+  .ms-suggestions-grid { grid-template-columns: 1fr; }
+  .ms-search-wrapper { flex-direction: column; }
+  .ms-search-btn { width: 100%; }
+  .ms-filters-bar { flex-direction: column; }
+}

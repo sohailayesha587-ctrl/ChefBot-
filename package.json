@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "MyChefbot",
   "private": true,
   "version": "0.0.0",
@@ -31,5 +32,13 @@
   },
   "overrides": {
     "vite": "^8.0.0-beta.13"
+=======
+  "dependencies": {
+    "react-router-dom": "^7.11.0",
+    "react-toastify": "^11.0.5"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.10.0"
+>>>>>>> 9ea63032f84331f319a4436c74a20af7e02ae44a
   }
 }
