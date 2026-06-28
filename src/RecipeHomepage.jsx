@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
+import 'RecipeHomepage.css';
 
-const RecipeFeature = () => {
+const RecipeHomepage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [email, setEmail] = useState('');
@@ -236,4 +236,4 @@ const RecipeFeature = () => {
   );
 };
 
-export default RecipeFeature;
+export default RecipeHomepage;

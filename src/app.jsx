@@ -1,13 +1,14 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import RecipeFeature from './RecipeFeature'
+import RecipeHomepage from './RecipeHomepage'
+import soups from './soups'git add .
 
-import './App.css'
+// import './App.css'
 function App() {
   return (
     <div className="app">
-      <RecipeFeature/>
-   
+      <RecipeHomepage/>
+      <soups/>
    </div>
   )
 }
