@@ -28,6 +28,7 @@ import UrduPublicHome from './pages/Urdu/UrduPublicHome';
 
 import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
+import RecipeHomepage from './pages/RecipeHomepage';
 
 import './App.css';
 
