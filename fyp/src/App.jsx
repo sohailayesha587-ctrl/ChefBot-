@@ -22,6 +22,7 @@ import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 import MealSuggestion from './pages/MealSuggestion';
 import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
+import AboutPage from "./pages/AboutPage";
 
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
@@ -109,6 +110,7 @@ function AppWrapper() {
           
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
           <Route path="/pantry" element={<PantryFeature />} />
+          <Route path="/about" element={<AboutPage />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
