@@ -4,9 +4,6 @@ import './HomePage.css';
 
 const HomePage = () => {
   const [email, setEmail] = useState('');
-  const [showChatbot, setShowChatbot] = useState(false);
-  const [showMealSuggestor, setShowMealSuggestor] = useState(false);
-  const [unreadMessages, setUnreadMessages] = useState(3);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,16 +11,7 @@ const HomePage = () => {
     setEmail('');
   };
 
-  const toggleChatbot = () => {
-    setShowChatbot(!showChatbot);
-    if (!showChatbot) {
-      setUnreadMessages(0);
-    }
-  };
-
-  const toggleMealSuggestor = () => {
-    setShowMealSuggestor(!showMealSuggestor);
-  };
+  
 
   const features = [
     {
@@ -108,7 +96,6 @@ const HomePage = () => {
               to={feature.path} 
               key={index} 
               className="h-feature-box"
-              style={{textDecoration: 'none'}}
             >
               <div className="h-feature-image">
                 <img src={feature.image} alt={feature.title} />
@@ -206,68 +193,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {showMealSuggestor && (
-        <div className="meal-suggestor-popup active">
-          <div className="meal-suggestor-popup-header">
-            <h3><i className="fas fa-robot"></i> Meal Suggestor Chat</h3>
-            <button className="close-popup" onClick={toggleMealSuggestor}>
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-          <div className="meal-suggestor-chat-body">
-            <div className="chat-message bot">
-              <div className="message-content">
-                <p>Hi! I'm your Meal Suggestor Bot.</p>
-                <p>Ask me for meal ideas like:</p>
-                <p>"breakfast suggestions"</p>
-                <p>"quick lunch ideas"</p>
-                <p>"vegetarian dinner"</p>
-              </div>
-            </div>
-          </div>
-          <div className="meal-suggestor-chat-footer">
-            <input 
-              type="text" 
-              className="chat-input" 
-              placeholder="Ask for meal suggestions..."
-            />
-            <button className="chat-send-btn">
-              <i className="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      )}
-
-      <div className="chatbot-icon" onClick={toggleChatbot}>
-        <i className="fas fa-robot"></i>
-        {unreadMessages > 0 && (
-          <span className="chatbot-badge">{unreadMessages}</span>
-        )}
-      </div>
-
-      {showChatbot && (
-        <div className="chatbot-modal active">
-          <div className="chatbot-header">
-            <h3><i className="fas fa-robot"></i> ChefBot Assistant</h3>
-            <button className="close-chatbot" onClick={toggleChatbot}>
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-          <div className="chatbot-body">
-            <p>Hello! I'm ChefBot. How can I help you with cooking today? 🍳</p>
-          </div>
-          <div className="chatbot-footer">
-            <input 
-              type="text" 
-              className="chatbot-input" 
-              placeholder="Type your message..."
-            />
-            <button className="chatbot-send">
-              <i className="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      )}
+     
+     
     </div>
   );
 };
