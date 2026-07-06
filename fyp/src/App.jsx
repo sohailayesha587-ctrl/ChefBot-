@@ -21,6 +21,7 @@ import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 import MealSuggestion from './pages/MealSuggestion';
 import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
+
 import AboutPage from "./pages/AboutPage";
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
