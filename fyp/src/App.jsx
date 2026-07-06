@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 import HomePage from './pages/HomePage';
 import PublicHome from './pages/PublicHome';
 import BeginnersPage from './pages/BeginnersPage';
@@ -22,14 +21,14 @@ import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 import MealSuggestion from './pages/MealSuggestion';
 import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
-
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
-
 import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
 import RecipeHomepage from './pages/RecipeHomepage';
+import desserts from './pages/desserts';
+import soups from './pages/soups';
 
 import './App.css';
 
