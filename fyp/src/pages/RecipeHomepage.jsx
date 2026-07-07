@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'RecipeHomepage.css';
-
+import "./RecipeHomepage.css";
 const RecipeHomepage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');

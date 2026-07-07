@@ -109,6 +109,8 @@ function AppWrapper() {
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
           <Route path="/pantry" element={<PantryFeature />} />
 
+          <Route path="/recipe" element={<RecipeHomepage />} />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
