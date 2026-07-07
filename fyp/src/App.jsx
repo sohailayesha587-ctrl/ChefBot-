@@ -21,6 +21,8 @@ import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 import MealSuggestion from './pages/MealSuggestion';
 import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
+import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
@@ -107,7 +109,12 @@ function AppWrapper() {
           <Route path="/meal-suggestion" element={<MealSuggestion />} />
           
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
+
           <Route path="/pantry" element={<PantryFeature />} />
+          
+            <Route path="/contact" element={<ContactPage />} />
+
+          <Route path="/about" element={<AboutPage />} />
 
           <Route path="/recipe" element={<RecipeHomepage />} />
 

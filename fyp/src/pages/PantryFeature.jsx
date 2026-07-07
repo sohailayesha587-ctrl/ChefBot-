@@ -7,7 +7,6 @@ import './PantryFeature.css';
 const categories = ['Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Other'];
 const units = ['kg', 'g', 'liters', 'ml', 'pieces', 'dozen'];
 
-// low stock thresholds based on unit (checked first)
 const unitThreshold = {
   kg: 1,
   g: 500,
@@ -16,8 +15,6 @@ const unitThreshold = {
   pieces: 3,
   dozen: 0.25
 };
-
-// fallback thresholds based on category, used if unit isn't in the list above
 const categoryThreshold = {
   Vegetables: 1,
   Fruits: 1,
@@ -38,8 +35,6 @@ const isLowStockItem = (item) => {
   }
   return item.quantity <= 0.5;
 };
-
-// simple local id generator since there's no backend assigning ids anymore
 let idCounter = 1;
 const generateId = () => `local-${idCounter++}`;
 
@@ -85,8 +80,6 @@ const PantryFeature = () => {
     showToast('Shopping list cleared!', 'success');
   };
 
-  // moves everything from the pantry shopping list to the main shopping page,
-  // then sends the user there
   const addAllToShoppingAndRedirect = () => {
     if (pantryShoppingList.length === 0) {
       showToast('No items to add!', 'warning');
@@ -94,9 +87,6 @@ const PantryFeature = () => {
     }
 
     setAddingAll(true);
-
-    // in a real app this is where the items would be posted to the main
-    // shopping list; for now we just simulate it and move on
     showToast(`${pantryShoppingList.length} item(s) added to main shopping list!`, 'success');
     clearPantryShoppingList();
     navigate('/smart-shopping');
@@ -197,8 +187,6 @@ const PantryFeature = () => {
           </div>
         </div>
       )}
-
-      {/* Search + add + low stock filter */}
       <div className="top-controls-row">
         <div className="search-add-section">
           <input
@@ -218,8 +206,6 @@ const PantryFeature = () => {
           )}
         </div>
       </div>
-
-      {/* Shopping list */}
       <div className="shopping-list-section">
         <div className="shopping-list-header">
           <h3 className="shopping-list-title">Shopping List ({pantryShoppingList.length})</h3>
@@ -254,8 +240,6 @@ const PantryFeature = () => {
           )}
         </div>
       </div>
-
-      {/* Pantry items */}
       {items.length === 0 ? (
         <div className="p-empty-message">
           <h4>Your pantry is empty</h4>
@@ -351,8 +335,6 @@ const PantryFeature = () => {
           )}
         </div>
       )}
-
-      {/* Low stock modal */}
       {showLowStockModal && (
         <div className="pantry-modal-overlay" onClick={() => setShowLowStockModal(false)}>
           <div className="pantry-modal low-stock-modal" onClick={(e) => e.stopPropagation()}>
@@ -411,8 +393,6 @@ const PantryFeature = () => {
           </div>
         </div>
       )}
-
-      {/* Add / edit modal */}
       {showModal && (
         <div className="pantry-modal-overlay" onClick={handleCloseModal}>
           <div className="pantry-modal" onClick={(e) => e.stopPropagation()}>
