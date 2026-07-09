@@ -31,7 +31,7 @@ import SettingsSidebar from './components/SettingsSidebar';
 import RecipeHomepage from './pages/RecipeHomepage';
 import desserts from './pages/desserts';
 import soups from './pages/soups';
-
+import CheatMeal from './pages/CheatMeal';
 import './App.css';
 
 function AppWrapper() {
@@ -117,7 +117,8 @@ function AppWrapper() {
           <Route path="/about" element={<AboutPage />} />
 
           <Route path="/recipe" element={<RecipeHomepage />} />
-
+          
+          <Route path="/recipe" element={<CheatMeal />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
