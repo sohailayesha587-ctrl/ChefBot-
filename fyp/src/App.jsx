@@ -118,7 +118,9 @@ function AppWrapper() {
 
           <Route path="/recipe" element={<RecipeHomepage />} />
           
-          <Route path="/recipe" element={<CheatMeal />} />
+          <Route path="/CheatMeal" element={<CheatMeal />} />
+           <Route path="/soups" element={<soups />} />
+            <Route path="/desserts" element={<desserts />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
