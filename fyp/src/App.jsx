@@ -23,6 +23,8 @@ import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
+import ShoppingList from "./pages/ShoppingList";
+import MealFeature from './pages/MealFeature';
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
@@ -110,7 +112,12 @@ function AppWrapper() {
           
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
 
-          <Route path="/pantry" element={<PantryFeature />} />
+          <Route path="/smart-pantry" element={<PantryFeature />} />
+
+           <Route path="/meal-planner" element={<MealFeature />} />
+              <Route path="/smart-shopping" element={<ShoppingList />} />
+            
+
           
             <Route path="/contact" element={<ContactPage />} />
 
