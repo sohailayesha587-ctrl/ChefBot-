@@ -46,6 +46,7 @@ import RecipeBreakfast from './pages/RecipeBreakfast';
 import RecipesDinner from './pages/RecipesDinner';
 import RecipesAppetizers from './pages/RecipesAppetizers';
 import RecipePlainVegetables from './pages/RecipePlainVegetables';
+import RecipesVegChicken from './pages/RecipesVegChicken';
 import './App.css';
 
 function AppWrapper() {
@@ -150,6 +151,7 @@ function AppWrapper() {
                     <Route path="/RecipesDinner" element={<RecipesDinner />} />
                     <Route path="/RecipesAppetizers" element={<RecipesAppetizers />} />
                     <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
