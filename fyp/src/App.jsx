@@ -23,8 +23,6 @@ import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
-import ShoppingList from "./pages/ShoppingList";
-import MealFeature from './pages/MealFeature';
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
@@ -34,6 +32,12 @@ import RecipeHomepage from './pages/RecipeHomepage';
 import desserts from './pages/desserts';
 import soups from './pages/soups';
 import CheatMeal from './pages/CheatMeal';
+import beverages from './pages/beverages';
+import Baking from './pages/Baking';
+import Regional from './pages/Regional';
+import Salads from './pages/Salads';
+import Snack from './pages/Snack';
+import StudentRecipe from './pages/StudentRecipe';
 import './App.css';
 
 function AppWrapper() {
@@ -112,12 +116,7 @@ function AppWrapper() {
           
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
 
-          <Route path="/smart-pantry" element={<PantryFeature />} />
-
-           <Route path="/meal-planner" element={<MealFeature />} />
-              <Route path="/smart-shopping" element={<ShoppingList />} />
-            
-
+          <Route path="/pantry" element={<PantryFeature />} />
           
             <Route path="/contact" element={<ContactPage />} />
 
@@ -128,6 +127,12 @@ function AppWrapper() {
           <Route path="/CheatMeal" element={<CheatMeal />} />
            <Route path="/soups" element={<soups />} />
             <Route path="/desserts" element={<desserts />} />
+             <Route path="/beverages" element={<beverages />} />
+              <Route path="/Baking" element={<Baking />} />
+               <Route path="/Regional" element={<Regional />} />
+                <Route path="/Salads" element={<Salads />} />
+                <Route path="/Snack" element={<Snack />} />
+                <Route path="/StudentRecipe" element={<StudentRecipe />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
