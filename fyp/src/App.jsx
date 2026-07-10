@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -41,6 +40,7 @@ import StudentRecipe from './pages/StudentRecipe';
 import QuickRecipe from './pages/QuickRecipe';
 import Vege from './pages/Vege';
 import MainCourse from './pages/MainCourse';
+import MyRecipeHomepage from './pages/MyRecipeHomePage';
 import './App.css';
 
 function AppWrapper() {
@@ -139,6 +139,7 @@ function AppWrapper() {
                  <Route path="/MainCourse" element={<MainCourse />} />
                   <Route path="/Vege" element={<Vege />} />
                    <Route path="/QuickRecipe" element={<QuickRecipe />} />
+                   <Route path="/MyRecipeHomepage" element={<MyRecipeHomepage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
