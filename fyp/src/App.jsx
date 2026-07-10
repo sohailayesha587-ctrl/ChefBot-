@@ -38,6 +38,9 @@ import Regional from './pages/Regional';
 import Salads from './pages/Salads';
 import Snack from './pages/Snack';
 import StudentRecipe from './pages/StudentRecipe';
+import QuickRecipe from './pages/QuickRecipe';
+import Vege from './pages/Vege';
+import MainCourse from './pages/MainCourse';
 import './App.css';
 
 function AppWrapper() {
@@ -133,6 +136,9 @@ function AppWrapper() {
                 <Route path="/Salads" element={<Salads />} />
                 <Route path="/Snack" element={<Snack />} />
                 <Route path="/StudentRecipe" element={<StudentRecipe />} />
+                 <Route path="/MainCourse" element={<MainCourse />} />
+                  <Route path="/Vege" element={<Vege />} />
+                   <Route path="/QuickRecipe" element={<QuickRecipe />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
