@@ -23,7 +23,7 @@ import PantryFeature from './pages/PantryFeature';
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import ShoppingList from "./pages/ShoppingList";
-import ShoppingList from "./pages/MealFeature";
+import MealFeature from "./pages/MealFeature";
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
