@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -24,7 +23,7 @@ import PantryFeature from './pages/PantryFeature';
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import ShoppingList from "./pages/ShoppingList";
-import MealFeature from './pages/MealFeature';
+import ShoppingList from "./pages/MealFeature";
 import UrduHomePage from './pages/Urdu/UrduHomePage';
 import UrduLoginPage from './pages/Urdu/UrduLoginPage';
 import UrduPublicHome from './pages/Urdu/UrduPublicHome';
@@ -34,6 +33,22 @@ import RecipeHomepage from './pages/RecipeHomepage';
 import desserts from './pages/desserts';
 import soups from './pages/soups';
 import CheatMeal from './pages/CheatMeal';
+import beverages from './pages/beverages';
+import Baking from './pages/Baking';
+import Regional from './pages/Regional';
+import Salads from './pages/Salads';
+import Snack from './pages/Snack';
+import StudentRecipe from './pages/StudentRecipe';
+import QuickRecipe from './pages/QuickRecipe';
+import Vege from './pages/Vege';
+import MainCourse from './pages/MainCourse';
+import MyRecipeHomepage from './pages/MyRecipeHomePage';
+import Lunch from './pages/Lunch';
+import RecipeBreakfast from './pages/RecipeBreakfast';
+import RecipesDinner from './pages/RecipesDinner';
+import RecipesAppetizers from './pages/RecipesAppetizers';
+import RecipePlainVegetables from './pages/RecipePlainVegetables';
+import RecipesVegChicken from './pages/RecipesVegChicken';
 import './App.css';
 
 function AppWrapper() {
@@ -117,7 +132,7 @@ function AppWrapper() {
            <Route path="/meal-planner" element={<MealFeature />} />
 
               <Route path="/smart-shopping" element={<ShoppingList />} />
-            
+        
             <Route path="/contact" element={<ContactPage />} />
 
           <Route path="/about" element={<AboutPage />} />
@@ -127,6 +142,22 @@ function AppWrapper() {
           <Route path="/CheatMeal" element={<CheatMeal />} />
            <Route path="/soups" element={<soups />} />
             <Route path="/desserts" element={<desserts />} />
+             <Route path="/beverages" element={<beverages />} />
+              <Route path="/Baking" element={<Baking />} />
+               <Route path="/Regional" element={<Regional />} />
+                <Route path="/Salads" element={<Salads />} />
+                <Route path="/Snack" element={<Snack />} />
+                <Route path="/StudentRecipe" element={<StudentRecipe />} />
+                 <Route path="/MainCourse" element={<MainCourse />} />
+                  <Route path="/Vege" element={<Vege />} />
+                   <Route path="/QuickRecipe" element={<QuickRecipe />} />
+                   <Route path="/MyRecipeHomepage" element={<MyRecipeHomepage />} />
+                   <Route path="/Lunch" element={<Lunch />} />
+                    <Route path="/RecipeBreakfast" element={<RecipeBreakfast />} />
+                    <Route path="/RecipesDinner" element={<RecipesDinner />} />
+                    <Route path="/RecipesAppetizers" element={<RecipesAppetizers />} />
+                    <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
