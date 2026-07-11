@@ -115,10 +115,9 @@ function AppWrapper() {
           <Route path="/smart-pantry" element={<PantryFeature />} />
 
            <Route path="/meal-planner" element={<MealFeature />} />
+
               <Route path="/smart-shopping" element={<ShoppingList />} />
             
-
-          
             <Route path="/contact" element={<ContactPage />} />
 
           <Route path="/about" element={<AboutPage />} />
