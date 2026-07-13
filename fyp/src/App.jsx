@@ -38,7 +38,7 @@ import './App.css';
 
 function AppWrapper() {
   const location = useLocation();
-  
+
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -57,7 +57,7 @@ function AppWrapper() {
 
   return (
     <>
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -68,11 +68,11 @@ function AppWrapper() {
         pauseOnHover
         theme="light"
       />
-      
+
       <AlarmModal isOpen={isAlarmModalOpen} onClose={() => setIsAlarmModalOpen(false)} />
-      
+
       <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
-      
+
       <div className="app-wrapper english-mode" dir="ltr">
         {shouldShowHeader && (
           <Header onSettingsClick={openSettings} />
@@ -87,47 +87,44 @@ function AppWrapper() {
           <Route path="/urdu-login" element={<UrduLoginPage />} />
 
           <Route path="/home" element={<HomePage />} />
-          
+
           <Route path="/urdu-home" element={<UrduHomePage />} />
-          
+
           <Route path="/guidance" element={<BeginnersPage />} />
-          
+
           <Route path="/measuring-skills" element={<MeasuringSkillsPage />} />
-          
+
           <Route path="/kitchen-appliances" element={<KitchenAppliancesPage />} />
-          
+
           <Route path="/cutting-techniques" element={<CuttingTechniquesPage />} />
-          
+
           <Route path="/kitchen-tools" element={<KitchenToolsPage />} />
-          
+
           <Route path="/cooking-methods" element={<CookingMethodsPage />} />
-          
+
           <Route path="/meat-cuts" element={<MeatProcessingPage />} />
-          
+
           <Route path="/pantry-basics" element={<PantryBasicsPage />} />
-          
+
           <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
-          
+
           <Route path="/meal-suggestion" element={<MealSuggestion />} />
-          
+
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
 
           <Route path="/smart-pantry" element={<PantryFeature />} />
 
-           <Route path="/meal-planner" element={<MealFeature />} />
-              <Route path="/smart-shopping" element={<ShoppingList />} />
-            
-
-          
-            <Route path="/contact" element={<ContactPage />} />
+          <Route path="/meal-planner" element={<MealFeature />} />
+          <Route path="/smart-shopping" element={<ShoppingList />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           <Route path="/about" element={<AboutPage />} />
 
           <Route path="/recipe" element={<RecipeHomepage />} />
-          
+
           <Route path="/CheatMeal" element={<CheatMeal />} />
-           <Route path="/soups" element={<soups />} />
-            <Route path="/desserts" element={<desserts />} />
+          <Route path="/soups" element={<soups />} />
+          <Route path="/desserts" element={<desserts />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 

@@ -4,81 +4,64 @@ import './Footer.css';
 
 function Footer() {
   const currentPath = window.location.pathname;
+  const hideFooter = [
+    '/login-page',
+    '/signup',
+    '/forgot-password',
+    '/verify-otp',
+    '/reset-password',
+    '/Alarm',
+    '/alarm'
+  ];
 
-  const noFooterPages = ['/login', '/login-page', '/urdu-login', '/Alarm', '/alarm'];
-  
-  if (noFooterPages.includes(currentPath)) {
+  if (hideFooter.includes(currentPath)) {
     return null;
   }
 
-  if (currentPath === '/signup') {
-    return (
-      <footer className="simple-footer">
-        <div className="simple-footer-content">
-          <p>© 2026 ChefBot | All rights reserved</p>
-          <p>Need help? Contact us at: support@chefbot.com</p>
-          <div className="simple-footer-links">
-            <a href="/terms">Terms</a> | 
-            <a href="/privacy">Privacy</a> | 
-            <a href="/contact">Contact</a>
-          </div>
-        </div>
-      </footer>
-    );
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for joining ChefBot!");
-  };
-
   return (
-    <footer className="chefbot-footer">
-      <div className="footer-gallery">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Food 1" />
-        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0" alt="Food 2" />
-        <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589" alt="Food 3" />
-        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Food 4" />
-        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0" alt="Food 5" />
+    <footer className="footer">
+      <div className="footer-images">
+        <img src="footer1.jpg" alt="footer" />
+        <img src="footer2.jpg" alt="footer" />
+        <img src="footer3.jpg" alt="footer" />
+        <img src="footer4.jpg" alt="footer" />
+        <img src="footer5.jpg" alt="footer" />
       </div>
 
-      <div className="footer-cta">
+      <div className="footer-heading">
         <h2>Let's cook something amazing together.</h2>
-        <form onSubmit={handleSubmit}>
-          <input type="email" id="search-footer" placeholder="Enter your email" required />
-          <button type="submit">Join Now</button>
-        </form>
       </div>
 
       <div className="footer-main">
-        <div className="footer-column">
+        <div className="footer-content">
           <h3>ChefBot</h3>
-          <p>Your AI kitchen partner that suggests recipes, helps plan meals, and makes cooking stress-free and fun.</p>
+          <p>
+            Your kitchen partner that suggests recipes, helps plan meals,
+            and makes cooking stress-free and fun.
+          </p>
         </div>
 
-        <div className="footer-column">
+        <div className="footer-content">
           <h4>Quick Links</h4>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/recipes">Recipes</Link></li>
+            <li><Link to="/meal-suggestion">Meal Suggestions</Link></li>
+            <li><Link to="/smart-shopping">Shopping List</Link></li>
+
+            <li><Link to="/smart-pantry">Pantry items</Link></li>
             <li><Link to="/meal-planning">Meal Planner</Link></li>
             <li><Link to="/guidance">Guidance</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+
           </ul>
         </div>
 
-        <div className="footer-column">
-          <h4>Stay Connected</h4>
-          <ul>
-            <li><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
-          </ul>
-        </div>
+
       </div>
 
       <div className="footer-bottom">
-        <p>© 2026 ChefBot. All rights reserved.</p>
+        <p>&copy; 2026 ChefBot. All rights reserved.</p>
       </div>
     </footer>
   );
