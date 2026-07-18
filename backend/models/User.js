@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: { 
-    type: String, 
+  name: {
+    type: String,
     required: true,
     trim: true
   },
@@ -51,8 +51,7 @@ userSchema.methods.comparePassword = async function(password) {
 };
 
 userSchema.methods.isAccountLocked = function() {
-  if (!this.lockUntil) return false;
-  return this.lockUntil > Date.now();
+  return this.lockUntil && this.lockUntil > Date.now();
 };
 
 userSchema.methods.incrementLoginAttempts = async function() {

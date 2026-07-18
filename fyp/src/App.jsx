@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -14,6 +13,7 @@ import KitchenToolsPage from './pages/KitchenToolsPage';
 import CookingMethodsPage from './pages/CookingMethodsPage';
 import MeatProcessingPage from './pages/MeatProcessingPage';
 import LoginPage from './pages/LoginPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import SignUpPage from './pages/SignUpPage';
 import PantryBasicsPage from './pages/PantryBasicsPage';
 import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
@@ -24,9 +24,6 @@ import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import ShoppingList from "./pages/ShoppingList";
 import MealFeature from "./pages/MealFeature";
-import UrduHomePage from './pages/Urdu/UrduHomePage';
-import UrduLoginPage from './pages/Urdu/UrduLoginPage';
-import UrduPublicHome from './pages/Urdu/UrduPublicHome';
 import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
 import RecipeHomepage from './pages/RecipeHomepage';
@@ -49,11 +46,15 @@ import RecipesDinner from './pages/RecipesDinner';
 import RecipesAppetizers from './pages/RecipesAppetizers';
 import RecipePlainVegetables from './pages/RecipePlainVegetables';
 import RecipesVegChicken from './pages/RecipesVegChicken';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import VerifyOTPPage from './pages/VerifyOTPPage';
+
 
 function AppWrapper() {
   const location = useLocation();
-
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -85,25 +86,21 @@ function AppWrapper() {
       />
 
       <AlarmModal isOpen={isAlarmModalOpen} onClose={() => setIsAlarmModalOpen(false)} />
-
       <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
 
       <div className="app-wrapper english-mode" dir="ltr">
-        {shouldShowHeader && (
-          <Header onSettingsClick={openSettings} />
-        )}
+        {shouldShowHeader && <Header onSettingsClick={openSettings} />}
 
         <Routes>
           <Route path="/" element={<PublicHome />} />
           <Route path="/login-page" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                    <Route path="/reset-password" element={<ResetPasswordPage />} />
+                                        <Route path="/verify-otp" element={<VerifyOTPPage />} />
+
+
           <Route path="/signup" element={<SignUpPage />} />
-
-          <Route path="/urdu" element={<UrduPublicHome />} />
-          <Route path="/urdu-login" element={<UrduLoginPage />} />
-
           <Route path="/home" element={<HomePage />} />
-          <Route path="/urdu-home" element={<UrduHomePage />} />
-
           <Route path="/guidance" element={<BeginnersPage />} />
           <Route path="/measuring-skills" element={<MeasuringSkillsPage />} />
           <Route path="/kitchen-appliances" element={<KitchenAppliancesPage />} />
@@ -113,7 +110,6 @@ function AppWrapper() {
           <Route path="/meat-cuts" element={<MeatProcessingPage />} />
           <Route path="/pantry-basics" element={<PantryBasicsPage />} />
           <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
-
           <Route path="/meal-suggestion" element={<MealSuggestion />} />
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
           <Route path="/smart-pantry" element={<PantryFeature />} />
@@ -121,7 +117,6 @@ function AppWrapper() {
           <Route path="/smart-shopping" element={<ShoppingList />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
-
           <Route path="/recipe" element={<RecipeHomepage />} />
           <Route path="/CheatMeal" element={<CheatMeal />} />
           <Route path="/desserts" element={<desserts />} />
@@ -142,8 +137,6 @@ function AppWrapper() {
           <Route path="/RecipesAppetizers" element={<RecipesAppetizers />} />
           <Route path="/plain-veg" element={<RecipePlainVegetables />} />
           <Route path="/veg-chick" element={<RecipesVegChicken />} />
-          
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
         <Footer />
@@ -155,7 +148,9 @@ function AppWrapper() {
 function App() {
   return (
     <Router>
-      <AppWrapper />
+      <AuthProvider>
+        <AppWrapper />
+      </AuthProvider>
     </Router>
   );
 }

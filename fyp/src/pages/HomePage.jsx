@@ -35,11 +35,15 @@ const HomePage = () => {
       path: '/guidance'
     }
   ];
-const foodImages = [
-  "home1.jpg",
-  "home2.jpg",
-  "home3.jpg",
-];
+  
+
+  const stats = [
+    { number: '500+', label: 'Recipes' },
+    { number: '50K+', label: 'Happy Cooks' },
+    { number: '6', label: 'Smart Tools' },
+    { number: '4.9★', label: 'User Rating' },
+  ];
+
   const recipes = [
     {
       image: "home_biryani.jpg",
@@ -94,7 +98,7 @@ const foodImages = [
               <span className="my-hero-highlight">"What to Cook"</span>
             </h1>
             <p className="my-hero-subtitle">
-              Tailored recipes using ingredients you already have.
+              Explore meal suggestions & recipes using ingredients you already have.
             </p>
             <div className="my-hero-buttons">
               <a href="#" className="my-btn-primary">
@@ -110,19 +114,17 @@ const foodImages = [
       </div>
  
       <section className="h-features-section">
-        <h2 className="h-features-title">Our Amazing Features</h2>
+        <div className="h-features-header">
+          <h2 className="h-features-title">Our Core Features</h2>
+        </div>
         <div className="h-features-grid">
-          {features.map((feature, index) => (
-            <Link 
-              to={feature.path} 
-              key={index} 
-              className="h-feature-box"
-            >
+          {features.map((item, index) => (
+            <Link to={item.path} key={index} className="h-feature-box">
               <div className="h-feature-image">
-                <img src={feature.image} alt={feature.title} />
+                <img src={item.image} alt={item.title} />
               </div>
               <div className="h-feature-content">
-                <h3 className="h-feature-title">{feature.title}</h3>
+                <h3 className="h-feature-title">{item.title}</h3>
                 <span className="h-feature-link">
                   Explore <i className="fas fa-arrow-right"></i>
                 </span>
@@ -168,54 +170,97 @@ const foodImages = [
             </div>
           </div>
         </div>
-      <section className="hero-section1">
-        <div className="hero-left">
-          <h2>Digital Cooking</h2>
-          <p>Turn pantry items into delicious meals with ChefBot's recipe suggestions.</p>
-          <Link to="/" className="contact-link">Start Learning →</Link>
-        </div>
-        <div className="hero-center">
-          <h1>No grocery trip needed! Cook from pantry items with ChefBot.</h1>
-        </div>
-        <div className="hero-right">
-          <img src="beginners.jpg" alt="Smart kitchen" />
-        </div>
-      </section>
 
-      <section className="food-showcase">
-        {foodImages.map((image, index) => (
-          <img 
-            key={index} 
-            src={image} 
-            className="food-image" 
-            alt={`Cooking ${index + 1}`} 
-          />
-        ))}
-      </section>
-
-      <section className="classes-section">
-        <img 
-          src="home_gui.jpg" 
-          className="classes-image" 
-          alt="AI Kitchen" 
-        />
-        <div className="classes-content">
-          <div className="section-label">LEARN TO COOK</div>
-          <h2>Guidance for beginners<br />made <span className="italic">easy</span></h2>
-          <p>
-            Master cooking basics with step-by-step instructions, pantry organization tips, and smart shopping guidance. 
-            Perfect for those starting their cooking journey with confidence and ease.
+      
+      <section className="digital-banner">
+        <div className="digital-banner-left">
+         
+          <h2 className="digital-banner-title">
+            Personalized Meal <br/>Suggestions
+          </h2>
+          <p className="digital-banner-desc">
+            Find the perfect meal recommendations based on your cravings and available ingredients
           </p>
+          <div className="digital-banner-btn-wrapper">
+            <Link to="/smart-pantry" className="digital-banner-btn">
+              Find Meal <i className="fas fa-arrow-right"></i>
+            </Link>
+          </div>
+        </div>
+        <div className="digital-banner-right">
+          <div className="digital-banner-img-wrap">
+            <img src="image.png" alt="Smart kitchen" />
+          </div>
+          <div className="digital-stats-row">
+            {stats.map((s, i) => (
+              <div className="digital-stat" key={i}>
+                <span className="digital-stat-num">{s.number}</span>
+                <span className="digital-stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      <section className="pantry-mini-section">
+        <div className="pantry-mini-header">
+          <h2 className="pantry-mini-title">
+            Pantry & <span className="pantry-mini-highlight">Shopping</span>
+          </h2>
+          <p className="pantry-mini-desc">Track what you have. Know what you need.</p>
+        </div>
+
+        <div className="pantry-mini-grid">
+          <Link to="/smart-pantry" className="pantry-mini-card">
+            <div className="pantry-mini-img">
+              <img src="pantry-staples.jpg" alt="Pantry" />
+            </div>
+            <div className="pantry-mini-info">
+              <h3>Smart Pantry</h3>
+              <p>Track ingredients & get recipes</p>
+            </div>
+            <span className="pantry-mini-arrow">→</span>
+          </Link>
+
+          <Link to="/smart-shopping" className="pantry-mini-card">
+            <div className="pantry-mini-img">
+              <img src="shoppinglist.png" alt="Shopping" />
+            </div>
+            <div className="pantry-mini-info">
+              <h3>Shopping List</h3>
+              <p>Track what you need to buy</p>
+            </div>
+            <span className="pantry-mini-arrow">→</span>
+          </Link>
+        </div>
+      </section>
+
+       <section className="classes-section">
+        <div className="classes-img-wrap">
+          <img src="beginners.jpg" className="classes-image" alt="AI Kitchen" />
+          
+        </div>
+        <div className="classes-content">
+          <h2>Guidance for beginners<br />made easy</h2>
+         
+          <div className="classes-checklist">
+            <div className="classes-check-item"><i className="fas fa-check-circle"></i> Step-by-step instructions</div>
+            <div className="classes-check-item"><i className="fas fa-check-circle"></i> Pantry organization tips</div>
+            <div className="classes-check-item"><i className="fas fa-check-circle"></i> Smart shopping guidance</div>
+          </div>
+          <Link to="/guidance" className="classes-cta-btn">
+            Start Your Journey <i className="fas fa-arrow-right"></i>
+          </Link>
+        </div>
+      </section>
+
 <section className="m_plan-section">
   <div className="m_plan-header">
     <div>
-      <span className="section-label-light">Meal Planner</span>
       <h2>Never wonder 'What's for dinner?' again.</h2>
-      <p className="m_plan-subtitle">Smart weekly meal planning that saves time, money and mental energy.</p>
+      <p className="m_plan-subtitle">Smart weekly meal planning that saves time and mental energy.</p>
     </div>
-    <Link to="/meal-planner" className="btn">Let's Plan</Link>
+    <Link to="/meal-planner" className="m_plan-btn">Let's Plan</Link>
   </div>
 
   <div className="m_plan-grid">

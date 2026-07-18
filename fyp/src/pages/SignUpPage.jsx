@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './SignUpPage.css';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -14,11 +16,7 @@ const SignUpPage = () => {
     terms: false
   });
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
@@ -26,47 +24,37 @@ const SignUpPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
+    setError('');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      alert("Please enter a valid email address!");
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
 
     if (!formData.terms) {
-      alert("You must accept the Terms of Service and Privacy Policy!");
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      alert("Password must be at least 6 characters long!");
+      setError('Please accept terms');
       return;
     }
 
     setLoading(true);
 
-    setTimeout(() => {
-      const userData = {
-        id: Date.now().toString(),
-        name: formData.fullname,
+    try {
+      await axios.post('http://localhost:5000/api/auth/register', {
+        fullname: formData.fullname,
         email: formData.email,
-        registeredAt: new Date().toISOString()
-      };
-      
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('isAuthenticated', 'true');
-      
-      alert("Account created successfully! Welcome to ChefBot!");
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        terms: formData.terms
+      });
+
+      navigate('/login-page');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed');
+    } finally {
       setLoading(false);
-      navigate('/home');
-    }, 1500);
+    }
   };
 
   return (
@@ -77,26 +65,11 @@ const SignUpPage = () => {
           <p>Create your account and unlock a world of delicious recipes, smart meal planning, and AI-powered cooking assistance.</p>
           
           <ul className="features">
-            <li>
-              <span className="check-icon">✓</span>
-              Personalized recipe recommendations
-            </li>
-            <li>
-              <span className="check-icon">✓</span>
-              Smart meal planning tools
-            </li>
-            <li>
-              <span className="check-icon">✓</span>
-              Step-by-step cooking guidance
-            </li>
-            <li>
-              <span className="check-icon">✓</span>
-              Nutritional tracking
-            </li>
-            <li>
-              <span className="check-icon">✓</span>
-              Save and organize your favorite recipes
-            </li>
+            <li><span className="check-icon">✓</span> Personalized recipe recommendations</li>
+            <li><span className="check-icon">✓</span> Smart meal planning tools</li>
+            <li><span className="check-icon">✓</span> Step-by-step cooking guidance</li>
+            <li><span className="check-icon">✓</span> Nutritional tracking</li>
+            <li><span className="check-icon">✓</span> Save and organize your favorite recipes</li>
           </ul>
         </div>
       </div>
@@ -105,6 +78,8 @@ const SignUpPage = () => {
         <div className="signup-form">
           <h2>Create Account</h2>
           <p>Sign up to start your culinary journey</p>
+          
+          {error && <div className="error-message">{error}</div>}
           
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -116,7 +91,7 @@ const SignUpPage = () => {
                 className="form-control" 
                 placeholder="Enter your full name" 
                 value={formData.fullname}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -130,7 +105,7 @@ const SignUpPage = () => {
                 className="form-control" 
                 placeholder="Enter your email" 
                 value={formData.email}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -145,31 +120,33 @@ const SignUpPage = () => {
                   className="form-control" 
                   placeholder="Create a password (min. 6 characters)" 
                   value={formData.password}
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   required
                 />
                 <button 
                   type="button" 
                   className="toggle-password" 
-                  onClick={togglePasswordVisibility}
+                  onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
                 </button>
               </div>
             </div>
             
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input 
-                type={showPassword ? "text" : "password"} 
-                id="confirmPassword" 
-                name="confirmPassword"
-                className="form-control" 
-                placeholder="Confirm your password" 
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                required
-              />
+              <div className="password-container">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  id="confirmPassword" 
+                  name="confirmPassword"
+                  className="form-control" 
+                  placeholder="Confirm your password" 
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
             
             <div className="checkbox-container">
@@ -178,14 +155,14 @@ const SignUpPage = () => {
                 id="terms" 
                 name="terms"
                 checked={formData.terms}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
               />
               <label htmlFor="terms">I agree to the Terms of Service and Privacy Policy</label>
             </div>
             
             <button type="submit" className="btn-signup" disabled={loading}>
-              {loading ? 'Creating Account...' : 'Create Account'}
+              {loading ? 'Creating...' : 'Create Account'}
             </button>
             
             <div className="login-link">

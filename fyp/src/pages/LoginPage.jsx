@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   
   const from = location.state?.from || '/home';
   
@@ -12,7 +14,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
     remember: false
   });
@@ -29,35 +31,30 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.username || !formData.password) {
-      setError("Please enter both username and password!");
+    if (!formData.email || !formData.password) {
+      setError("Please enter both email and password!");
       return;
     }
 
     setLoading(true);
     setError('');
 
-    setTimeout(() => {
-      const userData = {
-        id: Date.now().toString(),
-        name: formData.username,
-        email: formData.username,
-        registeredAt: new Date().toISOString()
-      };
+    try {
+      const result = await login(formData.email, formData.password, formData.remember);
       
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('isAuthenticated', 'true');
-      
-      if (formData.remember) {
-        localStorage.setItem('rememberMe', 'true');
+      if (result.success) {
+        navigate(from, { replace: true });
+      } else {
+        setError(result.error);
       }
-      
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.');
+    } finally {
       setLoading(false);
-      navigate(from, { replace: true });
-    }, 800);
+    }
   };
 
   return (
@@ -99,14 +96,14 @@ const LoginPage = () => {
 
           <form className="login-form-container" onSubmit={handleSubmit}>
             <div className="login-form-group">
-              <label className="login-form-label" htmlFor="username">Username or Email</label>
+              <label className="login-form-label" htmlFor="email">Email Address</label>
               <input
                 className="login-input"
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username or email"
-                value={formData.username}
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email address"
+                value={formData.email}
                 onChange={handleInputChange}
                 required
               />
@@ -149,11 +146,17 @@ const LoginPage = () => {
             </div>
 
             <button type="submit" className="login-submit-btn" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? (
+                <>
+                  <span className="spinner"></span> Logging in...
+                </>
+              ) : (
+                'Login'
+              )}
             </button>
 
             <div className="login-signup-link">
-              Don't have an account? <Link to="/signup-page">Sign up now</Link>
+              Don't have an account? <Link to="/signup">Sign up now</Link>
             </div>
           </form>
         </div>

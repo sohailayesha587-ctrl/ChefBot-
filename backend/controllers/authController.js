@@ -1,6 +1,9 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { sendOTPEmail } = require('../config/emailService');
+
+const otpStore = {};
 
 const register = async (req, res) => {
   try {
@@ -20,7 +23,7 @@ const register = async (req, res) => {
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
 
     const existingUser = await User.findOne({ email });
@@ -44,7 +47,7 @@ const register = async (req, res) => {
     );
 
     res.status(201).json({
-      message: 'Account created successfully! Welcome to ChefBot!',
+      message: 'Account created successfully!',
       token,
       user: {
         id: user._id,
@@ -54,10 +57,9 @@ const register = async (req, res) => {
         language: user.language
       }
     });
-
   } catch (error) {
     console.error('Register Error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
@@ -97,10 +99,9 @@ const login = async (req, res) => {
         language: user.language
       }
     });
-
   } catch (error) {
     console.error('Login Error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
@@ -108,8 +109,112 @@ const logout = async (req, res) => {
   try {
     res.status(200).json({ message: 'Logout successful!' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
-module.exports = { register, login, logout }
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    otpStore[email] = {
+      otp,
+      expiresAt: Date.now() + 10 * 60 * 1000
+    };
+
+    await sendOTPEmail(email, otp);
+
+    res.status(200).json({
+      message: 'OTP sent to your email',
+      email
+    });
+  } catch (error) {
+    console.error('Forgot Password Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const verifyOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({ message: 'Email and OTP are required' });
+    }
+
+    const stored = otpStore[email];
+    
+    if (!stored) {
+      return res.status(400).json({ message: 'OTP not found' });
+    }
+
+    if (Date.now() > stored.expiresAt) {
+      delete otpStore[email];
+      return res.status(400).json({ message: 'OTP expired' });
+    }
+
+    if (stored.otp !== otp) {
+      return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    delete otpStore[email];
+
+    res.status(200).json({
+      message: 'OTP verified successfully',
+      email
+    });
+  } catch (error) {
+    console.error('Verify OTP Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    if (!email || !newPassword) {
+      return res.status(400).json({ message: 'Email and new password are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({
+      message: 'Password reset successfully'
+    });
+  } catch (error) {
+    console.error('Reset Password Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  verifyOTP,
+  resetPassword
+};

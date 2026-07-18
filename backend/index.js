@@ -1,15 +1,15 @@
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const dns = require('node:dns/promises');
-dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 dotenv.config();
 
-const { protect } = require('./middleware/authMiddleware');
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const beginnersGuideRoutes = require('./routes/BeginnersGuideRoutes');
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users', protect, userRoutes);
+app.use('/api/guides', beginnersGuideRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server is running');
