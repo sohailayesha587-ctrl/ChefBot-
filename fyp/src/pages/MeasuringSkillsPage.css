@@ -37,10 +37,9 @@ html, body, #root {
 }
 
 .msp-sidebar-header {
-  margin-bottom: 70px;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #cbd5e1;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.2);
 }
 
 .msp-sidebar-title {
@@ -71,19 +70,19 @@ html, body, #root {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
-  border: 1px solid #4a6b6c;
-  background-color: #3a5a5b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .msp-category-item:hover {
-  background: #4a6b6c;
+  background: rgba(255, 255, 255, 0.2);
   transform: translateX(5px);
 }
 
 .msp-category-item.msp-active {
-  background: #5a7b7c;
+  background: rgba(255, 255, 255, 0.25);
   border-color: #4FD1C5;
-  box-shadow: 0 2px 10px #4FD1C5;
+  box-shadow: 0 2px 10px rgba(79, 209, 197, 0.2);
 }
 
 .msp-category-name {
@@ -102,7 +101,6 @@ html, body, #root {
 }
 
 .msp-main-header {
-  margin-bottom: 180px;
   margin-bottom: 20px;
   padding-bottom: 2px;
   border-bottom: 1px solid #e2e8f0;
@@ -112,9 +110,8 @@ html, body, #root {
   font-size: 36px;
   font-weight: 800;
   color: #1e293b;
-  margin-top: 40px;
-  margin-bottom: 10px;
   margin-top: 120px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
 }
 
@@ -140,7 +137,7 @@ html, body, #root {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px #e2e8f0;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
@@ -151,7 +148,7 @@ html, body, #root {
 
 .msp-item-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px #cbd5e1;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   border-color: #6366f1;
 }
 
@@ -192,45 +189,13 @@ html, body, #root {
   flex: 1;
 }
 
-.msp-essentiality-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-left: 10px;
-  flex-shrink: 0;
-}
-
-.msp-essentiality-badge.essential {
-  background: #fee2e2;
-  color: #dc2626;
-  border: 1px solid #fca5a5;
-}
-
-.msp-essentiality-badge.important {
-  background: #fef3c7;
-  color: #d97706;
-  border: 1px solid #fcd34d;
-}
-
-.msp-essentiality-badge.useful {
-  background: #dcfce7;
-  color: #16a34a;
-  border: 1px solid #86efac;
-}
-
-.msp-essentiality-badge.specialized {
-  background: #ede9fe;
-  color: #8b5cf6;
-  border: 1px solid #c4b5fd;
-}
-
 .msp-card-description {
   font-size: 14px;
   color: #64748b;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -240,7 +205,7 @@ html, body, #root {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #1a1a1a;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -257,7 +222,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 25px 60px #0a0a0a;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -278,7 +243,7 @@ html, body, #root {
   cursor: pointer;
   z-index: 100;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .msp-modal-close:hover {
@@ -321,6 +286,24 @@ html, body, #root {
   height: 100%;
 }
 
+.msp-modal-left::-webkit-scrollbar {
+  width: 6px;
+}
+
+.msp-modal-left::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.msp-modal-left::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.msp-modal-left::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 .msp-modal-details {
   width: 100%;
 }
@@ -347,10 +330,6 @@ html, body, #root {
   gap: 8px;
 }
 
-.msp-detail-section h3:before {
-  font-size: 20px;
-}
-
 .msp-detail-content {
   font-size: 15px;
   line-height: 1.6;
@@ -366,14 +345,14 @@ html, body, #root {
 }
 
 .msp-feature-box {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
   border-radius: 8px;
   padding: 12px;
   text-align: center;
   font-size: 13px;
   font-weight: 500;
-  color: #1e40af;
+  color: #0369a1;
 }
 
 .msp-mistake-box {
@@ -420,31 +399,6 @@ html, body, #root {
   font-size: 14px;
 }
 
-.msp-applications-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.msp-application-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: #f1f5f9;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #475569;
-  font-weight: 500;
-}
-
-.msp-application-check {
-  color: #3b82f6;
-  font-size: 16px;
-  font-weight: bold;
-}
-
 .msp-types-section {
   margin-top: 30px;
   padding-top: 25px;
@@ -469,7 +423,7 @@ html, body, #root {
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
   height: 100%;
@@ -478,7 +432,7 @@ html, body, #root {
 
 .msp-type-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px #cbd5e1;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   border-color: #6366f1;
 }
 
@@ -510,6 +464,9 @@ html, body, #root {
   margin-bottom: 8px;
   line-height: 1.3;
   min-height: 32px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -542,55 +499,8 @@ html, body, #root {
   color: #1e293b;
 }
 
-.msp-measurements-grid,
-.msp-comparisons-grid,
-.msp-guidelines-grid,
-.msp-plate-method-grid,
-.msp-tips-grid,
-.msp-indicators-grid,
-.msp-time-references-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 15px 0;
-}
-
-.msp-measurement-box,
-.msp-comparison-box,
-.msp-guideline-box,
-.msp-plate-method-box,
-.msp-tip-box,
-.msp-indicator-box,
-.msp-time-reference-box {
-  background: #fef3c7;
-  border: 1px solid #fbbf24;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 500;
-  color: #92400e;
-}
-
 .msp-conversions-grid,
-.msp-metric-conversions-grid,
-.msp-baking-conversions-grid,
-.msp-temperatures-grid,
-.msp-oven-temperatures-grid,
-.msp-volume-conversions-grid,
-.msp-weight-conversions-grid,
-.msp-oven-conversions-grid,
-.msp-substitutions-grid,
-.msp-dairy-substitutions-grid,
-.msp-scaling-rules-grid,
-.msp-multipliers-grid,
-.msp-exceptions-grid,
-.msp-pan-sizes-grid,
-.msp-area-calculations-grid,
-.msp-adjustment-rules-grid,
-.msp-must-know-grid,
-.msp-metric-equivalents-grid,
-.msp-handy-equivalents-grid {
+.msp-metric-conversions-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
@@ -598,24 +508,7 @@ html, body, #root {
 }
 
 .msp-conversion-box,
-.msp-metric-conversion-box,
-.msp-baking-conversion-box,
-.msp-temperature-box,
-.msp-oven-temperature-box,
-.msp-volume-conversion-box,
-.msp-weight-conversion-box,
-.msp-oven-conversion-box,
-.msp-substitution-box,
-.msp-dairy-substitution-box,
-.msp-scaling-rule-box,
-.msp-multiplier-box,
-.msp-exception-box,
-.msp-pan-size-box,
-.msp-area-calculation-box,
-.msp-adjustment-rule-box,
-.msp-must-know-box,
-.msp-metric-equivalent-box,
-.msp-handy-equivalent-box {
+.msp-metric-conversion-box {
   background: #dbeafe;
   border: 1px solid #93c5fd;
   border-radius: 8px;
@@ -626,60 +519,14 @@ html, body, #root {
   color: #1e40af;
 }
 
-.msp-critical-rules-grid,
-.msp-errors-grid,
-.msp-tools-required-grid,
-.msp-calibration-methods-grid,
-.msp-maintenance-tips-grid,
-.msp-accuracy-check-grid,
-.msp-micro-tools-grid,
-.msp-micro-techniques-grid,
-.msp-critical-amounts-grid,
-.msp-portioning-tools-grid,
-.msp-portioning-techniques-grid,
-.msp-benefits-grid,
-.msp-critical-temperatures-grid,
-.msp-temperature-tools-grid,
-.msp-temperature-techniques-grid,
-.msp-ratios-grid,
-.msp-calculation-grid,
-.msp-effects-grid,
-.msp-basic-ratios-grid,
-.msp-application-methods-grid,
-.msp-ratio-benefits-grid,
-.msp-documentation-methods-grid,
-.msp-what-to-record-grid,
-.msp-documentation-benefits-grid {
+.msp-critical-rules-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin: 15px 0;
 }
 
-.msp-critical-rule-box,
-.msp-error-box,
-.msp-tool-required-box,
-.msp-calibration-method-box,
-.msp-maintenance-tip-box,
-.msp-accuracy-check-box,
-.msp-micro-tool-box,
-.msp-micro-technique-box,
-.msp-critical-amount-box,
-.msp-portioning-tool-box,
-.msp-portioning-technique-box,
-.msp-benefit-box,
-.msp-critical-temperature-box,
-.msp-temperature-tool-box,
-.msp-temperature-technique-box,
-.msp-ratio-box,
-.msp-calculation-box,
-.msp-effect-box,
-.msp-basic-ratio-box,
-.msp-application-method-box,
-.msp-ratio-benefit-box,
-.msp-documentation-method-box,
-.msp-record-item-box,
-.msp-documentation-benefit-box {
+.msp-critical-rule-box {
   background: #fce7f3;
   border: 1px solid #f9a8d4;
   border-radius: 8px;
@@ -688,133 +535,6 @@ html, body, #root {
   font-size: 12px;
   font-weight: 500;
   color: #831843;
-}
-
-.msp-formula-grid,
-.msp-equivalents-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 15px 0;
-}
-
-.msp-formula-box {
-  background: #dcfce7;
-  border: 1px solid #86efac;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 500;
-  color: #166534;
-}
-
-.msp-equivalent-box {
-  background: #fef3c7;
-  border: 1px solid #fbbf24;
-  border-radius: 8px;
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 500;
-  color: #92400e;
-}
-
-.msp-techniques-list,
-.msp-definitions-list,
-.msp-equivalents-list,
-.msp-references-list,
-.msp-conversions-list,
-.msp-rules-list,
-.msp-tools-list {
-  list-style: none;
-}
-
-.msp-technique-item,
-.msp-definition-item,
-.msp-equivalent-item,
-.msp-reference-item,
-.msp-conversion-item,
-.msp-rule-item,
-.msp-tool-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #475569;
-}
-
-.msp-methods-list,
-.msp-process-list,
-.msp-practice-tips-list {
-  list-style: none;
-  counter-reset: step-counter;
-  margin: 10px 0;
-}
-
-.msp-method-item,
-.msp-process-item,
-.msp-practice-tip-item {
-  counter-increment: step-counter;
-  margin-bottom: 12px;
-  padding-left: 40px;
-  position: relative;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #475569;
-}
-
-.msp-method-item:before {
-  content: counter(step-counter);
-  background: #8b5cf6;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 28px;
-  height: 28px;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.msp-process-item:before {
-  content: counter(step-counter);
-  background: #10b981;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 28px;
-  height: 28px;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.msp-practice-tip-item:before {
-  content: counter(step-counter);
-  background: #f59e0b;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 28px;
-  height: 28px;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
 }
 
 .msp-modal-right {
@@ -834,7 +554,7 @@ html, body, #root {
   height: 350px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
   background: #f8fafc;
   position: relative;
@@ -843,48 +563,15 @@ html, body, #root {
 .msp-main-image {
   width: 100%;
   height: 100%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   transition: transform 0.3s ease;
   position: relative;
 }
 
 .msp-main-image:hover {
   transform: scale(1.05);
-}
-
-.msp-image-overlay {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 10;
-}
-
-.msp-essentiality-badge-large {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.msp-essentiality-badge-large.essential {
-  background: #dc2626;
-}
-
-.msp-essentiality-badge-large.important {
-  background: #d97706;
-}
-
-.msp-essentiality-badge-large.useful {
-  background: #16a34a;
-}
-
-.msp-essentiality-badge-large.specialized {
-  background: #8b5cf6;
 }
 
 .back-home-container {
@@ -940,8 +627,7 @@ html, body, #root {
   }
   
   .msp-conversions-grid,
-  .msp-metric-conversions-grid,
-  .msp-baking-conversions-grid {
+  .msp-metric-conversions-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1045,25 +731,16 @@ html, body, #root {
   }
   
   .msp-features-horizontal,
-  .msp-mistakes-horizontal,
-  .msp-measurements-grid,
-  .msp-comparisons-grid,
-  .msp-guidelines-grid,
-  .msp-plate-method-grid,
-  .msp-tips-grid,
-  .msp-indicators-grid,
-  .msp-time-references-grid,
-  .msp-critical-rules-grid,
-  .msp-errors-grid,
-  .msp-tools-required-grid {
+  .msp-mistakes-horizontal {
     grid-template-columns: 1fr;
   }
   
   .msp-conversions-grid,
-  .msp-metric-conversions-grid,
-  .msp-baking-conversions-grid,
-  .msp-temperatures-grid,
-  .msp-oven-temperatures-grid {
+  .msp-metric-conversions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .msp-critical-rules-grid {
     grid-template-columns: 1fr;
   }
   

@@ -1,120 +1,167 @@
-import React from 'react';
-import './BeginnersPage.css';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './BeginnersPage.css';
 
 const BeginnersPage = () => {
   const navigate = useNavigate();
+  const [skillCards, setSkillCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const skills = [
-    {
-      id: '01',
-      img: 'KitchenTools.png',
-      name: 'Kitchen Tools',
-      link: '/kitchen-tools',
-      desc: 'Tools that make cooking easier and more precise.'
-    },
-    {
-      id: '02',
-      img: 'CuttingTechniques.png',
-      name: 'Cutting Techniques',
-      link: '/cutting-techniques',
-      desc: 'Tools that make cooking easier and more precise.'
-    },
-    {
-      id: '03',
-      img: 'CookingMethods.png',
-      name: 'Cooking Methods',
-      link: '/cooking-methods',
-      desc: 'Heat-based techniques used to prepare and cook food.'
-    },
-    {
-      id: '04',
-      img: 'MeatCuts.png',
-      name: 'Meat Cuts',
-      link: '/meat-cuts',
-      desc: 'Different portions of meat from various animal parts.'
-    },
-    {
-      id: '05',
-      img: 'KitchenAppliances.png',
-      name: 'Kitchen Appliances',
-      link: '/kitchen-appliances',
-      desc: 'Electrical devices that assist with cooking and food preparation.'
-    },
-    {
-      id: '06',
-      img: 'PantryBasics.png',
-      name: 'Pantry Basics',
-      link: '/pantry-basics',
-      desc: 'Staple ingredients that form the foundation of everyday cooking.'
-    },
-    {
-      id: '07',
-      img: 'MeasuringSkills.png',
-      name: 'Measuring Skills',
-      link: '/measuring-skills',
-      desc: 'Techniques for accurately measuring ingredients.'
-    },
-    {
-      id: '08',
-      img: 'BakingEssentials.png',
-      name: 'Bakery Essentials',
-      link: '/bakery-essentials',
-      desc: 'Must-have tools and ingredients for successful baking.'
+  const routeMapping = {
+    'Kitchen Tools': '/kitchen-tools',
+    'Cutting Techniques': '/cutting-techniques',
+    'Cooking Methods': '/cooking-methods',
+    'Meat Cuts': '/meat-cuts',
+    'Kitchen Appliances': '/kitchen-appliances',
+    'Pantry Basics': '/pantry-basics',
+    'Measuring Skills': '/measuring-skills',
+    'Bakery Essentials': '/bakery-essentials'
+  };
+
+  const imageMapping = {
+    'Kitchen Tools': 'KitchenTools.png',
+    'Cutting Techniques': 'CuttingTechniques.png',
+    'Cooking Methods': 'CookingMethods.png',
+    'Meat Cuts': 'MeatCuts.png',
+    'Kitchen Appliances': 'KitchenAppliances.png',
+    'Pantry Basics': 'PantryBasics.png',
+    'Measuring Skills': 'MeasuringSkills.png',
+    'Bakery Essentials': 'BakingEssentials.png'
+  };
+
+  const subtitleMapping = {
+    'Kitchen Tools': 'Essential equipment for every kitchen',
+    'Cutting Techniques': 'Master professional knife skills',
+    'Cooking Methods': 'Fundamental cooking techniques',
+    'Meat Cuts': 'Learn about different meat cuts',
+    'Kitchen Appliances': 'Understanding kitchen appliances',
+    'Pantry Basics': 'Essential ingredients for cooking',
+    'Measuring Skills': 'Precise measuring techniques',
+    'Bakery Essentials': 'Essential baking tools and skills'
+  };
+
+  useEffect(() => {
+    fetchSkillCards();
+  }, []);
+
+  const fetchSkillCards = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get('http://localhost:5000/api/guides', {
+        params: { category: 'basics' }
+      });
+      
+      const guides = response.data.guides || [];
+      const cards = guides.map((guide, index) => {
+        let content = guide.content;
+        try {
+          if (typeof content === 'string' && content.startsWith('{')) {
+            const parsed = JSON.parse(content);
+            content = parsed.features ? parsed.features.join(' ') : parsed.fullDesc || guide.content;
+          }
+        } catch (e) {}
+        return {
+          id: String(index + 1).padStart(2, '0'),
+          image: imageMapping[guide.title] || `${guide.title.replace(/\s/g, '')}.png`,
+          title: guide.title,
+          subtitle: subtitleMapping[guide.title] || 'Learn essential skills',
+          route: routeMapping[guide.title] || `/${guide.title.toLowerCase().replace(/\s/g, '-')}`,
+          features: [typeof content === 'string' ? content.substring(0, 100) : 'Learn essential skills']
+        };
+      });
+      setSkillCards(cards.length === 0 ? getDefaultCards() : cards);
+    } catch (error) {
+      console.error('Error fetching skill cards:', error);
+      setSkillCards(getDefaultCards());
+      setError('Using offline data');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const getDefaultCards = () => [
+    { id: '01', image: 'KitchenTools.png', title: 'Kitchen Tools', route: '/kitchen-tools', subtitle: 'Essential equipment for every kitchen' },
+    { id: '02', image: 'CuttingTechniques.png', title: 'Cutting Techniques', route: '/cutting-techniques', subtitle: 'Master professional knife skills' },
+    { id: '03', image: 'CookingMethods.png', title: 'Cooking Methods', route: '/cooking-methods', subtitle: 'Fundamental cooking techniques' },
+    { id: '04', image: 'MeatCuts.png', title: 'Meat Cuts', route: '/meat-cuts', subtitle: 'Learn about different meat cuts' },
+    { id: '05', image: 'KitchenAppliances.png', title: 'Kitchen Appliances', route: '/kitchen-appliances', subtitle: 'Understanding kitchen appliances' },
+    { id: '06', image: 'PantryBasics.png', title: 'Pantry Basics', route: '/pantry-basics', subtitle: 'Essential ingredients for cooking' },
+    { id: '07', image: 'MeasuringSkills.png', title: 'Measuring Skills', route: '/measuring-skills', subtitle: 'Precise measuring techniques' },
+    { id: '08', image: 'BakingEssentials.png', title: 'Bakery Essentials', route: '/bakery-essentials', subtitle: 'Essential baking tools and skills' }
   ];
 
-  const goTo = (path) => {
-    navigate(path);
-  };
+  const handleCardClick = (route) => navigate(route);
+
+  if (loading) {
+    return (
+      <div className="beginners-page">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading kitchen essentials...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="beginners-page">
-      <div className="fullscreen-kitchen-image">
-        <div className="fullscreen-kitchen-content">
-          <h1>Kitchen Mastery Guide</h1>
-          <p>Essential skills every home cook needs to master</p>
-          <p>Step-by-step tutorials and expert tips</p>
+      <div className="hero-split">
+        <div className="hero-text-side">
+          <span className="hero-eyebrow">Beginner's Corner</span>
+          <h1 className="hero-title">Kitchen Guidance</h1>
+          <div className="hero-divider"></div>
+          <p className="hero-desc">Essential skills every home cook needs to master</p>
         </div>
-      </div>
-      
-      <div className="guide-header">
-        <h1>Kitchen Mastery Guide</h1>
-        <p>Master essential kitchen skills in one place</p>
+
+        <div className="hero-image-side">
+          <img src="beginners.jpg" alt="Kitchen" className="hero-img" />
+          <div className="hero-img-slice" aria-hidden="true"></div>
+          <div className="hero-img-tint" aria-hidden="true"></div>
+        </div>
       </div>
 
       <div className="guide-sections-container">
         <div className="guide-sections-grid">
-          {skills.map((item) => (
-            <div 
-              key={item.id} 
+          {skillCards.map((card, index) => (
+            <div
+              key={card.id}
               className="guide-section-card"
-              onClick={() => goTo(item.link)}
-              style={{ cursor: 'pointer' }}
+              onClick={() => handleCardClick(card.route)}
               role="button"
               tabIndex={0}
-              onKeyPress={(e) => e.key === 'Enter' && goTo(item.link)}
+              style={{ animationDelay: `${index * 0.07}s` }}
+              onKeyPress={(e) => e.key === 'Enter' && handleCardClick(card.route)}
             >
-              <div className="guide-card-header">
-                <div className="guide-card-title">
-                  <h3>{item.name}</h3>
-                </div>
-              </div>
-              
+              <div className="card-glow-ring" aria-hidden="true"></div>
+
               <div className="guide-card-image-container">
-                <img 
-                  src={item.img} 
-                  alt={item.name} 
+                <img
+                  src={card.image}
+                  alt={card.title}
                   className="guide-card-real-image"
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.src = `https://via.placeholder.com/300x200/284a4b/ffffff?text=${encodeURIComponent(card.title)}`;
+                  }}
                 />
+                <div className="card-img-overlay" aria-hidden="true"></div>
               </div>
-              
-              <div className="guide-card-content">
-                <ul className="guide-card-features">
-                  <li>{item.desc}</li>
-                </ul>
+
+              <div className="guide-card-body">
+                <h3 className="guide-card-title">{card.title}</h3>
+                <p className="guide-card-subtitle">{card.subtitle}</p>
+                <div className="guide-card-cta">
+                  <span>Explore</span>
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
               </div>
+
+              <div className="card-bottom-bar" aria-hidden="true"></div>
             </div>
           ))}
         </div>
@@ -122,7 +169,10 @@ const BeginnersPage = () => {
 
       <div className="back-home-container">
         <button className="back-home-btn" onClick={() => navigate('/home')}>
-          ← Back to Home
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Back to Home
         </button>
       </div>
     </div>

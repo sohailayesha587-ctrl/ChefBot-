@@ -1,17 +1,12 @@
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
-
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
-
 dotenv.config({ path: path.join(__dirname, '../.env') });
-
 const User = require('../models/User');
 const BeginnersGuide = require('../models/BeginnersGuide');
-
 const allGuides = [];
-
 const toolsData = [
   {
     name: "Stand Mixer",
