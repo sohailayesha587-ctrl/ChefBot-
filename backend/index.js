@@ -10,6 +10,7 @@ dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
 const beginnersGuideRoutes = require('./routes/BeginnersGuideRoutes');
+const recipeRoutes = require('./routes/recipeRoutes');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/guides', beginnersGuideRoutes);
+app.use('/api/recipes', recipeRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('Server is running');

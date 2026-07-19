@@ -130,10 +130,10 @@ function AppWrapper() {
           <Route path="/MainCourse" element={<MainCourse />} />
           <Route path="/Vege" element={<Vege />} />
           <Route path="/QuickRecipe" element={<QuickRecipe />} />
-          <Route path="/MyRecipeHomepage" element={<MyRecipeHomepage />} />
+          <Route path="/recipes" element={<MyRecipeHomepage />} />
           <Route path="/Lunch" element={<Lunch />} />
           <Route path="/RecipeBreakfast" element={<RecipeBreakfast />} />
-          <Route path="/RecipesDinner" element={<RecipesDinner />} />
+          <Route path="/recipe-dinner" element={<RecipesDinner />} />
           <Route path="/RecipesAppetizers" element={<RecipesAppetizers />} />
           <Route path="/plain-veg" element={<RecipePlainVegetables />} />
           <Route path="/veg-chick" element={<RecipesVegChicken />} />

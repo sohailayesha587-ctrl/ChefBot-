@@ -31,16 +31,7 @@ const BeginnersPage = () => {
     'Bakery Essentials': 'BakingEssentials.png'
   };
 
-  const subtitleMapping = {
-    'Kitchen Tools': 'Essential equipment for every kitchen',
-    'Cutting Techniques': 'Master professional knife skills',
-    'Cooking Methods': 'Fundamental cooking techniques',
-    'Meat Cuts': 'Learn about different meat cuts',
-    'Kitchen Appliances': 'Understanding kitchen appliances',
-    'Pantry Basics': 'Essential ingredients for cooking',
-    'Measuring Skills': 'Precise measuring techniques',
-    'Bakery Essentials': 'Essential baking tools and skills'
-  };
+  
 
   useEffect(() => {
     fetchSkillCards();
@@ -83,14 +74,47 @@ const BeginnersPage = () => {
   };
 
   const getDefaultCards = () => [
-    { id: '01', image: 'KitchenTools.png', title: 'Kitchen Tools', route: '/kitchen-tools', subtitle: 'Essential equipment for every kitchen' },
-    { id: '02', image: 'CuttingTechniques.png', title: 'Cutting Techniques', route: '/cutting-techniques', subtitle: 'Master professional knife skills' },
-    { id: '03', image: 'CookingMethods.png', title: 'Cooking Methods', route: '/cooking-methods', subtitle: 'Fundamental cooking techniques' },
-    { id: '04', image: 'MeatCuts.png', title: 'Meat Cuts', route: '/meat-cuts', subtitle: 'Learn about different meat cuts' },
-    { id: '05', image: 'KitchenAppliances.png', title: 'Kitchen Appliances', route: '/kitchen-appliances', subtitle: 'Understanding kitchen appliances' },
-    { id: '06', image: 'PantryBasics.png', title: 'Pantry Basics', route: '/pantry-basics', subtitle: 'Essential ingredients for cooking' },
-    { id: '07', image: 'MeasuringSkills.png', title: 'Measuring Skills', route: '/measuring-skills', subtitle: 'Precise measuring techniques' },
-    { id: '08', image: 'BakingEssentials.png', title: 'Bakery Essentials', route: '/bakery-essentials', subtitle: 'Essential baking tools and skills' }
+    { id: '01', 
+      image: 'KitchenTools.png', 
+      title: 'Kitchen Tools', 
+      route: '/kitchen-tools',
+      },
+    { id: '02',
+       image: 'CuttingTechniques.png', 
+       title: 'Cutting Techniques', 
+       route: '/cutting-techniques', 
+       },
+    { id: '03',
+      image: 'CookingMethods.png', 
+      title: 'Cooking Methods', 
+      route: '/cooking-methods', 
+     },
+    { id: '04',
+       image: 'MeatCuts.png', 
+       title: 'Meat Cuts', 
+       route: '/meat-cuts', 
+       },
+    { id: '05',
+       image: 'KitchenAppliances.png', 
+       title: 'Kitchen Appliances',
+        route: '/kitchen-appliances', 
+      },
+    { id: '06',
+       image: 'PantryBasics.png', 
+       title: 'Pantry Basics', 
+       route: '/pantry-basics', 
+       },
+    { id: '07',
+       image: 'MeasuringSkills.png',
+        title: 'Measuring Skills', 
+        
+        route: '/measuring-skills',
+       },
+    { id: '08', 
+      image: 'BakingEssentials.png', 
+      title: 'Bakery Essentials',
+       route: '/bakery-essentials', 
+       }
   ];
 
   const handleCardClick = (route) => navigate(route);
@@ -110,7 +134,6 @@ const BeginnersPage = () => {
     <div className="beginners-page">
       <div className="hero-split">
         <div className="hero-text-side">
-          <span className="hero-eyebrow">Beginner's Corner</span>
           <h1 className="hero-title">Kitchen Guidance</h1>
           <div className="hero-divider"></div>
           <p className="hero-desc">Essential skills every home cook needs to master</p>
@@ -167,8 +190,8 @@ const BeginnersPage = () => {
         </div>
       </div>
 
-      <div className="back-home-container">
-        <button className="back-home-btn" onClick={() => navigate('/home')}>
+      <div className="beg-back-home-container">
+        <button className="beg-back-home-btn" onClick={() => navigate('/home')}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
