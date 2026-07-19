@@ -35,40 +35,51 @@ const KitchenToolsPage = () => {
   const API_URL = 'http://localhost:5000/api/guides';
 
   const mergeContent = (guide) => {
-    const content = guide.content || {};
+    let content = {};
+    
+    if (typeof guide.content === 'string' && guide.content.startsWith('{')) {
+      try {
+        content = JSON.parse(guide.content);
+      } catch(e) {
+        content = {};
+      }
+    } else if (typeof guide.content === 'object' && guide.content !== null) {
+      content = guide.content;
+    }
+    
     return {
       id: guide._id,
       image: guide.image || content.image || '',
       name: guide.title || content.name || '',
-      tagline: content.tagline || '',
-      fullDesc: content.fullDesc || '',
-      description: content.description || '',
-      keyUses: content.keyUses || [],
-      bestFor: content.bestFor || '',
-      type: content.type || '',
-      material: content.material || '',
-      price: content.price || '',
-      priceRange: content.priceRange || '',
-      durability: content.durability || '',
-      pros: content.pros || [],
-      cons: content.cons || [],
-      care: content.care || '',
-      size: content.size || '',
-      sizes: content.sizes || '',
-      capacity: content.capacity || '',
-      diameter: content.diameter || '',
-      length: content.length || '',
-      bladeType: content.bladeType || '',
-      utensilType: content.utensilType || '',
-      cookwareType: content.cookwareType || '',
-      crockeryType: content.crockeryType || '',
-      cutleryType: content.cutleryType || '',
-      servingType: content.servingType || '',
-      materialType: content.materialType || '',
+      tagline: content.tagline || guide.tagline || '',
+      fullDesc: content.fullDesc || guide.fullDesc || '',
+      description: content.description || guide.description || '',
+      keyUses: content.keyUses || guide.keyUses || [],
+      bestFor: content.bestFor || guide.bestFor || '',
+      type: content.type || guide.type || '',
+      material: content.material || guide.material || '',
+      price: content.price || guide.price || '',
+      priceRange: content.priceRange || guide.priceRange || '',
+      durability: content.durability || guide.durability || '',
+      pros: content.pros || guide.pros || [],
+      cons: content.cons || guide.cons || [],
+      care: content.care || guide.care || '',
+      size: content.size || guide.size || '',
+      sizes: content.sizes || guide.sizes || '',
+      capacity: content.capacity || guide.capacity || '',
+      diameter: content.diameter || guide.diameter || '',
+      length: content.length || guide.length || '',
+      bladeType: content.bladeType || guide.bladeType || '',
+      utensilType: content.utensilType || guide.utensilType || '',
+      cookwareType: content.cookwareType || guide.cookwareType || '',
+      crockeryType: content.crockeryType || guide.crockeryType || '',
+      cutleryType: content.cutleryType || guide.cutleryType || '',
+      servingType: content.servingType || guide.servingType || '',
+      materialType: content.materialType || guide.materialType || '',
       category: content.category || guide.category || '',
-      items: content.items || [],
-      commonItems: content.commonItems || [],
-      subcategory: content.subcategory || ''
+      items: content.items || guide.items || [],
+      commonItems: content.commonItems || guide.commonItems || [],
+      subcategory: content.subcategory || guide.subcategory || ''
     };
   };
 

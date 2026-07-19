@@ -14,6 +14,14 @@ const CookingMethodsPage = () => {
 
   const API_URL = 'http://localhost:5000/api/guides';
 
+  const safeToString = (value) => {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return String(value);
+    if (typeof value === 'object') return JSON.stringify(value);
+    return String(value);
+  };
+
   useEffect(() => {
     fetchCookingMethods();
   }, []);
@@ -64,7 +72,7 @@ const CookingMethodsPage = () => {
           id: guide._id || index + 1,
           name: guide.title,
           tagline: content.tagline || guide.title,
-          fullDesc: content.fullDesc || content || `Learn about ${guide.title}`,
+          fullDesc: safeToString(content.fullDesc || content || `Learn about ${guide.title}`),
           keyUses: content.keyUses || ['General cooking'],
           previewImg: guide.image || `${guide.title.replace(/\s/g, '')}Method.png`,
           temperature: content.temperature || 'Varies',
@@ -102,8 +110,10 @@ const CookingMethodsPage = () => {
     setSelectedMethod(null);
   };
 
-  const getHeatType = (desc = '') =>
-    desc.toLowerCase().includes('moist') ? 'Moist Heat' : 'Dry Heat';
+  const getHeatType = (desc = '') => {
+    const descStr = safeToString(desc);
+    return descStr.toLowerCase().includes('moist') ? 'Moist Heat' : 'Dry Heat';
+  };
 
   if (loading) {
     return (
@@ -188,7 +198,7 @@ const CookingMethodsPage = () => {
                     <h3 className="cmp-card-title">{method.name}</h3>
                     <p className="cmp-card-description">{method.tagline}</p>
                     <div className="cmp-card-heat-type">
-                      <span className={`cmp-heat-badge ${method.fullDesc?.toLowerCase().includes('moist') ? 'moist-heat' : 'dry-heat'}`}>
+                      <span className={`cmp-heat-badge ${safeToString(method.fullDesc).toLowerCase().includes('moist') ? 'moist-heat' : 'dry-heat'}`}>
                         {getHeatType(method.fullDesc)}
                       </span>
                     </div>
@@ -269,7 +279,7 @@ const CookingMethodsPage = () => {
                         </div>
                       </div>
 
-                      <div className={`cmp-heat-pill ${selectedMethod.fullDesc?.toLowerCase().includes('moist') ? 'moist-heat' : 'dry-heat'}`}>
+                      <div className={`cmp-heat-pill ${safeToString(selectedMethod.fullDesc).toLowerCase().includes('moist') ? 'moist-heat' : 'dry-heat'}`}>
                         {getHeatType(selectedMethod.fullDesc)}
                       </div>
                     </div>

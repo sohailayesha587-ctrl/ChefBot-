@@ -49,18 +49,21 @@ const MeatProcessingPage = () => {
       
       guides.forEach(guide => {
         let content = {};
-        if (typeof guide.content === 'string') {
-          try {
-            content = JSON.parse(guide.content);
-          } catch(e) {
-            content = {};
+        
+        if (guide.content) {
+          if (typeof guide.content === 'string') {
+            try {
+              content = JSON.parse(guide.content);
+            } catch(e) {
+              content = {};
+            }
+          } else {
+            content = guide.content;
           }
-        } else {
-          content = guide.content || {};
         }
         
-        const meatType = content.meatType || '';
-        const type = content.type || '';
+        const meatType = content.meatType || 'beef';
+        const type = content.type || 'general';
         
         const item = {
           id: guide._id,
