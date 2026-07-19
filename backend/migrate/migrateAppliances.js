@@ -1,9 +1,10 @@
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 const mongoose = require('mongoose');
-const Appliance = require('../models/Appliance');   
+const BeginnersGuide = require('../models/BeginnersGuide');
+const User = require('../models/User');
 require('dotenv').config({ path: '../.env' });
-const User = require('../models/User');  
+
 const appliancesData = [
 {
   id: 'refrigerator',
@@ -18092,34 +18093,89 @@ const appliancesData = [
   }
 ]; 
 
+function convertToBeginnersGuide(data) {
+  const guides = [];
+  
+  data.forEach(appliance => {
+    appliance.companies.forEach(company => {
+      company.models.forEach(model => {
+        const guide = {
+          title: `${company.name} ${model.name}`,
+          name: model.name,
+          category: 'kitchen-appliances',
+          mainCategory: appliance.id,
+          subCategory: model.type,
+          filterTags: [appliance.id, model.type, company.name.toLowerCase(), ...(model.features || [])],
+          tags: [appliance.id, model.type, company.name.toLowerCase()],
+          image: model.image || '',
+          fullDesc: model.usageGuide || model.description || '',
+          description: model.bestFor || '',
+          tagline: `${company.name} ${model.type}`,
+          price: model.price || '',
+          priceRange: model.priceRange || '',
+          capacity: model.capacity || '',
+          brand: company.name,
+          warranty: model.warranty || '',
+          features: model.features || [],
+          specifications: model.specifications || {},
+          usageGuide: model.usageGuide || '',
+          maintenance: model.maintenance || '',
+          installationTips: model.installationTips || '',
+          energySavingTips: model.energySavingTips || '',
+          safetyTips: model.safetyTips || '',
+          troubleshooting: model.troubleshooting || [],
+          bestFor: model.bestFor || '',
+          estimatedConsumption: model.estimatedConsumption || '',
+          estimatedPowerConsumption: model.estimatedPowerConsumption || '',
+          estimatedGasConsumption: model.estimatedGasConsumption || '',
+          cookingTips: model.cookingTips || '',
+          washPrograms: model.washPrograms || '',
+          placeSettings: model.placeSettings || '',
+          coolingCapacity: model.coolingCapacity || '',
+          dryCapacity: model.dryCapacity || '',
+          hotWaterTemp: model.hotWaterTemp || '',
+          coldWaterTemp: model.coldWaterTemp || '',
+          burners: model.burners || '',
+          status: 'published'
+        };
+        guides.push(guide);
+      });
+    });
+  });
+  
+  return guides;
+}
+
 async function migrate() {
   try {
-    console.log('🔌 Connecting to MongoDB...');
-const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI || process.env.MONGOURI;
-if (!mongoURI) throw new Error('MongoDB URI not found');
-await mongoose.connect(mongoURI);   
- console.log('✅ Connected to MongoDB!');
+    console.log('Connecting to MongoDB...');
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI || process.env.MONGOURI;
+    if (!mongoURI) throw new Error('MongoDB URI not found');
+    
+    await mongoose.connect(mongoURI);
+    console.log('Connected to MongoDB');
+
     if (!appliancesData || appliancesData.length === 0) {
-      console.error('❌ No data found! Please paste your appliancesData array in this file.');
-      process.exit(1);
+      throw new Error('No data found in appliancesData');
     }
 
-const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
-   
-const result = await Appliance.insertMany(appliancesData, { ordered: false });
-    console.log(`✅ Migration successful: ${result.length} appliances inserted.`);
+    const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
+    if (!admin) throw new Error('Admin user not found');
 
+    const guideData = convertToBeginnersGuide(appliancesData);
+    guideData.forEach(g => g.createdBy = admin._id);
+
+    const result = await BeginnersGuide.insertMany(guideData, { ordered: false });
+    console.log(`${result.length} guides inserted successfully`);
     process.exit(0);
   } catch (err) {
     if (err.code === 11000) {
-      console.log('⚠️ Some appliances already exist. Skipping duplicates.');
-      console.log('✅ Migration completed with no critical errors.');
+      console.log('Some guides already exist. Skipping duplicates.');
       process.exit(0);
-    } else {
-      console.error('❌ Migration failed:', err);
-      process.exit(1);
     }
+    console.error('Migration failed:', err.message);
+    process.exit(1);
   }
-};
+}
 
 migrate();

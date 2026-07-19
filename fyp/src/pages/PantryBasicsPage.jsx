@@ -23,7 +23,17 @@ const PantryBasicsPage = () => {
   const API_URL = 'http://localhost:5000/api/guides';
 
   const parseGuideToItem = (guide) => {
-    const content = guide.content || {};
+    let content = {};
+    
+    if (typeof guide.content === 'string') {
+      try {
+        content = JSON.parse(guide.content);
+      } catch (e) {
+        content = {};
+      }
+    } else if (typeof guide.content === 'object' && guide.content !== null) {
+      content = guide.content;
+    }
     
     return {
       id: guide._id,

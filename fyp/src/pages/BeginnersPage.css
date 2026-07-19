@@ -13,7 +13,7 @@
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
-  padding-top: 120px;
+  margin-top: 100px;
 }
 
 .loading-container {
@@ -243,16 +243,16 @@
 }
 
 .guide-sections-container {
-  max-width: 1160px;
-  margin: 0 auto 3rem;
+  width: 1000px;
+  margin: 0 auto 4rem;
   padding: 0 1.5rem;
 }
 
 .guide-sections-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.6rem;
-  margin-top: 36px;
+  gap: 1.8rem;
+  margin-top: 40px;
 }
 
 .guide-section-card {
@@ -305,7 +305,7 @@
 
 .guide-card-image-container {
   width: 100%;
-  height: 135px;
+  height: 130px;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
@@ -338,7 +338,7 @@
 }
 
 .guide-card-body {
-  padding: 1.1rem 1.15rem 1.3rem;
+  padding: 0.7rem 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -347,7 +347,7 @@
 
 .guide-card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
+  font-size: 14px;
   font-weight: 700;
   color: #1d3a3b;
   margin-bottom: 5px;
@@ -360,7 +360,7 @@
 }
 
 .guide-card-subtitle {
-  font-size: 0.78rem;
+  font-size: 12px;
   color: #6b9a9b;
   font-weight: 400;
   line-height: 1.5;
@@ -412,12 +412,12 @@
   transform: scaleX(1);
 }
 
-.back-home-container {
+.beg-back-home-container {
   text-align: center;
   margin: 20px 0 60px;
 }
 
-.back-home-btn {
+.beg-back-home-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -433,17 +433,17 @@
   transition: background 0.25s, color 0.25s, transform 0.2s;
 }
 
-.back-home-btn:hover {
+.beg-back-home-btn:hover {
   background: #284a4b;
   color: #ffffff;
   transform: translateX(-4px);
 }
 
-.back-home-btn svg {
+.beg-back-home-btn svg {
   transition: transform 0.22s;
 }
 
-.back-home-btn:hover svg {
+.beg-back-home-btn:hover svg {
   transform: translateX(-3px);
 }
 

@@ -128,32 +128,7 @@ function AppWrapper() {
           <Route path="/cheat-meal" element={<CheatMeal />} />
           <Route path="/desserts" element={<desserts />} />
           <Route path="/soups" element={<soups />} />
-          <Route path="/beverages" element={<beverages />} />
-          <Route path="/baking" element={<Baking />} />
-          <Route path="/regional" element={<Regional />} />
-          <Route path="/salads" element={<Salads />} />
-          <Route path="/snack" element={<Snack />} />
-          <Route path="/student-recipe" element={<StudentRecipe />} />
-          <Route path="/vege" element={<Vege />} />
-          <Route path="/quick-recipe" element={<QuickRecipe />} />
-          <Route path="/lunch" element={<Lunch />} />
-          <Route path="/breakfast" element={<RecipeBreakfast />} />
-          <Route path="/dinner" element={<RecipesDinner />} />
-          <Route path="/appetizers" element={<RecipesAppetizers />} />
-          <Route path="/plain-veg" element={<RecipePlainVegetables />} />
-          <Route path="/veg-chick" element={<RecipesVegChicken />} />
-          <Route path="/veg-mutton" element={<RecipesVegMutton />} />
-          <Route path="/plain-dal" element={<RecipesPlainDal />} />
-          <Route path="/dal-mutton" element={<RecipesDalMutton />} />
-          <Route path="/egg-dishes" element={<RecipesEggDishes />} />
-          <Route path="/fish-dishes" element={<RecipesFish />} />
-          <Route path="/chicken" element={<RecipesPureChicken />} />
-          <Route path="/mutton" element={<RecipesPureMutton />} />
-          <Route path="/qeema" element={<RecipesQeema />} />
-          <Route path="/rice" element={<RecipesRice />} />
-          <Route path="/gravy" element={<RecipesHeavyGravy />} />
-          <Route path="/bbq" element={<RecipesBBQ />} />
-          <Route path="/breads" element={<RecipesBread />} />
+         
         </Routes>
 
         <Footer />

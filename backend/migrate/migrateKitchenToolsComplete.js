@@ -17,7 +17,7 @@ const addGuide = (item, mainCategory, subCategory, filterTags = []) => {
     subCategory: subCategory,
     filterTags: filterTags,
     image: item.image || '',
-    content: JSON.stringify({
+    content: {
       id: item.id,
       name: item.name,
       tagline: item.tagline || '',
@@ -41,7 +41,7 @@ const addGuide = (item, mainCategory, subCategory, filterTags = []) => {
       servingType: item.servingType || '',
       capacity: item.capacity || '',
       materialType: item.materialType || ''
-    })
+    }
   });
 };
 const knivesData = [
