@@ -26,7 +26,6 @@ import ShoppingList from "./pages/ShoppingList";
 import MealFeature from "./pages/MealFeature";
 import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
-import RecipeHomepage from './pages/RecipeHomepage';
 import desserts from './pages/desserts';
 import soups from './pages/soups';
 import CheatMeal from './pages/CheatMeal';
@@ -38,14 +37,25 @@ import Snack from './pages/Snack';
 import StudentRecipe from './pages/StudentRecipe';
 import QuickRecipe from './pages/QuickRecipe';
 import Vege from './pages/Vege';
-import MainCourse from './pages/MainCourse';
+import RecipesHeavyGravy from './pages/RecipesHeavyGravy';
+import RecipesFish from './pages/RecipesFish';
 import MyRecipeHomepage from './pages/MyRecipeHomePage';
 import Lunch from './pages/Lunch';
 import RecipeBreakfast from './pages/RecipeBreakfast';
+import RecipesBread from './pages/RecipesBread';
+import RecipesEggDishes from './pages/RecipesEggDishes';
+import RecipesBBQ from './pages/RecipesBBQ';
+import RecipesDalMutton from './pages/RecipesDalMutton';
 import RecipesDinner from './pages/RecipesDinner';
 import RecipesAppetizers from './pages/RecipesAppetizers';
+import RecipesPlainDal from './pages/RecipesPlainDal';
+import RecipesPureChicken from './pages/RecipesPureChicken';
 import RecipePlainVegetables from './pages/RecipePlainVegetables';
+import RecipesPureMutton from './pages/RecipesPureMutton';
+import RecipesQeema from './pages/RecipesQeema';
 import RecipesVegChicken from './pages/RecipesVegChicken';
+import RecipesVegMutton from './pages/RecipesVegMutton';
+import RecipesRice from './pages/RecipesRice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -117,26 +127,40 @@ function AppWrapper() {
           <Route path="/smart-shopping" element={<ShoppingList />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/recipe" element={<RecipeHomepage />} />
-          <Route path="/CheatMeal" element={<CheatMeal />} />
-          <Route path="/desserts" element={<desserts />} />
-          <Route path="/soups" element={<soups />} />
-          <Route path="/beverages" element={<beverages />} />
-          <Route path="/Baking" element={<Baking />} />
-          <Route path="/Regional" element={<Regional />} />
-          <Route path="/Salads" element={<Salads />} />
-          <Route path="/Snack" element={<Snack />} />
-          <Route path="/StudentRecipe" element={<StudentRecipe />} />
-          <Route path="/MainCourse" element={<MainCourse />} />
-          <Route path="/Vege" element={<Vege />} />
-          <Route path="/QuickRecipe" element={<QuickRecipe />} />
           <Route path="/MyRecipeHomepage" element={<MyRecipeHomepage />} />
-          <Route path="/Lunch" element={<Lunch />} />
-          <Route path="/RecipeBreakfast" element={<RecipeBreakfast />} />
-          <Route path="/RecipesDinner" element={<RecipesDinner />} />
-          <Route path="/RecipesAppetizers" element={<RecipesAppetizers />} />
-          <Route path="/plain-veg" element={<RecipePlainVegetables />} />
-          <Route path="/veg-chick" element={<RecipesVegChicken />} />
+        <Route path="/soups" element={<RecipeSoupPage />} />
+        <Route path="/Beverages" element={<RecipeBeveragesPage />} />
+        <Route path="/desserts" element={<RecipeDessertsPage />} />
+        <Route path="/baking" element={<RecipeBakingPage />} />
+        <Route path="/Vege" element={<RecipeVegetablePage />} />
+        <Route path="/QuickRecipe" element={<RecipeQuickPage />} />
+        <Route path="/StudentRecipe" element={<RecipeStudentPage />} />
+        <Route path="/Regional" element={<RecipeRegionalPage />} />
+        <Route path="/Salads" element={<RecipeSaladsPage />} />
+        <Route path="/Snack" element={<RecipeSnacksPage />} />
+        <Route path="/lunch" element={<Lunch />} />
+        <Route path="/recipe-lunch" element={<RecipesLunch />} />
+        <Route path="/BreakFast" element={<RecipeBreakFast />} />
+        <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+        <Route path="/veg-chick" element={<RecipesVegChicken />} />
+        <Route path="/veg-mutton" element={<RecipesVegMutton />} />
+        <Route path="/plain-dal" element={<RecipesPlainDal />} />
+        <Route path="/dal-chick" element={<RecipesDalChicken />} />
+        <Route path="/dal-mutton" element={<RecipesDalMutton />} />
+        <Route path="/egg-dishes" element={<RecipesEggDishes />} />
+        <Route path="/fish-dishes" element={<RecipesFish />} />
+        <Route path="/chicken" element={<RecipesPureChicken />} />
+        <Route path="/mutton" element={<RecipesPureMutton />} />
+        <Route path="/qeema" element={<RecipesQeema />} />
+        <Route path="/rice" element={<RecipesRice />} />
+        <Route path="/gravy" element={<RecipesHeavyGravy />} />
+        <Route path="/BBQ" element={<RecipesBBQ />} />
+        <Route path="/dinner" element={<Dinner />} />
+        <Route path="/recipe-dinner" element={<RecipesDinner />} />
+        <Route path="/breads" element={<RecipesBread />} />
+        <Route path="/appetizers" element={<RecipesAppetizers />} />
+        <Route path="/dinner-light" element={<RecipesLightDinner />} />
+        <Route path="/cheat-meal" element={<RecipeCheatMeal />} />
         </Routes>
 
         <Footer />

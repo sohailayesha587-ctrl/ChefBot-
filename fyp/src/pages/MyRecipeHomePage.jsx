@@ -9,24 +9,102 @@ const MyRecipeHomepage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const recipeTypes = [
-    { id: 1, title: 'BREAKFAST', path: '/BreakFast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAAkO6PiyzExlXgDE-kZFg0VQlAt1sOqclhA&s' },
-    { id: 2, title: 'LUNCH', path: '/recipe-lunch', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-    { id: 3, title: 'DINNER', path: '/recipe-dinner', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-    { id: 4, title: 'SOUPS', path: '/soups', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' },
-    { id: 5, title: 'APPETIZERS', path: '/appetizers', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 6, title: 'SNACKS', path: '/Snack', image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 7, title: 'DESSERTS', path: '/desserts', image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 8, title: 'BAKING', path: '/Baking', image: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 9, title: 'BEVERAGES', path: '/Beverage', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 10, title: 'SALADS', path: '/Salads', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 11, title: 'REGIONAL', path: '/Regional', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
-    { id: 12, title: 'CHEAT MEAL', path: '/cheat-meal', image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' }
+    { 
+      id: 1, 
+      title: 'BREAKFAST', 
+      path: '/BreakFast', 
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAAkO6PiyzExlXgDE-kZFg0VQlAt1sOqclhA&s' 
+    },
+    { 
+      id: 2, 
+      title: 'LUNCH', 
+      path: '/recipe-lunch', 
+      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+    },
+    { 
+      id: 3, 
+      title: 'DINNER', 
+      path: '/recipe-dinner', 
+      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+    },
+    { 
+      id: 4, 
+      title: 'SOUPS', 
+      path: '/soups', 
+      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+    },
+    { 
+      id: 5, 
+      title: 'APPETIZERS', 
+      path: '/appetizers', 
+      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 6, 
+      title: 'SNACKS', 
+      path: '/Snack', 
+      image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 7, 
+      title: 'DESSERTS', 
+      path: '/desserts', 
+      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 8, 
+      title: 'BAKING', 
+      path: '/Baking', 
+      image: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 9, 
+      title: 'BEVERAGES', 
+      path: '/Beverage', 
+      image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 10, 
+      title: 'SALADS', 
+      path: '/Salads', 
+      image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 11, 
+      title: 'REGIONAL', 
+      path: '/Regional', 
+      image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+    },
+    { 
+      id: 12, 
+      title: 'CHEAT MEAL', 
+      path: '/cheat-meal', 
+      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+    }
   ];
 
   const budgetCategories = [
-    { id: 2, title: 'STUDENT RECIPES', path: '/StudentRecipe', image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', features: ['Easy student meals', 'Dorm room cooking', 'Quick recipes', 'Minimal equipment'] },
-    { id: 3, title: 'QUICK and EASY', path: '/QuickRecipe', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', features: ['15-min meals', 'Simple recipes', 'Minimal cleanup', 'Busy weeknights'] },
-    { id: 4, title: 'VEGETARIAN', path: '/Vege', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', features: ['Meat-free meals', 'Plant-based protein', 'Healthy options', 'Vegetarian classics'] }
+    { 
+      id: 2, 
+      title: 'STUDENT RECIPES', 
+      path: '/StudentRecipe', 
+      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      features: ['Easy student meals', 'Dorm room cooking', 'Quick recipes', 'Minimal equipment'] 
+    },
+    { 
+      id: 3, 
+      title: 'QUICK and EASY', 
+      path: '/QuickRecipe', 
+      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      features: ['15-min meals', 'Simple recipes', 'Minimal cleanup', 'Busy weeknights'] 
+    },
+    { 
+      id: 4, 
+      title: 'VEGETARIAN', 
+      path: '/Vege', 
+      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      features: ['Meat-free meals', 'Plant-based protein', 'Healthy options', 'Vegetarian classics'] 
+    }
   ];
 
   const heroImages = [
