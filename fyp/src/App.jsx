@@ -62,7 +62,6 @@ import './App.css';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import VerifyOTPPage from './pages/VerifyOTPPage';
 
-
 function AppWrapper() {
   const location = useLocation();
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
@@ -105,10 +104,8 @@ function AppWrapper() {
           <Route path="/" element={<PublicHome />} />
           <Route path="/login-page" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                    <Route path="/reset-password" element={<ResetPasswordPage />} />
-                                        <Route path="/verify-otp" element={<VerifyOTPPage />} />
-
-
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/verify-otp" element={<VerifyOTPPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/guidance" element={<BeginnersPage />} />
@@ -127,40 +124,36 @@ function AppWrapper() {
           <Route path="/smart-shopping" element={<ShoppingList />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/MyRecipeHomepage" element={<MyRecipeHomepage />} />
-        <Route path="/soups" element={<RecipeSoupPage />} />
-        <Route path="/Beverages" element={<RecipeBeveragesPage />} />
-        <Route path="/desserts" element={<RecipeDessertsPage />} />
-        <Route path="/baking" element={<RecipeBakingPage />} />
-        <Route path="/Vege" element={<RecipeVegetablePage />} />
-        <Route path="/QuickRecipe" element={<RecipeQuickPage />} />
-        <Route path="/StudentRecipe" element={<RecipeStudentPage />} />
-        <Route path="/Regional" element={<RecipeRegionalPage />} />
-        <Route path="/Salads" element={<RecipeSaladsPage />} />
-        <Route path="/Snack" element={<RecipeSnacksPage />} />
-        <Route path="/lunch" element={<Lunch />} />
-        <Route path="/recipe-lunch" element={<RecipesLunch />} />
-        <Route path="/BreakFast" element={<RecipeBreakFast />} />
-        <Route path="/plain-veg" element={<RecipePlainVegetables />} />
-        <Route path="/veg-chick" element={<RecipesVegChicken />} />
-        <Route path="/veg-mutton" element={<RecipesVegMutton />} />
-        <Route path="/plain-dal" element={<RecipesPlainDal />} />
-        <Route path="/dal-chick" element={<RecipesDalChicken />} />
-        <Route path="/dal-mutton" element={<RecipesDalMutton />} />
-        <Route path="/egg-dishes" element={<RecipesEggDishes />} />
-        <Route path="/fish-dishes" element={<RecipesFish />} />
-        <Route path="/chicken" element={<RecipesPureChicken />} />
-        <Route path="/mutton" element={<RecipesPureMutton />} />
-        <Route path="/qeema" element={<RecipesQeema />} />
-        <Route path="/rice" element={<RecipesRice />} />
-        <Route path="/gravy" element={<RecipesHeavyGravy />} />
-        <Route path="/BBQ" element={<RecipesBBQ />} />
-        <Route path="/dinner" element={<Dinner />} />
-        <Route path="/recipe-dinner" element={<RecipesDinner />} />
-        <Route path="/breads" element={<RecipesBread />} />
-        <Route path="/appetizers" element={<RecipesAppetizers />} />
-        <Route path="/dinner-light" element={<RecipesLightDinner />} />
-        <Route path="/cheat-meal" element={<RecipeCheatMeal />} />
+          <Route path="/my-recipe" element={<MyRecipeHomepage />} />
+          <Route path="/cheat-meal" element={<CheatMeal />} />
+          <Route path="/desserts" element={<desserts />} />
+          <Route path="/soups" element={<soups />} />
+          <Route path="/beverages" element={<beverages />} />
+          <Route path="/baking" element={<Baking />} />
+          <Route path="/regional" element={<Regional />} />
+          <Route path="/salads" element={<Salads />} />
+          <Route path="/snack" element={<Snack />} />
+          <Route path="/student-recipe" element={<StudentRecipe />} />
+          <Route path="/vege" element={<Vege />} />
+          <Route path="/quick-recipe" element={<QuickRecipe />} />
+          <Route path="/lunch" element={<Lunch />} />
+          <Route path="/breakfast" element={<RecipeBreakfast />} />
+          <Route path="/dinner" element={<RecipesDinner />} />
+          <Route path="/appetizers" element={<RecipesAppetizers />} />
+          <Route path="/plain-veg" element={<RecipePlainVegetables />} />
+          <Route path="/veg-chick" element={<RecipesVegChicken />} />
+          <Route path="/veg-mutton" element={<RecipesVegMutton />} />
+          <Route path="/plain-dal" element={<RecipesPlainDal />} />
+          <Route path="/dal-mutton" element={<RecipesDalMutton />} />
+          <Route path="/egg-dishes" element={<RecipesEggDishes />} />
+          <Route path="/fish-dishes" element={<RecipesFish />} />
+          <Route path="/chicken" element={<RecipesPureChicken />} />
+          <Route path="/mutton" element={<RecipesPureMutton />} />
+          <Route path="/qeema" element={<RecipesQeema />} />
+          <Route path="/rice" element={<RecipesRice />} />
+          <Route path="/gravy" element={<RecipesHeavyGravy />} />
+          <Route path="/bbq" element={<RecipesBBQ />} />
+          <Route path="/breads" element={<RecipesBread />} />
         </Routes>
 
         <Footer />
