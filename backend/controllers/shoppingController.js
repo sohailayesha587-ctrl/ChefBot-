@@ -1,4 +1,4 @@
-const Shopping = require('../models/Shopping');
+const Shopping = require('../models/ShoppingList');
 
 const getShoppingItems = async (req, res) => {
   try {

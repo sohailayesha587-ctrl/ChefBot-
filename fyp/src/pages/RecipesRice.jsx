@@ -4,18 +4,109 @@ import './RecipesRice.css';
 
 const RecipesRice = () => {
   const navigate = useNavigate();
+  const [riceRecipes, setRiceRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechSynthesisRef = useRef(null);
+  const speechRef = useRef(null);
 
-  const riceRecipes = [
-    // All Rice Recipes (40 recipes) with detailed instructions
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5000/api/recipes/subCategory/rice?limit=200')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch rice recipes');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setRiceRecipes(data.recipes || []);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching rice recipes:', error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
 
-  const recipesList = riceRecipes;
+  useEffect(() => {
+    return () => {
+      if (speechRef.current) {
+        window.speechSynthesis.cancel();
+        speechRef.current = null;
+      }
+    };
+  }, []);
+
+  const speakInstructions = (steps, stepIndex = 0) => {
+    if (!steps || steps.length === 0) return;
+
+    if ('speechSynthesis' in window) {
+      if (speechRef.current) {
+        window.speechSynthesis.cancel();
+      }
+
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      utterance.lang = 'en-US';
+
+      setCurrentStep(stepIndex + 1);
+      setProgress(((stepIndex + 1) / steps.length) * 100);
+      setIsPlaying(true);
+
+      utterance.onend = () => {
+        setIsPlaying(false);
+        speechRef.current = null;
+
+        if (stepIndex + 1 < steps.length) {
+          setTimeout(() => {
+            speakInstructions(steps, stepIndex + 1);
+          }, 1500);
+        }
+      };
+
+      utterance.onerror = () => {
+        setIsPlaying(false);
+        speechRef.current = null;
+      };
+
+      speechRef.current = utterance;
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Your browser does not support text-to-speech.');
+    }
+  };
+
+  const stopSpeaking = () => {
+    if ('speechSynthesis' in window && speechRef.current) {
+      window.speechSynthesis.cancel();
+      setIsPlaying(false);
+      setCurrentStep(0);
+      setProgress(0);
+      speechRef.current = null;
+    }
+  };
+
+  const speakNextStep = () => {
+    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+      stopSpeaking();
+      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+    }
+  };
+
+  const speakPreviousStep = () => {
+    if (selectedRecipe && currentStep > 1) {
+      stopSpeaking();
+      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+    }
+  };
 
   const handleRecipeClick = (recipe) => {
     setSelectedRecipe(recipe);
@@ -30,104 +121,39 @@ const RecipesRice = () => {
   };
 
   const handleCloseModal = () => {
+    stopSpeaking();
     setShowDetailPanel(false);
     setSelectedRecipe(null);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
     
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
     }
   };
 
-  const speakStep = (stepText) => {
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
+  if (loading) {
+    return (
+      <div className="rice-page">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading delicious rice recipes...</p>
+        </div>
+      </div>
+    );
+  }
 
-    const utterance = new SpeechSynthesisUtterance(stepText);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
-    
-    utterance.onend = () => {
-      if (isPlaying && currentStep < selectedRecipe.steps.length - 1) {
-        setCurrentStep(prev => prev + 1);
-      } else if (isPlaying && currentStep === selectedRecipe.steps.length - 1) {
-        setIsPlaying(false);
-        setCurrentStep(0);
-      }
-    };
-
-    utterance.onerror = () => {
-      console.error('Speech synthesis error');
-      setIsPlaying(false);
-    };
-
-    window.speechSynthesis.speak(utterance);
-    speechSynthesisRef.current = utterance;
-  };
-
-  const handlePlayPause = () => {
-    if (!selectedRecipe) return;
-
-    if (isPlaying) {
-      window.speechSynthesis.cancel();
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-      speakStep(selectedRecipe.steps[currentStep]);
-    }
-  };
-
-  const handleNextStep = () => {
-    if (!selectedRecipe) return;
-    
-    if (currentStep < selectedRecipe.steps.length - 1) {
-      window.speechSynthesis.cancel();
-      setCurrentStep(prev => prev + 1);
-      if (isPlaying) {
-        speakStep(selectedRecipe.steps[currentStep + 1]);
-      }
-    }
-  };
-
-  const handlePrevStep = () => {
-    if (!selectedRecipe) return;
-    
-    if (currentStep > 0) {
-      window.speechSynthesis.cancel();
-      setCurrentStep(prev => prev - 1);
-      if (isPlaying) {
-        speakStep(selectedRecipe.steps[currentStep - 1]);
-      }
-    }
-  };
-
-  const handleRestart = () => {
-    if (!selectedRecipe) return;
-    
-    window.speechSynthesis.cancel();
-    setCurrentStep(0);
-    if (isPlaying) {
-      speakStep(selectedRecipe.steps[0]);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedRecipe) {
-      setProgress(((currentStep + 1) / selectedRecipe.steps.length) * 100);
-    }
-  }, [currentStep, selectedRecipe]);
-
-  useEffect(() => {
-    return () => {
-      if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, []);
+  if (error) {
+    return (
+      <div className="rice-page">
+        <div className="error-container">
+          <p>Error loading recipes: {error}</p>
+          <button onClick={() => window.location.reload()}>Try Again</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rice-page">
@@ -143,9 +169,9 @@ const RecipesRice = () => {
       <main className="rice-main">
         <div className="rice-grid-section">
           <div className="rice-grid">
-            {recipesList.map((recipe) => (
+            {riceRecipes.map((recipe) => (
               <div
-                key={recipe.id}
+                key={recipe._id}
                 className="rice-card"
                 onClick={() => handleRecipeClick(recipe)}
               >
@@ -154,7 +180,7 @@ const RecipesRice = () => {
                   style={{ backgroundImage: `url(${recipe.image})` }}
                 />
                 <div className="rice-card-content">
-                  <h3 className="rice-card-title">{recipe.name}</h3>
+                  <h3 className="rice-card-title">{recipe.title}</h3>
                   <p className="rice-card-description">{recipe.tagline}</p>
                 </div>
               </div>
@@ -165,7 +191,7 @@ const RecipesRice = () => {
 
       <div className="back-button-container">
         <button className="back-home-btn" onClick={() => navigate(-1)}>
-          <span>←</span> Back to Lunch Categories
+          Back to Lunch Categories
         </button>
       </div>
 
@@ -180,11 +206,13 @@ const RecipesRice = () => {
               backgroundPosition: 'center'
             }}
           >
-            <button className="rice-modal-close" onClick={handleCloseModal}>✕</button>
+            <button className="rice-modal-close" onClick={handleCloseModal}>
+              ×
+            </button>
             
             <div className="rice-modal-header">
               <div className="rice-modal-title">
-                <h2>{selectedRecipe.name}</h2>
+                <h2>{selectedRecipe.title}</h2>
               </div>
             </div>
 
@@ -192,7 +220,7 @@ const RecipesRice = () => {
               <div className="rice-modal-ingredients">
                 <h3>Ingredients</h3>
                 <div className="rice-ingredients-list">
-                  {selectedRecipe.ingredients.map((ingredient, index) => (
+                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
                     <div key={index} className="rice-ingredient-item">
                       <span className="rice-ingredient-bullet">•</span>
                       <span className="rice-ingredient-text">{ingredient}</span>
@@ -204,7 +232,7 @@ const RecipesRice = () => {
               <div className="rice-modal-steps">
                 <h3>Steps to Make</h3>
                 <div className="rice-steps-list">
-                  {selectedRecipe.steps.map((step, index) => (
+                  {selectedRecipe.stepsRaw?.map((step, index) => (
                     <div key={index} className="rice-step-item">
                       <span className="rice-step-number">{index + 1}.</span>
                       <span className="rice-step-text">{step}</span>
@@ -215,58 +243,54 @@ const RecipesRice = () => {
 
               <div className="rice-modal-voice-container">
                 <div className="voice-panel">
-                  <h3>
-                    <span></span> Voice Instructions
-                  </h3>
+                  <h3>Voice Instructions</h3>
                   
                   <div className="voice-progress">
                     <div className="progress-bar">
                       <div className="progress-fill" style={{ width: `${progress}%` }}></div>
                     </div>
                     <div className="progress-info">
-                      <span>Step {currentStep + 1} of {selectedRecipe.steps.length}</span>
+                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
                       <span>{Math.round(progress)}%</span>
                     </div>
                   </div>
 
                   <div className="current-step-display">
                     <p>
-                      <strong>Step {currentStep + 1}:</strong> {selectedRecipe.steps[currentStep]}
+                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
                     </p>
                   </div>
 
                   <button
                     className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={handlePlayPause}
+                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
                   >
-                    {isPlaying ? (
-                      <> Pause Reading</>
-                    ) : (
-                      <> Play Reading</>
-                    )}
+                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
                   </button>
 
                   <div className="step-controls">
                     <button
                       className="step-btn"
-                      onClick={handlePrevStep}
-                      disabled={currentStep === 0}
+                      onClick={speakPreviousStep}
+                      disabled={currentStep <= 1}
                     >
                       Previous
                     </button>
                     <button
                       className="step-btn"
-                      onClick={handleRestart}
-                      title="Restart from beginning"
+                      onClick={() => {
+                        stopSpeaking();
+                        speakInstructions(selectedRecipe.stepsRaw, 0);
+                      }}
                     >
                       Restart
                     </button>
                     <button
                       className="step-btn"
-                      onClick={handleNextStep}
-                      disabled={currentStep === selectedRecipe.steps.length - 1}
+                      onClick={speakNextStep}
+                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
                     >
-                      Next 
+                      Next
                     </button>
                   </div>
 
