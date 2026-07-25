@@ -9,8 +9,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
+
 const beginnersGuideRoutes = require('./routes/BeginnersGuideRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
+const shoppingRoutes = require('./routes/shoppingRoutes');
+const pantryRoutes = require('./routes/pantryRoutes');
+const pantryShoppingRoutes = require('./routes/pantryShoppingRoutes');
 
 const app = express();
 
@@ -20,8 +24,9 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/guides', beginnersGuideRoutes);
 app.use('/api/recipes', recipeRoutes);
-
-
+app.use('/api/shopping', shoppingRoutes);
+app.use('/api/pantry', pantryRoutes);
+app.use('/api/pantry-shopping', pantryShoppingRoutes);
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
