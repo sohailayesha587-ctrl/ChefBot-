@@ -4,86 +4,89 @@ import './RecipesAppetizers.css';
 
 const RecipesAppetizers = () => {
   const navigate = useNavigate();
-  const [appetizers, setAppetizers] = useState([]);
+  const [appetizerRecipes, setAppetizerRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedAppetizer, setSelectedAppetizer] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/appetizers?limit=200')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch appetizer recipes');
+        }
+        return res.json();
+      })
       .then(data => {
-        setAppetizers(data.recipes || []);
+        setAppetizerRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching appetizers:', error);
+        console.error('Error fetching appetizer recipes:', error);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
   const speakInstructions = (instructions, stepIndex = 0) => {
-    if (!instructions || instructions.length === 0) return;
-
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / instructions.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < instructions.length) {
-          setTimeout(() => {
-            speakInstructions(instructions, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
@@ -123,7 +126,7 @@ const RecipesAppetizers = () => {
       <div className="appetizers-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading delicious appetizers...</p>
+          <p>Loading delicious appetizer recipes...</p>
         </div>
       </div>
     );
@@ -133,9 +136,9 @@ const RecipesAppetizers = () => {
     <div className="appetizers-page">
       <header className="appetizers-header">
         <div className="appetizers-header-content">
-          <h1 className="appetizers-page-title">Appetizers Collection</h1>
+          <h1 className="appetizers-page-title">Appetizer Recipes</h1>
           <p className="appetizers-page-description">
-            A curated selection of delicious starters and finger foods for every occasion.
+            Discover delicious appetizer recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
@@ -143,7 +146,7 @@ const RecipesAppetizers = () => {
       <main className="appetizers-main">
         <div className="appetizers-grid-section">
           <div className="appetizers-grid">
-            {appetizers.map(appetizer => (
+            {appetizerRecipes.map(appetizer => (
               <div
                 key={appetizer._id}
                 className="appetizers-card"
@@ -155,7 +158,6 @@ const RecipesAppetizers = () => {
                 ></div>
                 <div className="appetizers-card-content">
                   <h3 className="appetizers-card-title">{appetizer.title}</h3>
-                  <p className="appetizers-card-description">{appetizer.tagline}</p>
                 </div>
               </div>
             ))}
@@ -165,100 +167,102 @@ const RecipesAppetizers = () => {
 
       <div className="back-button-container">
         <button className="back-home-btn" onClick={() => navigate('/')}>
-          Back to Home
+          <span>←</span> Back to Home
         </button>
       </div>
 
       {showDetailPanel && selectedAppetizer && (
         <div className="appetizers-modal-overlay" onClick={closeDetailPanel}>
           <div className="appetizers-modal" onClick={e => e.stopPropagation()}>
-            <div className="app-modal-hero">
-              <div className="app-modal-hero-left">
-                <span className="app-modal-tag">Appetizer</span>
-                <h2 className="app-modal-hero-title">{selectedAppetizer.title}</h2>
+            <div className="appetizers-modal-hero">
+              <div className="appetizers-modal-hero-left">
+                <span className="appetizers-modal-tag">Appetizer Recipe</span>
+                <h2 className="appetizers-modal-hero-title">{selectedAppetizer.title}</h2>
                 {selectedAppetizer.tagline && (
-                  <p className="app-modal-hero-tagline">{selectedAppetizer.tagline}</p>
+                  <p className="appetizers-modal-hero-tagline">{selectedAppetizer.tagline}</p>
                 )}
               </div>
-
-              <div className="app-modal-hero-right">
+              <div className="appetizers-modal-hero-right">
                 <img
                   src={selectedAppetizer.image}
                   alt={selectedAppetizer.title}
-                  className="app-modal-hero-img"
+                  className="appetizers-modal-hero-img"
                 />
               </div>
-
-              <button className="appetizers-modal-close" onClick={closeDetailPanel}>
-                ×
-              </button>
+              <button className="appetizers-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="app-modal-body">
-              <div className="app-modal-col">
-                <div className="app-modal-col-header">
+            <div className="appetizers-modal-body">
+              <div className="appetizers-modal-col">
+                <div className="appetizers-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
                   <h3>Ingredients</h3>
                 </div>
-                <div className="app-modal-scroll">
+                <div className="appetizers-modal-scroll">
                   {selectedAppetizer.ingredientsRaw?.map((ingredient, idx) => (
-                    <div key={idx} className="app-ingredient-item">
-                      <span className="app-ingredient-dot"></span>
-                      <span className="app-ingredient-text">{ingredient}</span>
+                    <div key={idx} className="appetizers-ingredient-item">
+                      <span className="appetizers-ingredient-dot"></span>
+                      <span className="appetizers-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="app-modal-col app-modal-col--steps">
-                <div className="app-modal-col-header">
+              <div className="appetizers-modal-col appetizers-modal-col--steps">
+                <div className="appetizers-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
                   <h3>Steps to Make</h3>
                 </div>
-                <div className="app-modal-scroll">
+                <div className="appetizers-modal-scroll">
                   {selectedAppetizer.stepsRaw?.map((step, idx) => (
-                    <div key={idx} className="app-step-item">
-                      <span className="app-step-num">{idx + 1}</span>
-                      <span className="app-step-text">{step}</span>
+                    <div key={idx} className="appetizers-step-item">
+                      <span className="appetizers-step-num">{idx + 1}</span>
+                      <span className="appetizers-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="app-voice-bar">
-              <div className="app-voice-left">
-                <span className="app-voice-label">Voice Guide</span>
+            <div className="appetizers-voice-bar">
+              <div className="appetizers-voice-left">
+                <i className="fas fa-volume-up appetizers-voice-icon"></i>
+                <span className="appetizers-voice-label">Voice Guide</span>
               </div>
 
-              <div className="app-voice-progress">
-                <div className="app-progress-track">
-                  <div className="app-progress-fill" style={{ width: `${progress}%` }}></div>
+              <div className="appetizers-voice-progress">
+                <div className="appetizers-progress-track">
+                  <div className="appetizers-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
-                <div className="app-progress-info">
+                <div className="appetizers-progress-info">
                   <span>Step {currentStep} of {selectedAppetizer.stepsRaw?.length || 0}</span>
                   <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="app-voice-controls">
+              <div className="appetizers-voice-controls">
                 <button
-                  className="app-step-btn"
+                  className="appetizers-step-btn"
                   onClick={speakPreviousStep}
                   disabled={currentStep <= 1}
                 >
-                  Prev
+                  <i className="fas fa-step-backward"></i> Prev
                 </button>
                 <button
-                  className={`app-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  className={`appetizers-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
                   onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedAppetizer.stepsRaw)}
                 >
-                  {isPlaying ? 'Stop' : 'Start'}
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
                 </button>
                 <button
-                  className="app-step-btn"
+                  className="appetizers-step-btn"
                   onClick={speakNextStep}
                   disabled={currentStep >= (selectedAppetizer.stepsRaw?.length || 0)}
                 >
-                  Next
+                  Next <i className="fas fa-step-forward"></i>
                 </button>
               </div>
             </div>

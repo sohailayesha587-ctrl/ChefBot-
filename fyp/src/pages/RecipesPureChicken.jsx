@@ -4,133 +4,121 @@ import './RecipesPureChicken.css';
 
 const RecipesPureChicken = () => {
   const navigate = useNavigate();
-  const [chickenRecipes, setChickenRecipes] = useState([]);
+  const [pureChickenRecipes, setPureChickenRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedPureChicken, setSelectedPureChicken] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/pure-chicken?limit=200')
       .then(res => {
         if (!res.ok) {
-          throw new Error('Failed to fetch chicken recipes');
+          throw new Error('Failed to fetch pure-chicken recipes');
         }
         return res.json();
       })
       .then(data => {
-        setChickenRecipes(data.recipes || []);
+        setPureChickenRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching chicken recipes:', error);
-        setError(error.message);
+        console.error('Error fetching pure-chicken recipes:', error);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedPureChicken && currentStep < selectedPureChicken.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedPureChicken.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedPureChicken && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedPureChicken.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handlePureChickenSelect = (pureChicken) => {
+    setSelectedPureChicken(pureChicken);
     setShowDetailPanel(true);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
-  const handleCloseModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedPureChicken(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
   if (loading) {
@@ -138,18 +126,7 @@ const RecipesPureChicken = () => {
       <div className="pure-chicken-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading delicious chicken recipes...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="pure-chicken-page">
-        <div className="error-container">
-          <p>Error loading recipes: {error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
+          <p>Loading delicious pure-chicken recipes...</p>
         </div>
       </div>
     );
@@ -159,9 +136,9 @@ const RecipesPureChicken = () => {
     <div className="pure-chicken-page">
       <header className="pure-chicken-header">
         <div className="pure-chicken-header-content">
-          <h1 className="pure-chicken-title">Pure Chicken Dishes</h1>
-          <p className="pure-chicken-description">
-            Discover 40+ delicious chicken recipes - curries, karahi, roast, masala aur bhi bahut kuch
+          <h1 className="pure-chicken-page-title">Pure Chicken Recipes</h1>
+          <p className="pure-chicken-page-description">
+            Discover delicious pure chicken recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
@@ -169,19 +146,18 @@ const RecipesPureChicken = () => {
       <main className="pure-chicken-main">
         <div className="pure-chicken-grid-section">
           <div className="pure-chicken-grid">
-            {chickenRecipes.map((recipe) => (
+            {pureChickenRecipes.map(pureChicken => (
               <div
-                key={recipe._id}
+                key={pureChicken._id}
                 className="pure-chicken-card"
-                onClick={() => handleRecipeClick(recipe)}
+                onClick={() => handlePureChickenSelect(pureChicken)}
               >
                 <div
                   className="pure-chicken-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                />
+                  style={{ backgroundImage: `url(${pureChicken.image})` }}
+                ></div>
                 <div className="pure-chicken-card-content">
-                  <h3 className="pure-chicken-card-title">{recipe.title}</h3>
-                  <p className="pure-chicken-card-description">{recipe.tagline}</p>
+                  <h3 className="pure-chicken-card-title">{pureChicken.title}</h3>
                 </div>
               </div>
             ))}
@@ -190,114 +166,104 @@ const RecipesPureChicken = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate(-1)}>
-          Back to Lunch Categories
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
-        <div className="pure-chicken-modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="pure-chicken-modal"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <button className="pure-chicken-modal-close" onClick={handleCloseModal}>
-              ×
-            </button>
-            
-            <div className="pure-chicken-modal-header">
-              <div className="pure-chicken-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+      {showDetailPanel && selectedPureChicken && (
+        <div className="pure-chicken-modal-overlay" onClick={closeDetailPanel}>
+          <div className="pure-chicken-modal" onClick={e => e.stopPropagation()}>
+            <div className="pure-chicken-modal-hero">
+              <div className="pure-chicken-modal-hero-left">
+                <span className="pure-chicken-modal-tag">Pure Chicken Recipe</span>
+                <h2 className="pure-chicken-modal-hero-title">{selectedPureChicken.title}</h2>
+                {selectedPureChicken.tagline && (
+                  <p className="pure-chicken-modal-hero-tagline">{selectedPureChicken.tagline}</p>
+                )}
               </div>
+              <div className="pure-chicken-modal-hero-right">
+                <img
+                  src={selectedPureChicken.image}
+                  alt={selectedPureChicken.title}
+                  className="pure-chicken-modal-hero-img"
+                />
+              </div>
+              <button className="pure-chicken-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="pure-chicken-modal-content">
-              <div className="pure-chicken-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="pure-chicken-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
-                    <div key={index} className="pure-chicken-ingredient-item">
-                      <span className="pure-chicken-ingredient-bullet">•</span>
+            <div className="pure-chicken-modal-body">
+              <div className="pure-chicken-modal-col">
+                <div className="pure-chicken-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="pure-chicken-modal-scroll">
+                  {selectedPureChicken.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="pure-chicken-ingredient-item">
+                      <span className="pure-chicken-ingredient-dot"></span>
                       <span className="pure-chicken-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pure-chicken-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="pure-chicken-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, index) => (
-                    <div key={index} className="pure-chicken-step-item">
-                      <span className="pure-chicken-step-number">{index + 1}.</span>
+              <div className="pure-chicken-modal-col pure-chicken-modal-col--steps">
+                <div className="pure-chicken-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="pure-chicken-modal-scroll">
+                  {selectedPureChicken.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="pure-chicken-step-item">
+                      <span className="pure-chicken-step-num">{idx + 1}</span>
                       <span className="pure-chicken-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
+            </div>
 
-              <div className="pure-chicken-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
+            <div className="pure-chicken-voice-bar">
+              <div className="pure-chicken-voice-left">
+                <i className="fas fa-volume-up pure-chicken-voice-icon"></i>
+                <span className="pure-chicken-voice-label">Voice Guide</span>
+              </div>
 
-                  <div className="current-step-display">
-                    <p>
-                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
-                    </p>
-                  </div>
-
-                  <button
-                    className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                  >
-                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                  </button>
-
-                  <div className="step-controls">
-                    <button
-                      className="step-btn"
-                      onClick={speakPreviousStep}
-                      disabled={currentStep <= 1}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={() => {
-                        stopSpeaking();
-                        speakInstructions(selectedRecipe.stepsRaw, 0);
-                      }}
-                    >
-                      Restart
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={speakNextStep}
-                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div className="voice-hint">
-                    <small>Use buttons to navigate through steps</small>
-                  </div>
+              <div className="pure-chicken-voice-progress">
+                <div className="pure-chicken-progress-track">
+                  <div className="pure-chicken-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
+                <div className="pure-chicken-progress-info">
+                  <span>Step {currentStep} of {selectedPureChicken.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
+                </div>
+              </div>
+
+              <div className="pure-chicken-voice-controls">
+                <button
+                  className="pure-chicken-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`pure-chicken-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedPureChicken.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="pure-chicken-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedPureChicken.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

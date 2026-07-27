@@ -4,93 +4,89 @@ import './RecipesSoupsPage.css';
 
 const RecipesSoupsPage = () => {
   const navigate = useNavigate();
-  const [soups, setSoups] = useState([]);
+  const [soupRecipes, setSoupRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [selectedSoup, setSelectedSoup] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/soups?limit=200')
       .then(res => {
         if (!res.ok) {
-          throw new Error('Failed to fetch soups');
+          throw new Error('Failed to fetch soup recipes');
         }
         return res.json();
       })
       .then(data => {
-        setSoups(data.recipes || []);
+        setSoupRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching soups:', error);
-        setError(error.message);
+        console.error('Error fetching soup recipes:', error);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
@@ -125,60 +121,43 @@ const RecipesSoupsPage = () => {
     setProgress(0);
   };
 
-  const handleGoBack = () => {
-    navigate('/');
-  };
-
   if (loading) {
     return (
-      <div className="soups-page">
+      <div className="soup-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading delicious soups...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="soups-page">
-        <div className="error-container">
-          <p>Error loading soups: {error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
+          <p>Loading delicious soup recipes...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="soups-page">
-      <header className="soups-header">
-        <div className="soups-header-content">
-          <h1 className="soups-page-title">Soup Recipe Collection</h1>
-          <p className="soups-page-description">
-            A curated selection of comforting and flavorful soups from around the world.
+    <div className="soup-page">
+      <header className="soup-header">
+        <div className="soup-header-content">
+          <h1 className="soup-page-title">Soup Recipes</h1>
+          <p className="soup-page-description">
+            Discover delicious soup recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
 
-      <main className="soups-main">
-        <div className="soups-grid-section">
-          <div className="soups-grid">
-            {soups.map(soup => (
-              <div 
-                key={soup._id} 
-                className="soups-technique-card"
+      <main className="soup-main">
+        <div className="soup-grid-section">
+          <div className="soup-grid">
+            {soupRecipes.map(soup => (
+              <div
+                key={soup._id}
+                className="soup-card"
                 onClick={() => handleSoupSelect(soup)}
               >
-                <div 
-                  className="soups-card-image"
+                <div
+                  className="soup-card-image"
                   style={{ backgroundImage: `url(${soup.image})` }}
                 ></div>
-                
-                <div className="soups-card-content">
-                  <h3 className="soups-card-title">{soup.title}</h3>
-                  <p className="soups-card-description">{soup.tagline}</p>
+                <div className="soup-card-content">
+                  <h3 className="soup-card-title">{soup.title}</h3>
                 </div>
               </div>
             ))}
@@ -187,98 +166,104 @@ const RecipesSoupsPage = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={handleGoBack}>
-          Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
       {showDetailPanel && selectedSoup && (
-        <div className="soups-modal-overlay" onClick={closeDetailPanel}>
-          <div 
-            className="soups-modal" 
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `url(${selectedSoup.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <button className="soups-modal-close" onClick={closeDetailPanel}>
-              ×
-            </button>
-            
-            <div className="soups-modal-header">
-              <div className="soups-modal-title">
-                <h2>{selectedSoup.title}</h2>
+        <div className="soup-modal-overlay" onClick={closeDetailPanel}>
+          <div className="soup-modal" onClick={e => e.stopPropagation()}>
+            <div className="soup-modal-hero">
+              <div className="soup-modal-hero-left">
+                <span className="soup-modal-tag">Soup Recipe</span>
+                <h2 className="soup-modal-hero-title">{selectedSoup.title}</h2>
+                {selectedSoup.tagline && (
+                  <p className="soup-modal-hero-tagline">{selectedSoup.tagline}</p>
+                )}
+              </div>
+              <div className="soup-modal-hero-right">
+                <img
+                  src={selectedSoup.image}
+                  alt={selectedSoup.title}
+                  className="soup-modal-hero-img"
+                />
+              </div>
+              <button className="soup-modal-close" onClick={closeDetailPanel}>×</button>
+            </div>
+
+            <div className="soup-modal-body">
+              <div className="soup-modal-col">
+                <div className="soup-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="soup-modal-scroll">
+                  {selectedSoup.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="soup-ingredient-item">
+                      <span className="soup-ingredient-dot"></span>
+                      <span className="soup-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="soup-modal-col soup-modal-col--steps">
+                <div className="soup-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="soup-modal-scroll">
+                  {selectedSoup.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="soup-step-item">
+                      <span className="soup-step-num">{idx + 1}</span>
+                      <span className="soup-step-text">{step}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="soups-modal-content">
-              <div className="soups-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="soups-ingredients-list">
-                  {selectedSoup.ingredientsRaw?.map((ingredient, idx) => (
-                    <div key={idx} className="soups-ingredient-item">
-                      <span className="soups-ingredient-bullet">•</span>
-                      <span className="soups-ingredient-text">{ingredient}</span>
-                    </div>
-                  ))}
+            <div className="soup-voice-bar">
+              <div className="soup-voice-left">
+                <i className="fas fa-volume-up soup-voice-icon"></i>
+                <span className="soup-voice-label">Voice Guide</span>
+              </div>
+
+              <div className="soup-voice-progress">
+                <div className="soup-progress-track">
+                  <div className="soup-progress-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="soup-progress-info">
+                  <span>Step {currentStep} of {selectedSoup.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="soups-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="soups-steps-list">
-                  {selectedSoup.stepsRaw?.map((step, idx) => (
-                    <div key={idx} className="soups-step-item">
-                      <span className="soups-step-number">{idx + 1}.</span>
-                      <span className="soups-step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="soups-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedSoup.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
-
-                  <div className="voice-controls">
-                    <button 
-                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedSoup.stepsRaw)}
-                    >
-                      {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                    </button>
-
-                    <div className="step-controls">
-                      <button 
-                        className="step-btn prev"
-                        onClick={speakPreviousStep}
-                        disabled={currentStep <= 1}
-                      >
-                        Prev
-                      </button>
-                      <button 
-                        className="step-btn next"
-                        onClick={speakNextStep}
-                        disabled={currentStep >= (selectedSoup.stepsRaw?.length || 0)}
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="soup-voice-controls">
+                <button
+                  className="soup-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`soup-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedSoup.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="soup-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedSoup.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

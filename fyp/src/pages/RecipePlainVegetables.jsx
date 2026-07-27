@@ -11,11 +11,16 @@ const RecipePlainVegetables = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/plain-vegetables?limit=200')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch vegetable recipes');
+        }
+        return res.json();
+      })
       .then(data => {
         setVegetables(data.recipes || []);
         setLoading(false);
@@ -26,64 +31,53 @@ const RecipePlainVegetables = () => {
       });
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (speechRef.current) {
-        window.speechSynthesis.cancel();
-        speechRef.current = null;
-      }
-    };
-  }, []);
-
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
@@ -135,7 +129,7 @@ const RecipePlainVegetables = () => {
         <div className="vegetables-header-content">
           <h1 className="vegetables-page-title">Plain Vegetables</h1>
           <p className="vegetables-page-description">
-            Discover traditional Pakistani vegetable recipes - simple, healthy, and homestyle taste
+            Discover traditional vegetable recipes with simple, healthy, and homestyle taste
           </p>
         </div>
       </header>
@@ -164,7 +158,7 @@ const RecipePlainVegetables = () => {
 
       <div className="back-button-container">
         <button className="back-home-btn" onClick={() => navigate('/')}>
-          Back to Home
+          <span>←</span> Back to Home
         </button>
       </div>
 
@@ -179,7 +173,6 @@ const RecipePlainVegetables = () => {
                   <p className="veg-modal-hero-tagline">{selectedVegetable.tagline}</p>
                 )}
               </div>
-
               <div className="veg-modal-hero-right">
                 <img
                   src={selectedVegetable.image}
@@ -187,15 +180,13 @@ const RecipePlainVegetables = () => {
                   className="veg-modal-hero-img"
                 />
               </div>
-
-              <button className="vegetables-modal-close" onClick={closeDetailPanel}>
-                ×
-              </button>
+              <button className="vegetables-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
             <div className="veg-modal-body">
               <div className="veg-modal-col">
                 <div className="veg-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
                   <h3>Ingredients</h3>
                 </div>
                 <div className="veg-modal-scroll">
@@ -210,6 +201,7 @@ const RecipePlainVegetables = () => {
 
               <div className="veg-modal-col veg-modal-col--steps">
                 <div className="veg-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
                   <h3>Steps to Make</h3>
                 </div>
                 <div className="veg-modal-scroll">
@@ -225,6 +217,7 @@ const RecipePlainVegetables = () => {
 
             <div className="veg-voice-bar">
               <div className="veg-voice-left">
+                <i className="fas fa-volume-up veg-voice-icon"></i>
                 <span className="veg-voice-label">Voice Guide</span>
               </div>
 
@@ -244,20 +237,23 @@ const RecipePlainVegetables = () => {
                   onClick={speakPreviousStep}
                   disabled={currentStep <= 1}
                 >
-                  Prev
+                  <i className="fas fa-step-backward"></i> Prev
                 </button>
                 <button
                   className={`veg-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
                   onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedVegetable.stepsRaw)}
                 >
-                  {isPlaying ? 'Stop' : 'Start'}
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
                 </button>
                 <button
                   className="veg-step-btn"
                   onClick={speakNextStep}
                   disabled={currentStep >= (selectedVegetable.stepsRaw?.length || 0)}
                 >
-                  Next
+                  Next <i className="fas fa-step-forward"></i>
                 </button>
               </div>
             </div>

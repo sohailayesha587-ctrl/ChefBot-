@@ -29,7 +29,7 @@ app.use('/api/shopping', shoppingRoutes);
 app.use('/api/pantry', pantryRoutes);
 app.use('/api/pantry-shopping', pantryShoppingRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
-
+app.use('/uploads', express.static('uploads'));
 app.get('/', (req, res) => {
   res.send('Server is running');
 });

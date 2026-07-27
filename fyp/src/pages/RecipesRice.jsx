@@ -6,13 +6,12 @@ const RecipesRice = () => {
   const navigate = useNavigate();
   const [riceRecipes, setRiceRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRice, setSelectedRice] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/rice?limit=200')
@@ -28,109 +27,98 @@ const RecipesRice = () => {
       })
       .catch(error => {
         console.error('Error fetching rice recipes:', error);
-        setError(error.message);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedRice && currentStep < selectedRice.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedRice.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedRice && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedRice.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleRiceSelect = (rice) => {
+    setSelectedRice(rice);
     setShowDetailPanel(true);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
-  const handleCloseModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedRice(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
   if (loading) {
@@ -144,24 +132,13 @@ const RecipesRice = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="rice-page">
-        <div className="error-container">
-          <p>Error loading recipes: {error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="rice-page">
       <header className="rice-header">
         <div className="rice-header-content">
-          <h1 className="rice-title">Rice Dishes</h1>
-          <p className="rice-description">
-            Discover 40+ delicious rice recipes - biryani, pulao, fried rice, khichdi, zarda, and much more
+          <h1 className="rice-page-title">Rice Recipes</h1>
+          <p className="rice-page-description">
+            Discover delicious rice recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
@@ -169,19 +146,18 @@ const RecipesRice = () => {
       <main className="rice-main">
         <div className="rice-grid-section">
           <div className="rice-grid">
-            {riceRecipes.map((recipe) => (
+            {riceRecipes.map(rice => (
               <div
-                key={recipe._id}
+                key={rice._id}
                 className="rice-card"
-                onClick={() => handleRecipeClick(recipe)}
+                onClick={() => handleRiceSelect(rice)}
               >
                 <div
                   className="rice-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                />
+                  style={{ backgroundImage: `url(${rice.image})` }}
+                ></div>
                 <div className="rice-card-content">
-                  <h3 className="rice-card-title">{recipe.title}</h3>
-                  <p className="rice-card-description">{recipe.tagline}</p>
+                  <h3 className="rice-card-title">{rice.title}</h3>
                 </div>
               </div>
             ))}
@@ -190,114 +166,104 @@ const RecipesRice = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate(-1)}>
-          Back to Lunch Categories
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
-        <div className="rice-modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="rice-modal"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <button className="rice-modal-close" onClick={handleCloseModal}>
-              ×
-            </button>
-            
-            <div className="rice-modal-header">
-              <div className="rice-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+      {showDetailPanel && selectedRice && (
+        <div className="rice-modal-overlay" onClick={closeDetailPanel}>
+          <div className="rice-modal" onClick={e => e.stopPropagation()}>
+            <div className="rice-modal-hero">
+              <div className="rice-modal-hero-left">
+                <span className="rice-modal-tag">Rice Recipe</span>
+                <h2 className="rice-modal-hero-title">{selectedRice.title}</h2>
+                {selectedRice.tagline && (
+                  <p className="rice-modal-hero-tagline">{selectedRice.tagline}</p>
+                )}
               </div>
+              <div className="rice-modal-hero-right">
+                <img
+                  src={selectedRice.image}
+                  alt={selectedRice.title}
+                  className="rice-modal-hero-img"
+                />
+              </div>
+              <button className="rice-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="rice-modal-content">
-              <div className="rice-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="rice-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
-                    <div key={index} className="rice-ingredient-item">
-                      <span className="rice-ingredient-bullet">•</span>
+            <div className="rice-modal-body">
+              <div className="rice-modal-col">
+                <div className="rice-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="rice-modal-scroll">
+                  {selectedRice.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="rice-ingredient-item">
+                      <span className="rice-ingredient-dot"></span>
                       <span className="rice-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rice-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="rice-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, index) => (
-                    <div key={index} className="rice-step-item">
-                      <span className="rice-step-number">{index + 1}.</span>
+              <div className="rice-modal-col rice-modal-col--steps">
+                <div className="rice-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="rice-modal-scroll">
+                  {selectedRice.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="rice-step-item">
+                      <span className="rice-step-num">{idx + 1}</span>
                       <span className="rice-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
+            </div>
 
-              <div className="rice-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
+            <div className="rice-voice-bar">
+              <div className="rice-voice-left">
+                <i className="fas fa-volume-up rice-voice-icon"></i>
+                <span className="rice-voice-label">Voice Guide</span>
+              </div>
 
-                  <div className="current-step-display">
-                    <p>
-                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
-                    </p>
-                  </div>
-
-                  <button
-                    className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                  >
-                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                  </button>
-
-                  <div className="step-controls">
-                    <button
-                      className="step-btn"
-                      onClick={speakPreviousStep}
-                      disabled={currentStep <= 1}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={() => {
-                        stopSpeaking();
-                        speakInstructions(selectedRecipe.stepsRaw, 0);
-                      }}
-                    >
-                      Restart
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={speakNextStep}
-                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div className="voice-hint">
-                    <small>Use buttons to navigate through steps</small>
-                  </div>
+              <div className="rice-voice-progress">
+                <div className="rice-progress-track">
+                  <div className="rice-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
+                <div className="rice-progress-info">
+                  <span>Step {currentStep} of {selectedRice.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
+                </div>
+              </div>
+
+              <div className="rice-voice-controls">
+                <button
+                  className="rice-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`rice-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRice.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="rice-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedRice.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

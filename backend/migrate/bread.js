@@ -844,7 +844,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Kabuli Naan",
-  image: "http://localhost:5000/uploads/bread",
+  image: "http://localhost:5000/uploads/kabuli-naan.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1259,7 +1259,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Aloo Bread Pakora",
-  image: "http://localhost:5000/uploads/bread-pakoras.jpg",
+  image: "http://localhost:5000/uploads/aloo-pakora-bread.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",

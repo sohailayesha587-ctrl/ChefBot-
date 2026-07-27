@@ -6,7 +6,7 @@ require('dotenv').config({ path: '../.env' });
 
 const recipesToMigrate = [
   {
-    title: "Chicken Noodles (Chicken Maggi)",
+    title: "Chicken Noodles",
     image: "http://localhost:5000/uploads/chicken-maggi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -55,7 +55,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Egg Paratha (Anda Paratha)",
+    title: "Egg Paratha",
     image: "http://localhost:5000/uploads/anda-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -157,7 +157,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Cup Noodles (Instant Noodles)",
+    title: "Cup Noodles ",
     image: "http://localhost:5000/uploads/cup-noodles.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -251,7 +251,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Fruit Yogurt (Fruit Raita)",
+    title: "Fruit Yogurt ",
     image: "http://localhost:5000/uploads/fruit-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -437,7 +437,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Sweet Yogurt (Meetha Dahi)",
+    title: "Sweet Yogurt",
     image: "http://localhost:5000/uploads/yogurt-with-sugar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -483,7 +483,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "French Toast (Egg Toast)",
+    title: "French Toast",
     image: "http://localhost:5000/uploads/french-toast.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -635,7 +635,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Chickpea Chaat (Chana Chaat)",
+    title: "Chickpea Chaat",
     image: "http://localhost:5000/uploads/channa-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -786,7 +786,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Leftover Rice Fry (Fried Rice)",
+    title: "Leftover Rice Fry",
     image: "http://localhost:5000/uploads/leftover-rice-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -835,7 +835,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Lentils with Rice (Daal Chawal)",
+    title: "Lentils with Rice ",
     image: "http://localhost:5000/uploads/daal-chawal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -934,7 +934,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Minced Meat Paratha (Qeema Paratha)",
+    title: "Minced Meat Paratha ",
     image: "http://localhost:5000/uploads/qeema-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [

@@ -6,13 +6,12 @@ const RecipesQeema = () => {
   const navigate = useNavigate();
   const [qeemaRecipes, setQeemaRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedQeema, setSelectedQeema] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/qeema?limit=200')
@@ -28,109 +27,98 @@ const RecipesQeema = () => {
       })
       .catch(error => {
         console.error('Error fetching qeema recipes:', error);
-        setError(error.message);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedQeema && currentStep < selectedQeema.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedQeema.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedQeema && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedQeema.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleQeemaSelect = (qeema) => {
+    setSelectedQeema(qeema);
     setShowDetailPanel(true);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
-  const handleCloseModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedQeema(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
   if (loading) {
@@ -144,24 +132,13 @@ const RecipesQeema = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="qeema-page">
-        <div className="error-container">
-          <p>Error loading recipes: {error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="qeema-page">
       <header className="qeema-header">
         <div className="qeema-header-content">
-          <h1 className="qeema-title">Qeema Dishes</h1>
-          <p className="qeema-description">
-            Discover 36+ delicious minced meat recipes - qeema matar, qeema aloo, qeema paratha, and much more
+          <h1 className="qeema-page-title">Qeema Recipes</h1>
+          <p className="qeema-page-description">
+            Discover delicious qeema recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
@@ -169,19 +146,18 @@ const RecipesQeema = () => {
       <main className="qeema-main">
         <div className="qeema-grid-section">
           <div className="qeema-grid">
-            {qeemaRecipes.map((recipe) => (
+            {qeemaRecipes.map(qeema => (
               <div
-                key={recipe._id}
+                key={qeema._id}
                 className="qeema-card"
-                onClick={() => handleRecipeClick(recipe)}
+                onClick={() => handleQeemaSelect(qeema)}
               >
                 <div
                   className="qeema-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                />
+                  style={{ backgroundImage: `url(${qeema.image})` }}
+                ></div>
                 <div className="qeema-card-content">
-                  <h3 className="qeema-card-title">{recipe.title}</h3>
-                  <p className="qeema-card-description">{recipe.tagline}</p>
+                  <h3 className="qeema-card-title">{qeema.title}</h3>
                 </div>
               </div>
             ))}
@@ -190,114 +166,104 @@ const RecipesQeema = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate(-1)}>
-          Back to Lunch Categories
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
-        <div className="qeema-modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="qeema-modal"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <button className="qeema-modal-close" onClick={handleCloseModal}>
-              ×
-            </button>
-            
-            <div className="qeema-modal-header">
-              <div className="qeema-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+      {showDetailPanel && selectedQeema && (
+        <div className="qeema-modal-overlay" onClick={closeDetailPanel}>
+          <div className="qeema-modal" onClick={e => e.stopPropagation()}>
+            <div className="qeema-modal-hero">
+              <div className="qeema-modal-hero-left">
+                <span className="qeema-modal-tag">Qeema Recipe</span>
+                <h2 className="qeema-modal-hero-title">{selectedQeema.title}</h2>
+                {selectedQeema.tagline && (
+                  <p className="qeema-modal-hero-tagline">{selectedQeema.tagline}</p>
+                )}
               </div>
+              <div className="qeema-modal-hero-right">
+                <img
+                  src={selectedQeema.image}
+                  alt={selectedQeema.title}
+                  className="qeema-modal-hero-img"
+                />
+              </div>
+              <button className="qeema-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="qeema-modal-content">
-              <div className="qeema-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="qeema-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
-                    <div key={index} className="qeema-ingredient-item">
-                      <span className="qeema-ingredient-bullet">•</span>
+            <div className="qeema-modal-body">
+              <div className="qeema-modal-col">
+                <div className="qeema-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="qeema-modal-scroll">
+                  {selectedQeema.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="qeema-ingredient-item">
+                      <span className="qeema-ingredient-dot"></span>
                       <span className="qeema-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="qeema-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="qeema-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, index) => (
-                    <div key={index} className="qeema-step-item">
-                      <span className="qeema-step-number">{index + 1}.</span>
+              <div className="qeema-modal-col qeema-modal-col--steps">
+                <div className="qeema-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="qeema-modal-scroll">
+                  {selectedQeema.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="qeema-step-item">
+                      <span className="qeema-step-num">{idx + 1}</span>
                       <span className="qeema-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
+            </div>
 
-              <div className="qeema-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
+            <div className="qeema-voice-bar">
+              <div className="qeema-voice-left">
+                <i className="fas fa-volume-up qeema-voice-icon"></i>
+                <span className="qeema-voice-label">Voice Guide</span>
+              </div>
 
-                  <div className="current-step-display">
-                    <p>
-                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
-                    </p>
-                  </div>
-
-                  <button
-                    className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                  >
-                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                  </button>
-
-                  <div className="step-controls">
-                    <button
-                      className="step-btn"
-                      onClick={speakPreviousStep}
-                      disabled={currentStep <= 1}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={() => {
-                        stopSpeaking();
-                        speakInstructions(selectedRecipe.stepsRaw, 0);
-                      }}
-                    >
-                      Restart
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={speakNextStep}
-                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div className="voice-hint">
-                    <small>Use buttons to navigate through steps</small>
-                  </div>
+              <div className="qeema-voice-progress">
+                <div className="qeema-progress-track">
+                  <div className="qeema-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
+                <div className="qeema-progress-info">
+                  <span>Step {currentStep} of {selectedQeema.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
+                </div>
+              </div>
+
+              <div className="qeema-voice-controls">
+                <button
+                  className="qeema-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`qeema-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedQeema.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="qeema-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedQeema.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

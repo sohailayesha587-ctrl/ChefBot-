@@ -346,7 +346,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Keema Samosa (Minced Meat Samosa)",
+  title: "Keema Samosa",
   image: "http://localhost:5000/uploads/keema-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -395,7 +395,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Lentil Samosa (Moong Dal Samosa)",
+  title: "Lentil Samosa",
   image: "http://localhost:5000/uploads/samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -587,7 +587,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Vegetable Pakoras (Mixed Vegetable Fritters)",
+  title: "Vegetable Pakoras",
   image: "http://localhost:5000/uploads/veg-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -636,7 +636,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Chicken Pakoras (Chicken Fritters)",
+  title: "Chicken Pakoras",
   image: "http://localhost:5000/uploads/chicken-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -684,7 +684,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Onion Pakoras (Onion Fritters)",
+  title: "Onion Pakoras",
   image: "http://localhost:5000/uploads/onion-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -732,7 +732,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Spinach Pakoras (Spinach Fritters)",
+  title: "Spinach Pakoras",
   image: "http://localhost:5000/uploads/spinach-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -780,7 +780,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Fish Pakoras (Fish Fritters)",
+  title: "Fish Pakoras",
   image: "http://localhost:5000/uploads/fish-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -828,7 +828,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Paneer Pakoras (Paneer Fritters)",
+  title: "Paneer Pakoras",
   image: "http://localhost:5000/uploads/paneer-pakoras.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -875,7 +875,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Potato Pakoras (Potato Fritters)",
+  title: "Potato Pakoras",
   image: "http://localhost:5000/uploads/potato-pakoras.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -970,7 +970,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "BBQ Wings (Barbecue Chicken Wings)",
+  title: "BBQ Wings",
   image: "http://localhost:5000/uploads/hot-and-spicy-wings.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -1192,7 +1192,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Mozzarella Sticks (Cheese Sticks)",
+  title: "Mozzarella Sticks",
   image: "http://localhost:5000/uploads/mozzarela-sticks.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
@@ -1289,7 +1289,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Stuffed Mushrooms (Creamy)",
+  title: "Stuffed Mushrooms",
   image: "http://localhost:5000/uploads/stuffed-mushrooms.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
@@ -1337,7 +1337,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Cheese Balls (Fried Cheese Bites)",
+  title: "Cheese Balls",
   image: "http://localhost:5000/uploads/cheese-balls.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
@@ -1385,7 +1385,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Halloumi Fries (Fried Halloumi Sticks)",
+  title: "Halloumi Fries",
   image: "http://localhost:5000/uploads/halloumi-fries.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
@@ -1430,7 +1430,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Shrimp Tempura (Crispy Shrimp)",
+  title: "Shrimp Tempura",
   image: "http://localhost:5000/uploads/shrimp-tempura.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
@@ -1479,7 +1479,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Calamari Rings (Fried Squid)",
+  title: "Calamari Rings",
   image: "http://localhost:5000/uploads/calamari-rings.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
@@ -1527,7 +1527,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Fish Bites (Crispy Fish Pieces)",
+  title: "Fish Bites",
   image: "http://localhost:5000/uploads/fish-bites.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
@@ -1672,7 +1672,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Stuffed Mushrooms (Herb Breadcrumb)",
+  title: "Stuffed Mushrooms",
   image: "http://localhost:5000/uploads/stuffed-mushrooms.jpg",
   cuisine: "Continental",
   ingredientsRaw: [

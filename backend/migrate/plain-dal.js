@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chana Dal",
-    image: "http://localhost:5000/uploads/chana-daal.jpg",
+    image: "http://localhost:5000/uploads/chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal (split Bengal gram) - washed and soaked",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Dal Fry",
-    image: "http://localhost:5000/uploads/chana-daal.jpg",
+    image: "http://localhost:5000/uploads/chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -1583,7 +1583,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Fry",
-    image: "http://localhost:5000/uploads/chana-daal.jpg",
+    image: "http://localhost:5000/uploads/chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup mixed dal (toor dal + moong dal) - washed",

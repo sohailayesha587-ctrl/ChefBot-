@@ -1027,7 +1027,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Shimla Mirch Matar",
-    image: "http://localhost:5000/uploads/chicken-shimla-mirch-matar.jpg",
+    image: "http://localhost:5000/uploads/chicken-shimla-mirch.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",

@@ -7,23 +7,29 @@
 html, body, #root {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f8fafc;
+  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .beverages-page {
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: #f8fafc;
 }
 
 .beverages-header {
-  background: linear-gradient(135deg, #284a4b, #1d3a3b);
+  background: rgb(40, 74, 75) !important;
+  background-image: none !important;
   color: white;
-  padding: 40px 20px;
+  padding: 30px 20px;
   text-align: center;
   position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  margin-top: 120px;
 }
 
 .beverages-header-content {
@@ -32,34 +38,31 @@ html, body, #root {
 }
 
 .beverages-page-title {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: white;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
 .beverages-page-description {
   font-size: 1rem;
   opacity: 0.9;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  max-height: 3em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #ddd;
 }
 
 .beverages-main {
+  flex: 1;
+  padding: 30px 20px;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 30px 20px;
-}
-
-.beverages-grid-section {
-  width: 100%;
 }
 
 .beverages-grid {
@@ -68,30 +71,31 @@ html, body, #root {
   gap: 20px;
 }
 
-.beverages-technique-card {
+.beverages-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
   display: flex;
   height: 120px;
-  width: 100%;
 }
 
-.beverages-technique-card:hover {
+.beverages-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-  border-color: #284a4b;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  border-color: rgb(40, 74, 75);
 }
 
 .beverages-card-image {
   width: 120px;
   height: 100%;
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: #f1f5f4;
   flex-shrink: 0;
   border-right: 1px solid #e2e8f0;
 }
@@ -102,32 +106,19 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .beverages-card-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: #1e293b;
-  margin-bottom: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.beverages-card-description {
-  font-size: 14px;
-  color: #64748b;
-  line-height: 1.4;
-  margin-bottom: 8px;
-  max-height: 2.8em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  white-space: normal;
-  word-wrap: break-word;
+  margin-bottom: 0;
+  line-height: 1.3;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
 }
 
 .back-button-container {
@@ -138,7 +129,7 @@ html, body, #root {
 }
 
 .back-home-btn {
-  background: #284a4b;
+  background: rgb(40, 74, 75);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -150,1090 +141,926 @@ html, body, #root {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.2);
+  box-shadow: 0 4px 12px rgba(40,74,75,0.2);
 }
 
 .back-home-btn:hover {
-  background: #1d3a3b;
+  background: rgb(28, 52, 53);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(40, 74, 75, 0.3);
+  box-shadow: 0 6px 18px rgba(40,74,75,0.3);
 }
 
 .beverages-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(0,0,0,0.82);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 15px;
+  padding: 16px;
+  backdrop-filter: blur(4px);
 }
 
 .beverages-modal {
-  border-radius: 15px;
   width: 95%;
-  max-width: 1600px;
+  max-width: 1360px;
   height: 90vh;
-  position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+  background: rgb(40, 74, 75);
+  position: relative;
+  animation: modalIn 0.28s ease-out;
 }
 
-.beverages-modal > * {
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.beverages-modal-hero {
+  flex: 0 0 168px !important;
+  height: 168px !important;
+  max-height: 168px !important;
+  min-height: 168px !important;
+  display: flex;
+  flex-direction: row;
   position: relative;
-  z-index: 2;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgb(40, 74, 75);
 }
 
 .beverages-modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #284a4b;
+  top: 14px;
+  right: 14px;
+  background: rgba(255,255,255,0.92);
+  color: rgb(40, 74, 75);
   border: none;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  z-index: 20;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 
 .beverages-modal-close:hover {
-  background: white;
-  color: #1d3a3b;
+  background: rgb(40, 74, 75);
+  color: white;
   transform: rotate(90deg);
 }
 
-.beverages-modal-header {
-  padding: 15px 25px 10px 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  z-index: 5;
-}
-
-.beverages-modal-title h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #284a4b;
-  margin-bottom: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 90%;
-  line-height: 1.3;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-}
-
-.beverages-modal-content {
+.beverages-modal-hero-left {
+  flex: 0 0 52%;
   display: flex;
-  flex: 1;
-  padding: 15px 20px 20px 20px;
-  gap: 20px;
-  min-height: 0;
-  height: calc(100% - 70px);
-  overflow: visible;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 40px;
+  background: linear-gradient(135deg, rgb(40, 74, 75) 0%, rgb(40, 74, 75) 100%);
   position: relative;
   z-index: 2;
 }
 
-.beverages-modal-ingredients {
-  width: 33.33%;
+.beverages-modal-hero-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -57px;
+  width: 60px;
+  height: 100%;
+  background: inherit;
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  z-index: 6;
+}
+
+.beverages-modal-tag {
+  display: none;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.85);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 30px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(4px);
+  align-self: flex-start;
+}
+
+.beverages-modal-hero-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.beverages-modal-hero-tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.beverages-modal-hero-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: rgb(20, 37, 38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beverages-modal-hero-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.beverages-modal-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px 10px;
+  background: white;
+  overflow: hidden;
+}
+
+.beverages-modal-col {
+  flex: 1;
+  background: rgb(40, 74, 75);
+  border-radius: 14px;
+  border: 1px solid #e2e9e5;
+  box-shadow: 0 2px 10px rgba(40,74,75,0.06);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  overflow: visible;
-  padding: 12px 12px 12px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.beverages-modal-ingredients h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #284a4b;
-  margin-bottom: 12px;
-  padding-bottom: 4px;
-  border-bottom: 2px solid #284a4b;
+  min-height: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  color: white;
 }
 
-.beverages-ingredients-list {
+.beverages-modal-col--steps {
+  flex: 1.3;
+}
+
+.beverages-modal-col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 10px;
+  border-bottom: 2px solid rgb(40, 74, 75);
+  flex-shrink: 0;
+  background: rgb(40, 74, 75);
+}
+
+.beverages-modal-col-header i {
+  color: white;
+  font-size: 13px;
+}
+
+.beverages-modal-col-header h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+.beverages-modal-scroll {
   flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  overflow: visible;
-  padding-right: 3px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(40,74,75,0.3) transparent;
+}
+
+.beverages-modal-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.beverages-modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.beverages-modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(40,74,75,0.3);
+  border-radius: 4px;
 }
 
 .beverages-ingredient-item {
   display: flex;
-  gap: 10px;
   align-items: flex-start;
-  line-height: 1.4;
-  width: 100%;
+  gap: 10px;
+  line-height: 1.45;
 }
 
-.beverages-ingredient-bullet {
-  color: black;
-  font-weight: bold;
-  min-width: 18px;
-  font-size: 14px;
-  display: inline-block;
+.beverages-ingredient-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+  flex-shrink: 0;
+  margin-top: 5px;
 }
 
 .beverages-ingredient-text {
-  font-size: 22px;
-  color: black;
+  font-size: 13px;
+  color: white;
+  font-weight: 500;
+  line-height: 1.45;
   flex: 1;
-  line-height: 1.4;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-weight: 550;
-  display: inline-block;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-}
-.beverages-modal-steps {
-  width: 33.33%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  overflow: visible;
-  padding: 12px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.beverages-modal-steps h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #284a4b;
-  margin-bottom: 12px;
-  padding-bottom: 4px;
-  border-bottom: 2px solid #284a4b;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-}
-
-.beverages-steps-list {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow: visible;
-  padding-right: 3px;
 }
 
 .beverages-step-item {
   display: flex;
-  gap: 10px;
   align-items: flex-start;
-  line-height: 1.4;
-  width: 100%;
+  gap: 10px;
+  line-height: 1.45;
 }
 
-.beverages-step-number {
+.beverages-step-num {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
   font-weight: 700;
-  color: black;
-  min-width: 26px;
-  font-size: 14px;
-  display: inline-block;
-  text-align: right;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
 }
 
 .beverages-step-text {
+  font-size: 13px;
+  color: white;
+  font-weight: 500;
+  line-height: 1.5;
   flex: 1;
-  line-height: 1.4;
-  color: black;
-  font-size: 22px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  display: inline-block;
-  font-weight: 550;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
-.beverages-modal-voice-container {
-  width: 33.33%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: visible;
-  padding-left: 5px;
-}
-
-.voice-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  padding: 15px;
-  min-height: 0;
-  height: 100%;
-  overflow: visible;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.voice-panel h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #284a4b;
-  margin-bottom: 12px;
+.beverages-voice-bar {
+  flex-shrink: 0;
+  background: #ffffff;
+  border-top: 1px solid #e2e9e5;
+  padding: 11px 18px 13px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: 16px;
+  box-shadow: 0 -4px 16px rgba(40,74,75,0.07);
+}
+
+.beverages-voice-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.beverages-voice-icon {
+  color: rgb(40, 74, 75);
+  font-size: 15px;
+}
+
+.beverages-voice-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgb(40, 74, 75);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   white-space: nowrap;
-  padding-bottom: 4px;
-  border-bottom: 2px solid #284a4b;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
-.voice-panel h3 i {
-  font-size: 1.2rem;
+.beverages-voice-progress {
+  flex: 1;
+  min-width: 60px;
 }
 
-.voice-progress {
-  margin-bottom: 15px;
-}
-
-.progress-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.3);
+.beverages-progress-track {
+  height: 5px;
+  background: #e2ebeb;
   border-radius: 3px;
   overflow: hidden;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 
-.progress-fill {
+.beverages-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #284a4b, #3d6b6c);
+  background: linear-gradient(90deg, rgb(40, 74, 75), rgb(40, 74, 75));
   border-radius: 3px;
-  transition: width 0.3s ease;
+  transition: width 0.35s ease;
 }
 
-.progress-info {
+.beverages-progress-info {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
-  color: #1e293b;
+  font-size: 0.7rem;
+  color: rgb(40, 74, 75);
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
-.voice-controls {
+.beverages-voice-controls {
   display: flex;
-  flex-direction: column;
-  gap: 12px; 
-  width: 100%;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.voice-main-btn {
-  width: 100%;
-  padding: 14px 12px;
+.beverages-voice-main-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  transition: all 0.25s;
+  font-family: inherit;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 4px; 
 }
 
-.voice-main-btn.play {
-  background: rgba(40, 74, 75, 0.9);
+.beverages-voice-main-btn.play {
+  background: rgb(40, 74, 75);
   color: white;
+  box-shadow: 0 3px 10px rgba(40,74,75,0.28);
 }
 
-.voice-main-btn.play:hover {
-  background: #284a4b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(40, 74, 75, 0.3);
+.beverages-voice-main-btn.play:hover {
+  background: rgb(40, 74, 75);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(40,74,75,0.35);
 }
 
-.voice-main-btn.stop {
-  background: rgba(220, 38, 38, 0.9);
+.beverages-voice-main-btn.stop {
+  background: #c53030;
   color: white;
+  box-shadow: 0 3px 10px rgba(197,48,48,0.28);
 }
 
-.voice-main-btn.stop:hover {
-  background: rgb(185, 28, 28);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3);
+.beverages-voice-main-btn.stop:hover {
+  background: #9b2c2c;
+  transform: translateY(-1px);
 }
 
-.step-controls {
-  display: flex;
-  gap: 12px; 
-  width: 100%;
-  margin-top: 2px; 
-}
-
-.step-btn {
-  flex: 1;
-  padding: 12px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.8);
-  color: #284a4b;
-  border-radius: 6px;
+.beverages-step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border: 1.5px solid rgb(40, 74, 75);
+  background: transparent;
+  color: rgb(40, 74, 75);
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 12.5px;
+  transition: all 0.22s;
+  font-family: inherit;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.step-btn:hover:not(:disabled) {
-  background: #284a4b;
+.beverages-step-btn:hover:not(:disabled) {
+  background: rgb(40, 74, 75);
   color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.2);
-  border-color: transparent;
+  transform: translateY(-1px);
 }
 
-.step-btn:disabled {
-  opacity: 0.5;
+.beverages-step-btn:disabled {
+  opacity: 0.35;
   cursor: not-allowed;
-  border-color: rgba(0, 0, 0, 0.1);
-  color: #666;
-  background: rgba(255, 255, 255, 0.5);
+  border-color: rgb(120, 140, 141);
+  color: rgb(120, 140, 141);
 }
 
-.step-btn i {
-  font-size: 0.9rem;
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 16px;
+  color: rgb(40, 74, 75);
 }
 
+.loading-spinner {
+  width: 42px;
+  height: 42px;
+  border: 3px solid #e2e8f0;
+  border-top-color: rgb(40, 74, 75);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 @media (min-width: 1400px) {
-  .beverages-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
-  }
-  
   .beverages-modal {
-    max-width: 1700px;
+    max-width: 1500px;
     height: 88vh;
   }
-  
-  .beverages-modal-content {
-    padding: 20px 30px 25px 30px;
-    gap: 25px;
+  .beverages-modal-hero {
+    flex: 0 0 260px;
+    max-height: 280px;
   }
-  
+  .beverages-modal-hero-left {
+    flex: 0 0 50%;
+    padding: 32px 36px;
+  }
+  .beverages-modal-hero-title {
+    font-size: 2rem;
+  }
   .beverages-ingredient-text,
   .beverages-step-text {
-    font-size: 15px;
+    font-size: 13.5px;
   }
 }
 
 @media (min-width: 1025px) and (max-width: 1399px) {
   .beverages-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .beverages-modal-content {
-    gap: 15px;
-    padding: 12px 18px 18px 18px;
+  .beverages-card-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  
-  .beverages-ingredient-text,
-  .beverages-step-text {
-    font-size: 13px;
+  .beverages-modal-hero {
+    flex: 0 0 230px;
+    max-height: 250px;
   }
-  
-  .beverages-modal-ingredients h3,
-  .beverages-modal-steps h3,
-  .voice-panel h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+  .beverages-modal-hero-title {
+    font-size: 1.6rem;
   }
-  
-  .beverages-ingredients-list,
-  .beverages-steps-list {
-    gap: 6px;
+  .beverages-modal-body {
+    gap: 10px;
+    padding: 12px 14px 8px;
   }
-  
-  .beverages-ingredient-item,
-  .beverages-step-item {
-    gap: 8px;
-  }
-  
-  .beverages-ingredient-bullet {
-    min-width: 16px;
-    font-size: 13px;
-  }
-  
-  .beverages-step-number {
-    min-width: 22px;
-    font-size: 13px;
-  }
-  
-  .voice-panel {
-    padding: 12px;
-  }
-  
-  .voice-controls {
-    gap: 10px; 
-  }
-  
-  .voice-main-btn {
-    padding: 12px;
-    font-size: 0.9rem;
-    margin-bottom: 3px; 
-  }
-  
-  .step-btn {
-    padding: 10px 8px;
-    font-size: 0.8rem;
-    gap: 6px;
-  }
-  
-  .step-controls {
-    gap: 10px; 
-    margin-top: 2px; 
+  .beverages-voice-bar {
+    padding: 10px 16px 12px;
+    gap: 12px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .beverages-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 18px;
   }
-  
-  .beverages-technique-card {
-    height: 100px;
+  .beverages-card {
+    height: 110px;
   }
-  
   .beverages-card-image {
-    width: 90px;
+    width: 110px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  
   .beverages-card-title {
     font-size: 15px;
   }
-  
-  .beverages-card-description {
-    font-size: 12px;
-    max-height: 2.4em;
-  }
-  
+
   .beverages-modal {
-    height: 92vh;
-    width: 98%;
+    width: 96%;
+    height: 88vh;
+    border-radius: 18px;
   }
-  
-  .beverages-modal-header {
-    padding: 12px 18px 8px 18px;
+
+  .beverages-modal-hero {
+    flex: 0 0 150px;
+    max-height: 150px;
+    min-height: 150px;
   }
-  
-  .beverages-modal-title h2 {
-    font-size: 1.5rem;
+  .beverages-modal-hero-left {
+    flex: 0 0 52%;
+    padding: 20px 28px;
   }
-  
-  .beverages-modal-content {
-    padding: 10px 15px 15px 15px;
-    gap: 12px;
+  .beverages-modal-hero-title {
+    font-size: 1.4rem;
   }
-  
-  .beverages-modal-ingredients,
-  .beverages-modal-steps,
-  .beverages-modal-voice-container {
-    width: 33.33%;
+  .beverages-modal-hero-tagline {
+    font-size: 0.75rem;
   }
-  
-  .beverages-modal-steps {
-    padding: 0 8px;
+  .beverages-modal-tag {
+    font-size: 9px;
+    padding: 3px 10px;
   }
-  
-  .beverages-modal-ingredients h3,
-  .beverages-modal-steps h3,
-  .voice-panel h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
+
+  .beverages-modal-body {
+    gap: 10px;
+    padding: 12px 14px 8px;
   }
-  
-  .beverages-ingredients-list,
-  .beverages-steps-list {
-    gap: 5px;
-  }
-  
-  .beverages-ingredient-item,
-  .beverages-step-item {
-    gap: 6px;
-  }
-  
-  .beverages-ingredient-bullet {
-    min-width: 14px;
-    font-size: 12px;
-  }
-  
   .beverages-ingredient-text,
   .beverages-step-text {
     font-size: 12px;
-    line-height: 1.3;
   }
-  
-  .beverages-step-number {
-    min-width: 20px;
+  .beverages-modal-col-header h3 {
+    font-size: 0.7rem;
+  }
+  .beverages-modal-col-header {
+    padding: 10px 14px 8px;
+  }
+  .beverages-modal-scroll {
+    padding: 10px 12px 12px;
+    gap: 7px;
+  }
+
+  .beverages-voice-bar {
+    padding: 9px 14px 11px;
+    gap: 12px;
+  }
+  .beverages-voice-label {
+    font-size: 0.65rem;
+  }
+  .beverages-voice-main-btn {
+    padding: 7px 18px;
     font-size: 12px;
   }
-  
-  .voice-panel {
-    padding: 10px;
-  }
-  
-  .voice-panel h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-  
-  .voice-progress {
-    margin-bottom: 12px;
-  }
-  
-  .progress-bar {
-    height: 5px;
-    margin-bottom: 4px;
-  }
-  
-  .progress-info {
-    font-size: 0.7rem;
-  }
-  
-  .voice-controls {
-    gap: 8px;
-  }
-  
-  .voice-main-btn {
-    padding: 10px;
-    font-size: 0.8rem;
-    gap: 5px;
-    margin-bottom: 2px; 
-  }
-  
-  .step-btn {
-    padding: 8px 6px;
-    font-size: 0.7rem;
-    gap: 5px;
-  }
-  
-  .step-controls {
-    gap: 8px; 
-    margin-top: 1px;
-  }
-  
-  .back-home-btn {
-    padding: 10px 25px;
-    font-size: 0.9rem;
+  .beverages-step-btn {
+    padding: 6px 14px;
+    font-size: 11.5px;
   }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
   .beverages-header {
-    padding: 25px 15px;
+    margin-top: 100px;
+    padding: 25px 16px;
   }
-  
+  .beverages-page-title {
+    font-size: 2rem;
+  }
+  .beverages-page-description {
+    font-size: 0.9rem;
+  }
+
+  .beverages-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+  .beverages-card {
+    height: 105px;
+  }
+  .beverages-card-image {
+    width: 105px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .beverages-card-title {
+    font-size: 14px;
+  }
+
+  .beverages-modal {
+    width: 95%;
+    height: 85vh;
+    border-radius: 16px;
+  }
+
+  .beverages-modal-hero-img {
+    object-fit: cover;
+  }
+  .beverages-modal-hero {
+    flex: 0 0 165px;
+    max-height: 165px;
+    min-height: 165px;
+  }
+  .beverages-modal-hero-left {
+    flex: 0 0 52%;
+    padding: 16px 22px;
+  }
+  .beverages-modal-hero-title {
+    font-size: 1.25rem;
+  }
+  .beverages-modal-hero-tagline {
+    font-size: 0.7rem;
+    display: -webkit-box;
+  }
+  .beverages-modal-tag {
+    font-size: 8px;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+  }
+  .beverages-modal-hero-left::after {
+    display: block;
+    right: -40px;
+    width: 45px;
+  }
+
+  .beverages-modal-body {
+    gap: 10px;
+    padding: 12px 12px 8px;
+  }
+  .beverages-ingredient-text,
+  .beverages-step-text {
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .beverages-modal-col-header h3 {
+    font-size: 0.65rem;
+  }
+  .beverages-modal-col-header {
+    padding: 9px 12px 7px;
+  }
+  .beverages-modal-scroll {
+    padding: 10px 12px 12px;
+    gap: 7px;
+  }
+
+  .beverages-ingredient-dot {
+    width: 6px;
+    height: 6px;
+    margin-top: 4px;
+  }
+  .beverages-step-num {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .beverages-voice-bar {
+    padding: 8px 12px 10px;
+    gap: 10px;
+  }
+  .beverages-voice-label {
+    display: inline-block;
+    font-size: 0.6rem;
+  }
+  .beverages-voice-left {
+    display: flex;
+  }
+  .beverages-voice-progress {
+    order: initial;
+    width: auto;
+    flex: 1;
+  }
+  .beverages-voice-main-btn {
+    padding: 7px 16px;
+    font-size: 11.5px;
+  }
+  .beverages-step-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 575px) {
+  .beverages-header {
+    margin-top: 80px;
+    padding: 20px 16px;
+  }
   .beverages-page-title {
     font-size: 1.6rem;
   }
-  
   .beverages-page-description {
-    font-size: 0.9rem;
-    max-height: 2.6em;
+    font-size: 0.8rem;
   }
-  
-  .beverages-main {
-    padding: 20px 15px;
-  }
-  
+
   .beverages-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px;
   }
-  
-  .beverages-technique-card {
-    height: auto;
-    flex-direction: column;
+  .beverages-card {
+    height: 95px;
   }
-  
   .beverages-card-image {
-    width: 100%;
-    height: 120px;
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
+    width: 95px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  
-  .beverages-card-content {
-    padding: 10px;
-  }
-  
   .beverages-card-title {
-    font-size: 15px;
-    max-height: 2.2em;
-  }
-  
-  .beverages-card-description {
     font-size: 12px;
-    max-height: 2.2em;
   }
-  
+
   .beverages-modal {
-    height: 94vh;
     width: 98%;
+    height: 90vh;
+    border-radius: 14px;
   }
-  
-  .beverages-modal-header {
-    padding: 10px 15px 6px 15px;
+
+  .beverages-modal-hero-img {
+    object-fit: cover;
   }
-  
-  .beverages-modal-title h2 {
-    font-size: 1.3rem;
+  .beverages-modal-hero {
+    flex: 0 0 145px;
+    max-height: 145px;
+    min-height: 145px;
   }
-  
+  .beverages-modal-hero-left {
+    flex: 0 0 52%;
+    padding: 12px 18px;
+  }
+  .beverages-modal-hero-title {
+    font-size: 1.1rem;
+    -webkit-line-clamp: 2;
+  }
+  .beverages-modal-hero-tagline {
+    font-size: 0.65rem;
+    display: -webkit-box;
+  }
+  .beverages-modal-tag {
+    font-size: 7px;
+    padding: 2px 7px;
+    margin-bottom: 6px;
+  }
+  .beverages-modal-hero-left::after {
+    right: -35px;
+    width: 40px;
+  }
+
   .beverages-modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
     top: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
   }
-  
-  .beverages-modal-content {
-    padding: 8px 12px 12px 12px;
-    gap: 10px;
+
+  .beverages-modal-body {
+    gap: 8px;
+    padding: 10px 10px 8px;
   }
-  
-  .beverages-modal-ingredients,
-  .beverages-modal-steps,
-  .beverages-modal-voice-container {
-    width: 33.33%;
-  }
-  
-  .beverages-modal-steps {
-    padding: 0 5px;
-  }
-  
-  .beverages-modal-ingredients h3,
-  .beverages-modal-steps h3,
-  .voice-panel h3 {
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    padding-bottom: 3px;
-  }
-  
-  .beverages-ingredients-list,
-  .beverages-steps-list {
-    gap: 4px;
-  }
-  
-  .beverages-ingredient-item,
-  .beverages-step-item {
-    gap: 5px;
-  }
-  
-  .beverages-ingredient-bullet {
-    min-width: 12px;
-    font-size: 11px;
-  }
-  
-  .beverages-ingredient-text,
-  .beverages-step-text {
-    font-size: 11px;
-    line-height: 1.2;
-    font-weight: 500;
-  }
-  
-  .beverages-step-number {
-    min-width: 18px;
-    font-size: 11px;
-  }
-  
-  .voice-panel {
-    padding: 8px;
-  }
-  
-  .voice-panel h3 {
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    gap: 4px;
-  }
-  
-  .voice-panel h3 i {
-    font-size: 0.9rem;
-  }
-  
-  .voice-progress {
-    margin-bottom: 10px;
-  }
-  
-  .progress-bar {
-    height: 4px;
-    margin-bottom: 3px;
-  }
-  
-  .progress-info {
-    font-size: 0.65rem;
-  }
-  
-  .voice-controls {
+  .beverages-modal-col-header {
+    padding: 8px 10px 6px;
     gap: 6px;
   }
-  
-  .voice-main-btn {
-    padding: 8px;
-    font-size: 0.7rem;
-    gap: 4px;
-    margin-bottom: 2px;
+  .beverages-modal-col-header h3 {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
   }
-  
-  .step-btn {
-    padding: 6px 5px;
-    font-size: 0.65rem;
-    gap: 4px;
-  }
-  
-  .step-controls {
-    gap: 6px; 
-    margin-top: 1px; 
-  }
-  
-  .back-home-btn {
-    padding: 8px 20px;
-    font-size: 0.8rem;
-  }
-}
-@media (max-width: 575px) {
-  .beverages-header {
-    padding: 20px 12px;
-  }
-  
-  .beverages-page-title {
-    font-size: 1.4rem;
-  }
-  
-  .beverages-page-description {
-    font-size: 0.8rem;
-    max-height: 2.4em;
-    margin-bottom: 10px;
-  }
-  
-  .beverages-main {
-    padding: 15px 12px;
-  }
-  
-  .beverages-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  
-  .beverages-technique-card {
-    height: auto;
-    flex-direction: column;
-  }
-  
-  .beverages-card-image {
-    width: 100%;
-    height: 100px;
-    border-right: none;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  
-  .beverages-card-content {
-    padding: 8px;
-  }
-  
-  .beverages-card-title {
-    font-size: 13px;
-    max-height: 2.2em;
-  }
-  
-  .beverages-card-description {
+  .beverages-modal-col-header i {
     font-size: 11px;
-    max-height: 2.2em;
   }
-  
-  .beverages-modal {
-    width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
+  .beverages-modal-scroll {
+    padding: 8px 10px 10px;
+    gap: 6px;
   }
-  
-  .beverages-modal-header {
-    padding: 8px 12px 5px 12px;
-  }
-  
-  .beverages-modal-title h2 {
-    font-size: 1.2rem;
-    max-width: 80%;
-  }
-  
-  .beverages-modal-close {
-    top: 6px;
-    right: 6px;
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
-  }
-  
-  .beverages-modal-content {
-    padding: 6px 10px 10px 10px;
-    gap: 8px;
-  }
-  
-  .beverages-modal-ingredients,
-  .beverages-modal-steps,
-  .beverages-modal-voice-container {
-    width: 33.33%;
-  }
-  
-  .beverages-modal-steps {
-    padding: 0 4px;
-  }
-  
-  .beverages-modal-ingredients h3,
-  .beverages-modal-steps h3,
-  .voice-panel h3 {
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-    padding-bottom: 2px;
-  }
-  
-  .beverages-ingredients-list,
-  .beverages-steps-list {
-    gap: 3px;
-  }
-  
-  .beverages-ingredient-item,
-  .beverages-step-item {
-    gap: 4px;
-  }
-  
-  .beverages-ingredient-bullet {
-    min-width: 10px;
-    font-size: 10px;
-  }
-  
-  .beverages-ingredient-text,
-  .beverages-step-text {
-    font-size: 10px;
-    line-height: 1.2;
-    font-weight: 500;
-  }
-  
-  .beverages-step-number {
-    min-width: 15px;
-    font-size: 10px;
-  }
-  
-  .voice-panel {
-    padding: 6px;
-  }
-  
-  .voice-panel h3 {
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-    gap: 3px;
-  }
-  
-  .voice-panel h3 i {
-    font-size: 0.8rem;
-  }
-  
-  .voice-progress {
-    margin-bottom: 8px;
-  }
-  
-  .progress-bar {
-    height: 3px;
-    margin-bottom: 2px;
-  }
-  
-  .progress-info {
-    font-size: 0.6rem;
-  }
-  
-  .voice-controls {
-    gap: 4px; 
-  }
-  
-  .voice-main-btn {
-    padding: 6px;
-    font-size: 0.65rem;
-    gap: 3px;
-    margin-bottom: 1px;
-  }
-  
-  .step-btn {
-    padding: 5px 4px;
-    font-size: 0.6rem;
-    gap: 3px;
-  }
-  
-  .step-controls {
-    gap: 4px; 
-    margin-top: 0px; 
-  }
-  
-  .back-home-btn {
-    padding: 6px 15px;
-    font-size: 0.75rem;
-  }
-}
 
-@media (max-width: 399px) {
-  .beverages-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  .beverages-technique-card {
-    height: auto;
-  }
-  
-  .beverages-card-image {
-    height: 130px;
-  }
-  
-  .beverages-card-title {
-    font-size: 15px;
-    max-height: 2.2em;
-  }
-  
-  .beverages-modal-ingredients,
-  .beverages-modal-steps,
-  .beverages-modal-voice-container {
-    width: 33.33%;
-  }
-  
   .beverages-ingredient-text,
   .beverages-step-text {
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .beverages-ingredient-dot {
+    width: 5px;
+    height: 5px;
+    margin-top: 4px;
+  }
+  .beverages-step-num {
+    width: 20px;
+    height: 20px;
     font-size: 9px;
   }
-  
-  .back-home-btn {
-    width: 100%;
-    justify-content: center;
+
+  .beverages-voice-bar {
+    padding: 7px 10px 9px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .beverages-voice-label {
+    display: inline-block;
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+  }
+  .beverages-voice-left {
+    display: flex;
+    gap: 5px;
+  }
+  .beverages-voice-icon {
+    font-size: 13px;
+  }
+  .beverages-voice-progress {
+    order: initial;
+    width: auto;
+    flex: 1;
+  }
+  .beverages-progress-info {
+    font-size: 0.6rem;
+  }
+  .beverages-voice-main-btn {
+    padding: 6px 12px;
+    font-size: 10.5px;
+    gap: 4px;
+  }
+  .beverages-step-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+    gap: 4px;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@media (max-width: 400px) {
+  .beverages-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .beverages-card {
+    height: 85px;
   }
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
+  .beverages-card-image {
+    width: 85px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  .beverages-card-title {
+    font-size: 11px;
   }
-}
+  .beverages-card-content {
+    padding: 10px 12px;
+  }
 
-.beverages-technique-card {
-  animation: fadeInUp 0.4s ease-out;
-}
+  .beverages-modal-hero-img {
+    object-fit: cover;
+  }
+  .beverages-modal-hero {
+    flex: 0 0 130px;
+    max-height: 130px;
+    min-height: 130px;
+  }
+  .beverages-modal-hero-left {
+    padding: 10px 14px;
+  }
+  .beverages-modal-hero-title {
+    font-size: 1rem;
+  }
+  .beverages-modal-hero-tagline {
+    font-size: 0.6rem;
+    display: -webkit-box;
+  }
+  .beverages-modal-tag {
+    display: none;
+  }
+  .beverages-modal-hero-left::after {
+    right: -30px;
+    width: 35px;
+  }
 
-.beverages-technique-card:nth-child(1) { animation-delay: 0.05s; }
-.beverages-technique-card:nth-child(2) { animation-delay: 0.1s; }
-.beverages-technique-card:nth-child(3) { animation-delay: 0.15s; }
-.beverages-technique-card:nth-child(4) { animation-delay: 0.2s; }
-.beverages-technique-card:nth-child(5) { animation-delay: 0.25s; }
-.beverages-technique-card:nth-child(6) { animation-delay: 0.3s; }
-.beverages-technique-card:nth-child(7) { animation-delay: 0.35s; }
-.beverages-technique-card:nth-child(8) { animation-delay: 0.4s; }
-.beverages-technique-card:nth-child(9) { animation-delay: 0.45s; }
-.beverages-technique-card:nth-child(10) { animation-delay: 0.5s; }
-.beverages-technique-card:nth-child(11) { animation-delay: 0.55s; }
-.beverages-technique-card:nth-child(12) { animation-delay: 0.6s; }
-.beverages-technique-card:nth-child(13) { animation-delay: 0.65s; }
-.beverages-technique-card:nth-child(14) { animation-delay: 0.7s; }
-.beverages-technique-card:nth-child(15) { animation-delay: 0.75s; }
-.beverages-technique-card:nth-child(16) { animation-delay: 0.8s; }
-.beverages-technique-card:nth-child(17) { animation-delay: 0.85s; }
-.beverages-technique-card:nth-child(18) { animation-delay: 0.9s; }
-.beverages-technique-card:nth-child(19) { animation-delay: 0.95s; }
-.beverages-technique-card:nth-child(20) { animation-delay: 1.0s; }
-.beverages-technique-card:nth-child(21) { animation-delay: 1.05s; }
-.beverages-technique-card:nth-child(22) { animation-delay: 1.1s; }
-.beverages-technique-card:nth-child(23) { animation-delay: 1.15s; }
-.beverages-technique-card:nth-child(24) { animation-delay: 1.2s; }
-.beverages-technique-card:nth-child(25) { animation-delay: 1.25s; }
-.beverages-technique-card:nth-child(26) { animation-delay: 1.3s; }
-.beverages-technique-card:nth-child(27) { animation-delay: 1.35s; }
-.beverages-technique-card:nth-child(28) { animation-delay: 1.4s; }
-.beverages-technique-card:nth-child(29) { animation-delay: 1.45s; }
-.beverages-technique-card:nth-child(30) { animation-delay: 1.5s; }
-.beverages-technique-card:nth-child(31) { animation-delay: 1.55s; }
-.beverages-technique-card:nth-child(32) { animation-delay: 1.6s; }
-.beverages-technique-card:nth-child(33) { animation-delay: 1.65s; }
-.beverages-technique-card:nth-child(34) { animation-delay: 1.7s; }
-.beverages-technique-card:nth-child(35) { animation-delay: 1.75s; }
-.beverages-technique-card:nth-child(36) { animation-delay: 1.8s; }
-.beverages-technique-card:nth-child(37) { animation-delay: 1.85s; }
-.beverages-technique-card:nth-child(38) { animation-delay: 1.9s; }
-.beverages-technique-card:nth-child(39) { animation-delay: 1.95s; }
-.beverages-technique-card:nth-child(40) { animation-delay: 2.0s; }
-.beverages-technique-card:nth-child(41) { animation-delay: 2.05s; }
-.beverages-technique-card:nth-child(42) { animation-delay: 2.1s; }
-.beverages-technique-card:nth-child(43) { animation-delay: 2.15s; }
-.beverages-technique-card:nth-child(44) { animation-delay: 2.2s; }
-.beverages-technique-card:nth-child(45) { animation-delay: 2.25s; }
-.beverages-technique-card:nth-child(46) { animation-delay: 2.3s; }
-.beverages-technique-card:nth-child(47) { animation-delay: 2.35s; }
-.beverages-technique-card:nth-child(48) { animation-delay: 2.4s; }
-
-.beverages-modal {
-  animation: modalFadeIn 0.3s ease-out;
+  .beverages-ingredient-text,
+  .beverages-step-text {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .beverages-modal-col-header h3 {
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+  }
+  .beverages-voice-label {
+    display: inline-block;
+    font-size: 0.5rem;
+  }
+  .beverages-voice-main-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+  .beverages-step-btn {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
 }

@@ -1307,7 +1307,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Handi with Cream",
-    image: "http://localhost:5000/uploads/chicken-handi-with cream.jpg",
+    image: "http://localhost:5000/uploads/chicken-handi-with-cream.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",

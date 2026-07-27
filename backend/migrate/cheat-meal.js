@@ -1803,7 +1803,7 @@ const recipesToMigrate = [
   },
   {
     title: "Grilled Chicken Sandwich",
-    image: "http://localhost:5000/uploads/uploads/grilled-sandwich.jpg",
+    image: "http://localhost:5000/uploads/grilled-sandwich.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 slices bread",

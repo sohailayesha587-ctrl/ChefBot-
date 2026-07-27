@@ -5,14 +5,15 @@ import './RecipesRegionalPage.css';
 const RecipesRegionalPage = () => {
   const navigate = useNavigate();
   const [selectedCuisine, setSelectedCuisine] = useState('pakistani');
-  const [recipes, setRecipes] = useState([]);
+  const [allRegionalRecipes, setAllRegionalRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRegional, setSelectedRegional] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   const cuisines = [
     { id: 1, name: 'Pakistani', key: 'pakistani' },
@@ -25,94 +26,107 @@ const RecipesRegionalPage = () => {
   useEffect(() => {
     setLoading(true);
     fetch('http://localhost:5000/api/recipes/subCategory/regional?limit=200')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch regional recipes');
+        }
+        return res.json();
+      })
       .then(data => {
-        setRecipes(data.recipes || []);
+        setAllRegionalRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error(`Error fetching ${selectedCuisine} recipes:`, error);
+        console.error('Error fetching regional recipes:', error);
         setLoading(false);
       });
-  }, [selectedCuisine]);
+  }, []);
+
+  // Filter recipes when selectedCuisine changes or recipes load
+  useEffect(() => {
+    if (allRegionalRecipes.length > 0) {
+      const filtered = allRegionalRecipes.filter(
+        recipe => recipe.cuisine?.toLowerCase() === selectedCuisine.toLowerCase()
+      );
+      setFilteredRecipes(filtered);
+    }
+  }, [selectedCuisine, allRegionalRecipes]);
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedRegional && currentStep < selectedRegional.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedRegional.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedRegional && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedRegional.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeSelect = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleRegionalSelect = (regional) => {
+    setSelectedRegional(regional);
     setShowDetailPanel(true);
     setIsPlaying(false);
     setCurrentStep(0);
@@ -122,14 +136,10 @@ const RecipesRegionalPage = () => {
   const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedRegional(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-  };
-
-  const handleGoBack = () => {
-    navigate('/');
   };
 
   if (loading) {
@@ -137,19 +147,25 @@ const RecipesRegionalPage = () => {
       <div className="regional-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading {selectedCuisine} recipes...</p>
+          <p>Loading delicious regional recipes...</p>
         </div>
       </div>
     );
   }
 
+  // Get current cuisine name for display
+  const getCurrentCuisineName = () => {
+    const cuisine = cuisines.find(c => c.key === selectedCuisine);
+    return cuisine ? cuisine.name : 'Regional';
+  };
+
   return (
     <div className="regional-page">
       <header className="regional-header">
         <div className="regional-header-content">
-          <h1 className="regional-title">Regional Recipes</h1>
-          <p className="regional-description">
-            Explore authentic dishes from around the world
+          <h1 className="regional-page-title">Regional Recipes</h1>
+          <p className="regional-page-description">
+            Discover delicious {getCurrentCuisineName()} recipes with rich, authentic, and homestyle taste
           </p>
         </div>
       </header>
@@ -162,132 +178,141 @@ const RecipesRegionalPage = () => {
             onClick={() => setSelectedCuisine(cuisine.key)}
           >
             <span className="cuisine-name">{cuisine.name}</span>
-            <span className="cuisine-count">({recipes.length})</span>
+            <span className="cuisine-count">
+              ({allRegionalRecipes.filter(r => r.cuisine?.toLowerCase() === cuisine.key.toLowerCase()).length})
+            </span>
           </button>
         ))}
       </div>
 
       <main className="regional-main">
         <div className="regional-grid-section">
-          <div className="regional-grid">
-            {recipes.map(recipe => (
-              <div 
-                key={recipe._id} 
-                className="regional-card"
-                onClick={() => handleRecipeSelect(recipe)}
-              >
+          {filteredRecipes.length === 0 ? (
+            <div className="no-recipes-message">
+              <p>No {getCurrentCuisineName()} recipes found.</p>
+            </div>
+          ) : (
+            <div className="regional-grid">
+              {filteredRecipes.map(regional => (
                 <div 
-                  className="regional-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                ></div>
-                
-                <div className="regional-card-content">
-                  <h3 className="regional-card-title">{recipe.title}</h3>
-                  <p className="regional-card-description">{recipe.tagline}</p>
+                  key={regional._id} 
+                  className="regional-card"
+                  onClick={() => handleRegionalSelect(regional)}
+                >
+                  <div 
+                    className="regional-card-image"
+                    style={{ backgroundImage: `url(${regional.image})` }}
+                  ></div>
+                  
+                  <div className="regional-card-content">
+                    <h3 className="regional-card-title">{regional.title}</h3>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={handleGoBack}>
-          Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
+      {showDetailPanel && selectedRegional && (
         <div className="regional-modal-overlay" onClick={closeDetailPanel}>
-          <div 
-            className="regional-modal" 
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <button className="regional-modal-close" onClick={closeDetailPanel}>
-              ×
-            </button>
-            
-            <div className="regional-modal-header">
-              <div className="regional-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+          <div className="regional-modal" onClick={e => e.stopPropagation()}>
+            <div className="veg-modal-hero">
+              <div className="veg-modal-hero-left">
+                <span className="veg-modal-tag">{selectedRegional.cuisine || 'Regional'} Recipe</span>
+                <h2 className="veg-modal-hero-title">{selectedRegional.title}</h2>
+                {selectedRegional.tagline && (
+                  <p className="veg-modal-hero-tagline">{selectedRegional.tagline}</p>
+                )}
+              </div>
+              <div className="veg-modal-hero-right">
+                <img
+                  src={selectedRegional.image}
+                  alt={selectedRegional.title}
+                  className="veg-modal-hero-img"
+                />
+              </div>
+              <button className="regional-modal-close" onClick={closeDetailPanel}>×</button>
+            </div>
+
+            <div className="veg-modal-body">
+              <div className="veg-modal-col">
+                <div className="veg-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="veg-modal-scroll">
+                  {selectedRegional.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="veg-ingredient-item">
+                      <span className="veg-ingredient-dot"></span>
+                      <span className="veg-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="veg-modal-col veg-modal-col--steps">
+                <div className="veg-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="veg-modal-scroll">
+                  {selectedRegional.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="veg-step-item">
+                      <span className="veg-step-num">{idx + 1}</span>
+                      <span className="veg-step-text">{step}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="regional-modal-content">
-              <div className="regional-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="regional-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, idx) => (
-                    <div key={idx} className="regional-ingredient-item">
-                      <span className="regional-ingredient-bullet">•</span>
-                      <span className="regional-ingredient-text">{ingredient}</span>
-                    </div>
-                  ))}
+            <div className="veg-voice-bar">
+              <div className="veg-voice-left">
+                <i className="fas fa-volume-up veg-voice-icon"></i>
+                <span className="veg-voice-label">Voice Guide</span>
+              </div>
+
+              <div className="veg-voice-progress">
+                <div className="veg-progress-track">
+                  <div className="veg-progress-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="veg-progress-info">
+                  <span>Step {currentStep} of {selectedRegional.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="regional-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="regional-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, idx) => (
-                    <div key={idx} className="regional-step-item">
-                      <span className="regional-step-number">{idx + 1}.</span>
-                      <span className="regional-step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="regional-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
-
-                  <div className="voice-controls">
-                    <button 
-                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                    >
-                      {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                    </button>
-
-                    <div className="step-controls">
-                      <button 
-                        className="step-btn prev"
-                        onClick={speakPreviousStep}
-                        disabled={currentStep <= 1}
-                      >
-                        Prev Step
-                      </button>
-                      <button 
-                        className="step-btn next"
-                        onClick={speakNextStep}
-                        disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                      >
-                        Next Step
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="voice-hint">
-                    Click Start to hear step-by-step instructions
-                  </div>
-                </div>
+              <div className="veg-voice-controls">
+                <button
+                  className="veg-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`veg-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRegional.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="veg-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedRegional.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

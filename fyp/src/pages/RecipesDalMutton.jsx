@@ -4,166 +4,151 @@ import './RecipesDalMutton.css';
 
 const RecipesDalMutton = () => {
   const navigate = useNavigate();
-  const [recipes, setRecipes] = useState([]);
+  const [dalMuttonRecipes, setDalMuttonRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedDalMutton, setSelectedDalMutton] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/dal-mutton?limit=200')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch dal-mutton recipes');
+        }
+        return res.json();
+      })
       .then(data => {
-        setRecipes(data.recipes || []);
+        setDalMuttonRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching mutton + dal recipes:', error);
+        console.error('Error fetching dal-mutton recipes:', error);
         setLoading(false);
       });
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (speechRef.current) {
-        window.speechSynthesis.cancel();
-        speechRef.current = null;
-      }
-    };
-  }, []);
-
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedDalMutton && currentStep < selectedDalMutton.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedDalMutton.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedDalMutton && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedDalMutton.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleDalMuttonSelect = (dalMutton) => {
+    setSelectedDalMutton(dalMutton);
     setShowDetailPanel(true);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
-  const handleCloseModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedDalMutton(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
   if (loading) {
     return (
-      <div className="mutton-dal-page">
+      <div className="dal-mutton-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading mutton + dal recipes...</p>
+          <p>Loading delicious dal-mutton recipes...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mutton-dal-page">
-      <header className="mutton-dal-header">
-        <div className="mutton-dal-header-content">
-          <h1 className="mutton-dal-title">Mutton + Dal</h1>
-          <p className="mutton-dal-description">
-            Discover delicious mutton and dal recipes - rich, flavorful, and homestyle taste
+    <div className="dal-mutton-page">
+      <header className="dal-mutton-header">
+        <div className="dal-mutton-header-content">
+          <h1 className="dal-mutton-page-title">Dal & Mutton Recipes</h1>
+          <p className="dal-mutton-page-description">
+            Discover delicious dal and mutton recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
 
-      <main className="mutton-dal-main">
-        <div className="mutton-dal-grid-section">
-          <div className="mutton-dal-grid">
-            {recipes.map((recipe) => (
+      <main className="dal-mutton-main">
+        <div className="dal-mutton-grid-section">
+          <div className="dal-mutton-grid">
+            {dalMuttonRecipes.map(dalMutton => (
               <div
-                key={recipe._id}
-                className="mutton-dal-card"
-                onClick={() => handleRecipeClick(recipe)}
+                key={dalMutton._id}
+                className="dal-mutton-card"
+                onClick={() => handleDalMuttonSelect(dalMutton)}
               >
                 <div
-                  className="mutton-dal-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                />
-                <div className="mutton-dal-card-content">
-                  <h3 className="mutton-dal-card-title">{recipe.title}</h3>
-                  <p className="mutton-dal-card-description">{recipe.tagline}</p>
+                  className="dal-mutton-card-image"
+                  style={{ backgroundImage: `url(${dalMutton.image})` }}
+                ></div>
+                <div className="dal-mutton-card-content">
+                  <h3 className="dal-mutton-card-title">{dalMutton.title}</h3>
                 </div>
               </div>
             ))}
@@ -172,114 +157,104 @@ const RecipesDalMutton = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate(-1)}>
-          Back to Lunch Categories
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
-        <div className="mutton-dal-modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="mutton-dal-modal"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <button className="mutton-dal-modal-close" onClick={handleCloseModal}>
-              ×
-            </button>
-            
-            <div className="mutton-dal-modal-header">
-              <div className="mutton-dal-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+      {showDetailPanel && selectedDalMutton && (
+        <div className="dal-mutton-modal-overlay" onClick={closeDetailPanel}>
+          <div className="dal-mutton-modal" onClick={e => e.stopPropagation()}>
+            <div className="veg-modal-hero">
+              <div className="veg-modal-hero-left">
+                <span className="veg-modal-tag">Dal & Mutton Recipe</span>
+                <h2 className="veg-modal-hero-title">{selectedDalMutton.title}</h2>
+                {selectedDalMutton.tagline && (
+                  <p className="veg-modal-hero-tagline">{selectedDalMutton.tagline}</p>
+                )}
+              </div>
+              <div className="veg-modal-hero-right">
+                <img
+                  src={selectedDalMutton.image}
+                  alt={selectedDalMutton.title}
+                  className="veg-modal-hero-img"
+                />
+              </div>
+              <button className="dal-mutton-modal-close" onClick={closeDetailPanel}>×</button>
+            </div>
+
+            <div className="veg-modal-body">
+              <div className="veg-modal-col">
+                <div className="veg-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="veg-modal-scroll">
+                  {selectedDalMutton.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="veg-ingredient-item">
+                      <span className="veg-ingredient-dot"></span>
+                      <span className="veg-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="veg-modal-col veg-modal-col--steps">
+                <div className="veg-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="veg-modal-scroll">
+                  {selectedDalMutton.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="veg-step-item">
+                      <span className="veg-step-num">{idx + 1}</span>
+                      <span className="veg-step-text">{step}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="mutton-dal-modal-content">
-              <div className="mutton-dal-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="mutton-dal-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
-                    <div key={index} className="mutton-dal-ingredient-item">
-                      <span className="mutton-dal-ingredient-bullet">•</span>
-                      <span className="mutton-dal-ingredient-text">{ingredient}</span>
-                    </div>
-                  ))}
+            <div className="veg-voice-bar">
+              <div className="veg-voice-left">
+                <i className="fas fa-volume-up veg-voice-icon"></i>
+                <span className="veg-voice-label">Voice Guide</span>
+              </div>
+
+              <div className="veg-voice-progress">
+                <div className="veg-progress-track">
+                  <div className="veg-progress-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="veg-progress-info">
+                  <span>Step {currentStep} of {selectedDalMutton.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="mutton-dal-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="mutton-dal-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, index) => (
-                    <div key={index} className="mutton-dal-step-item">
-                      <span className="mutton-dal-step-number">{index + 1}.</span>
-                      <span className="mutton-dal-step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mutton-dal-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
-
-                  <div className="current-step-display">
-                    <p>
-                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
-                    </p>
-                  </div>
-
-                  <button
-                    className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                  >
-                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                  </button>
-
-                  <div className="step-controls">
-                    <button
-                      className="step-btn"
-                      onClick={speakPreviousStep}
-                      disabled={currentStep <= 1}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={() => {
-                        stopSpeaking();
-                        speakInstructions(selectedRecipe.stepsRaw, 0);
-                      }}
-                    >
-                      Restart
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={speakNextStep}
-                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div className="voice-hint">
-                    <small>Use buttons to navigate through steps</small>
-                  </div>
-                </div>
+              <div className="veg-voice-controls">
+                <button
+                  className="veg-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`veg-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDalMutton.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="veg-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedDalMutton.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

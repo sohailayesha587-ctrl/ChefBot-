@@ -4,97 +4,89 @@ import './RecipesSnacksPage.css';
 
 const RecipesSnacksPage = () => {
   const navigate = useNavigate();
-  const [snacks, setSnacks] = useState([]);
+  const [snackRecipes, setSnackRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [selectedSnack, setSelectedSnack] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
-
-  const FALLBACK_IMAGE = 'https://placehold.co/600x400/284a4b/white?text=Snack+Image';
-
-  useEffect(() => {
-    return () => {
-      if (speechRef.current) {
-        window.speechSynthesis.cancel();
-        speechRef.current = null;
-      }
-    };
-  }, []);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/snacks?limit=200')
       .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch snacks');
+        if (!res.ok) {
+          throw new Error('Failed to fetch snack recipes');
+        }
         return res.json();
       })
       .then(data => {
-        setSnacks(data.recipes || []);
+        setSnackRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching snacks:', error);
-        setError(error.message);
+        console.error('Error fetching snack recipes:', error);
         setLoading(false);
       });
   }, []);
 
-  const handleImageError = (e) => {
-    e.target.style.backgroundImage = `url(${FALLBACK_IMAGE})`;
-  };
-
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
-    if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+  useEffect(() => {
+    return () => {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
+        speechSynthesisRef.current = null;
       }
+    };
+  }, []);
 
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
+  const speakInstructions = (instructions, stepIndex = 0) => {
+    if ('speechSynthesis' in window) {
+      if (speechSynthesisRef.current && isPlaying) {
+        window.speechSynthesis.cancel();
         setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
+      }
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
@@ -129,67 +121,43 @@ const RecipesSnacksPage = () => {
     setProgress(0);
   };
 
-  const handleGoBack = () => navigate('/');
-
-  const getImageUrl = (imageUrl) => {
-    return imageUrl && imageUrl.startsWith('http') ? imageUrl : FALLBACK_IMAGE;
-  };
-
   if (loading) {
     return (
-      <div className="snacks-page">
+      <div className="snack-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading delicious snacks...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="snacks-page">
-        <div className="error-container">
-          <p>Error loading snacks: {error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
+          <p>Loading delicious snack recipes...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="snacks-page">
-      <header className="snacks-header">
-        <div className="snacks-header-content">
-          <h1 className="snacks-page-title">Snack Recipe Collection</h1>
-          <p className="snacks-page-description">
-            A curated selection of delicious and crispy snacks from around the world.
+    <div className="snack-page">
+      <header className="snack-header">
+        <div className="snack-header-content">
+          <h1 className="snack-page-title">Snack Recipes</h1>
+          <p className="snack-page-description">
+            Discover delicious snack recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
 
-      <main className="snacks-main">
-        <div className="snacks-grid-section">
-          <div className="snacks-grid">
-            {snacks.map(snack => (
-              <div 
-                key={snack._id} 
-                className="snacks-technique-card"
+      <main className="snack-main">
+        <div className="snack-grid-section">
+          <div className="snack-grid">
+            {snackRecipes.map(snack => (
+              <div
+                key={snack._id}
+                className="snack-card"
                 onClick={() => handleSnackSelect(snack)}
               >
-                <div 
-                  className="snacks-card-image"
-                  style={{ 
-                    backgroundImage: `url(${getImageUrl(snack.image)})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                  onError={handleImageError}
+                <div
+                  className="snack-card-image"
+                  style={{ backgroundImage: `url(${snack.image})` }}
                 ></div>
-                
-                <div className="snacks-card-content">
-                  <h3 className="snacks-card-title">{snack.title}</h3>
-                  <p className="snacks-card-description">{snack.tagline || snack.description?.substring(0, 80)}</p>
+                <div className="snack-card-content">
+                  <h3 className="snack-card-title">{snack.title}</h3>
                 </div>
               </div>
             ))}
@@ -198,98 +166,104 @@ const RecipesSnacksPage = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={handleGoBack}>
-          Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
       {showDetailPanel && selectedSnack && (
-        <div className="snacks-modal-overlay" onClick={closeDetailPanel}>
-          <div 
-            className="snacks-modal" 
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `url(${getImageUrl(selectedSnack.image)})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <button className="snacks-modal-close" onClick={closeDetailPanel}>
-              ×
-            </button>
-            
-            <div className="snacks-modal-header">
-              <div className="snacks-modal-title">
-                <h2>{selectedSnack.title}</h2>
+        <div className="snack-modal-overlay" onClick={closeDetailPanel}>
+          <div className="snack-modal" onClick={e => e.stopPropagation()}>
+            <div className="snack-modal-hero">
+              <div className="snack-modal-hero-left">
+                <span className="snack-modal-tag">Snack Recipe</span>
+                <h2 className="snack-modal-hero-title">{selectedSnack.title}</h2>
+                {selectedSnack.tagline && (
+                  <p className="snack-modal-hero-tagline">{selectedSnack.tagline}</p>
+                )}
+              </div>
+              <div className="snack-modal-hero-right">
+                <img
+                  src={selectedSnack.image}
+                  alt={selectedSnack.title}
+                  className="snack-modal-hero-img"
+                />
+              </div>
+              <button className="snack-modal-close" onClick={closeDetailPanel}>×</button>
+            </div>
+
+            <div className="snack-modal-body">
+              <div className="snack-modal-col">
+                <div className="snack-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="snack-modal-scroll">
+                  {selectedSnack.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="snack-ingredient-item">
+                      <span className="snack-ingredient-dot"></span>
+                      <span className="snack-ingredient-text">{ingredient}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="snack-modal-col snack-modal-col--steps">
+                <div className="snack-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="snack-modal-scroll">
+                  {selectedSnack.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="snack-step-item">
+                      <span className="snack-step-num">{idx + 1}</span>
+                      <span className="snack-step-text">{step}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="snacks-modal-content">
-              <div className="snacks-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="snacks-ingredients-list">
-                  {selectedSnack.ingredientsRaw?.map((ingredient, idx) => (
-                    <div key={idx} className="snacks-ingredient-item">
-                      <span className="snacks-ingredient-bullet">•</span>
-                      <span className="snacks-ingredient-text">{ingredient}</span>
-                    </div>
-                  ))}
+            <div className="snack-voice-bar">
+              <div className="snack-voice-left">
+                <i className="fas fa-volume-up snack-voice-icon"></i>
+                <span className="snack-voice-label">Voice Guide</span>
+              </div>
+
+              <div className="snack-voice-progress">
+                <div className="snack-progress-track">
+                  <div className="snack-progress-fill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="snack-progress-info">
+                  <span>Step {currentStep} of {selectedSnack.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="snacks-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="snacks-steps-list">
-                  {selectedSnack.stepsRaw?.map((step, idx) => (
-                    <div key={idx} className="snacks-step-item">
-                      <span className="snacks-step-number">{idx + 1}.</span>
-                      <span className="snacks-step-text">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="snacks-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{width: `${progress}%`}}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedSnack.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
-
-                  <div className="voice-controls">
-                    <button 
-                      className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                      onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedSnack.stepsRaw, 0)}
-                    >
-                      {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                    </button>
-
-                    <div className="step-controls">
-                      <button 
-                        className="step-btn prev"
-                        onClick={speakPreviousStep}
-                        disabled={currentStep <= 1}
-                      >
-                        Prev
-                      </button>
-                      <button 
-                        className="step-btn next"
-                        onClick={speakNextStep}
-                        disabled={currentStep >= (selectedSnack.stepsRaw?.length || 0)}
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="snack-voice-controls">
+                <button
+                  className="snack-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`snack-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedSnack.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="snack-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedSnack.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

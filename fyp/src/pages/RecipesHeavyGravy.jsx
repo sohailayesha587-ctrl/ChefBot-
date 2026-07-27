@@ -4,20 +4,25 @@ import './RecipesHeavyGravy.css';
 
 const RecipesHeavyGravy = () => {
   const navigate = useNavigate();
-  const [recipes, setRecipes] = useState([]);
+  const [heavyGravyRecipes, setHeavyGravyRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedHeavyGravy, setSelectedHeavyGravy] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const speechRef = useRef(null);
+  const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/recipes/subCategory/heavy-gravy?limit=200')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch heavy gravy recipes');
+        }
+        return res.json();
+      })
       .then(data => {
-        setRecipes(data.recipes || []);
+        setHeavyGravyRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
@@ -28,102 +33,92 @@ const RecipesHeavyGravy = () => {
 
   useEffect(() => {
     return () => {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current) {
         window.speechSynthesis.cancel();
-        speechRef.current = null;
+        speechSynthesisRef.current = null;
       }
     };
   }, []);
 
-  const speakInstructions = (steps, stepIndex = 0) => {
-    if (!steps || steps.length === 0) return;
-
+  const speakInstructions = (instructions, stepIndex = 0) => {
     if ('speechSynthesis' in window) {
-      if (speechRef.current) {
+      if (speechSynthesisRef.current && isPlaying) {
         window.speechSynthesis.cancel();
+        setIsPlaying(false);
+        setCurrentStep(0);
+        setProgress(0);
+        speechSynthesisRef.current = null;
+        return;
       }
-
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Step ${stepIndex + 1}: ${steps[stepIndex]}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      utterance.lang = 'en-US';
-
-      setCurrentStep(stepIndex + 1);
-      setProgress(((stepIndex + 1) / steps.length) * 100);
-      setIsPlaying(true);
-
-      utterance.onend = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-
-        if (stepIndex + 1 < steps.length) {
-          setTimeout(() => {
-            speakInstructions(steps, stepIndex + 1);
-          }, 1500);
-        }
-      };
-
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        speechRef.current = null;
-      };
-
-      speechRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      if (stepIndex >= 0 && stepIndex < instructions.length) {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Step ${stepIndex + 1}: ${instructions[stepIndex]}`;
+        utterance.rate = 1.0;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        setCurrentStep(stepIndex + 1);
+        setProgress(((stepIndex + 1) / instructions.length) * 100);
+        utterance.onstart = () => setIsPlaying(true);
+        utterance.onend = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null;
+          if (stepIndex < instructions.length - 1) {
+            setTimeout(() => {
+              speakInstructions(instructions, stepIndex + 1);
+            }, 1000);
+          }
+        };
+        utterance.onerror = () => { 
+          setIsPlaying(false); 
+          speechSynthesisRef.current = null; 
+        };
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } else {
       alert('Your browser does not support text-to-speech.');
     }
   };
 
   const stopSpeaking = () => {
-    if ('speechSynthesis' in window && speechRef.current) {
+    if ('speechSynthesis' in window && speechSynthesisRef.current) {
       window.speechSynthesis.cancel();
       setIsPlaying(false);
       setCurrentStep(0);
       setProgress(0);
-      speechRef.current = null;
+      speechSynthesisRef.current = null;
     }
   };
 
   const speakNextStep = () => {
-    if (selectedRecipe && currentStep < selectedRecipe.stepsRaw?.length) {
+    if (selectedHeavyGravy && currentStep < selectedHeavyGravy.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep);
+      speakInstructions(selectedHeavyGravy.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedRecipe && currentStep > 1) {
+    if (selectedHeavyGravy && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedRecipe.stepsRaw, currentStep - 2);
+      speakInstructions(selectedHeavyGravy.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleHeavyGravySelect = (heavyGravy) => {
+    setSelectedHeavyGravy(heavyGravy);
     setShowDetailPanel(true);
+    setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    setIsPlaying(false);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
-  const handleCloseModal = () => {
+  const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedRecipe(null);
+    setSelectedHeavyGravy(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
-    
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-    }
   };
 
   if (loading) {
@@ -131,7 +126,7 @@ const RecipesHeavyGravy = () => {
       <div className="heavy-gravy-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading rich and flavorful heavy gravy dishes...</p>
+          <p>Loading delicious heavy gravy recipes...</p>
         </div>
       </div>
     );
@@ -141,9 +136,9 @@ const RecipesHeavyGravy = () => {
     <div className="heavy-gravy-page">
       <header className="heavy-gravy-header">
         <div className="heavy-gravy-header-content">
-          <h1 className="heavy-gravy-title">Heavy Gravy Dishes</h1>
-          <p className="heavy-gravy-description">
-            Discover rich and flavorful heavy gravy recipes - Nihari, Haleem, Paye, Korma, Handi, and much more
+          <h1 className="heavy-gravy-page-title">Heavy Gravy Recipes</h1>
+          <p className="heavy-gravy-page-description">
+            Discover delicious heavy gravy recipes with rich, flavorful, and homestyle taste
           </p>
         </div>
       </header>
@@ -151,19 +146,18 @@ const RecipesHeavyGravy = () => {
       <main className="heavy-gravy-main">
         <div className="heavy-gravy-grid-section">
           <div className="heavy-gravy-grid">
-            {recipes.map((recipe) => (
+            {heavyGravyRecipes.map(heavyGravy => (
               <div
-                key={recipe._id}
+                key={heavyGravy._id}
                 className="heavy-gravy-card"
-                onClick={() => handleRecipeClick(recipe)}
+                onClick={() => handleHeavyGravySelect(heavyGravy)}
               >
                 <div
                   className="heavy-gravy-card-image"
-                  style={{ backgroundImage: `url(${recipe.image})` }}
-                />
+                  style={{ backgroundImage: `url(${heavyGravy.image})` }}
+                ></div>
                 <div className="heavy-gravy-card-content">
-                  <h3 className="heavy-gravy-card-title">{recipe.title}</h3>
-                  <p className="heavy-gravy-card-description">{recipe.tagline}</p>
+                  <h3 className="heavy-gravy-card-title">{heavyGravy.title}</h3>
                 </div>
               </div>
             ))}
@@ -172,114 +166,104 @@ const RecipesHeavyGravy = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate(-1)}>
-          Back to Lunch Categories
+        <button className="back-home-btn" onClick={() => navigate('/')}>
+          <span>←</span> Back to Home
         </button>
       </div>
 
-      {showDetailPanel && selectedRecipe && (
-        <div className="heavy-gravy-modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="heavy-gravy-modal"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${selectedRecipe.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <button className="heavy-gravy-modal-close" onClick={handleCloseModal}>
-              ×
-            </button>
-            
-            <div className="heavy-gravy-modal-header">
-              <div className="heavy-gravy-modal-title">
-                <h2>{selectedRecipe.title}</h2>
+      {showDetailPanel && selectedHeavyGravy && (
+        <div className="heavy-gravy-modal-overlay" onClick={closeDetailPanel}>
+          <div className="heavy-gravy-modal" onClick={e => e.stopPropagation()}>
+            <div className="heavy-gravy-modal-hero">
+              <div className="heavy-gravy-modal-hero-left">
+                <span className="heavy-gravy-modal-tag">Heavy Gravy Recipe</span>
+                <h2 className="heavy-gravy-modal-hero-title">{selectedHeavyGravy.title}</h2>
+                {selectedHeavyGravy.tagline && (
+                  <p className="heavy-gravy-modal-hero-tagline">{selectedHeavyGravy.tagline}</p>
+                )}
               </div>
+              <div className="heavy-gravy-modal-hero-right">
+                <img
+                  src={selectedHeavyGravy.image}
+                  alt={selectedHeavyGravy.title}
+                  className="heavy-gravy-modal-hero-img"
+                />
+              </div>
+              <button className="heavy-gravy-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="heavy-gravy-modal-content">
-              <div className="heavy-gravy-modal-ingredients">
-                <h3>Ingredients</h3>
-                <div className="heavy-gravy-ingredients-list">
-                  {selectedRecipe.ingredientsRaw?.map((ingredient, index) => (
-                    <div key={index} className="heavy-gravy-ingredient-item">
-                      <span className="heavy-gravy-ingredient-bullet">•</span>
+            <div className="heavy-gravy-modal-body">
+              <div className="heavy-gravy-modal-col">
+                <div className="heavy-gravy-modal-col-header">
+                  <i className="fas fa-list-ul"></i>
+                  <h3>Ingredients</h3>
+                </div>
+                <div className="heavy-gravy-modal-scroll">
+                  {selectedHeavyGravy.ingredientsRaw?.map((ingredient, idx) => (
+                    <div key={idx} className="heavy-gravy-ingredient-item">
+                      <span className="heavy-gravy-ingredient-dot"></span>
                       <span className="heavy-gravy-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="heavy-gravy-modal-steps">
-                <h3>Steps to Make</h3>
-                <div className="heavy-gravy-steps-list">
-                  {selectedRecipe.stepsRaw?.map((step, index) => (
-                    <div key={index} className="heavy-gravy-step-item">
-                      <span className="heavy-gravy-step-number">{index + 1}.</span>
+              <div className="heavy-gravy-modal-col heavy-gravy-modal-col--steps">
+                <div className="heavy-gravy-modal-col-header">
+                  <i className="fas fa-shoe-prints"></i>
+                  <h3>Steps to Make</h3>
+                </div>
+                <div className="heavy-gravy-modal-scroll">
+                  {selectedHeavyGravy.stepsRaw?.map((step, idx) => (
+                    <div key={idx} className="heavy-gravy-step-item">
+                      <span className="heavy-gravy-step-num">{idx + 1}</span>
                       <span className="heavy-gravy-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
+            </div>
 
-              <div className="heavy-gravy-modal-voice-container">
-                <div className="voice-panel">
-                  <h3>Voice Instructions</h3>
-                  
-                  <div className="voice-progress">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-                    <div className="progress-info">
-                      <span>Step {currentStep} of {selectedRecipe.stepsRaw?.length || 0}</span>
-                      <span>{Math.round(progress)}%</span>
-                    </div>
-                  </div>
+            <div className="heavy-gravy-voice-bar">
+              <div className="heavy-gravy-voice-left">
+                <i className="fas fa-volume-up heavy-gravy-voice-icon"></i>
+                <span className="heavy-gravy-voice-label">Voice Guide</span>
+              </div>
 
-                  <div className="current-step-display">
-                    <p>
-                      <strong>Step {currentStep}:</strong> {selectedRecipe.stepsRaw?.[currentStep - 1]}
-                    </p>
-                  </div>
-
-                  <button
-                    className={`voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                    onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRecipe.stepsRaw)}
-                  >
-                    {isPlaying ? 'Stop' : 'Start Voice Guide'}
-                  </button>
-
-                  <div className="step-controls">
-                    <button
-                      className="step-btn"
-                      onClick={speakPreviousStep}
-                      disabled={currentStep <= 1}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={() => {
-                        stopSpeaking();
-                        speakInstructions(selectedRecipe.stepsRaw, 0);
-                      }}
-                    >
-                      Restart
-                    </button>
-                    <button
-                      className="step-btn"
-                      onClick={speakNextStep}
-                      disabled={currentStep >= (selectedRecipe.stepsRaw?.length || 0)}
-                    >
-                      Next
-                    </button>
-                  </div>
-
-                  <div className="voice-hint">
-                    <small>Use buttons to navigate through steps</small>
-                  </div>
+              <div className="heavy-gravy-voice-progress">
+                <div className="heavy-gravy-progress-track">
+                  <div className="heavy-gravy-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
+                <div className="heavy-gravy-progress-info">
+                  <span>Step {currentStep} of {selectedHeavyGravy.stepsRaw?.length || 0}</span>
+                  <span>{Math.round(progress)}%</span>
+                </div>
+              </div>
+
+              <div className="heavy-gravy-voice-controls">
+                <button
+                  className="heavy-gravy-step-btn"
+                  onClick={speakPreviousStep}
+                  disabled={currentStep <= 1}
+                >
+                  <i className="fas fa-step-backward"></i> Prev
+                </button>
+                <button
+                  className={`heavy-gravy-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedHeavyGravy.stepsRaw)}
+                >
+                  {isPlaying
+                    ? <><i className="fas fa-stop"></i> Stop</>
+                    : <><i className="fas fa-play"></i> Start</>
+                  }
+                </button>
+                <button
+                  className="heavy-gravy-step-btn"
+                  onClick={speakNextStep}
+                  disabled={currentStep >= (selectedHeavyGravy.stepsRaw?.length || 0)}
+                >
+                  Next <i className="fas fa-step-forward"></i>
+                </button>
               </div>
             </div>
           </div>

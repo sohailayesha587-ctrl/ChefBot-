@@ -63,7 +63,7 @@ const recipesToMigrate = [
   timesSuggested: 0,
   timesUsedInPlans: 0
 },{
-  title: "Anda Masala (Spicy Egg Curry)",
+  title: "Anda Masala",
   image: "http://localhost:5000/uploads/anda-masala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
@@ -279,7 +279,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Palak Curry",
-  image: "http://localhost:5000/uploads/aloo-palak.jpg",
+  image: "http://localhost:5000/uploads/aloo-palak.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",

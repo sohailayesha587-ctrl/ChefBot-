@@ -4,9 +4,9 @@ import './RecipeBeveragePage.css';
 
 const RecipeBeveragePage = () => {
   const navigate = useNavigate();
-  const [drinks, setDrinks] = useState([]);
+  const [beverageRecipes, setBeverageRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedDrink, setSelectedDrink] = useState(null);
+  const [selectedBeverage, setSelectedBeverage] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -22,13 +22,22 @@ const RecipeBeveragePage = () => {
         return res.json();
       })
       .then(data => {
-        setDrinks(data.recipes || []);
+        setBeverageRecipes(data.recipes || []);
         setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching beverage recipes:', error);
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (speechSynthesisRef.current) {
+        window.speechSynthesis.cancel();
+        speechSynthesisRef.current = null;
+      }
+    };
   }, []);
 
   const speakInstructions = (instructions, stepIndex = 0) => {
@@ -82,21 +91,21 @@ const RecipeBeveragePage = () => {
   };
 
   const speakNextStep = () => {
-    if (selectedDrink && currentStep < selectedDrink.stepsRaw?.length) {
+    if (selectedBeverage && currentStep < selectedBeverage.stepsRaw?.length) {
       stopSpeaking();
-      speakInstructions(selectedDrink.stepsRaw, currentStep);
+      speakInstructions(selectedBeverage.stepsRaw, currentStep);
     }
   };
 
   const speakPreviousStep = () => {
-    if (selectedDrink && currentStep > 1) {
+    if (selectedBeverage && currentStep > 1) {
       stopSpeaking();
-      speakInstructions(selectedDrink.stepsRaw, currentStep - 2);
+      speakInstructions(selectedBeverage.stepsRaw, currentStep - 2);
     }
   };
 
-  const handleDrinkSelect = (drink) => {
-    setSelectedDrink(drink);
+  const handleBeverageSelect = (beverage) => {
+    setSelectedBeverage(beverage);
     setShowDetailPanel(true);
     setIsPlaying(false);
     setCurrentStep(0);
@@ -106,7 +115,7 @@ const RecipeBeveragePage = () => {
   const closeDetailPanel = () => {
     stopSpeaking();
     setShowDetailPanel(false);
-    setSelectedDrink(null);
+    setSelectedBeverage(null);
     setIsPlaying(false);
     setCurrentStep(0);
     setProgress(0);
@@ -117,7 +126,7 @@ const RecipeBeveragePage = () => {
       <div className="beverages-page">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p>Loading refreshing beverages...</p>
+          <p>Loading delicious beverage recipes...</p>
         </div>
       </div>
     );
@@ -127,9 +136,9 @@ const RecipeBeveragePage = () => {
     <div className="beverages-page">
       <header className="beverages-header">
         <div className="beverages-header-content">
-          <h1 className="beverages-page-title">Beverage Collection</h1>
+          <h1 className="beverages-page-title">Beverage Recipes</h1>
           <p className="beverages-page-description">
-            A curated selection of refreshing drinks from around the world
+            Discover delicious beverage recipes with rich, flavorful, and refreshing taste
           </p>
         </div>
       </header>
@@ -137,18 +146,18 @@ const RecipeBeveragePage = () => {
       <main className="beverages-main">
         <div className="beverages-grid-section">
           <div className="beverages-grid">
-            {drinks.map(drink => (
+            {beverageRecipes.map(beverage => (
               <div
-                key={drink._id}
+                key={beverage._id}
                 className="beverages-card"
-                onClick={() => handleDrinkSelect(drink)}
+                onClick={() => handleBeverageSelect(beverage)}
               >
                 <div
                   className="beverages-card-image"
-                  style={{ backgroundImage: `url(${drink.image})` }}
+                  style={{ backgroundImage: `url(${beverage.image})` }}
                 ></div>
                 <div className="beverages-card-content">
-                  <h3 className="beverages-card-title">{drink.title}</h3>
+                  <h3 className="beverages-card-title">{beverage.title}</h3>
                 </div>
               </div>
             ))}
@@ -162,20 +171,21 @@ const RecipeBeveragePage = () => {
         </button>
       </div>
 
-      {showDetailPanel && selectedDrink && (
+      {showDetailPanel && selectedBeverage && (
         <div className="beverages-modal-overlay" onClick={closeDetailPanel}>
           <div className="beverages-modal" onClick={e => e.stopPropagation()}>
             <div className="beverages-modal-hero">
               <div className="beverages-modal-hero-left">
-                <h2 className="beverages-modal-hero-title">{selectedDrink.title}</h2>
-                {selectedDrink.tagline && (
-                  <p className="beverages-modal-hero-tagline">{selectedDrink.tagline}</p>
+                <span className="beverages-modal-tag">Beverage Recipe</span>
+                <h2 className="beverages-modal-hero-title">{selectedBeverage.title}</h2>
+                {selectedBeverage.tagline && (
+                  <p className="beverages-modal-hero-tagline">{selectedBeverage.tagline}</p>
                 )}
               </div>
               <div className="beverages-modal-hero-right">
                 <img
-                  src={selectedDrink.image}
-                  alt={selectedDrink.title}
+                  src={selectedBeverage.image}
+                  alt={selectedBeverage.title}
                   className="beverages-modal-hero-img"
                 />
               </div>
@@ -189,7 +199,7 @@ const RecipeBeveragePage = () => {
                   <h3>Ingredients</h3>
                 </div>
                 <div className="beverages-modal-scroll">
-                  {selectedDrink.ingredientsRaw?.map((ingredient, idx) => (
+                  {selectedBeverage.ingredientsRaw?.map((ingredient, idx) => (
                     <div key={idx} className="beverages-ingredient-item">
                       <span className="beverages-ingredient-dot"></span>
                       <span className="beverages-ingredient-text">{ingredient}</span>
@@ -204,7 +214,7 @@ const RecipeBeveragePage = () => {
                   <h3>Steps to Make</h3>
                 </div>
                 <div className="beverages-modal-scroll">
-                  {selectedDrink.stepsRaw?.map((step, idx) => (
+                  {selectedBeverage.stepsRaw?.map((step, idx) => (
                     <div key={idx} className="beverages-step-item">
                       <span className="beverages-step-num">{idx + 1}</span>
                       <span className="beverages-step-text">{step}</span>
@@ -225,7 +235,7 @@ const RecipeBeveragePage = () => {
                   <div className="beverages-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
                 <div className="beverages-progress-info">
-                  <span>Step {currentStep} of {selectedDrink.stepsRaw?.length || 0}</span>
+                  <span>Step {currentStep} of {selectedBeverage.stepsRaw?.length || 0}</span>
                   <span>{Math.round(progress)}%</span>
                 </div>
               </div>
@@ -240,7 +250,7 @@ const RecipeBeveragePage = () => {
                 </button>
                 <button
                   className={`beverages-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
-                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedDrink.stepsRaw)}
+                  onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedBeverage.stepsRaw)}
                 >
                   {isPlaying
                     ? <><i className="fas fa-stop"></i> Stop</>
@@ -250,7 +260,7 @@ const RecipeBeveragePage = () => {
                 <button
                   className="beverages-step-btn"
                   onClick={speakNextStep}
-                  disabled={currentStep >= (selectedDrink.stepsRaw?.length || 0)}
+                  disabled={currentStep >= (selectedBeverage.stepsRaw?.length || 0)}
                 >
                   Next <i className="fas fa-step-forward"></i>
                 </button>
