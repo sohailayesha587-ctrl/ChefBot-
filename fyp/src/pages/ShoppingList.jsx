@@ -1,32 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaCheck, FaEdit, FaTrash } from 'react-icons/fa';
 import { showToast } from '../components/Toast';
 import './ShoppingList.css';
 
-const categories = ['Groceries', 'Vegetables', 'Fruits', 'Dairy', 'Meat', 'Beverages', 'Snacks', 'Household', 'Other'];
-const units = ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles'];
-
-let idCounter = 1;
-const generateId = () => `local-${idCounter++}`;
-
-const emptyItem = { name: '', quantity: '', unit: 'pieces', category: 'Groceries' };
-
 const ShoppingList = () => {
-  const navigate = useNavigate();
-
-  const [items, setItems] = useState([
-    { _id: generateId(), name: 'Milk', quantity: 2, unit: 'liters', category: 'Dairy' },
-    { _id: generateId(), name: 'Bread', quantity: 1, unit: 'pieces', category: 'Groceries' },
-    { _id: generateId(), name: 'Apples', quantity: 6, unit: 'pieces', category: 'Fruits' },
-  ]);
-  const [purchasedIds, setPurchasedIds] = useState(new Set());
-
+  const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [currentItem, setCurrentItem] = useState(emptyItem);
+  const [currentItem, setCurrentItem] = useState({
+    name: '',
+    quantity: '',
+    unit: 'pieces',
+    category: 'Groceries'
+  });
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [showDeliveryModal, setShowDeliveryModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  const categories = ['Groceries', 'Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Snacks', 'Household', 'Other'];
+  const units = ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles'];
+
+  const getToken = () => localStorage.getItem('token');
 
   const shareOnWhatsApp = () => {
     if (items.length === 0) {
@@ -39,83 +37,151 @@ const ShoppingList = () => {
 
     categories.forEach((category) => {
       const categoryItems = items.filter((item) => item.category === category);
-      if (categoryItems.length === 0) return;
-
-      message += ` *${category.toUpperCase()}* (${categoryItems.length})\n`;
-      message += "─────────────────\n";
-      categoryItems.forEach((item, index) => {
-        const isPurchased = purchasedIds.has(item._id);
-        message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}${isPurchased ? ' ✅' : ''}\n`;
-      });
-      message += "\n";
+      if (categoryItems.length > 0) {
+        message += `📁 *${category.toUpperCase()}* (${categoryItems.length})\n`;
+        message += "─────────────────\n";
+        categoryItems.forEach((item, index) => {
+          message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}${item.purchased ? ' ✅' : ''}\n`;
+        });
+        message += "\n";
+      }
     });
+
+    const purchasedCount = items.filter((item) => item.purchased).length;
 
     message += "─────────────────\n";
     message += `Total Items: ${items.length}\n`;
-    message += `Purchased: ${purchasedIds.size}\n`;
-    message += `${new Date().toLocaleDateString()}\n`;
-    message += `ChefBot - Smart Kitchen\n`;
+    message += ` Purchased: ${purchasedCount}\n`;
+    message += ` ${new Date().toLocaleDateString()}\n`;
+    message += ` ChefBot - Smart Kitchen\n`;
     message += "─────────────────\n";
-    message += "Happy Shopping!";
+    message += "Happy Shopping! ";
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
   };
 
-  const handleSaveItem = () => {
+  const fetchShoppingItems = async () => {
+    try {
+      setLoading(true);
+      const token = getToken();
+      if (!token) {
+        navigate('/login-page');
+        return;
+      }
+
+      const res = await fetch('http://localhost:5000/api/shopping', {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items || []);
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchShoppingItems();
+  }, []);
+
+  const handleSaveItem = async () => {
     if (!currentItem.name || !currentItem.quantity) {
       showToast('Please fill all fields!', 'warning');
       return;
     }
 
-    const parsedQuantity = parseInt(currentItem.quantity, 10);
+    try {
+      const token = getToken();
+      const url = editMode
+        ? `http://localhost:5000/api/shopping/${currentItem._id}`
+        : 'http://localhost:5000/api/shopping';
+      const method = editMode ? 'PUT' : 'POST';
 
-    if (editMode) {
-      setItems((prev) =>
-        prev.map((item) =>
-          item._id === currentItem._id ? { ...item, ...currentItem, quantity: parsedQuantity } : item
-        )
-      );
-      showToast('Updated!', 'success');
-    } else {
-      setItems((prev) => [...prev, { ...currentItem, _id: generateId(), quantity: parsedQuantity }]);
-      showToast('Added!', 'success');
-    }
+      const res = await fetch(url, {
+        method,
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: currentItem.name,
+          quantity: parseFloat(currentItem.quantity),
+          unit: currentItem.unit,
+          category: currentItem.category
+        })
+      });
 
-    handleCloseModal();
-  };
-  const markAsPurchased = (id) => {
-    setPurchasedIds((prev) => {
-      const updated = new Set(prev);
-      if (updated.has(id)) {
-        updated.delete(id);
-        showToast('Marked as pending!', 'warning');
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items);
+        handleCloseModal();
+        showToast(editMode ? 'Updated!' : 'Added!', 'success');
       } else {
-        updated.add(id);
-        showToast('Marked as purchased!', 'success');
+        showToast(data.message || 'Failed', 'error');
       }
-      return updated;
-    });
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
   };
 
-  const handleDelete = (id) => {
-    setItems((prev) => prev.filter((item) => item._id !== id));
-    setPurchasedIds((prev) => {
-      const updated = new Set(prev);
-      updated.delete(id);
-      return updated;
-    });
-    showToast('Item deleted!', 'success');
+  const markAsPurchased = async (id) => {
+    try {
+      const token = getToken();
+      const res = await fetch(`http://localhost:5000/api/shopping/${id}/purchased`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items);
+        showToast(data.message, 'success');
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const token = getToken();
+      const res = await fetch(`http://localhost:5000/api/shopping/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items);
+        showToast('Item deleted!', 'success');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
   };
 
   const handleEdit = (item) => {
-    setCurrentItem({ _id: item._id, name: item.name, quantity: item.quantity, unit: item.unit, category: item.category });
+    setCurrentItem({
+      _id: item._id,
+      name: item.name,
+      quantity: item.quantity,
+      unit: item.unit,
+      category: item.category
+    });
     setEditMode(true);
     setShowModal(true);
   };
 
   const handleAddNew = () => {
-    setCurrentItem(emptyItem);
+    setCurrentItem({ name: '', quantity: '', unit: 'pieces', category: 'Groceries' });
     setEditMode(false);
     setShowModal(true);
   };
@@ -123,7 +189,7 @@ const ShoppingList = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setEditMode(false);
-    setCurrentItem(emptyItem);
+    setCurrentItem({ name: '', quantity: '', unit: 'pieces', category: 'Groceries' });
   };
 
   const openDeliveryModal = () => setShowDeliveryModal(true);
@@ -146,12 +212,22 @@ const ShoppingList = () => {
   );
 
   const totalItems = items.length;
-  const purchasedItems = purchasedIds.size;
+  const purchasedItems = items.filter((item) => item.purchased).length;
   const pendingItems = totalItems - purchasedItems;
+
+  if (loading) {
+    return (
+      <div className="shopping-page">
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="shopping-page">
-
       <div className="shopping-fullscreen-food-image">
         <div className="shopping-fullscreen-food-content">
           <h1>Your Smart Shopping List</h1>
@@ -165,6 +241,12 @@ const ShoppingList = () => {
           <p className="shopping-hero-subtitle">Manage items you need to purchase</p>
         </div>
       </div>
+
+      {error && (
+        <div className="shopping-error-message">
+          <i className="fas fa-exclamation-circle"></i> {error}
+        </div>
+      )}
 
       {items.length > 0 && (
         <div className="shopping-stats-section">
@@ -195,6 +277,7 @@ const ShoppingList = () => {
           Add New Item
         </button>
       </div>
+
       <div className="shopping-top-action-buttons">
         <button className="btn-shop-online" onClick={openDeliveryModal}>
           Shop Online
@@ -226,7 +309,7 @@ const ShoppingList = () => {
                 </div>
                 <div className="shopping-checklist-items">
                   {categoryItems.map((item) => {
-                    const isPurchased = purchasedIds.has(item._id);
+                    const isPurchased = item.purchased;
                     return (
                       <div key={item._id} className={`shopping-checklist-item ${isPurchased ? 'item-purchased' : ''}`}>
                         <span className="shopping-quantity-badge-simple">
@@ -274,25 +357,27 @@ const ShoppingList = () => {
                   onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}
                 />
               </div>
-
               <div className="shopping-form-group">
                 <label>Category</label>
                 <select value={currentItem.category} onChange={(e) => setCurrentItem({ ...currentItem, category: e.target.value })}>
-                  {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+                  {categories.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
                 </select>
               </div>
-
               <div className="shopping-form-group">
                 <label>Unit</label>
                 <select value={currentItem.unit} onChange={(e) => setCurrentItem({ ...currentItem, unit: e.target.value })}>
-                  {units.map((u) => <option key={u} value={u}>{u}</option>)}
+                  {units.map((u) => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
                 </select>
               </div>
-
               <div className="shopping-form-group">
                 <label>Quantity</label>
                 <input
                   type="number"
+                  step="any"
                   placeholder="e.g., 2, 0.5, 10"
                   value={currentItem.quantity}
                   onChange={(e) => setCurrentItem({ ...currentItem, quantity: e.target.value })}
@@ -310,10 +395,11 @@ const ShoppingList = () => {
       )}
 
       <div className="back-home-container">
-        <button className="btn-back-home" onClick={() => navigate('/')}>Back to Home</button>
+        <button className="btn-back-home" onClick={() => navigate('/')}>
+          Back to Home
+        </button>
       </div>
 
-      {/* Delivery options */}
       {showDeliveryModal && (
         <div className="shopping-modal-overlay" onClick={closeDeliveryModal}>
           <div className="delivery-modal" onClick={(e) => e.stopPropagation()}>

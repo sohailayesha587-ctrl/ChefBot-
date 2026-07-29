@@ -1,4 +1,4 @@
-const Shopping = require('../models/ShoppingList');
+const Shopping = require('../models/Shopping');
 
 const getShoppingItems = async (req, res) => {
   try {
@@ -40,7 +40,7 @@ const addShoppingItem = async (req, res) => {
       unit: unit.trim(),
       category: category.trim(),
       fromPantry: fromPantry || false,
-      purchased: false,
+      purchased: false
     });
 
     await newItem.save();
@@ -49,7 +49,7 @@ const addShoppingItem = async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Item added successfully!',
-      items,
+      items
     });
   } catch (error) {
     console.error('POST shopping error:', error);
@@ -94,7 +94,7 @@ const updateShoppingItem = async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Item updated successfully!',
-      items,
+      items
     });
   } catch (error) {
     console.error('PUT shopping error:', error);
@@ -120,7 +120,7 @@ const markAsPurchased = async (req, res) => {
     res.status(200).json({
       success: true,
       message: item.purchased ? 'Marked as purchased!' : 'Marked as pending!',
-      items,
+      items
     });
   } catch (error) {
     console.error('PATCH purchased error:', error);
@@ -143,7 +143,7 @@ const deleteShoppingItem = async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Item deleted successfully!',
-      items,
+      items
     });
   } catch (error) {
     console.error('DELETE shopping error:', error);
@@ -156,5 +156,5 @@ module.exports = {
   addShoppingItem,
   updateShoppingItem,
   markAsPurchased,
-  deleteShoppingItem,
+  deleteShoppingItem
 };

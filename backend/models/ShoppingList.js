@@ -5,22 +5,22 @@ const shoppingSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: true
     },
     name: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     quantity: {
       type: Number,
       required: true,
-      min: 0,
+      min: 0
     },
     unit: {
       type: String,
       required: true,
-      enum: ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles'],
+      enum: ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles']
     },
     category: {
       type: String,
@@ -36,22 +36,20 @@ const shoppingSchema = new mongoose.Schema(
         'Household',
         'Other',
         'Grains',
-        'Spices',
+        'Spices'
       ],
-      default: 'Groceries',
+      default: 'Groceries'
     },
     purchased: {
       type: Boolean,
-      default: false,
+      default: false
     },
     fromPantry: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model('Shopping', shoppingSchema);

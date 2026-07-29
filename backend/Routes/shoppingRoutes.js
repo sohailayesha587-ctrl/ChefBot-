@@ -6,7 +6,7 @@ const {
   addShoppingItem,
   updateShoppingItem,
   markAsPurchased,
-  deleteShoppingItem,
+  deleteShoppingItem
 } = require('../controllers/shoppingController');
 
 const { protect } = require('../middleware/authMiddleware');

@@ -1,125 +1,257 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaCartPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import { showToast } from '../components/Toast';
 import './PantryFeature.css';
 
-const categories = ['Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Other'];
-const units = ['kg', 'g', 'liters', 'ml', 'pieces', 'dozen'];
-
-const unitThreshold = {
-  kg: 1,
-  g: 500,
-  liters: 1,
-  ml: 500,
-  pieces: 3,
-  dozen: 0.25
-};
-const categoryThreshold = {
-  Vegetables: 1,
-  Fruits: 1,
-  Dairy: 0.5,
-  Grains: 2,
-  Spices: 0.2,
-  Meat: 0.5,
-  Beverages: 1,
-  Other: 0.5
-};
-
-const isLowStockItem = (item) => {
-  if (unitThreshold[item.unit] !== undefined) {
-    return item.quantity < unitThreshold[item.unit];
-  }
-  if (categoryThreshold[item.category] !== undefined) {
-    return item.quantity < categoryThreshold[item.category];
-  }
-  return item.quantity <= 0.5;
-};
-let idCounter = 1;
-const generateId = () => `local-${idCounter++}`;
-
-const emptyItem = { name: '', quantity: '', unit: 'kg', category: 'Vegetables' };
-
 const PantryFeature = () => {
-  const navigate = useNavigate();
-
-  const [items, setItems] = useState([
-    { _id: generateId(), name: 'Tomato', quantity: 2, unit: 'kg', category: 'Vegetables' },
-    { _id: generateId(), name: 'Milk', quantity: 0.5, unit: 'liters', category: 'Dairy' },
-    { _id: generateId(), name: 'Rice', quantity: 3, unit: 'kg', category: 'Grains' },
-  ]);
+  const [items, setItems] = useState([]);
   const [pantryShoppingList, setPantryShoppingList] = useState([]);
-
   const [showModal, setShowModal] = useState(false);
   const [showLowStockModal, setShowLowStockModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [currentItem, setCurrentItem] = useState(emptyItem);
-
+  const [currentItem, setCurrentItem] = useState({
+    name: '', quantity: '', unit: 'kg', category: 'Vegetables'
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [addingAll, setAddingAll] = useState(false);
 
-  const addToPantryShoppingList = (item) => {
-    const alreadyAdded = pantryShoppingList.some((i) => i.name === item.name);
-    if (alreadyAdded) return;
+  const navigate = useNavigate();
 
-    setPantryShoppingList((prev) => [
-      ...prev,
-      { _id: generateId(), name: item.name, quantity: item.quantity, unit: item.unit, category: item.category }
-    ]);
-    showToast(`${item.name} added!`, 'success');
+  const categories = ['Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Other'];
+  const units = ['kg', 'g', 'liters', 'ml', 'pieces', 'dozen'];
+
+  const unitThreshold = {
+    kg: 1,
+    g: 500,
+    liters: 1,
+    ml: 500,
+    pieces: 3,
+    dozen: 0.25
   };
 
-  const removeFromPantryShoppingList = (id) => {
-    setPantryShoppingList((prev) => prev.filter((i) => i._id !== id));
-    showToast('Item removed', 'info');
+  const categoryThreshold = {
+    Vegetables: 1,
+    Fruits: 1,
+    Dairy: 0.5,
+    Grains: 2,
+    Spices: 0.2,
+    Meat: 0.5,
+    Beverages: 1,
+    Other: 0.5
   };
 
-  const clearPantryShoppingList = () => {
-    setPantryShoppingList([]);
-    showToast('Shopping list cleared!', 'success');
+  const isLowStockItem = (item) => {
+    if (unitThreshold[item.unit] !== undefined) {
+      return item.quantity < unitThreshold[item.unit];
+    }
+    const catThreshold = categoryThreshold[item.category];
+    if (catThreshold !== undefined) {
+      return item.quantity < catThreshold;
+    }
+    return item.quantity <= 0.5;
   };
 
-  const addAllToShoppingAndRedirect = () => {
+  const getToken = () => localStorage.getItem('token');
+
+  const fetchPantryItems = async () => {
+    try {
+      setLoading(true);
+      const token = getToken();
+      if (!token) {
+        navigate('/login-page');
+        return;
+      }
+      const res = await fetch('http://localhost:5000/api/pantry', {
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (res.ok) setItems(data.items || []);
+    } catch (err) {
+      console.error(err);
+      showToast('Server error', 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPantryShoppingList = async () => {
+    try {
+      const token = getToken();
+      if (!token) return;
+      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (res.ok) setPantryShoppingList(data.items || []);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addToPantryShoppingList = async (item) => {
+    try {
+      const token = getToken();
+      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: item.name, quantity: item.quantity, unit: item.unit, category: item.category })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPantryShoppingList(data.items);
+        showToast(`${item.name} added!`, 'success');
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  const removeFromPantryShoppingList = async (id) => {
+    try {
+      const token = getToken();
+      const res = await fetch(`http://localhost:5000/api/pantry-shopping/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPantryShoppingList(data.items);
+        showToast('Item removed', 'info');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  const clearPantryShoppingList = async () => {
+    try {
+      const token = getToken();
+      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPantryShoppingList([]);
+        showToast('Shopping list cleared!', 'success');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
+  };
+
+  const addAllToShoppingAndRedirect = async () => {
     if (pantryShoppingList.length === 0) {
       showToast('No items to add!', 'warning');
       return;
     }
-
     setAddingAll(true);
-    showToast(`${pantryShoppingList.length} item(s) added to main shopping list!`, 'success');
-    clearPantryShoppingList();
-    navigate('/smart-shopping');
+    let successCount = 0;
 
-    setAddingAll(false);
+    try {
+      const token = getToken();
+      if (!token) {
+        showToast('Please login again', 'error');
+        navigate('/login-page');
+        return;
+      }
+
+      for (const item of pantryShoppingList) {
+        try {
+          const res = await fetch('http://localhost:5000/api/shopping', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: item.name,
+              quantity: item.quantity,
+              unit: item.unit,
+              category: item.category,
+              fromPantry: true
+            })
+          });
+          if (res.ok) {
+            successCount++;
+          } else {
+            const errData = await res.json();
+            console.error('Failed to add', item.name, errData);
+          }
+        } catch (err) {
+          console.error('Error adding', item.name, err);
+        }
+      }
+
+      if (successCount > 0) {
+        showToast(`${successCount} item(s) added to main shopping list!`, 'success');
+        await clearPantryShoppingList();
+        navigate('/smart-shopping');
+      } else {
+        showToast('Failed to add items. Check console.', 'error');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('Server error. Please try again.', 'error');
+    } finally {
+      setAddingAll(false);
+    }
   };
 
-  const handleSaveItem = () => {
+  const handleSaveItem = async () => {
     if (!currentItem.name || !currentItem.quantity) {
       showToast('Please fill all fields!', 'warning');
       return;
     }
-
-    const parsedQuantity = parseFloat(currentItem.quantity);
-
-    if (editMode) {
-      setItems((prev) =>
-        prev.map((item) =>
-          item._id === currentItem._id ? { ...item, ...currentItem, quantity: parsedQuantity } : item
-        )
-      );
-      showToast('Updated!', 'success');
-    } else {
-      setItems((prev) => [...prev, { ...currentItem, _id: generateId(), quantity: parsedQuantity }]);
-      showToast('Added!', 'success');
+    try {
+      const token = getToken();
+      const url = editMode
+        ? `http://localhost:5000/api/pantry/${currentItem._id}`
+        : 'http://localhost:5000/api/pantry';
+      const res = await fetch(url, {
+        method: editMode ? 'PUT' : 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: currentItem.name,
+          quantity: parseFloat(currentItem.quantity),
+          unit: currentItem.unit,
+          category: currentItem.category
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items);
+        handleCloseModal();
+        showToast(editMode ? 'Updated!' : 'Added!', 'success');
+      } else {
+        showToast(data.message || 'Failed', 'error');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
     }
-
-    handleCloseModal();
   };
 
-  const handleDelete = (id) => {
-    setItems((prev) => prev.filter((item) => item._id !== id));
-    showToast('Item deleted!', 'success');
+  const handleDelete = async (id) => {
+    try {
+      const token = getToken();
+      const res = await fetch(`http://localhost:5000/api/pantry/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setItems(data.items);
+        showToast('Item deleted!', 'success');
+      }
+    } catch (err) {
+      showToast('Server error', 'error');
+    }
   };
 
   const handleEdit = (item) => {
@@ -129,7 +261,7 @@ const PantryFeature = () => {
   };
 
   const handleAddNew = () => {
-    setCurrentItem(emptyItem);
+    setCurrentItem({ name: '', quantity: '', unit: 'kg', category: 'Vegetables' });
     setEditMode(false);
     setShowModal(true);
   };
@@ -137,8 +269,13 @@ const PantryFeature = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setEditMode(false);
-    setCurrentItem(emptyItem);
+    setCurrentItem({ name: '', quantity: '', unit: 'kg', category: 'Vegetables' });
   };
+
+  useEffect(() => {
+    fetchPantryItems();
+    fetchPantryShoppingList();
+  }, []);
 
   const lowStockItems = items.filter(isLowStockItem);
   const isSearchActive = searchTerm.trim().length > 0;
@@ -147,16 +284,25 @@ const PantryFeature = () => {
   const tabItems = isSearchActive
     ? items.filter((i) => i.name.toLowerCase().includes(searchTerm.toLowerCase()))
     : activeTab === 'All'
-      ? items
-      : items.filter((i) => i.category === activeTab);
+    ? items
+    : items.filter((i) => i.category === activeTab);
 
   const totalItems = items.length;
   const totalCategories = [...new Set(items.map((i) => i.category))].length;
 
+  if (loading) {
+    return (
+      <div className="pantry-page">
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pantry-page">
-
-      {/* Hero banner */}
       <div className="fullscreen-food-image">
         <div className="fullscreen-food-content">
           <h1>Your Smart Kitchen Pantry</h1>
@@ -170,7 +316,8 @@ const PantryFeature = () => {
         </div>
       </div>
 
-      {/* Stats */}
+      {error && <div className="pantry-error-message">{error}</div>}
+
       {items.length > 0 && (
         <div className="stats-section">
           <div className="stat-card">
@@ -187,13 +334,17 @@ const PantryFeature = () => {
           </div>
         </div>
       )}
+
       <div className="top-controls-row">
         <div className="search-add-section">
           <input
             type="text"
             placeholder="Search items..."
             value={searchTerm}
-            onChange={(e) => { setSearchTerm(e.target.value); setActiveTab('All'); }}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setActiveTab('All');
+            }}
             className="search-field-pantry"
           />
           <button className="btn-add-new-item" onClick={handleAddNew}>+ Add New Item</button>
@@ -206,6 +357,7 @@ const PantryFeature = () => {
           )}
         </div>
       </div>
+
       <div className="shopping-list-section">
         <div className="shopping-list-header">
           <h3 className="shopping-list-title">Shopping List ({pantryShoppingList.length})</h3>
@@ -240,6 +392,7 @@ const PantryFeature = () => {
           )}
         </div>
       </div>
+
       {items.length === 0 ? (
         <div className="p-empty-message">
           <h4>Your pantry is empty</h4>
@@ -248,7 +401,6 @@ const PantryFeature = () => {
         </div>
       ) : (
         <div className="tabs-wrapper">
-
           {!isSearchActive && (
             <div className="tabs-nav-bar">
               {allTabs.map((cat) => {
@@ -287,7 +439,7 @@ const PantryFeature = () => {
                   <button
                     className="btn-add-to-cat"
                     onClick={() => {
-                      setCurrentItem({ ...emptyItem, category: activeTab === 'All' ? 'Vegetables' : activeTab });
+                      setCurrentItem({ name: '', quantity: '', unit: 'kg', category: activeTab === 'All' ? 'Vegetables' : activeTab });
                       setEditMode(false);
                       setShowModal(true);
                     }}
@@ -300,23 +452,23 @@ const PantryFeature = () => {
           ) : (
             <div className="tab-items-grid">
               {tabItems.map((item) => {
-                const isLowStock = isLowStockItem(item);
-                const isInShoppingList = pantryShoppingList.some((i) => i.name === item.name);
+                const lowStock = isLowStockItem(item);
+                const alreadyInList = pantryShoppingList.some((i) => i.name === item.name);
                 return (
-                  <div key={item._id} className={`tab-item-card ${isLowStock ? 'low-stock' : ''}`}>
+                  <div key={item._id} className={`tab-item-card ${lowStock ? 'low-stock' : ''}`}>
                     <div className="tab-card-top">
-                      <span className={`tab-qty-badge ${isLowStock ? 'low' : ''}`}>
+                      <span className={`tab-qty-badge ${lowStock ? 'low' : ''}`}>
                         {item.quantity} {item.unit}
                       </span>
-                      {isLowStock && <span className="low-stock-flag">Low Stock</span>}
+                      {lowStock && <span className="low-stock-flag">Low Stock</span>}
                     </div>
                     <h4 className="tab-item-name">{item.name}</h4>
                     <p className="tab-item-cat">{item.category}</p>
                     <div className="tab-card-actions">
                       <button
-                        className={`tab-btn-cart ${isInShoppingList ? 'added' : ''}`}
+                        className={`tab-btn-cart ${alreadyInList ? 'added' : ''}`}
                         onClick={() => addToPantryShoppingList(item)}
-                        disabled={isInShoppingList}
+                        disabled={alreadyInList}
                         title="Add to shopping list"
                       >
                         <FaCartPlus />
@@ -335,6 +487,7 @@ const PantryFeature = () => {
           )}
         </div>
       )}
+
       {showLowStockModal && (
         <div className="pantry-modal-overlay" onClick={() => setShowLowStockModal(false)}>
           <div className="pantry-modal low-stock-modal" onClick={(e) => e.stopPropagation()}>
@@ -348,7 +501,7 @@ const PantryFeature = () => {
               ) : (
                 <div className="low-stock-modal-grid">
                   {lowStockItems.map((item) => {
-                    const isInShoppingList = pantryShoppingList.some((i) => i.name === item.name);
+                    const alreadyInList = pantryShoppingList.some((i) => i.name === item.name);
                     return (
                       <div key={item._id} className="low-stock-modal-card">
                         <div className="modal-card-top">
@@ -359,23 +512,29 @@ const PantryFeature = () => {
                         <p className="modal-item-cat">{item.category}</p>
                         <div className="modal-card-actions">
                           <button
-                            className={`modal-btn-cart ${isInShoppingList ? 'added' : ''}`}
+                            className={`modal-btn-cart ${alreadyInList ? 'added' : ''}`}
                             onClick={() => addToPantryShoppingList(item)}
-                            disabled={isInShoppingList}
+                            disabled={alreadyInList}
                             title="Add to shopping list"
                           >
                             <FaCartPlus />
                           </button>
                           <button
                             className="modal-btn-icon edit"
-                            onClick={() => { handleEdit(item); setShowLowStockModal(false); }}
+                            onClick={() => {
+                              handleEdit(item);
+                              setShowLowStockModal(false);
+                            }}
                             title="Edit item"
                           >
                             <FaEdit />
                           </button>
                           <button
                             className="modal-btn-icon del"
-                            onClick={() => { handleDelete(item._id); setShowLowStockModal(false); }}
+                            onClick={() => {
+                              handleDelete(item._id);
+                              setShowLowStockModal(false);
+                            }}
                             title="Delete item"
                           >
                             <FaTrash />
@@ -393,6 +552,7 @@ const PantryFeature = () => {
           </div>
         </div>
       )}
+
       {showModal && (
         <div className="pantry-modal-overlay" onClick={handleCloseModal}>
           <div className="pantry-modal" onClick={(e) => e.stopPropagation()}>
@@ -410,27 +570,22 @@ const PantryFeature = () => {
                   placeholder="e.g., Tomato, Rice, Milk"
                 />
               </div>
-
               <div className="form-group">
                 <label>Category</label>
-                <select
-                  value={currentItem.category}
-                  onChange={(e) => setCurrentItem({ ...currentItem, category: e.target.value })}
-                >
-                  {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+                <select value={currentItem.category} onChange={(e) => setCurrentItem({ ...currentItem, category: e.target.value })}>
+                  {categories.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
                 </select>
               </div>
-
               <div className="form-group">
                 <label>Unit</label>
-                <select
-                  value={currentItem.unit}
-                  onChange={(e) => setCurrentItem({ ...currentItem, unit: e.target.value })}
-                >
-                  {units.map((u) => <option key={u} value={u}>{u}</option>)}
+                <select value={currentItem.unit} onChange={(e) => setCurrentItem({ ...currentItem, unit: e.target.value })}>
+                  {units.map((u) => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
                 </select>
               </div>
-
               <div className="form-group">
                 <label>Quantity</label>
                 <input
