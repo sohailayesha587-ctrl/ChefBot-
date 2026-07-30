@@ -15,6 +15,7 @@ const recipeRoutes = require('./routes/recipeRoutes');
 const shoppingRoutes = require('./routes/shoppingRoutes');
 const pantryRoutes = require('./routes/pantryRoutes');
 const pantryShoppingRoutes = require('./routes/pantryShoppingRoutes');
+const mealPlanRoutes = require('./routes/mealPlanRoutes'); 
 const mealSuggestionRoutes = require('./routes/mealSuggestionRoutes');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api/recipes', recipeRoutes);
 app.use('/api/shopping', shoppingRoutes);
 app.use('/api/pantry', pantryRoutes);
 app.use('/api/pantry-shopping', pantryShoppingRoutes);
+app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/uploads', express.static('uploads'));
 app.get('/', (req, res) => {
