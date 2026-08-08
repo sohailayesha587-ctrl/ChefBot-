@@ -380,26 +380,28 @@
   }
 
   .mobile-logout {
-    color: #c0392b !important;
+    color: #c0392b ;
   }
 
   .mobile-logout i {
-    color: #c0392b !important;
+    color: #c0392b;
   }
 
   .mobile-logout:hover {
-    background: #fff5f5 !important;
+    background: #fff5f5 ;
   }
 }
 
 @media (max-width: 380px) {
   .mobile-search-container {
-    max-width: 90px;
+    max-width: 150px;
     padding: 2px 8px;
+    margin-left: 50px;
   }
 
   .mobile-search-input::placeholder {
     font-size: 0.6rem;
+    padding: 0px 10px;
   }
 
   .mobile-icon-btn {
@@ -409,8 +411,9 @@
   }
 
   .mobile-logo-img {
-    width: 28px;
-    height: 38px;
+    width: 45px;
+    height: 55px;
+    margin-top: 7px;
   }
 
   .mobile-login-btn-nav {

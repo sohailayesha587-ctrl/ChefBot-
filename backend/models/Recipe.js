@@ -64,7 +64,6 @@ const recipeSchema = new mongoose.Schema(
         'heavy-gravy',
         'student',
         'qeema',
-        'light-dinner',
         'soups',
         'snacks',
         'dal-mutton',

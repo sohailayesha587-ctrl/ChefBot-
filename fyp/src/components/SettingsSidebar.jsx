@@ -12,31 +12,24 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [notificationEnabled, setNotificationEnabled] = useState(true);
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
+  const [theme, setTheme] = useState('light');
+  const [language, setLanguage] = useState('en');
   
-  const [showEditMenu, setShowEditMenu] = useState(false);
   const [stats, setStats] = useState({
     totalTimers: 0,
-    activeTimers: 0
+    activeTimers: 0,
+    completedTimers: 0
   });
-
-  const [showDailyReport, setShowDailyReport] = useState(false);
-  const [missingNotifications, setMissingNotifications] = useState([]);
-  const [loadingReport, setLoadingReport] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentReport, setCurrentReport] = useState(null);
-  const [currentNotificationId, setCurrentNotificationId] = useState(null);
 
   useEffect(() => {
     if (isOpen) {
       fetchProfile();
       fetchSettings();
       fetchStats();
-      fetchMissingNotifications();
       document.body.style.overflow = 'hidden';
     } else {
       setIsProfileExpanded(false);
       setEditingName(false);
-      setShowEditMenu(false);
       document.body.style.overflow = 'auto';
     }
     return () => {
@@ -46,9 +39,11 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axiosInstance.get('/users/profile');
-      setUser(response.data.user);
-      setName(response.data.user.name);
+      const response = await axiosInstance.get('/api/users/profile');
+      if (response.data.success) {
+        setUser(response.data.user);
+        setName(response.data.user.name);
+      }
     } catch (error) {
       console.error('Error fetching profile:', error);
     }
@@ -56,11 +51,14 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
   const fetchSettings = async () => {
     try {
-      const response = await axiosInstance.get('/users/settings');
-      if (response.data.settings) {
-        setSoundEnabled(response.data.settings.soundPreferences?.beepEnabled ?? true);
-        setNotificationEnabled(response.data.settings.notificationPreferences?.browserNotification ?? true);
-        setVibrationEnabled(response.data.settings.soundPreferences?.vibrationEnabled ?? true);
+      const response = await axiosInstance.get('/api/users/settings');
+      if (response.data.success) {
+        const settings = response.data.settings;
+        setSoundEnabled(settings.soundPreferences?.timerSound === 'default' ?? true);
+        setNotificationEnabled(settings.notificationPreferences?.emailNotifications ?? true);
+        setVibrationEnabled(settings.soundPreferences?.volume > 0 ?? true);
+        setTheme(settings.displayPreferences?.theme || 'light');
+        setLanguage(settings.displayPreferences?.language || 'en');
       }
     } catch (error) {
       console.error('Error fetching settings:', error);
@@ -71,77 +69,28 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
   const fetchStats = async () => {
     try {
-      const response = await axiosInstance.get('/users/stats');
-      setStats({
-        totalTimers: response.data.stats?.totalTimers || 0,
-        activeTimers: response.data.stats?.activeTimers || 0
-      });
+      const response = await axiosInstance.get('/api/users/stats');
+      if (response.data.success) {
+        setStats({
+          totalTimers: response.data.stats?.totalTimers || 0,
+          activeTimers: response.data.stats?.activeTimers || 0,
+          completedTimers: response.data.stats?.completedTimers || 0
+        });
+      }
     } catch (error) {
       console.error('Error fetching stats:', error);
     }
   };
 
-  const fetchMissingNotifications = async () => {
+  const updateProfile = async () => {
     try {
-      setLoadingReport(true);
-      const response = await getMissingNotifications();
-      setMissingNotifications(response.notifications || []);
-    } catch (error) {
-      console.error('Error fetching missing notifications:', error);
-      setMissingNotifications([]);
-    } finally {
-      setLoadingReport(false);
-    }
-  };
-
-  const handleAnswerNow = async (notificationId, reportId) => {
-    try {
-      setCurrentNotificationId(notificationId);
-      const response = await getDailyReportQuestions(reportId);
-      setCurrentReport(response.report);
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to load report questions');
-    }
-  };
-
-  const handleSubmitReport = async (reportId, answers) => {
-    try {
-      const response = await submitReportAnswers(reportId, answers);
-      alert(response.message);
-      if (currentNotificationId) {
-        await markAsReplied(currentNotificationId);
+      const response = await axiosInstance.put('/api/users/profile', { name });
+      if (response.data.success) {
+        setUser({ ...user, name });
+        setEditingName(false);
+        setIsProfileExpanded(false);
+        alert('Name updated successfully');
       }
-      await fetchMissingNotifications();
-      setIsModalOpen(false);
-      setCurrentReport(null);
-      setCurrentNotificationId(null);
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to submit report');
-    }
-  };
-
-  const handleGenerateReport = async () => {
-    try {
-      setLoadingReport(true);
-      const response = await generateReport();
-      alert(response.message);
-      await fetchMissingNotifications();
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to generate report');
-    }
-  };
-
-  const updateName = async () => {
-    try {
-      await axiosInstance.put('/users/profile', { name });
-      setUser({ ...user, name });
-      setEditingName(false);
-      setIsProfileExpanded(false);
-      alert('Name updated successfully!');
     } catch (error) {
       alert('Failed to update name');
     }
@@ -149,25 +98,35 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
   const updateSettings = async () => {
     try {
-      await axiosInstance.put('/users/settings', {
-        soundPreferences: { 
-          beepEnabled: soundEnabled,
-          vibrationEnabled: vibrationEnabled 
+      const response = await axiosInstance.put('/api/users/settings', {
+        soundPreferences: {
+          timerSound: soundEnabled ? 'default' : 'none',
+          volume: vibrationEnabled ? 70 : 0
         },
-        notificationPreferences: { 
-          browserNotification: notificationEnabled 
+        notificationPreferences: {
+          emailNotifications: notificationEnabled,
+          pushNotifications: notificationEnabled,
+          timerReminders: notificationEnabled
+        },
+        displayPreferences: {
+          theme: theme,
+          language: language
         }
       });
       
-      localStorage.setItem('soundEnabled', soundEnabled);
-      localStorage.setItem('vibrationEnabled', vibrationEnabled);
-      localStorage.setItem('notificationEnabled', notificationEnabled);
-      
-      if (notificationEnabled && Notification.permission === 'default') {
-        Notification.requestPermission();
+      if (response.data.success) {
+        localStorage.setItem('soundEnabled', soundEnabled);
+        localStorage.setItem('vibrationEnabled', vibrationEnabled);
+        localStorage.setItem('notificationEnabled', notificationEnabled);
+        localStorage.setItem('theme', theme);
+        localStorage.setItem('language', language);
+        
+        if (notificationEnabled && Notification.permission === 'default') {
+          Notification.requestPermission();
+        }
+        
+        alert('Settings saved successfully');
       }
-      
-      alert('Settings saved successfully!');
     } catch (error) {
       console.error('Error saving settings:', error);
       alert('Failed to save settings');
@@ -177,7 +136,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   const playSound = () => {
     if (soundEnabled) {
       const audio = new Audio('/timer-sound.mp3');
-      audio.play().catch(e => console.log('Sound play failed:', e));
+      audio.play().catch(() => {});
     }
   };
 
@@ -216,10 +175,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       <div className={`settings-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <div className="header-title-section">
-            <span className="title-icon"></span>
             <h2>Settings</h2>
           </div>
-          <button className="close-btn" onClick={onClose}>X</button>
+          <button className="close-btn" onClick={onClose}>×</button>
         </div>
 
         {loading ? (
@@ -250,7 +208,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                     autoFocus
                   />
                   <div className="edit-btns">
-                    <button className="save-btn" onClick={updateName}>Save</button>
+                    <button className="save-btn" onClick={updateProfile}>Save</button>
                     <button className="cancel-btn" onClick={() => setEditingName(false)}>Cancel</button>
                   </div>
                 </div>
@@ -287,77 +245,32 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
             <div className="stats-row">
               <div className="stat-card">
-                <span className="stat-icon"></span>
                 <div>
                   <div className="stat-number">{stats.totalTimers}</div>
                   <div className="stat-label">Total Timers</div>
                 </div>
               </div>
               <div className="stat-card">
-                <span className="stat-icon"></span>
                 <div>
                   <div className="stat-number">{stats.activeTimers}</div>
                   <div className="stat-label">Active Timers</div>
                 </div>
               </div>
-            </div>
-
-            <div className="settings-block">
-              <div className="block-title">
-                <span className="title-line"></span>
-                <h4>Daily Report</h4>
-              </div>
-
-              <button 
-                className="report-btn"
-                onClick={() => setShowDailyReport(!showDailyReport)}
-              >
-                {showDailyReport ? 'Hide Daily Report' : 'View Daily Report'}
-                {missingNotifications.length > 0 && (
-                  <span className="badge">{missingNotifications.length}</span>
-                )}
-              </button>
-
-              {showDailyReport && (
-                <div className="report-panel">
-                  {loadingReport ? (
-                    <p>Loading...</p>
-                  ) : missingNotifications.length === 0 ? (
-                    <div className="empty-state">No missing notifications!</div>
-                  ) : (
-                    <>
-                      {missingNotifications.map((notif, idx) => (
-                        <div key={idx} className="notification-item">
-                          <div>
-                            <div className="notif-title">{notif.title}</div>
-                            <div className="notif-msg">{notif.message}</div>
-                          </div>
-                          <button 
-                            className="answer-btn"
-                            onClick={() => handleAnswerNow(notif.id, notif.reportId)}
-                          >
-                            Answer
-                          </button>
-                        </div>
-                      ))}
-                      <button className="generate-btn" onClick={handleGenerateReport}>
-                        Generate Report
-                      </button>
-                    </>
-                  )}
+              <div className="stat-card">
+                <div>
+                  <div className="stat-number">{stats.completedTimers}</div>
+                  <div className="stat-label">Completed</div>
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="settings-block">
               <div className="block-title">
-                <span className="title-line"></span>
                 <h4>Preferences</h4>
               </div>
 
               <div className="setting-item">
                 <div className="setting-left">
-                  <span></span>
                   <div>
                     <div className="setting-title">Sound Effects</div>
                     <div className="setting-desc">Play sound when timer ends</div>
@@ -371,7 +284,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
               <div className="setting-item">
                 <div className="setting-left">
-                  <span></span>
                   <div>
                     <div className="setting-title">Notifications</div>
                     <div className="setting-desc">Receive browser notifications</div>
@@ -385,7 +297,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
 
               <div className="setting-item">
                 <div className="setting-left">
-                  <span></span>
                   <div>
                     <div className="setting-title">Vibration</div>
                     <div className="setting-desc">Haptic feedback on completion</div>
@@ -395,6 +306,47 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
                   <input type="checkbox" checked={vibrationEnabled} onChange={(e) => setVibrationEnabled(e.target.checked)} />
                   <span className="toggle-slider"></span>
                 </label>
+              </div>
+            </div>
+
+            <div className="settings-block">
+              <div className="block-title">
+                <h4>Appearance</h4>
+              </div>
+
+              <div className="setting-item">
+                <div className="setting-left">
+                  <div>
+                    <div className="setting-title">Theme</div>
+                    <div className="setting-desc">Choose your preferred theme</div>
+                  </div>
+                </div>
+                <select 
+                  className="theme-select"
+                  value={theme} 
+                  onChange={(e) => setTheme(e.target.value)}
+                >
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                  <option value="system">System</option>
+                </select>
+              </div>
+
+              <div className="setting-item">
+                <div className="setting-left">
+                  <div>
+                    <div className="setting-title">Language</div>
+                    <div className="setting-desc">Choose your preferred language</div>
+                  </div>
+                </div>
+                <select 
+                  className="language-select"
+                  value={language} 
+                  onChange={(e) => setLanguage(e.target.value)}
+                >
+                  <option value="en">English</option>
+                  <option value="ur">Urdu</option>
+                </select>
               </div>
             </div>
 

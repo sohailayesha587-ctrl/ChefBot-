@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import AlarmModal from './AlarmModal';
 import './Header.css';
 
 const Header = ({ onSettingsClick }) => {
   const { user } = useAuth();
   const [search, setSearch] = useState('');
-  const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [showLang, setShowLang] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   
@@ -16,7 +14,7 @@ const Header = ({ onSettingsClick }) => {
 
   const authPages = ['/login-page', '/signup', '/forgot-password', '/verify-otp', '/reset-password', '/logout'];
   if (authPages.includes(location.pathname)) return null;
-  if (location.pathname === '/urdu-login' || location.pathname === '/Alarm') return null;
+  if (location.pathname === '/urdu-login') return null;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -25,11 +23,6 @@ const Header = ({ onSettingsClick }) => {
       setSearch('');
       setMobileMenu(false);
     }
-  };
-
-  const openAlarm = () => {
-    if (!user) { navigate('/login-page'); return; }
-    setIsAlarmOpen(true);
   };
 
   const changeLanguage = (lang) => {
@@ -83,7 +76,6 @@ const Header = ({ onSettingsClick }) => {
 
         <div className="nav-right">
           {!user && <Link to="/login-page" className="login-btn-nav"><i className="fas fa-sign-in-alt"></i> Login</Link>}
-          {user && <div className="simple-icon alarm-icon" onClick={openAlarm}><i className="fas fa-bell"></i></div>}
           
           <div className="language-selector">
             <div className="simple-icon" onClick={() => setShowLang(!showLang)}><i className="fas fa-globe"></i></div>
@@ -122,7 +114,6 @@ const Header = ({ onSettingsClick }) => {
 
         <div className="mobile-nav-right">
           <Link to="/home" className="mobile-icon-btn"><i className="fas fa-home"></i></Link>
-          {user && <div className="mobile-icon-btn" onClick={openAlarm}><i className="fas fa-bell"></i></div>}
           {!user && <Link to="/login-page" className="mobile-login-btn-nav"><i className="fas fa-sign-in-alt"></i> Login</Link>}
           <div className="mobile-icon-btn" onClick={() => setMobileMenu(!mobileMenu)}>
             <i className={mobileMenu ? 'fas fa-times' : 'fas fa-bars'}></i>
@@ -150,7 +141,6 @@ const Header = ({ onSettingsClick }) => {
         )}
       </nav>
 
-      <AlarmModal isOpen={isAlarmOpen} onClose={() => setIsAlarmOpen(false)} />
     </>
   );
 };

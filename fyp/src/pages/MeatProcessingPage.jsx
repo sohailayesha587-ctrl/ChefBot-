@@ -11,6 +11,7 @@ const MeatProcessingPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   const [beefData, setBeefData] = useState([]);
   const [lambData, setLambData] = useState([]);
@@ -32,8 +33,17 @@ const MeatProcessingPage = () => {
     fetchAllMeatData();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) setSidebarOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const fetchAllMeatData = async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios.get(API_URL, {
         params: { category: 'meat-processing' }
@@ -76,7 +86,11 @@ const MeatProcessingPage = () => {
           tips: content.tips || '',
           bestFor: content.bestFor || '',
           type: type,
-          meatType: meatType
+          meatType: meatType,
+          keyFeatures: content.keyFeatures || [],
+          properUsage: content.properUsage || [],
+          commonMistakes: content.commonMistakes || [],
+          types: content.types || []
         };
         
         if (meatType === 'beef') beef.push(item);
@@ -129,9 +143,56 @@ const MeatProcessingPage = () => {
     };
   };
 
+  const getCategoryTitle = () => {
+    return selectedMeat.charAt(0).toUpperCase() + selectedMeat.slice(1);
+  };
+
+  const getCategoryDescription = () => {
+    return `Professional ${selectedMeat} processing - deboning, cleaning, and cuts`;
+  };
+
   const currentData = getCurrentMeatData();
   const currentCounts = getCounts(selectedMeat);
   const filteredData = currentData.filter(item => item.type === selectedTab);
+
+  const MeatIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C8.5 2 5.5 4.5 5.5 8C5.5 10 6.5 11.5 8 12.5V14H16V12.5C17.5 11.5 18.5 10 18.5 8C18.5 4.5 15.5 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M8 14V19C8 20.1 8.9 21 10 21H14C15.1 21 16 20.1 16 19V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M9 17H15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const LightbulbIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.5 19.5H14.5M9.5 21.5H14.5M12 2.5C8.5 2.5 5.5 5.2 5.5 9C5.5 11.5 7 13.5 8.5 15C9.5 16 10 17 10 18H14C14 17 14.5 16 15.5 15C17 13.5 18.5 11.5 18.5 9C18.5 5.2 15.5 2.5 12 2.5Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const WarningIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const tipIcons = [<LightbulbIcon />, <LightbulbIcon />, <WarningIcon />];
+
+  const renderSafeContent = (content) => {
+    if (!content) return null;
+    if (typeof content === 'string') return content;
+    if (typeof content === 'number') return String(content);
+    if (Array.isArray(content)) {
+      return content.map(c => {
+        if (typeof c === 'string') return c;
+        if (typeof c === 'object') return c.name || c.description || JSON.stringify(c);
+        return String(c);
+      }).join(', ');
+    }
+    if (typeof content === 'object') {
+      return content.name || content.description || content.fullDesc || JSON.stringify(content);
+    }
+    return String(content);
+  };
 
   if (loading) {
     return (
@@ -143,8 +204,23 @@ const MeatProcessingPage = () => {
 
   return (
     <div className="mep-container">
+      <div className="mep-mobile-topbar">
+        <button
+          className={`mep-hamburger ${sidebarOpen ? 'open' : ''}`}
+          onClick={() => setSidebarOpen(prev => !prev)}
+        >
+          <span /><span /><span />
+        </button>
+        <h1 className="mep-page-title">{getCategoryTitle()}</h1>
+      </div>
+
+      <div
+        className={`mep-sidebar-overlay${sidebarOpen ? ' visible' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
       <div className="mep-layout">
-        <aside className="mep-sidebar">
+        <aside className={`mep-sidebar${sidebarOpen ? ' open' : ''}`}>
           <div className="mep-sidebar-header">
             <h2 className="mep-sidebar-title">Meat Processing</h2>
             <p className="mep-sidebar-subtitle">Professional Butchery Skills</p>
@@ -156,8 +232,8 @@ const MeatProcessingPage = () => {
                 return (
                   <li key={meat.id} 
                       className={`mep-category-item ${selectedMeat === meat.key ? 'mep-active' : ''}`}
-                      onClick={() => setSelectedMeat(meat.key)}>
-                    <span className="mep-category-name">{meat.name} ({counts.total})</span>
+                      onClick={() => { setSelectedMeat(meat.key); setSidebarOpen(false); }}>
+                    <span className="mep-category-name">{meat.name}</span>
                   </li>
                 );
               })}
@@ -166,11 +242,12 @@ const MeatProcessingPage = () => {
         </aside>
 
         <main className="mep-main">
-          {error && <div className="error-message">{error}</div>}
-          
           <header className="mep-main-header">
-            <h1 className="mep-page-title">{selectedMeat.charAt(0).toUpperCase() + selectedMeat.slice(1)}</h1>
-            <p className="mep-page-description">Professional {selectedMeat} processing - deboning, cleaning, and cuts</p>
+            <div className="mep-header-content">
+              <h1 className="mep-page-title desktop-title">{getCategoryTitle()}</h1>
+              <p className="mep-page-description">{getCategoryDescription()}</p>
+              {error && <p className="error-note">{error}</p>}
+            </div>
           </header>
 
           <div className="mep-tabs">
@@ -196,7 +273,7 @@ const MeatProcessingPage = () => {
 
           <div className="mep-items-grid-section">
             {filteredData.length === 0 ? (
-              <div className="empty-state">
+              <div className="mep-empty-state">
                 No {selectedTab} items found for {selectedMeat}.
               </div>
             ) : (
@@ -205,16 +282,29 @@ const MeatProcessingPage = () => {
                   <div key={item.id} className="mep-item-card" onClick={() => {
                     setSelectedItem(item);
                     setShowModal(true);
+                    setSidebarOpen(false);
                   }}>
-                    <div className="mep-card-image" style={{ backgroundImage: `url(${item.image})` }}></div>
+                    <div className="mep-card-image" style={{ backgroundImage: `url(${item.image || '/api/placeholder/120/120'})` }} />
                     <div className="mep-card-content">
                       <h3 className="mep-card-title">{item.name}</h3>
-                      <p className="mep-card-description">{item.tagline}</p>
+                      <p className="mep-card-description">{item.tagline || item.name}</p>
                     </div>
                   </div>
                 ))}
               </div>
             )}
+          </div>
+
+          <div className="mep-back-section">
+            <button
+              className="mep-back-button"
+              onClick={() => navigate('/guidance')}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Back to Guidance Page</span>
+            </button>
           </div>
         </main>
       </div>
@@ -223,40 +313,145 @@ const MeatProcessingPage = () => {
         <div className="mep-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="mep-modal" onClick={e => e.stopPropagation()}>
             <button className="mep-modal-close" onClick={() => setShowModal(false)}>×</button>
-            <div className="mep-modal-content">
+
+            <div className="mep-modal-hero">
+              <p className="mep-modal-hero-label">Meat Processing</p>
+              <h2 className="mep-modal-hero-title">{selectedItem.name}</h2>
+              <p className="mep-modal-hero-subtitle">{selectedItem.tagline || selectedItem.name}</p>
+            </div>
+
+            <div className="mep-modal-inner">
               <div className="mep-modal-left">
-                <h2>{selectedItem.name}</h2>
-                <p className="mep-modal-tagline">{selectedItem.tagline}</p>
-                <div className="mep-detail-section">
-                  <h3>Description</h3>
-                  <p>{selectedItem.fullDesc}</p>
-                </div>
-                {selectedItem.tools?.length > 0 && (
-                  <div className="mep-detail-section">
-                    <h3>Tools Needed</h3>
-                    {selectedItem.tools.map((t, i) => <div key={i} className="mep-tool-item">{t}</div>)}
-                  </div>
+                {selectedItem.fullDesc && (
+                  <>
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">About this process</span>
+                      <p className="mep-msec-text">{renderSafeContent(selectedItem.fullDesc)}</p>
+                    </div>
+                    <hr className="mep-mdivider" />
+                  </>
                 )}
-                {selectedItem.steps?.length > 0 && (
-                  <div className="mep-detail-section">
-                    <h3>Steps</h3>
-                    {selectedItem.steps.map((s, i) => <div key={i} className="mep-step-item"><strong>{i+1}.</strong> {s}</div>)}
-                  </div>
+
+                {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
+                  <>
+                    <div className="mep-uses-badge-row">
+                      <div className="mep-uses-section">
+                        <span className="mep-msec-label">Key Features</span>
+                        <div className="mep-uses-wrap">
+                          {selectedItem.keyFeatures.map((f, idx) => (
+                            <div key={idx} className="mep-use-tag">
+                              <span className="mep-use-dot">•</span>
+                              {renderSafeContent(f)}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mep-badge-section">
+                        <span className="mep-msec-label">Category</span>
+                        <div className="mep-category-badge">
+                          <span className="mep-category-badge-icon"><MeatIcon /></span>
+                          <span className="mep-category-badge-value">{getCategoryTitle()}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="mep-mdivider" />
+                  </>
+                )}
+
+                <div className="mep-modal-two-col">
+                  {selectedItem.tools && selectedItem.tools.length > 0 && (
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">Tools Needed</span>
+                      <div className="mep-steps-list">
+                        {selectedItem.tools.map((tool, idx) => (
+                          <div key={idx} className="mep-step-card">
+                            <span className="mep-step-num">{idx + 1}</span>
+                            <span className="mep-step-txt">{renderSafeContent(tool)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedItem.steps && selectedItem.steps.length > 0 && (
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">Steps</span>
+                      <div className="mep-tips-list">
+                        {selectedItem.steps.map((step, idx) => (
+                          <div key={idx} className="mep-tip-card">
+                            <span className="mep-tip-icon">{tipIcons[idx % tipIcons.length]}</span>
+                            <span className="mep-tip-txt">{renderSafeContent(step)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {selectedItem.properUsage && selectedItem.properUsage.length > 0 && (
+                  <>
+                    <hr className="mep-mdivider" />
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">Proper Usage</span>
+                      <div className="mep-uses-wrap">
+                        {selectedItem.properUsage.map((u, idx) => (
+                          <div key={idx} className="mep-use-tag">
+                            <span className="mep-use-dot">•</span>
+                            {renderSafeContent(u)}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                  <>
+                    <hr className="mep-mdivider" />
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">Common Mistakes</span>
+                      <div className="mep-mistakes-list">
+                        {selectedItem.commonMistakes.map((m, idx) => (
+                          <div key={idx} className="mep-mistake-card">
+                            <span className="mep-mistake-icon"><WarningIcon /></span>
+                            <span className="mep-tip-txt">{renderSafeContent(m)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {selectedItem.types && selectedItem.types.length > 0 && (
+                  <>
+                    <hr className="mep-mdivider" />
+                    <div className="mep-msec">
+                      <span className="mep-msec-label">Types</span>
+                      <div className="mep-types-grid">
+                        {selectedItem.types.map((type, idx) => (
+                          <div key={idx} className="mep-type-card">
+                            <h4>{renderSafeContent(type.name)}</h4>
+                            <p>{renderSafeContent(type.description)}</p>
+                            {type.bestFor && <p><strong>Best For:</strong> {renderSafeContent(type.bestFor)}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
+
               <div className="mep-modal-right">
-                <div className="mep-main-image" style={{ backgroundImage: `url(${selectedItem.image})` }}></div>
+                <div
+                  className="mep-modal-right-image"
+                  style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/400/400'})` }}
+                />
               </div>
             </div>
           </div>
         </div>
       )}
-
-      <div className="back-home-container">
-        <button className="back-home-btn" onClick={() => navigate('/guidance')}>
-          Back to Guidance Page
-        </button>
-      </div>
     </div>
   );
 };

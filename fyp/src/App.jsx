@@ -24,7 +24,6 @@ import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import ShoppingList from "./pages/ShoppingList";
 import MealFeature from "./pages/MealFeature";
-import AlarmModal from './components/AlarmModal';
 import SettingsSidebar from './components/SettingsSidebar';
 import RecipeDessertsPage from './pages/RecipeDessertsPage';
 import RecipesSoupsPage from './pages/RecipesSoupsPage';
@@ -67,15 +66,13 @@ import RecipeDetail from './pages/RecipeDetail';
 
 function AppWrapper() {
   const location = useLocation();
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const openSettings = () => setIsSettingsOpen(true);
   const closeSettings = () => setIsSettingsOpen(false);
 
   React.useEffect(() => {
-    window.openAlarmModal = () => setIsAlarmModalOpen(true);
-    window.closeAlarmModal = () => setIsAlarmModalOpen(false);
+
     window.openSettings = openSettings;
   }, []);
 
@@ -97,7 +94,6 @@ function AppWrapper() {
         theme="light"
       />
 
-      <AlarmModal isOpen={isAlarmModalOpen} onClose={() => setIsAlarmModalOpen(false)} />
       <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
 
       <div className="app-wrapper english-mode" dir="ltr">
@@ -154,6 +150,9 @@ function AppWrapper() {
                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
                    <Route path="/Vege" element={<RecipesVegePage />} />
                    <Route path="/veg-mutton" element={<RecipesVegMutton />} />
+                                      <Route path="/recipe-dinner" element={<RecipesDinner />} />
+                                      <Route path="/lunch" element={<Lunch/>} />
+
                    <Route path="/recipe/:id" element={<RecipeDetail />} />
 
 

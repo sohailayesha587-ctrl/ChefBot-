@@ -58,7 +58,6 @@ const BeginnersPage = () => {
           id: String(index + 1).padStart(2, '0'),
           image: imageMapping[guide.title] || `${guide.title.replace(/\s/g, '')}.png`,
           title: guide.title,
-          subtitle: subtitleMapping[guide.title] || 'Learn essential skills',
           route: routeMapping[guide.title] || `/${guide.title.toLowerCase().replace(/\s/g, '-')}`,
           features: [typeof content === 'string' ? content.substring(0, 100) : 'Learn essential skills']
         };
@@ -175,7 +174,6 @@ const BeginnersPage = () => {
 
               <div className="guide-card-body">
                 <h3 className="guide-card-title">{card.title}</h3>
-                <p className="guide-card-subtitle">{card.subtitle}</p>
                 <div className="guide-card-cta">
                   <span>Explore</span>
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">

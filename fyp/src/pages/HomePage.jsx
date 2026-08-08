@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
+import Lunch from './Lunch';
 
 const HomePage = () => {
+   const [recipes, setRecipes] = useState([]);
   const features = [
     {
       image: 'image.png',
@@ -43,27 +45,25 @@ const HomePage = () => {
     { number: '6', label: 'Smart Tools' },
     { number: '4.9★', label: 'User Rating' },
   ];
-
-  const recipes = [
-    {
-      image: "home_biryani.jpg",
-      name: "Chicken Biryani",
-      description: "Spiced chicken with aromatic rice.",
-      category: "Main",
-    },
-    {
-      image: "home_veg_salad.jpg",
-      name: "Veg Salad",
-      description: "Fresh veggies tossed with light dressing.",
-      category: "Salad",
-    },
-    {
-      image: "home_icecream.jpg",
-      name: "Chocolate Ice Cream",
-      description: "Rich, moist with creamy frosting ice cream.",
-      category: "Dessert",
-    }
-  ];
+ useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/recipes?subCategory=appetizers&limit=10');
+        const data = await response.json();
+        if (data.recipes) {
+          setRecipes(data.recipes);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setRecipes([
+          { _id: '1', image: 'home_biryani.jpg', title: 'Chicken Biryani', category: 'Main Course', cookingTime: '45 min' },
+          { _id: '2', image: 'home_veg_salad.jpg', title: 'Chicken Karahi', category: 'Main Course', cookingTime: '30 min' },
+          { _id: '3', image: 'home_icecream.jpg', title: 'Gulab Jamun', category: 'Dessert', cookingTime: '25 min' },
+        ]);
+      }
+    };
+    fetchRecipes();
+  }, []);
 
   const weekDays = [
     { img: 'meal1.jpg', day: 'Monday' },
@@ -258,7 +258,6 @@ const HomePage = () => {
   <div className="m_plan-header">
     <div>
       <h2>Never wonder 'What's for dinner?' again.</h2>
-      <p className="m_plan-subtitle">Smart weekly meal planning that saves time and mental energy.</p>
     </div>
     <Link to="/meal-planner" className="m_plan-btn">Let's Plan</Link>
   </div>
@@ -275,26 +274,30 @@ const HomePage = () => {
   </div>
 </section>
        
-      <section className="h-recipes-section">
-        <div className="h-recipes-container">
-          <h2 className="h-recipes-title">Popular Recipes</h2>
-          <p className="h-recipes-subtitle">
-            Discover delicious recipes curated by ChefBot AI
-          </p>
-          <div className="h-recipes-grid">
-            {recipes.map((recipe, index) => (
-              <div key={index} className="h-recipe-card">
-                <div className="h-recipe-image">
-                  <img src={recipe.image} alt={recipe.name} />
-                  <div className="recipe-category">{recipe.category}</div>
+      <section className="hp-recipes-section">
+        <div className="hp-recipes-container">
+          <div className="hp-recipes-header">
+            <h2 className="hp-recipes-title">Popular Recipes</h2>
+          </div>
+          <div className="hp-recipes-scroll-wrapper">
+            <div className="hp-recipes-scroll">
+              {recipes.map((recipe) => (
+                <div key={recipe._id} className="hp-recipe-card-mini">
+                  <div className="hp-recipe-card-image-mini">
+                    <img src={recipe.image || 'recipe.jpg'} alt={recipe.title} />
+                  </div>
+                  <div className="hp-recipe-card-body-mini">
+                    <h3 className="hp-recipe-card-title-mini">{recipe.title}</h3>
+                    <Link to={`/recipe/${recipe._id}`} className="hp-recipe-card-btn-mini">
+                      View Recipe →
+                    </Link>
+                  </div>
                 </div>
-                <div className="h-recipe-content">
-                  <h3 className="h-recipe-name">{recipe.name}</h3>
-                  <p className="h-recipe-description">{recipe.description}</p>
-                  <Link to="/recipes" className="h-recipe-btn">View Recipe</Link>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+          <div className="hp-recipes-footer">
+            <Link to="/recipes" className="hp-recipes-view-all">View All Recipes →</Link>
           </div>
         </div>
       </section>

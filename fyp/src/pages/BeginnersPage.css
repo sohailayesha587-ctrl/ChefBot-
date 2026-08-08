@@ -1,6 +1,4 @@
-*,
-*::before,
-*::after {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,7 +6,7 @@
 
 .beginners-page {
   font-family: 'Poppins', sans-serif;
-  background-color: #ffffff;
+  background: #ffffff;
   color: #284a4b;
   line-height: 1.6;
   overflow-x: hidden;
@@ -193,29 +191,13 @@
   }
 }
 
-.hero-badge-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
-}
 
-.hero-badge-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-}
 
 .guide-header {
   background: linear-gradient(135deg, #284a4b, #1d3a3b);
   color: white;
   padding: 38px 20px;
   text-align: center;
-  position: relative;
-  z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -235,24 +217,17 @@
   letter-spacing: 0.5px;
 }
 
-.error-note {
-  margin-top: 10px;
-  font-size: 0.78rem;
-  color: #a8d5c2;
-  font-style: normal;
-}
-
 .guide-sections-container {
-  width: 1000px;
-  margin: 0 auto 4rem;
+  max-width: 1160px;
+  margin: 0 auto 3rem;
   padding: 0 1.5rem;
 }
 
 .guide-sections-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.8rem;
-  margin-top: 40px;
+  gap: 1.6rem;
+  margin-top: 36px;
 }
 
 .guide-section-card {
@@ -263,7 +238,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  border: 1.5px solid #e0eae9;
+  border: 1.5px solid #6b9a9b;
   box-shadow: 0 2px 8px rgba(40, 74, 75, 0.06), 0 6px 24px rgba(40, 74, 75, 0.08);
   opacity: 0;
   transform: translateY(24px);
@@ -276,11 +251,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.guide-section-card:focus-visible {
-  outline: 2px solid #397d7c;
-  outline-offset: 3px;
 }
 
 .guide-section-card:hover {
@@ -305,7 +275,7 @@
 
 .guide-card-image-container {
   width: 100%;
-  height: 130px;
+  height: 135px;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
@@ -338,7 +308,7 @@
 }
 
 .guide-card-body {
-  padding: 0.7rem 1.5rem 1rem;
+  padding: 1.1rem 1.15rem 1.3rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -347,7 +317,7 @@
 
 .guide-card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 14px;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #1d3a3b;
   margin-bottom: 5px;
@@ -360,7 +330,7 @@
 }
 
 .guide-card-subtitle {
-  font-size: 12px;
+  font-size: 0.78rem;
   color: #6b9a9b;
   font-weight: 400;
   line-height: 1.5;
@@ -446,39 +416,66 @@
 .beg-back-home-btn:hover svg {
   transform: translateX(-3px);
 }
-
-@media (max-width: 1100px) {
-  .guide-sections-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 780px) 
+{
+  
+  .beginners-page {
+   margin-top: 80px;
   }
-}
-
-@media (max-width: 860px) {
   .hero-split {
     flex-direction: row;
-    min-height: 350px;
+    min-height: 280px;
   }
 
   .hero-image-side {
-    flex: 0 0 70%;
+    flex: 0 0 60%;
   }
 
   .hero-text-side {
     flex: 1;
-    padding: 40px 4% 40px 6%;
+    padding: 30px 4% 30px 6%;
   }
 
   .hero-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: 1.8rem;
+    margin-bottom: 12px;
   }
 
-  .hero-desc,
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-desc {
+    font-size: 0.85rem;
+  }
+
   .hero-sub {
-    max-width: 100%;
+    font-size: 0.75rem;
+  }
+
+  .hero-divider {
+    width: 35px;
+    height: 2px;
+    margin-bottom: 12px;
   }
 
   .hero-img-slice {
-    width: 80px;
+    width: 60px;
+  }
+
+  .hero-badge {
+    padding: 10px 16px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .hero-badge-num {
+    font-size: 1.5rem;
+  }
+
+  .hero-badge-label {
+    font-size: 0.55rem;
   }
 
   .guide-sections-grid {
@@ -490,74 +487,83 @@
     height: 120px;
   }
 
+  .guide-card-body {
+    padding: 0.7rem 1rem 0.9rem;
+  }
+
   .guide-card-title {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
   }
 
   .guide-card-subtitle {
-    font-size: 0.72rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero-split {
-    min-height: 280px;
-  }
-
-  .hero-image-side {
-    flex: 0 0 70%;
-  }
-
-  .hero-text-side {
-    padding: 30px 3% 30px 5%;
-  }
-
-  .hero-title {
-    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-    margin-bottom: 12px;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     margin-bottom: 10px;
   }
 
-  .hero-divider {
-    width: 35px;
-    margin-bottom: 12px;
-  }
-
-  .hero-desc {
-    font-size: 0.8rem;
-  }
-
-  .hero-sub {
-    font-size: 0.7rem;
-  }
-
-  .hero-badge {
-    padding: 6px 12px;
-  }
-
-  .hero-badge-num {
-    font-size: 1.2rem;
-  }
-
-  .hero-badge-label {
-    font-size: 0.5rem;
-  }
-
-  .hero-img-slice {
-    width: 50px;
+  .guide-card-cta {
+    font-size: 0.65rem;
+    padding-top: 8px;
   }
 
   .guide-sections-container {
-    padding: 0 0.8rem;
+    padding: 0 1rem;
+  }
+
+  .guide-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .guide-header p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-split {
+    flex-direction: row;
+    min-height: 200px;
+  }
+
+  .hero-image-side {
+    flex: 0 0 65%;
+  }
+
+  .hero-text-side {
+    flex: 1;
+    padding: 2px 9% 8px 4%;
+  }
+
+  .hero-title {
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+  }
+
+
+  .hero-desc {
+    font-size: 0.55rem;
+    margin-bottom: 3px;
+  }
+
+  .hero-sub {
+    font-size: 0.45rem;
+  }
+
+  .hero-divider {
+    width: 15px;
+    height: 2px;
+    margin-bottom: 3px;
+  }
+
+
+  .hero-img-slice {
+    width: 35px;
   }
 
   .guide-sections-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.65rem;
+    gap: 0.5rem;
+    padding: 0 2px;
     margin-top: 20px;
   }
 
@@ -566,94 +572,51 @@
   }
 
   .guide-card-body {
-    padding: 0.6rem 0.65rem 0.75rem;
+    padding: 0.6rem 0.8rem 0.8rem;
   }
 
   .guide-card-title {
-    font-size: 0.72rem;
-    margin-bottom: 2px;
+    font-size: 0.55rem;
+    margin-bottom: 3px;
+    line-height: 1.2;
   }
 
   .guide-card-subtitle {
-    display: none;
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
   }
 
   .guide-card-cta {
-    font-size: 0.6rem;
-    gap: 4px;
+    font-size: 0.65rem;
+    gap: 5px;
     padding-top: 7px;
   }
 
   .guide-card-cta svg {
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
+  }
+
+  .guide-sections-container {
+    padding: 0 0.5rem;
   }
 
   .guide-header h1 {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   .guide-header p {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-split {
-    min-height: 200px;
+    font-size: 0.65rem;
   }
 
-  .hero-image-side {
-    flex: 0 0 70%;
+  .beg-back-home-btn {
+    padding: 6px 14px;
+    font-size: 0.65rem;
   }
 
-  .hero-text-side {
-    padding: 20px 3% 20px 4%;
-  }
-
-  .hero-title {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 8px;
-  }
-
-  .hero-desc {
-    font-size: 0.7rem;
-  }
-
-  .hero-sub {
-    font-size: 0.6rem;
-  }
-
-  .hero-divider {
-    width: 25px;
-    height: 2px;
-    margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 360px) {
-  .guide-sections-grid {
-    gap: 0.5rem;
-  }
-
-  .guide-card-image-container {
-    height: 78px;
-  }
-
-  .guide-card-title {
-    font-size: 0.66rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .guide-section-card,
-  .guide-card-real-image,
-  .card-bottom-bar,
-  .loading-spinner,
-  .hero-img,
-  .hero-text-side,
-  .hero-badge {
-    animation: none;
-    transition: none;
+  .guide-section-card {
+    border-radius: 14px;
   }
 }
