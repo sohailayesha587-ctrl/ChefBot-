@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Tikka",
-    image: "http://localhost:5000/uploads/chicken-tikka-masala.jpg",
+    image: "chicken-tikka-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - bone-in pieces (thighs and drumsticks work best)",
@@ -65,7 +65,7 @@ const recipesToMigrate = [
   },
   {
     title: "Malai Tikka",
-    image: "http://localhost:5000/uploads/malai-tikka.jpg",
+    image: "malai-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg boneless chicken - cut into 1-inch pieces",
@@ -122,7 +122,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hariyali Tikka",
-    image: "http://localhost:5000/uploads/fish-haryali-tikka.jpg",
+    image: "fish-haryali-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - boneless, cut into pieces",
@@ -174,7 +174,7 @@ const recipesToMigrate = [
   },
   {
     title: "Achari Tikka",
-    image: "http://localhost:5000/uploads/achari-tikka.jpg",
+    image: "achari-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - bone-in pieces",
@@ -225,7 +225,7 @@ const recipesToMigrate = [
   },
   {
     title: "Afghani Tikka",
-    image: "http://localhost:5000/uploads/chicken-tikka-masala.jpg",
+    image: "chicken-tikka-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - boneless, cut into pieces",
@@ -274,7 +274,7 @@ const recipesToMigrate = [
   },
   {
     title: "Balochi Tikka",
-    image: "http://localhost:5000/uploads/chicken-tikka-masala.jpg",
+    image: "chicken-tikka-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg mutton or beef - boneless pieces",
@@ -324,7 +324,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Boti",
-    image: "http://localhost:5000/uploads/chicken-boti-kebab.jpg",
+    image: "chicken-boti-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg boneless chicken - cut into 1-inch pieces",
@@ -375,7 +375,7 @@ const recipesToMigrate = [
   },
   {
     title: "Malai Boti",
-    image: "http://localhost:5000/uploads/chicken-malai-boti.jpg",
+    image: "chicken-malai-boti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg boneless chicken - cut into pieces",
@@ -425,7 +425,7 @@ const recipesToMigrate = [
   },
   {
     title: "Achari Boti",
-    image: "http://localhost:5000/uploads/achari-tikka.jpg",
+    image: "achari-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg boneless chicken - pieces",
@@ -472,7 +472,7 @@ const recipesToMigrate = [
   },
   {
     title: "Beef Boti",
-    image: "http://localhost:5000/uploads/beef-boti-kebab.jpg",
+    image: "beef-boti-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg beef - sirloin or tenderloin, cut into 1-inch pieces",
@@ -523,7 +523,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Seekh Kebab",
-    image: "http://localhost:5000/uploads/chicken-seekh-kebab.jpg",
+    image: "chicken-seekh-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince (keema)",
@@ -582,7 +582,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Seekh Kebab",
-    image: "http://localhost:5000/uploads/mutton-seekh-kebab.jpg",
+    image: "mutton-seekh-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince (keema)",
@@ -634,7 +634,7 @@ const recipesToMigrate = [
   },
   {
     title: "Beef Seekh Kebab",
-    image: "http://localhost:5000/uploads/beef-seekh-kebab.jpg",
+    image: "beef-seekh-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef mince (keema)",
@@ -684,7 +684,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hariyali Seekh Kebab",
-    image: "http://localhost:5000/uploads/haryali-seekh-kebab.jpg",
+    image: "haryali-seekh-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken or mutton mince",
@@ -735,7 +735,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cheese Seekh Kebab",
-    image: "http://localhost:5000/uploads/cheese-seekh-kebab.jpg",
+    image: "cheese-seekh-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -786,7 +786,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chapli",
-    image: "http://localhost:5000/uploads/chapli-kebab-karahi.jpg",
+    image: "chapli-kebab-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef mince (keema)",
@@ -847,7 +847,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Chapli Kebab",
-    image: "http://localhost:5000/uploads/chicken-chapli-kebab.jpg",
+    image: "chicken-chapli-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -900,7 +900,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peshawari Chapli Kebab",
-    image: "http://localhost:5000/uploads/chicken-chapli-kebab.jpg",
+    image: "chicken-chapli-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef mince (with some fat is better)",
@@ -952,7 +952,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bihari",
-    image: "http://localhost:5000/uploads/behari-boti.jpg",
+    image: "behari-boti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef - thinly sliced (flank or sirloin)",
@@ -1006,7 +1006,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Bihari Kebab",
-    image: "http://localhost:5000/uploads/chicken-behari-kebab.jpg",
+    image: "chicken-behari-kebab.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken breast - thinly sliced",
@@ -1054,7 +1054,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bihari Boti",
-    image: "http://localhost:5000/uploads/behari-boti.jpg",
+    image: "behari-boti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef - cut into 1-inch pieces",
@@ -1101,7 +1101,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Chicken Legs",
-    image: "http://localhost:5000/uploads/tandoori-chicken-legs.jpg",
+    image: "tandoori-chicken-legs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 chicken legs (drumsticks or thighs)",
@@ -1155,7 +1155,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Leg Piece",
-    image: "http://localhost:5000/uploads/tandoori-chicken-legs.jpg",
+    image: "tandoori-chicken-legs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 chicken legs",
@@ -1200,7 +1200,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hariyali Chicken Leg",
-    image: "http://localhost:5000/uploads/haryali-chicken-leg-platter.jpg",
+    image: "haryali-chicken-leg-platter.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 chicken legs",
@@ -1245,7 +1245,7 @@ const recipesToMigrate = [
   },
   {
     title: "Reshmi",
-    image: "http://localhost:5000/uploads/reshmi-tikka.jpg",
+    image: "reshmi-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -1297,7 +1297,7 @@ const recipesToMigrate = [
   },
   {
     title: "Reshmi Tikka",
-    image: "http://localhost:5000/uploads/reshmi-tikka.jpg",
+    image: "reshmi-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken - cut into pieces",
@@ -1344,7 +1344,7 @@ const recipesToMigrate = [
   },
   {
     title: "Malai Reshmi",
-    image: "http://localhost:5000/uploads/reshmi-tikka.jpg",
+    image: "reshmi-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken",
@@ -1388,7 +1388,7 @@ const recipesToMigrate = [
   },
   {
     title: "Seekh",
-    image: "http://localhost:5000/uploads/seekh-kebab-masala.jpg",
+    image: "seekh-kebab-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef mince (very fine mince)",
@@ -1445,7 +1445,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Galouti",
-    image: "http://localhost:5000/uploads/chicken-galouti.jpg",
+    image: "chicken-galouti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -1493,7 +1493,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fish Tikka",
-    image: "http://localhost:5000/uploads/fish-tikka.jpg",
+    image: "fish-tikka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g firm white fish fillets (salmon, cod, or sea bass) - cut into pieces",
@@ -1545,7 +1545,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fish",
-    image: "http://localhost:5000/uploads/fish-fry.jpg",
+    image: "fish-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 whole fish (pomfret, sea bass, or trout) - cleaned",
@@ -1597,7 +1597,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Fish",
-    image: "http://localhost:5000/uploads/fish-fry.jpg",
+    image: "fish-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fish fillets - cut into pieces",
@@ -1644,7 +1644,7 @@ const recipesToMigrate = [
   },
   {
     title: "Grilled Veg Platter",
-    image: "http://localhost:5000/uploads/grilled-veg.jpg",
+    image: "grilled-veg.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 capsicums (bell peppers) - cut into pieces",
@@ -1696,7 +1696,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Mushroom",
-    image: "http://localhost:5000/uploads/stuffed-mushrooms.jpg",
+    image: "stuffed-mushrooms.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g button mushrooms - cleaned",
@@ -1745,7 +1745,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Paneer",
-    image: "http://localhost:5000/uploads/tandoori-paneer.jpg",
+    image: "tandoori-paneer.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g paneer - cut into 1-inch pieces",
@@ -1797,7 +1797,7 @@ const recipesToMigrate = [
   },
   {
     title: "Seekh Kebab Masala",
-    image: "http://localhost:5000/uploads/seekh-kebab-masala.jpg",
+    image: "seekh-kebab-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "12 seekh kebabs (already cooked)",
@@ -1853,7 +1853,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chapli Kebab Karahi",
-    image: "http://localhost:5000/uploads/chapli-kebab-karahi.jpg",
+    image: "chapli-kebab-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 chapli kebabs (already cooked)",
@@ -1905,7 +1905,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Raan",
-    image: "http://localhost:5000/uploads/tandoori-raan.jpg",
+    image: "tandoori-raan.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 whole lamb leg (about 2 kg)",
@@ -1963,7 +1963,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Chops",
-    image: "http://localhost:5000/uploads/mutton-chops-karahi.jpg",
+    image: "mutton-chops-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg mutton chops (about 8-10 chops)",
@@ -2014,7 +2014,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Quail",
-    image: "http://localhost:5000/uploads/tandoori-quails.jpg",
+    image: "tandoori-quails.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 quails (bater) - cleaned",

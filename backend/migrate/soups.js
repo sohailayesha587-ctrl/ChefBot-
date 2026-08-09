@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Cream of Mushroom Soup",
-    image: "http://localhost:5000/uploads/Cream-of-mushroom-soup.jpg",
+    image: "Cream-of-mushroom-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh mushrooms - cut into thin pieces",
@@ -59,7 +59,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Corn Soup",
-    image: "http://localhost:5000/uploads/Chicken-Corn-Soup.jpg",
+    image: "Chicken-Corn-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g chicken - boil and shred into small pieces",
@@ -109,7 +109,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tomato Soup",
-    image: "http://localhost:5000/uploads/tomato-soup.jpg",
+    image: "tomato-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg ripe tomatoes - chopped",
@@ -160,7 +160,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Soup",
-    image: "http://localhost:5000/uploads/mixed-veg-soup.jpg",
+    image: "mixed-veg-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups mixed vegetables (carrots, peas, beans, corn)",
@@ -210,7 +210,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Noodle Soup",
-    image: "http://localhost:5000/uploads/Chicken-Corn-Soup.jpg",
+    image: "Chicken-Corn-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g chicken - cut into small pieces",
@@ -260,7 +260,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hot and Sour Soup",
-    image: "http://localhost:5000/uploads/Restaurant-Style-Hot-and-Sour-Soup.jpg",
+    image: "Restaurant-Style-Hot-and-Sour-Soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken stock",
@@ -310,7 +310,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lentil Soup",
-    image: "http://localhost:5000/uploads/LENTIL-SOUP.jpg",
+    image: "LENTIL-SOUP.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup brown lentils (masoor)",
@@ -360,7 +360,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Vegetable Soup",
-    image: "http://localhost:5000/uploads/Chicken-veg-soup.jpg",
+    image: "Chicken-veg-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g chicken - cut into small pieces",
@@ -411,7 +411,7 @@ const recipesToMigrate = [
   },
   {
     title: "Pumpkin Soup",
-    image: "http://localhost:5000/uploads/Pumpkin-Soup.jpg",
+    image: "Pumpkin-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg pumpkin - remove skin and cut into cubes",
@@ -461,7 +461,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Drop Soup",
-    image: "http://localhost:5000/uploads/Egg-drop-soup.jpg",
+    image: "Egg-drop-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken stock",
@@ -510,7 +510,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cream of Chicken Soup",
-    image: "http://localhost:5000/uploads/Cream-of-Chicken-Soup.jpg",
+    image: "Cream-of-Chicken-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g chicken breast",
@@ -561,7 +561,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spinach Soup",
-    image: "http://localhost:5000/uploads/Spinach-Soup.jpg",
+    image: "Spinach-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh spinach (palak)",
@@ -611,7 +611,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Soup",
-    image: "http://localhost:5000/uploads/mutton-broth.jpg",
+    image: "mutton-broth.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton with bones",
@@ -665,7 +665,7 @@ const recipesToMigrate = [
   },
   {
     title: "Manchow Soup",
-    image: "http://localhost:5000/uploads/manchow-soup.jpg",
+    image: "manchow-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups vegetable stock",
@@ -715,7 +715,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Potato Soup",
-    image: "http://localhost:5000/uploads/Chicken-Potato-Soup.jpg",
+    image: "Chicken-Potato-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g chicken - cut into small pieces",
@@ -768,7 +768,7 @@ const recipesToMigrate = [
   },
   {
     title: "Garlic Soup",
-    image: "http://localhost:5000/uploads/garlic-soup.jpg",
+    image: "garlic-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 whole garlic bulbs",
@@ -819,7 +819,7 @@ const recipesToMigrate = [
   },
   {
     title: "Barley Soup",
-    image: "http://localhost:5000/uploads/Barley-Soup.jpg",
+    image: "Barley-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup barley (jau)",
@@ -871,7 +871,7 @@ const recipesToMigrate = [
   },
   {
     title: "Thai Soup",
-    image: "http://localhost:5000/uploads/thai-soup.jpg",
+    image: "thai-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken stock",
@@ -921,7 +921,7 @@ const recipesToMigrate = [
   },
   {
     title: "Oats Soup",
-    image: "http://localhost:5000/uploads/Oats-Soup.jpg",
+    image: "Oats-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup rolled oats",
@@ -972,7 +972,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mulligatawny Soup",
-    image: "http://localhost:5000/uploads/Mulligatawny-Soup.jpg",
+    image: "Mulligatawny-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup red lentils (masoor)",
@@ -1025,7 +1025,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Clear Soup",
-    image: "http://localhost:5000/uploads/Clear-chicken-soup.jpg",
+    image: "Clear-chicken-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g chicken pieces with bones",
@@ -1074,7 +1074,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mixed Grain Soup",
-    image: "http://localhost:5000/uploads/Mixed-Grain-Soup.png",
+    image: "Mixed-Grain-Soup.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup barley",
@@ -1126,7 +1126,7 @@ const recipesToMigrate = [
   },
   {
     title: "Noodle Soup",
-    image: "http://localhost:5000/uploads/noodle-soup.jpg",
+    image: "noodle-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g noodles",
@@ -1175,7 +1175,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fish Vegetable Soup",
-    image: "http://localhost:5000/uploads/fish-veg-and-noodle-soup.jpg",
+    image: "fish-veg-and-noodle-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g white fish (like tilapia or cod)",
@@ -1224,7 +1224,7 @@ const recipesToMigrate = [
   },
   {
     title: "Paye Soup",
-    image: "http://localhost:5000/uploads/paye-soup.jpg",
+    image: "paye-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 lamb or goat trotters (paye)",
@@ -1275,7 +1275,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Broth",
-    image: "http://localhost:5000/uploads/Chicken-broth.jpg",
+    image: "Chicken-broth.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 kg chicken bones",
@@ -1326,7 +1326,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Tikka Corn Soup",
-    image: "http://localhost:5000/uploads/Chicken-Tikka-Corn-Soup.jpg",
+    image: "Chicken-Tikka-Corn-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g chicken tikka pieces",
@@ -1376,7 +1376,7 @@ const recipesToMigrate = [
   },
   {
     title: "Creamy Noodle Soup",
-    image: "http://localhost:5000/uploads/Creamy-noodles-soup.jpg",
+    image: "Creamy-noodles-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g noodles",
@@ -1425,7 +1425,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Macaroni Soup",
-    image: "http://localhost:5000/uploads/Chicken-macroni-corn-soup.jpg",
+    image: "Chicken-macroni-corn-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g chicken - cut into small pieces",
@@ -1476,7 +1476,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hot and Sour Macaroni Soup",
-    image: "http://localhost:5000/uploads/hot-and-sour-chicken-soup.jpg",
+    image: "hot-and-sour-chicken-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "200g chicken - shredded",
@@ -1526,7 +1526,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Pot Pie Soup",
-    image: "http://localhost:5000/uploads/Chicken-Pot-Pie-Soup.jpg",
+    image: "Chicken-Pot-Pie-Soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g chicken - cut into small pieces",
@@ -1577,7 +1577,7 @@ const recipesToMigrate = [
   },
   {
     title: "Creamy Chicken Macaroni Soup",
-    image: "http://localhost:5000/uploads/creamy-chicken-macroni-soup.jpg",
+    image: "creamy-chicken-macroni-soup.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g chicken - cut into small pieces",
@@ -1629,7 +1629,7 @@ const recipesToMigrate = [
   },
   {
     title: "Herbal Soup",
-    image: "http://localhost:5000/uploads/herbal-soup.jpg",
+    image: "herbal-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "300g chicken",

@@ -8,7 +8,7 @@ const recipesToMigrate = [
   
   {
   title: "Simple Qeema",
-  image: "http://localhost:5000/uploads/qeema-simple.jpg",
+  image: "qeema-simple.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton or chicken mince - fresh",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Masala",
-  image: "http://localhost:5000/uploads/qeema-simple.jpg",
+  image: "qeema-simple.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -117,7 +117,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Karahi",
-  image: "http://localhost:5000/uploads/qeema-simple.jpg",
+  image: "qeema-simple.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -167,7 +167,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Bhuna",
-  image: "http://localhost:5000/uploads/qeema-bhuna.jpg",
+  image: "qeema-bhuna.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -217,7 +217,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Handi",
-  image: "http://localhost:5000/uploads/qeema-bhuna.jpg",
+  image: "qeema-bhuna.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -270,7 +270,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Matar",
-  image: "http://localhost:5000/uploads/qeema-matar.jpg",
+  image: "qeema-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -324,7 +324,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Matar Pulao",
-  image: "http://localhost:5000/uploads/qeema-matar-pulao.jpg",
+  image: "qeema-matar-pulao.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "300g mince - fresh",
@@ -379,7 +379,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Matar Curry",
-  image: "http://localhost:5000/uploads/qeema-matar.jpg",
+  image: "qeema-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -432,7 +432,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Matar Masala",
-  image: "http://localhost:5000/uploads/qeema-matar.jpg",
+  image: "qeema-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -485,7 +485,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Aloo",
-  image: "http://localhost:5000/uploads/keema-aloo.jpg",
+  image: "keema-aloo.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -539,7 +539,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Aloo Matar",
-  image: "http://localhost:5000/uploads/qeema-aloo-matar.jpg",
+  image: "qeema-aloo-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -593,7 +593,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Aloo Karahi",
-  image: "http://localhost:5000/uploads/keema-aloo.jpg",
+  image: "keema-aloo.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -643,7 +643,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Palak",
-  image: "http://localhost:5000/uploads/qeema-methi.jpg",
+  image: "qeema-methi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -695,7 +695,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Palak Matar",
-  image: "http://localhost:5000/uploads/qeema-methi.jpg",
+  image: "qeema-methi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -748,7 +748,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Palak Curry",
-  image: "http://localhost:5000/uploads/qeema-methi.jpg",
+  image: "qeema-methi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -801,7 +801,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Baingan Bharta",
-  image: "http://localhost:5000/uploads/qeema-brinjal-bharta.jpg",
+  image: "qeema-brinjal-bharta.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -854,7 +854,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Karela",
-  image: "http://localhost:5000/uploads/qeema-karely.jpg",
+  image: "qeema-karely.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -907,7 +907,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Karela Aloo",
-  image: "http://localhost:5000/uploads/qeema-karely.jpg",
+  image: "qeema-karely.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -961,7 +961,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Gobhi",
-  image: "http://localhost:5000/uploads/qeema-ghobi.jpg",
+  image: "qeema-ghobi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1013,7 +1013,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Gobhi Aloo",
-  image: "http://localhost:5000/uploads/marble-cake.jpg",
+  image: "marble-cake.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1067,7 +1067,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Methi",
-  image: "http://localhost:5000/uploads/qeema-methi.jpg",
+  image: "qeema-methi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1119,7 +1119,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Methi Aloo",
-  image: "http://localhost:5000/uploads/qeema-methi-aloo.jpg",
+  image: "qeema-methi-aloo.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1173,7 +1173,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Tinday",
-  image: "http://localhost:5000/uploads/qeema-tinda.jpg",
+  image: "qeema-tinda.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1225,7 +1225,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Naan",
-  image: "http://localhost:5000/uploads/keema-paratha.jpg",
+  image: "keema-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g mince - cooked and cooled",
@@ -1276,7 +1276,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Paratha",
-  image: "http://localhost:5000/uploads/keema-paratha.jpg",
+  image: "keema-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g mince - cooked and cooled",
@@ -1325,7 +1325,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Samosa",
-  image: "http://localhost:5000/uploads/keema-samosa.jpg",
+  image: "keema-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g mince - cooked and cooled",
@@ -1375,7 +1375,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Biryani",
-  image: "http://localhost:5000/uploads/qeema-biryani.jpg",
+  image: "qeema-biryani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",
@@ -1433,7 +1433,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Cutlet",
-  image: "http://localhost:5000/uploads/egg-cutlets.jpg",
+  image: "egg-cutlets.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - cooked",

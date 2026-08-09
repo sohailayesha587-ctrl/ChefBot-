@@ -7,7 +7,7 @@ const Recipe = require('../models/Recipe');
 const recipesToMigrate = [
   {
     title: "Chicken Aloo",
-    image: "http://localhost:5000/uploads/chicken-aloo.jpg",
+    image: "chicken-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Matar",
-    image: "http://localhost:5000/uploads/chicken-aloo-matar.jpg",
+    image: "chicken-aloo-matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - curry cut pieces",
@@ -120,7 +120,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Baingan",
-    image: "http://localhost:5000/uploads/chicken-aloo-baingan.jpg",
+    image: "chicken-aloo-baingan.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -175,7 +175,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Shimla Mirch",
-    image: "http://localhost:5000/uploads/chicken-aloo-shimla-mirch.jpg",
+    image: "chicken-aloo-shimla-mirch.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -229,7 +229,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Gobhi",
-    image: "http://localhost:5000/uploads/chicken-aloo-ghobi.jpg",
+    image: "chicken-aloo-ghobi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -284,7 +284,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Palak",
-    image: "http://localhost:5000/uploads/chicken-aloo-palak.jpg",
+    image: "chicken-aloo-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -337,7 +337,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Tamatar",
-    image: "http://localhost:5000/uploads/chicken-aloo-tamatar.jpg",
+    image: "chicken-aloo-tamatar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -388,7 +388,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Aloo Beans",
-    image: "http://localhost:5000/uploads/chicken-aloo-beans.jpg",
+    image: "chicken-aloo-beans.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -441,7 +441,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Matar",
-    image: "http://localhost:5000/uploads/chicken-matar.jpg",
+    image: "chicken-matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -496,7 +496,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Matar Malai",
-    image: "http://localhost:5000/uploads/chicken-matar-malai.jpg",
+    image: "chicken-matar-malai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -549,7 +549,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Matar Pulao",
-    image: "http://localhost:5000/uploads/chicken-matar-pulao.jpg",
+    image: "chicken-matar-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -603,7 +603,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Matar Korma",
-    image: "http://localhost:5000/uploads/chicken-matar-korma.jpg",
+    image: "chicken-matar-korma.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -658,7 +658,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Matar Keema",
-    image: "http://localhost:5000/uploads/chicken-matar-keema.jpg",
+    image: "chicken-matar-keema.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -712,7 +712,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Palak",
-    image: "http://localhost:5000/uploads/chicken-palak.jpg",
+    image: "chicken-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -764,7 +764,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Palak Malai",
-    image: "http://localhost:5000/uploads/chicken-palak-malai.jpg",
+    image: "chicken-palak-malai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -815,7 +815,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Palak Aloo",
-    image: "http://localhost:5000/uploads/chicken-palak-aloo.jpg",
+    image: "chicken-palak-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -868,7 +868,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Palak Matar",
-    image: "http://localhost:5000/uploads/chicken-palak-matar.jpg",
+    image: "chicken-palak-matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -921,7 +921,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Shimla Mirch",
-    image: "http://localhost:5000/uploads/chicken-shimla-mirch.jpg",
+    image: "chicken-shimla-mirch.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -974,7 +974,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Shimla Mirch Aloo",
-    image: "http://localhost:5000/uploads/chicken-shimla-mirch-aloo.jpg",
+    image: "chicken-shimla-mirch-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1027,7 +1027,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Shimla Mirch Matar",
-    image: "http://localhost:5000/uploads/chicken-shimla-mirch.jpg",
+    image: "chicken-shimla-mirch.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1081,7 +1081,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Shimla Mirch Pyaz",
-    image: "http://localhost:5000/uploads/chicken-shimla-mirch-pyaz.jpg",
+    image: "chicken-shimla-mirch-pyaz.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into strips",
@@ -1134,7 +1134,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Gobhi",
-    image: "http://localhost:5000/uploads/chicken-ghobi.jpg",
+    image: "chicken-ghobi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1186,7 +1186,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Gobhi Aloo",
-    image: "http://localhost:5000/uploads/chicken-ghobi-aloo.jpg",
+    image: "chicken-ghobi-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1239,7 +1239,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Gobhi Matar",
-    image: "http://localhost:5000/uploads/chicken-ghobi-matar.jpg",
+    image: "chicken-ghobi-matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1292,7 +1292,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Baingan",
-    image: "http://localhost:5000/uploads/chicken-baingan.jpg",
+    image: "chicken-baingan.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1344,7 +1344,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Baingan Aloo",
-    image: "http://localhost:5000/uploads/chicken-baingan-aloo.jpg",
+    image: "chicken-baingan-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1397,7 +1397,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Baingan Bharta",
-    image: "http://localhost:5000/uploads/chicken-baingan-bharta.jpg",
+    image: "chicken-baingan-bharta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken mince",
@@ -1450,7 +1450,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Tori",
-    image: "http://localhost:5000/uploads/chicken-tori.jpg",
+    image: "chicken-tori.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1502,7 +1502,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Louki",
-    image: "http://localhost:5000/uploads/chicken-lauki.jpg",
+    image: "chicken-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1554,7 +1554,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Tori Aloo",
-    image: "http://localhost:5000/uploads/chicken-tori-aloo.jpg",
+    image: "chicken-tori-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",

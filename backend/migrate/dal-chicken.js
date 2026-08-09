@@ -8,7 +8,7 @@ const recipesToMigrate = [
 
   {
     title: "Chicken Chana Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - curry cut pieces with bones",
@@ -66,7 +66,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Chana Dal Fry",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -123,7 +123,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Chana Dal Palak",
-    image: "http://localhost:5000/uploads/chicken-chana-daal-palak.jpg",
+    image: "chicken-chana-daal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -179,7 +179,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Chana Dal Louki",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -235,7 +235,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spicy Chicken Chana Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -291,7 +291,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Moong Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -346,7 +346,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Moong Dal Fry",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -401,7 +401,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Moong Dal Palak",
-    image: "http://localhost:5000/uploads/Chicken-Chana-Dal-Palak.jpg",
+    image: "Chicken-Chana-Dal-Palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -456,7 +456,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Moong Dal Louki",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -512,7 +512,7 @@ const recipesToMigrate = [
   },
   {
     title: "Light Chicken Moong Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - skinless, cut into pieces",
@@ -564,7 +564,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Maash Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -621,7 +621,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Maash Dal Fry",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -676,7 +676,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Maash Dal Palak",
-    image: "http://localhost:5000/uploads/Chicken-Chana-Dal-Palak.jpg",
+    image: "Chicken-Chana-Dal-Palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -731,7 +731,7 @@ const recipesToMigrate = [
   },
   {
     title: "Creamy Chicken Maash Dal",
-    image: "http://localhost:5000/uploads/creamy-chicken-maash-daal.jpg",
+    image: "creamy-chicken-maash-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -786,7 +786,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Masoor Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -841,7 +841,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Masoor Dal Fry",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -896,7 +896,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Masoor Dal Palak",
-    image: "http://localhost:5000/uploads/Chicken-Chana-Dal-Palak.jpg",
+    image: "Chicken-Chana-Dal-Palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -951,7 +951,7 @@ const recipesToMigrate = [
   },
   {
     title: "Quick Chicken Masoor Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into pieces",
@@ -1004,7 +1004,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Mix Dal",
-    image: "http://localhost:5000/uploads/chicken-mix-daal.jpg",
+    image: "chicken-mix-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1063,7 +1063,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Panchmel Dal",
-    image: "http://localhost:5000/uploads/panchmel-dal.jpg",
+    image: "panchmel-dal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1118,7 +1118,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Makhani",
-    image: "http://localhost:5000/uploads/mutton-dal-makhni.jpg",
+    image: "mutton-dal-makhni.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1178,7 +1178,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Bukhara",
-    image: "http://localhost:5000/uploads/mutton-dal-makhni.jpg",
+    image: "mutton-dal-makhni.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1235,7 +1235,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Palak",
-    image: "http://localhost:5000/uploads/chicken-chana-daal-palak.jpg",
+    image: "chicken-chana-daal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1290,7 +1290,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1346,7 +1346,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Tori",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1402,7 +1402,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Methi",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1457,7 +1457,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Tadka",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1517,7 +1517,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Dal Fry",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1576,7 +1576,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hyderabadi Chicken Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1633,7 +1633,7 @@ const recipesToMigrate = [
   },
   {
     title: "Punjabi Chicken Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",
@@ -1689,7 +1689,7 @@ const recipesToMigrate = [
   },
   {
     title: "South Indian Chicken Dal",
-    image: "http://localhost:5000/uploads/chicken-chana-daal.jpg",
+    image: "chicken-chana-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - medium pieces",

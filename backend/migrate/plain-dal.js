@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chana Dal",
-    image: "http://localhost:5000/uploads/chana-daal.png",
+    image: "chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal (split Bengal gram) - washed and soaked",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Dal Fry",
-    image: "http://localhost:5000/uploads/chana-daal.png",
+    image: "chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -122,7 +122,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Dal Palak",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -180,7 +180,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -236,7 +236,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Dal with Spinach",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -294,7 +294,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal",
-    image: "http://localhost:5000/uploads/moong-dal.jpg",
+    image: "moong-dal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal (split yellow lentils) - washed",
@@ -348,7 +348,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal Fry",
-    image: "http://localhost:5000/uploads/moong-dal.jpg",
+    image: "moong-dal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -404,7 +404,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal Palak",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -461,7 +461,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -517,7 +517,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal with Spinach",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -573,7 +573,7 @@ const recipesToMigrate = [
   },
   {
     title: "Moong Dal Khichdi",
-    image: "http://localhost:5000/uploads/daal-mong-khichri.jpg",
+    image: "daal-mong-khichri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup moong dal - washed",
@@ -627,7 +627,7 @@ const recipesToMigrate = [
   },
   {
     title: "Maash Dal",
-    image: "http://localhost:5000/uploads/mash-dal.jpg",
+    image: "mash-dal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup maash dal (black lentils / urad dal) - washed and soaked",
@@ -684,7 +684,7 @@ const recipesToMigrate = [
   },
   {
     title: "Maash Dal Fry",
-    image: "http://localhost:5000/uploads/maash-daal-fry.jpg",
+    image: "maash-daal-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup maash dal - washed and soaked",
@@ -740,7 +740,7 @@ const recipesToMigrate = [
   },
   {
     title: "Maash Dal Palak",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup maash dal - washed and soaked",
@@ -795,7 +795,7 @@ const recipesToMigrate = [
   },
   {
     title: "Maash Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup maash dal - washed and soaked",
@@ -850,7 +850,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masoor Dal",
-    image: "http://localhost:5000/uploads/masoor-daal.jpg",
+    image: "masoor-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup masoor dal (red lentils) - washed",
@@ -904,7 +904,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masoor Dal Fry",
-    image: "http://localhost:5000/uploads/masoor-daal.jpg",
+    image: "masoor-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup masoor dal - washed",
@@ -960,7 +960,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masoor Dal Palak",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup masoor dal - washed",
@@ -1015,7 +1015,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masoor Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup masoor dal - washed",
@@ -1070,7 +1070,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mix Dal",
-    image: "http://localhost:5000/uploads/mix-daal.jpg",
+    image: "mix-daal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/3 cup chana dal - washed and soaked",
@@ -1129,7 +1129,7 @@ const recipesToMigrate = [
   },
   {
     title: "Panchmel Dal",
-    image: "http://localhost:5000/uploads/panchmel-dal.jpg",
+    image: "panchmel-dal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/4 cup chana dal - washed and soaked",
@@ -1189,7 +1189,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Makhani",
-    image: "http://localhost:5000/uploads/daal-makhni.jpg",
+    image: "daal-makhni.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup whole urad dal (sabut urad) - washed and soaked overnight",
@@ -1248,7 +1248,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Palak",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup mixed dal (moong dal + masoor dal) - washed",
@@ -1303,7 +1303,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Louki",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -1358,7 +1358,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Tori",
-    image: "http://localhost:5000/uploads/chana-dal-lauki.jpg",
+    image: "chana-dal-lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",
@@ -1413,7 +1413,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Karela",
-    image: "http://localhost:5000/uploads/daal-karela.jpg",
+    image: "daal-karela.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup toor dal - washed",
@@ -1469,7 +1469,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Methi",
-    image: "http://localhost:5000/uploads/chana-dal-palak.jpg",
+    image: "chana-dal-palak.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup moong dal - washed",
@@ -1524,7 +1524,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Tadka",
-    image: "http://localhost:5000/uploads/daal-tadka.jpg",
+    image: "daal-tadka.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup toor dal - washed",
@@ -1583,7 +1583,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Fry",
-    image: "http://localhost:5000/uploads/chana-daal.png",
+    image: "chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup mixed dal (toor dal + moong dal) - washed",
@@ -1641,7 +1641,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Bukhara",
-    image: "http://localhost:5000/uploads/daal-bukhara.jpg",
+    image: "daal-bukhara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup whole urad dal (sabut urad) - washed and soaked overnight",
@@ -1699,7 +1699,7 @@ const recipesToMigrate = [
   },
   {
     title: "Gujarati Dal",
-    image: "http://localhost:5000/uploads/daal-bukhara.jpg",
+    image: "daal-bukhara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup toor dal - washed",
@@ -1756,7 +1756,7 @@ const recipesToMigrate = [
   },
   {
     title: "Rajasthani Dal",
-    image: "http://localhost:5000/uploads/daal-bukhara.jpg",
+    image: "daal-bukhara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup chana dal - washed and soaked",

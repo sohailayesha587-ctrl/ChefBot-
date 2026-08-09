@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
  {
   title: "Tawa Roti",
-image: "http://localhost:5000/uploads/tawa-roti.jpg",
+image: "tawa-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour (atta)",
@@ -60,7 +60,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Phulka",
-  image: "http://localhost:5000/uploads/phulka.jpg",
+  image: "phulka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour (atta)",
@@ -111,7 +111,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Jowar Roti",
-   image: "http://localhost:5000/uploads/jowar-roti.jpg",
+   image: "jowar-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups jowar flour (sorghum flour)",
@@ -163,7 +163,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
  {
   title: "Bajra Roti",
-  image: "http://localhost:5000/uploads/bajra-roti.jpg",
+  image: "bajra-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups bajra flour (pearl millet flour)",
@@ -215,7 +215,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Simple Paratha",
-   image: "http://localhost:5000/uploads/paratha.jpg",
+   image: "paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -267,7 +267,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Lachha Paratha",
-  image: "http://localhost:5000/uploads/laccha-paratha.jpg",
+  image: "laccha-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour (maida)",
@@ -321,7 +321,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
  {
   title: "Aloo Paratha",
-  image: "http://localhost:5000/uploads/aloo-paratha.jpg",
+  image: "aloo-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -379,7 +379,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Gobhi Paratha",
-  image: "http://localhost:5000/uploads/gobi-paratha.jpg",
+  image: "gobi-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -434,7 +434,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Mooli Paratha",
-  image: "http://localhost:5000/uploads/mooli-paratha.jpg",
+  image: "mooli-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -488,7 +488,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
  {
   title: "Paneer Paratha",
-  image: "http://localhost:5000/uploads/paneer-paratha.jpg",
+  image: "paneer-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -541,7 +541,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Tandoori Naan",
-  image: "http://localhost:5000/uploads/tandoori-naan.jpg",
+  image: "tandoori-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour (maida)",
@@ -595,7 +595,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Garlic Naan",
-  image: "http://localhost:5000/uploads/garlic-naan.jpg",
+  image: "garlic-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -645,7 +645,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
  {
   title: "Butter Naan",
-  image: "http://localhost:5000/uploads/butter-naan.jpg",
+  image: "butter-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -691,7 +691,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Cheese Naan",
-  image: "http://localhost:5000/uploads/cheese-naan.jpg",
+  image: "cheese-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -741,7 +741,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Peshawari Naan",
-  image: "http://localhost:5000/uploads/peshawri-naan.jpg",
+  image: "peshawri-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -794,7 +794,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Roghni Naan",
-  image: "http://localhost:5000/uploads/bread.jpg",
+  image: "bread.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -844,7 +844,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Kabuli Naan",
-  image: "http://localhost:5000/uploads/kabuli-naan.png",
+  image: "kabuli-naan.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -891,7 +891,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Roghni Naan Quick Homestyle",
-  image: "http://localhost:5000/uploads/roghni-naan.jpg",
+  image: "roghni-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -940,7 +940,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Sheermal",
-  image: "http://localhost:5000/uploads/bread.jpg",
+  image: "bread.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -995,7 +995,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Kashmiri Sheermal",
-  image: "http://localhost:5000/uploads/sheermal.jpg",
+  image: "sheermal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1044,7 +1044,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
  {
   title: "Plain Kulcha",
-  image: "http://localhost:5000/uploads/kulcha-chana.jpg",
+  image: "kulcha-chana.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1095,7 +1095,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Aloo Kulcha",
-  image: "http://localhost:5000/uploads/kulcha-chana.jpg",
+  image: "kulcha-chana.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1151,7 +1151,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Paneer Kulcha",
-  image: "http://localhost:5000/uploads/kulcha-chana.jpg",
+  image: "kulcha-chana.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1207,7 +1207,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Bread Pakora",
-  image: "http://localhost:5000/uploads/bread.jpg",
+  image: "bread.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1259,7 +1259,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Aloo Bread Pakora",
-  image: "http://localhost:5000/uploads/aloo-pakora-bread.png",
+  image: "aloo-pakora-bread.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1313,7 +1313,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Grilled Vegetable Sandwich",
-  image: "http://localhost:5000/uploads/grilled-sandwich.jpg",
+  image: "grilled-sandwich.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1364,7 +1364,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Bombay Sandwich",
-  image: "http://localhost:5000/uploads/grilled-sandwich.jpg",
+  image: "grilled-sandwich.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1417,7 +1417,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Cheese Grilled Sandwich",
-  image: "http://localhost:5000/uploads/chicken-cheese-sandwich.jpg",
+  image: "chicken-cheese-sandwich.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1464,7 +1464,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Potato Bread Roll",
-  image: "http://localhost:5000/uploads/bread.jpg",
+  image: "bread.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1516,7 +1516,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Vegetable Bread Roll",
-  image: "http://localhost:5000/uploads/veg-spring-roll.jpg",
+  image: "veg-spring-roll.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 slices of bread",
@@ -1566,7 +1566,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Meetha Paratha",
-  image: "http://localhost:5000/uploads/meetha-paratha.jpg",
+  image: "meetha-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -1615,7 +1615,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Banana Bread",
-  image: "http://localhost:5000/uploads/banana-bread.jpg",
+  image: "banana-bread.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1666,7 +1666,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Puri",
-  image: "http://localhost:5000/uploads/puri.jpg",
+  image: "puri.jpg",
   tagline: "Deep fried Indian bread - puffy and golden",
   image: "https://images.unsplash.com/photo-1601050690597-df0568f70950",
   cuisine: "Pakistani",
@@ -1717,7 +1717,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
 },
   {
   title: "Bhatura",
-  image: "http://localhost:5000/uploads/bhatura.jpg",
+  image: "bhatura.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1769,7 +1769,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Roomali Roti",
-  image: "http://localhost:5000/uploads/roomali-roti.jpg",
+  image: "roomali-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1819,7 +1819,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Missi Roti",
-  image: "http://localhost:5000/uploads/missi-roti.jpg",
+  image: "missi-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 cup whole wheat flour",
@@ -1873,7 +1873,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Thepla",
-  image: "http://localhost:5000/uploads/missi-roti.jpg",
+  image: "missi-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",
@@ -1928,7 +1928,7 @@ image: "http://localhost:5000/uploads/tawa-roti.jpg",
   timesUsedInPlans: 0
 },{
   title: "Makki ki Roti",
-  image: "http://localhost:5000/uploads/saag-makki-ki-roti.jpg",
+  image: "saag-makki-ki-roti.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups makki ka atta (cornmeal flour)",

@@ -6,7 +6,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
  {
   title: "Fish Curry",
-  image: "http://localhost:5000/uploads/fish-curry.jpg",
+  image: "fish-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish fillets (rohu, salmon, or any firm white fish) - cut into pieces",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Masala",
-  image: "http://localhost:5000/uploads/fish-masala.jpg",
+  image: "fish-masala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -118,7 +118,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Curry with Coconut",
-  image: "http://localhost:5000/uploads/fish-curry-with-cocunut.jpg",
+  image: "fish-curry-with-cocunut.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -172,7 +172,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Kadhai",
-  image: "http://localhost:5000/uploads/fish-karahi.jpg",
+  image: "fish-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -226,7 +226,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Do Pyaza",
-  image: "http://localhost:5000/uploads/fish-karahi.jpg",
+  image: "fish-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -280,7 +280,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Jalfrezi",
-  image: "http://localhost:5000/uploads/fish-jalfrezi.jpg",
+  image: "fish-jalfrezi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless, cut into cubes",
@@ -333,7 +333,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Malai Curry",
-  image: "http://localhost:5000/uploads/fish-malai-curry.jpg",
+  image: "fish-malai-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -386,7 +386,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Kofta Curry",
-  image: "http://localhost:5000/uploads/fish-kofta.jpg",
+  image: "fish-kofta.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless, minced",
@@ -441,7 +441,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Fry",
-  image: "http://localhost:5000/uploads/fish-fry.jpg",
+  image: "fish-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish fillets - cut into pieces",
@@ -494,7 +494,7 @@ const recipesToMigrate = [
 },
 {
   title: "Karachi Fish Fry",
-  image: "http://localhost:5000/uploads/fish-fry.jpg",
+  image: "fish-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish slices - about 1 inch thick",
@@ -550,7 +550,7 @@ const recipesToMigrate = [
 },
 {
   title: "Tawa Fish Fry",
-  image: "http://localhost:5000/uploads/fish-fry.jpg",
+  image: "fish-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -602,7 +602,7 @@ const recipesToMigrate = [
 },
 {
   title: "Andhra Fish Fry",
-  image: "http://localhost:5000/uploads/fish-fry.jpg",
+  image: "fish-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - cut into pieces",
@@ -654,7 +654,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Finger",
-  image: "http://localhost:5000/uploads/finger-fish.jpg",
+  image: "finger-fish.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish fillets - boneless, cut into finger-sized strips",
@@ -708,7 +708,7 @@ const recipesToMigrate = [
 
   {
   title: "Fish Tikka",
-  image: "http://localhost:5000/uploads/fish-tikka.jpg",
+  image: "fish-tikka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless, cut into cubes",
@@ -762,7 +762,7 @@ const recipesToMigrate = [
 },
 {
   title: "Malai Fish Tikka",
-  image: "http://localhost:5000/uploads/malai-tikka.jpg",
+  image: "malai-tikka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -812,7 +812,7 @@ const recipesToMigrate = [
 },
 {
   title: "Hariyali Fish Tikka",
-  image: "http://localhost:5000/uploads/fish-haryali-tikka.jpg",
+  image: "fish-haryali-tikka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -862,7 +862,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Tikka Boti",
-  image: "http://localhost:5000/uploads/fish-tikka.jpg",
+  image: "fish-tikka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -911,7 +911,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Pulao",
-  image: "http://localhost:5000/uploads/fish-biryani.jpg",
+  image: "fish-biryani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - fried until golden",
@@ -969,7 +969,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Biryani",
-  image: "http://localhost:5000/uploads/fish-biryani.jpg",
+  image: "fish-biryani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - fried until golden",
@@ -1028,7 +1028,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Fried Rice",
-  image: "http://localhost:5000/uploads/fish-fried-rice.jpg",
+  image: "fish-fried-rice.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g fish - boneless, cut into small cubes",
@@ -1077,7 +1077,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Pakora",
-  image: "http://localhost:5000/uploads/fish-pakora.jpg",
+  image: "fish-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless, cut into bite-sized cubes",
@@ -1128,7 +1128,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Manchurian",
-  image: "http://localhost:5000/uploads/fish-manchurian.jpg",
+  image: "fish-manchurian.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -1184,7 +1184,7 @@ const recipesToMigrate = [
 
   {
   title: "Fish Cutlet",
-  image: "http://localhost:5000/uploads/fish-cutlet.jpg",
+  image: "fish-cutlet.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boiled and mashed",
@@ -1237,7 +1237,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Kebab",
-  image: "http://localhost:5000/uploads/fish-kebab.jpg",
+  image: "fish-kebab.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless, minced",
@@ -1290,7 +1290,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Masala Fry",
-  image: "http://localhost:5000/uploads/fish-masala-fry.jpg",
+  image: "fish-masala-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish slices - about 1 inch thick",
@@ -1343,7 +1343,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish 65",
-  image: "http://localhost:5000/uploads/fish-tikka.jpg",
+  image: "fish-tikka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -1394,7 +1394,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Chili",
-  image: "http://localhost:5000/uploads/fish-chilli.jpg",
+  image: "fish-chilli.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g fish - boneless cubes",
@@ -1446,7 +1446,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Roll",
-  image: "http://localhost:5000/uploads/fish-paratha-roll.jpg",
+  image: "fish-paratha-roll.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g fish fingers - cooked",
@@ -1496,7 +1496,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Sandwich",
-  image: "http://localhost:5000/uploads/fish-sandwich.jpg",
+  image: "fish-sandwich.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "200g fish fingers - cooked",
@@ -1545,7 +1545,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Soup",
-  image: "http://localhost:5000/uploads/fish-soup.jpg",
+  image: "fish-soup.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "250g fish bones and head (or fish pieces)",
@@ -1595,7 +1595,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fish Manchow Soup",
-  image: "http://localhost:5000/uploads/fish-soup.jpg",
+  image: "fish-soup.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "200g fish - boneless, minced",

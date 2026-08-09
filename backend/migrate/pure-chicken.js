@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chicken Curry",
-    image: "http://localhost:5000/uploads/chicken-curry.jpg",
+    image: "chicken-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -61,7 +61,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Karahi",
-    image: "http://localhost:5000/uploads/chicken-karahi.jpg",
+    image: "chicken-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -112,7 +112,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Handi",
-    image: "http://localhost:5000/uploads/chicken-handi.jpg",
+    image: "chicken-handi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -165,7 +165,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Qorma",
-    image: "http://localhost:5000/uploads/chicken-qorma.jpg",
+    image: "chicken-qorma.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -220,7 +220,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Jalfrezi",
-    image: "http://localhost:5000/uploads/chicken-jalfrezi.jpg",
+    image: "chicken-jalfrezi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - boneless, cut into cubes",
@@ -273,7 +273,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Lahori",
-    image: "http://localhost:5000/uploads/chicken-lahori.jpg",
+    image: "chicken-lahori.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -327,7 +327,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Mughlai",
-    image: "http://localhost:5000/uploads/chicken-mughlai.jpg",
+    image: "chicken-mughlai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -381,7 +381,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Do Pyaza",
-    image: "http://localhost:5000/uploads/chicken-do-pyaz.jpg",
+    image: "chicken-do-pyaz.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -432,7 +432,7 @@ const recipesToMigrate = [
   },
   {
     title: "White Chicken Karahi",
-    image: "http://localhost:5000/uploads/white-chicken-karahi.jpg",
+    image: "white-chicken-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -480,7 +480,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peshawari Chicken Karahi",
-    image: "http://localhost:5000/uploads/peshawari-chicken-karahi.jpg",
+    image: "peshawari-chicken-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -528,7 +528,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spicy Chicken Karahi",
-    image: "http://localhost:5000/uploads/spicy-chicken-karahi.jpg",
+    image: "spicy-chicken-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -575,7 +575,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Karahi with Gravy",
-    image: "http://localhost:5000/uploads/chicken-karahi-with-gravy.jpg",
+    image: "chicken-karahi-with-gravy.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -622,7 +622,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dry Chicken Karahi",
-    image: "http://localhost:5000/uploads/dry-chicken-karahi.jpg",
+    image: "dry-chicken-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -668,7 +668,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Masala",
-    image: "http://localhost:5000/uploads/chicken-masala.jpg",
+    image: "chicken-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -721,7 +721,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Tikka Masala",
-    image: "http://localhost:5000/uploads/chicken-tikka-masala.jpg",
+    image: "chicken-tikka-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken tikka pieces - already cooked",
@@ -771,7 +771,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0  },
   {
     title: "Chicken Butter Masala",
-    image: "http://localhost:5000/uploads/chicken-butter-masala.jpg",
+    image: "chicken-butter-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken - boneless, cut into cubes",
@@ -821,7 +821,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Lababdar",
-    image: "http://localhost:5000/uploads/chicken-lababdar.jpg",
+    image: "chicken-lababdar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -871,7 +871,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Kolhapuri",
-    image: "http://localhost:5000/uploads/chicken-kolhapuri.jpg",
+    image: "chicken-kolhapuri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -920,7 +920,7 @@ const recipesToMigrate = [
   },
   {
     title: "Oven Roasted Chicken",
-    image: "http://localhost:5000/uploads/oven-roasted-chicken.jpg",
+    image: "oven-roasted-chicken.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 whole chicken",
@@ -971,7 +971,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tandoori Chicken",
-    image: "http://localhost:5000/uploads/tandoori-chicken.jpg",
+    image: "tandoori-chicken.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 whole chicken",
@@ -1021,7 +1021,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Roast with Gravy",
-    image: "http://localhost:5000/uploads/chicken-roast-with-gravy.jpg",
+    image: "chicken-roast-with-gravy.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 whole chicken",
@@ -1069,7 +1069,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Boneless Curry",
-    image: "http://localhost:5000/uploads/chicken-boneless-curry.jpg",
+    image: "chicken-boneless-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken - cut into cubes",
@@ -1119,7 +1119,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Malai Boti",
-    image: "http://localhost:5000/uploads/chicken-malai-boti.jpg",
+    image: "chicken-malai-boti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken - cut into cubes",
@@ -1165,7 +1165,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Kali Mirch",
-    image: "http://localhost:5000/uploads/chicken-kali-mirch.jpg",
+    image: "chicken-kali-mirch.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken - cut into cubes",
@@ -1212,7 +1212,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Hariyali",
-    image: "http://localhost:5000/uploads/chicken-hariyali.jpg",
+    image: "chicken-hariyali.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless chicken - cut into cubes",
@@ -1258,7 +1258,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Handi Traditional",
-    image: "http://localhost:5000/uploads/chicken-handi-traditional.jpg",
+    image: "chicken-handi-traditional.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -1307,7 +1307,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Handi with Cream",
-    image: "http://localhost:5000/uploads/chicken-handi-with-cream.jpg",
+    image: "chicken-handi-with-cream.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -1357,7 +1357,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spicy Chicken Handi",
-    image: "http://localhost:5000/uploads/spicy-chicken-handi.jpg",
+    image: "spicy-chicken-handi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -1406,7 +1406,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Bhuna",
-    image: "http://localhost:5000/uploads/chicken-bhuna.jpg",
+    image: "chicken-bhuna.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",
@@ -1456,7 +1456,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Bhuna Masala",
-    image: "http://localhost:5000/uploads/chicken-bhuna-masala.jpg",
+    image: "chicken-bhuna-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg chicken - cut into pieces",

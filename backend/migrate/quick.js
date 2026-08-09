@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chicken Noodles",
-    image: "http://localhost:5000/uploads/chicken-maggi.jpg",
+    image: "chicken-maggi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 packet Maggi noodles",
@@ -56,7 +56,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Paratha",
-    image: "http://localhost:5000/uploads/anda-paratha.jpg",
+    image: "anda-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 ready-made parathas",
@@ -106,7 +106,7 @@ const recipesToMigrate = [
   },
   {
     title: "Omelette Sandwich",
-    image: "http://localhost:5000/uploads/omelette-sandwich.jpg",
+    image: "omelette-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 slices of bread",
@@ -158,7 +158,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cup Noodles ",
-    image: "http://localhost:5000/uploads/cup-noodles.jpg",
+    image: "cup-noodles.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup instant noodles (any brand)",
@@ -206,7 +206,7 @@ const recipesToMigrate = [
   },
   {
     title: "Butter Toast with Jam",
-    image: "http://localhost:5000/uploads/toast-with-butter-and-jam.jpg",
+    image: "toast-with-butter-and-jam.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices of bread",
@@ -252,7 +252,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fruit Yogurt ",
-    image: "http://localhost:5000/uploads/fruit-raita.jpg",
+    image: "fruit-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup plain yogurt",
@@ -299,7 +299,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cornflakes with Milk",
-    image: "http://localhost:5000/uploads/cornflakes-with-milk.jpg",
+    image: "cornflakes-with-milk.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup cornflakes",
@@ -344,7 +344,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peanut Butter Banana Sandwich",
-    image: "http://localhost:5000/uploads/peanut-butter-sandwich.jpg",
+    image: "peanut-butter-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices of bread",
@@ -390,7 +390,7 @@ const recipesToMigrate = [
   },
   {
     title: "Boiled Eggs",
-    image: "http://localhost:5000/uploads/boiled-eggs.jpg",
+    image: "boiled-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -438,7 +438,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sweet Yogurt",
-    image: "http://localhost:5000/uploads/yogurt-with-sugar.jpg",
+    image: "yogurt-with-sugar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup plain yogurt",
@@ -484,7 +484,7 @@ const recipesToMigrate = [
   },
   {
     title: "French Toast",
-    image: "http://localhost:5000/uploads/french-toast.jpg",
+    image: "french-toast.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices of bread",
@@ -534,7 +534,7 @@ const recipesToMigrate = [
   },
   {
     title: "Scrambled Eggs",
-    image: "http://localhost:5000/uploads/scrambled-eggs.jpg",
+    image: "scrambled-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -584,7 +584,7 @@ const recipesToMigrate = [
   },
   {
     title: "Paratha with Scrambled Eggs",
-    image: "http://localhost:5000/uploads/anda-paratha.jpg",
+    image: "anda-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 ready-made parathas",
@@ -636,7 +636,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chickpea Chaat",
-    image: "http://localhost:5000/uploads/channa-chaat.jpg",
+    image: "channa-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup boiled chickpeas (canned or fresh)",
@@ -687,7 +687,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Sandwich",
-    image: "http://localhost:5000/uploads/veg-sandwich.jpg",
+    image: "veg-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 slices of bread",
@@ -737,7 +737,7 @@ const recipesToMigrate = [
   },
   {
     title: "Quick Pasta with Ready Sauce",
-    image: "http://localhost:5000/uploads/pasta-with-ready-sauce.jpg",
+    image: "pasta-with-ready-sauce.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "1 cup pasta (penne, macaroni, or spaghetti)",
@@ -787,7 +787,7 @@ const recipesToMigrate = [
   },
   {
     title: "Leftover Rice Fry",
-    image: "http://localhost:5000/uploads/leftover-rice-fry.jpg",
+    image: "leftover-rice-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups leftover cooked rice",
@@ -836,7 +836,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lentils with Rice ",
-    image: "http://localhost:5000/uploads/daal-chawal.jpg",
+    image: "daal-chawal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "½ cup masoor dal (red lentils)",
@@ -886,7 +886,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Mayonnaise Sandwich",
-    image: "http://localhost:5000/uploads/chicken-mayo-sandwich.jpg",
+    image: "chicken-mayo-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 slices of bread",
@@ -935,7 +935,7 @@ const recipesToMigrate = [
   },
   {
     title: "Minced Meat Paratha ",
-    image: "http://localhost:5000/uploads/qeema-paratha.jpg",
+    image: "qeema-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 ready-made parathas",

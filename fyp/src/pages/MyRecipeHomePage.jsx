@@ -13,73 +13,73 @@ const MyRecipeHomepage = () => {
       id: 1, 
       title: 'BREAKFAST', 
       path: '/BreakFast', 
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAAkO6PiyzExlXgDE-kZFg0VQlAt1sOqclhA&s' 
+     image: "breakfast.jpg",
     },
     { 
       id: 2, 
       title: 'LUNCH', 
       path: '/recipe-lunch', 
-      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+      image: "lunch.jpg", 
     },
     { 
       id: 3, 
       title: 'DINNER', 
       path: '/recipe-dinner', 
-      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+      image: "dinner.jpg",
     },
     { 
       id: 4, 
       title: 'SOUPS', 
       path: '/soups', 
-      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+      image: "soups.jpg", 
     },
     { 
       id: 5, 
       title: 'APPETIZERS', 
       path: '/appetizers', 
-      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "appetizers.jpg", 
     },
     { 
       id: 6, 
       title: 'SNACKS', 
       path: '/Snack', 
-      image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "snacks.jpg",
     },
     { 
       id: 7, 
       title: 'DESSERTS', 
       path: '/desserts', 
-      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "desserts.jpg",
     },
     { 
       id: 8, 
       title: 'BAKING', 
       path: '/Baking', 
-      image: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "baking.jpg",
     },
     { 
       id: 9, 
       title: 'BEVERAGES', 
       path: '/Beverage', 
-      image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "beverages.jpg",
     },
     { 
       id: 10, 
       title: 'SALADS', 
       path: '/Salads', 
-      image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "salads.jpg",
     },
     { 
       id: 11, 
       title: 'REGIONAL', 
       path: '/Regional', 
-      image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' 
+      image: "regional.jpg", 
     },
     { 
       id: 12, 
       title: 'CHEAT MEAL', 
       path: '/cheat-meal', 
-      image: 'https://substackcdn.com/image/fetch/$s_!Xw3X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdfa9ec03-d4e8-4946-9649-cf7fe4f34059_1442x1103.heic' 
+      image: "cheatMeal.jpg",
     }
   ];
 
@@ -88,29 +88,27 @@ const MyRecipeHomepage = () => {
       id: 2, 
       title: 'STUDENT RECIPES', 
       path: '/StudentRecipe', 
-      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      image: "student.jpg", 
       features: ['Easy student meals', 'Dorm room cooking', 'Quick recipes', 'Minimal equipment'] 
     },
     { 
       id: 3, 
       title: 'QUICK and EASY', 
       path: '/QuickRecipe', 
-      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      image: "quick.jpg", 
       features: ['15-min meals', 'Simple recipes', 'Minimal cleanup', 'Busy weeknights'] 
     },
     { 
       id: 4, 
       title: 'VEGETARIAN', 
       path: '/Vege', 
-      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80', 
+      image: "vegeterian.jpg", 
       features: ['Meat-free meals', 'Plant-based protein', 'Healthy options', 'Vegetarian classics'] 
     }
   ];
 
   const heroImages = [
-    'https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80',
-    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80',
-    'https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80'
+    "heroImage.jpg",
   ];
 
   useEffect(() => {
@@ -128,24 +126,36 @@ const MyRecipeHomepage = () => {
     <div className="rf-homepage">
 
       <section className="rf-hero-banner">
-        <div className="rf-hero-slider">
-          {heroImages.map((image, index) => (
-            <div
-              key={index}
-              className={`rf-hero-slide ${index === currentImageIndex ? 'active' : ''}`}
-              style={{ backgroundImage: `url(${image})` }}
-            ></div>
-          ))}
+        <div className="rf-hero-split">
 
-          <div className="rf-slider-dots">
-            {heroImages.map((_, index) => (
-              <button
-                key={index}
-                className={`rf-slider-dot ${index === currentImageIndex ? 'active' : ''}`}
-                onClick={() => setCurrentImageIndex(index)}
-              />
-            ))}
+          <div className="rf-hero-text-side">
+            <span className="rf-hero-eyebrow">Fresh & Flavorful</span>
+            <h1 className="rf-hero-title">
+              Culinary <em>Masterpieces</em><br />Made Simple
+            </h1>
+            <div className="rf-hero-divider"></div>
+            <p className="rf-hero-desc">
+              Chef-curated recipes to transform your everyday cooking into something extraordinary.
+            </p>
+            <p className="rf-hero-sub">
+              From quick weeknight dinners to show-stopping desserts.
+            </p>
           </div>
+
+          <div className="rf-hero-image-side">
+            <div className="rf-hero-slider">
+              {heroImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`rf-hero-slide ${index === currentImageIndex ? 'active' : ''}`}
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              ))}
+            </div>
+            <div className="rf-hero-img-tint"></div>
+            <div className="rf-hero-img-slice"></div>
+          </div>
+
         </div>
       </section>
 

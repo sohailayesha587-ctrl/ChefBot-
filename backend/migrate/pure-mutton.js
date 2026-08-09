@@ -7,7 +7,7 @@ const Recipe = require('../models/Recipe');
 const recipesToMigrate = [
   {
     title: "Mutton Karahi",
-    image: "http://localhost:5000/uploads/mutton-karahi.jpg",
+    image: "mutton-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones, medium pieces)",
@@ -58,7 +58,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Handi",
-    image: "http://localhost:5000/uploads/mutton-handi.jpg",
+    image: "mutton-handi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -112,7 +112,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Qorma",
-    image: "http://localhost:5000/uploads/mutton-korma.jpg",
+    image: "mutton-korma.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -166,7 +166,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Rogan Josh",
-    image: "http://localhost:5000/uploads/mutton-rogan-josh.jpg",
+    image: "mutton-rogan-josh.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -218,7 +218,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Do Pyaz",
-    image: "http://localhost:5000/uploads/mutton-do-pyaz.jpg",
+    image: "mutton-do-pyaz.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -271,7 +271,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Bhuna",
-    image: "http://localhost:5000/uploads/mutton-bhuna.jpg",
+    image: "mutton-bhuna.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -325,7 +325,7 @@ const recipesToMigrate = [
   },
   {
     title: "White Mutton Karahi",
-    image: "http://localhost:5000/uploads/white-mutton-karahi.jpg",
+    image: "white-mutton-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -374,7 +374,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peshawari Mutton Karahi",
-    image: "http://localhost:5000/uploads/peshawari-mutton-karahi.jpg",
+    image: "peshawari-mutton-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -423,7 +423,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spicy Mutton Karahi",
-    image: "http://localhost:5000/uploads/spicy-mutton-karahi.jpg",
+    image: "spicy-mutton-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -473,7 +473,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Masala",
-    image: "http://localhost:5000/uploads/mutton-masala.jpg",
+    image: "mutton-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -525,7 +525,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Tikka Masala",
-    image: "http://localhost:5000/uploads/mutton-tikka-masala.jpg",
+    image: "mutton-tikka-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cut into cubes)",
@@ -578,7 +578,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Butter Masala",
-    image: "http://localhost:5000/uploads/mutton-butter-masala.jpg",
+    image: "mutton-butter-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cut into cubes)",
@@ -631,7 +631,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Lababdar",
-    image: "http://localhost:5000/uploads/mutton-lababdar.jpg",
+    image: "mutton-lababdar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cut into cubes)",
@@ -684,7 +684,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kolhapuri",
-    image: "http://localhost:5000/uploads/mutton-kolhapuri.jpg",
+    image: "mutton-kolhapuri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -738,7 +738,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kashmiri Rogan Josh",
-    image: "http://localhost:5000/uploads/kashmiri-rogan-josh.jpg",
+    image: "kashmiri-rogan-josh.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -790,7 +790,7 @@ const recipesToMigrate = [
   },
   {
     title: "Easy Rogan Josh",
-    image: "http://localhost:5000/uploads/easy-rogan-josh.jpg",
+    image: "easy-rogan-josh.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -842,7 +842,7 @@ const recipesToMigrate = [
   },
   {
     title: "Pressure Cooker Rogan Josh",
-    image: "http://localhost:5000/uploads/pressure-cooker-rogan-josh.jpg",
+    image: "pressure-cooker-rogan-josh.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -896,7 +896,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kofta Curry",
-    image: "http://localhost:5000/uploads/mutton-kofta-curry.jpg",
+    image: "mutton-kofta-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -950,7 +950,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kofta in Yogurt Gravy",
-    image: "http://localhost:5000/uploads/mutton-kofta-in-yogurt-gravy.jpg",
+    image: "mutton-kofta-in-yogurt-gravy.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -1003,7 +1003,7 @@ const recipesToMigrate = [
   },
   {
     title: "Nargisi Kofta",
-    image: "http://localhost:5000/uploads/nargisi-kofta.jpg",
+    image: "nargisi-kofta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -1058,7 +1058,7 @@ const recipesToMigrate = [
   },
   {
     title: "Malai Kofta",
-    image: "http://localhost:5000/uploads/malai-kofta.jpg",
+    image: "malai-kofta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -1112,7 +1112,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Rara",
-    image: "http://localhost:5000/uploads/mutton-rara.jpg",
+    image: "mutton-rara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1166,7 +1166,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Rara Masala",
-    image: "http://localhost:5000/uploads/mutton-rara-masala.jpg",
+    image: "mutton-rara-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1219,7 +1219,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hyderabadi Mutton",
-    image: "http://localhost:5000/uploads/hyderabadi-mutton.jpg",
+    image: "hyderabadi-mutton.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1272,7 +1272,7 @@ const recipesToMigrate = [
   },
   {
     title: "Punjabi Mutton",
-    image: "http://localhost:5000/uploads/punjabi-mutton.jpg",
+    image: "punjabi-mutton.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1325,7 +1325,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chettinad Mutton",
-    image: "http://localhost:5000/uploads/chettinad-mutton.jpg",
+    image: "chettinad-mutton.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1378,7 +1378,7 @@ const recipesToMigrate = [
   },
   {
     title: "Goan Mutton Curry",
-    image: "http://localhost:5000/uploads/goan-mutton-curry.jpg",
+    image: "goan-mutton-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (with bones)",
@@ -1433,7 +1433,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Chops Curry",
-    image: "http://localhost:5000/uploads/mutton-chops-curry.jpg",
+    image: "mutton-chops-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton chops",
@@ -1485,7 +1485,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Chops Karahi",
-    image: "http://localhost:5000/uploads/mutton-chops-karahi.jpg",
+    image: "mutton-chops-karahi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton chops",
@@ -1534,7 +1534,7 @@ const recipesToMigrate = [
   },
   {
     title: "Grilled Mutton Chops",
-    image: "http://localhost:5000/uploads/grilled-mutton-chops.jpg",
+    image: "grilled-mutton-chops.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton chops",

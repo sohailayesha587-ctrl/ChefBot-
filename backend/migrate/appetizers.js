@@ -7,7 +7,7 @@ const recipesToMigrate = [
   
   {
   title: "Vegetable Spring Rolls",
-  image: "http://localhost:5000/uploads/veg-spring-roll.jpg",
+  image: "veg-spring-roll.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 spring roll wrappers",
@@ -57,7 +57,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Chicken Spring Rolls",
-image: "http://localhost:5000/uploads/spring-rolls.jpg",
+image: "spring-rolls.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 spring roll wrappers",
@@ -107,7 +107,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Shrimp Spring Rolls",
-  image: "http://localhost:5000/uploads/spring-rolls.jpg",
+  image: "spring-rolls.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 spring roll wrappers",
@@ -155,7 +155,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Cheese Spring Rolls",
-  image: "http://localhost:5000/uploads/cheese-spring-roll.jpg",
+  image: "cheese-spring-roll.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "12 spring roll wrappers",
@@ -201,7 +201,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Tofu Spring Rolls",
-  image: "http://localhost:5000/uploads/tofu-spring-roll.jpg",
+  image: "tofu-spring-roll.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 spring roll wrappers",
@@ -249,7 +249,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Vegetable Samosa",
-  image: "http://localhost:5000/uploads/samosa.jpg",
+  image: "samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -298,7 +298,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Chicken Samosa",
-  image: "http://localhost:5000/uploads/chicken-samosa.jpg",
+  image: "chicken-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -347,7 +347,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Keema Samosa",
-  image: "http://localhost:5000/uploads/keema-samosa.jpg",
+  image: "keema-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -396,7 +396,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Lentil Samosa",
-  image: "http://localhost:5000/uploads/samosa.jpg",
+  image: "samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -445,7 +445,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Cheese Samosa",
-  image: "http://localhost:5000/uploads/cheesy-samosa.jpg",
+  image: "cheesy-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -493,7 +493,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Spinach & Feta Samosa",
-  image: "http://localhost:5000/uploads/samosa.jpg",
+  image: "samosa.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -541,7 +541,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Mushroom Samosa",
-  image: "http://localhost:5000/uploads/samosa.jpg",
+  image: "samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 samosa wrappers",
@@ -588,7 +588,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Vegetable Pakoras",
-  image: "http://localhost:5000/uploads/veg-pakora.jpg",
+  image: "veg-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 cup gram flour (besan)",
@@ -637,7 +637,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Chicken Pakoras",
-  image: "http://localhost:5000/uploads/chicken-pakora.jpg",
+  image: "chicken-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "200g chicken breast, thinly sliced",
@@ -685,7 +685,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Onion Pakoras",
-  image: "http://localhost:5000/uploads/onion-pakora.jpg",
+  image: "onion-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 large onions, thinly sliced",
@@ -733,7 +733,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Spinach Pakoras",
-  image: "http://localhost:5000/uploads/spinach-pakora.jpg",
+  image: "spinach-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups spinach leaves, roughly chopped",
@@ -781,7 +781,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Fish Pakoras",
-  image: "http://localhost:5000/uploads/fish-pakora.jpg",
+  image: "fish-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "200g fish fillets, cut into bite-sized pieces",
@@ -829,7 +829,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Paneer Pakoras",
-  image: "http://localhost:5000/uploads/paneer-pakoras.jpg",
+  image: "paneer-pakoras.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "200g paneer, cut into cubes",
@@ -876,7 +876,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Potato Pakoras",
-  image: "http://localhost:5000/uploads/potato-pakoras.jpg",
+  image: "potato-pakoras.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "3 potatoes, thinly sliced",
@@ -926,7 +926,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
  
   {
   title: "Hot & Spicy Wings",
-  image: "http://localhost:5000/uploads/hot-and-spicy-wings.jpg",
+  image: "hot-and-spicy-wings.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "12 chicken wings",
@@ -971,7 +971,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "BBQ Wings",
-  image: "http://localhost:5000/uploads/hot-and-spicy-wings.jpg",
+  image: "hot-and-spicy-wings.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 chicken wings",
@@ -1016,7 +1016,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Garlic Parmesan Wings",
-  image: "http://localhost:5000/uploads/garlic-permesan-wings.jpg",
+  image: "garlic-permesan-wings.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "12 chicken wings",
@@ -1060,7 +1060,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Honey Sesame Wings",
-  image: "http://localhost:5000/uploads/honey-sesame-wings.jpg",
+  image: "honey-sesame-wings.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 chicken wings",
@@ -1105,7 +1105,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Salt & Pepper Wings",
-  image: "http://localhost:5000/uploads/salt-and-pepper-wings.jpg",
+  image: "salt-and-pepper-wings.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 chicken wings",
@@ -1150,7 +1150,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Lemon Pepper Wings",
-  image: "http://localhost:5000/uploads/salt-and-pepper-wings.jpg",
+  image: "salt-and-pepper-wings.jpg",
   cuisine: "italian",
   ingredientsRaw: [
     "12 chicken wings",
@@ -1193,7 +1193,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Mozzarella Sticks",
-  image: "http://localhost:5000/uploads/mozzarela-sticks.jpg",
+  image: "mozzarela-sticks.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "12 mozzarella cheese sticks",
@@ -1242,7 +1242,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Jalapeño Poppers",
-  image: "http://localhost:5000/uploads/jalapeno-poppers.jpg",
+  image: "jalapeno-poppers.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "12 fresh jalapeños",
@@ -1290,7 +1290,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Stuffed Mushrooms",
-  image: "http://localhost:5000/uploads/stuffed-mushrooms.jpg",
+  image: "stuffed-mushrooms.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "24 large mushrooms, stems removed",
@@ -1338,7 +1338,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Cheese Balls",
-  image: "http://localhost:5000/uploads/cheese-balls.jpg",
+  image: "cheese-balls.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "200g mozzarella cheese, cubed",
@@ -1386,7 +1386,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Halloumi Fries",
-  image: "http://localhost:5000/uploads/halloumi-fries.jpg",
+  image: "halloumi-fries.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "200g halloumi cheese",
@@ -1431,7 +1431,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Shrimp Tempura",
-  image: "http://localhost:5000/uploads/shrimp-tempura.jpg",
+  image: "shrimp-tempura.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "12 large shrimp, peeled with tails on",
@@ -1480,7 +1480,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Calamari Rings",
-  image: "http://localhost:5000/uploads/calamari-rings.jpg",
+  image: "calamari-rings.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "500g calamari rings",
@@ -1528,7 +1528,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Fish Bites",
-  image: "http://localhost:5000/uploads/fish-bites.jpg",
+  image: "fish-bites.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "400g white fish fillets, cut into 1-inch pieces",
@@ -1576,7 +1576,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Hummus with Pita Bread",
-  image: "http://localhost:5000/uploads/hummus-with-pita-bread.jpg",
+  image: "hummus-with-pita-bread.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "2 cans chickpeas, drained",
@@ -1625,7 +1625,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Guacamole with Tortilla Chips",
-  image: "http://localhost:5000/uploads/guacamole-with-chips.jpg",
+  image: "guacamole-with-chips.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "3 ripe avocados",
@@ -1673,7 +1673,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Stuffed Mushrooms",
-  image: "http://localhost:5000/uploads/stuffed-mushrooms.jpg",
+  image: "stuffed-mushrooms.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "24 large mushrooms",
@@ -1721,7 +1721,7 @@ image: "http://localhost:5000/uploads/spring-rolls.jpg",
   timesUsedInPlans: 0
 },{
   title: "Chicken Lollipop",
-  image: "http://localhost:5000/uploads/spicy-glazed-chicken-lollipop.jpg",
+  image: "spicy-glazed-chicken-lollipop.jpg",
   cuisine: "Continental",
   ingredientsRaw: [
     "12 chicken wing lollipops",

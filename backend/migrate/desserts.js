@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Banana Bread Recipe",
-    image: "http://localhost:5000/uploads/banana-bread.jpg",
+    image: "banana-bread.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "3 ripe bananas (mashed well)",
@@ -58,7 +58,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mango Caramel Delight",
-    image: "http://localhost:5000/uploads/Mango-Caramel-Delight.jpg",
+    image: "Mango-Caramel-Delight.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 big ripe mangoes (peeled and cut into small pieces)",
@@ -108,7 +108,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Delight",
-    image: "http://localhost:5000/uploads/Chocolate-Delight.jpg",
+    image: "Chocolate-Delight.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 1/2 cups chocolate cookies (crushed)",
@@ -160,7 +160,7 @@ const recipesToMigrate = [
   },
   {
     title: "Suji Cake",
-    image: "http://localhost:5000/uploads/Suji-cake.jpg",
+    image: "Suji-cake.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup semolina (suji)",
@@ -214,7 +214,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sweet Dumplings",
-    image: "http://localhost:5000/uploads/Sweet-Dumplings.jpg",
+    image: "Sweet-Dumplings.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup plain flour (maida)",
@@ -269,7 +269,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cherry Delight",
-    image: "http://localhost:5000/uploads/Cherry-delight.jpg",
+    image: "Cherry-delight.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups fresh cherries (seeds removed)",
@@ -323,7 +323,7 @@ const recipesToMigrate = [
   },
   {
     title: "Watermelon Pudding",
-    image: "http://localhost:5000/uploads/Watermelon-pudding.jpg",
+    image: "Watermelon-pudding.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "3 cups watermelon (seeds removed and chopped)",
@@ -375,7 +375,7 @@ const recipesToMigrate = [
   },
   {
     title: "Custard Falooda",
-    image: "http://localhost:5000/uploads/Custard-Falooda.jpg",
+    image: "Custard-Falooda.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups milk",
@@ -430,7 +430,7 @@ const recipesToMigrate = [
   },
   {
     title: "Custard Ice Cream",
-    image: "http://localhost:5000/uploads/Custard-ice-cream.jpg",
+    image: "Custard-ice-cream.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups heavy cream",
@@ -483,7 +483,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bread Malai Pudding",
-    image: "http://localhost:5000/uploads/Bread-Malai-Pudding.jpg",
+    image: "Bread-Malai-Pudding.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 slices white bread (crusts removed)",
@@ -537,7 +537,7 @@ const recipesToMigrate = [
   },
   {
     title: "Custard Panna Cotta",
-    image: "http://localhost:5000/uploads/Custard-Panna-Cotta.jpg",
+    image: "Custard-Panna-Cotta.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "2 cups heavy cream",
@@ -589,7 +589,7 @@ const recipesToMigrate = [
   },
   {
     title: "Qissa Khawani Kheer",
-    image: "http://localhost:5000/uploads/Qissa-Khawani-Kheer.jpg",
+    image: "Qissa-Khawani-Kheer.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup basmati rice",
@@ -643,7 +643,7 @@ const recipesToMigrate = [
   },
   {
     title: "Walnut Halwa",
-    image: "http://localhost:5000/uploads/Walnut-Halwa.jpg",
+    image: "Walnut-Halwa.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups walnuts (finely ground)",
@@ -697,7 +697,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cinnamon Rolls",
-    image: "http://localhost:5000/uploads/Cinnamon-Roll.jpg",
+    image: "Cinnamon-Roll.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "For dough: 3 cups plain flour (maida)",
@@ -757,7 +757,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bread Gulab Jamun",
-    image: "http://localhost:5000/uploads/Bread-gulab-jamun.jpg",
+    image: "Bread-gulab-jamun.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 slices white bread (crusts removed)",
@@ -815,7 +815,7 @@ const recipesToMigrate = [
   },
   {
     title: "Creamy Mango Delight",
-    image: "http://localhost:5000/uploads/Creamy-Mango-Delight.jpg",
+    image: "Creamy-Mango-Delight.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 big ripe mangoes (pureed)",
@@ -868,7 +868,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kunafa Dates",
-    image: "http://localhost:5000/uploads/kunafa-dates.jpg",
+    image: "kunafa-dates.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "250g kunafa dough (kataifi), thawed",
@@ -926,7 +926,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kunafa Chocolate",
-    image: "http://localhost:5000/uploads/kunafa-chocolate.jpg",
+    image: "kunafa-chocolate.jpg",
     cuisine: "Arabic",
     ingredientsRaw: [
       "250g kunafa dough (kataifi), thawed",
@@ -983,7 +983,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Strawberry Crepes",
-    image: "http://localhost:5000/uploads/Chocolate-Strawberry-Crepes.jpg",
+    image: "Chocolate-Strawberry-Crepes.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "For crepes: 1 cup plain flour (maida)",
@@ -1043,7 +1043,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sweet Milk Balls",
-    image: "http://localhost:5000/uploads/sweet-milk-balls.jpg",
+    image: "sweet-milk-balls.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 liter full-fat milk",

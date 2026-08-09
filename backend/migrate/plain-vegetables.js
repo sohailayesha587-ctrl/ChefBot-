@@ -6,7 +6,7 @@ const Recipe = require('../models/Recipe');
 const recipesToMigrate = [
   {
     title: "Aloo Ki Sabzi",
-    image: "http://localhost:5000/uploads/aloo-ki-sabzi.jpg",
+    image: "aloo-ki-sabzi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 potatoes - boiled, peeled, cut into cubes",
@@ -54,7 +54,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Matar",
-    image: "http://localhost:5000/uploads/aloo_matar.png",
+    image: "aloo_matar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - cut into cubes",
@@ -103,7 +103,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Baingan",
-    image: "http://localhost:5000/uploads/baingan-aloo.png",
+    image: "baingan-aloo.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 potatoes - cut into cubes",
@@ -151,7 +151,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Shimla Mirch",
-    image: "http://localhost:5000/uploads/aloo-shimla-mirch.png",
+    image: "aloo-shimla-mirch.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - thinly sliced",
@@ -197,7 +197,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Gobhi",
-    image: "http://localhost:5000/uploads/aloo-ghobi.png",
+    image: "aloo-ghobi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 potatoes - cut into cubes",
@@ -246,7 +246,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Palak",
-    image: "http://localhost:5000/uploads/aloo-palak.png",
+    image: "aloo-palak.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - cut into cubes",
@@ -295,7 +295,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Tamatar",
-    image: "http://localhost:5000/uploads/aloo-tamatar.png",
+    image: "aloo-tamatar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - cut into cubes",
@@ -343,7 +343,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Beans",
-    image: "http://localhost:5000/uploads/aloo-beans.png",
+    image: "aloo-beans.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 potatoes - thinly sliced",
@@ -390,7 +390,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Karela",
-    image: "http://localhost:5000/uploads/aloo-karela.png",
+    image: "aloo-karela.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 potatoes - cut into cubes",
@@ -437,7 +437,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Methi",
-    image: "http://localhost:5000/uploads/aloo-maithi.png",
+    image: "aloo-maithi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - cut into cubes",
@@ -483,7 +483,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Pyaz",
-    image: "http://localhost:5000/uploads/aloo-pyaz.png",
+    image: "aloo-pyaz.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 potatoes - thinly sliced",
@@ -528,7 +528,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bhindi Masala",
-    image: "http://localhost:5000/uploads/Bhindi-Masala.png",
+    image: "Bhindi-Masala.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh bhindi (okra) - washed, dried, sliced",
@@ -575,7 +575,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bhindi Do Pyaza",
-    image: "http://localhost:5000/uploads/bhindi-do-pyaz.png",
+    image: "bhindi-do-pyaz.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh bhindi (okra) - washed, dried, sliced",
@@ -621,7 +621,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bhindi Salan",
-    image: "http://localhost:5000/uploads/bhindi-salan.png",
+    image: "bhindi-salan.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh bhindi (okra) - whole, stems removed",
@@ -669,7 +669,7 @@ const recipesToMigrate = [
   },
   {
     title: "Baingan Bharta",
-    image: "http://localhost:5000/uploads/baingan-bharta.png",
+    image: "baingan-bharta.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 large eggplants (baingan)",
@@ -718,7 +718,7 @@ const recipesToMigrate = [
   },
   {
     title: "Baingan Masala",
-    image: "http://localhost:5000/uploads/baingan-masala.png",
+    image: "baingan-masala.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 medium eggplants - cut into cubes",
@@ -767,7 +767,7 @@ const recipesToMigrate = [
   },
   {
     title: "Baingan Ka Salan",
-    image: "http://localhost:5000/uploads/baingan-ka-salan.png",
+    image: "baingan-ka-salan.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 medium eggplants - slit lengthwise but not cut through",
@@ -818,7 +818,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bharwa Baingan",
-    image: "http://localhost:5000/uploads/bharwa-baingan.png",
+    image: "bharwa-baingan.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "8 small eggplants - slit crosswise, keep stem intact",
@@ -868,7 +868,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Zeera",
-    image: "http://localhost:5000/uploads/aloo-zeera.png",
+    image: "aloo-zeera.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 potatoes - boiled and cubed",
@@ -911,7 +911,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Rasedar",
-    image: "http://localhost:5000/uploads/aloo-rasedar.png",
+    image: "aloo-rasedar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 potatoes - cut into cubes",
@@ -958,7 +958,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Hari Mirch",
-    image: "http://localhost:5000/uploads/aloo-hari-mirch.png",
+    image: "aloo-hari-mirch.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 potatoes - boiled and cubed",
@@ -1000,7 +1000,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Adraki",
-    image: "http://localhost:5000/uploads/aloo-adraki.png",
+    image: "aloo-adraki.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 potatoes - cubed",
@@ -1045,7 +1045,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bhindi Fry",
-    image: "http://localhost:5000/uploads/bhindi-fry.png",
+    image: "bhindi-fry.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh bhindi - sliced into rounds",
@@ -1089,7 +1089,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bhindi Tomato",
-    image: "http://localhost:5000/uploads/bindhi-tomato.png",
+    image: "bindhi-tomato.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g fresh bhindi - sliced",
@@ -1135,7 +1135,7 @@ const recipesToMigrate = [
   },
   {
     title: "Baingan Fry",
-    image: "http://localhost:5000/uploads/baingan-fry.png",
+    image: "baingan-fry.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 medium eggplants - sliced into rounds",
@@ -1179,7 +1179,7 @@ const recipesToMigrate = [
   },
   {
     title: "Baingan Tamatar",
-    image: "http://localhost:5000/uploads/baingan-tamatar.png",
+    image: "baingan-tamatar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 medium eggplants - cubed",
@@ -1226,7 +1226,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mix Vegetable Curry",
-    image: "http://localhost:5000/uploads/mix-vegetable-curry.png",
+    image: "mix-vegetable-curry.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup cauliflower florets",
@@ -1277,7 +1277,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Jalfrezi",
-    image: "http://localhost:5000/uploads/vegetable-jalfrezi.png",
+    image: "vegetable-jalfrezi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup capsicum strips",
@@ -1325,7 +1325,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tava Vegetable",
-    image: "http://localhost:5000/uploads/tawa-vegetable.png",
+    image: "tawa-vegetable.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups mixed diced vegetables (potato, cauliflower, capsicum)",
@@ -1370,7 +1370,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kadai Vegetable",
-    image: "http://localhost:5000/uploads/kadai-vegetable.png",
+    image: "kadai-vegetable.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups mixed vegetables",
@@ -1418,7 +1418,7 @@ const recipesToMigrate = [
   },
   {
     title: "Matar Paneer",
-    image: "http://localhost:5000/uploads/matar-paneer.png",
+    image: "matar-paneer.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "200g paneer - cubed",
@@ -1468,7 +1468,7 @@ const recipesToMigrate = [
   },
   {
     title: "Shimla Mirch Masala",
-    image: "http://localhost:5000/uploads/shimla-mirch-masala.png",
+    image: "shimla-mirch-masala.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 large capsicums - sliced into strips",
@@ -1517,7 +1517,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lauki Chana Dal",
-    image: "http://localhost:5000/uploads/lauki-chana-daal.png",
+    image: "lauki-chana-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups lauki (bottle gourd) - peeled and cubed",
@@ -1565,7 +1565,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tori Ki Sabzi",
-    image: "http://localhost:5000/uploads/tori-ki-sabzi.png",
+    image: "tori-ki-sabzi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 medium tori (ridge gourd) - peeled and sliced",
@@ -1611,7 +1611,7 @@ const recipesToMigrate = [
   },
   {
     title: "Karela Fry",
-    image: "http://localhost:5000/uploads/karela-fry.png",
+    image: "karela-fry.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 medium karela (bitter gourd) - thinly sliced",
@@ -1656,7 +1656,7 @@ const recipesToMigrate = [
   },
   {
     title: "Ghia Rasedar",
-    image: "http://localhost:5000/uploads/ghia-rasedar.png",
+    image: "ghia-rasedar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 cups lauki (bottle gourd) - peeled and grated",
@@ -1702,7 +1702,7 @@ const recipesToMigrate = [
   },
   {
     title: "Palak Dal",
-    image: "http://localhost:5000/uploads/palak-daal.png",
+    image: "palak-daal.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup masoor dal (red lentils) - washed",
@@ -1749,7 +1749,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chana Masala",
-    image: "http://localhost:5000/uploads/chana-masala.jpg",
+    image: "chana-masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups chickpeas (chana) - soaked overnight",
@@ -1801,7 +1801,7 @@ const recipesToMigrate = [
   },
   {
     title: "Rajma",
-    image: "http://localhost:5000/uploads/rajma.jpg",
+    image: "rajma.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups rajma (red kidney beans) - soaked overnight",
@@ -1852,7 +1852,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Pulao",
-    image: "http://localhost:5000/uploads/vegetable-pulao.jpg",
+    image: "vegetable-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice - soaked for 30 minutes",

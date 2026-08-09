@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Halwa Puri",
-    image: "http://localhost:5000/uploads/halwa-puri.jpg",
+    image: "halwa-puri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups flour",
@@ -57,7 +57,7 @@ const recipesToMigrate = [
   },
   {
     title: "Nihari",
-    image: "http://localhost:5000/uploads/nihari.jpg",
+    image: "nihari.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg beef shank",
@@ -109,7 +109,7 @@ const recipesToMigrate = [
   },
   {
     title: "Paye",
-    image: "http://localhost:5000/uploads/paye.jpg",
+    image: "paye.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 kg trotters (paye)",
@@ -165,7 +165,7 @@ const recipesToMigrate = [
   },
   {
     title: "Haleem",
-    image: "http://localhost:5000/uploads/haleem.jpg",
+    image: "haleem.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "½ cup cracked wheat",
@@ -220,7 +220,7 @@ const recipesToMigrate = [
   },
   {
     title: "Channa Poori",
-    image: "http://localhost:5000/uploads/channa-puri.jpg",
+    image: "channa-puri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups flour",
@@ -278,7 +278,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Paratha",
-    image: "http://localhost:5000/uploads/aloo-paratha.jpg",
+    image: "aloo-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups whole wheat flour",
@@ -334,7 +334,7 @@ const recipesToMigrate = [
   },
   {
     title: "Anday wala Paratha",
-    image: "http://localhost:5000/uploads/anday-wala-paratha.jpg",
+    image: "anday-wala-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups whole wheat flour",
@@ -388,7 +388,7 @@ const recipesToMigrate = [
   },
   {
     title: "Keema Paratha",
-    image: "http://localhost:5000/uploads/keema-paratha.jpg",
+    image: "keema-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups whole wheat flour",
@@ -444,7 +444,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lachha Paratha",
-    image: "http://localhost:5000/uploads/lachha-paratha.jpg",
+    image: "lachha-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups whole wheat flour",
@@ -495,7 +495,7 @@ const recipesToMigrate = [
   },
   {
     title: "Roghni Naan",
-    image: "http://localhost:5000/uploads/roghni-naan.jpg",
+    image: "roghni-naan.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 cups all-purpose flour",
@@ -549,7 +549,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sheermal",
-    image: "http://localhost:5000/uploads/sheermal.jpg",
+    image: "sheermal.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 cups all-purpose flour",
@@ -603,7 +603,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kulcha Channa",
-    image: "http://localhost:5000/uploads/kulcha-chana.jpg",
+    image: "kulcha-chana.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "For Kulcha:",
@@ -665,7 +665,7 @@ const recipesToMigrate = [
   },
   {
     title: "Khagina",
-    image: "http://localhost:5000/uploads/khagina.jpg",
+    image: "khagina.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "6 eggs",
@@ -719,7 +719,7 @@ const recipesToMigrate = [
   },
   {
     title: "Saag and Makai ki Roti",
-    image: "http://localhost:5000/uploads/saag-makki-ki-roti.jpg",
+    image: "saag-makki-ki-roti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "For Saag:",
@@ -782,7 +782,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cholay",
-    image: "http://localhost:5000/uploads/cholay.jpg",
+    image: "cholay.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups boiled chickpeas",
@@ -840,7 +840,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aloo Bhujia",
-    image: "http://localhost:5000/uploads/aloo-bhujia.jpg",
+    image: "aloo-bhujia.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 medium potatoes, boiled and cubed",
@@ -892,7 +892,7 @@ const recipesToMigrate = [
   },
   {
     title: "Daal Fry",
-    image: "http://localhost:5000/uploads/daal-fry.jpg",
+    image: "daal-fry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup toor dal (split pigeon peas)",
@@ -949,7 +949,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tawa Paratha",
-    image: "http://localhost:5000/uploads/tawa-paratha.jpg",
+    image: "tawa-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups whole wheat flour",
@@ -998,7 +998,7 @@ const recipesToMigrate = [
   },
   {
     title: "Anda Bhurji",
-    image: "http://localhost:5000/uploads/anda-bhurji.jpg",
+    image: "anda-bhurji.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 eggs",
@@ -1051,7 +1051,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masala Omelette",
-    image: "http://localhost:5000/uploads/masala-omellete.jpg",
+    image: "masala-omellete.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 eggs",
@@ -1104,7 +1104,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bread Omelette",
-    image: "http://localhost:5000/uploads/bread-omelette.jpg",
+    image: "bread-omelette.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -1154,7 +1154,7 @@ const recipesToMigrate = [
   },
   {
     title: "Half Fry Eggs",
-    image: "http://localhost:5000/uploads/half-fry-eggs.jpg",
+    image: "half-fry-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -1199,7 +1199,7 @@ const recipesToMigrate = [
   },
   {
     title: "Boiled Eggs",
-    image: "http://localhost:5000/uploads/boiled-eggs.jpg",
+    image: "boiled-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 eggs",
@@ -1244,7 +1244,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Curry",
-    image: "http://localhost:5000/uploads/egg-curry.jpg",
+    image: "egg-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 boiled eggs",
@@ -1299,7 +1299,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Sandwich",
-    image: "http://localhost:5000/uploads/egg-sandwich.jpg",
+    image: "egg-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "8 slices bread",
@@ -1346,7 +1346,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Fried Rice",
-    image: "http://localhost:5000/uploads/egg-fried-rice.jpg",
+    image: "egg-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "2 cups cooked rice (preferably day old)",
@@ -1396,7 +1396,7 @@ const recipesToMigrate = [
   },
   {
     title: "Scrambled Eggs",
-    image: "http://localhost:5000/uploads/scrambled-eggs.jpg",
+    image: "scrambled-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 eggs",
@@ -1444,7 +1444,7 @@ const recipesToMigrate = [
   },
   {
     title: "Poached Eggs",
-    image: "http://localhost:5000/uploads/poached-egg.jpg",
+    image: "poached-egg.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -1491,7 +1491,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Drop Soup",
-    image: "http://localhost:5000/uploads/Egg-drop-soup.jpg",
+    image: "Egg-drop-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken or vegetable broth",
@@ -1540,7 +1540,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Roll",
-    image: "http://localhost:5000/uploads/egg-roll.jpg",
+    image: "egg-roll.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 parathas",
@@ -1588,7 +1588,7 @@ const recipesToMigrate = [
   },
   {
     title: "Anda Toast",
-    image: "http://localhost:5000/uploads/anda-toast.jpg",
+    image: "anda-toast.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 slices bread",
@@ -1632,7 +1632,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cheese Omelette",
-    image: "http://localhost:5000/uploads/omelette-sandwich.jpg",
+    image: "omelette-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 eggs",
@@ -1678,7 +1678,7 @@ const recipesToMigrate = [
   },
   {
     title: "French Toast",
-    image: "http://localhost:5000/uploads/french-toast.jpg",
+    image: "french-toast.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 slices bread (thick)",
@@ -1724,7 +1724,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Bhurji",
-    image: "http://localhost:5000/uploads/egg-bhurji.jpg",
+    image: "egg-bhurji.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 eggs",
@@ -1774,7 +1774,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Paratha",
-    image: "http://localhost:5000/uploads/egg-paratha.jpg",
+    image: "egg-paratha.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 parathas (frozen or fresh)",
@@ -1818,7 +1818,7 @@ const recipesToMigrate = [
   },
   {
     title: "Oats Porridge",
-    image: "http://localhost:5000/uploads/oats-porridge.jpg",
+    image: "oats-porridge.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup rolled oats",
@@ -1864,7 +1864,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cornflakes",
-    image: "http://localhost:5000/uploads/corn-flakes.jpg",
+    image: "corn-flakes.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups cornflakes",
@@ -1905,7 +1905,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sprouts Salad",
-    image: "http://localhost:5000/uploads/sprouts-salad.jpg",
+    image: "sprouts-salad.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups boiled sprouts (moong)",
@@ -1952,7 +1952,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fresh Fruits",
-    image: "http://localhost:5000/uploads/fresh-fruits.jpg",
+    image: "fresh-fruits.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 banana",
@@ -1997,7 +1997,7 @@ const recipesToMigrate = [
   },
   {
     title: "Veg Sandwich",
-    image: "http://localhost:5000/uploads/veg-sandwich.jpg",
+    image: "veg-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "8 slices whole wheat bread",
@@ -2043,7 +2043,7 @@ const recipesToMigrate = [
   },
   {
     title: "Grilled Sandwich",
-    image: "http://localhost:5000/uploads/grilled-sandwich.jpg",
+    image: "grilled-sandwich.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "8 slices bread",
@@ -2089,7 +2089,7 @@ const recipesToMigrate = [
   },
   {
     title: "Yogurt and Fruits",
-    image: "http://localhost:5000/uploads/yogurt-with-fruits.jpg",
+    image: "yogurt-with-fruits.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup Greek yogurt",
@@ -2132,7 +2132,7 @@ const recipesToMigrate = [
   },
   {
     title: "Boiled Eggs",
-    image: "http://localhost:5000/uploads/boiled-eggs.jpg",
+    image: "boiled-eggs.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -2174,7 +2174,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fruit Chaat",
-    image: "http://localhost:5000/uploads/fruit-chaat.jpg",
+    image: "fruit-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 bananas, sliced",
@@ -2221,7 +2221,7 @@ const recipesToMigrate = [
   },
   {
     title: "Green Salad",
-    image: "http://localhost:5000/uploads/green-salad.jpg",
+    image: "green-salad.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups lettuce, torn",
@@ -2269,7 +2269,7 @@ const recipesToMigrate = [
   },
   {
     title: "Smoothie Bowl",
-    image: "http://localhost:5000/uploads/smoothie-bowl.jpg",
+    image: "smoothie-bowl.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 frozen bananas",
@@ -2312,7 +2312,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mixed Nuts ",
-    image: "http://localhost:5000/uploads/mixed-nuts.jpg",
+    image: "mixed-nuts.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "¼ cup almonds",
@@ -2354,7 +2354,7 @@ const recipesToMigrate = [
   },
   {
     title: "Brown Bread Toast",
-    image: "http://localhost:5000/uploads/brown-bread-toast.jpg",
+    image: "brown-bread-toast.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 slices brown bread",
@@ -2393,7 +2393,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chia Pudding",
-    image: "http://localhost:5000/uploads/chia-pudding.jpg",
+    image: "chia-pudding.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 tablespoons chia seeds",
@@ -2436,7 +2436,7 @@ const recipesToMigrate = [
   },
   {
     title: "Herbal Tea",
-    image: "http://localhost:5000/uploads/herbal-tea.jpg",
+    image: "herbal-tea.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup water",
@@ -2480,7 +2480,7 @@ const recipesToMigrate = [
   },
   {
     title: "Pancakes ",
-    image: "http://localhost:5000/uploads/pancakes.jpg",
+    image: "pancakes.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1½ cups all-purpose flour",
@@ -2528,7 +2528,7 @@ const recipesToMigrate = [
   },
   {
     title: "Waffles",
-    image: "http://localhost:5000/uploads/waffles.jpg",
+    image: "waffles.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -2575,7 +2575,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cereal with Milk",
-    image: "http://localhost:5000/uploads/cereal-with-milk.jpg",
+    image: "cereal-with-milk.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup breakfast cereal",
@@ -2614,7 +2614,7 @@ const recipesToMigrate = [
   },
   {
     title: "Continental Omelette",
-    image: "http://localhost:5000/uploads/continental-omelette.jpg",
+    image: "continental-omelette.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "3 eggs",
@@ -2658,7 +2658,7 @@ const recipesToMigrate = [
   },
   {
     title: "Boiled Eggs with Toast",
-    image: "http://localhost:5000/uploads/boiled-eggs-with-toast.jpg",
+    image: "boiled-eggs-with-toast.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 eggs",
@@ -2701,7 +2701,7 @@ const recipesToMigrate = [
   },
   {
     title: "Continental Scrambled Eggs",
-    image: "http://localhost:5000/uploads/continental-omelette.jpg",
+    image: "continental-omelette.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 eggs",
@@ -2745,7 +2745,7 @@ const recipesToMigrate = [
   },
   {
     title: "Poached Eggs",
-    image: "http://localhost:5000/uploads/poached-egg.jpg",
+    image: "poached-egg.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -2789,7 +2789,7 @@ const recipesToMigrate = [
   },
   {
     title: "English Breakfast",
-    image: "http://localhost:5000/uploads/english-breakfast.jpg",
+    image: "english-breakfast.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 eggs",
@@ -2836,7 +2836,7 @@ const recipesToMigrate = [
   },
   {
     title: "Continental Breakfast",
-    image: "http://localhost:5000/uploads/continental-breakfast.jpg",
+    image: "continental-breakfast.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 croissant",
@@ -2880,7 +2880,7 @@ const recipesToMigrate = [
   },
   {
     title: "Croissant with Jam",
-    image: "http://localhost:5000/uploads/croissant-with-jam.jpg",
+    image: "croissant-with-jam.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 croissants",
@@ -2922,7 +2922,7 @@ const recipesToMigrate = [
   },
   {
     title: "Muffins",
-    image: "http://localhost:5000/uploads/muffins.jpg",
+    image: "muffins.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1½ cups flour",
@@ -2970,7 +2970,7 @@ const recipesToMigrate = [
   },
   {
     title: "Donuts",
-    image: "http://localhost:5000/uploads/donuts.jpg",
+    image: "donuts.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups flour",
@@ -3018,7 +3018,7 @@ const recipesToMigrate = [
   },
   {
     title: "Toast with Butter and Jam",
-    image: "http://localhost:5000/uploads/toast-with-butter-and-jam.jpg",
+    image: "toast-with-butter-and-jam.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices bread",
@@ -3057,7 +3057,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fresh Fruit Platter",
-    image: "http://localhost:5000/uploads/fresh-fruit-platter.jpg",
+    image: "fresh-fruit-platter.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "Strawberries",
@@ -3100,7 +3100,7 @@ const recipesToMigrate = [
   },
   {
     title: "Waffles with Berries",
-    image: "http://localhost:5000/uploads/waffles-with-berries.jpg",
+    image: "waffles-with-berries.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 waffles",
@@ -3143,7 +3143,7 @@ const recipesToMigrate = [
   },
   {
     title: "Bread Butter Jam",
-    image: "http://localhost:5000/uploads/bread-butter-jam.jpg",
+    image: "bread-butter-jam.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices bread",
@@ -3183,7 +3183,7 @@ const recipesToMigrate = [
   },
   {
     title: "Anda Toast",
-    image: "http://localhost:5000/uploads/anda-toast.jpg",
+    image: "anda-toast.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices bread",
@@ -3225,7 +3225,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chai and Biscuit",
-    image: "http://localhost:5000/uploads/chai-and-biscuit.jpg",
+    image: "chai-and-biscuit.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup water",
@@ -3267,7 +3267,7 @@ const recipesToMigrate = [
   },
   {
     title: "Maggie Noodles",
-    image: "http://localhost:5000/uploads/maggie-noodles.jpg",
+    image: "maggie-noodles.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 packet noodles",
@@ -3310,7 +3310,7 @@ const recipesToMigrate = [
   },
   {
     title: "Boiled Eggs and Bread",
-    image: "http://localhost:5000/uploads/boiled-eggs-and-bread.jpg",
+    image: "boiled-eggs-and-bread.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 eggs",
@@ -3352,7 +3352,7 @@ const recipesToMigrate = [
   },
   {
     title: "Milk and Cornflakes",
-    image: "http://localhost:5000/uploads/milk-and-cornflakes.jpg",
+    image: "milk-and-cornflakes.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup cornflakes",
@@ -3391,7 +3391,7 @@ const recipesToMigrate = [
   },
   {
     title: "Banana Shake",
-    image: "http://localhost:5000/uploads/banana-shake.jpg",
+    image: "banana-shake.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 ripe bananas",
@@ -3433,7 +3433,7 @@ const recipesToMigrate = [
   },
   {
     title: "Paratha with Chai",
-    image: "http://localhost:5000/uploads/paratha-with-chai.jpg",
+    image: "paratha-with-chai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 leftover paratha",
@@ -3473,7 +3473,7 @@ const recipesToMigrate = [
   },
   {
     title: "Toast with Honey",
-    image: "http://localhost:5000/uploads/toast-with-honey.jpg",
+    image: "toast-with-honey.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 slices bread",
@@ -3512,7 +3512,7 @@ const recipesToMigrate = [
   },
   {
     title: "Leftover Rice with Curd",
-    image: "http://localhost:5000/uploads/Leftover-Rice-with-Curd.jpg",
+    image: "Leftover-Rice-with-Curd.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup leftover rice",

@@ -7,7 +7,7 @@ const Recipe = require('../models/Recipe');
 const recipesToMigrate = [
   {
     title: "Mutton Aloo",
-    image: "http://localhost:5000/uploads/Mutton_Aloo.png",
+    image: "Mutton_Aloo.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (bone-in pieces)",
@@ -61,7 +61,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Matar",
-    image: "http://localhost:5000/uploads/Aloo-matar-mutton.png",
+    image: "Aloo-matar-mutton.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -114,7 +114,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Baingan",
-    image: "http://localhost:5000/uploads/aloo-baingan-mutton.png",
+    image: "aloo-baingan-mutton.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -166,7 +166,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Shimla Mirch",
-    image: "http://localhost:5000/uploads/mutton-aloo-shimla-mirch.png",
+    image: "mutton-aloo-shimla-mirch.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -217,7 +217,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Gobhi",
-    image: "http://localhost:5000/uploads/mutton-aloo-ghobi.png",
+    image: "mutton-aloo-ghobi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -268,7 +268,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Palak",
-    image: "http://localhost:5000/uploads/mutton-aloo-palak.png",
+    image: "mutton-aloo-palak.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -318,7 +318,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Tamatar",
-    image: "http://localhost:5000/uploads/mutton-aloo-tamatar.png",
+    image: "mutton-aloo-tamatar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -368,7 +368,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Aloo Beans",
-    image: "http://localhost:5000/uploads/mutton-aloo-beans.png",
+    image: "mutton-aloo-beans.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -418,7 +418,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Matar",
-    image: "http://localhost:5000/uploads/mutton-matar.png",
+    image: "mutton-matar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (bone-in)",
@@ -469,7 +469,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Matar Malai",
-    image: "http://localhost:5000/uploads/mutton-matar-malai.png",
+    image: "mutton-matar-malai.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cubed)",
@@ -518,7 +518,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Matar Pulao",
-    image: "http://localhost:5000/uploads/matar-mutton-pulao.png",
+    image: "matar-mutton-pulao.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -570,7 +570,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Matar Korma",
-    image: "http://localhost:5000/uploads/mutton-matar-qourma.png",
+    image: "mutton-matar-qourma.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -620,7 +620,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Matar Keema",
-    image: "http://localhost:5000/uploads/mutton-matar-keema.png",
+    image: "mutton-matar-keema.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -670,7 +670,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Palak",
-    image: "http://localhost:5000/uploads/mutton-palak.png",
+    image: "mutton-palak.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -718,7 +718,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Palak Malai",
-    image: "http://localhost:5000/uploads/mutton-palak-malai.png",
+    image: "mutton-palak-malai.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cubed)",
@@ -766,7 +766,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Palak Aloo",
-    image: "http://localhost:5000/uploads/mutton-palak-aloo.png",
+    image: "mutton-palak-aloo.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -815,7 +815,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Palak Matar",
-    image: "http://localhost:5000/uploads/mutton-palak-matar.png",
+    image: "mutton-palak-matar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -864,7 +864,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Shimla Mirch",
-    image: "http://localhost:5000/uploads/mutton-shimla-mirch.png",
+    image: "mutton-shimla-mirch.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cubed)",
@@ -913,7 +913,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Shimla Mirch Aloo",
-    image: "http://localhost:5000/uploads/mutton-shimla-mirch.png",
+    image: "mutton-shimla-mirch.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -962,7 +962,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Shimla Mirch Matar",
-    image: "http://localhost:5000/uploads/mutton-shimla-mirch-matar.png",
+    image: "mutton-shimla-mirch-matar.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1011,7 +1011,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Shimla Mirch Pyaz",
-    image: "http://localhost:5000/uploads/mutton-shimla-mirch-pyaz.png",
+    image: "mutton-shimla-mirch-pyaz.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (strips)",
@@ -1059,7 +1059,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Gobhi",
-    image: "http://localhost:5000/uploads/mutton-ghobi.png",
+    image: "mutton-ghobi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1108,7 +1108,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Gobhi Aloo",
-    image: "http://localhost:5000/uploads/mutton-ghobi-aloo.png",
+    image: "mutton-ghobi-aloo.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1158,7 +1158,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Gobhi Matar",
-    image: "http://localhost:5000/uploads/mutton-matar-ghobi.png",
+    image: "mutton-matar-ghobi.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1207,7 +1207,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Baingan",
-    image: "http://localhost:5000/uploads/mutton-baingan.png",
+    image: "mutton-baingan.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1255,7 +1255,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Baingan Aloo",
-    image: "http://localhost:5000/uploads/mutton-aloo-baingan.png",
+    image: "mutton-aloo-baingan.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1305,7 +1305,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Baingan Bharta",
-    image: "http://localhost:5000/uploads/mutton-baingan-bharta.png",
+    image: "mutton-baingan-bharta.png",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -1356,7 +1356,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Tori",
-    image: "http://localhost:5000/uploads/mutton-tori.jpg",
+    image: "mutton-tori.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1404,7 +1404,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Louki",
-    image: "http://localhost:5000/uploads/Mutton-Lauki.jpg",
+    image: "Mutton-Lauki.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1452,7 +1452,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Tori Aloo",
-    image: "http://localhost:5000/uploads/Mutton-Tori-Aloo.jpg",
+    image: "Mutton-Tori-Aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1502,7 +1502,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Karela",
-    image: "http://localhost:5000/uploads/Mutton-Karela.jpg",
+    image: "Mutton-Karela.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1551,7 +1551,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Karela Aloo",
-    image: "http://localhost:5000/uploads/Mutton-Karela-Aloo.jpg",
+    image: "Mutton-Karela-Aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1602,7 +1602,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Karela Masala",
-    image: "http://localhost:5000/uploads/Mutton-Karela-Masala.jpg",
+    image: "Mutton-Karela-Masala.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1652,7 +1652,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Methi",
-    image: "http://localhost:5000/uploads/Mutton-Methi.jpg",
+    image: "Mutton-Methi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1700,7 +1700,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Methi Malai",
-    image: "http://localhost:5000/uploads/Mutton-Methi-Malai.jpg",
+    image: "Mutton-Methi-Malai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cubed)",
@@ -1748,7 +1748,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Methi Aloo",
-    image: "http://localhost:5000/uploads/Mutton-Methi-Aloo.jpg",
+    image: "Mutton-Methi-Aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1797,7 +1797,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Beans",
-    image: "http://localhost:5000/uploads/Mutton-Beans.jpg",
+    image: "Mutton-Beans.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (cubed)",
@@ -1845,7 +1845,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Beans Aloo",
-    image: "http://localhost:5000/uploads/Mutton-Beans-Aloo.jpg",
+    image: "Mutton-Beans-Aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1895,7 +1895,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Beans Matar",
-    image: "http://localhost:5000/uploads/Mutton-Beans-Matar.jpg",
+    image: "Mutton-Beans-Matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1944,7 +1944,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Tinday",
-    image: "http://localhost:5000/uploads/Mutton-Beans-Matar.jpg",
+    image: "Mutton-Beans-Matar.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -1992,7 +1992,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kaddu",
-    image: "http://localhost:5000/uploads/mutton-kaddu.jpg",
+    image: "mutton-kaddu.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2040,7 +2040,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kaddu Aloo",
-    image: "http://localhost:5000/uploads/Mutton-Kadu-Aloo.jpg",
+    image: "Mutton-Kadu-Aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2090,7 +2090,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Kaddu Ka Bharta",
-    image: "http://localhost:5000/uploads/Mutton-Kadu-Ka-Bharta.jpg",
+    image: "Mutton-Kadu-Ka-Bharta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -2140,7 +2140,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Arvi",
-    image: "http://localhost:5000/uploads/mutton-arvi.jpg",
+    image: "mutton-arvi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2189,7 +2189,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Arvi Aloo",
-    image: "http://localhost:5000/uploads/mutton-arvi-aloo.jpg",
+    image: "mutton-arvi-aloo.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2240,7 +2240,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Mix Vegetable",
-    image: "http://localhost:5000/uploads/mutton-mix-veg.jpg",
+    image: "mutton-mix-veg.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2293,7 +2293,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Jalfrezi",
-    image: "http://localhost:5000/uploads/mutton-jalfrezi.jpg",
+    image: "mutton-jalfrezi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g boneless mutton (strips)",
@@ -2345,7 +2345,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Karahi with Veggies",
-    image: "http://localhost:5000/uploads/mutton-karahi-veggies.jpg",
+    image: "mutton-karahi-veggies.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton (bone-in)",
@@ -2395,7 +2395,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Handi with Veg",
-    image: "http://localhost:5000/uploads/mutton-handi-veg.jpg",
+    image: "mutton-handi-veg.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2444,7 +2444,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Vegetable Curry",
-    image: "http://localhost:5000/uploads/mutton-veg-curry.jpg",
+    image: "mutton-veg-curry.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2493,7 +2493,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Saag",
-    image: "http://localhost:5000/uploads/mutton-saag.jpg",
+    image: "mutton-saag.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2542,7 +2542,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Sarson Ka Saag",
-    image: "http://localhost:5000/uploads/mutton-sarson-ka-saag.jpg",
+    image: "mutton-sarson-ka-saag.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2593,7 +2593,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Lauki Kofta",
-    image: "http://localhost:5000/uploads/mutton-lauki-kofta.jpg",
+    image: "mutton-lauki-kofta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",
@@ -2644,7 +2644,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Vegetable Pulao",
-    image: "http://localhost:5000/uploads/mutton-veg-pulao.jpg",
+    image: "mutton-veg-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton",
@@ -2696,7 +2696,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Pumpkin Kofta",
-    image: "http://localhost:5000/uploads/mutton-pumpkin-kofta.jpg",
+    image: "mutton-pumpkin-kofta.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton mince",

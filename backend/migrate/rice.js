@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chicken Biryani",
-    image: "http://localhost:5000/uploads/chicken-biryani.jpg",
+    image: "chicken-biryani.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken, cut into pieces",
@@ -74,7 +74,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Biryani",
-    image: "http://localhost:5000/uploads/mutton-biryani.jpg",
+    image: "mutton-biryani.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton, with bones",
@@ -137,7 +137,7 @@ const recipesToMigrate = [
   },
   {
     title: "Beef Biryani",
-    image: "http://localhost:5000/uploads/beef-biryani.jpg",
+    image: "beef-biryani.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g beef, cut into cubes",
@@ -200,7 +200,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Pulao",
-    image: "http://localhost:5000/uploads/chicken-pulao.jpg",
+    image: "chicken-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken, cut into pieces",
@@ -258,7 +258,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mutton Pulao",
-    image: "http://localhost:5000/uploads/mutton-pulao.jpg",
+    image: "mutton-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mutton, with bones",
@@ -317,7 +317,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Pulao",
-    image: "http://localhost:5000/uploads/vegetable-pulao.jpg",
+    image: "vegetable-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, soaked for 30 minutes",
@@ -372,7 +372,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chicken Fried Rice",
-    image: "http://localhost:5000/uploads/chicken-fried-rice.jpg",
+    image: "chicken-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice (best if it's a day old)",
@@ -423,7 +423,7 @@ const recipesToMigrate = [
   },
   {
     title: "Egg Fried Rice",
-    image: "http://localhost:5000/uploads/egg-fried-rice.jpg",
+    image: "egg-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice (best if it's a day old)",
@@ -472,7 +472,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Fried Rice",
-    image: "http://localhost:5000/uploads/veg-fried-rice.jpg",
+    image: "veg-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice",
@@ -519,7 +519,7 @@ const recipesToMigrate = [
   },
   {
     title: "Shrimp Fried Rice",
-    image: "http://localhost:5000/uploads/shrimp-fried-rice.jpg",
+    image: "shrimp-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice",
@@ -569,7 +569,7 @@ const recipesToMigrate = [
   },
   {
     title: "Singapore Fried Rice",
-    image: "http://localhost:5000/uploads/singapore-fried-rice.jpg",
+    image: "singapore-fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice",
@@ -622,7 +622,7 @@ const recipesToMigrate = [
   },
   {
     title: "Simple Khichdi",
-    image: "http://localhost:5000/uploads/simple-khichri.jpg",
+    image: "simple-khichri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup basmati rice",
@@ -672,7 +672,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegetable Khichdi",
-    image: "http://localhost:5000/uploads/veg-khichri.jpg",
+    image: "veg-khichri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup basmati rice",
@@ -723,7 +723,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masala Khichdi",
-    image: "http://localhost:5000/uploads/masala-khichri.jpg",
+    image: "masala-khichri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup basmati rice",
@@ -775,7 +775,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sabudana Khichdi",
-    image: "http://localhost:5000/uploads/sagudana-khichri.jpg",
+    image: "sagudana-khichri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup sabudana (tapioca pearls)",
@@ -824,7 +824,7 @@ const recipesToMigrate = [
   },
   {
     title: "Zarda",
-    image: "http://localhost:5000/uploads/zarda.jpg",
+    image: "zarda.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, soaked for 30 minutes",
@@ -877,7 +877,7 @@ const recipesToMigrate = [
   },
   {
     title: "Tomato Rice",
-    image: "http://localhost:5000/uploads/tomato-rice.jpg",
+    image: "tomato-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, cooked",
@@ -927,7 +927,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lemon Rice",
-    image: "http://localhost:5000/uploads/lemon-rice.jpg",
+    image: "lemon-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, cooked",
@@ -977,7 +977,7 @@ const recipesToMigrate = [
   },
   {
     title: "Coconut Rice",
-    image: "http://localhost:5000/uploads/coconut-rice.jpg",
+    image: "coconut-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, cooked",
@@ -1026,7 +1026,7 @@ const recipesToMigrate = [
   },
   {
     title: "Curd Rice",
-    image: "http://localhost:5000/uploads/curd-rice.jpg",
+    image: "curd-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups cooked rice (cooled down)",
@@ -1076,7 +1076,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kabuli Pulao",
-    image: "http://localhost:5000/uploads/kabuli-pulao.jpg",
+    image: "kabuli-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g lamb, cut into cubes",
@@ -1131,7 +1131,7 @@ const recipesToMigrate = [
   },
   {
     title: "Pakistani Pulao",
-    image: "http://localhost:5000/uploads/pakistani-pulao.jpg",
+    image: "pakistani-pulao.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g chicken, cut into cubes",
@@ -1184,7 +1184,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fish Biryani",
-    image: "http://localhost:5000/uploads/fish-biryani.jpg",
+    image: "fish-biryani.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g firm white fish fillets, cut into cubes",
@@ -1238,7 +1238,7 @@ const recipesToMigrate = [
   },
   {
     title: "Keema Rice",
-    image: "http://localhost:5000/uploads/keema-rice.jpg",
+    image: "keema-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "300g mince (beef or chicken)",
@@ -1292,7 +1292,7 @@ const recipesToMigrate = [
   },
   {
     title: "Saffron Rice",
-    image: "http://localhost:5000/uploads/saffron-rice.jpg",
+    image: "saffron-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, soaked",
@@ -1343,7 +1343,7 @@ const recipesToMigrate = [
   },
   {
     title: "Zeera Rice",
-    image: "http://localhost:5000/uploads/zeera-rice.jpg",
+    image: "zeera-rice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups basmati rice, soaked",

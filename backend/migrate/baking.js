@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Vanilla Sponge Cake",
-    image: "http://localhost:5000/uploads/vanilla-sponge-cake.jpg",
+    image: "vanilla-sponge-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -57,7 +57,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Mug Cake",
-    image: "http://localhost:5000/uploads/choc-mug-cake.jpg",
+    image: "choc-mug-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 tbsp all-purpose flour",
@@ -103,7 +103,7 @@ const recipesToMigrate = [
   },
   {
     title: "Banana Bread",
-    image: "http://localhost:5000/uploads/banana-bread.jpg",
+    image: "banana-bread.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "3 ripe bananas, mashed",
@@ -154,7 +154,7 @@ const recipesToMigrate = [
   },
   {
     title: "Butter Pound Cake",
-    image: "http://localhost:5000/uploads/butter-pound-cake.jpg",
+    image: "butter-pound-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -203,7 +203,7 @@ const recipesToMigrate = [
   },
   {
     title: "Coffee Cake",
-    image: "http://localhost:5000/uploads/coffee-cake.jpg",
+    image: "coffee-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -256,7 +256,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegan Sugar Cookies",
-    image: "http://localhost:5000/uploads/vegan-sugar-cookies.jpg",
+    image: "vegan-sugar-cookies.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 1/2 cups all-purpose flour",
@@ -306,7 +306,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peanut Butter Cookies",
-    image: "http://localhost:5000/uploads/peanut-butter-cookies.jpg",
+    image: "peanut-butter-cookies.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup creamy peanut butter",
@@ -352,7 +352,7 @@ const recipesToMigrate = [
   },
   {
     title: "Vegan Chocolate Cake",
-    image: "http://localhost:5000/uploads/vegan-choc-cake.jpg",
+    image: "vegan-choc-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 1/2 cups all-purpose flour",
@@ -401,7 +401,7 @@ const recipesToMigrate = [
   },
   {
     title: "Continental Red Velvet",
-    image: "http://localhost:5000/uploads/continental-red-velvet.jpg",
+    image: "continental-red-velvet.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 1/2 cups all-purpose flour",
@@ -454,7 +454,7 @@ const recipesToMigrate = [
   },
   {
     title: "Yogurt Pound Cake",
-    image: "http://localhost:5000/uploads/yogurt-pound-cake.jpg",
+    image: "yogurt-pound-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 1/2 cups all-purpose flour",
@@ -504,7 +504,7 @@ const recipesToMigrate = [
   },
   {
     title: "Japanese Cheesecake",
-    image: "http://localhost:5000/uploads/japanese-cheesecake.jpg",
+    image: "japanese-cheesecake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "250g cream cheese",
@@ -556,7 +556,7 @@ const recipesToMigrate = [
   },
   {
     title: "Spanish Orange Cake",
-    image: "http://localhost:5000/uploads/spanish-orange-cake.jpg",
+    image: "spanish-orange-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -606,7 +606,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cinnamon Rolls",
-    image: "http://localhost:5000/uploads/cinnamon-rolls.jpg",
+    image: "cinnamon-rolls.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "For dough: 3 cups all-purpose flour",
@@ -666,7 +666,7 @@ const recipesToMigrate = [
   },
   {
     title: "Blueberry Muffins",
-    image: "http://localhost:5000/uploads/blueberry-muffins.jpg",
+    image: "blueberry-muffins.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -721,7 +721,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cherry Almond Coffee Cake",
-    image: "http://localhost:5000/uploads/cherry-almond-coffee.jpg",
+    image: "cherry-almond-coffee.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -776,7 +776,7 @@ const recipesToMigrate = [
   },
   {
     title: "Swedish Princess Cake",
-    image: "http://localhost:5000/uploads/swedish-princess-cake.jpg",
+    image: "swedish-princess-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "For cake: 3 eggs",
@@ -830,7 +830,7 @@ const recipesToMigrate = [
   },
   {
     title: "Russian Honey Cake",
-    image: "http://localhost:5000/uploads/russian-honey-cake.jpg",
+    image: "russian-honey-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "3 eggs",
@@ -882,7 +882,7 @@ const recipesToMigrate = [
   },
   {
     title: "Almond Sponge Roll",
-    image: "http://localhost:5000/uploads/almond-sponge-roll.jpg",
+    image: "almond-sponge-roll.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 eggs, separated",
@@ -935,7 +935,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Butter Cake",
-    image: "http://localhost:5000/uploads/chocolate-butter-cake.jpg",
+    image: "chocolate-butter-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 3/4 cups all-purpose flour",
@@ -986,7 +986,7 @@ const recipesToMigrate = [
   },
   {
     title: "Whipped Cream Frosting",
-    image: "http://localhost:5000/uploads/whipped-cream-frosting.jpg",
+    image: "whipped-cream-frosting.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups heavy cream",
@@ -1029,7 +1029,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Fudge Cake",
-    image: "http://localhost:5000/uploads/chocolate-fudge-cake.jpg",
+    image: "chocolate-fudge-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 3/4 cups all-purpose flour",
@@ -1084,7 +1084,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lemon Drizzle Cake",
-    image: "http://localhost:5000/uploads/lemon-drizzle-cake.jpg",
+    image: "lemon-drizzle-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 3/4 cups all-purpose flour",
@@ -1139,7 +1139,7 @@ const recipesToMigrate = [
   },
   {
     title: "Carrot Cake",
-    image: "http://localhost:5000/uploads/carrot-cake.jpg",
+    image: "carrot-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups grated carrots",
@@ -1195,7 +1195,7 @@ const recipesToMigrate = [
   },
   {
     title: "Marble Cake",
-    image: "http://localhost:5000/uploads/marble-cake.jpg",
+    image: "marble-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -1250,7 +1250,7 @@ const recipesToMigrate = [
   },
   {
     title: "Coconut Cake",
-    image: "http://localhost:5000/uploads/coconut-cake.jpg",
+    image: "coconut-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -1305,7 +1305,7 @@ const recipesToMigrate = [
   },
   {
     title: "Strawberry Shortcake",
-    image: "http://localhost:5000/uploads/strawberry-shortcake.jpg",
+    image: "strawberry-shortcake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups all-purpose flour",
@@ -1357,7 +1357,7 @@ const recipesToMigrate = [
   },
   {
     title: "Pineapple Upside Down Cake",
-    image: "http://localhost:5000/uploads/pineapple-upside-down-cake.jpg",
+    image: "pineapple-upside-down-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "For topping: 1/4 cup butter",
@@ -1413,7 +1413,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fluffy Vanilla Cake",
-    image: "http://localhost:5000/uploads/fluffy-vanilla-cake.jpg",
+    image: "fluffy-vanilla-cake.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 1/4 cups all-purpose flour",
@@ -1462,7 +1462,7 @@ const recipesToMigrate = [
   },
   {
     title: "French Heart Puff",
-    image: "http://localhost:5000/uploads/french-heart-puff.jpg",
+    image: "french-heart-puff.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 sheet puff pastry",
@@ -1509,7 +1509,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cake Rusk",
-    image: "http://localhost:5000/uploads/cake-rusk.jpg",
+    image: "cake-rusk.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "Leftover cake or plain cake",

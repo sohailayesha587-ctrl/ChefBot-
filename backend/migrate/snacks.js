@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
   title: "Pinwheel Spring Rolls",
-  image: "http://localhost:5000/uploads/spring-rolls.jpg",
+  image: "spring-rolls.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "10 spring roll wrappers",
@@ -62,7 +62,7 @@ const recipesToMigrate = [
 },
 {
   title: "Stuffed Capsicum with Aloo Chaat",
-  image: "http://localhost:5000/uploads/stuffed-capsicum-with-aloo-chaat.jpg",
+  image: "stuffed-capsicum-with-aloo-chaat.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large bell peppers",
@@ -118,7 +118,7 @@ const recipesToMigrate = [
 },
 {
   title: "Chicken Pakora",
-  image: "http://localhost:5000/uploads/chicken-pakora.jpg",
+  image: "chicken-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g boneless chicken, cut into small pieces",
@@ -178,7 +178,7 @@ const recipesToMigrate = [
 },
 {
   title: "Cheesy Baked Rolls",
-  image: "http://localhost:5000/uploads/cheesy-bread-rolls.jpg",
+  image: "cheesy-bread-rolls.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 bread slices",
@@ -233,7 +233,7 @@ const recipesToMigrate = [
 },
 {
   title: "Pizza Tots",
-  image: "http://localhost:5000/uploads/pizza-tots.jpg",
+  image: "pizza-tots.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large potatoes, boiled and mashed",
@@ -289,7 +289,7 @@ const recipesToMigrate = [
 },
 {
   title: "Tandoori Chai",
-  image: "http://localhost:5000/uploads/chai.jpg",
+  image: "chai.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 cups water",
@@ -345,7 +345,7 @@ const recipesToMigrate = [
 },
 {
   title: "Special Falooda",
-  image: "http://localhost:5000/uploads/special-falooda.jpg",
+  image: "special-falooda.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1/2 cup falooda seeds (sabja/tukmaria)",
@@ -401,7 +401,7 @@ const recipesToMigrate = [
 },
 {
   title: "Loaded Fries",
-  image: "http://localhost:5000/uploads/loaded-fries.jpg",
+  image: "loaded-fries.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large potatoes, cut into fries",
@@ -461,7 +461,7 @@ const recipesToMigrate = [
   
   {
   title: "Potato Finger",
-  image: "http://localhost:5000/uploads/potato-fingers.jpg",
+  image: "potato-fingers.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large potatoes, boiled and mashed",
@@ -515,7 +515,7 @@ const recipesToMigrate = [
 },
 {
   title: "Thai Chicken Toast",
-  image: "http://localhost:5000/uploads/thai-chicken-toast.jpg",
+  image: "thai-chicken-toast.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 bread slices",
@@ -571,7 +571,7 @@ const recipesToMigrate = [
 },
 {
   title: "Chicken Fries",
-  image: "http://localhost:5000/uploads/chicken-fries.jpg",
+  image: "chicken-fries.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g chicken breast, cut into thin strips",
@@ -624,7 +624,7 @@ const recipesToMigrate = [
 },
 {
   title: "Potato Cheese Bar",
-  image: "http://localhost:5000/uploads/potato-cheese-bar.jpg",
+  image: "potato-cheese-bar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large potatoes, boiled and mashed",
@@ -680,7 +680,7 @@ const recipesToMigrate = [
 },
 {
   title: "Popcorn Chicken",
-  image: "http://localhost:5000/uploads/popcorn-chicken.jpg",
+  image: "popcorn-chicken.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g boneless chicken, cut into small bite-sized pieces",
@@ -734,7 +734,7 @@ const recipesToMigrate = [
 },
 {
   title: "Fried Wonton",
-  image: "http://localhost:5000/uploads/fried-wonton.jpg",
+  image: "fried-wonton.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "20 wonton wrappers",
@@ -788,7 +788,7 @@ const recipesToMigrate = [
 },
 {
   title: "Bread Pizza",
-  image: "http://localhost:5000/uploads/bread-pizza.jpg",
+  image: "bread-pizza.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "8 bread slices",
@@ -842,7 +842,7 @@ const recipesToMigrate = [
 },
 {
   title: "Chicken Cheese Sandwich",
-  image: "http://localhost:5000/uploads/chicken-cheese-sandwich.jpg",
+  image: "chicken-cheese-sandwich.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "8 bread slices",
@@ -896,7 +896,7 @@ const recipesToMigrate = [
 },
 {
   title: "Dynamite Chicken",
-  image: "http://localhost:5000/uploads/dynamite-chicken.jpg",
+  image: "dynamite-chicken.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g boneless chicken, cut into strips",
@@ -950,7 +950,7 @@ const recipesToMigrate = [
 },
 {
   title: "Namak Paray",
-  image: "http://localhost:5000/uploads/namak-paary.jpg",
+  image: "namak-paary.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1003,7 +1003,7 @@ const recipesToMigrate = [
 },
 {
   title: "Chicken Fritters",
-  image: "http://localhost:5000/uploads/chicken-fritters.jpg",
+  image: "chicken-fritters.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g boneless chicken, minced",
@@ -1056,7 +1056,7 @@ const recipesToMigrate = [
 },
 {
   title: "Butterfly Chicken",
-  image: "http://localhost:5000/uploads/butterfly-chicken.jpg",
+  image: "butterfly-chicken.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "4 chicken breasts",
@@ -1109,7 +1109,7 @@ const recipesToMigrate = [
 },
 {
   title: "Veggie Pancakes",
-  image: "http://localhost:5000/uploads/veggie-pancakes.jpg",
+  image: "veggie-pancakes.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "1 cup gram flour (besan)",
@@ -1167,7 +1167,7 @@ const recipesToMigrate = [
 },
 {
   title: "Apple Banana Muffins",
-  image: "http://localhost:5000/uploads/apple-banana-muffins.jpg",
+  image: "apple-banana-muffins.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "1 1/2 cups all-purpose flour",
@@ -1222,7 +1222,7 @@ const recipesToMigrate = [
 },
 {
   title: "Corn Chaat",
-  image: "http://localhost:5000/uploads/corn-chaat.jpg",
+  image: "corn-chaat.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "2 cups corn kernels (fresh or frozen)",
@@ -1273,7 +1273,7 @@ const recipesToMigrate = [
 },
 {
   title: "Granola Bars",
-  image: "http://localhost:5000/uploads/granola-bars.jpg",
+  image: "granola-bars.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups rolled oats",
@@ -1325,7 +1325,7 @@ const recipesToMigrate = [
 },
 {
   title: "Chicken Samosa",
-  image: "http://localhost:5000/uploads/chicken-samosa.jpg",
+  image: "chicken-samosa.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "For dough: 2 cups all-purpose flour",
@@ -1385,7 +1385,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mat Samosa",
-  image: "http://localhost:5000/uploads/chicken-samosa.jpg",
+  image: "chicken-samosa.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "For dough: 2 cups all-purpose flour",
@@ -1445,7 +1445,7 @@ const recipesToMigrate = [
 },
 {
   title: "Potato Fritters with Schezwan Sauce",
-  image: "http://localhost:5000/uploads/potato-fritters-with-schezwan-sauce.jpg",
+  image: "potato-fritters-with-schezwan-sauce.jpg",
   cuisine: "Chinese",
   ingredientsRaw: [
     "4 large potatoes, boiled and mashed",
@@ -1501,7 +1501,7 @@ const recipesToMigrate = [
 },
 {
   title: "Corn Croquettes",
-  image: "http://localhost:5000/uploads/croquettes.jpg",
+  image: "croquettes.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "2 cups corn kernels (fresh or frozen)",
@@ -1555,7 +1555,7 @@ const recipesToMigrate = [
 },
 {
   title: "Pizza Cone",
-  image: "http://localhost:5000/uploads/pizza-cones.jpg",
+  image: "pizza-cones.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "1 cup all-purpose flour",
@@ -1612,7 +1612,7 @@ const recipesToMigrate = [
 },
 {
   title: "Easy Chicken Drumsticks",
-  image: "http://localhost:5000/uploads/drum-sticks.jpg",
+  image: "drum-sticks.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "8 chicken drumsticks",
@@ -1664,7 +1664,7 @@ const recipesToMigrate = [
 },
 {
   title: "Khaja",
-  image: "http://localhost:5000/uploads/khaja.jpg",
+  image: "khaja.jpg",
   cuisine: "Italian",
   ingredientsRaw: [
     "2 cups all-purpose flour",
@@ -1716,7 +1716,7 @@ const recipesToMigrate = [
 },
 {
   title: "Noodles Pakora",
-  image: "http://localhost:5000/uploads/noodles-pakoray.jpg",
+  image: "noodles-pakoray.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 packets instant noodles",

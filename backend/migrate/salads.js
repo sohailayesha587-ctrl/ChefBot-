@@ -7,7 +7,7 @@ const recipesToMigrate =[
   
   {
     title: "Onion Raita",
-    image: "http://localhost:5000/uploads/onion-raita.jpg",
+    image: "onion-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups plain yogurt",
@@ -60,7 +60,7 @@ const recipesToMigrate =[
   },
   {
     title: "Boondi Raita",
-    image: "http://localhost:5000/uploads/boondi-raita.jpg",
+    image: "boondi-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups plain yogurt",
@@ -113,7 +113,7 @@ const recipesToMigrate =[
   },
   {
     title: "Cucumber Raita",
-    image: "http://localhost:5000/uploads/cucumber-raita.jpg",
+    image: "cucumber-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups plain yogurt",
@@ -167,7 +167,7 @@ const recipesToMigrate =[
   },
   {
     title: "Mint Raita",
-    image: "http://localhost:5000/uploads/mint-raita.jpg",
+    image: "mint-raita.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups plain yogurt",
@@ -222,7 +222,7 @@ const recipesToMigrate =[
   },
   {
     title: "Potato Salad",
-    image: "http://localhost:5000/uploads/potatto-salad.jpg",
+    image: "potatto-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 medium potatoes, boiled and cubed",
@@ -279,7 +279,7 @@ const recipesToMigrate =[
   },
   {
     title: "Mixed Vegetable Salad",
-    image: "http://localhost:5000/uploads/mix-veg-salad.jpg",
+    image: "mix-veg-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup cucumber, diced",
@@ -336,7 +336,7 @@ const recipesToMigrate =[
   },
   {
     title: "Fruit Chaat",
-    image: "http://localhost:5000/uploads/fruit-chaat.jpg",
+    image: "fruit-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 apple, diced",
@@ -394,7 +394,7 @@ const recipesToMigrate =[
   },
   {
     title: "Chana Chaat",
-    image: "http://localhost:5000/uploads/channa-chaat.jpg",
+    image: "channa-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups boiled chickpeas",
@@ -453,7 +453,7 @@ const recipesToMigrate =[
   },
   {
     title: "Aloo Chaat",
-    image: "http://localhost:5000/uploads/aloo-chaat.jpg",
+    image: "aloo-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 medium potatoes, boiled and cubed",
@@ -510,7 +510,7 @@ const recipesToMigrate =[
   },
   {
     title: "Papri Chaat",
-    image: "http://localhost:5000/uploads/papri-chaat.jpg",
+    image: "papri-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "20-25 papdis",
@@ -569,7 +569,7 @@ const recipesToMigrate =[
   },
   {
     title: "Dahi Bhalla",
-    image: "http://localhost:5000/uploads/dahi-bhallay.jpg",
+    image: "dahi-bhallay.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup urad dal, soaked 4-6 hours",
@@ -627,7 +627,7 @@ const recipesToMigrate =[
   },
   {
     title: "Bhel Puri",
-    image: "http://localhost:5000/uploads/bhel-puri.jpg",
+    image: "bhel-puri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups puffed rice",
@@ -687,7 +687,7 @@ const recipesToMigrate =[
   },
   {
     title: "Sev Puri",
-    image: "http://localhost:5000/uploads/sev-puri.jpg",
+    image: "sev-puri.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "20-25 puris",
@@ -745,7 +745,7 @@ const recipesToMigrate =[
   },
   {
     title: "Pakora Salad",
-    image: "http://localhost:5000/uploads/pakora-salad.jpg",
+    image: "pakora-salad.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup besan (gram flour)",
@@ -802,7 +802,7 @@ const recipesToMigrate =[
   },
   {
     title: "Greek Salad",
-    image: "http://localhost:5000/uploads/greek-salad.jpg",
+    image: "greek-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 large tomatoes, cut into wedges",
@@ -858,7 +858,7 @@ const recipesToMigrate =[
   },
   {
     title: "Caesar Salad",
-    image: "http://localhost:5000/uploads/ceaser-salad.jpg",
+    image: "ceaser-salad.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "1 large head romaine lettuce, washed and torn",
@@ -913,7 +913,7 @@ const recipesToMigrate =[
   },
   {
     title: "Waldorf Salad",
-    image: "http://localhost:5000/uploads/waldorf-salad.jpg",
+    image: "waldorf-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 large apples, diced",
@@ -970,7 +970,7 @@ const recipesToMigrate =[
   },
   {
     title: "Caprese Salad",
-    image: "http://localhost:5000/uploads/caprese-salad.jpg",
+    image: "caprese-salad.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "3-4 large ripe tomatoes, sliced",
@@ -1022,7 +1022,7 @@ const recipesToMigrate =[
   },
   {
     title: "Cobb Salad",
-    image: "http://localhost:5000/uploads/cobb-salad.jpg",
+    image: "cobb-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 head romaine lettuce, chopped",
@@ -1077,7 +1077,7 @@ const recipesToMigrate =[
   },
   {
     title: "Nicoise Salad",
-    image: "http://localhost:5000/uploads/spring-rolls.jpg",
+    image: "spring-rolls.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "200g fresh tuna steak or 2 cans tuna in olive oil",
@@ -1130,7 +1130,7 @@ const recipesToMigrate =[
   },
   {
     title: "Coleslaw",
-    image: "http://localhost:5000/uploads/coleslaw.jpg",
+    image: "coleslaw.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 cups cabbage, finely shredded",
@@ -1186,7 +1186,7 @@ const recipesToMigrate =[
   },
   {
     title: "Garden Salad",
-    image: "http://localhost:5000/uploads/garden-salad.jpg",
+    image: "garden-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 cups mixed lettuce greens",
@@ -1241,7 +1241,7 @@ const recipesToMigrate =[
   },
   {
     title: "Russian Salad",
-    image: "http://localhost:5000/uploads/russian-salad.jpg",
+    image: "russian-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 potatoes, boiled and diced",
@@ -1298,7 +1298,7 @@ const recipesToMigrate =[
   },
   {
     title: "Continental Potato Salad",
-    image: "http://localhost:5000/uploads/continental-potato-salad.jpg",
+    image: "continental-potato-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "6 medium potatoes, boiled and cubed",
@@ -1355,7 +1355,7 @@ const recipesToMigrate =[
   },
   {
     title: "Macaroni Salad",
-    image: "http://localhost:5000/uploads/continental-macroni-salad.jpg",
+    image: "continental-macroni-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups elbow macaroni, cooked",
@@ -1413,7 +1413,7 @@ const recipesToMigrate =[
   },
   {
     title: "Fattoush Salad",
-    image: "http://localhost:5000/uploads/fattoush-salad.jpg",
+    image: "fattoush-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 cups romaine lettuce, chopped",
@@ -1471,7 +1471,7 @@ const recipesToMigrate =[
   },
   {
     title: "Tabbouleh",
-    image: "http://localhost:5000/uploads/tabbouleh-salad.jpg",
+    image: "tabbouleh-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup fine bulgur wheat",
@@ -1530,7 +1530,7 @@ const recipesToMigrate =[
  
   {
     title: "Egg Salad",
-    image: "http://localhost:5000/uploads/egg-salad.jpg",
+    image: "egg-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "8 hard-boiled eggs",
@@ -1587,7 +1587,7 @@ const recipesToMigrate =[
   },
   {
     title: "Beetroot Salad",
-    image: "http://localhost:5000/uploads/beetroot-salad.jpg",
+    image: "beetroot-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 medium beetroots, boiled or roasted",
@@ -1644,7 +1644,7 @@ const recipesToMigrate =[
   },
   {
     title: "Avocado Salad",
-    image: "http://localhost:5000/uploads/avocado-salad.jpg",
+    image: "avocado-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 ripe avocados, diced",
@@ -1703,7 +1703,7 @@ const recipesToMigrate =[
   
   {
     title: "Broccoli Salad",
-    image: "http://localhost:5000/uploads/broccoli-salad.jpg",
+    image: "broccoli-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 cups broccoli florets, chopped into bite-sized pieces",
@@ -1758,7 +1758,7 @@ const recipesToMigrate =[
   },
   {
     title: "Feta Cheese Salad",
-    image: "http://localhost:5000/uploads/feta-cheese-salad.jpg",
+    image: "feta-cheese-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 cups mixed salad greens",
@@ -1817,7 +1817,7 @@ const recipesToMigrate =[
   },
   {
     title: "Mediterranean Salad",
-    image: "http://localhost:5000/uploads/mediterranean-salad.jpg",
+    image: "mediterranean-salad.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups cooked quinoa or couscous",

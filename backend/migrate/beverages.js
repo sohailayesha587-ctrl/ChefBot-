@@ -8,7 +8,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
     title: "Chai",
-    image: "http://localhost:5000/uploads/chai.jpg",
+    image: "chai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups water",
@@ -55,7 +55,7 @@ const recipesToMigrate = [
   },
   {
     title: "Coffee",
-    image: "http://localhost:5000/uploads/coffee.jpg",
+    image: "coffee.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 tablespoons coffee powder",
@@ -100,7 +100,7 @@ const recipesToMigrate = [
   },
   {
     title: "Hot Chocolate",
-    image: "http://localhost:5000/uploads/hot-chocolate.jpg",
+    image: "hot-chocolate.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups milk",
@@ -147,7 +147,7 @@ const recipesToMigrate = [
   },
   {
     title: "Kashmiri Chai",
-    image: "http://localhost:5000/uploads/kashmiri-chai.jpg",
+    image: "kashmiri-chai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 tablespoons Kashmiri tea leaves",
@@ -195,7 +195,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masala Chai",
-    image: "http://localhost:5000/uploads/masala-chai.jpg",
+    image: "masala-chai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 cups water",
@@ -245,7 +245,7 @@ const recipesToMigrate = [
   },
   {
     title: "Green Tea",
-    image: "http://localhost:5000/uploads/green-tea.jpg",
+    image: "green-tea.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "2 cups water",
@@ -290,7 +290,7 @@ const recipesToMigrate = [
   },
   {
     title: "Ginger Tea",
-    image: "http://localhost:5000/uploads/ginger-tea.jpg",
+    image: "ginger-tea.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups water",
@@ -337,7 +337,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cardamom Tea",
-    image: "http://localhost:5000/uploads/cardamon-tea.jpg",
+    image: "cardamon-tea.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 cups water",
@@ -383,7 +383,7 @@ const recipesToMigrate = [
   },
   {
     title: "Lemonade",
-    image: "http://localhost:5000/uploads/lemonade.jpg",
+    image: "lemonade.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 lemons, squeezed (about 1 cup juice)",
@@ -429,7 +429,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mango Lassi",
-    image: "http://localhost:5000/uploads/mango-lassi.jpg",
+    image: "mango-lassi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 ripe mangoes, peeled and chopped",
@@ -476,7 +476,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sweet Lassi",
-    image: "http://localhost:5000/uploads/sweet-lassi.jpg",
+    image: "sweet-lassi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 cups plain yogurt",
@@ -523,7 +523,7 @@ const recipesToMigrate = [
   },
   {
     title: "Salted Lassi",
-    image: "http://localhost:5000/uploads/salted-lassi.jpg",
+    image: "salted-lassi.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "3 cups plain yogurt",
@@ -570,7 +570,7 @@ const recipesToMigrate = [
   },
   {
     title: "Iced Tea",
-    image: "http://localhost:5000/uploads/iced-tea.jpg",
+    image: "iced-tea.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 black tea bags",
@@ -617,7 +617,7 @@ const recipesToMigrate = [
   },
   {
     title: "Cold Coffee",
-    image: "http://localhost:5000/uploads/cold-coffee.jpg",
+    image: "cold-coffee.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "4 tablespoons instant coffee",
@@ -664,7 +664,7 @@ const recipesToMigrate = [
   },
   {
     title: "Falooda",
-    image: "http://localhost:5000/uploads/falooda.jpg",
+    image: "falooda.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup falooda seeds (sabja)",
@@ -712,7 +712,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sugarcane Juice",
-    image: "http://localhost:5000/uploads/vanilla-sponge-cake.jpg",
+    image: "vanilla-sponge-cake.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4-5 sugarcane sticks",
@@ -759,7 +759,7 @@ const recipesToMigrate = [
   },
   {
     title: "Strawberry Banana Smoothie",
-    image: "http://localhost:5000/uploads/strawberry-banana-smoothie.jpg",
+    image: "strawberry-banana-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup strawberries, cleaned",
@@ -806,7 +806,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mango Smoothie",
-    image: "http://localhost:5000/uploads/mango-smoothie.jpg",
+    image: "mango-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 ripe mangoes, peeled and chopped",
@@ -853,7 +853,7 @@ const recipesToMigrate = [
   },
   {
     title: "Berry Blast Smoothie",
-    image: "http://localhost:5000/uploads/berry-blast-smoothie.jpg",
+    image: "berry-blast-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup mixed berries (strawberries, blueberries, raspberries)",
@@ -901,7 +901,7 @@ const recipesToMigrate = [
   },
   {
     title: "Green Detox Smoothie",
-    image: "http://localhost:5000/uploads/green-detox-smoothie.jpg",
+    image: "green-detox-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup spinach leaves",
@@ -949,7 +949,7 @@ const recipesToMigrate = [
   },
   {
     title: "Peanut Butter Smoothie",
-    image: "http://localhost:5000/uploads/peanut-butter-smoothie.jpg",
+    image: "peanut-butter-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 bananas",
@@ -996,7 +996,7 @@ const recipesToMigrate = [
   },
   {
     title: "Chocolate Smoothie",
-    image: "http://localhost:5000/uploads/chocolate-smoothie.jpg",
+    image: "chocolate-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 bananas",
@@ -1044,7 +1044,7 @@ const recipesToMigrate = [
   },
   {
     title: "Avocado Smoothie",
-    image: "http://localhost:5000/uploads/avocado-smoothie.jpg",
+    image: "avocado-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 ripe avocado",
@@ -1091,7 +1091,7 @@ const recipesToMigrate = [
   },
   {
     title: "Protein Power Smoothie",
-    image: "http://localhost:5000/uploads/protein-power-smoothie.jpg",
+    image: "protein-power-smoothie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 banana",
@@ -1139,7 +1139,7 @@ const recipesToMigrate = [
   },
   {
     title: "Virgin Mojito",
-    image: "http://localhost:5000/uploads/virgin-mojito.jpg",
+    image: "virgin-mojito.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "10-12 fresh mint leaves",
@@ -1186,7 +1186,7 @@ const recipesToMigrate = [
   },
   {
     title: "Virgin Pina Colada",
-    image: "http://localhost:5000/uploads/pina-colado.jpg",
+    image: "pina-colado.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups pineapple juice",
@@ -1233,7 +1233,7 @@ const recipesToMigrate = [
   },
   {
     title: "Shirley Temple",
-    image: "http://localhost:5000/uploads/shirley-temple.jpg",
+    image: "shirley-temple.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup ginger ale",
@@ -1280,7 +1280,7 @@ const recipesToMigrate = [
   },
   {
     title: "Fruit Punch",
-    image: "http://localhost:5000/uploads/fruit-punch.jpg",
+    image: "fruit-punch.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 cups orange juice",
@@ -1328,7 +1328,7 @@ const recipesToMigrate = [
   },
   {
     title: "Blue Lagoon",
-    image: "http://localhost:5000/uploads/blue-lagoon.jpg",
+    image: "blue-lagoon.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup lemonade",
@@ -1375,7 +1375,7 @@ const recipesToMigrate = [
   },
   {
     title: "Mango Tango",
-    image: "http://localhost:5000/uploads/mango-tango.jpg",
+    image: "mango-tango.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup mango juice",
@@ -1422,7 +1422,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sunrise Mocktail",
-    image: "http://localhost:5000/uploads/sunrise-mocktail.jpg",
+    image: "sunrise-mocktail.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1 cup orange juice",
@@ -1468,7 +1468,7 @@ const recipesToMigrate = [
   },
   {
     title: "Berry Bliss",
-    image: "http://localhost:5000/uploads/berry-bliss.jpg",
+    image: "berry-bliss.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "1/2 cup mixed berry puree",
@@ -1515,7 +1515,7 @@ const recipesToMigrate = [
   },
   {
     title: "Rooh Afza",
-    image: "http://localhost:5000/uploads/rooh-afza.jpg",
+    image: "rooh-afza.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 tablespoons Rooh Afza syrup",
@@ -1561,7 +1561,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sharbat-e-Sandal",
-    image: "http://localhost:5000/uploads/sandal-sharbat.jpg",
+    image: "sandal-sharbat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 teaspoons sandalwood powder",
@@ -1608,7 +1608,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sattu Sharbat",
-    image: "http://localhost:5000/uploads/sattu-sharbat.jpg",
+    image: "sattu-sharbat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup sattu flour",
@@ -1655,7 +1655,7 @@ const recipesToMigrate = [
   },
   {
     title: "Jal Zeera",
-    image: "http://localhost:5000/uploads/jal-zeera.jpg",
+    image: "jal-zeera.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/4 cup mint leaves",
@@ -1703,7 +1703,7 @@ const recipesToMigrate = [
   },
   {
     title: "Aam Panna",
-    image: "http://localhost:5000/uploads/aam-panna.jpg",
+    image: "aam-panna.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "2 raw mangoes",
@@ -1750,7 +1750,7 @@ const recipesToMigrate = [
   },
   {
     title: "Badam Milk",
-    image: "http://localhost:5000/uploads/badam-milk.jpg",
+    image: "badam-milk.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup almonds, soaked overnight",
@@ -1796,7 +1796,7 @@ const recipesToMigrate = [
   },
   {
     title: "Masala Milk",
-    image: "http://localhost:5000/uploads/masala-milk.jpg",
+    image: "masala-milk.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4 cups milk",
@@ -1843,7 +1843,7 @@ const recipesToMigrate = [
   },
   {
     title: "Thandai",
-    image: "http://localhost:5000/uploads/thandai.jpg",
+    image: "thandai.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1/2 cup almonds",

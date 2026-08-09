@@ -8,7 +8,7 @@ const recipesToMigrate = [
   
   {
   title: "Anda Curry",
-  image: "http://localhost:5000/uploads/aloo-anda-curry.jpg",
+  image: "aloo-anda-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -64,7 +64,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Masala",
-  image: "http://localhost:5000/uploads/anda-masala.jpg",
+  image: "anda-masala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -117,7 +117,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Dhaba Style Egg Curry",
-  image: "http://localhost:5000/uploads/aloo-anda-curry.jpg",
+  image: "aloo-anda-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -171,7 +171,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Aloo Curry",
-  image: "http://localhost:5000/uploads/aloo-anda-curry.jpg",
+  image: "aloo-anda-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -225,7 +225,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Matar Curry",
-  image: "http://localhost:5000/uploads/anda-matar-curry.jpg",
+  image: "anda-matar-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -279,7 +279,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Palak Curry",
-  image: "http://localhost:5000/uploads/aloo-palak.png",
+  image: "aloo-palak.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -331,7 +331,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Kerala Egg Curry ",
-  image: "http://localhost:5000/uploads/karela-mutton-curry.jpg",
+  image: "karela-mutton-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -384,7 +384,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Do Pyaza ",
-  image: "http://localhost:5000/uploads/anda-do-pyaz.jpg",
+  image: "anda-do-pyaz.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -437,7 +437,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Bhurji",
-  image: "http://localhost:5000/uploads/anda-bhurji.jpg",
+  image: "anda-bhurji.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs",
@@ -489,7 +489,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Bhurji Masala",
-  image: "http://localhost:5000/uploads/anda-bhurji.jpg",
+  image: "anda-bhurji.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs",
@@ -542,7 +542,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Bhurji with Paneer",
-  image: "http://localhost:5000/uploads/anda-bhurji-with-paneer.jpg",
+  image: "anda-bhurji-with-paneer.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs",
@@ -593,7 +593,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Bhurji Pav",
-  image: "http://localhost:5000/uploads/anda-bhurji-with-paneer.jpg",
+  image: "anda-bhurji-with-paneer.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs",
@@ -643,7 +643,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Ghotala",
-  image: "http://localhost:5000/uploads/anda-ghotala.jpg",
+  image: "anda-ghotala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs",
@@ -697,7 +697,7 @@ const recipesToMigrate = [
   
  {
   title: "Anda Aloo Matar",
-  image: "http://localhost:5000/uploads/anda-aloo-matar.jpg",
+  image: "anda-aloo-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -752,7 +752,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Shimla Mirch",
-  image: "http://localhost:5000/uploads/anda-shimla-mirch.jpg",
+  image: "anda-shimla-mirch.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -804,7 +804,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Gobhi",
-  image: "http://localhost:5000/uploads/aloo-ghobi.png",
+  image: "aloo-ghobi.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -856,7 +856,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Baingan",
-  image: "http://localhost:5000/uploads/aloo-baingan-mutton.png",
+  image: "aloo-baingan-mutton.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -908,7 +908,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Palak",
-  image: "http://localhost:5000/uploads/aloo-palak.png",
+  image: "aloo-palak.png",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -960,7 +960,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Keema",
-  image: "http://localhost:5000/uploads/anda-keema.jpg",
+  image: "anda-keema.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -1014,7 +1014,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Keema Matar",
-  image: "http://localhost:5000/uploads/anda-keema-matar.jpg",
+  image: "anda-keema-matar.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -1069,7 +1069,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Keema Aloo",
-  image: "http://localhost:5000/uploads/anda-keema.jpg",
+  image: "anda-keema.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -1125,7 +1125,7 @@ const recipesToMigrate = [
 },
  {
   title: "Egg Fried Rice",
-  image: "http://localhost:5000/uploads/egg-fried-rice.jpg",
+  image: "egg-fried-rice.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - scrambled",
@@ -1172,7 +1172,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Biryani",
-  image: "http://localhost:5000/uploads/egg-biryani.jpg",
+  image: "egg-biryani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -1230,7 +1230,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Pulao",
-  image: "http://localhost:5000/uploads/egg-biryani.jpg",
+  image: "egg-biryani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -1282,7 +1282,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Paratha",
-  image: "http://localhost:5000/uploads/anda-paratha.jpg",
+  image: "anda-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 large eggs",
@@ -1332,7 +1332,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Anda Paratha",
-  image: "http://localhost:5000/uploads/anda-paratha.jpg",
+  image: "anda-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 large eggs",
@@ -1383,7 +1383,7 @@ const recipesToMigrate = [
 },
 {
   title: "Egg Cheese Paratha",
-  image: "http://localhost:5000/uploads/cheese-naan.jpg",
+  image: "cheese-naan.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 large eggs",
@@ -1430,7 +1430,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Keema Paratha",
-  image: "http://localhost:5000/uploads/keema-paratha.jpg",
+  image: "keema-paratha.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 large eggs",
@@ -1478,7 +1478,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Sandwich",
-  image: "http://localhost:5000/uploads/egg-sandwich.jpg",
+  image: "egg-sandwich.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - scrambled",
@@ -1524,7 +1524,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Mayo Sandwich",
-  image: "http://localhost:5000/uploads/egg-mayo-sandwich.jpg",
+  image: "egg-mayo-sandwich.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and mashed",
@@ -1570,7 +1570,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Pakora",
-  image: "http://localhost:5000/uploads/egg-pakora.jpg",
+  image: "egg-pakora.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and peeled",
@@ -1621,7 +1621,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Devil",
-  image: "http://localhost:5000/uploads/egg-devils.jpg",
+  image: "egg-devils.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "6 large eggs - boiled and peeled",
@@ -1670,7 +1670,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0
 },{
   title: "Egg Cutlet",
-  image: "http://localhost:5000/uploads/egg-cutlets.jpg",
+  image: "egg-cutlets.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 large eggs - boiled and mashed",

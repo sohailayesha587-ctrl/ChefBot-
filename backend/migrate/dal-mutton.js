@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
   {
   title: "Mutton Chana Dal",
-  image: "http://localhost:5000/uploads/mutton-chana-dal-fry.jpg",
+  image: "mutton-chana-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - curry cut pieces with bones",
@@ -65,7 +65,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Chana Dal Fry",
-  image: "http://localhost:5000/uploads/mutton-chana-dal-fry.jpg",
+  image: "mutton-chana-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -122,7 +122,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Chana Dal Palak",
-  image: "http://localhost:5000/uploads/mutton-dal-palak.jpg",
+  image: "mutton-dal-palak.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -178,7 +178,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Chana Dal Louki",
-  image: "http://localhost:5000/uploads/mutton-dal-lauki.jpg",
+  image: "mutton-dal-lauki.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -234,7 +234,7 @@ const recipesToMigrate = [
 },
 {
   title: "Spicy Mutton Chana Dal",
-  image: "http://localhost:5000/uploads/mutton-chana-dal-fry.jpg",
+  image: "mutton-chana-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -290,7 +290,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Moong Dal",
-  image: "http://localhost:5000/uploads/mutton-moong-dal-fry.jpg",
+  image: "mutton-moong-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -345,7 +345,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Moong Dal Fry",
-  image: "http://localhost:5000/uploads/mutton-moong-dal-fry.jpg",
+  image: "mutton-moong-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -400,7 +400,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Moong Dal Palak",
-  image: "http://localhost:5000/uploads/mutton-dal-palak.jpg",
+  image: "mutton-dal-palak.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -455,7 +455,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Moong Dal Louki",
-  image: "http://localhost:5000/uploads/mutton-dal-lauki.jpg",
+  image: "mutton-dal-lauki.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -511,7 +511,7 @@ const recipesToMigrate = [
 },
 {
   title: "Light Mutton Moong Dal",
-  image: "http://localhost:5000/uploads/mutton-moong-dal-fry.jpg",
+  image: "mutton-moong-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - lean pieces",
@@ -563,7 +563,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Maash Dal",
-  image: "http://localhost:5000/uploads/mutton-mash-dal-fry.jpg",
+  image: "mutton-mash-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -620,7 +620,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Maash Dal Fry",
-  image: "http://localhost:5000/uploads/mutton-mash-dal-fry.jpg",
+  image: "mutton-mash-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -675,7 +675,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Maash Dal Palak",
-  image: "http://localhost:5000/uploads/mutton-dal-palak.jpg",
+  image: "mutton-dal-palak.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -730,7 +730,7 @@ const recipesToMigrate = [
 },
 {
   title: "Creamy Mutton Maash Dal",
-  image: "http://localhost:5000/uploads/creamy-mutton-mash-dal.jpg",
+  image: "creamy-mutton-mash-dal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -785,7 +785,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Masoor Dal",
-  image: "http://localhost:5000/uploads/mutton-moong-dal-fry.jpg",
+  image: "mutton-moong-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -840,7 +840,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Masoor Dal Fry",
-  image: "http://localhost:5000/uploads/mutton-moong-dal-fry.jpg",
+  image: "mutton-moong-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -895,7 +895,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Masoor Dal Palak",
-  image: "http://localhost:5000/uploads/mutton-dal-palak.jpg",
+  image: "mutton-dal-palak.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -950,7 +950,7 @@ const recipesToMigrate = [
 },
 {
   title: "Quick Mutton Masoor Dal",
-  image: "http://localhost:5000/uploads/mutton-dal-fry.jpg",
+  image: "mutton-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - boneless, cut into pieces",
@@ -1003,7 +1003,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Mix Dal",
-  image: "http://localhost:5000/uploads/mutton-mix-daal.jpg",
+  image: "mutton-mix-daal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1062,7 +1062,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Panchmel Dal",
-  image: "http://localhost:5000/uploads/mutton-panchmel-dal.jpg",
+  image: "mutton-panchmel-dal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1117,7 +1117,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Makhani",
-  image: "http://localhost:5000/uploads/mutton-dal-makhni.jpg",
+  image: "mutton-dal-makhni.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1177,7 +1177,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Bukhara",
-  image: "http://localhost:5000/uploads/mutton-dal-bukhara.jpg",
+  image: "mutton-dal-bukhara.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1234,7 +1234,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Palak",
-  image: "http://localhost:5000/uploads/mutton-dal-palak.jpg",
+  image: "mutton-dal-palak.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1289,7 +1289,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Louki",
-  image: "http://localhost:5000/uploads/mutton-dal-lauki.jpg",
+  image: "mutton-dal-lauki.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1345,7 +1345,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Tori",
-  image: "http://localhost:5000/uploads/mutton-dal-tori.jpg",
+  image: "mutton-dal-tori.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1401,7 +1401,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Methi",
-  image: "http://localhost:5000/uploads/mutton-dal-methi.jpg",
+  image: "mutton-dal-methi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1456,7 +1456,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Tadka",
-  image: "http://localhost:5000/uploads/mutton-dal-tadka.jpg",
+  image: "mutton-dal-tadka.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1516,7 +1516,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Fry",
-  image: "http://localhost:5000/uploads/mutton-dal-fry.jpg",
+  image: "mutton-dal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1575,7 +1575,7 @@ const recipesToMigrate = [
 },
 {
   title: "Hyderabadi Mutton Dal",
-  image: "http://localhost:5000/uploads/hyderabadi-mutton-dal.jpg",
+  image: "hyderabadi-mutton-dal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1632,7 +1632,7 @@ const recipesToMigrate = [
 },
 {
   title: "Punjabi Mutton Dal",
-  image: "http://localhost:5000/uploads/punjabi-mutton-dal.jpg",
+  image: "punjabi-mutton-dal.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1688,7 +1688,7 @@ const recipesToMigrate = [
 },
 {
   title: "South Indian Mutton Dal",
-  image: "http://localhost:5000/uploads/mutton-dal-south-indian.jpg",
+  image: "mutton-dal-south-indian.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1745,7 +1745,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Karela",
-  image: "http://localhost:5000/uploads/karela-mutton-curry.jpg",
+  image: "karela-mutton-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1802,7 +1802,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Shimla Mirch",
-  image: "http://localhost:5000/uploads/mutton-dal-shimla-mirch.jpg",
+  image: "mutton-dal-shimla-mirch.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1857,7 +1857,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Gobhi",
-  image: "http://localhost:5000/uploads/mutton-dal-ghobi.jpg",
+  image: "mutton-dal-ghobi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1911,7 +1911,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Multani",
-  image: "http://localhost:5000/uploads/mutton-dal-multani.jpg",
+  image: "mutton-dal-multani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -1962,7 +1962,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Sultani",
-  image: "http://localhost:5000/uploads/mutton-dal-sultani.jpg",
+  image: "mutton-dal-sultani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - boneless pieces",
@@ -2016,7 +2016,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Sarson",
-  image: "http://localhost:5000/uploads/mutton-dal-sarson.jpg",
+  image: "mutton-dal-sarson.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -2068,7 +2068,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Kaddu",
-  image: "http://localhost:5000/uploads/mutton-dal-kaddu.jpg",
+  image: "mutton-dal-kaddu.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -2121,7 +2121,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Arvi",
-  image: "http://localhost:5000/uploads/mutton-dal-arvi.jpg",
+  image: "mutton-dal-arvi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",
@@ -2173,7 +2173,7 @@ const recipesToMigrate = [
 },
 {
   title: "Mutton Dal Tinda",
-  image: "http://localhost:5000/uploads/mutton-dal-with-tinda-gourd.jpg",
+  image: "mutton-dal-with-tinda-gourd.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - medium pieces",

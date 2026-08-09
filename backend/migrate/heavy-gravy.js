@@ -7,7 +7,7 @@ require('dotenv').config({ path: '../.env' });
 const recipesToMigrate = [
  {
   title: "Beef Nihari",
-  image: "http://localhost:5000/uploads/beef-nihari.jpg",
+  image: "beef-nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg beef shank - with bone, cut into large pieces",
@@ -63,7 +63,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Nihari",
-  image: "http://localhost:5000/uploads/mutton-nihari.jpg",
+  image: "mutton-nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton shanks - with bones",
@@ -116,7 +116,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Nihari",
-  image: "http://localhost:5000/uploads/chicken-nihari.jpg",
+  image: "chicken-nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -169,7 +169,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Bong Nihari",
-  image: "http://localhost:5000/uploads/bong-nihari.jpg",
+  image: "bong-nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg beef with marrow bones (nalli)",
@@ -218,7 +218,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Special Nihari",
-  image: "http://localhost:5000/uploads/special-nihari.jpg",
+  image: "special-nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg beef - shank with bone",
@@ -268,7 +268,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Beef Haleem",
-  image: "http://localhost:5000/uploads/beef-haleem.jpg",
+  image: "beef-haleem.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g beef - boneless, cut into cubes",
@@ -328,7 +328,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Haleem",
-  image: "http://localhost:5000/uploads/mutton-haleem.jpg",
+  image: "mutton-haleem.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - boneless cubes",
@@ -385,7 +385,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Haleem",
-  image: "http://localhost:5000/uploads/chicken-haleem.jpg",
+  image: "chicken-haleem.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g chicken - boneless cubes",
@@ -437,7 +437,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Hyderabadi Haleem",
-  image: "http://localhost:5000/uploads/hyderabadi-haleem.jpg",
+  image: "hyderabadi-haleem.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g beef or mutton",
@@ -490,7 +490,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Special Haleem",
-  image: "http://localhost:5000/uploads/special-haleem.jpg",
+  image: "special-haleem.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mixed meat (beef and mutton)",
@@ -541,7 +541,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Paye",
-  image: "http://localhost:5000/uploads/mutton-paye.jpg",
+  image: "mutton-paye.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 mutton trotters (paye) - cleaned thoroughly",
@@ -599,7 +599,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Beef Paye",
-  image: "http://localhost:5000/uploads/beef-paye.jpg",
+  image: "beef-paye.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 beef trotters - cleaned",
@@ -652,7 +652,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Kashmiri Paye",
-  image: "http://localhost:5000/uploads/paye.jpg",
+  image: "paye.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 mutton trotters - cleaned",
@@ -703,7 +703,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Special Paye",
-  image: "http://localhost:5000/uploads/paye.jpg",
+  image: "paye.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "4 trotters - cleaned",
@@ -750,7 +750,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Beef Khichda",
-  image: "http://localhost:5000/uploads/beef-khichda.jpg",
+  image: "beef-khichda.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g beef - boneless cubes",
@@ -808,7 +808,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Khichda",
-  image: "http://localhost:5000/uploads/mutton-khichda.jpg",
+  image: "mutton-khichda.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton - boneless cubes",
@@ -857,7 +857,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Khichda",
-  image: "http://localhost:5000/uploads/chicken-khichda.jpg",
+  image: "chicken-khichda.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g chicken - boneless cubes",
@@ -904,7 +904,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Korma",
-  image: "http://localhost:5000/uploads/chicken-masala.jpg",
+  image: "chicken-masala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -964,7 +964,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Korma",
-  image: "http://localhost:5000/uploads/mutton-qorma.jpg",
+  image: "mutton-qorma.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton - curry cut pieces",
@@ -1014,7 +1014,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Shahi Korma",
-  image: "http://localhost:5000/uploads/shahi-qorma.jpg",
+  image: "shahi-qorma.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken or mutton",
@@ -1067,7 +1067,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Nawabi Korma",
-  image: "http://localhost:5000/uploads/nawabi-qorma.jpg",
+  image: "nawabi-qorma.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg meat (chicken or mutton)",
@@ -1116,7 +1116,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Karahi",
-  image: "http://localhost:5000/uploads/chicken-karahi.jpg",
+  image: "chicken-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1168,7 +1168,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Karahi",
-  image: "http://localhost:5000/uploads/mutton-karahi.jpg",
+  image: "mutton-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton - curry cut pieces",
@@ -1217,7 +1217,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "White Karahi",
-  image: "http://localhost:5000/uploads/white-karahi.jpg",
+  image: "white-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1266,7 +1266,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Handi",
-  image: "http://localhost:5000/uploads/chicken-handi.jpg",
+  image: "chicken-handi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1320,7 +1320,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Mutton Handi",
-  image: "http://localhost:5000/uploads/mutton-handi.jpg",
+  image: "mutton-handi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton - curry cut pieces",
@@ -1367,7 +1367,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Vegetable Handi",
-  image: "http://localhost:5000/uploads/veg-handi.jpg",
+  image: "veg-handi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups mixed vegetables (cauliflower, carrots, peas, beans, potatoes)",
@@ -1417,7 +1417,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Dal Makhani",
-  image: "http://localhost:5000/uploads/daal-makhani.jpg",
+  image: "daal-makhani.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 cup whole urad dal (black lentils) - washed and soaked overnight",
@@ -1473,7 +1473,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Dal Bukhara",
-  image: "http://localhost:5000/uploads/dal-bukhara.jpg",
+  image: "dal-bukhara.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 cup whole urad dal - washed and soaked overnight",
@@ -1523,7 +1523,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Dal Fry",
-  image: "http://localhost:5000/uploads/daal-fry.jpg",
+  image: "daal-fry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 cup toor dal (pigeon pea lentils) - washed",
@@ -1575,7 +1575,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Achaar Gosht",
-  image: "http://localhost:5000/uploads/achaar-gosht.jpg",
+  image: "achaar-gosht.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton or beef - curry cut pieces",
@@ -1628,7 +1628,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Achaar",
-  image: "http://localhost:5000/uploads/achaar-gosht.jpg",
+  image: "achaar-gosht.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1678,7 +1678,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Kashmiri Rogan Josh",
-  image: "http://localhost:5000/uploads/kashmiri-rogan-josh.jpg",
+  image: "kashmiri-rogan-josh.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton - curry cut pieces",
@@ -1729,7 +1729,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Rogan Josh Gravy",
-  image: "http://localhost:5000/uploads/kashmiri-rogan-josh.jpg",
+  image: "kashmiri-rogan-josh.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton",
@@ -1777,7 +1777,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Lahori Chicken",
-  image: "http://localhost:5000/uploads/chicken-lahori.jpg",
+  image: "chicken-lahori.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1828,7 +1828,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Lahori Karahi",
-  image: "http://localhost:5000/uploads/chicken-lahori.jpg",
+  image: "chicken-lahori.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken",
@@ -1875,7 +1875,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Peshawari Chicken",
-  image: "http://localhost:5000/uploads/peshawari-chicken-karahi.jpg",
+  image: "peshawari-chicken-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -1925,7 +1925,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Peshawari Karahi",
-  image: "http://localhost:5000/uploads/peshawari-chicken-karahi.jpg",
+  image: "peshawari-chicken-karahi.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken",
@@ -1972,7 +1972,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Bhuna Gosht",
-  image: "http://localhost:5000/uploads/achaar-gosht.jpg",
+  image: "achaar-gosht.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg mutton - curry cut pieces",
@@ -2024,7 +2024,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Chicken Bhuna",
-  image: "http://localhost:5000/uploads/achaar-gosht.jpg",
+  image: "achaar-gosht.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg chicken - curry cut pieces",
@@ -2070,7 +2070,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Meatball Curry",
-  image: "http://localhost:5000/uploads/meatball-curry.jpg",
+  image: "meatball-curry.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton or chicken mince",
@@ -2123,7 +2123,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Nargisi Kofta",
-  image: "http://localhost:5000/uploads/nargisi-kofta.jpg",
+  image: "nargisi-kofta.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton mince",
@@ -2173,7 +2173,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Malai Kofta",
-  image: "http://localhost:5000/uploads/malai-kofta.jpg",
+  image: "malai-kofta.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mutton mince",
@@ -2226,7 +2226,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Nalli Nihari",
-  image: "http://localhost:5000/uploads/nihari.jpg",
+  image: "nihari.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "1 kg nalli (beef shanks with marrow)",
@@ -2271,7 +2271,7 @@ const recipesToMigrate = [
   timesUsedInPlans: 0,
 },{
   title: "Bheja Masala",
-  image: "http://localhost:5000/uploads/bheja-masala.jpg",
+  image: "bheja-masala.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g lamb brain",
