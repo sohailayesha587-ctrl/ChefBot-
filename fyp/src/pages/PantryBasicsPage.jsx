@@ -21,7 +21,6 @@ const PantryBasicsPage = () => {
   const [staplesData, setStaplesData] = useState([]);
   const [dailyVegetablesData, setDailyVegetablesData] = useState([]);
 
-  const API_URL = 'http://localhost:5000/api/guides';
 
   useEffect(() => {
     fetchAllData();
@@ -81,9 +80,9 @@ const PantryBasicsPage = () => {
     setError(null);
     
     try {
-      const response = await axios.get(API_URL, {
-        params: { category: 'pantry-basics' }
-      });
+      const response = await axios.get('/api/beginners-guides', {
+            params: { category: 'pantry-basics' }
+          });
       
       const allGuides = response.data.guides || [];
       console.log('Total pantry guides:', allGuides.length);

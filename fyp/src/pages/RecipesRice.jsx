@@ -14,7 +14,7 @@ const RecipesRice = () => {
   const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/recipes/subCategory/rice?limit=200')
+    fetch('/api/recipes/subCategory/rice?limit=200')
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch rice recipes');

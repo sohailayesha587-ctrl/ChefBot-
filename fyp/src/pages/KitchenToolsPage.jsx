@@ -32,7 +32,6 @@ const KitchenToolsPage = () => {
   const [servingGravy, setServingGravy] = useState([]);
   const [servingAccessories, setServingAccessories] = useState([]);
 
-  const API_URL = 'http://localhost:5000/api/guides';
 
   const mergeContent = (guide) => {
     let content = {};
@@ -100,7 +99,7 @@ const KitchenToolsPage = () => {
     setError(null);
 
     try {
-      const response = await axios.get(API_URL, {
+      const response = await axios.get('/api/beginners-guides', {
         params: { category: 'kitchen-tools' }
       });
 

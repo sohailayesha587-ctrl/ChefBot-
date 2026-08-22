@@ -11,6 +11,5 @@ const {
 router.get('/', protect, getSettings);
 router.put('/profile', protect, updateProfile);
 router.put('/', protect, updateSettings);
-router.get('/stats', protect, getStats);
 
 module.exports = router;

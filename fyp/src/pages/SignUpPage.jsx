@@ -41,7 +41,7 @@ const SignUpPage = () => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:5000/api/auth/register', {
+      await axios.post('/api/auth/register', {
         fullname: formData.fullname,
         email: formData.email,
         password: formData.password,

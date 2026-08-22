@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/guides', beginnersGuideRoutes);
+app.use('/api/beginners-guides', beginnersGuideRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/shopping', shoppingRoutes);
 app.use('/api/pantry', pantryRoutes);
@@ -34,7 +34,6 @@ app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/api/users', settingsRoutes);
 
-app.use('/uploads', express.static('uploads'));
 app.get('/', (req, res) => {
   res.send('Server is running');
 });

@@ -76,7 +76,9 @@ const cookingMethods = [
     steps: [ "Preheat grill to high heat.", "Clean and oil grill grates.", "Place food on hot grill grates.", "Cook until grill marks appear.", "Flip and cook to desired doneness." ]
   },
   {
-    id: 10, name: "Broiling", tagline: "Direct heat from above", fullDesc: "Broiling uses direct radiant heat from above the food. Similar to an upside down grill, it quickly browns and cooks the surface of food. Excellent for melting cheese, browning toppings, or cooking thin cuts.",
+    id: 10, name: "Broiling", 
+    tagline: "Direct heat from above", 
+    fullDesc: "Broiling uses direct radiant heat from above the food. Similar to an upside down grill, it quickly browns and cooks the surface of food. Excellent for melting cheese, browning toppings, or cooking thin cuts.",
     keyUses: ["Cheese melting", "Fish fillets", "Toast toppings", "Thin meats"], previewImg: "BroilingMethod.png", temperature: "260-290°C (500-550°F)", equipment: "Oven broiler", bestFor: "Quick browning, thin cuts",
     tips: ["Watch carefully", "Use broiler pan", "Adjust rack position", "Preheat broiler"],
     steps: [ "Preheat broiler for 5-10 minutes.", "Place food on broiler pan or baking sheet.", "Position rack 4-6 inches from heat source.", "Broil until browned and cooked.", "Watch carefully to prevent burning." ]
@@ -160,7 +162,7 @@ skillCards.forEach(card => {
 cookingMethods.forEach(method => {
   allGuides.push({
     title: method.name,
-    content: JSON.stringify(method),
+content: method,
     category: 'cooking-methods',
     image: method.previewImg,
     video: ''
@@ -169,7 +171,7 @@ cookingMethods.forEach(method => {
 cuttingTechniques.forEach(tech => {
   allGuides.push({
     title: tech.name,
-    content: JSON.stringify(tech),   
+content: tech,
     category: 'cutting-techniques',
     image: tech.previewImg,
     video: ''

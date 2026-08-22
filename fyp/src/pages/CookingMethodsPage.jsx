@@ -12,7 +12,6 @@ const CookingMethodsPage = () => {
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const API_URL = 'http://localhost:5000/api/guides';
 
   const safeToString = (value) => {
     if (!value) return '';
@@ -38,9 +37,9 @@ const CookingMethodsPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(API_URL, {
-        params: { category: 'cooking-methods' }
-      });
+   const response = await axios.get('/api/beginners-guides', {
+         params: { category: 'cooking-methods' }
+       });
       
       const guides = response.data.guides || [];
       

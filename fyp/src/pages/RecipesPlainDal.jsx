@@ -14,7 +14,7 @@ const RecipesPlainDal = () => {
   const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/recipes/subCategory/plain-dal?limit=200')
+    fetch('/api/recipes/subCategory/plain-dal?limit=200')
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch dal recipes');

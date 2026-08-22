@@ -19,7 +19,6 @@ const MeatProcessingPage = () => {
   const [fishData, setFishData] = useState([]);
   const [gameData, setGameData] = useState([]);
 
-  const API_URL = 'http://localhost:5000/api/guides';
 
   const meatTypes = [
     { id: 1, name: 'Beef', key: 'beef' },
@@ -44,11 +43,12 @@ const MeatProcessingPage = () => {
   const fetchAllMeatData = async () => {
     setLoading(true);
     setError(null);
+    
     try {
-      const response = await axios.get(API_URL, {
-        params: { category: 'meat-processing' }
-      });
-      
+      const response = await axios.get('/api/beginners-guides?category=meat-processing', {
+            params: { category: 'meat-processing' }
+          });
+
       const guides = response.data.guides || [];
       
       const beef = [];

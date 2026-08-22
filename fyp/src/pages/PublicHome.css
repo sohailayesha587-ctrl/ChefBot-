@@ -239,30 +239,6 @@ body {
   z-index: 1;
 }
 
-.pk-box-1 {
-  background-image: url('ai.jpg');
-}
-
-.pk-box-2 {
-  background-image: url('recipe.jpg');
-}
-
-.pk-box-3 {
-  background-image: url('beginners.jpg');
-}
-
-.pk-box-4 {
-  background-image: url('pantry-staples.jpg');
-}
-
-.pk-box-5 {
-  background-image: url('shoppinglist.png');
-}
-
-.pk-box-6 {
-  background-image: url('plannermeal.jpg');
-}
-
 .pk-box-description {
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
@@ -354,7 +330,7 @@ body {
 .pk-recipe-card-heading {
   margin: 0 0 8px 0;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 650;
   color: #284a4b;
   line-height: 1.3;
 }
@@ -363,7 +339,6 @@ body {
   font-size: 0.8rem;
   color: #666;
   line-height: 1.4;
-  margin-bottom: 12px;
   flex-grow: 1;
   min-height: 50px;
 }
@@ -412,88 +387,86 @@ body {
   scrollbar-color: #284a4b #e0e0e0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 780px) {
   .pk-hero-carousel-section {
-    margin-top: 100px;
+    margin-top: 80px;
     flex-direction: column;
-    height: 85vh;
+    height: 80vh;
   }
 
   .pk-hero-left-section {
     width: 100%;
     height: auto;
-    padding: 40px 20px;
+    padding: 70px 10px;
     text-align: center;
   }
 
   .pk-hero-main-heading {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   .pk-hero-second-heading {
-    font-size: 1.35rem;
+    font-size: 2rem;
   }
 
   .pk-hero-description {
-    max-width: 100%;
-    margin-top: 10px;
-    margin: auto;
-    font-size: 0.7rem;
+   display:none;
   }
 
   .pk-hero-right-section {
     width: 100%;
-    height: 450px;
+    height: 200px;
   }
 
   .pk-carousel-item {
-    width: 200px !important;
-    height: 300px !important;
+    width: 200px ;
+    height: 300px ;
   }
 
   .pk-center-card .pk-item-image {
-    height: 170px !important;
+    height: 170px ;
   }
 
   .pk-side-card .pk-item-image {
-    height: 140px !important;
+    height: 140px ;
   }
 
   .pk-item-content {
-    padding: 12px !important;
+    padding: 12px ;
   }
 
   .pk-item-title {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem ;
   }
 
   .pk-content-box {
     padding: 2rem 1.5rem;
-    height: 272px;
+    width: 88%;
+    height: 230px;
     margin: 0.8rem auto;
   }
 
   .pk-colored-box {
     padding: 1.3rem;
-    width: 225px;
-    height: 240px;
+    width: 180px;
+    height: 175px;
   }
 
   .pk-colored-box h1 {
-    font-size: 1rem;
+    font-size: 12px;
   }
 
   .pk-colored-box h2 {
-    font-size: 0.7rem;
+    font-size: 11px;
   }
 
   .pk-box-description {
-    font-size: 0.5rem;
+    font-size: 7px;
   }
 
   .pk-btn {
     padding: 8px 20px;
-    font-size: 0.8rem;
+    font-size: 8px;
   }
 
   .pk-recipe-card-item {
@@ -507,7 +480,7 @@ body {
   }
 
   .pk-recipe-card-heading {
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   .pk-recipe-card-text {
@@ -520,30 +493,30 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 380px) {
   .pk-hero-right-section {
-    height: 380px;
+    height: 200px;
   }
 
   .pk-carousel-item {
-    width: 170px !important;
-    height: 260px !important;
+    width: 170px ;
+    height: 260px ;
   }
 
   .pk-center-card .pk-item-image {
-    height: 145px !important;
+    height: 145px ;
   }
 
   .pk-side-card .pk-item-image {
-    height: 115px !important;
+    height: 115px ;
   }
 
   .pk-item-title {
-    font-size: 0.6rem !important;
+    font-size: 0.8rem ;
   }
 
   .pk-item-description {
-    font-size: 0.4rem !important;
+    font-size: 0.6rem ;
   }
 
   .pk-content-box {
@@ -552,13 +525,19 @@ body {
   }
 
   .pk-colored-box h2 {
-    font-size: 1.1rem;
+    font-size: 11px;
   }
 
   .pk-box-description {
-    font-size: 0.75rem;
+    font-size: 8px;
   }
 
+.pk-recipe-main-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+}
   .pk-recipe-card-item {
     min-width: 200px;
     width: 200px;
@@ -570,145 +549,18 @@ body {
   }
 
   .pk-recipe-card-heading {
-    font-size: 0.8rem;
+    font-size: 13px;
+    font-weight: 700;
   }
 
   .pk-recipe-card-text {
     font-size: 0.65rem;
+    margin-bottom: -10px;
   }
+  
+.pk-recipe-card-button {
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 10px;
 }
-
-@media (max-width: 480px) {
-  .pk-hero-right-section {
-    height: 300px;
-  }
-
-  .pk-carousel-item {
-    width: 150px !important;
-    height: 230px !important;
-  }
-
-  .pk-center-card .pk-item-image {
-    height: 125px !important;
-  }
-
-  .pk-side-card .pk-item-image {
-    height: 100px !important;
-  }
-
-  .pk-item-content {
-    padding: 8px !important;
-  }
-
-  .pk-item-title {
-    font-size: 0.7rem !important;
-  }
-
-  .pk-item-description {
-    font-size: 0.55rem !important;
-  }
-
-  .pk-carousel-indicators {
-    bottom: 8px;
-  }
-
-  .pk-indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  .pk-content-box {
-    padding: 1rem 0.8rem;
-    min-height: 180px;
-  }
-
-  .pk-colored-box {
-    padding: 0.8rem;
-  }
-
-  .pk-colored-box h2 {
-    font-size: 1rem;
-  }
-
-  .pk-box-description {
-    font-size: 0.7rem;
-  }
-
-  .pk-btn {
-    padding: 6px 16px;
-    font-size: 0.7rem;
-  }
-
-  .pk-recipe-main-title {
-    font-size: 1.5rem;
-  }
-
-  .pk-recipe-card-item {
-    min-width: 170px;
-    width: 170px;
-    padding: 8px;
-  }
-
-  .pk-recipe-card-img {
-    height: 95px;
-  }
-
-  .pk-recipe-card-heading {
-    font-size: 0.75rem;
-  }
-
-  .pk-recipe-card-text {
-    font-size: 0.6rem;
-  }
-
-  .pk-recipe-card-button {
-    padding: 6px 10px;
-    font-size: 0.6rem;
-  }
-
-  .pk-recipe-scroll-container {
-    gap: 10px;
-    padding: 10px 12px 15px 12px;
-  }
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-  .pk-hero-carousel-section {
-    flex-direction: row;
-    height: 100vh;
-  }
-
-  .pk-hero-left-section {
-    width: 45%;
-    height: 100%;
-    text-align: left;
-    padding: 20px;
-  }
-
-  .pk-hero-main-heading {
-    font-size: 1.5rem;
-  }
-
-  .pk-hero-second-heading {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-
-  .pk-hero-right-section {
-    width: 55%;
-    height: 100%;
-  }
-
-  .pk-carousel-item {
-    width: 160px !important;
-    height: 240px !important;
-  }
-
-  .pk-center-card .pk-item-image {
-    height: 130px !important;
-  }
-
-  .pk-side-card .pk-item-image {
-    height: 105px !important;
-  }
 }

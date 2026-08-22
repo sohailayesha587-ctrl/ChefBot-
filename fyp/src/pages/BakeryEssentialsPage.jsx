@@ -18,7 +18,7 @@ const BakeryEssentialsPage = () => {
   const [decoratingData, setDecoratingData] = useState([]);
 
   const navigate = useNavigate();
-  const API_URL = 'http://localhost:5000/api/guides';
+  const API_URL = '/api/beginners-guides';
 
   useEffect(() => {
     fetchAllData();

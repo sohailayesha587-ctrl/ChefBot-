@@ -71,7 +71,7 @@ const ShoppingList = () => {
         return;
       }
 
-      const res = await fetch('http://localhost:5000/api/shopping', {
+      const res = await fetch('/api/shopping', {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
@@ -102,8 +102,8 @@ const ShoppingList = () => {
     try {
       const token = getToken();
       const url = editMode
-        ? `http://localhost:5000/api/shopping/${currentItem._id}`
-        : 'http://localhost:5000/api/shopping';
+        ? `/api/shopping/${currentItem._id}`
+        : '/api/shopping';
       const method = editMode ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -133,7 +133,7 @@ const ShoppingList = () => {
   const markAsPurchased = async (id) => {
     try {
       const token = getToken();
-      const res = await fetch(`http://localhost:5000/api/shopping/${id}/purchased`, {
+      const res = await fetch(`/api/shopping/${id}/purchased`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
@@ -153,7 +153,7 @@ const ShoppingList = () => {
   const handleDelete = async (id) => {
     try {
       const token = getToken();
-      const res = await fetch(`http://localhost:5000/api/shopping/${id}`, {
+      const res = await fetch(`/api/shopping/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });

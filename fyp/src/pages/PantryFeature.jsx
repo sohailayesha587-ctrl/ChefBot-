@@ -65,7 +65,7 @@ const PantryFeature = () => {
         navigate('/login-page');
         return;
       }
-      const res = await fetch('http://localhost:5000/api/pantry', {
+      const res = await fetch('/api/pantry', {
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
       const data = await res.json();
@@ -82,7 +82,7 @@ const PantryFeature = () => {
     try {
       const token = getToken();
       if (!token) return;
-      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+      const res = await fetch('/api/pantry-shopping', {
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
       const data = await res.json();
@@ -95,7 +95,7 @@ const PantryFeature = () => {
   const addToPantryShoppingList = async (item) => {
     try {
       const token = getToken();
-      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+      const res = await fetch('/api/pantry-shopping', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: item.name, quantity: item.quantity, unit: item.unit, category: item.category })
@@ -115,7 +115,7 @@ const PantryFeature = () => {
   const removeFromPantryShoppingList = async (id) => {
     try {
       const token = getToken();
-      const res = await fetch(`http://localhost:5000/api/pantry-shopping/${id}`, {
+      const res = await fetch(`/api/pantry-shopping/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
@@ -132,7 +132,7 @@ const PantryFeature = () => {
   const clearPantryShoppingList = async () => {
     try {
       const token = getToken();
-      const res = await fetch('http://localhost:5000/api/pantry-shopping', {
+      const res = await fetch('/api/pantry-shopping', {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
@@ -164,7 +164,7 @@ const PantryFeature = () => {
 
       for (const item of pantryShoppingList) {
         try {
-          const res = await fetch('http://localhost:5000/api/shopping', {
+          const res = await fetch('/api/shopping', {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -212,8 +212,8 @@ const PantryFeature = () => {
     try {
       const token = getToken();
       const url = editMode
-        ? `http://localhost:5000/api/pantry/${currentItem._id}`
-        : 'http://localhost:5000/api/pantry';
+        ? `/api/pantry/${currentItem._id}`
+        : '/api/pantry';
       const res = await fetch(url, {
         method: editMode ? 'PUT' : 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -240,7 +240,7 @@ const PantryFeature = () => {
   const handleDelete = async (id) => {
     try {
       const token = getToken();
-      const res = await fetch(`http://localhost:5000/api/pantry/${id}`, {
+      const res = await fetch(`/api/pantry/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });

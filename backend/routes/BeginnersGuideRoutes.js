@@ -5,10 +5,7 @@ const express = require('express');
 const router = express.Router();
 const {
   getAllGuides,
-  getGuideById,
-  createGuide,
-  updateGuide,
-  deleteGuide
+  getGuideById
 } = require('../controllers/BeginnersGuideController');
 const { protect, adminOnly } = require('../middleware/authMiddleware');
 

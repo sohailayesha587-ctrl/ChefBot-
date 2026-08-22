@@ -25,7 +25,7 @@ const RecipesRegionalPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:5000/api/recipes/subCategory/regional?limit=200')
+    fetch('/api/recipes/subCategory/regional?limit=200')
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch regional recipes');

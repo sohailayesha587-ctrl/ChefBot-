@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { generateMealPlan, saveMealPlan } = require('../controllers/mealplanController');
+const { generateMealPlan, saveMealPlan } = require('../controllers/mealPlanController');
 const { protect } = require('../middleware/authMiddleware');
 
 router.get('/generate', protect, generateMealPlan);

@@ -10,17 +10,15 @@ const User = require('../models/User');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const allMeatGuides = [];
-
 const addMeatGuide = (title, contentObj, category, image) => {
   allMeatGuides.push({
-    title: title,
-    content: JSON.stringify(contentObj),
-    category: category,
-    image: image,
+    title,
+    content: contentObj,
+    category,
+    image,
     video: ''
   });
 };
-
 addMeatGuide(
   "Beef Boning Knife",
   {

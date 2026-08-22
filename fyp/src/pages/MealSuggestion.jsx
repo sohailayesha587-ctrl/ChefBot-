@@ -259,7 +259,7 @@ const MealSuggestion = () => {
     try {
       setLoadingHistory(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log/month', {
+      const response = await fetch('/api/meal-suggestions/cooking-log/month', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -280,7 +280,7 @@ const MealSuggestion = () => {
   const fetchAllRecipes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/recipes?limit=100', {
+      const response = await fetch('/api/recipes?limit=100', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -293,7 +293,7 @@ const MealSuggestion = () => {
   const fetchPantryItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/pantry', {
+      const response = await fetch('/api/pantry', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -312,7 +312,7 @@ const MealSuggestion = () => {
   const fetchCookingLogForDate = async (date) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${date}`, {
+      const response = await fetch(`/api/meal-suggestions/cooking-log/${date}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -336,7 +336,7 @@ const MealSuggestion = () => {
     for (const day of weekDays) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${day.date}`, {
+        const response = await fetch(`/api/meal-suggestions/cooking-log/${day.date}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await response.json();
@@ -354,7 +354,7 @@ const MealSuggestion = () => {
     if (!query.trim()) { setRecipeSuggestions([]); setShowRecipeSuggestions(false); return; }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/recipes/search?q=${encodeURIComponent(query)}`, {
+      const response = await fetch(`/api/recipes/search?q=${encodeURIComponent(query)}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -384,7 +384,7 @@ const MealSuggestion = () => {
       const token = localStorage.getItem('token');
       const limit = 5;
       setPatientSections(prev => ({ ...prev, [type]: { ...prev[type], loading: true } }));
-      const response = await fetch(`http://localhost:5000/api/recipes/patient/${type}?limit=${limit}&skip=${page * limit}&dietType=${filters.dietType}`, {
+      const response = await fetch(`/api/recipes/patient/${type}?limit=${limit}&skip=${page * limit}&dietType=${filters.dietType}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -408,7 +408,7 @@ const MealSuggestion = () => {
     if (!recipe.missing || recipe.missing.length === 0) { toast.info('No missing ingredients to add'); return; }
     try {
       const token = localStorage.getItem('token');
-      const shoppingResponse = await fetch('http://localhost:5000/api/shopping', {
+      const shoppingResponse = await fetch('/api/shopping', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const shoppingData = await shoppingResponse.json();
@@ -422,7 +422,7 @@ const MealSuggestion = () => {
       });
       if (alreadyInShopping.length > 0) toast.warning(`Already in shopping list: ${alreadyInShopping.join(', ')}`);
       if (newItems.length > 0) {
-        const addResponse = await fetch('http://localhost:5000/api/shopping/add-missing', {
+        const addResponse = await fetch('/api/shopping/add-missing', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipeId: recipe.id || recipe._id, missingIngredients: newItems })
@@ -445,7 +445,7 @@ const MealSuggestion = () => {
       const token = localStorage.getItem('token');
       let pantryNames = pantryItems;
       if (pantryNames.length === 0) pantryNames = await fetchPantryItems();
-      let url = `http://localhost:5000/api/meal-suggestions?`;
+      let url = `/api/meal-suggestions?`;
       if (search && search !== '') url += `search=${encodeURIComponent(search)}&`;
       if (filters.mealType !== 'all') url += `mealTime=${filters.mealType}&`;
       if (filters.dietType !== 'all') url += `dietType=${filters.dietType}&`;
@@ -478,16 +478,11 @@ const MealSuggestion = () => {
     }
   };
 
-  const handleDayClick = async (day) => {
-    setSelectedDate(day);
-    if (isMobile) {
-      setDrawerOpen(false);
-      setExpandedDay(day.id);
-    } else {
-      setExpandedDay(day.id);
-    }
-    await fetchCookingLogForDate(day.date);
-  };
+const handleDayClick = async (day) => {
+  setSelectedDate(day);
+  setExpandedDay(day.id);
+  await fetchCookingLogForDate(day.date);
+};
 
   const handleCloseExpanded = () => { setExpandedDay(null); setIsNoCookingDay(false); };
 
@@ -495,7 +490,7 @@ const MealSuggestion = () => {
     if (!selectedDate) { toast.error('No date selected'); return; }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log', {
+      const response = await fetch('/api/meal-suggestions/cooking-log', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: selectedDate.date, recipeId: null, recipeName: null, members: 0, noCooking: true })
@@ -540,14 +535,14 @@ const MealSuggestion = () => {
     try {
       const token = localStorage.getItem('token');
       const mealId = meal._id || meal.id;
-      const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${mealId}`, {
+      const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${mealId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
       if (data.success) {
         toast.success('Meal deleted successfully');
-        const updatedResponse = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}`, {
+        const updatedResponse = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const updatedData = await updatedResponse.json();
@@ -569,7 +564,7 @@ const MealSuggestion = () => {
     try {
       const token = localStorage.getItem('token');
       if (editingMeal) {
-        const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${editingMeal._id || editingMeal.id}`, {
+        const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${editingMeal._id || editingMeal.id}`, {
           method: 'PUT',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipeId: selectedMealRecipe || 'manual', recipeName: manualRecipeName, members: selectedMealMembers })
@@ -578,7 +573,7 @@ const MealSuggestion = () => {
         if (data.success) toast.success(`Meal updated: ${manualRecipeName}`);
         else toast.error(data.message || 'Error updating meal');
       } else {
-        const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log', {
+        const response = await fetch('/api/meal-suggestions/cooking-log', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ date: selectedDate.date, recipeId: selectedMealRecipe || 'manual', recipeName: manualRecipeName, members: selectedMealMembers })
@@ -604,7 +599,7 @@ const MealSuggestion = () => {
   const handleAddMissingToShopping = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/shopping/add-multiple', {
+      const response = await fetch('/api/shopping/add-multiple', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: missingFundamentals.map(item => ({ name: item, quantity: 1, unit: 'piece' })) })
@@ -632,7 +627,7 @@ const MealSuggestion = () => {
     setIsCooking(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cook', {
+      const response = await fetch('/api/meal-suggestions/cook', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ recipeId: selectedRecipe.id || selectedRecipe._id, members: parseInt(membersValue), date: selectedDate?.date || new Date().toISOString().split('T')[0] })
@@ -800,38 +795,78 @@ const MealSuggestion = () => {
       {isMobile && drawerOpen && (
         <div className="ms-drawer-overlay" onClick={closeDrawer}></div>
       )}
+{isMobile && (
+  <div className={`ms-side-drawer ${drawerOpen ? 'open' : ''}`}>
+    <div className="ms-drawer-header">
+      <h3><Icons.Calendar /> Calendar</h3>
+      <button className="ms-drawer-close" onClick={closeDrawer}><Icons.X /></button>
+    </div>
+    <div className="ms-drawer-content">
+      {weekDays.map(day => {
+        const isToday = day.date === new Date().toISOString().split('T')[0];
+        const status = dayStatus[day.date];
+        const isExpanded = expandedDay === day.id;
+        const mealsForDay = isExpanded ? selectedDayMeals : [];
 
-      {isMobile && (
-        <div className={`ms-side-drawer ${drawerOpen ? 'open' : ''}`}>
-          <div className="ms-drawer-header">
-            <h3><Icons.Calendar /> Calendar</h3>
-            <button className="ms-drawer-close" onClick={closeDrawer}><Icons.X /></button>
-          </div>
-          <div className="ms-drawer-content">
-            {weekDays.map(day => {
-              const isToday = day.date === new Date().toISOString().split('T')[0];
-              const status = dayStatus[day.date];
-              return (
-                <div
-                  key={day.id}
-                  className={`ms-drawer-day-item ${selectedDate?.id === day.id ? 'active' : ''} ${isToday ? 'today' : ''}`}
-                  onClick={() => handleDayClick(day)}
-                >
-                  <div className="ms-drawer-day-info">
-                    <span className="ms-drawer-day-name">{day.fullName}</span>
-                    <span className="ms-drawer-day-date">{getFormattedDate(day.date)}</span>
-                  </div>
-                  {status === 'pending' && <div className="ms-drawer-status-dot"></div>}
+        return (
+          <div key={day.id} className="ms-drawer-day-wrapper">
+            <div
+              className={`ms-drawer-day-item ${selectedDate?.id === day.id ? 'active' : ''} ${isToday ? 'today' : ''}`}
+              onClick={() => handleDayClick(day)}
+            >
+              <div className="ms-drawer-day-info">
+                <span className="ms-drawer-day-name">{day.fullName}</span>
+                <span className="ms-drawer-day-date">{getFormattedDate(day.date)}</span>
+              </div>
+              {status === 'pending' && <div className="ms-drawer-status-dot"></div>}
+            </div>
+
+            {isExpanded && (
+              <div className="ms-mobile-expanded-day">
+                <div className="ms-mobile-expanded-header">
+                  <h3>{day.fullName} - {getFormattedDate(day.date)}</h3>
+                  <button className="ms-mobile-expanded-close" onClick={handleCloseExpanded}><Icons.X /></button>
                 </div>
-              );
-            })}
-            <button className="ms-drawer-history-btn" onClick={() => { fetchMonthHistory(); closeDrawer(); }}>
-              <Icons.History /> Month History
-            </button>
+                <div className="ms-mobile-expanded-content">
+                  {status === 'no-cooking' ? (
+                    <div className="ms-no-meals-expanded">
+                      <p>No cooking this day</p>
+                      <button className="ms-add-meal-expanded" onClick={handleForgotToLog}><Icons.Plus /> Add Meal</button>
+                    </div>
+                  ) : mealsForDay.length > 0 ? (
+                    <>
+                      {mealsForDay.map((meal, idx) => (
+                        <div key={idx} className="ms-meal-item-expanded">
+                          <div>
+                            <span className="ms-meal-name">{meal.recipeName}</span>
+                            <span className="ms-meal-members"><Icons.Users /> {meal.members}</span>
+                          </div>
+                          <button className="ms-delete-meal" onClick={() => handleDeleteMeal(meal)}><Icons.Trash /></button>
+                        </div>
+                      ))}
+                      <button className="ms-add-meal-expanded" onClick={handleForgotToLog}><Icons.Plus /> Add Meal</button>
+                    </>
+                  ) : (
+                    <div className="ms-no-meals-expanded">
+                      <p>No meals recorded.</p>
+                      <div className="ms-expanded-actions">
+                        <button className="ms-no-cooking-expanded" onClick={handleNoCooking}>No cooking done</button>
+                        <button className="ms-forgot-log-expanded" onClick={handleForgotToLog}>I forgot to log</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-
+        );
+      })}
+      <button className="ms-drawer-history-btn" onClick={() => { fetchMonthHistory(); closeDrawer(); }}>
+        <Icons.History /> Month History
+      </button>
+    </div>
+  </div>
+)}
       <header className="ms-header">
         <div className="ms-header-content">
           <h1 className="ms-title">What to Cook Today?</h1>
@@ -977,8 +1012,18 @@ const MealSuggestion = () => {
               <Icons.Plus />
               <span>More</span>
             </button>
+{isMobile && (
+    <button
+      className="ms-calendar-btn"
+      onClick={openDrawer}
+      title="Calendar"
+    >
+      <Icons.Calendar />
+      <span>Calendar</span>
+    </button>
+  )}
           </div>
-
+ 
           {isMobile && expandedDay && (
             <div className="ms-mobile-expanded-day">
               <div className="ms-mobile-expanded-header">
@@ -1073,14 +1118,21 @@ const MealSuggestion = () => {
                         <span>{recipe.subCategory || recipe.category}</span>
                         <span className="ms-recipe-time"><Icons.Clock /> {recipe.cookingTime} min</span>
                       </p>
-                      {recipe.missing && recipe.missing.length > 0 ? (
-                        <div className="ms-missing-ingredients">
-                          <span className="ms-missing-label">Missing:</span>
-                          <span className="ms-missing-items">{recipe.missing.slice(0, 3).join(', ')}{recipe.missing.length > 3 && ` +${recipe.missing.length - 3}`}</span>
-                        </div>
-                      ) : (
-                        <div className="ms-full-match"><Icons.Check /> All ingredients ready</div>
-                      )}
+                     {recipe.match === 100 ? (
+  <div className="ms-full-match"><Icons.Check /> All ingredients ready</div>
+) : recipe.missing && recipe.missing.length > 0 ? (
+  <div className="ms-missing-ingredients">
+    <span className="ms-missing-label">Missing:</span>
+    <span className="ms-missing-items">
+      {recipe.missing.slice(0, 3).join(', ')}
+      {recipe.missing.length > 3 && ` +${recipe.missing.length - 3}`}
+    </span>
+  </div>
+) : (
+  <div className="ms-no-ingredients">
+    No ingredients listed for this recipe
+  </div>
+)}
                       <div className="ms-match-progress">
                         <div className="ms-match-progress-bar" style={{ width: `${recipe.match}%`, backgroundColor: getMatchColor(recipe.match) }}></div>
                       </div>

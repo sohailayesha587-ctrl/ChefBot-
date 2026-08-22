@@ -48,7 +48,7 @@ const HomePage = () => {
  useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/recipes?subCategory=appetizers&limit=10');
+        const response = await fetch('/api/recipes?subCategory=appetizers&limit=10');
         const data = await response.json();
         if (data.recipes) {
           setRecipes(data.recipes);

@@ -17,7 +17,6 @@ const KitchenAppliancesPage = () => {
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const API_URL = 'http://localhost:5000/api/guides';
 
   useEffect(() => {
     fetchAppliances();
@@ -34,9 +33,12 @@ const KitchenAppliancesPage = () => {
   const fetchAppliances = async () => {
     setLoading(true);
     setError(null);
+   
     try {
-      const response = await axios.get(`${API_URL}?category=kitchen-appliances`);
-      
+      const response = await axios.get('/api/beginners-guides? category=kitchen-appliances', {
+            params: { category: 'kitchen-appliances' }
+          });
+
       if (response.data.success && response.data.guides) {
         const groupedData = response.data.guides.reduce((acc, guide) => {
           const mainCat = guide.mainCategory || 'uncategorized';

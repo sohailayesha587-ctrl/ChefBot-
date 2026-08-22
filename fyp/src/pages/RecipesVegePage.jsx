@@ -14,7 +14,7 @@ const RecipesVegePage = () => {
   const speechRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/recipes/subCategory/plain-vegetables?limit=200')
+    fetch('/api/recipes/subCategory/plain-vegetables?limit=200')
       .then(res => res.json())
       .then(data => {
         setVegetables(data.recipes || []);

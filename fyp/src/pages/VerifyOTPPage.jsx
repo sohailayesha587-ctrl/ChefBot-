@@ -65,7 +65,7 @@ const VerifyOTPPage = () => {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/verify-otp', {
+      const response = await axios.post('/api/auth/verify-otp', {
         email,
         otp: otpValue
       });
@@ -88,7 +88,7 @@ const VerifyOTPPage = () => {
     setMessage('');
 
     try {
-      await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      await axios.post('/api/auth/forgot-password', { email });
       setMessage('New OTP sent!');
       setTimer(60);
       setCanResend(false);

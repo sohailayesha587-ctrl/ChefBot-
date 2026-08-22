@@ -32,10 +32,11 @@ const checkLowStock = (quantity, unit, category) => {
 
 const getPantryItems = async (req, res) => {
   try {
-    let pantry = await Pantry.findOne({ userId: req.user._id });
+    const userId = req.user._id || req.user.id;
+    let pantry = await Pantry.findOne({ userId });
 
     if (!pantry) {
-      pantry = await Pantry.create({ userId: req.user._id, items: [] });
+      pantry = await Pantry.create({ userId, items: [] });
     }
 
     res.status(200).json({ success: true, items: pantry.items });
@@ -52,10 +53,11 @@ const addPantryItem = async (req, res) => {
       return res.status(400).json({ message: 'Please fill all fields!' });
     }
 
-    let pantry = await Pantry.findOne({ userId: req.user._id });
+    const userId = req.user._id || req.user.id;
+    let pantry = await Pantry.findOne({ userId });
 
     if (!pantry) {
-      pantry = await Pantry.create({ userId: req.user._id, items: [] });
+      pantry = await Pantry.create({ userId, items: [] });
     }
 
     const lowStock = checkLowStock(quantity, unit, category);
@@ -78,7 +80,8 @@ const updatePantryItem = async (req, res) => {
     const { itemId } = req.params;
     const { name, quantity, unit, category } = req.body;
 
-    const pantry = await Pantry.findOne({ userId: req.user._id });
+    const userId = req.user._id || req.user.id;
+    const pantry = await Pantry.findOne({ userId });
 
     if (!pantry) {
       return res.status(404).json({ message: 'Pantry not found!' });
@@ -112,7 +115,8 @@ const deletePantryItem = async (req, res) => {
   try {
     const { itemId } = req.params;
 
-    const pantry = await Pantry.findOne({ userId: req.user._id });
+    const userId = req.user._id || req.user.id;
+    const pantry = await Pantry.findOne({ userId });
 
     if (!pantry) {
       return res.status(404).json({ message: 'Pantry not found!' });
