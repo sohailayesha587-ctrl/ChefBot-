@@ -25,42 +25,35 @@ const ShoppingList = () => {
   const units = ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles'];
 
   const getToken = () => localStorage.getItem('token');
-
   const shareOnWhatsApp = () => {
-    if (items.length === 0) {
-      showToast('No items to share!', 'warning');
-      return;
+  if (items.length === 0) {
+    showToast('No items to share!', 'warning');
+    return;
+  }
+
+  let message = "My Shopping List - ${new Date().toLocaleDateString()}\n\n";
+
+  categories.forEach((category) => {
+    const categoryItems = items.filter((item) => item.category === category);
+    if (categoryItems.length > 0) {
+      message += `${category}:\n`;
+      categoryItems.forEach((item) => {
+        const check = item.purchased ? '' : '';
+        message += `${check} ${item.name} - ${item.quantity} ${item.unit}\n`;
+      });
+      message += `\n`;
     }
+  });
 
-    let message = "🛒 *MY SHOPPING LIST* 🛒\n";
-    message += "─────────────────\n\n";
+  const purchasedCount = items.filter((item) => item.purchased).length;
+  message += `Total: ${items.length} items (${purchasedCount} purchased)\n`;
+  message += ` ChefBot - Smart Kitchen\n`;
+    message += "Happy Shopping ";
 
-    categories.forEach((category) => {
-      const categoryItems = items.filter((item) => item.category === category);
-      if (categoryItems.length > 0) {
-        message += `📁 *${category.toUpperCase()}* (${categoryItems.length})\n`;
-        message += "─────────────────\n";
-        categoryItems.forEach((item, index) => {
-          message += `${index + 1}. ${item.quantity} ${item.unit} - ${item.name}${item.purchased ? ' ✅' : ''}\n`;
-        });
-        message += "\n";
-      }
-    });
-
-    const purchasedCount = items.filter((item) => item.purchased).length;
-
-    message += "─────────────────\n";
-    message += `Total Items: ${items.length}\n`;
-    message += ` Purchased: ${purchasedCount}\n`;
-    message += ` ${new Date().toLocaleDateString()}\n`;
-    message += ` ChefBot - Smart Kitchen\n`;
-    message += "─────────────────\n";
-    message += "Happy Shopping! ";
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
-  };
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+  window.open(whatsappUrl, '_blank');
+};
 
   const fetchShoppingItems = async () => {
     try {
