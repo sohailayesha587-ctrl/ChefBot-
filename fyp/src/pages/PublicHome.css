@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: white;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  background-color: whitesmoke;
   color: #284a4b;
   line-height: 1.6;
   overflow-x: hidden;
@@ -46,13 +46,13 @@ body {
 .pk-hero-left-section {
   width: 40%;
   height: 100%;
-  padding: 0 40px;
+  padding: 0 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   z-index: 5;
-  color: white;
+  color: #ffffff;
 }
 
 .pk-hero-section-tag {
@@ -65,10 +65,10 @@ body {
 }
 
 .pk-hero-main-heading {
-  font-size: 3.8rem;
+  font-size: 3.3rem;
   font-weight: 700;
   line-height: 1.1;
-  color: white;
+  color: #ffffff;
   margin-bottom: 15px;
   letter-spacing: -0.5px;
 }
@@ -76,7 +76,7 @@ body {
 .pk-hero-second-heading {
   font-size: 2.3rem;
   font-weight: 600;
-  color: white;
+  color: #ffffff;
   margin-bottom: 25px;
 }
 
@@ -121,9 +121,9 @@ body {
   position: absolute;
   width: 260px;
   height: 360px;
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   display: flex;
   flex-direction: column;
@@ -166,21 +166,21 @@ body {
 .pk-item-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #1a3334;
   margin-bottom: 10px;
   line-height: 1.2;
 }
 
 .pk-item-description {
   font-size: 0.85rem;
-  color: #666;
+  color: #666666;
   line-height: 1.5;
   margin-bottom: 15px;
   flex-grow: 1;
 }
 
 .pk-section-boxes {
-  background-color: white;
+  background-color: #ffffff;
   align-items: center;
   text-align: center;
   gap: 0;
@@ -195,7 +195,7 @@ body {
   border-radius: 20px;
   width: 78%;
   max-width: 1300px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   margin: 1rem auto;
   height: 425px;
   display: flex;
@@ -205,17 +205,18 @@ body {
 }
 
 .pk-colored-box {
-  background: linear-gradient(135deg, #284a4b, #1a3536);
+  background: linear-gradient(135deg, #284a4b, #1a3334);
   padding: 2rem;
   border-radius: 15px;
-  max-width: 450px;
+  width: 350px;
+  height: 300px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
 
 .pk-colored-box h2 {
-  color: white;
-  font-size: 1.8rem;
+  color: #ffffff;
+  font-size: 26px;
   margin-bottom: 1rem;
   font-weight: 700;
 }
@@ -235,7 +236,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 
@@ -243,11 +244,11 @@ body {
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .pk-btn {
-  background-color: white;
+  background-color: #ffffff;
   color: #284a4b;
   border: none;
   padding: 10px 30px;
@@ -262,13 +263,13 @@ body {
 
 .pk-btn:hover {
   background-color: #397d7c;
-  color: white;
+  color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .pk-recipe-wrapper {
-  background: #f8f9fa;
+  background: #f5fafa;
   padding: 2rem 0;
   margin: 0;
   width: 100%;
@@ -301,14 +302,14 @@ body {
 .pk-recipe-card-item {
   min-width: 280px;
   width: 280px;
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   padding: 15px;
   flex-shrink: 0;
   flex-grow: 0;
   transition: all 0.3s ease;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #e0eeee;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -316,7 +317,7 @@ body {
 
 .pk-recipe-card-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .pk-recipe-card-img {
@@ -337,7 +338,7 @@ body {
 
 .pk-recipe-card-text {
   font-size: 0.8rem;
-  color: #666;
+  color: #666666;
   line-height: 1.4;
   flex-grow: 1;
   min-height: 50px;
@@ -345,7 +346,7 @@ body {
 
 .pk-recipe-card-button {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
@@ -360,7 +361,7 @@ body {
 .pk-recipe-card-button:hover {
   background: #397d7c;
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(40, 91, 90, 0.2);
+  box-shadow: 0 5px 12px rgba(40, 74, 75, 0.2);
 }
 
 .pk-recipe-scroll-container::-webkit-scrollbar {
@@ -368,7 +369,7 @@ body {
 }
 
 .pk-recipe-scroll-container::-webkit-scrollbar-track {
-  background: #e0e0e0;
+  background: #e0eeee;
   border-radius: 10px;
   margin: 0 30px;
 }
@@ -384,7 +385,7 @@ body {
 
 .pk-recipe-scroll-container {
   scrollbar-width: thin;
-  scrollbar-color: #284a4b #e0e0e0;
+  scrollbar-color: #284a4b #e0eeee;
 }
 
 @media (max-width: 780px) {
@@ -441,27 +442,23 @@ body {
 
   .pk-content-box {
     padding: 2rem 1.5rem;
-    width: 88%;
-    height: 230px;
+    width: 80%;
+    height: 200px;
     margin: 0.8rem auto;
   }
 
   .pk-colored-box {
     padding: 1.3rem;
-    width: 180px;
-    height: 175px;
-  }
-
-  .pk-colored-box h1 {
-    font-size: 12px;
+    width: 150px;
+    height: 150px;
   }
 
   .pk-colored-box h2 {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .pk-box-description {
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .pk-btn {
@@ -521,15 +518,18 @@ body {
 
   .pk-content-box {
     padding: 1.5rem 1rem;
-    min-height: 200px;
+    height: 190px;
+      margin: 30px auto;
+
   }
 
   .pk-colored-box h2 {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .pk-box-description {
     font-size: 8px;
+    margin-bottom: 15px;
   }
 
 .pk-recipe-main-title {

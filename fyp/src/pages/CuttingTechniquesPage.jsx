@@ -10,6 +10,7 @@ const CuttingTechniquesPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,13 +32,11 @@ const CuttingTechniquesPage = () => {
       const response = await axios.get('/api/beginners-guides', {
         params: { category: 'cutting-techniques' }
       });
-      console.log('API Response:', response.data);
       
       const guides = response.data.guides || [];
-      console.log('Guides:', guides);
       
       if (guides.length === 0) {
-        setError('No cutting techniques found');
+        setError('No cutting techniques found in database.');
         setCuttingTechniques([]);
         setLoading(false);
         return;
@@ -49,9 +48,7 @@ const CuttingTechniquesPage = () => {
         if (guide.content && typeof guide.content === 'string') {
           try {
             content = JSON.parse(guide.content);
-            console.log('Parsed content for', guide.title, ':', content);
           } catch (e) {
-            console.error('Parse error:', e);
             content = { 
               fullDesc: guide.content,
               keyUses: [],
@@ -69,14 +66,13 @@ const CuttingTechniquesPage = () => {
           tagline: content.tagline || '',
           fullDesc: content.fullDesc || 'No description available',
           keyUses: Array.isArray(content.keyUses) ? content.keyUses : ['General use'],
-          previewImg: guide.image || content.previewImg || 'default.png',
+          image: guide.image || content.image || content.previewImg || '/api/placeholder/120/120',
           knife: content.knife || "Chef's knife",
           tips: Array.isArray(content.tips) ? content.tips : ['Practice makes perfect'],
           steps: Array.isArray(content.steps) ? content.steps : ['Prepare your ingredients']
         };
       });
 
-      console.log('Final techniques:', techniques);
       setCuttingTechniques(techniques);
     } catch (err) {
       console.error('API Error:', err);
@@ -88,7 +84,6 @@ const CuttingTechniquesPage = () => {
   };
 
   const handleTechniqueSelect = (technique) => {
-    console.log('Selected:', technique);
     setSelectedTechnique(technique);
     setShowDetailPanel(true);
     setSidebarOpen(false);
@@ -97,6 +92,14 @@ const CuttingTechniquesPage = () => {
   const closeDetailPanel = () => {
     setShowDetailPanel(false);
     setSelectedTechnique(null);
+  };
+
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
   };
 
   const KnifeIcon = () => (
@@ -109,6 +112,12 @@ const CuttingTechniquesPage = () => {
   const LightbulbIcon = () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9.5 19.5H14.5M9.5 21.5H14.5M12 2.5C8.5 2.5 5.5 5.2 5.5 9C5.5 11.5 7 13.5 8.5 15C9.5 16 10 17 10 18H14C14 17 14.5 16 15.5 15C17 13.5 18.5 11.5 18.5 9C18.5 5.2 15.5 2.5 12 2.5Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const WarningIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
     </svg>
   );
 
@@ -154,7 +163,7 @@ const CuttingTechniquesPage = () => {
   if (loading) {
     return (
       <div className="ctp-container">
-        <div className="loading-spinner">Loading cutting techniques...</div>
+        <div className="loading-spinner">Loading...</div>
       </div>
     );
   }
@@ -175,14 +184,7 @@ const CuttingTechniquesPage = () => {
   return (
     <div className="ctp-container">
       <div className="ctp-mobile-topbar">
-        <button
-          className={`ctp-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
-        </button>
-        <h1 className="ctp-page-title">Essential Cutting Techniques</h1>
+        <h1 className="ctp-page-title">Cutting Techniques</h1>
       </div>
 
       <div
@@ -230,7 +232,7 @@ const CuttingTechniquesPage = () => {
                   className="ctp-technique-card"
                   onClick={() => handleTechniqueSelect(technique)}
                 >
-                  <div className="ctp-card-image" style={{ backgroundImage: `url(${technique.previewImg})` }} />
+                  <div className="ctp-card-image" style={{ backgroundImage: `url(${technique.image})` }} />
                   <div className="ctp-card-content">
                     <h3 className="ctp-card-title">{technique.name}</h3>
                     <p className="ctp-card-description">{technique.tagline}</p>
@@ -267,9 +269,18 @@ const CuttingTechniquesPage = () => {
 
             <div className="ctp-modal-inner">
               <div className="ctp-modal-left">
-                <div className="ctp-msec">
-                  <span className="ctp-msec-label">About this technique</span>
-                  <p className="ctp-msec-text">{selectedTechnique.fullDesc}</p>
+                <div className="ctp-about-row">
+                  <div className="ctp-about-text">
+                    <div className="ctp-msec">
+                      <span className="ctp-msec-label">About this technique</span>
+                      <p className="ctp-msec-text">{selectedTechnique.fullDesc}</p>
+                    </div>
+                  </div>
+                  <div
+                    className="ctp-about-thumb"
+                    style={{ backgroundImage: `url(${selectedTechnique.image})` }}
+                    onClick={() => openLightbox(selectedTechnique.image)}
+                  />
                 </div>
 
                 <hr className="ctp-mdivider" />
@@ -349,11 +360,24 @@ const CuttingTechniquesPage = () => {
               <div className="ctp-modal-right">
                 <div
                   className="ctp-modal-right-image"
-                  style={{ backgroundImage: `url(${selectedTechnique.previewImg})` }}
+                  style={{ backgroundImage: `url(${selectedTechnique.image})` }}
+                  onClick={() => openLightbox(selectedTechnique.image)}
                 />
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {lightboxImage && (
+        <div className="ctp-lightbox-overlay" onClick={closeLightbox}>
+          <button className="ctp-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="ctp-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

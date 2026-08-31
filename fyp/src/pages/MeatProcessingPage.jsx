@@ -12,13 +12,13 @@ const MeatProcessingPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
   
   const [beefData, setBeefData] = useState([]);
   const [lambData, setLambData] = useState([]);
   const [poultryData, setPoultryData] = useState([]);
   const [fishData, setFishData] = useState([]);
   const [gameData, setGameData] = useState([]);
-
 
   const meatTypes = [
     { id: 1, name: 'Beef', key: 'beef' },
@@ -45,9 +45,9 @@ const MeatProcessingPage = () => {
     setError(null);
     
     try {
-      const response = await axios.get('/api/beginners-guides?category=meat-processing', {
-            params: { category: 'meat-processing' }
-          });
+      const response = await axios.get('/api/beginners-guides', {
+        params: { category: 'meat-processing' }
+      });
 
       const guides = response.data.guides || [];
       
@@ -106,9 +106,13 @@ const MeatProcessingPage = () => {
       setFishData(fish);
       setGameData(game);
       
+      if (guides.length === 0) {
+        setError('No meat processing data found in database.');
+      }
+      
     } catch (err) {
       console.error(err);
-      setError('Failed to load data');
+      setError('Failed to load data from server.');
     } finally {
       setLoading(false);
     }
@@ -155,6 +159,23 @@ const MeatProcessingPage = () => {
   const currentCounts = getCounts(selectedMeat);
   const filteredData = currentData.filter(item => item.type === selectedTab);
 
+  const renderSafeContent = (content) => {
+    if (!content) return null;
+    if (typeof content === 'string') return content;
+    if (typeof content === 'number') return String(content);
+    if (Array.isArray(content)) {
+      return content.map(c => {
+        if (typeof c === 'string') return c;
+        if (typeof c === 'object') return c.name || c.description || JSON.stringify(c);
+        return String(c);
+      }).join(', ');
+    }
+    if (typeof content === 'object') {
+      return content.name || content.description || content.fullDesc || JSON.stringify(content);
+    }
+    return String(content);
+  };
+
   const MeatIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 2C8.5 2 5.5 4.5 5.5 8C5.5 10 6.5 11.5 8 12.5V14H16V12.5C17.5 11.5 18.5 10 18.5 8C18.5 4.5 15.5 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -177,27 +198,31 @@ const MeatProcessingPage = () => {
 
   const tipIcons = [<LightbulbIcon />, <LightbulbIcon />, <WarningIcon />];
 
-  const renderSafeContent = (content) => {
-    if (!content) return null;
-    if (typeof content === 'string') return content;
-    if (typeof content === 'number') return String(content);
-    if (Array.isArray(content)) {
-      return content.map(c => {
-        if (typeof c === 'string') return c;
-        if (typeof c === 'object') return c.name || c.description || JSON.stringify(c);
-        return String(c);
-      }).join(', ');
-    }
-    if (typeof content === 'object') {
-      return content.name || content.description || content.fullDesc || JSON.stringify(content);
-    }
-    return String(content);
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
   };
 
   if (loading) {
     return (
       <div className="mep-container">
-        <div className="loading-spinner">Loading meat processing data...</div>
+        <div className="loading-spinner">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error && filteredData.length === 0) {
+    return (
+      <div className="mep-container">
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={fetchAllMeatData} className="retry-button">
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }
@@ -205,13 +230,19 @@ const MeatProcessingPage = () => {
   return (
     <div className="mep-container">
       <div className="mep-mobile-topbar">
-        <button
-          className={`mep-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-        >
-          <span /><span /><span />
-        </button>
         <h1 className="mep-page-title">{getCategoryTitle()}</h1>
+      </div>
+
+      <div className="mep-categories-row">
+        {meatTypes.map(meat => (
+          <button
+            key={meat.key}
+            className={`mep-cat-btn ${selectedMeat === meat.key ? 'active' : ''}`}
+            onClick={() => { setSelectedMeat(meat.key); setSidebarOpen(false); }}
+          >
+            {meat.name}
+          </button>
+        ))}
       </div>
 
       <div
@@ -322,15 +353,23 @@ const MeatProcessingPage = () => {
 
             <div className="mep-modal-inner">
               <div className="mep-modal-left">
-                {selectedItem.fullDesc && (
-                  <>
-                    <div className="mep-msec">
-                      <span className="mep-msec-label">About this process</span>
-                      <p className="mep-msec-text">{renderSafeContent(selectedItem.fullDesc)}</p>
-                    </div>
-                    <hr className="mep-mdivider" />
-                  </>
-                )}
+                <div className="mep-about-row">
+                  <div className="mep-about-text">
+                    {selectedItem.fullDesc && (
+                      <div className="mep-msec">
+                        <span className="mep-msec-label">About this process</span>
+                        <p className="mep-msec-text">{renderSafeContent(selectedItem.fullDesc)}</p>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className="mep-about-thumb"
+                    style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/200/200'})` }}
+                    onClick={() => openLightbox(selectedItem.image || '/api/placeholder/200/200')}
+                  />
+                </div>
+
+                <hr className="mep-mdivider" />
 
                 {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
                   <>
@@ -423,19 +462,14 @@ const MeatProcessingPage = () => {
                   </>
                 )}
 
-                {selectedItem.types && selectedItem.types.length > 0 && (
+                {selectedItem.tips && (
                   <>
                     <hr className="mep-mdivider" />
                     <div className="mep-msec">
-                      <span className="mep-msec-label">Types</span>
-                      <div className="mep-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="mep-type-card">
-                            <h4>{renderSafeContent(type.name)}</h4>
-                            <p>{renderSafeContent(type.description)}</p>
-                            {type.bestFor && <p><strong>Best For:</strong> {renderSafeContent(type.bestFor)}</p>}
-                          </div>
-                        ))}
+                      <span className="mep-msec-label">Pro Tips</span>
+                      <div className="mep-tip-card">
+                        <span className="mep-tip-icon"><LightbulbIcon /></span>
+                        <span className="mep-tip-txt">{renderSafeContent(selectedItem.tips)}</span>
                       </div>
                     </div>
                   </>
@@ -446,10 +480,23 @@ const MeatProcessingPage = () => {
                 <div
                   className="mep-modal-right-image"
                   style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/400/400'})` }}
+                  onClick={() => openLightbox(selectedItem.image || '/api/placeholder/400/400')}
                 />
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {lightboxImage && (
+        <div className="mep-lightbox-overlay" onClick={closeLightbox}>
+          <button className="mep-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="mep-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

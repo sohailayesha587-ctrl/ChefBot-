@@ -18,6 +18,7 @@ const pantryShoppingRoutes = require('./routes/pantryShoppingRoutes');
 const mealPlanRoutes = require('./routes/mealPlanRoutes'); 
 const mealSuggestionRoutes = require('./routes/mealSuggestionRoutes');
 const settingsRoutes = require('./routes/settingsRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use('/api/pantry-shopping', pantryShoppingRoutes);
 app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/api/users', settingsRoutes);
-
+app.use('/api/search', searchRoutes);
 app.get('/', (req, res) => {
   res.send('Server is running');
 });

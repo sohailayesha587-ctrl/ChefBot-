@@ -11,6 +11,7 @@ const PantryBasicsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
   
   const [spiceCategory, setSpiceCategory] = useState('all');
   const [staplesCategory, setStaplesCategory] = useState('all');
@@ -20,7 +21,6 @@ const PantryBasicsPage = () => {
   const [spicesData, setSpicesData] = useState([]);
   const [staplesData, setStaplesData] = useState([]);
   const [dailyVegetablesData, setDailyVegetablesData] = useState([]);
-
 
   useEffect(() => {
     fetchAllData();
@@ -81,11 +81,10 @@ const PantryBasicsPage = () => {
     
     try {
       const response = await axios.get('/api/beginners-guides', {
-            params: { category: 'pantry-basics' }
-          });
+        params: { category: 'pantry-basics' }
+      });
       
       const allGuides = response.data.guides || [];
-      console.log('Total pantry guides:', allGuides.length);
       
       const parsedGuides = allGuides.map(parseGuideToItem);
       
@@ -105,11 +104,6 @@ const PantryBasicsPage = () => {
         g.subCategory === 'vegetables'
       );
       
-      console.log('Basics:', basics.length);
-      console.log('Spices:', spices.length);
-      console.log('Staples:', staples.length);
-      console.log('Vegetables:', vegetables.length);
-      
       setKitchenBasicsData(basics);
       setSpicesData(spices);
       setStaplesData(staples);
@@ -121,7 +115,7 @@ const PantryBasicsPage = () => {
       
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('Failed to load data. Please check connection.');
+      setError('Failed to load data from server.');
     }
     
     setLoading(false);
@@ -150,21 +144,6 @@ const PantryBasicsPage = () => {
       case 'vegetables': return getFilteredVegetables();
       default: return kitchenBasicsData;
     }
-  };
-
-  const getStaplesCount = (cat) => {
-    if (cat === 'all') return staplesData.length;
-    return staplesData.filter(item => item.category === cat).length;
-  };
-
-  const getSpicesCount = (type) => {
-    if (type === 'all') return spicesData.length;
-    return spicesData.filter(spice => spice.spiceType === type).length;
-  };
-
-  const getVegetablesCount = (type) => {
-    if (type === 'all') return dailyVegetablesData.length;
-    return dailyVegetablesData.filter(item => item.vegetableType === type).length;
   };
 
   const getCategoryTitle = () => {
@@ -196,6 +175,14 @@ const PantryBasicsPage = () => {
   const closeDetailPanel = () => {
     setShowDetailPanel(false);
     setSelectedItem(null);
+  };
+
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
   };
 
   const sidebarItems = [
@@ -246,7 +233,20 @@ const PantryBasicsPage = () => {
   if (loading) {
     return (
       <div className="pbp-container">
-        <div className="loading-spinner">Loading pantry essentials...</div>
+        <div className="loading-spinner">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error && getCurrentData().length === 0) {
+    return (
+      <div className="pbp-container">
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={fetchAllData} className="retry-button">
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }
@@ -256,13 +256,19 @@ const PantryBasicsPage = () => {
   return (
     <div className="pbp-container">
       <div className="pbp-mobile-topbar">
-        <button
-          className={`pbp-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-        >
-          <span /><span /><span />
-        </button>
         <h1 className="pbp-page-title">{getCategoryTitle()}</h1>
+      </div>
+
+      <div className="pbp-categories-row">
+        {sidebarItems.map(item => (
+          <button
+            key={item.key}
+            className={`pbp-cat-btn ${selectedCategory === item.key ? 'active' : ''}`}
+            onClick={() => { setSelectedCategory(item.key); setSidebarOpen(false); }}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
 
       <div
@@ -284,15 +290,7 @@ const PantryBasicsPage = () => {
                   className={`pbp-category-item${selectedCategory === item.key ? ' pbp-active' : ''}`}
                   onClick={() => { setSelectedCategory(item.key); setSidebarOpen(false); }}
                 >
-                  <span className="pbp-category-name">
-                    {item.label} 
-                    <span className="pbp-category-count">
-                      ({selectedCategory === 'basics' ? kitchenBasicsData.length : 
-                        selectedCategory === 'spices' ? spicesData.length : 
-                        selectedCategory === 'staples' ? staplesData.length : 
-                        selectedCategory === 'vegetables' ? dailyVegetablesData.length : 0})
-                    </span>
-                  </span>
+                  <span className="pbp-category-name">{item.label}</span>
                 </li>
               ))}
             </ul>
@@ -308,6 +306,7 @@ const PantryBasicsPage = () => {
             </div>
           </header>
 
+          {/* FILTERS - RETAINED */}
           {selectedCategory === 'spices' && spicesData.length > 0 && (
             <div className="pbp-filter-bar">
               <button 
@@ -462,20 +461,16 @@ const PantryBasicsPage = () => {
           )}
 
           <div className="pbp-items-grid-section">
-            {currentData.length === 0 ? (
-              <div className="pbp-empty-state">
-                No items found in this category.
-              </div>
-            ) : (
-              <div className="pbp-items-grid">
-                {currentData.map((item) => (
-                  <div 
-                    key={item.id} 
-                    className="pbp-item-card" 
+            <div className="pbp-items-grid">
+              {currentData.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className="pbp-item-card"
                     onClick={() => handleItemSelect(item)}
                   >
-                    <div 
-                      className="pbp-card-image" 
+                    <div
+                      className="pbp-card-image"
                       style={{ backgroundImage: `url(${item.image || '/api/placeholder/120/120'})` }}
                     />
                     <div className="pbp-card-content">
@@ -483,9 +478,9 @@ const PantryBasicsPage = () => {
                       <p className="pbp-card-description">{item.tagline || item.name}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
+                );
+              })}
+            </div>
           </div>
 
           <div className="pbp-back-section">
@@ -502,163 +497,162 @@ const PantryBasicsPage = () => {
         </main>
       </div>
 
-      {showDetailPanel && selectedItem && (
-        <div className="pbp-modal-overlay" onClick={closeDetailPanel}>
-          <div className="pbp-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="pbp-modal-close" onClick={closeDetailPanel}>×</button>
+      {showDetailPanel && selectedItem && (() => {
+        return (
+          <div className="pbp-modal-overlay" onClick={closeDetailPanel}>
+            <div className="pbp-modal" onClick={e => e.stopPropagation()}>
+              <button className="pbp-modal-close" onClick={closeDetailPanel}>×</button>
 
-            <div className="pbp-modal-hero">
-              <p className="pbp-modal-hero-label">Pantry Essential</p>
-              <h2 className="pbp-modal-hero-title">{selectedItem.name}</h2>
-              <p className="pbp-modal-hero-subtitle">{selectedItem.tagline || selectedItem.name}</p>
-            </div>
+              <div className="pbp-modal-hero">
+                <p className="pbp-modal-hero-label">Pantry Essential</p>
+                <h2 className="pbp-modal-hero-title">{selectedItem.name}</h2>
+                <p className="pbp-modal-hero-subtitle">{selectedItem.tagline || selectedItem.name}</p>
+              </div>
 
-            <div className="pbp-modal-inner">
-              <div className="pbp-modal-left">
-                {selectedItem.fullDesc && (
-                  <>
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">About this item</span>
-                      <p className="pbp-msec-text">{renderSafeContent(selectedItem.fullDesc)}</p>
+              <div className="pbp-modal-inner">
+                <div className="pbp-modal-left">
+                  <div className="pbp-about-row">
+                    <div className="pbp-about-text">
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">About this item</span>
+                        <p className="pbp-msec-text">{renderSafeContent(selectedItem.fullDesc)}</p>
+                      </div>
                     </div>
-                    <hr className="pbp-mdivider" />
-                  </>
-                )}
+                    <div
+                      className="pbp-about-thumb"
+                      style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/200/200'})` }}
+                      onClick={() => openLightbox(selectedItem.image || '/api/placeholder/200/200')}
+                    />
+                  </div>
 
-                {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
-                  <>
-                    <div className="pbp-uses-badge-row">
-                      <div className="pbp-uses-section">
-                        <span className="pbp-msec-label">Key Features</span>
+                  <hr className="pbp-mdivider" />
+
+                  {selectedItem.keyFeatures && selectedItem.keyFeatures.length > 0 && (
+                    <>
+                      <div className="pbp-uses-badge-row">
+                        <div className="pbp-uses-section">
+                          <span className="pbp-msec-label">Key Features</span>
+                          <div className="pbp-uses-wrap">
+                            {selectedItem.keyFeatures.map((f, idx) => (
+                              <div key={idx} className="pbp-use-tag">
+                                <span className="pbp-use-dot">•</span>
+                                {renderSafeContent(f)}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pbp-badge-section">
+                          <span className="pbp-msec-label">Category</span>
+                          <div className="pbp-category-badge">
+                            <span className="pbp-category-badge-icon"><PantryIcon /></span>
+                            <span className="pbp-category-badge-value">{getCategoryTitle()}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <hr className="pbp-mdivider" />
+                    </>
+                  )}
+
+                  <div className="pbp-modal-two-col">
+                    {selectedItem.storageTips && (
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Storage Tips</span>
+                        <p className="pbp-msec-text">{renderSafeContent(selectedItem.storageTips)}</p>
+                      </div>
+                    )}
+
+                    {selectedItem.shelfLife && (
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Shelf Life</span>
+                        <p className="pbp-msec-text">{renderSafeContent(selectedItem.shelfLife)}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {selectedItem.keyUses && selectedItem.keyUses.length > 0 && (
+                    <>
+                      <hr className="pbp-mdivider" />
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Common Uses</span>
                         <div className="pbp-uses-wrap">
-                          {selectedItem.keyFeatures.map((f, idx) => (
+                          {selectedItem.keyUses.map((u, idx) => (
                             <div key={idx} className="pbp-use-tag">
                               <span className="pbp-use-dot">•</span>
-                              {renderSafeContent(f)}
+                              {renderSafeContent(u)}
                             </div>
                           ))}
                         </div>
                       </div>
-
-                      <div className="pbp-badge-section">
-                        <span className="pbp-msec-label">Category</span>
-                        <div className="pbp-category-badge">
-                          <span className="pbp-category-badge-icon"><PantryIcon /></span>
-                          <span className="pbp-category-badge-value">{getCategoryTitle()}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <hr className="pbp-mdivider" />
-                  </>
-                )}
-
-                <div className="pbp-modal-two-col">
-                  {selectedItem.storageTips && (
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Storage Tips</span>
-                      <p className="pbp-msec-text">{renderSafeContent(selectedItem.storageTips)}</p>
-                    </div>
+                    </>
                   )}
 
-                  {selectedItem.shelfLife && (
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Shelf Life</span>
-                      <p className="pbp-msec-text">{renderSafeContent(selectedItem.shelfLife)}</p>
-                    </div>
+                  {selectedItem.properUsage && (
+                    <>
+                      <hr className="pbp-mdivider" />
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Proper Usage</span>
+                        <div className="pbp-tip-card">
+                          <span className="pbp-tip-icon"><LightbulbIcon /></span>
+                          <span className="pbp-tip-txt">{renderSafeContent(selectedItem.properUsage)}</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
+                    <>
+                      <hr className="pbp-mdivider" />
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Common Mistakes</span>
+                        <div className="pbp-mistakes-list">
+                          {selectedItem.commonMistakes.map((m, idx) => (
+                            <div key={idx} className="pbp-mistake-card">
+                              <span className="pbp-mistake-icon"><WarningIcon /></span>
+                              <span className="pbp-tip-txt">{renderSafeContent(m)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {selectedItem.cookingTips && (
+                    <>
+                      <hr className="pbp-mdivider" />
+                      <div className="pbp-msec">
+                        <span className="pbp-msec-label">Pro Tips</span>
+                        <div className="pbp-tip-card">
+                          <span className="pbp-tip-icon"><LightbulbIcon /></span>
+                          <span className="pbp-tip-txt">{renderSafeContent(selectedItem.cookingTips)}</span>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </div>
 
-                {selectedItem.keyUses && selectedItem.keyUses.length > 0 && (
-                  <>
-                    <hr className="pbp-mdivider" />
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Common Uses</span>
-                      <div className="pbp-uses-wrap">
-                        {selectedItem.keyUses.map((u, idx) => (
-                          <div key={idx} className="pbp-use-tag">
-                            <span className="pbp-use-dot">•</span>
-                            {renderSafeContent(u)}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {selectedItem.healthBenefits && selectedItem.healthBenefits.length > 0 && (
-                  <>
-                    <hr className="pbp-mdivider" />
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Health Benefits</span>
-                      <div className="pbp-uses-wrap">
-                        {selectedItem.healthBenefits.map((h, idx) => (
-                          <div key={idx} className="pbp-use-tag">
-                            <span className="pbp-use-dot">•</span>
-                            {renderSafeContent(h)}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {selectedItem.cookingTips && (
-                  <>
-                    <hr className="pbp-mdivider" />
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Cooking Tips</span>
-                      <div className="pbp-tip-card">
-                        <span className="pbp-tip-icon"><LightbulbIcon /></span>
-                        <span className="pbp-tip-txt">{renderSafeContent(selectedItem.cookingTips)}</span>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {selectedItem.commonMistakes && selectedItem.commonMistakes.length > 0 && (
-                  <>
-                    <hr className="pbp-mdivider" />
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Common Mistakes</span>
-                      <div className="pbp-mistakes-list">
-                        {selectedItem.commonMistakes.map((m, idx) => (
-                          <div key={idx} className="pbp-mistake-card">
-                            <span className="pbp-mistake-icon"><WarningIcon /></span>
-                            <span className="pbp-tip-txt">{renderSafeContent(m)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {selectedItem.types && selectedItem.types.length > 0 && (
-                  <>
-                    <hr className="pbp-mdivider" />
-                    <div className="pbp-msec">
-                      <span className="pbp-msec-label">Types</span>
-                      <div className="pbp-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="pbp-type-card">
-                            <h4>{renderSafeContent(type.name)}</h4>
-                            <p>{renderSafeContent(type.description)}</p>
-                            {type.bestFor && <p><strong>Best For:</strong> {renderSafeContent(type.bestFor)}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-
-              <div className="pbp-modal-right">
-                <div
-                  className="pbp-modal-right-image"
-                  style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/400/400'})` }}
-                />
+                <div className="pbp-modal-right">
+                  <div
+                    className="pbp-modal-right-image"
+                    style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/400/400'})` }}
+                    onClick={() => openLightbox(selectedItem.image || '/api/placeholder/400/400')}
+                  />
+                </div>
               </div>
             </div>
           </div>
+        );
+      })()}
+
+      {lightboxImage && (
+        <div className="pbp-lightbox-overlay" onClick={closeLightbox}>
+          <button className="pbp-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="pbp-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

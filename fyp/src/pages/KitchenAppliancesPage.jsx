@@ -16,7 +16,7 @@ const KitchenAppliancesPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   useEffect(() => {
     fetchAppliances();
@@ -35,9 +35,9 @@ const KitchenAppliancesPage = () => {
     setError(null);
    
     try {
-      const response = await axios.get('/api/beginners-guides? category=kitchen-appliances', {
-            params: { category: 'kitchen-appliances' }
-          });
+      const response = await axios.get('/api/beginners-guides', {
+        params: { category: 'kitchen-appliances' }
+      });
 
       if (response.data.success && response.data.guides) {
         const groupedData = response.data.guides.reduce((acc, guide) => {
@@ -98,12 +98,16 @@ const KitchenAppliancesPage = () => {
         }, {});
         
         setAppliancesData(Object.values(groupedData));
+        
+        if (Object.values(groupedData).length === 0) {
+          setError('No appliance data found in database.');
+        }
       } else {
         setError('No data received from server');
       }
     } catch (err) {
       console.error('API Error:', err);
-      setError('Failed to connect to server. Please check your connection.');
+      setError('Failed to load data from server.');
     } finally {
       setLoading(false);
     }
@@ -138,6 +142,14 @@ const KitchenAppliancesPage = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedModel(null);
+  };
+
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
   };
 
   const ChevronDownIcon = () => (
@@ -224,20 +236,19 @@ const KitchenAppliancesPage = () => {
   if (loading) {
     return (
       <div className="kap-container">
-        <div className="loading-spinner">Loading kitchen appliances...</div>
+        <div className="loading-spinner">Loading...</div>
       </div>
     );
   }
 
-  if (error) {
+  if (error && appliancesData.length === 0) {
     return (
       <div className="kap-container">
-        <div className="kap-error-container">
-          <div className="kap-error-icon">⚠️</div>
-          <h2>Connection Error</h2>
+        <div className="error-message">
           <p>{error}</p>
-          <button className="kap-retry-btn" onClick={fetchAppliances}>Retry Connection</button>
-          <button className="kap-back-btn" onClick={() => navigate('/guidance')}>Back to Guidance</button>
+          <button onClick={fetchAppliances} className="retry-button">
+            Try Again
+          </button>
         </div>
       </div>
     );
@@ -245,16 +256,25 @@ const KitchenAppliancesPage = () => {
 
   return (
     <div className="kap-container">
-
       <div className="kap-mobile-topbar">
-        <button
-          className={`kap-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
-        </button>
         <h1 className="kap-page-title">Kitchen Appliances</h1>
+      </div>
+
+      <div className="kap-categories-row">
+        {appliancesData.map(appliance => (
+          <button
+            key={appliance.id}
+            className={`kap-cat-btn ${selectedAppliance === appliance.id ? 'active' : ''}`}
+            onClick={() => { 
+              setSelectedAppliance(appliance.id);
+              setSelectedCompany(null);
+              setSelectedType('all');
+              setSidebarOpen(false);
+            }}
+          >
+            {appliance.name}
+          </button>
+        ))}
       </div>
 
       <div
@@ -263,7 +283,6 @@ const KitchenAppliancesPage = () => {
       />
 
       <div className="kap-layout">
-
         <aside className={`kap-sidebar${sidebarOpen ? ' open' : ''}`}>
           <div className="kap-sidebar-header">
             <h2 className="kap-sidebar-title">Kitchen Appliances</h2>
@@ -316,10 +335,11 @@ const KitchenAppliancesPage = () => {
         <main className="kap-main">
           <header className="kap-main-header">
             <div className="kap-header-content">
-              <h1 className="kap-page-title">Kitchen Appliances Guide</h1>
+              <h1 className="kap-page-title desktop-title">Kitchen Appliances Guide</h1>
               <p className="kap-page-description">
                 Browse appliances, compare brands, and find the perfect model for your home.
               </p>
+              {error && <p className="error-note">{error}</p>}
             </div>
           </header>
 
@@ -429,10 +449,7 @@ const KitchenAppliancesPage = () => {
           <div className="kap-back-section">
             <button
               className="kap-back-button"
-              onClick={() => {
-                try { navigate('/guidance'); }
-                catch { window.location.href = '/guidance'; }
-              }}
+              onClick={() => navigate('/guidance')}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -459,19 +476,28 @@ const KitchenAppliancesPage = () => {
 
             <div className="kap-modal-inner">
               <div className="kap-modal-left">
-                <div className="kap-msec">
-                  <span className="kap-msec-label">Product overview</span>
-                  <p className="kap-msec-text">
-                    {selectedModel.bestFor && `Best for: ${selectedModel.bestFor}. `}
-                    {selectedModel.estimatedConsumption && `Energy consumption: ${selectedModel.estimatedConsumption}. `}
-                    {selectedModel.estimatedPowerConsumption && `Power: ${selectedModel.estimatedPowerConsumption}. `}
-                    {selectedModel.estimatedGasConsumption && `Gas: ${selectedModel.estimatedGasConsumption}. `}
-                    {selectedModel.capacity && `Capacity: ${selectedModel.capacity}. `}
-                    {selectedModel.coolingCapacity && `Cooling capacity: ${selectedModel.coolingCapacity}. `}
-                    {selectedModel.dryCapacity && `Dry capacity: ${selectedModel.dryCapacity}. `}
-                    {selectedModel.hotWaterTemp && `Hot water: ${selectedModel.hotWaterTemp}. `}
-                    {selectedModel.coldWaterTemp && `Cold inlet: ${selectedModel.coldWaterTemp}.`}
-                  </p>
+                <div className="kap-about-row">
+                  <div className="kap-about-text">
+                    <div className="kap-msec">
+                      <span className="kap-msec-label">Product overview</span>
+                      <p className="kap-msec-text">
+                        {selectedModel.bestFor && `Best for: ${selectedModel.bestFor}. `}
+                        {selectedModel.estimatedConsumption && `Energy consumption: ${selectedModel.estimatedConsumption}. `}
+                        {selectedModel.estimatedPowerConsumption && `Power: ${selectedModel.estimatedPowerConsumption}. `}
+                        {selectedModel.estimatedGasConsumption && `Gas: ${selectedModel.estimatedGasConsumption}. `}
+                        {selectedModel.capacity && `Capacity: ${selectedModel.capacity}. `}
+                        {selectedModel.coolingCapacity && `Cooling capacity: ${selectedModel.coolingCapacity}. `}
+                        {selectedModel.dryCapacity && `Dry capacity: ${selectedModel.dryCapacity}. `}
+                        {selectedModel.hotWaterTemp && `Hot water: ${selectedModel.hotWaterTemp}. `}
+                        {selectedModel.coldWaterTemp && `Cold inlet: ${selectedModel.coldWaterTemp}.`}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="kap-about-thumb"
+                    style={{ backgroundImage: `url(${selectedModel.image || '/api/placeholder/200/200'})` }}
+                    onClick={() => openLightbox(selectedModel.image || '/api/placeholder/200/200')}
+                  />
                 </div>
 
                 <hr className="kap-mdivider" />
@@ -593,7 +619,7 @@ const KitchenAppliancesPage = () => {
                       {selectedModel.energySavingTips && (
                         <div className="kap-msec">
                           <span className="kap-msec-label">Energy saving tips</span>
-                          <div className="kap-tip-card kap-tip-card--green">
+                          <div className="kap-tip-card">
                             <span className="kap-tip-icon"><EnergyIcon /></span>
                             <span className="kap-tip-txt">{selectedModel.energySavingTips}</span>
                           </div>
@@ -603,7 +629,7 @@ const KitchenAppliancesPage = () => {
                       {selectedModel.safetyTips && (
                         <div className="kap-msec">
                           <span className="kap-msec-label">Safety tips</span>
-                          <div className="kap-tip-card kap-tip-card--red">
+                          <div className="kap-tip-card">
                             <span className="kap-tip-icon"><WarningIcon /></span>
                             <span className="kap-tip-txt">{selectedModel.safetyTips}</span>
                           </div>
@@ -665,6 +691,7 @@ const KitchenAppliancesPage = () => {
                 <div
                   className="kap-modal-right-image"
                   style={{ backgroundImage: `url(${selectedModel.image || '/api/placeholder/400/400'})` }}
+                  onClick={() => openLightbox(selectedModel.image || '/api/placeholder/400/400')}
                 />
               </div>
             </div>
@@ -672,6 +699,17 @@ const KitchenAppliancesPage = () => {
         </div>
       )}
 
+      {lightboxImage && (
+        <div className="kap-lightbox-overlay" onClick={closeLightbox}>
+          <button className="kap-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="kap-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

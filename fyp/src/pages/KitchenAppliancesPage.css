@@ -8,6 +8,7 @@ html, body, #root {
   width: 100%;
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
   background: whitesmoke;
+  --site-nav-height: 100px;
 }
 
 .kap-container {
@@ -20,14 +21,10 @@ html, body, #root {
   position: relative;
 }
 
-.kap-hamburger {
-  display: none;
-}
-
 .kap-sidebar {
   width: 280px;
   background: #284a4b;
-  border-right: 1px solid #397d7c;
+  border-right: 1px solid #f5fafa;
   padding: 25px;
   display: flex;
   flex-direction: column;
@@ -44,7 +41,7 @@ html, body, #root {
   margin-top: 0;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(57, 125, 124, 0.5);
+  border-bottom: 1px solid #f5fafa;
 }
 
 .kap-sidebar-title {
@@ -59,7 +56,7 @@ html, body, #root {
 
 .kap-sidebar-subtitle {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.65);
+  color: #ffffff;
   font-weight: 500;
   text-align: center;
   letter-spacing: 0.1em;
@@ -82,8 +79,8 @@ html, body, #root {
   justify-content: space-between;
   align-items: center;
   transition: all 0.25s ease;
-  border: 1px solid rgba(57, 125, 124, 0.35);
-  background: rgba(57, 125, 124, 0.1);
+  border: 1px solid #397d7c;
+  background: #284a4b;
 }
 
 .kap-appliance-item:hover {
@@ -94,7 +91,6 @@ html, body, #root {
 .kap-appliance-item.kap-active {
   background: #1a3334;
   border-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(57, 125, 124, 0.4);
 }
 
 .kap-appliance-name {
@@ -104,7 +100,7 @@ html, body, #root {
 }
 
 .kap-dropdown-arrow {
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   display: flex;
   align-items: center;
 }
@@ -112,9 +108,9 @@ html, body, #root {
 .kap-types-list {
   margin-left: 0;
   padding: 6px 8px 8px;
-  background: rgba(0, 0, 0, 0.15);
+  background: #1a3334;
   border-radius: 0 0 10px 10px;
-  border: 1px solid rgba(57, 125, 124, 0.25);
+  border: 1px solid #397d7c;
   border-top: none;
   animation: fadeInUp 0.25s ease;
 }
@@ -127,24 +123,24 @@ html, body, #root {
   align-items: center;
   transition: all 0.2s ease;
   margin-bottom: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #397d7c;
+  background: #284a4b;
 }
 
 .kap-type-item:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #397d7c;
   transform: translateX(3px);
 }
 
 .kap-type-item.kap-type-selected {
-  background: rgba(57, 125, 124, 0.35);
-  border-color: #397d7c;
+  background: #1a3334;
+  border-color: #ffffff;
 }
 
 .kap-type-name {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  color: #ffffff;
 }
 
 .kap-sidebar::-webkit-scrollbar {
@@ -156,7 +152,7 @@ html, body, #root {
 }
 
 .kap-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(57, 125, 124, 0.6);
+  background: #e0eeee;
   border-radius: 4px;
 }
 
@@ -164,7 +160,7 @@ html, body, #root {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: #000000;
   z-index: 1050;
 }
 
@@ -183,7 +179,7 @@ html, body, #root {
   margin-top: 100px;
   margin-bottom: 28px;
   padding-bottom: 16px;
-  border-bottom: 2px solid #284a4b;
+  border-bottom: 2px solid #e0eeee;
   position: relative;
   z-index: 10;
   background: whitesmoke;
@@ -196,6 +192,10 @@ html, body, #root {
   color: #284a4b;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
+}
+
+.kap-page-title.desktop-title {
+  display: block;
 }
 
 .kap-page-description {
@@ -263,7 +263,6 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   border: 1px solid #e0eeee;
   min-width: 120px;
 }
@@ -320,13 +319,12 @@ html, body, #root {
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e0eeee;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   animation: fadeInUp 0.4s ease-out;
 }
 
 .kap-company-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(57, 125, 124, 0.2);
+  box-shadow: 0 12px 30px #397d7c;
   border-color: #397d7c;
 }
 
@@ -435,7 +433,6 @@ html, body, #root {
   background: #284a4b;
   border-color: #284a4b;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.3);
 }
 
 .kap-models-grid {
@@ -448,7 +445,6 @@ html, body, #root {
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #e0eeee;
@@ -460,7 +456,7 @@ html, body, #root {
 
 .kap-model-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(57, 125, 124, 0.2);
+  box-shadow: 0 12px 30px #397d7c;
   border-color: #397d7c;
 }
 
@@ -606,14 +602,14 @@ html, body, #root {
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 8px #000000;
   font-family: 'DM Sans', sans-serif;
 }
 
 .kap-back-button:hover {
   background: #397d7c;
   transform: translateX(-5px);
-  box-shadow: 0 4px 15px rgba(57, 125, 124, 0.3);
+  box-shadow: 0 4px 15px #397d7c;
 }
 
 .kap-back-button svg {
@@ -633,8 +629,43 @@ html, body, #root {
   color: #397d7c;
 }
 
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 20px;
+}
+
+.error-message p {
+  font-size: 18px;
+  color: #c0392b;
+}
+
+.retry-button {
+  background: #284a4b;
+  color: #ffffff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+  background: #397d7c;
+  transform: scale(1.05);
+}
+
 .kap-mobile-topbar {
   margin-top: 120px;
+  display: none;
+}
+
+.kap-categories-row {
   display: none;
 }
 
@@ -652,13 +683,12 @@ html, body, #root {
 .kap-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 24, 25, 0.82);
+  background: #1a3334;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
   padding: 20px;
-  backdrop-filter: blur(7px);
 }
 
 .kap-modal {
@@ -669,30 +699,18 @@ html, body, #root {
   max-height: 90vh;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 40px 90px #000000;
   display: flex;
   flex-direction: column;
-  animation: modalSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes modalSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(36px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .kap-modal-close {
   position: absolute;
   top: 18px;
   right: 18px;
-  background: rgba(255, 255, 255, 0.15);
+  background: #1a3334;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid #e0eeee;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -707,7 +725,7 @@ html, body, #root {
 }
 
 .kap-modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #397d7c;
   transform: scale(1.1);
 }
 
@@ -719,36 +737,12 @@ html, body, #root {
   flex-shrink: 0;
 }
 
-.kap-modal-hero::before {
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  top: -100px;
-  right: 80px;
-  pointer-events: none;
-}
-
-.kap-modal-hero::after {
-  content: '';
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  bottom: -60px;
-  right: 30px;
-  pointer-events: none;
-}
-
 .kap-modal-hero-label {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   margin-bottom: 8px;
 }
 
@@ -765,7 +759,7 @@ html, body, #root {
 
 .kap-modal-hero-subtitle {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.72);
+  color: #ffffff;
   font-style: italic;
   position: relative;
   z-index: 1;
@@ -818,28 +812,96 @@ html, body, #root {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(57, 125, 124, 0.1) 0%, transparent 60%);
+  background: radial-gradient(circle at 20% 20%, #397d7c 0%, transparent 60%);
   pointer-events: none;
 }
 
 .kap-modal-right-image {
-  width: 400px;
-  height: 400px;
-  aspect-ratio: 1 / 1;
+  width: 220px;
+  height: 220px;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 3px solid rgba(40, 74, 75, 0.25);
-  box-shadow: 0 20px 50px rgba(40, 74, 75, 0.25);
+  border: 3px solid #e0eeee;
+  box-shadow: 0 20px 50px #284a4b;
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
-  margin: 0 auto;
+  cursor: pointer;
 }
 
 .kap-modal-right-image:hover {
   transform: scale(1.02);
+}
+
+.kap-about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.kap-about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.kap-about-thumb {
+  display: none;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 3px solid #e0eeee;
+  box-shadow: 0 8px 18px #284a4b;
+  cursor: pointer;
+}
+
+.kap-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 51, 52, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 30px;
+  animation: fadeInUp 0.25s ease-out;
+}
+
+.kap-lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px #000000;
+  object-fit: contain;
+}
+
+.kap-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: #ffffff;
+  color: #1a3334;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 4px 15px #000000;
+  transition: all 0.2s;
+}
+
+.kap-lightbox-close:hover {
+  background: #397d7c;
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .kap-msec {
@@ -858,9 +920,9 @@ html, body, #root {
 
 .kap-msec-text {
   font-size: 14px;
-  color: #4a5a5b;
+  color: #000000;
   line-height: 1.6;
-  background: #f5fafa;
+  background: #e0eeee;
   padding: 10px 16px;
   border-radius: 12px;
   border-left: 3px solid #397d7c;
@@ -1029,16 +1091,7 @@ html, body, #root {
 }
 
 .kap-tip-card:hover {
-  background: #f5fafa;
-  border-color: #e0eeee;
-}
-
-.kap-tip-card--green {
-  border-left: 3px solid #397d7c;
-}
-
-.kap-tip-card--red {
-  border-left: 3px solid #c0392b;
+  background: #e0eeee;
 }
 
 .kap-tip-icon {
@@ -1046,7 +1099,6 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #397d7c;
 }
 
 .kap-tip-txt {
@@ -1097,10 +1149,13 @@ html, body, #root {
   line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-  html, body {
-    height: auto;
+@media (max-width: 780px) {
+  html {
     overflow-x: hidden;
+  }
+
+  body {
+    height: auto;
     overflow-y: auto;
   }
 
@@ -1111,7 +1166,7 @@ html, body, #root {
   .kap-main {
     margin-left: 0;
     width: 100%;
-    padding: 20px 50px 15px;
+    padding: 15px 16px 10px;
     height: auto;
     overflow-y: visible;
   }
@@ -1124,69 +1179,59 @@ html, body, #root {
   .kap-mobile-topbar {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    top: 0;
-    z-index: 1020;
-    background: whitesmoke;
-    padding: 20px 12px;
-    border-bottom: 2px solid #284a4b;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    height: 100px;
+    background: #1a3334;
+    padding: 14px 16px;
+    border-bottom: 3px solid #397d7c;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 80px;
   }
 
-  .kap-hamburger {
-    display: flex;
-    position: relative;
-    background: #284a4b;
-    border: none;
-    border-radius: 10px;
-    width: 44px;
-    height: 44px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(40, 74, 75, 0.4);
-    transition: background 0.2s;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .kap-hamburger:hover {
-    background: #397d7c;
-  }
-
-  .kap-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  .kap-hamburger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .kap-hamburger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .kap-hamburger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
   .kap-mobile-topbar .kap-page-title {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
     margin: 0;
     flex: 1;
+  }
+
+  .kap-categories-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .kap-cat-btn {
+    padding: 8px 6px;
+    border-radius: 18px;
+    background: #e0eeee;
+    color: #1a3334;
+    font-size: 8.5px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
     white-space: nowrap;
     overflow: hidden;
-    font-family: 'DM Sans', serif;
-    font-weight: 800;
-    color: #284a4b;
+    text-overflow: ellipsis;
+  }
+
+  .kap-cat-btn:hover {
+    background: #397d7c;
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+
+  .kap-cat-btn.active {
+    background: #284a4b;
+    color: #ffffff;
+    border-color: #ffffff;
   }
 
   .kap-main-header .kap-page-title {
@@ -1195,10 +1240,14 @@ html, body, #root {
 
   .kap-main-header {
     margin-top: 0;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 8px;
     border-bottom: none;
     margin-bottom: 0px;
+  }
+
+  .kap-page-description {
+    font-size: 14px;
   }
 
   .kap-sidebar {
@@ -1212,6 +1261,7 @@ html, body, #root {
     z-index: 1100;
     overflow-y: auto;
     bottom: auto;
+    padding: 20px 16px;
   }
 
   .kap-sidebar.open {
@@ -1219,7 +1269,11 @@ html, body, #root {
   }
 
   .kap-sidebar-header {
-    margin-top: 30px;
+    margin-top: 20px;
+  }
+
+  .kap-sidebar-title {
+    font-size: 20px;
   }
 
   .kap-companies-grid,
@@ -1235,7 +1289,7 @@ html, body, #root {
 
   .kap-card-image {
     width: 100%;
-    height: 100px;
+    height: 80px;
     border-right: none;
     border-bottom: 1px solid #e0eeee;
   }
@@ -1260,26 +1314,33 @@ html, body, #root {
   }
 
   .kap-modal-inner {
-    flex-direction: row;
-    overflow: hidden;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
   .kap-modal-left {
-    width: 65%;
+    width: 100%;
     padding: 16px;
-    overflow-y: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }
 
   .kap-modal-right {
-    width: 35%;
-    padding: 16px 10px;
-    overflow: hidden;
+    display: none;
   }
 
-  .kap-modal-right-image {
-    width: 200px;
-    height: 250px;
+  .kap-about-thumb {
+    display: block;
+    width: 120px;
+    height: 120px;
+  }
+
+  .kap-modal-hero {
+    padding: 16px 20px;
+  }
+
+  .kap-modal-hero-title {
+    font-size: 22px;
   }
 
   .kap-features-info-row {
@@ -1305,16 +1366,8 @@ html, body, #root {
     font-size: 12px;
   }
 
-  .kap-modal-hero {
-    padding: 16px 20px;
-  }
-
-  .kap-modal-hero-title {
-    font-size: 22px;
-  }
-
   .kap-modal-two-col {
-    grid-template-columns: 1fr;
+    grid-template-columns: 3fr;
     gap: 12px;
   }
 
@@ -1351,23 +1404,187 @@ html, body, #root {
   .kap-stat-card {
     padding: 18px 24px;
   }
+
+  .kap-mistake-card {
+    padding: 7px 10px;
+  }
+
+  .kap-mistake-card .kap-tip-txt {
+    font-size: 11px;
+  }
 }
 
-@media (max-width: 480px) {
-  .kap-modal-right {
-    width: 30%;
+@media (max-width: 380px) {
+  .kap-main {
+    padding: 10px 10px 8px;
   }
 
-  .kap-modal-left {
-    width: 70%;
+  .kap-mobile-topbar {
+    padding: 10px 12px;
   }
 
-  .kap-modal-right-image {
-    max-width: 90px;
+  .kap-mobile-topbar .kap-page-title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .kap-categories-row {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    padding: 8px 10px;
+  }
+
+  .kap-cat-btn {
+    font-size: 7px;
+    padding: 6px 4px;
+  }
+
+  .kap-items-grid {
+    gap: 10px;
+  }
+
+  .kap-item-card {
+    flex-direction: column;
     height: auto;
   }
 
+  .kap-card-image {
+    height: 60px;
+  }
+
+  .kap-card-content {
+    padding: 6px 10px;
+  }
+
+  .kap-card-title {
+    font-size: 12px;
+  }
+
+  .kap-card-description {
+    font-size: 10px;
+    -webkit-line-clamp: 1;
+  }
+
+  .kap-modal {
+    width: 98%;
+    border-radius: 16px;
+    max-height: 92vh;
+  }
+
+  .kap-modal-left {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .kap-about-row {
+    gap: 10px;
+  }
+
+  .kap-about-thumb {
+    width: 110px;
+    height: 110px;
+  }
+
+  .kap-modal-hero {
+    padding: 12px 14px;
+  }
+
+  .kap-modal-hero-title {
+    font-size: 18px;
+  }
+
+  .kap-modal-hero-subtitle {
+    font-size: 12px;
+  }
+
+  .kap-modal-hero-label {
+    font-size: 8px;
+  }
+
+  .kap-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .kap-msec-text {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .kap-msec-label {
+    font-size: 8px;
+  }
+
   .kap-uses-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .kap-use-tag {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .kap-step-txt, .kap-tip-txt {
+    font-size: 10px;
+  }
+
+  .kap-step-card, .kap-tip-card {
+    padding: 5px 8px;
+  }
+
+  .kap-step-num {
+    width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  .kap-back-button {
+    padding: 8px 16px;
+    font-size: 12px;
+    min-width: 150px;
+  }
+
+  .kap-sidebar {
+    width: 240px;
+    padding: 16px 12px;
+  }
+
+  .kap-sidebar-title {
+    font-size: 18px;
+  }
+
+  .kap-sidebar-subtitle {
+    font-size: 10px;
+  }
+
+  .kap-appliance-item {
+    padding: 10px 12px;
+  }
+
+  .kap-appliance-name {
+    font-size: 13px;
+  }
+
+  .kap-lightbox-overlay {
+    padding: 16px;
+  }
+
+  .kap-lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+  }
+
+  .kap-specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kap-extra-tips-grid {
     grid-template-columns: 1fr;
   }
 }

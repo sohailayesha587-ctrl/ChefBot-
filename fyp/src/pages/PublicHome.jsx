@@ -277,7 +277,7 @@ useLayoutEffect(() => {
           <div className="pk-hero-section-tag"></div>
           <h1 className="pk-hero-main-heading">What should we cook today?</h1>
           <h2 className="pk-hero-second-heading">Let's ask CHEFBOT</h2>
-          <p className="pk-hero-description">"ChefBot: Your smart kitchen AI that cooks up ideas from what you have!"</p>
+          <p className="pk-hero-description">"Your smart kitchen that cooks up ideas from what you have!"</p>
         </div>
 
         <div className="pk-hero-right-section">
@@ -337,8 +337,8 @@ useLayoutEffect(() => {
 >
           <div className="pk-colored-box">
             <h2>ChefBot Assistant</h2>
-            <p className="pk-box-description">Get instant meal suggestions based on what's in your pantry. Our ChefBot creates personalized meals just for you!</p>
-            <button className="pk-btn" onClick={() => navigate('/login-page')}>Ask ChefBot Now</button>
+            <p className="pk-box-description">ChefBot creates meal suggestions based on what's in your pantry!</p>
+            <button className="pk-btn" onClick={() => navigate('/login-page')}>Ask ChefBot</button>
           </div>
         </div>
 
@@ -347,8 +347,8 @@ useLayoutEffect(() => {
 >
  <div className="pk-colored-box">
             <h2>Recipe Diary</h2>
-            <p className="pk-box-description">Explore your recipes from recipes collection and track your cooking journey.</p>
-            <button className="pk-btn" onClick={() => navigate('/login-page')}>Try Now</button>
+            <p className="pk-box-description">Explore recipes from recipes collection.</p>
+            <button className="pk-btn" onClick={() => navigate('/login-page')}>Explore Recipes</button>
           </div>
         </div>
 
@@ -358,7 +358,7 @@ useLayoutEffect(() => {
 
           <div className="pk-colored-box">
             <h2>Complete Guidance for Beginners</h2>
-            <p className="pk-box-description">Get complete guidance and tips designed especially for beginners to start with ease.</p>
+            <p className="pk-box-description">Get complete guidance and tips for beginners.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Explore Guide</button>
           </div>
         </div>
@@ -369,7 +369,7 @@ useLayoutEffect(() => {
 
           <div className="pk-colored-box">
             <h2>Store Pantry Items</h2>
-            <p className="pk-box-description">Keep, organize and track all your pantry essentials in one place so you never run out of ingredients again.</p>
+            <p className="pk-box-description">Keep, organize and track all your pantry essentials in one place.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Fill Your Pantry</button>
           </div>
         </div>
@@ -405,7 +405,7 @@ useLayoutEffect(() => {
 
           <div className="pk-colored-box">
             <h2>Create Your Shopping List</h2>
-            <p className="pk-box-description">Create and manage your shopping list easily so you never forget what to buy.</p>
+            <p className="pk-box-description">Create and manage your shopping list easily.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Get Shopping</button>
           </div>
         </div>
@@ -415,7 +415,7 @@ useLayoutEffect(() => {
 >
           <div className="pk-colored-box">
             <h2>Smart Meal Planning</h2>
-            <p className="pk-box-description">Plan your weekly meals form grocery lists to organize your cooking schedule.</p>
+            <p className="pk-box-description">Plan your weekly meals form grocery lists.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Start Planning</button>
           </div>
         </div>

@@ -1,0 +1,156 @@
+.search-results-page {
+min-height: 100vh;
+padding: 140px 20px 60px;
+background: #f7f9f9;
+}
+
+.search-results-container {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.search-results-container h1 {
+color: #284a4b;
+font-size: 2rem;
+margin-bottom: 10px;
+}
+
+.search-query {
+color: #666;
+font-size: 1rem;
+margin-bottom: 35px;
+}
+
+.search-query strong {
+color: #284a4b;
+}
+
+.results-section {
+margin-bottom: 45px;
+}
+
+.results-section h2 {
+color: #284a4b;
+font-size: 1.5rem;
+margin-bottom: 20px;
+padding-bottom: 8px;
+border-bottom: 2px solid #d8e7e7;
+}
+
+.results-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 20px;
+}
+
+.result-card {
+display: block;
+background: white;
+border-radius: 12px;
+overflow: hidden;
+text-decoration: none;
+color: inherit;
+box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+transition: 0.3s;
+}
+
+.result-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 20px rgba(40, 74, 75, 0.15);
+}
+
+.result-card img {
+width: 100%;
+height: 170px;
+object-fit: cover;
+display: block;
+}
+
+.result-content {
+padding: 16px;
+}
+
+.result-content h3 {
+color: #284a4b;
+font-size: 1rem;
+margin-bottom: 8px;
+}
+
+.result-content p {
+color: #777;
+font-size: 0.85rem;
+line-height: 1.5;
+margin-bottom: 12px;
+}
+
+.result-type {
+display: inline-block;
+background: #e8f1f1;
+color: #284a4b;
+font-size: 0.75rem;
+font-weight: 600;
+padding: 5px 10px;
+border-radius: 20px;
+}
+
+.no-results {
+background: white;
+padding: 50px 20px;
+text-align: center;
+border-radius: 12px;
+box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.no-results h2 {
+color: #284a4b;
+margin-bottom: 10px;
+}
+
+.no-results p {
+color: #777;
+}
+
+@media (max-width: 768px) {
+.search-results-page {
+padding: 110px 15px 40px;
+}
+
+.search-results-container h1 {
+font-size: 1.6rem;
+}
+
+.results-grid {
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+}
+
+.result-card img {
+height: 130px;
+}
+
+.result-content {
+padding: 12px;
+}
+
+.result-content h3 {
+font-size: 0.9rem;
+}
+
+.result-content p {
+font-size: 0.75rem;
+}
+}
+
+@media (max-width: 480px) {
+.search-results-page {
+padding: 100px 10px 30px;
+}
+
+.results-grid {
+grid-template-columns: 1fr;
+}
+
+.result-card img {
+height: 180px;
+}
+}

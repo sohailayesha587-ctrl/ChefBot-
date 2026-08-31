@@ -33,7 +33,7 @@ const HomePage = () => {
     },
     {
       image: 'beginners.jpg',
-      title: 'Beginners Guidance',
+      title: 'Beginners Guide',
       path: '/guidance'
     }
   ];
@@ -126,7 +126,7 @@ const HomePage = () => {
               <div className="h-feature-content">
                 <h3 className="h-feature-title">{item.title}</h3>
                 <span className="h-feature-link">
-                  Explore <i className="fas fa-arrow-right"></i>
+                  Explore 
                 </span>
               </div>
             </Link>
@@ -182,7 +182,7 @@ const HomePage = () => {
             Find the perfect meal recommendations based on your cravings and available ingredients
           </p>
           <div className="digital-banner-btn-wrapper">
-            <Link to="/smart-pantry" className="digital-banner-btn">
+            <Link to="/meal-suggestion" className="digital-banner-btn">
               Find Meal <i className="fas fa-arrow-right"></i>
             </Link>
           </div>

@@ -7,49 +7,83 @@
 .ms-container {
   width: 100%;
   min-height: 100vh;
-  background: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: whitesmoke;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
-.ms-header {
-  background: linear-gradient(135deg, #284a4b, #1d3a3b);
-  color: white;
-  padding: 22px 20px;
-  text-align: center;
-  position: relative;
+.ms-hero-split {
+  margin-top: 100px;
+  display: flex;
   width: 100%;
-  margin-top: 120px;
+  height: 250px;
+  overflow: hidden;
 }
 
-.ms-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
+.ms-hero-text-side {
+  flex: 0 0 40%;
+  background: #1a3334;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 5% 40px 7%;
+  position: relative;
+  z-index: 2;
+}
+
+.ms-hero-title {
+  font-family: 'DM Sans', serif;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  color: #ffffff;
+}
+
+.ms-hero-divider {
+  width: 55px;
   height: 3px;
   background: #397d7c;
-  border-radius: 3px;
+  margin-bottom: 18px;
 }
 
-.ms-header-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.ms-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  font-family: 'Playfair Display', serif;
-  color: white;
-}
-
-.ms-description {
-  font-size: 14px;
+.ms-hero-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
   opacity: 0.9;
-  color: white;
+  margin: 0;
+  max-width: 400px;
+}
+
+.ms-hero-image-side {
+  flex: 0 0 60%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-hero-img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  display: block;
+}
+
+.ms-hero-img-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 74, 75, 0.15);
+}
+
+.ms-hero-img-slice {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 90px;
+  height: 100%;
+  background: #1a3334;
+  clip-path: polygon(0 0, 100% 0, 25% 100%, 0 100%);
 }
 
 .ms-layout {
@@ -64,10 +98,10 @@
 .ms-days-calendar {
   width: 70px;
   flex-shrink: 0;
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
   padding: 12px 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   border: 2px solid #397d7c;
   position: sticky;
   top: 20px;
@@ -99,12 +133,12 @@
 }
 
 .ms-day-item:hover {
-  background: #e2e8f0;
+  background: #f5fafa;
 }
 
 .ms-day-active {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-day-name {
@@ -122,13 +156,13 @@
 }
 
 .ms-day-active .ms-day-date {
-  color: white;
+  color: #ffffff;
   opacity: 0.8;
 }
 
 .ms-day-today {
   border: 2px solid #397d7c;
-  background: #f0f9f9;
+  background: #f5fafa;
 }
 
 .ms-status-dot {
@@ -138,24 +172,30 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ef4444;
+  background: #c0392b;
   animation: pulse-red 1.5s infinite;
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.2);
 }
 
 @keyframes pulse-red {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
 }
 
 .ms-day-meals-expanded {
   margin-top: 8px;
   padding: 12px;
-  background: #f8fafc;
+  background: #f5fafa;
   border-radius: 10px;
   border-left: 3px solid #397d7c;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e0eeee;
+  border-bottom: 1px solid #e0eeee;
 }
 
 .ms-expanded-header {
@@ -164,7 +204,7 @@
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e0eeee;
 }
 
 .ms-expanded-header h4 {
@@ -179,7 +219,7 @@
   border: none;
   font-size: 16px;
   cursor: pointer;
-  color: #666;
+  color: #666666;
 }
 
 .ms-meals-list-expanded {
@@ -194,11 +234,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: #ffffff;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
 }
 
 .ms-meal-name {
@@ -207,8 +247,8 @@
 }
 
 .ms-meal-members {
-  color: #666;
-  background: #e2e8f0;
+  color: #666666;
+  background: #e0eeee;
   padding: 2px 8px;
   border-radius: 20px;
   font-size: 10px;
@@ -220,11 +260,11 @@
 }
 
 .ms-delete-meal {
-  background: #fee2e2;
+  background: #fecaca;
   border: none;
   padding: 4px 10px;
   border-radius: 6px;
-  color: #ff4444;
+  color: #c0392b;
   font-size: 11px;
   cursor: pointer;
 }
@@ -233,7 +273,7 @@
   text-align: center;
   padding: 16px;
   font-size: 12px;
-  color: #666;
+  color: #666666;
 }
 
 .ms-expanded-actions {
@@ -243,8 +283,8 @@
 }
 
 .ms-no-cooking-expanded {
-  background: #ff4444;
-  color: white;
+  background: #c0392b;
+  color: #ffffff;
   border: none;
   padding: 8px 12px;
   border-radius: 20px;
@@ -255,7 +295,7 @@
 
 .ms-forgot-log-expanded {
   background: #397d7c;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 8px 12px;
   border-radius: 20px;
@@ -295,14 +335,16 @@
 .ms-search-form {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .ms-search-wrapper {
   flex: 1;
   position: relative;
+  min-width: 0;
 }
 
 .ms-search-icon {
@@ -310,39 +352,44 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #666;
+  color: #666666;
+  pointer-events: none;
 }
 
 .ms-search-input {
   width: 100%;
   padding: 12px 18px 12px 42px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   border-radius: 40px;
   font-size: 14px;
   outline: none;
   transition: all 0.3s;
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #1a3334;
+}
+
+.ms-search-input::placeholder {
+  color: #b8cccc;
 }
 
 .ms-search-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57,125,124,0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.15);
 }
 
 .ms-search-actions {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
 .ms-search-btn {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
   border: none;
-  padding: 12px 28px;
+  padding: 12px 24px;
   border-radius: 40px;
   font-weight: 600;
   cursor: pointer;
@@ -374,7 +421,7 @@
 
 .ms-refresh-btn {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-refresh-btn:hover {
@@ -384,26 +431,22 @@
 
 .ms-view-pantry-btn {
   background: #397d7c;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-view-pantry-btn:hover {
-  background: #2e6364;
+  background: #284a4b;
   transform: translateY(-1px);
 }
 
 .ms-view-shopping-btn {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-view-shopping-btn:hover {
-  background: #1d3a3b;
+  background: #1a3334;
   transform: translateY(-1px);
-}
-
-.ms-action-buttons {
-  display: none;
 }
 
 .ms-filters-bar {
@@ -421,52 +464,55 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  min-width: 110px;
+  flex: 0 0 auto;
 }
 
 .ms-filter-label {
   font-size: 11px;
   font-weight: 600;
-  color: white;
-  opacity: 0.85;
+  color: #ffffff;
+  opacity: 1;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .ms-filter-select {
-  padding: 8px 12px;
-  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 14px;
+  border: 1px solid #284a4b;
   border-radius: 10px;
-  background: white;
+  background: #ffffff;
   font-size: 12px;
   cursor: pointer;
   outline: none;
-  color: black;
+  color: #284a4b;
+  min-width: 110px;
 }
 
 .ms-filter-select:hover {
-  border-color: #397d7c;
+  background: #ffffff;
+  color: #1a3334;
 }
 
 .ms-plus-btn {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-  padding: 8px 20px;
+  background: #ffffff;
+  border: 1px solid #284a4b;
+  padding: 8px 22px;
   border-radius: 30px;
-  color: white;
+  color: #284a4b;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  margin-left: auto;
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .ms-plus-btn:hover {
-  background: #397d7c;
+  background: #e0eeee;
 }
 
 .patient-sections-container {
@@ -475,7 +521,7 @@
 
 .patient-section {
   margin-bottom: 30px;
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 16px 0;
 }
@@ -499,8 +545,8 @@
 .scroll-arrow {
   width: 34px;
   height: 34px;
-  background: #284a4b;
-  color: white;
+  background: #ffffff;
+  color: #1a3334;
   border: none;
   border-radius: 50%;
   font-size: 16px;
@@ -518,7 +564,7 @@
 }
 
 .scroll-arrow:disabled {
-  background: #cbd5e1;
+  background: #e0eeee;
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -539,18 +585,18 @@
 .patient-recipe-card {
   min-width: 160px;
   width: 160px;
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #e0eeee;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .patient-recipe-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-color: #397d7c;
 }
 
@@ -577,7 +623,7 @@
 
 .patient-recipe-info {
   font-size: 11px;
-  color: #666;
+  color: #666666;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -607,17 +653,17 @@
 }
 
 .patient-view-btn {
-  background: #e2e8f0;
+  background: #e0eeee;
   color: #284a4b;
 }
 
 .patient-view-btn:hover {
-  background: #cbd5e1;
+  background: #c5d8d8;
 }
 
 .patient-cook-btn {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .patient-cook-btn:hover {
@@ -627,7 +673,7 @@
 .ms-results-info {
   margin-bottom: 18px;
   padding: 10px 16px;
-  background: #f0f9f9;
+  background: #f5fafa;
   border-radius: 12px;
   color: #284a4b;
   font-size: 13px;
@@ -647,19 +693,19 @@
 }
 
 .ms-recipe-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: all 0.25s ease;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   display: flex;
   flex-direction: column;
 }
 
 .ms-recipe-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   border-color: #397d7c;
 }
 
@@ -680,8 +726,8 @@
   border-radius: 20px;
   font-size: 11px;
   font-weight: 700;
-  color: white;
-  background: rgba(0,0,0,0.6);
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .ms-recipe-content {
@@ -717,7 +763,7 @@
 }
 
 .ms-recipe-category {
-  color: #666;
+  color: #666666;
   font-size: 11px;
   margin: 0;
   display: flex;
@@ -736,7 +782,7 @@
   padding: 6px 10px;
   border-radius: 8px;
   font-size: 11px;
-  border-left: 2px solid #ff9800;
+  border-left: 2px solid #c0392b;
 }
 
 .ms-missing-label {
@@ -745,7 +791,7 @@
 }
 
 .ms-missing-items {
-  color: #ff9800;
+  color: #c0392b;
 }
 
 .ms-full-match {
@@ -762,7 +808,7 @@
 
 .ms-match-progress {
   height: 4px;
-  background: #e2e8f0;
+  background: #e0eeee;
   border-radius: 4px;
   overflow: hidden;
   margin: 4px 0;
@@ -795,17 +841,17 @@
 }
 
 .ms-btn-view {
-  background: #e2e8f0;
+  background: #e0eeee;
   color: #284a4b;
 }
 
 .ms-btn-view:hover {
-  background: #cbd5e1;
+  background: #c5d8d8;
 }
 
 .ms-btn-cook {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-btn-cook:hover {
@@ -813,17 +859,17 @@
 }
 
 .ms-btn-shop {
-  background: #e2e8f0;
+  background: #e0eeee;
   color: #284a4b;
 }
 
 .ms-btn-shop:hover {
-  background: #cbd5e1;
+  background: #c5d8d8;
 }
 
 .ms-missing-inline {
   background: #fef3e8;
-  border-left: 4px solid #ff9800;
+  border-left: 4px solid #c0392b;
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 20px;
@@ -847,7 +893,7 @@
 
 .ms-missing-inline p {
   font-size: 13px;
-  color: #666;
+  color: #666666;
   margin-bottom: 12px;
 }
 
@@ -872,7 +918,7 @@
 
 .ms-inline-shopping {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-inline-shopping:hover {
@@ -881,21 +927,21 @@
 
 .ms-inline-panda {
   background: #397d7c;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-inline-panda:hover {
-  background: #2e6364;
+  background: #284a4b;
 }
 
 .ms-inline-skip {
-  background: #e2e8f0;
+  background: #e0eeee;
   color: #284a4b;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #c5d8d8;
 }
 
 .ms-inline-skip:hover {
-  background: #cbd5e1;
+  background: #c5d8d8;
 }
 
 .ms-show-more {
@@ -905,7 +951,7 @@
 
 .ms-show-more-btn {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 10px 32px;
   border-radius: 40px;
@@ -927,28 +973,35 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  padding: 20px;
 }
 
 .ms-modal,
 .ms-popup-content {
-  background: white;
+  background: #ffffff;
   border-radius: 24px;
   width: 90%;
   max-width: 450px;
   overflow: hidden;
   animation: fadeIn 0.2s ease;
-  box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .ms-modal-header,
@@ -958,14 +1011,14 @@
   align-items: center;
   padding: 16px 20px;
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-modal-header h3,
 .ms-popup-header h3 {
   margin: 0;
   font-size: 16px;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-modal-close,
@@ -974,7 +1027,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: white;
+  color: #ffffff;
   opacity: 0.7;
 }
 
@@ -995,8 +1048,8 @@
 }
 
 .ms-category-btn {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #f5fafa;
+  border: 1px solid #e0eeee;
   border-radius: 40px;
   padding: 10px 12px;
   font-size: 13px;
@@ -1009,7 +1062,7 @@
 
 .ms-category-btn:hover {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
   border-color: #284a4b;
 }
 
@@ -1025,15 +1078,15 @@
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #f5fafa;
+  border: 1px solid #e0eeee;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .ms-member-option:hover {
-  background: #e2e8f0;
+  background: #e0eeee;
   border-color: #397d7c;
 }
 
@@ -1048,24 +1101,24 @@
   width: 100%;
   padding: 10px 14px;
   margin-top: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   border-radius: 50px;
   font-size: 14px;
   outline: none;
   text-align: center;
-  color: black;
+  color: #1a3334;
 }
 
 .ms-custom-member-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57,125,124,0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
 }
 
 .ms-popup-footer {
   display: flex;
   gap: 12px;
   padding: 16px 20px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e0eeee;
 }
 
 .ms-popup-cancel,
@@ -1084,28 +1137,28 @@
 }
 
 .ms-popup-cancel {
-  background: #e2e8f0;
+  background: #e0eeee;
   color: #284a4b;
 }
 
 .ms-popup-cancel:hover {
-  background: #cbd5e1;
+  background: #c5d8d8;
 }
 
 .ms-popup-confirm,
 .ms-popup-cook-view {
   background: #397d7c;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-popup-confirm:hover,
 .ms-popup-cook-view:hover {
-  background: #2e6364;
+  background: #284a4b;
 }
 
 .ms-popup-view {
   background: #284a4b;
-  color: white;
+  color: #ffffff;
 }
 
 .ms-popup-view:hover {
@@ -1127,23 +1180,23 @@
 .ms-form-group input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   border-radius: 12px;
   font-size: 14px;
   outline: none;
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #1a3334;
 }
 
 .ms-form-group input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57,125,124,0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
 }
 
 .ms-form-group small {
   display: block;
   font-size: 10px;
-  color: #666;
+  color: #666666;
   margin-top: 5px;
 }
 
@@ -1155,17 +1208,17 @@
 .ms-recipe-input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   border-radius: 12px;
   font-size: 14px;
   outline: none;
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #1a3334;
 }
 
 .ms-recipe-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57,125,124,0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
 }
 
 .ms-suggestions-dropdown {
@@ -1173,39 +1226,39 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border: 1px solid #e0eeee;
   border-radius: 12px;
   margin-top: 4px;
   max-height: 200px;
   overflow-y: auto;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ms-suggestion-item {
   padding: 10px 12px;
   cursor: pointer;
   font-size: 13px;
-  color: black;
+  color: #1a3334;
   transition: all 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f5fafa;
 }
 
 .ms-suggestion-item:hover {
-  background: #f8fafc;
+  background: #f5fafa;
   color: #397d7c;
 }
 
 .ms-history-popup {
-  background: white;
+  background: #ffffff;
   border-radius: 24px;
   width: 90%;
   max-width: 550px;
   max-height: 80vh;
   overflow: hidden;
   animation: fadeIn 0.2s ease;
-  box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
 }
 
 .ms-history-popup-body {
@@ -1225,15 +1278,15 @@
   align-items: center;
   gap: 16px;
   padding: 12px;
-  background: #f8fafc;
+  background: #f5fafa;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
 }
 
 .history-item:hover {
-  background: #e2e8f0;
+  background: #e0eeee;
   transform: translateX(4px);
   border-color: #397d7c;
 }
@@ -1245,7 +1298,7 @@
   align-items: center;
   padding: 6px 12px;
   background: #284a4b;
-  color: white;
+  color: #ffffff;
   border-radius: 10px;
 }
 
@@ -1274,7 +1327,7 @@
 
 .history-members {
   font-size: 11px;
-  color: #666;
+  color: #666666;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1287,7 +1340,7 @@
 .empty-history {
   text-align: center;
   padding: 40px 20px;
-  color: #666;
+  color: #666666;
 }
 
 .empty-history-sub {
@@ -1308,7 +1361,7 @@
   border-radius: 8px;
   border: none;
   background: #397d7c;
-  color: white;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1316,7 +1369,7 @@
 }
 
 .ms-month-history-btn:hover {
-  background: #2e6364;
+  background: #284a4b;
   transform: translateY(-1px);
 }
 
@@ -1332,31 +1385,33 @@
 .ms-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #e2e8f0;
+  border: 3px solid #e0eeee;
   border-top-color: #284a4b;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ms-error {
   text-align: center;
   padding: 20px;
-  background: #fee2e2;
+  background: #fecaca;
   border-radius: 12px;
   margin: 20px 0;
-  color: #ff4444;
-  border-left: 3px solid #ff4444;
+  color: #c0392b;
+  border-left: 3px solid #c0392b;
 }
 
 .ms-empty-state {
   text-align: center;
   padding: 50px 20px;
-  color: #666;
-  background: #f8fafc;
+  color: #666666;
+  background: #f5fafa;
   border-radius: 16px;
 }
 
@@ -1389,43 +1444,326 @@
   opacity: 1;
   color: #397d7c;
 }
+
+.ms-mobile-calendar-hub {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 14px 12px 12px;
+  border: 1px solid #d4e8e8;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.ms-mobile-calendar-hub .hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ms-mobile-calendar-hub .hub-header .month {
+  font-weight: 700;
+  color: #1a4a4b;
+  font-size: 14px;
+}
+
+.ms-mobile-calendar-hub .hub-header .week-label {
+  font-size: 11px;
+  color: #8aa8a8;
+  font-weight: 500;
+}
+
+.ms-mobile-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.ms-mobile-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 0 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  background: #fafcfc;
+  position: relative;
+}
+
+.ms-mobile-day:hover {
+  background: #f0f6f7;
+}
+
+.ms-mobile-day .day-name {
+  font-size: 8px;
+  font-weight: 600;
+  color: #8aa8a8;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.ms-mobile-day .day-num {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a4a4b;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.2s;
+  margin: 1px 0;
+}
+
+.ms-mobile-day.active {
+  background: #1a4a4b;
+  border-color: #1a4a4b;
+}
+
+.ms-mobile-day.active .day-name {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ms-mobile-day.active .day-num {
+  color: #ffffff;
+}
+
+.ms-mobile-day.today .day-num {
+  border: 2px solid #3a8a8a;
+}
+
+.ms-mobile-day.today.active .day-num {
+  border: 2px solid #ffffff;
+}
+
+.ms-mobile-day .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 1px;
+}
+
+.ms-mobile-day .dot.completed {
+  background: #2d8a5e;
+}
+
+.ms-mobile-day .dot.pending {
+  background: #c0392b;
+  animation: pulse-red 1.5s infinite;
+}
+
+.ms-mobile-day .meal-count {
+  font-size: 7px;
+  color: #8aa8a8;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.ms-mobile-day.active .meal-count {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ms-mobile-day-details {
+  background: #f5fafa;
+  border-radius: 14px;
+  padding: 0 14px;
+  border: 1px solid #d4e8e8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+  margin-top: 0;
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+.ms-mobile-day-details.open {
+  max-height: 400px;
+  padding: 12px 14px;
+  margin-top: 10px;
+}
+
+.ms-mobile-day-details .detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #1a4a4b;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.ms-mobile-day-details .detail-header .meal-total {
+  font-size: 11px;
+  color: #6a8a8a;
+  font-weight: 500;
+}
+
+.ms-mobile-day-details .meal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 5px 12px;
+  border-radius: 30px;
+  border: 1px solid #d4e8e8;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.ms-mobile-day-details .meal-row .meal-name {
+  font-weight: 600;
+  color: #1a4a4b;
+}
+
+.ms-mobile-day-details .meal-row .meal-members {
+  color: #6a8a8a;
+  font-size: 11px;
+}
+
+.ms-mobile-day-details .meal-row .delete-meal {
+  background: none;
+  border: none;
+  color: #c0392b;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 4px;
+}
+
+.ms-mobile-day-details .empty-day {
+  text-align: center;
+  color: #8aa8a8;
+  font-size: 12px;
+  padding: 6px 0;
+}
+
+.ms-mobile-day-details .empty-day span {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.ms-mobile-day-details .detail-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ms-mobile-day-details .detail-actions button {
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ms-mobile-day-details .detail-actions .btn-primary {
+  background: #1a4a4b;
+  color: #ffffff;
+}
+
+.ms-mobile-day-details .detail-actions .btn-primary:hover {
+  background: #2d6a6b;
+}
+
+.ms-mobile-day-details .detail-actions .btn-secondary {
+  background: #d4e8e8;
+  color: #1a4a4b;
+}
+
+.ms-mobile-day-details .detail-actions .btn-secondary:hover {
+  background: #c0d8d8;
+}
+
+.ms-mobile-day-details .detail-actions .btn-danger {
+  background: #fecaca;
+  color: #c0392b;
+}
+
+.ms-mobile-day-details .detail-actions .btn-danger:hover {
+  background: #f8b4b4;
+}
+
+@media (max-width: 1024px) {
+  .ms-suggestions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 780px) {
-  .ms-layout {
-    flex-direction: column;
-    height: auto;
-    padding: 14px;
-    gap: 15px;
+  .ms-hero-split {
+    margin-top: 70px;
+    height: 180px;
+    min-height: 180px;
   }
 
-  .ms-header {
-    margin-top: 120px;
-    padding: 14px 15px;
-    height: auto;
-    min-height: 100px;
+  .ms-hero-text-side {
+    flex: 0 0 50%;
+    padding: 20px 4% 20px 6%;
   }
 
-  .ms-title {
+  .ms-hero-title {
     font-size: 1.4rem;
+    line-height: 1.1;
+    margin-bottom: 8px;
   }
 
-  .ms-description {
-    font-size: 11px;
+  
+
+  .ms-hero-desc {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .ms-hero-image-side {
+    flex: 0 0 50%;
+  }
+
+  .ms-hero-img {
+    min-height: 180px;
+  }
+
+  .ms-hero-img-slice {
+    width: 40px;
+  }
+
+  .ms-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .ms-days-calendar {
+    display: none !important;
   }
 
   .ms-main-content {
     width: 100%;
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
+    min-width: 0;
+  }
+
+  .ms-search-section {
+    width: 100%;
   }
 
   .ms-search-form {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: 7px;
+    gap: 6px;
+    flex-wrap: nowrap;
     width: 100%;
-    margin-bottom: 12px;
   }
 
   .ms-search-wrapper {
@@ -1434,363 +1772,117 @@
   }
 
   .ms-search-input {
-    padding: 10px 12px 10px 36px;
-    font-size: 12px;
+    padding: 10px 12px 10px 34px;
+    font-size: 13px;
+    width: 100%;
   }
 
   .ms-search-icon {
-    left: 12px;
+    left: 10px;
   }
 
-  .ms-search-actions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    flex-shrink: 0;
+  .ms-search-icon svg {
+    width: 14px;
+    height: 14px;
   }
 
   .ms-search-btn {
-    padding: 10px 13px;
-    font-size: 11px;
+    padding: 10px 14px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ms-search-actions {
+    gap: 4px;
+    flex-shrink: 0;
   }
 
   .ms-refresh-btn,
   .ms-view-pantry-btn,
   .ms-view-shopping-btn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .ms-refresh-btn svg,
+  .ms-view-pantry-btn svg,
+  .ms-view-shopping-btn svg {
+    width: 15px;
+    height: 15px;
   }
 
   .ms-filters-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
-    padding: 7px;
-    margin-bottom: 18px;
-    border-radius: 12px;
+    padding: 12px 14px;
+    gap: 8px;
+    border-radius: 14px;
   }
 
   .ms-filter-group {
-    min-width: 0;
-    flex: 1 1 70px;
+    flex: 0 0 calc(33.33% - 6px);
+    min-width: 60px;
   }
-
-  .ms-filter-label {
-    font-size: 9px;
-  }
-
+  
   .ms-filter-select {
-    width: 80%;
-    padding: 6px 7px;
-    font-size: 8px;
+    font-size: 10px;
+    padding: 6px 8px;
+    min-width: 60px;
   }
-
+  
   .ms-plus-btn {
-    width: 34px;
-    height: 34px;
-    padding: 0;
+    padding: 6px 12px;
+    font-size: 10px;
     margin-left: 0;
-    border-radius: 50%;
-    justify-content: center;
-    flex-shrink: 0;
   }
-
-  .ms-plus-btn span {
-    display: none;
-  }
-
-  .ms-calendar-btn {
-    background: rgba(40,74,75,0.9);
-    border: 1px solid rgba(40,74,75,0.25);
-    padding: 0;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    flex-shrink: 0;
-  }
-
-  .ms-calendar-btn span {
-    display: none;
-  }
-
-  .ms-calendar-btn:hover {
-    background: #397d7c;
+  .ms-mobile-calendar-hub {
+    display: block;
+    width: 100%;
   }
 
   .ms-suggestions-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
   .ms-recipe-card {
-    border-radius: 12px;
+    min-width: 0;
   }
 
   .ms-recipe-image {
-    height: 115px;
-  }
-
-  .ms-recipe-content {
-    padding: 10px;
+    height: 110px;
   }
 
   .ms-recipe-name {
     font-size: 13px;
   }
 
-  .ms-recipe-category {
-    font-size: 10px;
-  }
-
   .ms-recipe-actions {
-    gap: 5px;
+    gap: 4px;
   }
 
   .ms-recipe-actions button {
-    padding: 6px 5px;
     font-size: 9px;
+    padding: 5px 4px;
   }
 
-  .ms-results-info {
-    padding: 8px 11px;
-    font-size: 11px;
-    margin-bottom: 14px;
-  }
-
-  .patient-section {
-    padding: 10px 0;
-    margin-bottom: 20px;
-  }
-
-  .patient-section-title {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-
-  .patient-recipes-wrapper {
-    gap: 10px;
+  .ms-recipe-actions button svg {
+    width: 12px;
+    height: 12px;
   }
 
   .patient-recipe-card {
-    min-width: 145px;
-    width: 145px;
+    min-width: 140px;
+    width: 140px;
   }
 
   .patient-recipe-image {
     height: 100px;
   }
 
-  .scroll-arrow {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
-  }
-
   .ms-modal,
   .ms-popup-content,
   .ms-history-popup {
-    width: 94%;
-    max-width: 450px;
-    border-radius: 18px;
-  }
-
-  .ms-categories-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ms-side-drawer {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 280px;
-    height: 100%;
-    background: white;
-    z-index: 10002;
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .ms-side-drawer.open {
-    left: 0;
-  }
-
-  .ms-drawer-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 10001;
-    display: none;
-  }
-
-  .ms-drawer-overlay.open {
-    display: block;
-  }
-
-  .ms-drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 18px;
-    background: #284a4b;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-
-  .ms-drawer-header h3 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    margin: 0;
-    color: white;
-  }
-
-  .ms-drawer-close {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    opacity: 0.8;
-  }
-
-  .ms-drawer-close:hover {
-    opacity: 1;
-  }
-
-  .ms-drawer-content {
-    padding: 12px;
-  }
-
-  .ms-drawer-day-wrapper {
-    margin-bottom: 6px;
-  }
-
-  .ms-drawer-day-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-  }
-
-  .ms-drawer-day-item:hover {
-    background: #f0f9f9;
-  }
-
-  .ms-drawer-day-item.active {
-    background: #284a4b;
-  }
-
-  .ms-drawer-day-item.active .ms-drawer-day-name,
-  .ms-drawer-day-item.active .ms-drawer-day-date {
-    color: white;
-  }
-
-  .ms-drawer-day-item.today {
-    border: 1.5px solid #397d7c;
-  }
-
-  .ms-drawer-day-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .ms-drawer-day-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: #284a4b;
-  }
-
-  .ms-drawer-day-date {
-    font-size: 11px;
-    color: #666;
-  }
-
-  .ms-drawer-status-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ef4444;
-    animation: pulse-red 1.5s infinite;
-  }
-
-  .ms-drawer-history-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
-    background: #397d7c;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .ms-drawer-history-btn:hover {
-    background: #2e6364;
-  }
-
-  .ms-mobile-expanded-day {
-    margin-top: 6px;
-    padding: 10px;
-    background: #f8fafc;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-    border-left: 3px solid #397d7c;
-    max-height: 260px;
-    overflow-y: auto;
-  }
-
-  .ms-mobile-expanded-header {
-    position: static;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e2e8f0;
-    background: transparent;
-    color: #284a4b;
-  }
-
-  .ms-mobile-expanded-header h3 {
-    font-size: 13px;
-    font-weight: 700;
-    color: #284a4b;
-    margin: 0;
-  }
-
-  .ms-mobile-expanded-close {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    color: #666;
-  }
-
-  .ms-mobile-expanded-content {
-    padding: 15px;
+    width: 95%;
+    max-width: 400px;
   }
 
   .ms-missing-inline {
@@ -1811,25 +1903,48 @@
     margin: 20px 0 15px;
   }
 }
+
+
+
 @media (max-width: 380px) {
-  .ms-layout {
-    padding: 10px;
-    gap: 10px;
+  .ms-hero-split {
+    margin-top: 80px;
+    margin-bottom: 10px;
+    height: 170px;
   }
 
-  .ms-header {
-    margin-top: 120px;
-    padding: 12px 10px;
-    min-height: 90px;
+  .ms-hero-text-side {
+    flex: 0 0 40%;
+    padding: 10px 3% 10px 4%;
   }
 
-  .ms-title {
-    font-size: 1.15rem;
+  .ms-hero-title {
+    font-size: 0.9rem;
     margin-bottom: 3px;
   }
 
-  .ms-description {
-    font-size: 9px;
+  .ms-hero-desc {
+    margin-top: 10px;
+    font-size: 7px;
+    line-height: 1.35 ;
+  }
+
+
+  .ms-hero-image-side {
+    flex: 0 0 60%;
+  }
+
+  .ms-hero-img {
+    min-height: 120px;
+  }
+
+  .ms-hero-img-slice {
+    width: 20px;
+  }
+
+  .ms-layout {
+    padding: 4px;
+    gap: 6px;
   }
 
   .ms-search-form {
@@ -1837,194 +1952,148 @@
   }
 
   .ms-search-input {
-    padding: 9px 8px 9px 30px;
-    font-size: 10px;
+    padding: 7px 8px 7px 26px;
+    font-size: 11px;
   }
 
   .ms-search-icon {
-    left: 9px;
-    font-size: 12px;
+    left: 8px;
   }
 
-  .ms-search-actions {
-    gap: 3px;
+  .ms-search-icon svg {
+    width: 12px;
+    height: 12px;
   }
 
   .ms-search-btn {
-    padding: 8px 9px;
+    padding: 7px 8px;
     font-size: 9px;
   }
 
   .ms-refresh-btn,
   .ms-view-pantry-btn,
   .ms-view-shopping-btn {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .ms-refresh-btn svg,
+  .ms-view-pantry-btn svg,
+  .ms-view-shopping-btn svg {
+    width: 12px;
+    height: 12px;
   }
 
   .ms-filters-bar {
-    gap: 5px;
-    padding: 8px;
+    padding: 8px 8px;
+    gap: 4px;
     border-radius: 10px;
+    
   }
 
-  .ms-filter-group {
-    flex: 1 1 75px;
+    .ms-filter-group {
+    flex: 0 0 calc(20% - 3px);
+    min-width: 40px;
   }
-
-  .ms-filter-label {
-    font-size: 7px;
-  }
-
+  
   .ms-filter-select {
-    padding: 5px 4px;
     font-size: 8px;
-    border-radius: 7px;
+    padding: 4px 4px;
+    min-width: 40px;
   }
-
+  
   .ms-plus-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
+    padding: 4px 5px;
+    margin-left: 15px;
+    font-size: 8px;
   }
 
-  .ms-calendar-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
+  .ms-plus-btn svg {
+    width: 10px;
+    height: 10px;
   }
 
-  .ms-suggestions-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .ms-mobile-calendar-hub {
+    margin-top: -15px;
+    padding: 8px 6px 6px;
+    border-radius: 12px;
   }
 
-  .ms-recipe-card {
-    width: 100%;
+  .ms-mobile-day .day-num {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .ms-mobile-day .day-name {
+    font-size: 5px;
+  }
+
+  .ms-mobile-day-details.open {
+    padding: 6px 8px;
+  }
+
+  .ms-mobile-day-details .meal-row {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  .ms-mobile-day-details .detail-actions button {
+    font-size: 6px;
+    padding: 3px 7px;
+  }
+
+   .ms-suggestions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 
   .ms-recipe-image {
-    height: 135px;
+    height: 100px;
   }
 
-  .ms-recipe-content {
-    padding: 10px 11px;
-  }
-
-  .ms-recipe-name {
-    font-size: 13px;
-  }
-
-  .ms-recipe-category {
-    font-size: 10px;
+  .ms-recipe-actions {
+    flex-wrap: wrap;
   }
 
   .ms-recipe-actions button {
-    padding: 7px 5px;
-    font-size: 10px;
-  }
-
-  .ms-results-info {
-    padding: 7px 9px;
-    font-size: 10px;
-  }
-
-  .patient-section-title {
-    font-size: 0.9rem;
-  }
-
-  .patient-recipes-wrapper {
-    gap: 8px;
+    flex: 1;
+    min-width: 35px;
+    font-size: 7px;
+    padding: 5px 4px;
   }
 
   .patient-recipe-card {
-    min-width: 135px;
-    width: 135px;
+    min-width: 100px;
+    width: 100px;
   }
 
   .patient-recipe-image {
-    height: 90px;
+    height: 65px;
   }
 
   .patient-recipe-title {
-    font-size: 11px;
-  }
-
-  .patient-recipe-info {
     font-size: 9px;
-  }
-
-  .patient-view-btn,
-  .patient-cook-btn {
-    font-size: 9px;
-    padding: 5px 2px;
   }
 
   .scroll-arrow {
-    width: 27px;
-    height: 27px;
-    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
   }
 
   .ms-modal,
-  .ms-popup-content,
-  .ms-history-popup {
-    width: 96%;
-    border-radius: 16px;
+  .ms-popup-content {
+    max-width: 290px;
   }
 
-  .ms-modal-header,
-  .ms-popup-header {
-    padding: 12px 14px;
+  .ms-categories-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
   }
 
-  .ms-modal-body,
-  .ms-popup-body {
-    padding: 14px;
-  }
-
-  .ms-popup-footer {
-    padding: 12px 14px;
-    gap: 8px;
-  }
-
-  .ms-popup-cancel,
-  .ms-popup-confirm,
-  .ms-popup-view,
-  .ms-popup-cook-view {
-    padding: 8px 6px;
-    font-size: 11px;
-  }
-
-  .ms-side-drawer {
-    width: 250px;
-  }
-
-  .ms-mobile-expanded-day {
-    padding: 8px;
-  }
-
-  .ms-mobile-expanded-header h3 {
-    font-size: 12px;
-  }
-
-  .ms-mobile-expanded-content {
-    max-height: 220px;
-  }
-
-  .ms-missing-inline-actions {
-    gap: 5px;
-  }
-
-  .ms-inline-btn {
-    flex: 1;
-    justify-content: center;
-    padding: 6px 7px;
-    font-size: 9px;
-  }
-
-  .ms-show-more-btn {
-    padding: 8px 18px;
-    font-size: 11px;
+  .ms-category-btn {
+    font-size: 10px;
+    padding: 6px 8px;
   }
 }

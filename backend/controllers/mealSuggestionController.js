@@ -1,6 +1,5 @@
 const Pantry = require('../models/Pantry');
-const Recipe = require('../models/Recipe');
-const ShoppingList = require('../models/ShoppingList');
+const Recipe = require('../models/Recipe');const ShoppingList = require('../models/ShoppingList');
 const CookingLog = require('../models/CookingLog');
 const { checkFundamentalIngredients } = require('../utils/pantryHelper');
 const { normalizeIngredient, getIngredientCategory } = require('../utils/urduHelper');
@@ -491,39 +490,41 @@ const getMealSuggestions = async (req, res) => {
     }
 
     const query = { isActive: true };
+    const conditions = [];
 
     if (search && search.trim() !== '') {
-      query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { tagline: { $regex: search, $options: 'i' } },
-        { category: { $regex: search, $options: 'i' } },
-        { subCategory: { $regex: search, $options: 'i' } }
-      ];
+      conditions.push({
+        $or: [
+          { title: { $regex: search, $options: 'i' } },
+          { tagline: { $regex: search, $options: 'i' } },
+          { category: { $regex: search, $options: 'i' } },
+          { subCategory: { $regex: search, $options: 'i' } }
+        ]
+      });
     }
 
-  if (mealTime && mealTime.toLowerCase() !== 'all') {
-  const normalizedMealTime =
-    mealTime.trim().toLowerCase();
+    if (mealTime && mealTime.toLowerCase() !== 'all') {
+      const mealTimeMap = {
+        breakfast: 'Breakfast',
+        lunch: 'Lunch',
+        dinner: 'Dinner',
+        snack: 'Snack',
+        appetizer: 'Appetizer',
+        dessert: 'Dessert',
+        anytime: 'Anytime'
+      };
 
-  const mealTimeMap = {
-    breakfast: 'Breakfast',
-    lunch: 'Lunch',
-    dinner: 'Dinner',
-    snack: 'Snack',
-    appetizer: 'Appetizer',
-    dessert: 'Dessert',
-    anytime: 'Anytime'
-  };
+      const mealValue = mealTimeMap[mealTime.trim().toLowerCase()];
 
-  const mealValue = mealTimeMap[normalizedMealTime];
-
-  if (mealValue) {
-    query.$or = [
-      { category: mealValue },
-      { suitableForMeals: mealValue }
-    ];
-  }
-}
+      if (mealValue) {
+        conditions.push({
+          $or: [
+            { category: mealValue },
+            { suitableForMeals: mealValue }
+          ]
+        });
+      }
+    }
 
     if (dietType && dietType !== 'all') {
       let dietFilter =
@@ -535,13 +536,15 @@ const getMealSuggestions = async (req, res) => {
         dietFilter = 'Vegetarian';
       }
 
-      query.dietType = dietFilter;
+      conditions.push({ dietType: dietFilter });
     }
 
     if (allergy && allergy !== 'none') {
-      query.allergens = {
-        $nin: [allergy.toLowerCase()]
-      };
+      conditions.push({
+        allergens: {
+          $nin: [allergy.toLowerCase()]
+        }
+      });
     }
 
     if (ageGroup && ageGroup !== 'general') {
@@ -554,10 +557,16 @@ const getMealSuggestions = async (req, res) => {
       const ageValue = ageMap[ageGroup];
 
       if (ageValue) {
-        query.ageGroup = Array.isArray(ageValue)
-          ? { $in: ageValue }
-          : { $in: [ageValue] };
+        conditions.push({
+          ageGroup: Array.isArray(ageValue)
+            ? { $in: ageValue }
+            : { $in: [ageValue] }
+        });
       }
+    }
+
+    if (conditions.length > 0) {
+      query.$and = conditions;
     }
 
     const recipes = await Recipe.find(query)
@@ -619,7 +628,6 @@ const getMealSuggestions = async (req, res) => {
     });
   }
 };
-
 const cookRecipe = async (req, res) => {
   try {
     const {
@@ -868,7 +876,14 @@ const addToCookingLog = async (req, res) => {
         isNoCookingDay: true
       });
     }
-
+if (recipeId && recipeId !== 'manual') {
+  const recipe = await Recipe.findById(recipeId);
+  if (recipe) {
+    const scale = members / (recipe.baseServings || 4);
+    const deducted = await deductPantryItems(userId, recipe, scale);
+    console.log('Pantry deducted for:', recipe.title);
+  }
+}
     cookingLog.meals.push({
       recipeId,
       recipeName,

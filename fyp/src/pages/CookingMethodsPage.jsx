@@ -11,7 +11,7 @@ const CookingMethodsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   const safeToString = (value) => {
     if (!value) return '';
@@ -37,14 +37,14 @@ const CookingMethodsPage = () => {
     setLoading(true);
     setError(null);
     try {
-   const response = await axios.get('/api/beginners-guides', {
-         params: { category: 'cooking-methods' }
-       });
+      const response = await axios.get('/api/beginners-guides', {
+        params: { category: 'cooking-methods' }
+      });
       
       const guides = response.data.guides || [];
       
       if (guides.length === 0) {
-        setError('No cooking methods found');
+        setError('No cooking methods found in database.');
         setCookingMethods([]);
         setLoading(false);
         return;
@@ -73,7 +73,7 @@ const CookingMethodsPage = () => {
           tagline: content.tagline || guide.title,
           fullDesc: safeToString(content.fullDesc || content || `Learn about ${guide.title}`),
           keyUses: content.keyUses || ['General cooking'],
-          previewImg: guide.image || `${guide.title.replace(/\s/g, '')}Method.png`,
+          image: guide.image || content.image || content.previewImg || '/api/placeholder/120/120',
           temperature: content.temperature || 'Varies',
           equipment: content.equipment || 'Standard cookware',
           bestFor: content.bestFor || 'Various dishes',
@@ -91,7 +91,7 @@ const CookingMethodsPage = () => {
       setCookingMethods(methods);
     } catch (err) {
       console.error('API Error:', err);
-      setError('Failed to load data');
+      setError('Failed to load data from server.');
       setCookingMethods([]);
     } finally {
       setLoading(false);
@@ -109,15 +109,43 @@ const CookingMethodsPage = () => {
     setSelectedMethod(null);
   };
 
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
   const getHeatType = (desc = '') => {
     const descStr = safeToString(desc);
     return descStr.toLowerCase().includes('moist') ? 'Moist Heat' : 'Dry Heat';
   };
 
+  const LightbulbIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.5 19.5H14.5M9.5 21.5H14.5M12 2.5C8.5 2.5 5.5 5.2 5.5 9C5.5 11.5 7 13.5 8.5 15C9.5 16 10 17 10 18H14C14 17 14.5 16 15.5 15C17 13.5 18.5 11.5 18.5 9C18.5 5.2 15.5 2.5 12 2.5Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const WarningIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const CookIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 8h12l-1.5 9H7.5L6 8zM4 8h16M9 8V6a1 1 0 011-1h4a1 1 0 011 1v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+
+  const tipIcons = [<LightbulbIcon />, <LightbulbIcon />, <WarningIcon />, <LightbulbIcon />];
+
   if (loading) {
     return (
       <div className="cmp-container">
-        <div className="loading-spinner">Loading cooking methods...</div>
+        <div className="loading-spinner">Loading...</div>
       </div>
     );
   }
@@ -138,13 +166,7 @@ const CookingMethodsPage = () => {
   return (
     <div className="cmp-container">
       <div className="cmp-mobile-topbar">
-        <button
-          className={`cmp-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-        >
-          <span /><span /><span />
-        </button>
-        <h1 className="cmp-page-title">Essential Cooking Methods</h1>
+        <h1 className="cmp-page-title">Cooking Methods</h1>
       </div>
 
       <div
@@ -192,7 +214,7 @@ const CookingMethodsPage = () => {
                   className="cmp-method-card"
                   onClick={() => handleMethodSelect(method)}
                 >
-                  <div className="cmp-card-image" style={{ backgroundImage: `url(${method.previewImg})` }} />
+                  <div className="cmp-card-image" style={{ backgroundImage: `url(${method.image})` }} />
                   <div className="cmp-card-content">
                     <h3 className="cmp-card-title">{method.name}</h3>
                     <p className="cmp-card-description">{method.tagline}</p>
@@ -234,9 +256,18 @@ const CookingMethodsPage = () => {
 
             <div className="cmp-modal-inner">
               <div className="cmp-modal-left">
-                <div className="cmp-msec">
-                  <span className="cmp-msec-label">About this method</span>
-                  <p className="cmp-msec-text">{selectedMethod.fullDesc}</p>
+                <div className="cmp-about-row">
+                  <div className="cmp-about-text">
+                    <div className="cmp-msec">
+                      <span className="cmp-msec-label">About this method</span>
+                      <p className="cmp-msec-text">{selectedMethod.fullDesc}</p>
+                    </div>
+                  </div>
+                  <div
+                    className="cmp-about-thumb"
+                    style={{ backgroundImage: `url(${selectedMethod.image})` }}
+                    onClick={() => openLightbox(selectedMethod.image)}
+                  />
                 </div>
 
                 <hr className="cmp-mdivider" />
@@ -305,6 +336,7 @@ const CookingMethodsPage = () => {
                     <div className="cmp-tips-list">
                       {selectedMethod.tips?.map((tip, idx) => (
                         <div key={idx} className="cmp-tip-card">
+                          <span className="cmp-tip-icon">{tipIcons[idx % tipIcons.length]}</span>
                           <span className="cmp-tip-txt">{tip}</span>
                         </div>
                       ))}
@@ -316,11 +348,24 @@ const CookingMethodsPage = () => {
               <div className="cmp-modal-right">
                 <div
                   className="cmp-modal-right-image"
-                  style={{ backgroundImage: `url(${selectedMethod.previewImg})` }}
+                  style={{ backgroundImage: `url(${selectedMethod.image})` }}
+                  onClick={() => openLightbox(selectedMethod.image)}
                 />
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {lightboxImage && (
+        <div className="cmp-lightbox-overlay" onClick={closeLightbox}>
+          <button className="cmp-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="cmp-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

@@ -3,16 +3,21 @@ import axiosInstance from '../services/axiosConfig';
 
 export const useAppSettings = () => {
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [notificationEnabled, setNotificationEnabled] = useState(true);
-  const [vibrationEnabled, setVibrationEnabled] = useState(true);
+  const [language, setLanguage] = useState('en');
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
     try {
       const response = await axiosInstance.get('/users/settings');
-      setSoundEnabled(response.data.settings?.soundPreferences?.beepEnabled ?? true);
-      setVibrationEnabled(response.data.settings?.soundPreferences?.vibrationEnabled ?? true);
-      setNotificationEnabled(response.data.settings?.notificationPreferences?.browserNotification ?? true);
+      const settings = response.data.settings;
+
+      setSoundEnabled(
+        settings?.soundPreferences?.beepEnabled ?? true
+      );
+
+      setLanguage(
+        settings?.displayPreferences?.language ?? 'en'
+      );
     } catch (error) {
       console.error('Error fetching settings:', error);
     } finally {
@@ -24,5 +29,12 @@ export const useAppSettings = () => {
     fetchSettings();
   }, []);
 
-  return { soundEnabled, notificationEnabled, vibrationEnabled, loading, refetch: fetchSettings };
+  return {
+    soundEnabled,
+    setSoundEnabled,
+    language,
+    setLanguage,
+    loading,
+    refetch: fetchSettings
+  };
 };
