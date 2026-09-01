@@ -1013,7 +1013,7 @@ const recipesToMigrate = [
 },
 {
   title: "Qeema Gobhi Aloo",
-  image: "marble-cake.jpg",
+  image: "qeema-gobi-aloo.jpg",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "500g mince - fresh",

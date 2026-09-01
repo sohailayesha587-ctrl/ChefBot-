@@ -712,7 +712,7 @@ const recipesToMigrate = [
   },
   {
     title: "Sugarcane Juice",
-    image: "vanilla-sponge-cake.jpg",
+    image: "Sugarcane-juice.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "4-5 sugarcane sticks",

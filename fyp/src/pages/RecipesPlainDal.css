@@ -4,10 +4,12 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -17,18 +19,17 @@ html, body, #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
+  background: #ffffff;
 }
 
 .dal-header {
-  background: rgb(40, 74, 75) !important;
-  background-image: none !important;
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   padding: 30px 20px;
   text-align: center;
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: 120px;
 }
 
@@ -38,23 +39,23 @@ html, body, #root {
 }
 
 .dal-page-title {
-  font-size: 2.5rem;
+  font-size: 40px;
   font-weight: 700;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
-  color: white;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  font-family: 'Playfair Display', Georgia, serif;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'DM Sans', 'Segoe UI', serif;
 }
 
 .dal-page-description {
-  font-size: 1rem;
+  font-size: 16px;
   opacity: 0.9;
   font-weight: 300;
   letter-spacing: 0.3px;
   max-width: 600px;
   margin: 0 auto;
-  color: #ddd;
+  color: #f5fafa;
 }
 
 .dal-main {
@@ -72,52 +73,53 @@ html, body, #root {
 }
 
 .dal-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   display: flex;
-  height: 120px;
+  height: 100px;
 }
 
 .dal-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  border-color: rgb(40, 74, 75);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #284a4b;
 }
 
 .dal-card-image {
-  width: 120px;
+  width: 80px;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #f1f5f4;
+  background-color: #f5fafa;
   flex-shrink: 0;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid #e0eeee;
 }
 
 .dal-card-content {
-  padding: 15px 20px;
+  padding: 8px 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: visible;
+  min-width: 0;
 }
 
 .dal-card-title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
-  color: #1e293b;
+  color: #1a3334;
   margin-bottom: 0;
   line-height: 1.3;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   word-break: break-word;
 }
 
@@ -129,31 +131,32 @@ html, body, #root {
 }
 
 .back-home-btn {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   border: none;
   padding: 12px 30px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(40,74,75,0.2);
+  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.2);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
 }
 
 .back-home-btn:hover {
-  background: rgb(28, 52, 53);
+  background: #1a3334;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(40,74,75,0.3);
+  box-shadow: 0 6px 18px rgba(40, 74, 75, 0.3);
 }
 
 .dal-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.82);
+  background: rgba(0, 0, 0, 0.82);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,36 +174,42 @@ html, body, #root {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-  background: rgb(40, 74, 75);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  background: #284a4b;
   position: relative;
   animation: modalIn 0.28s ease-out;
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.veg-modal-hero {
-  flex: 0 0 168px !important;
-  height: 168px !important;
-  max-height: 168px !important;
-  min-height: 168px !important;
+.dal-modal-hero {
+  flex: 0 0 168px;
+  height: 168px;
+  max-height: 168px;
+  min-height: 168px;
   display: flex;
   flex-direction: row;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
 .dal-modal-close {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(255,255,255,0.92);
-  color: rgb(40, 74, 75);
+  background: rgba(255, 255, 255, 0.92);
+  color: #284a4b;
   border: none;
   width: 36px;
   height: 36px;
@@ -213,27 +222,27 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   transition: all 0.25s;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 .dal-modal-close:hover {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
-.veg-modal-hero-left {
+.dal-modal-hero-left {
   flex: 0 0 52%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 28px 40px;
-  background: linear-gradient(135deg, rgb(40, 74, 75) 0%, rgb(40, 74, 75) 100%);
+  background: #284a4b;
   position: relative;
   z-index: 2;
 }
 
-.veg-modal-hero-left::after {
+.dal-modal-hero-left::after {
   content: '';
   position: absolute;
   top: 0;
@@ -245,11 +254,11 @@ html, body, #root {
   z-index: 6;
 }
 
-.veg-modal-tag {
+.dal-modal-tag {
   display: none;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -261,8 +270,8 @@ html, body, #root {
   align-self: flex-start;
 }
 
-.veg-modal-hero-title {
-  font-size: 1.75rem;
+.dal-modal-hero-title {
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
@@ -275,9 +284,9 @@ html, body, #root {
   -webkit-box-orient: vertical;
 }
 
-.veg-modal-hero-tagline {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
+.dal-modal-hero-tagline {
+  font-size: 13.6px;
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.5;
   white-space: normal;
   overflow: hidden;
@@ -286,17 +295,17 @@ html, body, #root {
   -webkit-box-orient: vertical;
 }
 
-.veg-modal-hero-right {
+.dal-modal-hero-right {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: rgb(20, 37, 38);
+  background: #1a3334;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.veg-modal-hero-img {
+.dal-modal-hero-img {
   position: relative;
   width: 100%;
   height: 100%;
@@ -305,58 +314,58 @@ html, body, #root {
   display: block;
 }
 
-.veg-modal-body {
+.dal-modal-body {
   flex: 1;
   min-height: 0;
   display: flex;
   gap: 12px;
   padding: 14px 16px 10px;
-  background: white;
+  background: #ffffff;
   overflow: hidden;
 }
 
-.veg-modal-col {
+.dal-modal-col {
   flex: 1;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
   border-radius: 14px;
-  border: 1px solid #e2e9e5;
-  box-shadow: 0 2px 10px rgba(40,74,75,0.06);
+  border: 1px solid #e0eeee;
+  box-shadow: 0 2px 10px rgba(40, 74, 75, 0.06);
   display: flex;
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  color: white;
+  color: #ffffff;
 }
 
-.veg-modal-col--steps {
+.dal-modal-col--steps {
   flex: 1.3;
 }
 
-.veg-modal-col-header {
+.dal-modal-col-header {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 16px 10px;
-  border-bottom: 2px solid rgb(40, 74, 75);
+  border-bottom: 2px solid #284a4b;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
-.veg-modal-col-header i {
-  color: white;
+.dal-modal-col-header i {
+  color: #ffffff;
   font-size: 13px;
 }
 
-.veg-modal-col-header h3 {
-  font-size: 0.78rem;
+.dal-modal-col-header h3 {
+  font-size: 12.48px;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 0;
 }
 
-.veg-modal-scroll {
+.dal-modal-scroll {
   flex: 1;
   overflow-y: auto;
   padding: 12px 14px 14px;
@@ -364,60 +373,60 @@ html, body, #root {
   flex-direction: column;
   gap: 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(40,74,75,0.3) transparent;
+  scrollbar-color: rgba(40, 74, 75, 0.3) transparent;
 }
 
-.veg-modal-scroll::-webkit-scrollbar {
+.dal-modal-scroll::-webkit-scrollbar {
   width: 4px;
 }
 
-.veg-modal-scroll::-webkit-scrollbar-track {
+.dal-modal-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.veg-modal-scroll::-webkit-scrollbar-thumb {
-  background: rgba(40,74,75,0.3);
+.dal-modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(40, 74, 75, 0.3);
   border-radius: 4px;
 }
 
-.veg-ingredient-item {
+.dal-ingredient-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   line-height: 1.45;
 }
 
-.veg-ingredient-dot {
+.dal-ingredient-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: white;
+  background: #ffffff;
   flex-shrink: 0;
   margin-top: 5px;
 }
 
-.veg-ingredient-text {
+.dal-ingredient-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.45;
   flex: 1;
 }
 
-.veg-step-item {
+.dal-step-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   line-height: 1.45;
 }
 
-.veg-step-num {
+.dal-step-num {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
   border-radius: 50%;
   font-size: 11px;
   font-weight: 700;
@@ -427,82 +436,82 @@ html, body, #root {
   margin-top: 1px;
 }
 
-.veg-step-text {
+.dal-step-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.5;
   flex: 1;
 }
 
-.veg-voice-bar {
+.dal-voice-bar {
   flex-shrink: 0;
   background: #ffffff;
-  border-top: 1px solid #e2e9e5;
+  border-top: 1px solid #e0eeee;
   padding: 11px 18px 13px;
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 -4px 16px rgba(40,74,75,0.07);
+  box-shadow: 0 -4px 16px rgba(40, 74, 75, 0.07);
 }
 
-.veg-voice-left {
+.dal-voice-left {
   display: flex;
   align-items: center;
   gap: 7px;
   flex-shrink: 0;
 }
 
-.veg-voice-icon {
-  color: rgb(40, 74, 75);
+.dal-voice-icon {
+  color: #284a4b;
   font-size: 15px;
 }
 
-.veg-voice-label {
-  font-size: 0.72rem;
+.dal-voice-label {
+  font-size: 11.52px;
   font-weight: 700;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
 }
 
-.veg-voice-progress {
+.dal-voice-progress {
   flex: 1;
   min-width: 60px;
 }
 
-.veg-progress-track {
+.dal-progress-track {
   height: 5px;
-  background: #e2ebeb;
+  background: #e0eeee;
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 4px;
 }
 
-.veg-progress-fill {
+.dal-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgb(40, 74, 75), rgb(40, 74, 75));
+  background: #284a4b;
   border-radius: 3px;
   transition: width 0.35s ease;
 }
 
-.veg-progress-info {
+.dal-progress-info {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
-  color: rgb(40, 74, 75);
+  font-size: 11.2px;
+  color: #284a4b;
   font-weight: 600;
 }
 
-.veg-voice-controls {
+.dal-voice-controls {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
 
-.veg-voice-main-btn {
+.dal-voice-main-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -513,61 +522,61 @@ html, body, #root {
   font-size: 13px;
   cursor: pointer;
   transition: all 0.25s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
-.veg-voice-main-btn.play {
-  background: rgb(40, 74, 75);
-  color: white;
-  box-shadow: 0 3px 10px rgba(40,74,75,0.28);
+.dal-voice-main-btn.play {
+  background: #284a4b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(40, 74, 75, 0.28);
 }
 
-.veg-voice-main-btn.play:hover {
-  background: rgb(40, 74, 75);
+.dal-voice-main-btn.play:hover {
+  background: #284a4b;
   transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(40,74,75,0.35);
+  box-shadow: 0 5px 14px rgba(40, 74, 75, 0.35);
 }
 
-.veg-voice-main-btn.stop {
-  background: #c53030;
-  color: white;
-  box-shadow: 0 3px 10px rgba(197,48,48,0.28);
+.dal-voice-main-btn.stop {
+  background: #c0392b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(192, 57, 43, 0.28);
 }
 
-.veg-voice-main-btn.stop:hover {
-  background: #9b2c2c;
+.dal-voice-main-btn.stop:hover {
+  background: #c0392b;
   transform: translateY(-1px);
 }
 
-.veg-step-btn {
+.dal-step-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 8px 16px;
-  border: 1.5px solid rgb(40, 74, 75);
+  border: 1.5px solid #284a4b;
   background: transparent;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   font-size: 12.5px;
   transition: all 0.22s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
-.veg-step-btn:hover:not(:disabled) {
-  background: rgb(40, 74, 75);
-  color: white;
+.dal-step-btn:hover:not(:disabled) {
+  background: #284a4b;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
-.veg-step-btn:disabled {
+.dal-step-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-  border-color: rgb(120, 140, 141);
-  color: rgb(120, 140, 141);
+  border-color: #666666;
+  color: #666666;
 }
 
 .loading-container {
@@ -577,78 +586,52 @@ html, body, #root {
   justify-content: center;
   height: 60vh;
   gap: 16px;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
 }
 
 .loading-spinner {
   width: 42px;
   height: 42px;
-  border: 3px solid #e2e8f0;
-  border-top-color: rgb(40, 74, 75);
+  border: 3px solid #e0eeee;
+  border-top-color: #284a4b;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@media (min-width: 1400px) {
-  .dal-modal {
-    max-width: 1500px;
-    height: 88vh;
-  }
-  .veg-modal-hero {
-    flex: 0 0 260px;
-    max-height: 280px;
-  }
-  .veg-modal-hero-left {
-    flex: 0 0 50%;
-    padding: 32px 36px;
-  }
-  .veg-modal-hero-title {
-    font-size: 2rem;
-  }
-  .veg-ingredient-text,
-  .veg-step-text {
-    font-size: 13.5px;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1399px) {
+@media (max-width: 780px) {
+  .dal-header {
+    margin-top: 100px;
+    padding: 25px 16px;
+  }
+  .dal-page-title {
+    font-size: 32px;
+  }
+  .dal-page-description {
+    font-size: 14.4px;
+  }
+
   .dal-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .veg-modal-hero {
-    flex: 0 0 230px;
-    max-height: 250px;
-  }
-  .veg-modal-hero-title {
-    font-size: 1.6rem;
-  }
-  .veg-modal-body {
-    gap: 10px;
-    padding: 12px 14px 8px;
-  }
-  .veg-voice-bar {
-    padding: 10px 16px 12px;
-    gap: 12px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .dal-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
   .dal-card {
-    height: 110px;
+    height: 85px;
   }
   .dal-card-image {
-    width: 110px;
+    width: 70px;
+    background-size: cover;
+  }
+  .dal-card-content {
+    padding: 6px 14px;
   }
   .dal-card-title {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .dal-modal {
@@ -657,205 +640,90 @@ html, body, #root {
     border-radius: 18px;
   }
 
-  .veg-modal-hero {
+  .dal-modal-hero {
     flex: 0 0 150px;
     max-height: 150px;
     min-height: 150px;
   }
-  .veg-modal-hero-left {
+  .dal-modal-hero-left {
     flex: 0 0 52%;
     padding: 20px 28px;
   }
-  .veg-modal-hero-title {
-    font-size: 1.4rem;
+  .dal-modal-hero-title {
+    font-size: 22.4px;
   }
-  .veg-modal-hero-tagline {
-    font-size: 0.75rem;
+  .dal-modal-hero-tagline {
+    font-size: 12px;
   }
-  .veg-modal-tag {
+  .dal-modal-tag {
     font-size: 9px;
     padding: 3px 10px;
   }
 
-  .veg-modal-body {
+  .dal-modal-body {
     gap: 10px;
     padding: 12px 14px 8px;
   }
-  .veg-ingredient-text,
-  .veg-step-text {
+  .dal-ingredient-text,
+  .dal-step-text {
     font-size: 12px;
   }
-  .veg-modal-col-header h3 {
-    font-size: 0.7rem;
+  .dal-modal-col-header h3 {
+    font-size: 11.2px;
   }
-  .veg-modal-col-header {
+  .dal-modal-col-header {
     padding: 10px 14px 8px;
   }
-  .veg-modal-scroll {
+  .dal-modal-scroll {
     padding: 10px 12px 12px;
     gap: 7px;
   }
 
-  .veg-voice-bar {
+  .dal-voice-bar {
     padding: 9px 14px 11px;
     gap: 12px;
   }
-  .veg-voice-label {
-    font-size: 0.65rem;
+  .dal-voice-label {
+    font-size: 10.4px;
   }
-  .veg-voice-main-btn {
+  .dal-voice-main-btn {
     padding: 7px 18px;
     font-size: 12px;
   }
-  .veg-step-btn {
+  .dal-step-btn {
     padding: 6px 14px;
     font-size: 11.5px;
   }
 }
 
-@media (min-width: 576px) and (max-width: 767px) {
-  .dal-header {
-    margin-top: 100px;
-    padding: 25px 16px;
-  }
-  .dal-page-title {
-    font-size: 2rem;
-  }
-  .dal-page-description {
-    font-size: 0.9rem;
-  }
-
-  .dal-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px;
-  }
-  .dal-card {
-    height: 105px;
-  }
-  .dal-card-image {
-    width: 105px;
-  }
-  .dal-card-title {
-    font-size: 14px;
-  }
-
-  .dal-modal {
-    width: 95%;
-    height: 85vh;
-    border-radius: 16px;
-  }
-
-  .veg-modal-hero-img {
-    object-fit: cover;
-  }
-  .veg-modal-hero {
-    flex: 0 0 165px;
-    max-height: 165px;
-    min-height: 165px;
-  }
-  .veg-modal-hero-left {
-    flex: 0 0 52%;
-    padding: 16px 22px;
-  }
-  .veg-modal-hero-title {
-    font-size: 1.25rem;
-  }
-  .veg-modal-hero-tagline {
-    font-size: 0.7rem;
-    display: -webkit-box;
-  }
-  .veg-modal-tag {
-    font-size: 8px;
-    padding: 3px 8px;
-    margin-bottom: 8px;
-  }
-  .veg-modal-hero-left::after {
-    display: block;
-    right: -40px;
-    width: 45px;
-  }
-
-  .veg-modal-body {
-    gap: 10px;
-    padding: 12px 12px 8px;
-  }
-  .veg-ingredient-text,
-  .veg-step-text {
-    font-size: 13.5px;
-    font-weight: 600;
-  }
-  .veg-modal-col-header h3 {
-    font-size: 0.65rem;
-  }
-  .veg-modal-col-header {
-    padding: 9px 12px 7px;
-  }
-  .veg-modal-scroll {
-    padding: 10px 12px 12px;
-    gap: 7px;
-  }
-
-  .veg-ingredient-dot {
-    width: 6px;
-    height: 6px;
-    margin-top: 4px;
-  }
-  .veg-step-num {
-    width: 22px;
-    height: 22px;
-    font-size: 10px;
-  }
-
-  .veg-voice-bar {
-    padding: 8px 12px 10px;
-    gap: 10px;
-  }
-  .veg-voice-label {
-    display: inline-block;
-    font-size: 0.6rem;
-  }
-  .veg-voice-left {
-    display: flex;
-  }
-  .veg-voice-progress {
-    order: initial;
-    width: auto;
-    flex: 1;
-  }
-  .veg-voice-main-btn {
-    padding: 7px 16px;
-    font-size: 11.5px;
-  }
-  .veg-step-btn {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 575px) {
+@media (max-width: 380px) {
   .dal-header {
     margin-top: 80px;
     padding: 20px 16px;
   }
   .dal-page-title {
-    font-size: 1.6rem;
+    font-size: 25.6px;
   }
   .dal-page-description {
-    font-size: 0.8rem;
+    font-size: 12.8px;
   }
 
   .dal-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
   .dal-card {
-    height: 95px;
+    height: 75px;
   }
   .dal-card-image {
-    width: 95px;
+    width: 60px;
+    background-size: cover;
+  }
+  .dal-card-content {
+    padding: 5px 12px;
   }
   .dal-card-title {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .dal-modal {
@@ -864,32 +732,32 @@ html, body, #root {
     border-radius: 14px;
   }
 
-  .veg-modal-hero-img {
+  .dal-modal-hero-img {
     object-fit: cover;
   }
-  .veg-modal-hero {
+  .dal-modal-hero {
     flex: 0 0 145px;
     max-height: 145px;
     min-height: 145px;
   }
-  .veg-modal-hero-left {
+  .dal-modal-hero-left {
     flex: 0 0 52%;
     padding: 12px 18px;
   }
-  .veg-modal-hero-title {
-    font-size: 1.1rem;
+  .dal-modal-hero-title {
+    font-size: 17.6px;
     -webkit-line-clamp: 2;
   }
-  .veg-modal-hero-tagline {
-    font-size: 0.65rem;
+  .dal-modal-hero-tagline {
+    font-size: 10.4px;
     display: -webkit-box;
   }
-  .veg-modal-tag {
+  .dal-modal-tag {
     font-size: 7px;
     padding: 2px 7px;
     margin-bottom: 6px;
   }
-  .veg-modal-hero-left::after {
+  .dal-modal-hero-left::after {
     right: -35px;
     width: 40px;
   }
@@ -902,144 +770,76 @@ html, body, #root {
     right: 10px;
   }
 
-  .veg-modal-body {
+  .dal-modal-body {
     gap: 8px;
     padding: 10px 10px 8px;
   }
-  .veg-modal-col-header {
+  .dal-modal-col-header {
     padding: 8px 10px 6px;
     gap: 6px;
   }
-  .veg-modal-col-header h3 {
-    font-size: 0.6rem;
+  .dal-modal-col-header h3 {
+    font-size: 9.6px;
     letter-spacing: 1px;
   }
-  .veg-modal-col-header i {
+  .dal-modal-col-header i {
     font-size: 11px;
   }
-  .veg-modal-scroll {
+  .dal-modal-scroll {
     padding: 8px 10px 10px;
     gap: 6px;
   }
 
-  .veg-ingredient-text,
-  .veg-step-text {
+  .dal-ingredient-text,
+  .dal-step-text {
     font-size: 12.5px;
     font-weight: 600;
     line-height: 1.5;
   }
-  .veg-ingredient-dot {
+  .dal-ingredient-dot {
     width: 5px;
     height: 5px;
     margin-top: 4px;
   }
-  .veg-step-num {
+  .dal-step-num {
     width: 20px;
     height: 20px;
     font-size: 9px;
   }
 
-  .veg-voice-bar {
+  .dal-voice-bar {
     padding: 7px 10px 9px;
     gap: 8px;
     flex-wrap: nowrap;
   }
-  .veg-voice-label {
+  .dal-voice-label {
     display: inline-block;
-    font-size: 0.55rem;
+    font-size: 8.8px;
     letter-spacing: 1px;
   }
-  .veg-voice-left {
+  .dal-voice-left {
     display: flex;
     gap: 5px;
   }
-  .veg-voice-icon {
+  .dal-voice-icon {
     font-size: 13px;
   }
-  .veg-voice-progress {
+  .dal-voice-progress {
     order: initial;
     width: auto;
     flex: 1;
   }
-  .veg-progress-info {
-    font-size: 0.6rem;
+  .dal-progress-info {
+    font-size: 9.6px;
   }
-  .veg-voice-main-btn {
+  .dal-voice-main-btn {
     padding: 6px 12px;
     font-size: 10.5px;
     gap: 4px;
   }
-  .veg-step-btn {
+  .dal-step-btn {
     padding: 5px 10px;
     font-size: 10px;
     gap: 4px;
-  }
-}
-
-@media (max-width: 400px) {
-  .dal-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px;
-  }
-  .dal-card {
-    height: 85px;
-  }
-  .dal-card-image {
-    width: 85px;
-  }
-  .dal-card-title {
-    font-size: 11px;
-  }
-  .dal-card-content {
-    padding: 10px 12px;
-  }
-
-  .veg-modal-hero-img {
-    object-fit: cover;
-  }
-  .veg-modal-hero {
-    flex: 0 0 130px;
-    max-height: 130px;
-    min-height: 130px;
-  }
-  .veg-modal-hero-left {
-    padding: 10px 14px;
-  }
-  .veg-modal-hero-title {
-    font-size: 1rem;
-  }
-  .veg-modal-hero-tagline {
-    font-size: 0.6rem;
-    display: -webkit-box;
-  }
-  .veg-modal-tag {
-    display: none;
-  }
-  .veg-modal-hero-left::after {
-    right: -30px;
-    width: 35px;
-  }
-
-  .veg-ingredient-text,
-  .veg-step-text {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-  .veg-modal-col-header h3 {
-    font-size: 0.55rem;
-    letter-spacing: 0.5px;
-  }
-  .veg-voice-label {
-    display: inline-block;
-    font-size: 0.5rem;
-  }
-  .veg-voice-main-btn {
-    padding: 5px 10px;
-    font-size: 10px;
-  }
-  .veg-step-btn {
-    padding: 4px 8px;
-    font-size: 9px;
   }
 }

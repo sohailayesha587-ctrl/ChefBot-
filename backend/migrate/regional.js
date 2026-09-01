@@ -5,8 +5,6 @@ const Recipe = require('../models/Recipe');
 require('dotenv').config({ path: '../.env' });
 
 const recipesToMigrate = [
-  // ==================== PAKISTANI RECIPES (20) ====================
-  // 1
   {
     title: "Chicken Biryani",
     image: "chicken-biryani.jpg",
@@ -74,7 +72,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 2
   {
     title: "Mutton Biryani",
     image: "mutton-biryani.jpg",
@@ -138,7 +135,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 3
   {
     title: "Beef Biryani",
     image: "beef-biryani.jpg",
@@ -202,7 +198,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 4
   {
     title: "Chicken Pulao",
     image: "chicken-pulao.jpg",
@@ -261,7 +256,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 5
   {
     title: "Mutton Pulao",
     image: "mutton-pulao.jpg",
@@ -321,7 +315,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 6
   {
     title: "Nihari",
     image: "nihari.jpg",
@@ -377,7 +370,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 7
   {
     title: "Chicken Karahi",
     image: "chicken-karahi.jpg",
@@ -437,7 +429,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 8
   {
     title: "Mutton Karahi",
     image: "mutton-karahi.jpg",
@@ -494,7 +485,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 9
   {
     title: "White Karahi",
     image: "white-karahi.jpg",
@@ -549,7 +539,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 10
   {
     title: "Achari Chicken",
     image: "achari-chicken.jpg",
@@ -610,7 +599,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 11
   {
     title: "Seekh Kebabs",
     image: "seekh-kebab.jpg",
@@ -668,7 +656,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 12
   {
     title: "Chapli Kebabs",
     image: "chapli-kebab-karahi.jpg",
@@ -725,7 +712,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 13
   {
     title: "Reshmi Kebabs",
     image: "reshmi-kabab-platter.jpg",
@@ -779,7 +765,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 14
   {
     title: "Malai Boti",
     image: "malai-tikka.jpg",
@@ -835,7 +820,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 15
   {
     title: "Bihari Kebabs",
     image: "bihari-kebab.jpg",
@@ -890,10 +874,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 16
   {
     title: "Daal Makhani",
-    image: "daal-makhni.jpg",
+    image: "daal-makhani.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup whole black lentils (urad dal)",
@@ -950,7 +933,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 17
   {
     title: "Daal Chawal",
     image: "daal-chawal.jpg",
@@ -1007,7 +989,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 18
   {
     title: "Chana Chaat",
     image: "channa-chaat.jpg",
@@ -1064,7 +1045,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 19
   {
     title: "Aloo Samosa",
     image: "samosa.jpg",
@@ -1124,10 +1104,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 20 - NEW PAKISTANI
   {
     title: "Sarson Ka Saag",
-    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800",
+    image: "saag-makki-ki-roti.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "500g mustard greens (sarson, chopped)",
@@ -1182,9 +1161,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-
-  // ==================== CONTINENTAL RECIPES (20) ====================
-  // 1
   {
     title: "Grilled Chicken Breast",
     image: "grilled-chicken-breast.jpg",
@@ -1239,7 +1215,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 2
   {
     title: "Beef Steak with Pepper Sauce",
     image: "Beef-Steak-with-Pepper-Sauce.jpg",
@@ -1296,7 +1271,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 3
   {
     title: "Fish and Chips",
     image: "fish-and-chips.jpg",
@@ -1351,10 +1325,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 4
   {
     title: "Shepherd's Pie",
-    image: "Shepherd's-Pie.jpg",
+    image: "Shepherd-Pie.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "500g lamb mince",
@@ -1411,7 +1384,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 5
   {
     title: "Chicken Alfredo Pasta",
     image: "Chicken-Alfredo-Pasta.jpg",
@@ -1464,7 +1436,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 6
   {
     title: "Roasted Lamb with Rosemary",
     image: "Roasted-Lamb-with-Rosemary.jpg",
@@ -1515,10 +1486,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 7
   {
     title: "Creamy Mushroom Soup",
-    image: "Creamy-of-mushroom-soup.jpg",
+    image: "Cream-of-mushroom-soup.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "500g mushrooms (sliced)",
@@ -1567,7 +1537,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 8
   {
     title: "Beef Bourguignon",
     image: "Beef-Bourguignon.jpg",
@@ -1624,7 +1593,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 9
   {
     title: "Quiche Lorraine",
     image: "Quiche-Lorraine.jpg",
@@ -1676,7 +1644,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 10
   {
     title: "Ratatouille",
     image: "Ratatouille.jpg",
@@ -1728,7 +1695,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 11
   {
     title: "Chicken Cordon Bleu",
     image: "Chicken-Cordon-Bleu.jpg",
@@ -1777,7 +1743,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 12
   {
     title: "Baked Salmon",
     image: "Baked-Salmon.jpg",
@@ -1825,7 +1790,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 13
   {
     title: "Beef Wellington",
     image: "Beef-Wellington.jpg",
@@ -1878,7 +1842,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 14
   {
     title: "Coq au Vin",
     image: "Coq-au-Vin.jpg",
@@ -1930,7 +1893,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 15
   {
     title: "Potato Gratin",
     image: "Potato-Gratin.jpg",
@@ -1978,7 +1940,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 16
   {
     title: "Eggs Benedict",
     image: "Eggs-Benedict.jpg",
@@ -2028,7 +1989,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 17
   {
     title: "Bouillabaisse",
     image: "Bouillabaisse.jpg",
@@ -2082,7 +2042,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 18
   {
     title: "French Onion Soup",
     image: "French-Onion-Soup.jpg",
@@ -2134,7 +2093,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 19
   {
     title: "Crème Brûlée",
     image: "Crème-Brûlée.jpg",
@@ -2182,10 +2140,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 20 - NEW CONTINENTAL
   {
     title: "Caesar Salad with Grilled Chicken",
-    image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=800",
+    image: "Caesar-Salad-with-Grilled-Chicken.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
       "2 chicken breasts",
@@ -2231,9 +2188,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-
-  // ==================== ITALIAN RECIPES (20) ====================
-  // 1
   {
     title: "Margherita Pizza",
     image: "Margherita-Pizza.jpg",
@@ -2280,7 +2234,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 2
   {
     title: "Spaghetti Carbonara",
     image: "Spaghetti-Bolognese.jpg",
@@ -2327,7 +2280,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 3
   {
     title: "Lasagna",
     image: "Lasagna.jpg",
@@ -2382,7 +2334,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 4
   {
     title: "Chicken Parmigiana",
     image: "Chicken-Parmigiana.jpg",
@@ -2432,7 +2383,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 5
   {
     title: "Risotto",
     image: "Risotto.jpg",
@@ -2482,7 +2432,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 6
   {
     title: "Bruschetta",
     image: "Bruschetta.jpg",
@@ -2528,7 +2477,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 7
   {
     title: "Minestrone Soup",
     image: "Minestrone-Soup.jpg",
@@ -2582,7 +2530,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 8
   {
     title: "Fettuccine Alfredo",
     image: "Chicken-Alfredo-Pasta.jpg",
@@ -2629,7 +2576,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 9
   {
     title: "Tiramisu",
     image: "Tiramisu.jpg",
@@ -2678,7 +2624,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 10
   {
     title: "Penne Arrabiata",
     image: "Penne-Arrabiata.jpg",
@@ -2725,7 +2670,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 11
   {
     title: "Pesto Pasta",
     image: "Pesto-Pasta.jpg",
@@ -2772,10 +2716,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 12 - NEW ITALIAN
   {
     title: "Spaghetti Bolognese",
-    image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=800",
+    image: "Spaghetti-Bolognese.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "400g spaghetti",
@@ -2828,10 +2771,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 13 - NEW ITALIAN
   {
     title: "Four Cheese Pizza",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800",
+    image: "Four-Cheese-Pizza.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "500g pizza dough",
@@ -2878,10 +2820,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 14 - NEW ITALIAN
   {
     title: "Caprese Salad",
-    image: "https://images.unsplash.com/photo-1592417817098-8fd3d9a4f395?w=800",
+    image: "caprese-salad.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "4 ripe tomatoes (sliced)",
@@ -2922,10 +2863,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 15 - NEW ITALIAN
   {
     title: "Eggplant Parmesan",
-    image: "https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?w=800",
+    image: "Eggplant-Parmesan.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "2 large eggplants (sliced into 1/2 inch rounds)",
@@ -2973,10 +2913,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 16 - NEW ITALIAN
   {
     title: "Lemon Risotto",
-    image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800",
+    image: "Lemon-Risotto.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "1 1/2 cups arborio rice",
@@ -3026,10 +2965,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 17 - NEW ITALIAN
   {
     title: "Garlic Bread",
-    image: "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=800",
+    image: "garlic-naan.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "1 baguette (sliced in half lengthwise)",
@@ -3070,10 +3008,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 18 - NEW ITALIAN
   {
     title: "Calzone",
-    image: "https://images.unsplash.com/photo-1542372147193-a7aca8b6be8b?w=800",
+    image: "calzone.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "500g pizza dough",
@@ -3121,61 +3058,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-    // 18 - NEW ITALIAN
-  {
-    title: "Calzone",
-    image: "https://images.unsplash.com/photo-1542372147193-a7aca8b6be8b?w=800",
-    cuisine: "Italian",
-    ingredientsRaw: [
-      "500g pizza dough",
-      "1 cup ricotta cheese",
-      "1 cup mozzarella cheese (shredded)",
-      "1/2 cup Parmesan cheese (grated)",
-      "1/2 cup ham or salami (diced)",
-      "1/2 cup marinara sauce",
-      "1 egg (beaten, for egg wash)",
-      "2 tablespoons olive oil",
-      "Salt and pepper to taste",
-      "Fresh basil"
-    ],
-    stepsRaw: [
-      "Preheat the oven to 400°F.",
-      "Divide the dough into 4 equal portions and roll each into a circle.",
-      "Mix ricotta, mozzarella, Parmesan, and ham in a bowl.",
-      "Place filling on one half of each dough circle.",
-      "Fold the other half over and seal the edges tightly.",
-      "Brush with beaten egg and make small slits on top.",
-      "Bake for 20-25 minutes until golden.",
-      "Serve with marinara sauce for dipping."
-    ],
-    difficulty: "Medium",
-    cookingTime: 35,
-    isActive: true,
-    isHalal: true,
-    description: "A folded pizza filled with cheese and ham - a delicious Italian classic.",
-    category: "Dinner",
-    subCategory: "regional",
-    dietType: "Non-Vegetarian",
-    suitableForMeals: ["Dinner"],
-    allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
-    baseServings: 4,
-    calories: 520,
-    ageGroup: ["adults", "kids", "seniors"],
-    patientFriendly: ["general"],
-    pantryKeywords: ["pizza dough", "ricotta", "mozzarella", "Parmesan", "ham", "marinara"],
-    searchKeywords: ["calzone", "stuffed pizza", "folded pizza", "italian calzone", "ham and cheese calzone"],
-    isFeatured: false,
-    averageRating: 0,
-    totalRatings: 0,
-    timesSuggested: 0,
-    timesUsedInPlans: 0
-  },
-  // 19 - NEW ITALIAN
   {
     title: "Stuffed Shells",
-    image: "https://images.unsplash.com/photo-1583924503997-d1c8b3c8c5f8?w=800",
+    image: "Stuffed-Shells.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "20 jumbo pasta shells",
@@ -3222,10 +3107,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 20 - NEW ITALIAN
   {
     title: "Panna Cotta",
-    image: "https://images.unsplash.com/photo-1488477181946-6428a0291779?w=800",
+    image: "Panna-Cotta.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
       "2 cups heavy cream",
@@ -3267,8 +3151,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // ==================== TURKISH RECIPES (20) ====================
-  // 1
   {
     title: "Chicken Shawarma",
     image: "chicken-shawarma.jpg",
@@ -3320,7 +3202,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 2
   {
     title: "Turkish Kebabs",
     image: "chicken-seekh-kebab.jpg",
@@ -3367,7 +3248,6 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 3
   {
     title: "Lamb Shish Kebab",
     image: "fish-kebab.jpg",
@@ -3412,10 +3292,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 4 - NEW TURKISH
   {
     title: "Turkish Baklava",
-    image: "https://images.unsplash.com/photo-1544613013-0f35b9a5b7b0?w=800",
+    image: "Turkish-Baklava.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "1 packet phyllo pastry",
@@ -3460,10 +3339,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 5 - NEW TURKISH
   {
     title: "Turkish Pide",
-    image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=800",
+    image: "Turkish-Pide.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "500g flour",
@@ -3513,10 +3391,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 6 - NEW TURKISH
   {
-    title: "Manti (Turkish Dumplings)",
-    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+    title: "Manti",
+    image: " Manti.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "2 cups flour",
@@ -3568,10 +3445,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 7 - NEW TURKISH
   {
     title: "Iskender Kebab",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800",
+    image: "Iskender-Kebab.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "500g lamb (thinly sliced)",
@@ -3620,10 +3496,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 8 - NEW TURKISH
   {
     title: "Doner Kebab",
-    image: "https://images.unsplash.com/photo-1597651355732-6b2b588a97d5?w=800",
+    image: "Iskender-Kebab.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "700g chicken thighs or lamb",
@@ -3672,10 +3547,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 9 - NEW TURKISH
   {
     title: "Turkish Meze Platter",
-    image: "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=800",
+    image: "Turkish-Meze-Platter.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "1 can chickpeas (for hummus)",
@@ -3722,10 +3596,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 10 - NEW TURKISH
   {
     title: "Turkish Borek",
-    image: "https://images.unsplash.com/photo-1585399000684-d2f72660f092?w=800",
+    image: "Turkish-Borek.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "1 packet phyllo pastry",
@@ -3771,10 +3644,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 11 - NEW TURKISH
   {
     title: "Turkish Simit",
-    image: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?w=800",
+    image: "Turkish-Simit.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "3 cups flour",
@@ -3819,10 +3691,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 12 - NEW TURKISH
   {
     title: "Lahmacun",
-    image: "https://images.unsplash.com/photo-1534809027769-b00d750a6bac?w=800",
+    image: "Lahmacun.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "500g flour",
@@ -3874,10 +3745,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 13 - NEW TURKISH
   {
     title: "Turkish Kofte",
-    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800",
+    image: "turkish-kofte.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "500g ground lamb or beef",
@@ -3924,10 +3794,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 14 - NEW TURKISH
   {
     title: "Menemen",
-    image: "https://images.unsplash.com/photo-1543080850-2eb8b7fc30b4?w=800",
+    image: "Menemen.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "6 eggs",
@@ -3973,10 +3842,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 15 - NEW TURKISH
   {
-    title: "Turkish Delight (Lokum)",
-    image: "https://images.unsplash.com/photo-1551489188-8f7fe0cf6bdf?w=800",
+    title: "Turkish Delight",
+    image: "Turkish-Delight.jpg ",
     cuisine: "Turkish",
     ingredientsRaw: [
       "2 cups sugar",
@@ -4021,10 +3889,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 16 - NEW TURKISH
   {
     title: "Turkish Rice Pilaf",
-    image: "https://images.unsplash.com/photo-1557935728-e3f2b57598b2?w=800",
+    image: "Turkish-Rice-Pilaf.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "2 cups rice",
@@ -4066,10 +3933,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 17 - NEW TURKISH
   {
     title: "Turkish Red Lentil Soup",
-    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800",
+    image: "Turkish-Red-Lentil-Soup.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "1 cup red lentils",
@@ -4115,10 +3981,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 18 - NEW TURKISH
   {
     title: "Sultan's Delight",
-    image: "https://images.unsplash.com/photo-1533840794060-21b514ef1501?w=800",
+    image: "Sultan-Delight.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "500g lamb (cubed)",
@@ -4166,10 +4031,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 19 - NEW TURKISH
   {
     title: "Turkish Salep",
-    image: "https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=800",
+    image: "Turkish-salep.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "2 cups milk",
@@ -4211,10 +4075,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 20 - NEW TURKISH
   {
     title: "Ayran",
-    image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+    image: "ayran.jpg",
     cuisine: "Turkish",
     ingredientsRaw: [
       "2 cups yogurt",
@@ -4252,12 +4115,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-
-  // ==================== CHINESE RECIPES (20) ====================
-  // 1
   {
     title: "Chow Mein",
-    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+    image: "ChowMein.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "400g chow mein noodles",
@@ -4304,10 +4164,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 2
   {
     title: "Kung Pao Chicken",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800",
+    image: "Kung-Pao-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken breast (diced)",
@@ -4355,10 +4214,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 3
   {
     title: "Sweet and Sour Chicken",
-    image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800",
+    image: "Sweet-and-Sour-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken breast (cubed)",
@@ -4407,10 +4265,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 4
   {
     title: "Fried Rice",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+    image: "fried-rice.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "3 cups cooked rice (cold)",
@@ -4456,10 +4313,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 5
   {
     title: "Spring Rolls",
-    image: "https://images.unsplash.com/photo-1567329959659-fc95aaca348b?w=800",
+    image: "spring-rolls.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "12 spring roll wrappers",
@@ -4506,10 +4362,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 6
   {
     title: "Hot and Sour Soup",
-    image: "https://images.unsplash.com/photo-1546548970-71785318a17b?w=800",
+    image: "hot-and-sour-chicken-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken stock",
@@ -4557,10 +4412,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 7
   {
     title: "Beef with Broccoli",
-    image: "https://images.unsplash.com/photo-1521727857535-282d5a56f24b?w=800",
+    image: "beef-with-broccoli.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g beef (thinly sliced)",
@@ -4606,10 +4460,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 8
   {
     title: "General Tso's Chicken",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800",
+    image: "General-Tsos-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken (cubed)",
@@ -4656,10 +4509,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 9
   {
     title: "Dumplings",
-    image: "https://images.unsplash.com/photo-1549305443-5f4a4e3a34f3?w=800",
+    image: "Dumplings.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "30 dumpling wrappers",
@@ -4706,10 +4558,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 10
   {
     title: "Mapo Tofu",
-    image: "https://images.unsplash.com/photo-1571688335693-2739fb1250e0?w=800",
+    image: "Mapo-Tofu.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "400g tofu (cubed)",
@@ -4757,10 +4608,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 11
   {
     title: "Szechuan Chicken",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800",
+    image: "Szechuan-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken (cubed)",
@@ -4805,10 +4655,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 12
   {
     title: "Egg Drop Soup",
-    image: "https://images.unsplash.com/photo-1546548970-71785318a17b?w=800",
+    image: "Egg-drop-soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "4 cups chicken stock",
@@ -4853,10 +4702,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 13
   {
     title: "Peking Duck",
-    image: "https://images.unsplash.com/photo-1584789219142-f1d4313a327b?w=800",
+    image: "Peking-Duck.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "1 whole duck",
@@ -4902,10 +4750,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 14
   {
     title: "Cashew Chicken",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800",
+    image: "Cashew-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken (cubed)",
@@ -4952,10 +4799,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 15
   {
     title: "Moo Goo Gai Pan",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800",
+    image: "Moo-Goo-Gai-Pan.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken (sliced)",
@@ -5002,10 +4848,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 16
   {
     title: "Wonton Soup",
-    image: "https://images.unsplash.com/photo-1546548970-71785318a17b?w=800",
+    image: "Wonton-Soup.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "20 wonton wrappers",
@@ -5050,10 +4895,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 17
   {
     title: "Sesame Chicken",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800",
+    image: "Sesame-Chicken.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g chicken (cubed)",
@@ -5099,10 +4943,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 18
   {
     title: "Lo Mein",
-    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800",
+    image: "Lo-Mein.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "400g lo mein noodles",
@@ -5149,10 +4992,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 19
   {
     title: "Egg Rolls",
-    image: "https://images.unsplash.com/photo-1567329959659-fc95aaca348b?w=800",
+    image: "egg-roll.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "12 egg roll wrappers",
@@ -5200,10 +5042,9 @@ const recipesToMigrate = [
     timesSuggested: 0,
     timesUsedInPlans: 0
   },
-  // 20
   {
     title: "Mongolian Beef",
-    image: "https://images.unsplash.com/photo-1521727857535-282d5a56f24b?w=800",
+    image: "Mongolian-Beef.jpg",
     cuisine: "Chinese",
     ingredientsRaw: [
       "500g beef (thinly sliced)",
@@ -5278,27 +5119,15 @@ async function migrateRecipes() {
         console.log(`Added: ${recipe.title}`);
         added++;
       } else {
-        console.log(`Skipped: ${recipe.title} (already exists)`);
         skipped++;
       }
     }
 
-    console.log('\n✅ Migration Complete!');
     console.log(`Added: ${added}, Skipped: ${skipped}`);
-    console.log('\n📊 Final Counts:');
-    console.log(`🇵🇰 Pakistani: 20`);
-    console.log(`🇪🇺 Continental: 20`);
-    console.log(`🇮🇹 Italian: 20`);
-    console.log(`🇹🇷 Turkish: 20`);
-    console.log(`🇨🇳 Chinese: 20`);
-    console.log(`📈 Total: 100 recipes`);
-    
     process.exit(0);
     
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error('Error:', error);
     process.exit(1);
   }
 }
-
-migrateRecipes();

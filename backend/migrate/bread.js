@@ -1667,8 +1667,6 @@ image: "tawa-roti.jpg",
 },{
   title: "Puri",
   image: "puri.jpg",
-  tagline: "Deep fried Indian bread - puffy and golden",
-  image: "https://images.unsplash.com/photo-1601050690597-df0568f70950",
   cuisine: "Pakistani",
   ingredientsRaw: [
     "2 cups whole wheat flour",

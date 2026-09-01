@@ -13,100 +13,99 @@ const MyRecipeHomepage = () => {
       id: 1, 
       title: 'BREAKFAST', 
       path: '/BreakFast', 
-     image: "breakfast.jpg",
+     image: "channa-puri.jpg",
     },
     { 
       id: 2, 
       title: 'LUNCH', 
       path: '/recipe-lunch', 
-      image: "lunch.jpg", 
+      image: "pakistani-pulao.jpg", 
     },
     { 
       id: 3, 
       title: 'DINNER', 
       path: '/recipe-dinner', 
-      image: "dinner.jpg",
+      image: "achari-chicken.jpg",
     },
     { 
       id: 4, 
       title: 'SOUPS', 
       path: '/soups', 
-      image: "soups.jpg", 
+      image: "Restaurant-Style-Hot-and-Sour-Soup.jpg", 
     },
     { 
       id: 5, 
       title: 'APPETIZERS', 
       path: '/appetizers', 
-      image: "appetizers.jpg", 
+      image: "hot-and-spicy-wings.jpg", 
     },
     { 
       id: 6, 
       title: 'SNACKS', 
       path: '/Snack', 
-      image: "snacks.jpg",
+      image: "gol-gappay.jpg",
     },
     { 
       id: 7, 
       title: 'DESSERTS', 
       path: '/desserts', 
-      image: "desserts.jpg",
+      image: "Qissa-Khawani-Kheer.jpg",
     },
     { 
       id: 8, 
       title: 'BAKING', 
       path: '/Baking', 
-      image: "baking.jpg",
+      image: "cherry-almond-coffee.jpg",
     },
     { 
       id: 9, 
       title: 'BEVERAGES', 
       path: '/Beverage', 
-      image: "beverages.jpg",
+      image: "badam-milk.jpg",
     },
     { 
       id: 10, 
       title: 'SALADS', 
       path: '/Salads', 
-      image: "salads.jpg",
+      image: "cucumber-salad.jpg",
     },
     { 
       id: 11, 
       title: 'REGIONAL', 
       path: '/Regional', 
-      image: "regional.jpg", 
+      image: "Ratatouille.jpg", 
     },
     { 
       id: 12, 
       title: 'CHEAT MEAL', 
       path: '/cheat-meal', 
-      image: "cheatMeal.jpg",
+      image: "fried-chicken.jpg",
     }
   ];
 
-  const budgetCategories = [
-    { 
-      id: 2, 
-      title: 'STUDENT RECIPES', 
-      path: '/StudentRecipe', 
-      image: "student.jpg", 
-      features: ['Easy student meals', 'Dorm room cooking', 'Quick recipes', 'Minimal equipment'] 
-    },
-    { 
-      id: 3, 
-      title: 'QUICK and EASY', 
-      path: '/QuickRecipe', 
-      image: "quick.jpg", 
-      features: ['15-min meals', 'Simple recipes', 'Minimal cleanup', 'Busy weeknights'] 
-    },
-    { 
-      id: 4, 
-      title: 'VEGETARIAN', 
-      path: '/Vege', 
-      image: "vegeterian.jpg", 
-      features: ['Meat-free meals', 'Plant-based protein', 'Healthy options', 'Vegetarian classics'] 
-    }
-  ];
-
+const budgetCategories = [
+  { 
+    id: 2, 
+    title: 'STUDENT RECIPES', 
+    path: '/StudentRecipe', 
+    image: "yogurt-with-fruits.jpg", 
+    features: ['Easy student meals for quick dorm room cooking'] 
+  },
+  { 
+    id: 3, 
+    title: 'QUICK And EASY', 
+    path: '/QuickRecipe', 
+    image: "french-fries.jpg", 
+    features: ['Simple 15-minute meals with minimal cleanup'] 
+  },
+  { 
+    id: 4, 
+    title: 'VEGETARIAN', 
+    path: '/Vege', 
+    image: "anda-shimla-mirch.jpg", 
+    features: ['Healthy meat-free meals with plant-based protein'] 
+  }
+];
   const heroImages = [
     "heroImage.jpg",
   ];

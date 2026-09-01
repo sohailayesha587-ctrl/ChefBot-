@@ -9,80 +9,69 @@ const RecipesDinner = () => {
     {
       id: 1,
       name: "Plain Vegetables",
-      image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500",
-      recipeCount: 3,
+      image: "plainVegetable.jpg",
       route: "/dinner",
     
     },
     {
       id: 2,
       name: "Plain Daal",
-      image: "https://images.unsplash.com/photo-1546833999-bf9a581a1996?w=500",
-      recipeCount: 3,
+      image: "plainDal.jpg",
       route: "/dinner",
      
     },
     {
       id: 3,
       name: "Egg Dishes",
-      image: "https://images.unsplash.com/photo-1584483766114-2c22c5e4f7b0?w=500",
-      recipeCount: 7,
+      image: "egg.jpg",
       route: "/egg-dishes"
     },
     {
       id: 4,
       name: "Fish Dishes",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500",
-      recipeCount: 4,
+      image: "fish.jpg",
       route: "/fish-dishes"
     },
     {
       id: 5,
       name: "Chicken Dishes",
-      image: "https://images.unsplash.com/photo-1604908176997-125f25c813e5?w=500",
-      recipeCount: 5,
+      image: "chicken.jpg",
       route: "/chicken"
     },
     {
       id: 6,
       name: "Mutton Dishes",
-      image: "https://images.unsplash.com/photo-1545247181-516773c7e8a2?w=500",
-      recipeCount: 6,
+      image: "mutton.jpg",
       route: "/mutton"
     },
     {
       id: 7,
       name: "Keema Dishes",
-      image: "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?w=500",
-      recipeCount: 7,
+      image: "keema.jpg",
       route: "/qeema"
     },
     {
       id: 8,
       name: "Rice Dishes",
-      image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500",
-      recipeCount: 8,
+      image: "rice.jpg",
       route: "/rice"
     },
     {
       id: 9,
       name: "Breads",
-      image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500",
-      recipeCount: 9,
+      image: "bread.jpg",
       route: "/breads"
     },
     {
       id: 10,
-      name: "BBQ / Grills",
-      image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500",
-      recipeCount: 10,
+      name: "BBQ",
+      image: "bbq.jpg",
       route: "/BBQ"
     },
     {
       id: 11,
       name: "Heavy Gravy",
-      image: "https://images.unsplash.com/photo-1585937421612-70a008356c36?w=500",
-      recipeCount: 11,
+      image: "heavyGravy.jpg",
       route: "/gravy"
     }
   ];

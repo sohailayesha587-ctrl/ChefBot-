@@ -1189,7 +1189,7 @@ const recipesToMigrate = [
   },
   {
     title: "Dal Makhani",
-    image: "daal-makhni.jpg",
+    image: "dal-bukhara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
       "1 cup whole urad dal (sabut urad) - washed and soaked overnight",
@@ -1755,7 +1755,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Rajasthani Dal",
+    title: "Rajasthan Dal",
     image: "daal-bukhara.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [

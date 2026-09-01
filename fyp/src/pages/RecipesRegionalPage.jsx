@@ -42,7 +42,6 @@ const RecipesRegionalPage = () => {
       });
   }, []);
 
-  // Filter recipes when selectedCuisine changes or recipes load
   useEffect(() => {
     if (allRegionalRecipes.length > 0) {
       const filtered = allRegionalRecipes.filter(
@@ -80,8 +79,8 @@ const RecipesRegionalPage = () => {
         setCurrentStep(stepIndex + 1);
         setProgress(((stepIndex + 1) / instructions.length) * 100);
         utterance.onstart = () => setIsPlaying(true);
-        utterance.onend = () => { 
-          setIsPlaying(false); 
+        utterance.onend = () => {
+          setIsPlaying(false);
           speechSynthesisRef.current = null;
           if (stepIndex < instructions.length - 1) {
             setTimeout(() => {
@@ -89,9 +88,9 @@ const RecipesRegionalPage = () => {
             }, 1000);
           }
         };
-        utterance.onerror = () => { 
-          setIsPlaying(false); 
-          speechSynthesisRef.current = null; 
+        utterance.onerror = () => {
+          setIsPlaying(false);
+          speechSynthesisRef.current = null;
         };
         speechSynthesisRef.current = utterance;
         window.speechSynthesis.speak(utterance);
@@ -153,7 +152,6 @@ const RecipesRegionalPage = () => {
     );
   }
 
-  // Get current cuisine name for display
   const getCurrentCuisineName = () => {
     const cuisine = cuisines.find(c => c.key === selectedCuisine);
     return cuisine ? cuisine.name : 'Regional';
@@ -178,9 +176,6 @@ const RecipesRegionalPage = () => {
             onClick={() => setSelectedCuisine(cuisine.key)}
           >
             <span className="cuisine-name">{cuisine.name}</span>
-            <span className="cuisine-count">
-              ({allRegionalRecipes.filter(r => r.cuisine?.toLowerCase() === cuisine.key.toLowerCase()).length})
-            </span>
           </button>
         ))}
       </div>
@@ -194,16 +189,15 @@ const RecipesRegionalPage = () => {
           ) : (
             <div className="regional-grid">
               {filteredRecipes.map(regional => (
-                <div 
-                  key={regional._id} 
+                <div
+                  key={regional._id}
                   className="regional-card"
                   onClick={() => handleRegionalSelect(regional)}
                 >
-                  <div 
+                  <div
                     className="regional-card-image"
                     style={{ backgroundImage: `url(${regional.image})` }}
                   ></div>
-                  
                   <div className="regional-card-content">
                     <h3 className="regional-card-title">{regional.title}</h3>
                   </div>
@@ -223,82 +217,82 @@ const RecipesRegionalPage = () => {
       {showDetailPanel && selectedRegional && (
         <div className="regional-modal-overlay" onClick={closeDetailPanel}>
           <div className="regional-modal" onClick={e => e.stopPropagation()}>
-            <div className="veg-modal-hero">
-              <div className="veg-modal-hero-left">
-                <span className="veg-modal-tag">{selectedRegional.cuisine || 'Regional'} Recipe</span>
-                <h2 className="veg-modal-hero-title">{selectedRegional.title}</h2>
+            <div className="regional-modal-hero">
+              <div className="regional-modal-hero-left">
+                <span className="regional-modal-tag">{selectedRegional.cuisine || 'Regional'} Recipe</span>
+                <h2 className="regional-modal-hero-title">{selectedRegional.title}</h2>
                 {selectedRegional.tagline && (
-                  <p className="veg-modal-hero-tagline">{selectedRegional.tagline}</p>
+                  <p className="regional-modal-hero-tagline">{selectedRegional.tagline}</p>
                 )}
               </div>
-              <div className="veg-modal-hero-right">
+              <div className="regional-modal-hero-right">
                 <img
                   src={selectedRegional.image}
                   alt={selectedRegional.title}
-                  className="veg-modal-hero-img"
+                  className="regional-modal-hero-img"
                 />
               </div>
               <button className="regional-modal-close" onClick={closeDetailPanel}>×</button>
             </div>
 
-            <div className="veg-modal-body">
-              <div className="veg-modal-col">
-                <div className="veg-modal-col-header">
+            <div className="regional-modal-body">
+              <div className="regional-modal-col">
+                <div className="regional-modal-col-header">
                   <i className="fas fa-list-ul"></i>
                   <h3>Ingredients</h3>
                 </div>
-                <div className="veg-modal-scroll">
+                <div className="regional-modal-scroll">
                   {selectedRegional.ingredientsRaw?.map((ingredient, idx) => (
-                    <div key={idx} className="veg-ingredient-item">
-                      <span className="veg-ingredient-dot"></span>
-                      <span className="veg-ingredient-text">{ingredient}</span>
+                    <div key={idx} className="regional-ingredient-item">
+                      <span className="regional-ingredient-dot"></span>
+                      <span className="regional-ingredient-text">{ingredient}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="veg-modal-col veg-modal-col--steps">
-                <div className="veg-modal-col-header">
+              <div className="regional-modal-col regional-modal-col--steps">
+                <div className="regional-modal-col-header">
                   <i className="fas fa-shoe-prints"></i>
                   <h3>Steps to Make</h3>
                 </div>
-                <div className="veg-modal-scroll">
+                <div className="regional-modal-scroll">
                   {selectedRegional.stepsRaw?.map((step, idx) => (
-                    <div key={idx} className="veg-step-item">
-                      <span className="veg-step-num">{idx + 1}</span>
-                      <span className="veg-step-text">{step}</span>
+                    <div key={idx} className="regional-step-item">
+                      <span className="regional-step-num">{idx + 1}</span>
+                      <span className="regional-step-text">{step}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="veg-voice-bar">
-              <div className="veg-voice-left">
-                <i className="fas fa-volume-up veg-voice-icon"></i>
-                <span className="veg-voice-label">Voice Guide</span>
+            <div className="regional-voice-bar">
+              <div className="regional-voice-left">
+                <i className="fas fa-volume-up regional-voice-icon"></i>
+                <span className="regional-voice-label">Voice Guide</span>
               </div>
 
-              <div className="veg-voice-progress">
-                <div className="veg-progress-track">
-                  <div className="veg-progress-fill" style={{ width: `${progress}%` }}></div>
+              <div className="regional-voice-progress">
+                <div className="regional-progress-track">
+                  <div className="regional-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
-                <div className="veg-progress-info">
+                <div className="regional-progress-info">
                   <span>Step {currentStep} of {selectedRegional.stepsRaw?.length || 0}</span>
                   <span>{Math.round(progress)}%</span>
                 </div>
               </div>
 
-              <div className="veg-voice-controls">
+              <div className="regional-voice-controls">
                 <button
-                  className="veg-step-btn"
+                  className="regional-step-btn"
                   onClick={speakPreviousStep}
                   disabled={currentStep <= 1}
                 >
                   <i className="fas fa-step-backward"></i> Prev
                 </button>
                 <button
-                  className={`veg-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
+                  className={`regional-voice-main-btn ${isPlaying ? 'stop' : 'play'}`}
                   onClick={() => isPlaying ? stopSpeaking() : speakInstructions(selectedRegional.stepsRaw)}
                 >
                   {isPlaying
@@ -307,7 +301,7 @@ const RecipesRegionalPage = () => {
                   }
                 </button>
                 <button
-                  className="veg-step-btn"
+                  className="regional-step-btn"
                   onClick={speakNextStep}
                   disabled={currentStep >= (selectedRegional.stepsRaw?.length || 0)}
                 >

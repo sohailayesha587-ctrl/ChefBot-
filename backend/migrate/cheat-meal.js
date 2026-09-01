@@ -10,7 +10,7 @@ const recipesToMigrate = [
     image: "chicken-burger.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
-      "1 chicken breast",
+     "1 chicken breast",
       "1 burger bun",
       "1 tablespoon oil",
       "Salt to taste",
@@ -1248,7 +1248,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Vegetable Pizza (Veg Pizza)",
+    title: "Vegetable Pizza",
     image: "veg-pizza.jpg",
     cuisine: "Italian",
     ingredientsRaw: [
@@ -2023,7 +2023,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Vegetable Roll (Veg Roll)",
+    title: "Vegetable Roll",
     image: "veg-spring-roll.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
@@ -2113,7 +2113,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Shami Burger (Bun Kebab)",
+    title: "Shami Burger",
     image: "shami-burger.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -2886,7 +2886,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Vegetable Wrap (Veg Wrap)",
+    title: "Vegetable Wrap",
     image: "kebab-wrap.jpg",
     cuisine: "Continental",
     ingredientsRaw: [
@@ -3993,7 +3993,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Dahi Baray (Lentil Fritters in Yogurt)",
+    title: "Dahi Baray",
     image: "dahi-bhallay.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4143,7 +4143,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Gol Gappay (Pani Puri)",
+    title: "Gol Gappay",
     image: "gol-gappay.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4283,7 +4283,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Chana Chaat (Chickpea Chaat)",
+    title: "Chana Chaat",
     image: "channa-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4329,7 +4329,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Samosa (Potato)",
+    title: "Samosa",
     image: "samosa.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4379,7 +4379,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Samosa (Minced Meat)",
+    title: "Samosa",
     image: "samosa.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4429,7 +4429,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Pakora (Potato Fritters)",
+    title: "Pakora",
     image: "pakora-chaat.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4570,7 +4570,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Kebab Roll (Seekh Kebab Paratha)",
+    title: "Kebab Roll",
     image: "spring-rolls.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
@@ -4706,7 +4706,7 @@ const recipesToMigrate = [
     timesUsedInPlans: 0
   },
   {
-    title: "Egg Paratha Roll (Anda Roll)",
+    title: "Egg Paratha Roll",
     image: "egg-roll.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [

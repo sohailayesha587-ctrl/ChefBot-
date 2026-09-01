@@ -4,10 +4,12 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -17,18 +19,17 @@ html, body, #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
+  background: #ffffff;
 }
 
 .dal-chicken-header {
-  background: rgb(40, 74, 75) !important;
-  background-image: none !important;
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   padding: 30px 20px;
   text-align: center;
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: 120px;
 }
 
@@ -38,23 +39,23 @@ html, body, #root {
 }
 
 .dal-chicken-page-title {
-  font-size: 2.5rem;
+  font-size: 40px;
   font-weight: 700;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
-  color: white;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  font-family: 'Playfair Display', Georgia, serif;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'DM Sans', 'Segoe UI', serif;
 }
 
 .dal-chicken-page-description {
-  font-size: 1rem;
+  font-size: 16px;
   opacity: 0.9;
   font-weight: 300;
   letter-spacing: 0.3px;
   max-width: 600px;
   margin: 0 auto;
-  color: #ddd;
+  color: #f5fafa;
 }
 
 .dal-chicken-main {
@@ -72,52 +73,53 @@ html, body, #root {
 }
 
 .dal-chicken-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   display: flex;
-  height: 120px;
+  height: 100px;
 }
 
 .dal-chicken-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  border-color: rgb(40, 74, 75);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #284a4b;
 }
 
 .dal-chicken-card-image {
-  width: 120px;
+  width: 80px;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #f1f5f4;
+  background-color: #f5fafa;
   flex-shrink: 0;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid #e0eeee;
 }
 
 .dal-chicken-card-content {
-  padding: 15px 20px;
+  padding: 8px 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: visible;
+  min-width: 0;
 }
 
 .dal-chicken-card-title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
-  color: #1e293b;
+  color: #1a3334;
   margin-bottom: 0;
   line-height: 1.3;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   word-break: break-word;
 }
 
@@ -129,31 +131,32 @@ html, body, #root {
 }
 
 .back-home-btn {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   border: none;
   padding: 12px 30px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(40,74,75,0.2);
+  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.2);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
 }
 
 .back-home-btn:hover {
-  background: rgb(28, 52, 53);
+  background: #1a3334;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(40,74,75,0.3);
+  box-shadow: 0 6px 18px rgba(40, 74, 75, 0.3);
 }
 
 .dal-chicken-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.82);
+  background: rgba(0, 0, 0, 0.82);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,36 +174,42 @@ html, body, #root {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-  background: rgb(40, 74, 75);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  background: #284a4b;
   position: relative;
   animation: modalIn 0.28s ease-out;
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .dal-chicken-modal-hero {
-  flex: 0 0 168px !important;
-  height: 168px !important;
-  max-height: 168px !important;
-  min-height: 168px !important;
+  flex: 0 0 168px;
+  height: 168px;
+  max-height: 168px;
+  min-height: 168px;
   display: flex;
   flex-direction: row;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
 .dal-chicken-modal-close {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(255,255,255,0.92);
-  color: rgb(40, 74, 75);
+  background: rgba(255, 255, 255, 0.92);
+  color: #284a4b;
   border: none;
   width: 36px;
   height: 36px;
@@ -213,12 +222,12 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   transition: all 0.25s;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 .dal-chicken-modal-close:hover {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
@@ -228,7 +237,7 @@ html, body, #root {
   flex-direction: column;
   justify-content: center;
   padding: 28px 40px;
-  background: linear-gradient(135deg, rgb(40, 74, 75) 0%, rgb(40, 74, 75) 100%);
+  background: #284a4b;
   position: relative;
   z-index: 2;
 }
@@ -247,9 +256,9 @@ html, body, #root {
 
 .dal-chicken-modal-tag {
   display: none;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -262,7 +271,7 @@ html, body, #root {
 }
 
 .dal-chicken-modal-hero-title {
-  font-size: 1.75rem;
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
@@ -276,8 +285,8 @@ html, body, #root {
 }
 
 .dal-chicken-modal-hero-tagline {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
+  font-size: 13.6px;
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.5;
   white-space: normal;
   overflow: hidden;
@@ -290,7 +299,7 @@ html, body, #root {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: rgb(20, 37, 38);
+  background: #1a3334;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,21 +320,21 @@ html, body, #root {
   display: flex;
   gap: 12px;
   padding: 14px 16px 10px;
-  background: white;
+  background: #ffffff;
   overflow: hidden;
 }
 
 .dal-chicken-modal-col {
   flex: 1;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
   border-radius: 14px;
-  border: 1px solid #e2e9e5;
-  box-shadow: 0 2px 10px rgba(40,74,75,0.06);
+  border: 1px solid #e0eeee;
+  box-shadow: 0 2px 10px rgba(40, 74, 75, 0.06);
   display: flex;
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  color: white;
+  color: #ffffff;
 }
 
 .dal-chicken-modal-col--steps {
@@ -337,20 +346,20 @@ html, body, #root {
   align-items: center;
   gap: 8px;
   padding: 12px 16px 10px;
-  border-bottom: 2px solid rgb(40, 74, 75);
+  border-bottom: 2px solid #284a4b;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
 .dal-chicken-modal-col-header i {
-  color: white;
+  color: #ffffff;
   font-size: 13px;
 }
 
 .dal-chicken-modal-col-header h3 {
-  font-size: 0.78rem;
+  font-size: 12.48px;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 0;
@@ -364,7 +373,7 @@ html, body, #root {
   flex-direction: column;
   gap: 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(40,74,75,0.3) transparent;
+  scrollbar-color: rgba(40, 74, 75, 0.3) transparent;
 }
 
 .dal-chicken-modal-scroll::-webkit-scrollbar {
@@ -376,7 +385,7 @@ html, body, #root {
 }
 
 .dal-chicken-modal-scroll::-webkit-scrollbar-thumb {
-  background: rgba(40,74,75,0.3);
+  background: rgba(40, 74, 75, 0.3);
   border-radius: 4px;
 }
 
@@ -391,14 +400,14 @@ html, body, #root {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: white;
+  background: #ffffff;
   flex-shrink: 0;
   margin-top: 5px;
 }
 
 .dal-chicken-ingredient-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.45;
   flex: 1;
@@ -415,9 +424,9 @@ html, body, #root {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
   border-radius: 50%;
   font-size: 11px;
   font-weight: 700;
@@ -429,7 +438,7 @@ html, body, #root {
 
 .dal-chicken-step-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.5;
   flex: 1;
@@ -438,12 +447,12 @@ html, body, #root {
 .dal-chicken-voice-bar {
   flex-shrink: 0;
   background: #ffffff;
-  border-top: 1px solid #e2e9e5;
+  border-top: 1px solid #e0eeee;
   padding: 11px 18px 13px;
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 -4px 16px rgba(40,74,75,0.07);
+  box-shadow: 0 -4px 16px rgba(40, 74, 75, 0.07);
 }
 
 .dal-chicken-voice-left {
@@ -454,14 +463,14 @@ html, body, #root {
 }
 
 .dal-chicken-voice-icon {
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   font-size: 15px;
 }
 
 .dal-chicken-voice-label {
-  font-size: 0.72rem;
+  font-size: 11.52px;
   font-weight: 700;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
@@ -474,7 +483,7 @@ html, body, #root {
 
 .dal-chicken-progress-track {
   height: 5px;
-  background: #e2ebeb;
+  background: #e0eeee;
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 4px;
@@ -482,7 +491,7 @@ html, body, #root {
 
 .dal-chicken-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgb(40, 74, 75), rgb(40, 74, 75));
+  background: #284a4b;
   border-radius: 3px;
   transition: width 0.35s ease;
 }
@@ -490,8 +499,8 @@ html, body, #root {
 .dal-chicken-progress-info {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
-  color: rgb(40, 74, 75);
+  font-size: 11.2px;
+  color: #284a4b;
   font-weight: 600;
 }
 
@@ -513,30 +522,30 @@ html, body, #root {
   font-size: 13px;
   cursor: pointer;
   transition: all 0.25s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
 .dal-chicken-voice-main-btn.play {
-  background: rgb(40, 74, 75);
-  color: white;
-  box-shadow: 0 3px 10px rgba(40,74,75,0.28);
+  background: #284a4b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(40, 74, 75, 0.28);
 }
 
 .dal-chicken-voice-main-btn.play:hover {
-  background: rgb(40, 74, 75);
+  background: #284a4b;
   transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(40,74,75,0.35);
+  box-shadow: 0 5px 14px rgba(40, 74, 75, 0.35);
 }
 
 .dal-chicken-voice-main-btn.stop {
-  background: #c53030;
-  color: white;
-  box-shadow: 0 3px 10px rgba(197,48,48,0.28);
+  background: #c0392b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(192, 57, 43, 0.28);
 }
 
 .dal-chicken-voice-main-btn.stop:hover {
-  background: #9b2c2c;
+  background: #c0392b;
   transform: translateY(-1px);
 }
 
@@ -545,29 +554,29 @@ html, body, #root {
   align-items: center;
   gap: 5px;
   padding: 8px 16px;
-  border: 1.5px solid rgb(40, 74, 75);
+  border: 1.5px solid #284a4b;
   background: transparent;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   font-size: 12.5px;
   transition: all 0.22s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
 .dal-chicken-step-btn:hover:not(:disabled) {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
 .dal-chicken-step-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-  border-color: rgb(120, 140, 141);
-  color: rgb(120, 140, 141);
+  border-color: #666666;
+  color: #666666;
 }
 
 .loading-container {
@@ -577,87 +586,52 @@ html, body, #root {
   justify-content: center;
   height: 60vh;
   gap: 16px;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
 }
 
 .loading-spinner {
   width: 42px;
   height: 42px;
-  border: 3px solid #e2e8f0;
-  border-top-color: rgb(40, 74, 75);
+  border: 3px solid #e0eeee;
+  border-top-color: #284a4b;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@media (min-width: 1400px) {
-  .dal-chicken-modal {
-    max-width: 1500px;
-    height: 88vh;
-  }
-  .dal-chicken-modal-hero {
-    flex: 0 0 260px;
-    max-height: 280px;
-  }
-  .dal-chicken-modal-hero-left {
-    flex: 0 0 50%;
-    padding: 32px 36px;
-  }
-  .dal-chicken-modal-hero-title {
-    font-size: 2rem;
-  }
-  .dal-chicken-ingredient-text,
-  .dal-chicken-step-text {
-    font-size: 13.5px;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1399px) {
+@media (max-width: 780px) {
+  .dal-chicken-header {
+    margin-top: 100px;
+    padding: 25px 16px;
+  }
+  .dal-chicken-page-title {
+    font-size: 32px;
+  }
+  .dal-chicken-page-description {
+    font-size: 14.4px;
+  }
+
   .dal-chicken-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .dal-chicken-card-image {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .dal-chicken-modal-hero {
-    flex: 0 0 230px;
-    max-height: 250px;
-  }
-  .dal-chicken-modal-hero-title {
-    font-size: 1.6rem;
-  }
-  .dal-chicken-modal-body {
-    gap: 10px;
-    padding: 12px 14px 8px;
-  }
-  .dal-chicken-voice-bar {
-    padding: 10px 16px 12px;
-    gap: 12px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .dal-chicken-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
   .dal-chicken-card {
-    height: 110px;
+    height: 85px;
   }
   .dal-chicken-card-image {
-    width: 110px;
-    height: 100%;
+    width: 70px;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  }
+  .dal-chicken-card-content {
+    padding: 6px 14px;
   }
   .dal-chicken-card-title {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .dal-chicken-modal {
@@ -676,10 +650,10 @@ html, body, #root {
     padding: 20px 28px;
   }
   .dal-chicken-modal-hero-title {
-    font-size: 1.4rem;
+    font-size: 22.4px;
   }
   .dal-chicken-modal-hero-tagline {
-    font-size: 0.75rem;
+    font-size: 12px;
   }
   .dal-chicken-modal-tag {
     font-size: 9px;
@@ -695,7 +669,7 @@ html, body, #root {
     font-size: 12px;
   }
   .dal-chicken-modal-col-header h3 {
-    font-size: 0.7rem;
+    font-size: 11.2px;
   }
   .dal-chicken-modal-col-header {
     padding: 10px 14px 8px;
@@ -710,7 +684,7 @@ html, body, #root {
     gap: 12px;
   }
   .dal-chicken-voice-label {
-    font-size: 0.65rem;
+    font-size: 10.4px;
   }
   .dal-chicken-voice-main-btn {
     padding: 7px 18px;
@@ -722,157 +696,34 @@ html, body, #root {
   }
 }
 
-@media (min-width: 576px) and (max-width: 767px) {
-  .dal-chicken-header {
-    margin-top: 100px;
-    padding: 25px 16px;
-  }
-  .dal-chicken-page-title {
-    font-size: 2rem;
-  }
-  .dal-chicken-page-description {
-    font-size: 0.9rem;
-  }
-
-  .dal-chicken-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px;
-  }
-  .dal-chicken-card {
-    height: 105px;
-  }
-  .dal-chicken-card-image {
-    width: 105px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .dal-chicken-card-title {
-    font-size: 14px;
-  }
-
-  .dal-chicken-modal {
-    width: 95%;
-    height: 85vh;
-    border-radius: 16px;
-  }
-
-  .dal-chicken-modal-hero-img {
-    object-fit: cover;
-  }
-  .dal-chicken-modal-hero {
-    flex: 0 0 165px;
-    max-height: 165px;
-    min-height: 165px;
-  }
-  .dal-chicken-modal-hero-left {
-    flex: 0 0 52%;
-    padding: 16px 22px;
-  }
-  .dal-chicken-modal-hero-title {
-    font-size: 1.25rem;
-  }
-  .dal-chicken-modal-hero-tagline {
-    font-size: 0.7rem;
-    display: -webkit-box;
-  }
-  .dal-chicken-modal-tag {
-    font-size: 8px;
-    padding: 3px 8px;
-    margin-bottom: 8px;
-  }
-  .dal-chicken-modal-hero-left::after {
-    display: block;
-    right: -40px;
-    width: 45px;
-  }
-
-  .dal-chicken-modal-body {
-    gap: 10px;
-    padding: 12px 12px 8px;
-  }
-  .dal-chicken-ingredient-text,
-  .dal-chicken-step-text {
-    font-size: 13.5px;
-    font-weight: 600;
-  }
-  .dal-chicken-modal-col-header h3 {
-    font-size: 0.65rem;
-  }
-  .dal-chicken-modal-col-header {
-    padding: 9px 12px 7px;
-  }
-  .dal-chicken-modal-scroll {
-    padding: 10px 12px 12px;
-    gap: 7px;
-  }
-
-  .dal-chicken-ingredient-dot {
-    width: 6px;
-    height: 6px;
-    margin-top: 4px;
-  }
-  .dal-chicken-step-num {
-    width: 22px;
-    height: 22px;
-    font-size: 10px;
-  }
-
-  .dal-chicken-voice-bar {
-    padding: 8px 12px 10px;
-    gap: 10px;
-  }
-  .dal-chicken-voice-label {
-    display: inline-block;
-    font-size: 0.6rem;
-  }
-  .dal-chicken-voice-left {
-    display: flex;
-  }
-  .dal-chicken-voice-progress {
-    order: initial;
-    width: auto;
-    flex: 1;
-  }
-  .dal-chicken-voice-main-btn {
-    padding: 7px 16px;
-    font-size: 11.5px;
-  }
-  .dal-chicken-step-btn {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 575px) {
+@media (max-width: 380px) {
   .dal-chicken-header {
     margin-top: 80px;
     padding: 20px 16px;
   }
   .dal-chicken-page-title {
-    font-size: 1.6rem;
+    font-size: 25.6px;
   }
   .dal-chicken-page-description {
-    font-size: 0.8rem;
+    font-size: 12.8px;
   }
 
   .dal-chicken-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
   .dal-chicken-card {
-    height: 95px;
+    height: 75px;
   }
   .dal-chicken-card-image {
-    width: 95px;
-    height: 100%;
+    width: 60px;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  }
+  .dal-chicken-card-content {
+    padding: 5px 12px;
   }
   .dal-chicken-card-title {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .dal-chicken-modal {
@@ -894,11 +745,11 @@ html, body, #root {
     padding: 12px 18px;
   }
   .dal-chicken-modal-hero-title {
-    font-size: 1.1rem;
+    font-size: 17.6px;
     -webkit-line-clamp: 2;
   }
   .dal-chicken-modal-hero-tagline {
-    font-size: 0.65rem;
+    font-size: 10.4px;
     display: -webkit-box;
   }
   .dal-chicken-modal-tag {
@@ -928,7 +779,7 @@ html, body, #root {
     gap: 6px;
   }
   .dal-chicken-modal-col-header h3 {
-    font-size: 0.6rem;
+    font-size: 9.6px;
     letter-spacing: 1px;
   }
   .dal-chicken-modal-col-header i {
@@ -963,7 +814,7 @@ html, body, #root {
   }
   .dal-chicken-voice-label {
     display: inline-block;
-    font-size: 0.55rem;
+    font-size: 8.8px;
     letter-spacing: 1px;
   }
   .dal-chicken-voice-left {
@@ -979,7 +830,7 @@ html, body, #root {
     flex: 1;
   }
   .dal-chicken-progress-info {
-    font-size: 0.6rem;
+    font-size: 9.6px;
   }
   .dal-chicken-voice-main-btn {
     padding: 6px 12px;
@@ -990,77 +841,5 @@ html, body, #root {
     padding: 5px 10px;
     font-size: 10px;
     gap: 4px;
-  }
-}
-
-@media (max-width: 400px) {
-  .dal-chicken-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px;
-  }
-  .dal-chicken-card {
-    height: 85px;
-  }
-  .dal-chicken-card-image {
-    width: 85px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .dal-chicken-card-title {
-    font-size: 11px;
-  }
-  .dal-chicken-card-content {
-    padding: 10px 12px;
-  }
-
-  .dal-chicken-modal-hero-img {
-    object-fit: cover;
-  }
-  .dal-chicken-modal-hero {
-    flex: 0 0 130px;
-    max-height: 130px;
-    min-height: 130px;
-  }
-  .dal-chicken-modal-hero-left {
-    padding: 10px 14px;
-  }
-  .dal-chicken-modal-hero-title {
-    font-size: 1rem;
-  }
-  .dal-chicken-modal-hero-tagline {
-    font-size: 0.6rem;
-    display: -webkit-box;
-  }
-  .dal-chicken-modal-tag {
-    display: none;
-  }
-  .dal-chicken-modal-hero-left::after {
-    right: -30px;
-    width: 35px;
-  }
-
-  .dal-chicken-ingredient-text,
-  .dal-chicken-step-text {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-  .dal-chicken-modal-col-header h3 {
-    font-size: 0.55rem;
-    letter-spacing: 0.5px;
-  }
-  .dal-chicken-voice-label {
-    display: inline-block;
-    font-size: 0.5rem;
-  }
-  .dal-chicken-voice-main-btn {
-    padding: 5px 10px;
-    font-size: 10px;
-  }
-  .dal-chicken-step-btn {
-    padding: 4px 8px;
-    font-size: 9px;
   }
 }

@@ -4,100 +4,61 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.mutton-veg-page {
+.veg-mutton-page {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
+  background: #ffffff;
 }
 
-.mutton-veg-header {
-  background: rgb(40, 74, 75) !important;
-  background-image: none !important;
-  color: white;
+.veg-mutton-header {
+  background: #284a4b;
+  color: #ffffff;
   padding: 30px 20px;
   text-align: center;
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: 120px;
 }
 
-.mutton-veg-header-content {
+.veg-mutton-header-content {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.mutton-veg-page-title {
-  font-size: 2.5rem;
+.veg-mutton-page-title {
+  font-size: 40px;
   font-weight: 700;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
-  color: white;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  font-family: 'Playfair Display', Georgia, serif;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'DM Sans', 'Segoe UI', serif;
 }
 
-.mutton-veg-page-description {
-  font-size: 1rem;
+.veg-mutton-page-description {
+  font-size: 16px;
   opacity: 0.9;
   font-weight: 300;
   letter-spacing: 0.3px;
   max-width: 600px;
   margin: 0 auto;
-  color: #ddd;
+  color: #f5fafa;
 }
 
-.category-filter-container {
-  max-width: 1400px;
-  margin: 20px auto 0;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.category-filter-select {
-  padding: 10px 20px;
-  border: 2px solid rgb(40, 74, 75);
-  border-radius: 30px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: rgb(40, 74, 75);
-  background: white;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-  min-width: 180px;
-}
-
-.category-filter-select:hover {
-  border-color: rgb(28, 52, 53);
-  box-shadow: 0 2px 10px rgba(40,74,75,0.15);
-}
-
-.category-filter-select:focus {
-  border-color: rgb(28, 52, 53);
-  box-shadow: 0 0 0 3px rgba(40,74,75,0.1);
-}
-
-.recipe-count {
-  font-size: 0.95rem;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.mutton-veg-main {
+.veg-mutton-main {
   flex: 1;
   padding: 30px 20px;
   width: 100%;
@@ -105,73 +66,61 @@ html, body, #root {
   margin: 0 auto;
 }
 
-.mutton-veg-grid {
+.veg-mutton-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-.mutton-veg-card {
-  background: white;
+.veg-mutton-card {
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0eeee;
   display: flex;
-  height: 120px;
+  height: 100px;
 }
 
-.mutton-veg-card:hover {
+.veg-mutton-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  border-color: rgb(40, 74, 75);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  border-color: #284a4b;
 }
 
-.mutton-veg-card-image {
-  width: 120px;
+.veg-mutton-card-image {
+  width: 80px;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #f1f5f4;
+  background-color: #f5fafa;
   flex-shrink: 0;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid #e0eeee;
 }
 
-.mutton-veg-card-content {
-  padding: 15px 20px;
+.veg-mutton-card-content {
+  padding: 8px 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: visible;
+  min-width: 0;
 }
 
-.mutton-veg-card-title {
-  font-size: 17px;
+.veg-mutton-card-title {
+  font-size: 15px;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 4px;
+  color: #1a3334;
+  margin-bottom: 0;
   line-height: 1.3;
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   word-break: break-word;
-}
-
-.recipe-category-badge {
-  display: inline-block;
-  background: rgb(40, 74, 75);
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 12px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
-  align-self: flex-start;
-  margin-top: 4px;
 }
 
 .back-button-container {
@@ -182,31 +131,32 @@ html, body, #root {
 }
 
 .back-home-btn {
-  background: rgb(40, 74, 75);
-  color: white;
+  background: #284a4b;
+  color: #ffffff;
   border: none;
   padding: 12px 30px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(40,74,75,0.2);
+  box-shadow: 0 4px 12px rgba(40, 74, 75, 0.2);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
 }
 
 .back-home-btn:hover {
-  background: rgb(28, 52, 53);
+  background: #1a3334;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(40,74,75,0.3);
+  box-shadow: 0 6px 18px rgba(40, 74, 75, 0.3);
 }
 
-.mutton-veg-modal-overlay {
+.veg-mutton-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.82);
+  background: rgba(0, 0, 0, 0.82);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,7 +165,7 @@ html, body, #root {
   backdrop-filter: blur(4px);
 }
 
-.mutton-veg-modal {
+.veg-mutton-modal {
   width: 95%;
   max-width: 1360px;
   height: 90vh;
@@ -224,36 +174,42 @@ html, body, #root {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-  background: rgb(40, 74, 75);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  background: #284a4b;
   position: relative;
   animation: modalIn 0.28s ease-out;
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.mutton-veg-modal-hero {
-  flex: 0 0 168px !important;
-  height: 168px !important;
-  max-height: 168px !important;
-  min-height: 168px !important;
+.veg-mutton-modal-hero {
+  flex: 0 0 168px;
+  height: 168px;
+  max-height: 168px;
+  min-height: 168px;
   display: flex;
   flex-direction: row;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
-.mutton-veg-modal-close {
+.veg-mutton-modal-close {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(255,255,255,0.92);
-  color: rgb(40, 74, 75);
+  background: rgba(255, 255, 255, 0.92);
+  color: #284a4b;
   border: none;
   width: 36px;
   height: 36px;
@@ -266,27 +222,27 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   transition: all 0.25s;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
-.mutton-veg-modal-close:hover {
-  background: rgb(40, 74, 75);
-  color: white;
+.veg-mutton-modal-close:hover {
+  background: #284a4b;
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
-.mutton-veg-modal-hero-left {
+.veg-mutton-modal-hero-left {
   flex: 0 0 52%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 28px 40px;
-  background: linear-gradient(135deg, rgb(40, 74, 75) 0%, rgb(40, 74, 75) 100%);
+  background: #284a4b;
   position: relative;
   z-index: 2;
 }
 
-.mutton-veg-modal-hero-left::after {
+.veg-mutton-modal-hero-left::after {
   content: '';
   position: absolute;
   top: 0;
@@ -298,11 +254,11 @@ html, body, #root {
   z-index: 6;
 }
 
-.mutton-veg-modal-tag {
+.veg-mutton-modal-tag {
   display: none;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -314,8 +270,8 @@ html, body, #root {
   align-self: flex-start;
 }
 
-.mutton-veg-modal-hero-title {
-  font-size: 1.75rem;
+.veg-mutton-modal-hero-title {
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
@@ -328,9 +284,9 @@ html, body, #root {
   -webkit-box-orient: vertical;
 }
 
-.mutton-veg-modal-hero-tagline {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
+.veg-mutton-modal-hero-tagline {
+  font-size: 13.6px;
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.5;
   white-space: normal;
   overflow: hidden;
@@ -339,17 +295,17 @@ html, body, #root {
   -webkit-box-orient: vertical;
 }
 
-.mutton-veg-modal-hero-right {
+.veg-mutton-modal-hero-right {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: rgb(20, 37, 38);
+  background: #1a3334;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.mutton-veg-modal-hero-img {
+.veg-mutton-modal-hero-img {
   position: relative;
   width: 100%;
   height: 100%;
@@ -358,58 +314,58 @@ html, body, #root {
   display: block;
 }
 
-.mutton-veg-modal-body {
+.veg-mutton-modal-body {
   flex: 1;
   min-height: 0;
   display: flex;
   gap: 12px;
   padding: 14px 16px 10px;
-  background: white;
+  background: #ffffff;
   overflow: hidden;
 }
 
-.mutton-veg-modal-col {
+.veg-mutton-modal-col {
   flex: 1;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
   border-radius: 14px;
-  border: 1px solid #e2e9e5;
-  box-shadow: 0 2px 10px rgba(40,74,75,0.06);
+  border: 1px solid #e0eeee;
+  box-shadow: 0 2px 10px rgba(40, 74, 75, 0.06);
   display: flex;
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  color: white;
+  color: #ffffff;
 }
 
-.mutton-veg-modal-col--steps {
+.veg-mutton-modal-col--steps {
   flex: 1.3;
 }
 
-.mutton-veg-modal-col-header {
+.veg-mutton-modal-col-header {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 16px 10px;
-  border-bottom: 2px solid rgb(40, 74, 75);
+  border-bottom: 2px solid #284a4b;
   flex-shrink: 0;
-  background: rgb(40, 74, 75);
+  background: #284a4b;
 }
 
-.mutton-veg-modal-col-header i {
-  color: white;
+.veg-mutton-modal-col-header i {
+  color: #ffffff;
   font-size: 13px;
 }
 
-.mutton-veg-modal-col-header h3 {
-  font-size: 0.78rem;
+.veg-mutton-modal-col-header h3 {
+  font-size: 12.48px;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 0;
 }
 
-.mutton-veg-modal-scroll {
+.veg-mutton-modal-scroll {
   flex: 1;
   overflow-y: auto;
   padding: 12px 14px 14px;
@@ -417,60 +373,60 @@ html, body, #root {
   flex-direction: column;
   gap: 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(40,74,75,0.3) transparent;
+  scrollbar-color: rgba(40, 74, 75, 0.3) transparent;
 }
 
-.mutton-veg-modal-scroll::-webkit-scrollbar {
+.veg-mutton-modal-scroll::-webkit-scrollbar {
   width: 4px;
 }
 
-.mutton-veg-modal-scroll::-webkit-scrollbar-track {
+.veg-mutton-modal-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.mutton-veg-modal-scroll::-webkit-scrollbar-thumb {
-  background: rgba(40,74,75,0.3);
+.veg-mutton-modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(40, 74, 75, 0.3);
   border-radius: 4px;
 }
 
-.mutton-veg-ingredient-item {
+.veg-mutton-ingredient-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   line-height: 1.45;
 }
 
-.mutton-veg-ingredient-dot {
+.veg-mutton-ingredient-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: white;
+  background: #ffffff;
   flex-shrink: 0;
   margin-top: 5px;
 }
 
-.mutton-veg-ingredient-text {
+.veg-mutton-ingredient-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.45;
   flex: 1;
 }
 
-.mutton-veg-step-item {
+.veg-mutton-step-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   line-height: 1.45;
 }
 
-.mutton-veg-step-num {
+.veg-mutton-step-num {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
   border-radius: 50%;
   font-size: 11px;
   font-weight: 700;
@@ -480,82 +436,82 @@ html, body, #root {
   margin-top: 1px;
 }
 
-.mutton-veg-step-text {
+.veg-mutton-step-text {
   font-size: 13px;
-  color: white;
+  color: #ffffff;
   font-weight: 500;
   line-height: 1.5;
   flex: 1;
 }
 
-.mutton-veg-voice-bar {
+.veg-mutton-voice-bar {
   flex-shrink: 0;
   background: #ffffff;
-  border-top: 1px solid #e2e9e5;
+  border-top: 1px solid #e0eeee;
   padding: 11px 18px 13px;
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 -4px 16px rgba(40,74,75,0.07);
+  box-shadow: 0 -4px 16px rgba(40, 74, 75, 0.07);
 }
 
-.mutton-veg-voice-left {
+.veg-mutton-voice-left {
   display: flex;
   align-items: center;
   gap: 7px;
   flex-shrink: 0;
 }
 
-.mutton-veg-voice-icon {
-  color: rgb(40, 74, 75);
+.veg-mutton-voice-icon {
+  color: #284a4b;
   font-size: 15px;
 }
 
-.mutton-veg-voice-label {
-  font-size: 0.72rem;
+.veg-mutton-voice-label {
+  font-size: 11.52px;
   font-weight: 700;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
 }
 
-.mutton-veg-voice-progress {
+.veg-mutton-voice-progress {
   flex: 1;
   min-width: 60px;
 }
 
-.mutton-veg-progress-track {
+.veg-mutton-progress-track {
   height: 5px;
-  background: #e2ebeb;
+  background: #e0eeee;
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 4px;
 }
 
-.mutton-veg-progress-fill {
+.veg-mutton-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgb(40, 74, 75), rgb(40, 74, 75));
+  background: #284a4b;
   border-radius: 3px;
   transition: width 0.35s ease;
 }
 
-.mutton-veg-progress-info {
+.veg-mutton-progress-info {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
-  color: rgb(40, 74, 75);
+  font-size: 11.2px;
+  color: #284a4b;
   font-weight: 600;
 }
 
-.mutton-veg-voice-controls {
+.veg-mutton-voice-controls {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
 
-.mutton-veg-voice-main-btn {
+.veg-mutton-voice-main-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -566,61 +522,61 @@ html, body, #root {
   font-size: 13px;
   cursor: pointer;
   transition: all 0.25s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
-.mutton-veg-voice-main-btn.play {
-  background: rgb(40, 74, 75);
-  color: white;
-  box-shadow: 0 3px 10px rgba(40,74,75,0.28);
+.veg-mutton-voice-main-btn.play {
+  background: #284a4b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(40, 74, 75, 0.28);
 }
 
-.mutton-veg-voice-main-btn.play:hover {
-  background: rgb(40, 74, 75);
+.veg-mutton-voice-main-btn.play:hover {
+  background: #284a4b;
   transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(40,74,75,0.35);
+  box-shadow: 0 5px 14px rgba(40, 74, 75, 0.35);
 }
 
-.mutton-veg-voice-main-btn.stop {
-  background: #c53030;
-  color: white;
-  box-shadow: 0 3px 10px rgba(197,48,48,0.28);
+.veg-mutton-voice-main-btn.stop {
+  background: #c0392b;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(192, 57, 43, 0.28);
 }
 
-.mutton-veg-voice-main-btn.stop:hover {
-  background: #9b2c2c;
+.veg-mutton-voice-main-btn.stop:hover {
+  background: #c0392b;
   transform: translateY(-1px);
 }
 
-.mutton-veg-step-btn {
+.veg-mutton-step-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 8px 16px;
-  border: 1.5px solid rgb(40, 74, 75);
+  border: 1.5px solid #284a4b;
   background: transparent;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   font-size: 12.5px;
   transition: all 0.22s;
-  font-family: inherit;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   white-space: nowrap;
 }
 
-.mutton-veg-step-btn:hover:not(:disabled) {
-  background: rgb(40, 74, 75);
-  color: white;
+.veg-mutton-step-btn:hover:not(:disabled) {
+  background: #284a4b;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
-.mutton-veg-step-btn:disabled {
+.veg-mutton-step-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-  border-color: rgb(120, 140, 141);
-  color: rgb(120, 140, 141);
+  border-color: #666666;
+  color: #666666;
 }
 
 .loading-container {
@@ -630,375 +586,183 @@ html, body, #root {
   justify-content: center;
   height: 60vh;
   gap: 16px;
-  color: rgb(40, 74, 75);
+  color: #284a4b;
 }
 
 .loading-spinner {
   width: 42px;
   height: 42px;
-  border: 3px solid #e2e8f0;
-  border-top-color: rgb(40, 74, 75);
+  border: 3px solid #e0eeee;
+  border-top-color: #284a4b;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Responsive Styles */
-@media (min-width: 1400px) {
-  .mutton-veg-modal {
-    max-width: 1500px;
-    height: 88vh;
-  }
-  .mutton-veg-modal-hero {
-    flex: 0 0 260px;
-    max-height: 280px;
-  }
-  .mutton-veg-modal-hero-left {
-    flex: 0 0 50%;
-    padding: 32px 36px;
-  }
-  .mutton-veg-modal-hero-title {
-    font-size: 2rem;
-  }
-  .mutton-veg-ingredient-text,
-  .mutton-veg-step-text {
-    font-size: 13.5px;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1399px) {
-  .mutton-veg-grid {
+@media (max-width: 780px) {
+  .veg-mutton-header {
+    margin-top: 100px;
+    padding: 25px 16px;
+  }
+  .veg-mutton-page-title {
+    font-size: 32px;
+  }
+  .veg-mutton-page-description {
+    font-size: 14.4px;
+  }
+
+  .veg-mutton-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
-  .mutton-veg-card-image {
+  .veg-mutton-card {
+    height: 85px;
+  }
+  .veg-mutton-card-image {
+    width: 70px;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
   }
-  .mutton-veg-modal-hero {
-    flex: 0 0 230px;
-    max-height: 250px;
+  .veg-mutton-card-content {
+    padding: 6px 14px;
   }
-  .mutton-veg-modal-hero-title {
-    font-size: 1.6rem;
-  }
-  .mutton-veg-modal-body {
-    gap: 10px;
-    padding: 12px 14px 8px;
-  }
-  .mutton-veg-voice-bar {
-    padding: 10px 16px 12px;
-    gap: 12px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .mutton-veg-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .mutton-veg-card {
-    height: 110px;
-  }
-  .mutton-veg-card-image {
-    width: 110px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .mutton-veg-card-title {
-    font-size: 15px;
+  .veg-mutton-card-title {
+    font-size: 12px;
   }
 
-  .category-filter-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .category-filter-select {
-    width: 100%;
-    min-width: unset;
-  }
-
-  .mutton-veg-modal {
+  .veg-mutton-modal {
     width: 96%;
     height: 88vh;
     border-radius: 18px;
   }
 
-  .mutton-veg-modal-hero {
+  .veg-mutton-modal-hero {
     flex: 0 0 150px;
     max-height: 150px;
     min-height: 150px;
   }
-  .mutton-veg-modal-hero-left {
+  .veg-mutton-modal-hero-left {
     flex: 0 0 52%;
     padding: 20px 28px;
   }
-  .mutton-veg-modal-hero-title {
-    font-size: 1.4rem;
+  .veg-mutton-modal-hero-title {
+    font-size: 22.4px;
   }
-  .mutton-veg-modal-hero-tagline {
-    font-size: 0.75rem;
+  .veg-mutton-modal-hero-tagline {
+    font-size: 12px;
   }
-  .mutton-veg-modal-tag {
+  .veg-mutton-modal-tag {
     font-size: 9px;
     padding: 3px 10px;
   }
 
-  .mutton-veg-modal-body {
+  .veg-mutton-modal-body {
     gap: 10px;
     padding: 12px 14px 8px;
   }
-  .mutton-veg-ingredient-text,
-  .mutton-veg-step-text {
+  .veg-mutton-ingredient-text,
+  .veg-mutton-step-text {
     font-size: 12px;
   }
-  .mutton-veg-modal-col-header h3 {
-    font-size: 0.7rem;
+  .veg-mutton-modal-col-header h3 {
+    font-size: 11.2px;
   }
-  .mutton-veg-modal-col-header {
+  .veg-mutton-modal-col-header {
     padding: 10px 14px 8px;
   }
-  .mutton-veg-modal-scroll {
+  .veg-mutton-modal-scroll {
     padding: 10px 12px 12px;
     gap: 7px;
   }
 
-  .mutton-veg-voice-bar {
+  .veg-mutton-voice-bar {
     padding: 9px 14px 11px;
     gap: 12px;
   }
-  .mutton-veg-voice-label {
-    font-size: 0.65rem;
+  .veg-mutton-voice-label {
+    font-size: 10.4px;
   }
-  .mutton-veg-voice-main-btn {
+  .veg-mutton-voice-main-btn {
     padding: 7px 18px;
     font-size: 12px;
   }
-  .mutton-veg-step-btn {
+  .veg-mutton-step-btn {
     padding: 6px 14px;
     font-size: 11.5px;
   }
 }
 
-@media (min-width: 576px) and (max-width: 767px) {
-  .mutton-veg-header {
-    margin-top: 100px;
-    padding: 25px 16px;
-  }
-  .mutton-veg-page-title {
-    font-size: 2rem;
-  }
-  .mutton-veg-page-description {
-    font-size: 0.9rem;
-  }
-
-  .category-filter-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .category-filter-select {
-    width: 100%;
-    min-width: unset;
-  }
-
-  .mutton-veg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 16px;
-  }
-  .mutton-veg-card {
-    height: 105px;
-  }
-  .mutton-veg-card-image {
-    width: 105px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .mutton-veg-card-title {
-    font-size: 14px;
-  }
-
-  .mutton-veg-modal {
-    width: 95%;
-    height: 85vh;
-    border-radius: 16px;
-  }
-
-  .mutton-veg-modal-hero-img {
-    object-fit: cover;
-  }
-  .mutton-veg-modal-hero {
-    flex: 0 0 165px;
-    max-height: 165px;
-    min-height: 165px;
-  }
-  .mutton-veg-modal-hero-left {
-    flex: 0 0 52%;
-    padding: 16px 22px;
-  }
-  .mutton-veg-modal-hero-title {
-    font-size: 1.25rem;
-  }
-  .mutton-veg-modal-hero-tagline {
-    font-size: 0.7rem;
-    display: -webkit-box;
-  }
-  .mutton-veg-modal-tag {
-    font-size: 8px;
-    padding: 3px 8px;
-    margin-bottom: 8px;
-  }
-  .mutton-veg-modal-hero-left::after {
-    display: block;
-    right: -40px;
-    width: 45px;
-  }
-
-  .mutton-veg-modal-body {
-    gap: 10px;
-    padding: 12px 12px 8px;
-  }
-  .mutton-veg-ingredient-text,
-  .mutton-veg-step-text {
-    font-size: 13.5px;
-    font-weight: 600;
-  }
-  .mutton-veg-modal-col-header h3 {
-    font-size: 0.65rem;
-  }
-  .mutton-veg-modal-col-header {
-    padding: 9px 12px 7px;
-  }
-  .mutton-veg-modal-scroll {
-    padding: 10px 12px 12px;
-    gap: 7px;
-  }
-
-  .mutton-veg-ingredient-dot {
-    width: 6px;
-    height: 6px;
-    margin-top: 4px;
-  }
-  .mutton-veg-step-num {
-    width: 22px;
-    height: 22px;
-    font-size: 10px;
-  }
-
-  .mutton-veg-voice-bar {
-    padding: 8px 12px 10px;
-    gap: 10px;
-  }
-  .mutton-veg-voice-label {
-    display: inline-block;
-    font-size: 0.6rem;
-  }
-  .mutton-veg-voice-left {
-    display: flex;
-  }
-  .mutton-veg-voice-progress {
-    order: initial;
-    width: auto;
-    flex: 1;
-  }
-  .mutton-veg-voice-main-btn {
-    padding: 7px 16px;
-    font-size: 11.5px;
-  }
-  .mutton-veg-step-btn {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 575px) {
-  .mutton-veg-header {
+@media (max-width: 380px) {
+  .veg-mutton-header {
     margin-top: 80px;
     padding: 20px 16px;
   }
-  .mutton-veg-page-title {
-    font-size: 1.6rem;
+  .veg-mutton-page-title {
+    font-size: 25.6px;
   }
-  .mutton-veg-page-description {
-    font-size: 0.8rem;
-  }
-
-  .category-filter-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .category-filter-select {
-    width: 100%;
-    min-width: unset;
-  }
-  .recipe-count {
-    font-size: 0.85rem;
+  .veg-mutton-page-description {
+    font-size: 12.8px;
   }
 
-  .mutton-veg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+  .veg-mutton-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  .mutton-veg-card {
-    height: 95px;
+  .veg-mutton-card {
+    height: 75px;
   }
-  .mutton-veg-card-image {
-    width: 95px;
-    height: 100%;
+  .veg-mutton-card-image {
+    width: 60px;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
   }
-  .mutton-veg-card-title {
-    font-size: 12px;
+  .veg-mutton-card-content {
+    padding: 5px 12px;
+  }
+  .veg-mutton-card-title {
+    font-size: 10px;
   }
 
-  .mutton-veg-modal {
+  .veg-mutton-modal {
     width: 98%;
     height: 90vh;
     border-radius: 14px;
   }
 
-  .mutton-veg-modal-hero-img {
+  .veg-mutton-modal-hero-img {
     object-fit: cover;
   }
-  .mutton-veg-modal-hero {
+  .veg-mutton-modal-hero {
     flex: 0 0 145px;
     max-height: 145px;
     min-height: 145px;
   }
-  .mutton-veg-modal-hero-left {
+  .veg-mutton-modal-hero-left {
     flex: 0 0 52%;
     padding: 12px 18px;
   }
-  .mutton-veg-modal-hero-title {
-    font-size: 1.1rem;
+  .veg-mutton-modal-hero-title {
+    font-size: 17.6px;
     -webkit-line-clamp: 2;
   }
-  .mutton-veg-modal-hero-tagline {
-    font-size: 0.65rem;
+  .veg-mutton-modal-hero-tagline {
+    font-size: 10.4px;
     display: -webkit-box;
   }
-  .mutton-veg-modal-tag {
+  .veg-mutton-modal-tag {
     font-size: 7px;
     padding: 2px 7px;
     margin-bottom: 6px;
   }
-  .mutton-veg-modal-hero-left::after {
+  .veg-mutton-modal-hero-left::after {
     right: -35px;
     width: 40px;
   }
 
-  .mutton-veg-modal-close {
+  .veg-mutton-modal-close {
     width: 32px;
     height: 32px;
     font-size: 18px;
@@ -1006,148 +770,76 @@ html, body, #root {
     right: 10px;
   }
 
-  .mutton-veg-modal-body {
+  .veg-mutton-modal-body {
     gap: 8px;
     padding: 10px 10px 8px;
   }
-  .mutton-veg-modal-col-header {
+  .veg-mutton-modal-col-header {
     padding: 8px 10px 6px;
     gap: 6px;
   }
-  .mutton-veg-modal-col-header h3 {
-    font-size: 0.6rem;
+  .veg-mutton-modal-col-header h3 {
+    font-size: 9.6px;
     letter-spacing: 1px;
   }
-  .mutton-veg-modal-col-header i {
+  .veg-mutton-modal-col-header i {
     font-size: 11px;
   }
-  .mutton-veg-modal-scroll {
+  .veg-mutton-modal-scroll {
     padding: 8px 10px 10px;
     gap: 6px;
   }
 
-  .mutton-veg-ingredient-text,
-  .mutton-veg-step-text {
+  .veg-mutton-ingredient-text,
+  .veg-mutton-step-text {
     font-size: 12.5px;
     font-weight: 600;
     line-height: 1.5;
   }
-  .mutton-veg-ingredient-dot {
+  .veg-mutton-ingredient-dot {
     width: 5px;
     height: 5px;
     margin-top: 4px;
   }
-  .mutton-veg-step-num {
+  .veg-mutton-step-num {
     width: 20px;
     height: 20px;
     font-size: 9px;
   }
 
-  .mutton-veg-voice-bar {
+  .veg-mutton-voice-bar {
     padding: 7px 10px 9px;
     gap: 8px;
     flex-wrap: nowrap;
   }
-  .mutton-veg-voice-label {
+  .veg-mutton-voice-label {
     display: inline-block;
-    font-size: 0.55rem;
+    font-size: 8.8px;
     letter-spacing: 1px;
   }
-  .mutton-veg-voice-left {
+  .veg-mutton-voice-left {
     display: flex;
     gap: 5px;
   }
-  .mutton-veg-voice-icon {
+  .veg-mutton-voice-icon {
     font-size: 13px;
   }
-  .mutton-veg-voice-progress {
+  .veg-mutton-voice-progress {
     order: initial;
     width: auto;
     flex: 1;
   }
-  .mutton-veg-progress-info {
-    font-size: 0.6rem;
+  .veg-mutton-progress-info {
+    font-size: 9.6px;
   }
-  .mutton-veg-voice-main-btn {
+  .veg-mutton-voice-main-btn {
     padding: 6px 12px;
     font-size: 10.5px;
     gap: 4px;
   }
-  .mutton-veg-step-btn {
+  .veg-mutton-step-btn {
     padding: 5px 10px;
     font-size: 10px;
     gap: 4px;
-  }
-}
-
-@media (max-width: 400px) {
-  .mutton-veg-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px;
-  }
-  .mutton-veg-card {
-    height: 85px;
-  }
-  .mutton-veg-card-image {
-    width: 85px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .mutton-veg-card-title {
-    font-size: 11px;
-  }
-  .mutton-veg-card-content {
-    padding: 10px 12px;
-  }
-
-  .mutton-veg-modal-hero-img {
-    object-fit: cover;
-  }
-  .mutton-veg-modal-hero {
-    flex: 0 0 130px;
-    max-height: 130px;
-    min-height: 130px;
-  }
-  .mutton-veg-modal-hero-left {
-    padding: 10px 14px;
-  }
-  .mutton-veg-modal-hero-title {
-    font-size: 1rem;
-  }
-  .mutton-veg-modal-hero-tagline {
-    font-size: 0.6rem;
-    display: -webkit-box;
-  }
-  .mutton-veg-modal-tag {
-    display: none;
-  }
-  .mutton-veg-modal-hero-left::after {
-    right: -30px;
-    width: 35px;
-  }
-
-  .mutton-veg-ingredient-text,
-  .mutton-veg-step-text {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-  .mutton-veg-modal-col-header h3 {
-    font-size: 0.55rem;
-    letter-spacing: 0.5px;
-  }
-  .mutton-veg-voice-label {
-    display: inline-block;
-    font-size: 0.5rem;
-  }
-  .mutton-veg-voice-main-btn {
-    padding: 5px 10px;
-    font-size: 10px;
-  }
-  .mutton-veg-step-btn {
-    padding: 4px 8px;
-    font-size: 9px;
   }
 }
