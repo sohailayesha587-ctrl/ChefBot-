@@ -8,6 +8,7 @@ html, body, #root {
   width: 100%;
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
   background: whitesmoke;
+  --site-nav-height: 100px;
 }
 
 .cmp-container {
@@ -18,10 +19,6 @@ html, body, #root {
 .cmp-layout {
   display: flex;
   position: relative;
-}
-
-.cmp-hamburger {
-  display: none;
 }
 
 .cmp-sidebar {
@@ -105,10 +102,6 @@ html, body, #root {
   color: #ffffff;
 }
 
-.cmp-method-priority {
-  display: none;
-}
-
 .cmp-sidebar::-webkit-scrollbar {
   width: 5px;
 }
@@ -158,6 +151,10 @@ html, body, #root {
   color: #284a4b;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
+}
+
+.cmp-page-title.desktop-title {
+  display: block;
 }
 
 .cmp-page-description {
@@ -388,10 +385,80 @@ html, body, #root {
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .cmp-modal-right-image:hover {
   transform: scale(1.02);
+}
+
+.cmp-about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cmp-about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cmp-about-thumb {
+  display: none;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 3px solid #e0eeee;
+  box-shadow: 0 8px 18px #284a4b;
+  cursor: pointer;
+}
+
+.cmp-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 51, 52, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 30px;
+  animation: fadeInUp 0.25s ease-out;
+}
+
+.cmp-lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px #000000;
+  object-fit: contain;
+}
+
+.cmp-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: #ffffff;
+  color: #1a3334;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 4px 15px #000000;
+  transition: all 0.2s;
+}
+
+.cmp-lightbox-close:hover {
+  background: #397d7c;
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .cmp-msec {
@@ -466,6 +533,10 @@ html, body, #root {
   color: #ffffff;
 }
 
+.cmp-use-dot {
+  flex-shrink: 0;
+}
+
 .cmp-detail-badges {
   display: flex;
   flex-direction: column;
@@ -489,15 +560,6 @@ html, body, #root {
   border-color: #e0eeee;
 }
 
-.cmp-detail-badge-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: #397d7c;
-}
-
 .cmp-detail-badge-text {
   display: flex;
   flex-direction: column;
@@ -518,6 +580,47 @@ html, body, #root {
   font-weight: 600;
   color: #1a3334;
   line-height: 1.3;
+}
+
+.cmp-heat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  width: fit-content;
+}
+
+.cmp-heat-pill.dry-heat {
+  background: #c0392b;
+}
+
+.cmp-heat-pill.moist-heat {
+  background: #397d7c;
+}
+
+.cmp-card-heat-type {
+  margin-top: 4px;
+}
+
+.cmp-heat-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cmp-heat-badge.dry-heat {
+  background: #c0392b;
+}
+
+.cmp-heat-badge.moist-heat {
+  background: #397d7c;
 }
 
 .cmp-modal-two-col {
@@ -576,6 +679,13 @@ html, body, #root {
   background: #e0eeee;
 }
 
+.cmp-tip-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .cmp-back-section {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -622,6 +732,37 @@ html, body, #root {
   color: #397d7c;
 }
 
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 20px;
+}
+
+.error-message p {
+  font-size: 18px;
+  color: #c0392b;
+}
+
+.retry-button {
+  background: #284a4b;
+  color: #ffffff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+  background: #397d7c;
+  transform: scale(1.05);
+}
+
 .cmp-mobile-topbar {
   margin-top: 120px;
   display: none;
@@ -638,10 +779,13 @@ html, body, #root {
   }
 }
 
-@media (max-width: 768px) {
-  html, body {
-    height: auto;
+@media (max-width: 780px) {
+  html {
     overflow-x: hidden;
+  }
+
+  body {
+    height: auto;
     overflow-y: auto;
   }
 
@@ -652,7 +796,7 @@ html, body, #root {
   .cmp-main {
     margin-left: 0;
     width: 100%;
-    padding: 20px 50px 15px;
+    padding: 15px 16px 10px;
     height: auto;
     overflow-y: visible;
   }
@@ -665,69 +809,23 @@ html, body, #root {
   .cmp-mobile-topbar {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    top: 0;
-    z-index: 1020;
-    background: whitesmoke;
-    padding: 20px 12px;
-    border-bottom: 2px solid #e0eeee;
-    box-shadow: 0 2px 8px #000000;
+    height: 100px;
+    background: #1a3334;
+    padding: 14px 16px;
+    border-bottom: 3px solid #397d7c;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 80px;
   }
 
-  .cmp-hamburger {
-    display: flex;
-    position: relative;
-    background: #284a4b;
-    border: none;
-    border-radius: 10px;
-    width: 44px;
-    height: 44px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px #284a4b;
-    transition: background 0.2s;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .cmp-hamburger:hover {
-    background: #397d7c;
-  }
-
-  .cmp-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  .cmp-hamburger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .cmp-hamburger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .cmp-hamburger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
   .cmp-mobile-topbar .cmp-page-title {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
     margin: 0;
     flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    font-family: 'DM Sans', serif;
-    font-weight: 800;
-    color: #284a4b;
   }
 
   .cmp-main-header .cmp-page-title {
@@ -736,10 +834,14 @@ html, body, #root {
 
   .cmp-main-header {
     margin-top: 0;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 8px;
     border-bottom: none;
     margin-bottom: 0px;
+  }
+
+  .cmp-page-description {
+    font-size: 14px;
   }
 
   .cmp-sidebar {
@@ -753,6 +855,7 @@ html, body, #root {
     z-index: 1100;
     overflow-y: auto;
     bottom: auto;
+    padding: 20px 16px;
   }
 
   .cmp-sidebar.open {
@@ -760,11 +863,15 @@ html, body, #root {
   }
 
   .cmp-sidebar-header {
-    margin-top: 30px;
+    margin-top: 20px;
+  }
+
+  .cmp-sidebar-title {
+    font-size: 20px;
   }
 
   .cmp-methods-grid {
-    gap: 10px;
+    gap: 15px;
   }
 
   .cmp-method-card {
@@ -780,7 +887,7 @@ html, body, #root {
   }
 
   .cmp-card-content {
-    padding: 8px 12px;
+    padding: 12px 12px;
   }
 
   .cmp-card-title {
@@ -799,26 +906,33 @@ html, body, #root {
   }
 
   .cmp-modal-inner {
-    flex-direction: row;
-    overflow: hidden;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
   .cmp-modal-left {
-    width: 65%;
+    width: 100%;
     padding: 16px;
-    overflow-y: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }
 
   .cmp-modal-right {
-    width: 35%;
-    padding: 16px 10px;
-    overflow: hidden;
+    display: none;
   }
 
-  .cmp-modal-right-image {
-    width: 150px;
-    height: 150px;
+  .cmp-about-thumb {
+    display: block;
+    width: 120px;
+    height: 120px;
+  }
+
+  .cmp-modal-hero {
+    padding: 16px 20px;
+  }
+
+  .cmp-modal-hero-title {
+    font-size: 22px;
   }
 
   .cmp-uses-details-row {
@@ -844,14 +958,6 @@ html, body, #root {
     font-size: 12px;
   }
 
-  .cmp-modal-hero {
-    padding: 16px 20px;
-  }
-
-  .cmp-modal-hero-title {
-    font-size: 22px;
-  }
-
   .cmp-modal-two-col {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -875,21 +981,159 @@ html, body, #root {
   }
 }
 
-@media (max-width: 480px) {
-  .cmp-modal-right {
-    width: 35%;
+@media (max-width: 380px) {
+  .cmp-main {
+    padding: 10px 10px 8px;
+  }
+
+  .cmp-mobile-topbar {
+    padding: 10px 12px;
+  }
+
+  .cmp-mobile-topbar .cmp-page-title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .cmp-methods-grid {
+    gap: 10px;
+    margin: 10px 10px;
+  }
+
+  .cmp-method-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .cmp-card-image {
+    height: 60px;
+  }
+
+  .cmp-card-content {
+    padding: 6px 10px;
+  }
+
+  .cmp-card-title {
+    font-size: 12px;
+  }
+
+  .cmp-card-description {
+    font-size: 10px;
+    -webkit-line-clamp: 1;
+  }
+
+  .cmp-modal {
+    width: 98%;
+    border-radius: 16px;
+    max-height: 92vh;
   }
 
   .cmp-modal-left {
-    width: 65%;
+    width: 100%;
+    padding: 12px;
   }
 
-  .cmp-modal-right-image {
+  .cmp-about-row {
+    gap: 10px;
+  }
+
+  .cmp-about-thumb {
     width: 120px;
     height: 120px;
   }
 
+  .cmp-modal-hero {
+    padding: 12px 14px;
+  }
+
+  .cmp-modal-hero-title {
+    font-size: 18px;
+  }
+
+  .cmp-modal-hero-subtitle {
+    font-size: 12px;
+  }
+
+  .cmp-modal-hero-label {
+    font-size: 8px;
+  }
+
+  .cmp-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .cmp-msec-text {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .cmp-msec-label {
+    font-size: 8px;
+  }
+
   .cmp-uses-wrap {
     grid-template-columns: 1fr;
+  }
+
+  .cmp-use-tag {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .cmp-step-txt, .cmp-tip-txt {
+    font-size: 10px;
+  }
+
+  .cmp-step-card, .cmp-tip-card {
+    padding: 5px 8px;
+  }
+
+  .cmp-step-num {
+    width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  .cmp-back-button {
+    padding: 8px 16px;
+    font-size: 12px;
+    min-width: 150px;
+  }
+
+  .cmp-sidebar {
+    width: 240px;
+    padding: 16px 12px;
+  }
+
+  .cmp-sidebar-title {
+    font-size: 18px;
+  }
+
+  .cmp-sidebar-subtitle {
+    font-size: 10px;
+  }
+
+  .cmp-method-list-item {
+    padding: 10px 12px;
+  }
+
+  .cmp-method-list-name {
+    font-size: 13px;
+  }
+
+  .cmp-lightbox-overlay {
+    padding: 16px;
+  }
+
+  .cmp-lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
   }
 }

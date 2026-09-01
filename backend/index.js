@@ -18,6 +18,7 @@ const pantryShoppingRoutes = require('./routes/pantryShoppingRoutes');
 const mealPlanRoutes = require('./routes/mealPlanRoutes'); 
 const mealSuggestionRoutes = require('./routes/mealSuggestionRoutes');
 const settingsRoutes = require('./routes/settingsRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/guides', beginnersGuideRoutes);
+app.use('/api/beginners-guides', beginnersGuideRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/shopping', shoppingRoutes);
 app.use('/api/pantry', pantryRoutes);
@@ -33,8 +34,7 @@ app.use('/api/pantry-shopping', pantryShoppingRoutes);
 app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/api/users', settingsRoutes);
-
-app.use('/uploads', express.static('uploads'));
+app.use('/api/search', searchRoutes);
 app.get('/', (req, res) => {
   res.send('Server is running');
 });

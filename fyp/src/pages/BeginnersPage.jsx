@@ -41,7 +41,7 @@ const BeginnersPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('http://localhost:5000/api/guides', {
+      const response = await axios.get('/api/beginners-guides', {
         params: { category: 'basics' }
       });
       

@@ -10,6 +10,7 @@ const BakeryEssentialsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   const [toolsData, setToolsData] = useState([]);
   const [techniquesData, setTechniquesData] = useState([]);
@@ -18,7 +19,7 @@ const BakeryEssentialsPage = () => {
   const [decoratingData, setDecoratingData] = useState([]);
 
   const navigate = useNavigate();
-  const API_URL = 'http://localhost:5000/api/guides';
+  const API_URL = '/api/beginners-guides';
 
   useEffect(() => {
     fetchAllData();
@@ -37,7 +38,7 @@ const BakeryEssentialsPage = () => {
     setError(null);
     try {
       const categories = ['tools', 'techniques', 'ingredients', 'temperature', 'decorating'];
-      
+
       const results = await Promise.all(
         categories.map(async (cat) => {
           try {
@@ -78,10 +79,10 @@ const BakeryEssentialsPage = () => {
     if (!content) return {};
     if (typeof content === 'object' && content !== null) return content;
     if (typeof content === 'string') {
-      try { 
-        return JSON.parse(content); 
-      } catch(e) { 
-        return { fullDesc: content, tagline: content }; 
+      try {
+        return JSON.parse(content);
+      } catch(e) {
+        return { fullDesc: content, tagline: content };
       }
     }
     return {};
@@ -132,6 +133,14 @@ const BakeryEssentialsPage = () => {
     setSelectedItem(null);
   };
 
+  const openLightbox = (imageUrl) => {
+    setLightboxImage(imageUrl);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
   const BakeryIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 2C8.5 2 5.5 4.5 5.5 8C5.5 10 6.5 11.5 8 12.5V14H16V12.5C17.5 11.5 18.5 10 18.5 8C18.5 4.5 15.5 2 12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -180,13 +189,19 @@ const BakeryEssentialsPage = () => {
   return (
     <div className="bep-container">
       <div className="bep-mobile-topbar">
-        <button
-          className={`bep-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-        >
-          <span /><span /><span />
-        </button>
         <h1 className="bep-page-title">{getCategoryTitle()}</h1>
+      </div>
+
+      <div className="bep-categories-row">
+        {sidebarItems.map(item => (
+          <button
+            key={item.key}
+            className={`bep-cat-btn ${activeTab === item.key ? 'active' : ''}`}
+            onClick={() => { setActiveTab(item.key); setSidebarOpen(false); }}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
 
       <div
@@ -274,9 +289,18 @@ const BakeryEssentialsPage = () => {
 
               <div className="bep-modal-inner">
                 <div className="bep-modal-left">
-                  <div className="bep-msec">
-                    <span className="bep-msec-label">About this essential</span>
-                    <p className="bep-msec-text">{content.fullDesc || content.tagline || selectedItem.title}</p>
+                  <div className="bep-about-row">
+                    <div className="bep-about-text">
+                      <div className="bep-msec">
+                        <span className="bep-msec-label">About this essential</span>
+                        <p className="bep-msec-text">{content.fullDesc || content.tagline || selectedItem.title}</p>
+                      </div>
+                    </div>
+                    <div
+                      className="bep-about-thumb"
+                      style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/200/200'})` }}
+                      onClick={() => openLightbox(selectedItem.image || '/api/placeholder/200/200')}
+                    />
                   </div>
 
                   <hr className="bep-mdivider" />
@@ -373,6 +397,7 @@ const BakeryEssentialsPage = () => {
                   <div
                     className="bep-modal-right-image"
                     style={{ backgroundImage: `url(${selectedItem.image || '/api/placeholder/400/400'})` }}
+                    onClick={() => openLightbox(selectedItem.image || '/api/placeholder/400/400')}
                   />
                 </div>
               </div>
@@ -380,6 +405,18 @@ const BakeryEssentialsPage = () => {
           </div>
         );
       })()}
+
+      {lightboxImage && (
+        <div className="bep-lightbox-overlay" onClick={closeLightbox}>
+          <button className="bep-lightbox-close" onClick={closeLightbox}>×</button>
+          <img
+            className="bep-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

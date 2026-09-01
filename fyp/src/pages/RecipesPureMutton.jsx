@@ -14,7 +14,7 @@ const RecipesPureMutton = () => {
   const speechSynthesisRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/recipes/subCategory/pure-mutton?limit=200')
+    fetch('/api/recipes/subCategory/pure-mutton?limit=200')
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch pure-mutton recipes');

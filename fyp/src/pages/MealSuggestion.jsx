@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import './MealSuggestion.css';
-
 const Icons = {
   Search: () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -119,6 +119,7 @@ const Icons = {
 const MealSuggestion = () => {
   const navigate = useNavigate();
   const location = useLocation();
+const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestionsData, setSuggestionsData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -128,7 +129,6 @@ const MealSuggestion = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [pantryCount, setPantryCount] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDayMeals, setSelectedDayMeals] = useState([]);
   const [expandedDay, setExpandedDay] = useState(null);
@@ -178,6 +178,17 @@ const MealSuggestion = () => {
     { id: 'kidney', name: 'Kidney Friendly', label: 'KD' },
     { id: 'lowfat', name: 'Low Fat', label: 'LF' }
   ];
+
+  const closeMobileDetail = () => {
+    document.querySelectorAll('.ms-mobile-day-details').forEach(el => {
+      el.classList.remove('open');
+    });
+    document.querySelectorAll('.ms-mobile-day').forEach(el => {
+      el.classList.remove('active');
+    });
+    setSelectedDate(null);
+    setExpandedDay(null);
+  };
 
   const getDateForDay = (dayName) => {
     const today = new Date();
@@ -259,7 +270,7 @@ const MealSuggestion = () => {
     try {
       setLoadingHistory(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log/month', {
+      const response = await fetch('/api/meal-suggestions/cooking-log/month', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -280,7 +291,7 @@ const MealSuggestion = () => {
   const fetchAllRecipes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/recipes?limit=100', {
+      const response = await fetch('/api/recipes?limit=100', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -293,7 +304,7 @@ const MealSuggestion = () => {
   const fetchPantryItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/pantry', {
+      const response = await fetch('/api/pantry', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -312,7 +323,7 @@ const MealSuggestion = () => {
   const fetchCookingLogForDate = async (date) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${date}`, {
+      const response = await fetch(`/api/meal-suggestions/cooking-log/${date}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -336,7 +347,7 @@ const MealSuggestion = () => {
     for (const day of weekDays) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${day.date}`, {
+        const response = await fetch(`/api/meal-suggestions/cooking-log/${day.date}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await response.json();
@@ -350,22 +361,38 @@ const MealSuggestion = () => {
     }
   };
 
-  const searchRecipesForSuggestions = async (query) => {
-    if (!query.trim()) { setRecipeSuggestions([]); setShowRecipeSuggestions(false); return; }
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/recipes/search?q=${encodeURIComponent(query)}`, {
-        headers: { Authorization: `Bearer ${token}` }
+ const searchRecipesForSuggestions = async (query) => {
+  if (!query.trim()) { 
+    setRecipeSuggestions([]); 
+    setShowRecipeSuggestions(false); 
+    return; 
+  }
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`/api/recipes/search?q=${encodeURIComponent(query)}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await response.json();
+    if (data.success && data.recipes) {
+      const filtered = data.recipes.filter(recipe => 
+        recipe.title.toLowerCase().includes(query.toLowerCase())
+      );
+      
+      const sorted = filtered.sort((a, b) => {
+        const aTitle = a.title.toLowerCase().includes(query.toLowerCase());
+        const bTitle = b.title.toLowerCase().includes(query.toLowerCase());
+        if (aTitle && !bTitle) return -1;
+        if (!aTitle && bTitle) return 1;
+        return 0;
       });
-      const data = await response.json();
-      if (data.success && data.recipes) {
-        setRecipeSuggestions(data.recipes.slice(0, 5));
-        setShowRecipeSuggestions(true);
-      }
-    } catch (error) {
-      console.error('Error searching recipes:', error);
+      
+      setRecipeSuggestions(sorted.slice(0, 5));
+      setShowRecipeSuggestions(true);
     }
-  };
+  } catch (error) {
+    console.error('Error searching recipes:', error);
+  }
+};
 
   const handleManualRecipeChange = (e) => {
     const value = e.target.value;
@@ -384,7 +411,7 @@ const MealSuggestion = () => {
       const token = localStorage.getItem('token');
       const limit = 5;
       setPatientSections(prev => ({ ...prev, [type]: { ...prev[type], loading: true } }));
-      const response = await fetch(`http://localhost:5000/api/recipes/patient/${type}?limit=${limit}&skip=${page * limit}&dietType=${filters.dietType}`, {
+      const response = await fetch(`/api/recipes/patient/${type}?limit=${limit}&skip=${page * limit}&dietType=${filters.dietType}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -408,7 +435,7 @@ const MealSuggestion = () => {
     if (!recipe.missing || recipe.missing.length === 0) { toast.info('No missing ingredients to add'); return; }
     try {
       const token = localStorage.getItem('token');
-      const shoppingResponse = await fetch('http://localhost:5000/api/shopping', {
+      const shoppingResponse = await fetch('/api/shopping', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const shoppingData = await shoppingResponse.json();
@@ -422,7 +449,7 @@ const MealSuggestion = () => {
       });
       if (alreadyInShopping.length > 0) toast.warning(`Already in shopping list: ${alreadyInShopping.join(', ')}`);
       if (newItems.length > 0) {
-        const addResponse = await fetch('http://localhost:5000/api/shopping/add-missing', {
+        const addResponse = await fetch('/api/shopping/add-missing', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipeId: recipe.id || recipe._id, missingIngredients: newItems })
@@ -445,7 +472,7 @@ const MealSuggestion = () => {
       const token = localStorage.getItem('token');
       let pantryNames = pantryItems;
       if (pantryNames.length === 0) pantryNames = await fetchPantryItems();
-      let url = `http://localhost:5000/api/meal-suggestions?`;
+      let url = `/api/meal-suggestions?`;
       if (search && search !== '') url += `search=${encodeURIComponent(search)}&`;
       if (filters.mealType !== 'all') url += `mealTime=${filters.mealType}&`;
       if (filters.dietType !== 'all') url += `dietType=${filters.dietType}&`;
@@ -478,16 +505,11 @@ const MealSuggestion = () => {
     }
   };
 
-  const handleDayClick = async (day) => {
-    setSelectedDate(day);
-    if (isMobile) {
-      setDrawerOpen(false);
-      setExpandedDay(day.id);
-    } else {
-      setExpandedDay(day.id);
-    }
-    await fetchCookingLogForDate(day.date);
-  };
+const handleDayClick = async (day) => {
+  setSelectedDate(day);
+  setExpandedDay(day.id);
+  await fetchCookingLogForDate(day.date);
+};
 
   const handleCloseExpanded = () => { setExpandedDay(null); setIsNoCookingDay(false); };
 
@@ -495,7 +517,7 @@ const MealSuggestion = () => {
     if (!selectedDate) { toast.error('No date selected'); return; }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log', {
+      const response = await fetch('/api/meal-suggestions/cooking-log', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ date: selectedDate.date, recipeId: null, recipeName: null, members: 0, noCooking: true })
@@ -507,6 +529,7 @@ const MealSuggestion = () => {
         setIsNoCookingDay(true);
         setDayStatus(prev => ({ ...prev, [selectedDate.date]: 'no-cooking' }));
         setShowAddMealForm(false);
+        closeMobileDetail();
       } else {
         toast.error(data.message || 'Error saving');
       }
@@ -525,6 +548,7 @@ const MealSuggestion = () => {
     setSelectedMealMembers(4);
     setShowAddMealForm(true);
     setIsNoCookingDay(false);
+    closeMobileDetail();
   };
 
   const handleEditMeal = (meal) => {
@@ -540,14 +564,14 @@ const MealSuggestion = () => {
     try {
       const token = localStorage.getItem('token');
       const mealId = meal._id || meal.id;
-      const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${mealId}`, {
+      const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${mealId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
       if (data.success) {
         toast.success('Meal deleted successfully');
-        const updatedResponse = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}`, {
+        const updatedResponse = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const updatedData = await updatedResponse.json();
@@ -569,7 +593,7 @@ const MealSuggestion = () => {
     try {
       const token = localStorage.getItem('token');
       if (editingMeal) {
-        const response = await fetch(`http://localhost:5000/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${editingMeal._id || editingMeal.id}`, {
+        const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${editingMeal._id || editingMeal.id}`, {
           method: 'PUT',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ recipeId: selectedMealRecipe || 'manual', recipeName: manualRecipeName, members: selectedMealMembers })
@@ -578,7 +602,7 @@ const MealSuggestion = () => {
         if (data.success) toast.success(`Meal updated: ${manualRecipeName}`);
         else toast.error(data.message || 'Error updating meal');
       } else {
-        const response = await fetch('http://localhost:5000/api/meal-suggestions/cooking-log', {
+        const response = await fetch('/api/meal-suggestions/cooking-log', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ date: selectedDate.date, recipeId: selectedMealRecipe || 'manual', recipeName: manualRecipeName, members: selectedMealMembers })
@@ -596,6 +620,7 @@ const MealSuggestion = () => {
       setRecipeSuggestions([]);
       setSelectedMealMembers(4);
       await fetchCookingLogForDate(selectedDate.date);
+      closeMobileDetail();
     } catch (error) {
       toast.error('Error saving meal');
     }
@@ -604,7 +629,7 @@ const MealSuggestion = () => {
   const handleAddMissingToShopping = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/shopping/add-multiple', {
+      const response = await fetch('/api/shopping/add-multiple', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: missingFundamentals.map(item => ({ name: item, quantity: 1, unit: 'piece' })) })
@@ -632,7 +657,7 @@ const MealSuggestion = () => {
     setIsCooking(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/meal-suggestions/cook', {
+      const response = await fetch('/api/meal-suggestions/cook', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ recipeId: selectedRecipe.id || selectedRecipe._id, members: parseInt(membersValue), date: selectedDate?.date || new Date().toISOString().split('T')[0] })
@@ -648,6 +673,7 @@ const MealSuggestion = () => {
           await fetchCookingLogForDate(selectedDate.date);
         }
         fetchSuggestions(searchQuery);
+        closeMobileDetail();
       } else {
         toast.error(data.message || 'Error cooking recipe');
       }
@@ -661,6 +687,7 @@ const MealSuggestion = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) { setSkipFundamental(false); fetchSuggestions(searchQuery); }
+    closeMobileDetail();
   };
 
   const handleCategorySelect = (category) => {
@@ -669,12 +696,14 @@ const MealSuggestion = () => {
     setSearchQuery(category.query);
     setSkipFundamental(false);
     fetchSuggestions(category.query);
+    closeMobileDetail();
   };
 
   const handleRecipeClick = (recipe) => {
     const recipeId = recipe._id || recipe.id || recipe.recipeId;
     if (recipeId) navigate(`/recipe/${recipeId}`);
     else toast.error('Recipe ID not found');
+    closeMobileDetail();
   };
 
   const handleCookIt = (recipe) => {
@@ -683,6 +712,7 @@ const MealSuggestion = () => {
     setCustomMembers('');
     setShowCustomInput(false);
     setShowMemberPopup(true);
+    closeMobileDetail();
   };
 
   const handleMemberSelect = (value) => {
@@ -705,9 +735,6 @@ const MealSuggestion = () => {
     if (percent >= 40) return '#f97316';
     return '#ef4444';
   };
-
-  const openDrawer = () => setDrawerOpen(true);
-  const closeDrawer = () => setDrawerOpen(false);
 
   useEffect(() => { loadAllDayStatuses(); }, []);
 
@@ -773,11 +800,11 @@ const MealSuggestion = () => {
 
   const visibleSuggestions = suggestionsData.slice(0, visibleCount);
   const hasMore = visibleCount < suggestionsData.length;
+  const todayDateStr = new Date().toISOString().split('T')[0];
 
   const getDayStatusIcon = (day) => {
     const status = dayStatus[day.date];
-    const todayDate = new Date().toISOString().split('T')[0];
-    const isFutureDay = day.date > todayDate;
+    const isFutureDay = day.date > todayDateStr;
     if (status === 'pending' && !isFutureDay) {
       return <span className="ms-status-dot ms-status-pending"></span>;
     }
@@ -795,49 +822,26 @@ const MealSuggestion = () => {
     );
   }
 
-  return (
+ return (
     <div className="ms-container">
-      {isMobile && drawerOpen && (
-        <div className="ms-drawer-overlay" onClick={closeDrawer}></div>
-      )}
-
-      {isMobile && (
-        <div className={`ms-side-drawer ${drawerOpen ? 'open' : ''}`}>
-          <div className="ms-drawer-header">
-            <h3><Icons.Calendar /> Calendar</h3>
-            <button className="ms-drawer-close" onClick={closeDrawer}><Icons.X /></button>
-          </div>
-          <div className="ms-drawer-content">
-            {weekDays.map(day => {
-              const isToday = day.date === new Date().toISOString().split('T')[0];
-              const status = dayStatus[day.date];
-              return (
-                <div
-                  key={day.id}
-                  className={`ms-drawer-day-item ${selectedDate?.id === day.id ? 'active' : ''} ${isToday ? 'today' : ''}`}
-                  onClick={() => handleDayClick(day)}
-                >
-                  <div className="ms-drawer-day-info">
-                    <span className="ms-drawer-day-name">{day.fullName}</span>
-                    <span className="ms-drawer-day-date">{getFormattedDate(day.date)}</span>
-                  </div>
-                  {status === 'pending' && <div className="ms-drawer-status-dot"></div>}
-                </div>
-              );
-            })}
-            <button className="ms-drawer-history-btn" onClick={() => { fetchMonthHistory(); closeDrawer(); }}>
-              <Icons.History /> Month History
-            </button>
-          </div>
+      <div className="ms-hero-split">
+        <div className="ms-hero-text-side">
+          <h1 className="ms-hero-title">What to Cook Today?</h1>
+          <p className="ms-hero-desc">
+            Plan delicious meals based on your ingredients and preferences.
+          </p>
         </div>
-      )}
 
-      <header className="ms-header">
-        <div className="ms-header-content">
-          <h1 className="ms-title">What to Cook Today?</h1>
-          <p className="ms-description">Search by meal type, ingredients, or cuisine preference</p>
+        <div className="ms-hero-image-side">
+          <img
+            src="/meal_suggestion.jpg"
+            alt="Meal Schedule"
+            className="ms-hero-img"
+          />
+          <div className="ms-hero-img-tint"></div>
+          <div className="ms-hero-img-slice"></div>
         </div>
-      </header>
+      </div>
 
       <div className="ms-layout">
         {!isMobile && (
@@ -846,8 +850,7 @@ const MealSuggestion = () => {
               const isExpanded = expandedDay === day.id;
               const mealsForDay = isExpanded ? selectedDayMeals : [];
               const status = dayStatus[day.date];
-              const todayDate = new Date().toISOString().split('T')[0];
-              const isToday = day.date === todayDate;
+              const isToday = day.date === todayDateStr;
 
               return (
                 <div key={day.id} className="ms-day-wrapper">
@@ -918,339 +921,416 @@ const MealSuggestion = () => {
             </div>
           </div>
         )}
-
-        <div className={`ms-main-content ${isMobile && drawerOpen ? 'ms-blurred' : ''}`}>
+        <div className="ms-main-content" >
          
               <div className="ms-search-section">
-  <form onSubmit={handleSearchSubmit} className="ms-search-form">
-    <div className="ms-search-wrapper">
-      <span className="ms-search-icon"><Icons.Search /></span>
-      <input
-        type="text"
-        className="ms-search-input"
-        placeholder="Search: breakfast, spicy chicken, quick dinner..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-    </div>
-    <div className="ms-search-actions">
-      <button type="submit" className="ms-search-btn">Find Recipes</button>
-      <button type="button" className="ms-refresh-btn" onClick={handleRefreshPantry} title="Refresh Pantry">
-        <Icons.Refresh />
-      </button>
-      <button type="button" className="ms-view-pantry-btn" onClick={handleViewPantry} title="Pantry">
-        <Icons.Box />
-      </button>
-      <button type="button" className="ms-view-shopping-btn" onClick={handleViewShoppingList} title="Shopping List">
-        <Icons.Cart />
-      </button>
-    </div>
-  </form>
-</div>
-
-          <div className="ms-filters-bar">
-            <div className="ms-filter-group">
-              <label className="ms-filter-label"> Meal</label>
-              <select className="ms-filter-select" value={filters.mealType} onChange={(e) => setFilters({ ...filters, mealType: e.target.value })}>
-                {mealTypes.map(type => <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>)}
-              </select>
-            </div>
-            <div className="ms-filter-group">
-              <label className="ms-filter-label"> Diet</label>
-              <select className="ms-filter-select" value={filters.dietType} onChange={(e) => setFilters({ ...filters, dietType: e.target.value })}>
-                {dietTypes.map(type => <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>)}
-              </select>
-            </div>
-            <div className="ms-filter-group">
-              <label className="ms-filter-label"> Allergy</label>
-              <select className="ms-filter-select" value={filters.allergy} onChange={(e) => setFilters({ ...filters, allergy: e.target.value })}>
-                {allergies.map(allergy => <option key={allergy} value={allergy}>{allergy.charAt(0).toUpperCase() + allergy.slice(1)}</option>)}
-              </select>
-            </div>
-            <div className="ms-filter-group">
-              <label className="ms-filter-label"> Age</label>
-              <select className="ms-filter-select" value={filters.ageGroup} onChange={(e) => setFilters({ ...filters, ageGroup: e.target.value })}>
-                {ageGroups.map(group => <option key={group} value={group}>{group.replace('-', ' ').charAt(0).toUpperCase() + group.slice(1)}</option>)}
-              </select>
-            </div>
-            <button className="ms-plus-btn" onClick={() => setShowCategoryModal(true)}>
-              <Icons.Plus />
-              <span>More</span>
-            </button>
-          </div>
-
-          {isMobile && expandedDay && (
-            <div className="ms-mobile-expanded-day">
-              <div className="ms-mobile-expanded-header">
-                <h3>{selectedDate?.fullName} - {selectedDate?.date}</h3>
-                <button className="ms-mobile-expanded-close" onClick={handleCloseExpanded}><Icons.X /></button>
-              </div>
-              <div className="ms-mobile-expanded-content">
-                {dayStatus[selectedDate?.date] === 'no-cooking' ? (
-                  <div className="ms-no-meals-expanded">
-                    <p>No cooking this day</p>
-                    <button className="ms-add-meal-expanded" onClick={handleForgotToLog}><Icons.Plus /> Add Meal</button>
+                <form onSubmit={handleSearchSubmit} className="ms-search-form">
+                  <div className="ms-search-wrapper">
+                    <span className="ms-search-icon"><Icons.Search /></span>
+                    <input
+                      type="text"
+                      className="ms-search-input"
+                      placeholder="Search: breakfast, spicy chicken, quick dinner..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                   </div>
-                ) : selectedDayMeals.length > 0 ? (
-                  <>
-                    {selectedDayMeals.map((meal, idx) => (
-                      <div key={idx} className="ms-meal-item-expanded">
-                        <div>
-                          <span className="ms-meal-name">{meal.recipeName}</span>
-                          <span className="ms-meal-members"><Icons.Users /> {meal.members}</span>
-                        </div>
-                        <button className="ms-delete-meal" onClick={() => handleDeleteMeal(meal)}><Icons.Trash /></button>
-                      </div>
-                    ))}
-                    <button className="ms-add-meal-expanded" onClick={handleForgotToLog}><Icons.Plus /> Add Meal</button>
-                  </>
-                ) : (
-                  <div className="ms-no-meals-expanded">
-                    <p>No meals recorded.</p>
-                    <div className="ms-expanded-actions">
-                      <button className="ms-no-cooking-expanded" onClick={handleNoCooking}>No cooking done</button>
-                      <button className="ms-forgot-log-expanded" onClick={handleForgotToLog}>I forgot to log</button>
-                    </div>
+                  <div className="ms-search-actions">
+                    <button type="submit" className="ms-search-btn">Find Recipes</button>
+                    <button type="button" className="ms-refresh-btn" onClick={handleRefreshPantry} title="Refresh Pantry">
+                      <Icons.Refresh />
+                    </button>
+                    <button type="button" className="ms-view-pantry-btn" onClick={handleViewPantry} title="Pantry">
+                      <Icons.Box />
+                    </button>
+                    <button type="button" className="ms-view-shopping-btn" onClick={handleViewShoppingList} title="Shopping List">
+                      <Icons.Cart />
+                    </button>
                   </div>
-                )}
+                </form>
               </div>
-            </div>
-          )}
 
-          {filters.ageGroup === 'patient' && (
-            <div className="patient-sections-container">
-              {patientTypes.map(type => (
-                <HorizontalScrollSection
-                  key={type.id}
-                  title={type.name}
-                  label={type.label}
-                  recipes={patientSections[type.id].recipes}
-                  currentPage={patientSections[type.id].currentPage}
-                  hasMore={patientSections[type.id].hasMore}
-                  onPrev={() => handlePatientPrev(type.id, patientSections[type.id].currentPage)}
-                  onNext={() => handlePatientNext(type.id, patientSections[type.id].currentPage, patientSections[type.id].hasMore)}
-                  loading={patientSections[type.id].loading}
-                />
-              ))}
-            </div>
-          )}
-
-          {showMissingInline && (
-            <div className="ms-missing-inline">
-              <div className="ms-missing-inline-header">
-                <span className="ms-missing-icon"><Icons.AlertTriangle /></span>
-                <span className="ms-missing-title">Essential Items Missing</span>
+              <div className="ms-filters-bar">
+                <div className="ms-filter-group">
+                  <label className="ms-filter-label"> Meal</label>
+                  <select className="ms-filter-select" value={filters.mealType} onChange={(e) => setFilters({ ...filters, mealType: e.target.value })}>
+                    {mealTypes.map(type => <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>)}
+                  </select>
+                </div>
+                <div className="ms-filter-group">
+                  <label className="ms-filter-label"> Diet</label>
+                  <select className="ms-filter-select" value={filters.dietType} onChange={(e) => setFilters({ ...filters, dietType: e.target.value })}>
+                    {dietTypes.map(type => <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>)}
+                  </select>
+                </div>
+                <div className="ms-filter-group">
+                  <label className="ms-filter-label"> Allergy</label>
+                  <select className="ms-filter-select" value={filters.allergy} onChange={(e) => setFilters({ ...filters, allergy: e.target.value })}>
+                    {allergies.map(allergy => <option key={allergy} value={allergy}>{allergy.charAt(0).toUpperCase() + allergy.slice(1)}</option>)}
+                  </select>
+                </div>
+                <div className="ms-filter-group">
+                  <label className="ms-filter-label"> Age</label>
+                  <select className="ms-filter-select" value={filters.ageGroup} onChange={(e) => setFilters({ ...filters, ageGroup: e.target.value })}>
+                    {ageGroups.map(group => <option key={group} value={group}>{group.replace('-', ' ').charAt(0).toUpperCase() + group.slice(1)}</option>)}
+                  </select>
+                </div>
+                <button className="ms-plus-btn" onClick={() => setShowCategoryModal(true)}>
+                  <Icons.Plus />
+                  <span>More</span>
+                </button>
               </div>
-              <p>Your pantry is missing: <strong>{missingFundamentals.join(', ')}</strong></p>
-              <div className="ms-missing-inline-actions">
-                <button className="ms-inline-btn ms-inline-shopping" onClick={handleAddMissingToShopping}><Icons.Cart /> Add to Shopping List</button>
-                <button className="ms-inline-btn ms-inline-panda" onClick={handlePandaMartOrder}><Icons.ShoppingBag /> Order from Panda Mart</button>
-                <button className="ms-inline-btn ms-inline-skip" onClick={handleSkipAndContinue}><Icons.Skip /> Skip & Show Suggestions</button>
-              </div>
-            </div>
-          )}
 
-          {error && !showMissingInline && <div className="ms-error"><p>{error}</p></div>}
-
-          {!showMissingInline && suggestionsData.length > 0 && (
-            <div className="ms-results-info">
-              {searchedFor && <p>Results for: <strong>"{searchedFor}"</strong></p>}
-              <p>Found <span className="ms-results-count">{suggestionsData.length}</span> recipes</p>
-            </div>
-          )}
-
-          {!showMissingInline && visibleSuggestions.length > 0 && (
-            <>
-              <div className="ms-suggestions-grid">
-                {visibleSuggestions.map((recipe, idx) => (
-                  <div key={idx} className="ms-recipe-card">
-                    <div className="ms-recipe-image" style={{ backgroundImage: `url(${recipe.image || 'https://via.placeholder.com/400x250?text=No+Image'})` }} onClick={() => handleRecipeClick(recipe)}>
-                      <span className="ms-match-badge" style={{ backgroundColor: getMatchColor(recipe.match) }}>{recipe.match}%</span>
-                    </div>
-                    <div className="ms-recipe-content">
-                      <h3 className="ms-recipe-name" onClick={() => handleRecipeClick(recipe)}>{recipe.name}</h3>
-                      <p className="ms-recipe-category">
-                        <span>{recipe.subCategory || recipe.category}</span>
-                        <span className="ms-recipe-time"><Icons.Clock /> {recipe.cookingTime} min</span>
-                      </p>
-                      {recipe.missing && recipe.missing.length > 0 ? (
-                        <div className="ms-missing-ingredients">
-                          <span className="ms-missing-label">Missing:</span>
-                          <span className="ms-missing-items">{recipe.missing.slice(0, 3).join(', ')}{recipe.missing.length > 3 && ` +${recipe.missing.length - 3}`}</span>
-                        </div>
-                      ) : (
-                        <div className="ms-full-match"><Icons.Check /> All ingredients ready</div>
-                      )}
-                      <div className="ms-match-progress">
-                        <div className="ms-match-progress-bar" style={{ width: `${recipe.match}%`, backgroundColor: getMatchColor(recipe.match) }}></div>
-                      </div>
-                      <div className="ms-recipe-actions">
-                        <button className="ms-btn-view" onClick={() => handleRecipeClick(recipe)}><Icons.Eye /> View</button>
-                        <button className="ms-btn-cook" onClick={() => handleCookIt(recipe)}><Icons.Chef /> Cook</button>
-                        {recipe.missing && recipe.missing.length > 0 && (
-                          <button className="ms-btn-shop" onClick={() => handleAddToShopping(recipe)}><Icons.Cart /></button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {hasMore && (
-                <div className="ms-show-more">
-                  <button className="ms-show-more-btn" onClick={loadMore}>
-                    Show More — {suggestionsData.length - visibleCount} more recipes
-                  </button>
+              {filters.ageGroup === 'patient' && (
+                <div className="patient-sections-container">
+                  {patientTypes.map(type => (
+                    <HorizontalScrollSection
+                      key={type.id}
+                      title={type.name}
+                      label={type.label}
+                      recipes={patientSections[type.id].recipes}
+                      currentPage={patientSections[type.id].currentPage}
+                      hasMore={patientSections[type.id].hasMore}
+                      onPrev={() => handlePatientPrev(type.id, patientSections[type.id].currentPage)}
+                      onNext={() => handlePatientNext(type.id, patientSections[type.id].currentPage, patientSections[type.id].hasMore)}
+                      loading={patientSections[type.id].loading}
+                    />
+                  ))}
                 </div>
               )}
-            </>
-          )}
 
-          {!showMissingInline && !loading && !error && suggestionsData.length === 0 && filters.ageGroup !== 'patient' && (
-            <div className="ms-empty-state">
-              <div className="ms-empty-icon"><Icons.Search /></div>
-              <h3>No recipes found</h3>
-              <p>Try searching for breakfast, lunch, dinner, or quick recipes</p>
-            </div>
-          )}
+              {isMobile && (
+                <div className="ms-mobile-calendar-hub">
+                  <div className="hub-header">
+                    <span className="month">August 2026</span>
+                    <span className="week-label">Tap a day</span>
+                  </div>
 
-          <div className="ms-back-section">
-            <button className="ms-back-btn" onClick={() => navigate(-1)}><Icons.ArrowLeft /> Back</button>
-          </div>
-        </div>
-      </div>
+                  <div className="ms-mobile-week-grid">
+                    {weekDays.map((day) => {
+                      const isToday = day.date === todayDateStr;
+                      const status = dayStatus[day.date];
+                      const isActive = selectedDate?.id === day.id;
+                      const dayNumber = new Date(day.date).getDate();
+                      const dayName = day.name;
+                      return (
+                        <div
+                          key={day.id}
+                          className={`ms-mobile-day ${isActive ? 'active' : ''} ${isToday ? 'today' : ''}`}
+                          onClick={() => {
+                            if (isActive) {
+                              setSelectedDate(null);
+                              setExpandedDay(null);
+                            } else {
+                              document.querySelectorAll('.ms-mobile-day-details').forEach(el => {
+                                el.classList.remove('open');
+                              });
+                              document.querySelectorAll('.ms-mobile-day').forEach(el => {
+                                el.classList.remove('active');
+                              });
+                              handleDayClick(day);
+                            }
+                          }}
+                        >
+                          <span className="day-name">{dayName}</span>
+                          <span className="day-num">{dayNumber}</span>
+                          {status === 'completed' && <span className="dot completed"></span>}
+                          {status === 'pending' && day.date <= todayDateStr && <span className="dot pending"></span>}
+                        </div>
+                      );
+                    })}
+                  </div>
 
-      {showCategoryModal && (
-        <div className="ms-modal-overlay" onClick={() => setShowCategoryModal(false)}>
-          <div className="ms-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="ms-modal-header">
-              <h3>More Categories</h3>
-              <button className="ms-modal-close" onClick={() => setShowCategoryModal(false)}><Icons.X /></button>
-            </div>
-            <div className="ms-modal-body">
-              <div className="ms-categories-grid">
-                {moreCategories.map(cat => (
-                  <button key={cat.id} className="ms-category-btn" onClick={() => handleCategorySelect(cat)}>{cat.name}</button>
-                ))}
+                  {weekDays.map((day) => {
+                    const isActive = selectedDate?.id === day.id;
+                    const mealsForDay = isActive ? selectedDayMeals : [];
+                    const status = dayStatus[day.date];
+                    
+                    return (
+                      <div 
+                        key={`detail-${day.id}`} 
+                        className={`ms-mobile-day-details ${isActive ? 'open' : ''}`}
+                      >
+                        <div className="detail-header">
+                          <span>{day.fullName}</span>
+                          <span className="meal-total">{mealsForDay.length > 0 ? `${mealsForDay.reduce((sum, m) => sum + m.members, 0)} people · ${mealsForDay.length} meal${mealsForDay.length > 1 ? 's' : ''}` : 'No meals'}</span>
+                        </div>
+
+                        {status === 'no-cooking' ? (
+                          <div className="empty-day">
+                            No cooking this day
+                          </div>
+                        ) : mealsForDay.length > 0 ? (
+                          mealsForDay.map((meal, idx) => (
+                            <div key={idx} className="meal-row">
+                              <span className="meal-name">{meal.recipeName}</span>
+                              <span className="meal-members">{meal.members}</span>
+                              <button className="delete-meal" onClick={(e) => { e.stopPropagation(); handleDeleteMeal(meal); }}>X</button>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="empty-day">
+                            No meals recorded
+                          </div>
+                        )}
+
+                        <div className="detail-actions">
+                          <button className="btn-primary" onClick={(e) => { 
+                            e.stopPropagation(); 
+                            handleDayClick(day); 
+                            handleForgotToLog(); 
+                          }}>
+                            Add meal
+                          </button>
+                          {status !== 'no-cooking' && mealsForDay.length === 0 && (
+                            <button className="btn-secondary" onClick={(e) => { 
+                              e.stopPropagation(); 
+                              handleDayClick(day); 
+                              handleNoCooking(); 
+                            }}>
+                              No cooking
+                            </button>
+                          )}
+                          {mealsForDay.length > 0 && (
+                            <button className="btn-danger" onClick={(e) => { 
+                              e.stopPropagation(); 
+                              if (window.confirm('Clear all meals for this day?')) { 
+                                closeMobileDetail();
+                              } 
+                            }}>
+                              Clear all
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {showMissingInline && (
+                <div className="ms-missing-inline">
+                  <div className="ms-missing-inline-header">
+                    <span className="ms-missing-icon"><Icons.AlertTriangle /></span>
+                    <span className="ms-missing-title">Essential Items Missing</span>
+                  </div>
+                  <p>Your pantry is missing: <strong>{missingFundamentals.join(', ')}</strong></p>
+                  <div className="ms-missing-inline-actions">
+                    <button className="ms-inline-btn ms-inline-shopping" onClick={handleAddMissingToShopping}><Icons.Cart /> Add to Shopping List</button>
+                    <button className="ms-inline-btn ms-inline-panda" onClick={handlePandaMartOrder}><Icons.ShoppingBag /> Order from Panda Mart</button>
+                    <button className="ms-inline-btn ms-inline-skip" onClick={handleSkipAndContinue}><Icons.Skip /> Skip & Show Suggestions</button>
+                  </div>
+                </div>
+              )}
+
+              {error && !showMissingInline && <div className="ms-error"><p>{error}</p></div>}
+
+              {!showMissingInline && suggestionsData.length > 0 && (
+                <div className="ms-results-info">
+                  {searchedFor && <p>Results for: <strong>"{searchedFor}"</strong></p>}
+                  <p>Found <span className="ms-results-count">{suggestionsData.length}</span> recipes</p>
+                </div>
+              )}
+
+              {!showMissingInline && visibleSuggestions.length > 0 && (
+                <>
+                  <div className="ms-suggestions-grid">
+                    {visibleSuggestions.map((recipe, idx) => (
+                      <div key={idx} className="ms-recipe-card">
+                        <div className="ms-recipe-image" style={{ backgroundImage: `url(${recipe.image || 'https://via.placeholder.com/400x250?text=No+Image'})` }} onClick={() => handleRecipeClick(recipe)}>
+                          <span className="ms-match-badge" style={{ backgroundColor: getMatchColor(recipe.match) }}>{recipe.match}%</span>
+                        </div>
+                        <div className="ms-recipe-content">
+                          <h3 className="ms-recipe-name" onClick={() => handleRecipeClick(recipe)}>{recipe.name}</h3>
+                          <p className="ms-recipe-category">
+                            <span>{recipe.subCategory || recipe.category}</span>
+                            <span className="ms-recipe-time"><Icons.Clock /> {recipe.cookingTime} min</span>
+                          </p>
+                          {recipe.match === 100 ? (
+                            <div className="ms-full-match"><Icons.Check /> All ingredients ready</div>
+                          ) : recipe.missing && recipe.missing.length > 0 ? (
+                            <div className="ms-missing-ingredients">
+                              <span className="ms-missing-label">Missing:</span>
+                              <span className="ms-missing-items">
+                                {recipe.missing.slice(0, 3).join(', ')}
+                                {recipe.missing.length > 3 && ` +${recipe.missing.length - 3}`}
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="ms-no-ingredients">
+                              No ingredients listed for this recipe
+                            </div>
+                          )}
+                          <div className="ms-match-progress">
+                            <div className="ms-match-progress-bar" style={{ width: `${recipe.match}%`, backgroundColor: getMatchColor(recipe.match) }}></div>
+                          </div>
+                          <div className="ms-recipe-actions">
+                            <button className="ms-btn-view" onClick={() => handleRecipeClick(recipe)}><Icons.Eye /> View</button>
+                            <button className="ms-btn-cook" onClick={() => handleCookIt(recipe)}><Icons.Chef /> Cook</button>
+                            {recipe.missing && recipe.missing.length > 0 && (
+                              <button className="ms-btn-shop" onClick={() => handleAddToShopping(recipe)}><Icons.Cart /></button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {hasMore && (
+                    <div className="ms-show-more">
+                      <button className="ms-show-more-btn" onClick={loadMore}>
+                        Show More — {suggestionsData.length - visibleCount} more recipes
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {!showMissingInline && !loading && !error && suggestionsData.length === 0 && filters.ageGroup !== 'patient' && (
+                <div className="ms-empty-state">
+                  <div className="ms-empty-icon"><Icons.Search /></div>
+                  <h3>No recipes found</h3>
+                  <p>Try searching for breakfast, lunch, dinner, or quick recipes</p>
+                </div>
+              )}
+
+              <div className="ms-back-section">
+                <button className="ms-back-btn" onClick={() => navigate(-1)}><Icons.ArrowLeft /> Back</button>
               </div>
             </div>
           </div>
-        </div>
-      )}
 
-      {showMemberPopup && selectedRecipe && (
-        <div className="ms-popup-overlay" onClick={() => setShowMemberPopup(false)}>
-          <div className="ms-popup-content" onClick={(e) => e.stopPropagation()}>
-            <div className="ms-popup-header">
-              <h3>{selectedRecipe.name}</h3>
-              <button className="ms-popup-close" onClick={() => setShowMemberPopup(false)}><Icons.X /></button>
-            </div>
-            <div className="ms-popup-body">
-              <p className="ms-popup-question">How many people are eating?</p>
-              <p className="ms-popup-base-info">Base recipe serves: {selectedRecipe.baseServings || 4} persons</p>
-              <div className="ms-member-options">
-                {memberOptions.map(option => (
-                  <label key={option.value} className="ms-member-option">
-                    <input type="radio" name="members" value={option.value} checked={option.value === 'other' ? showCustomInput : selectedMembers === option.value} onChange={() => handleMemberSelect(option.value)} />
-                    <span><Icons.Users /> {option.label}</span>
-                  </label>
-                ))}
-                {showCustomInput && (
-                  <input type="number" className="ms-custom-member-input" placeholder="Enter number of people" value={customMembers} onChange={handleCustomMemberChange} min="1" autoFocus />
-                )}
+          {showCategoryModal && (
+            <div className="ms-modal-overlay" onClick={() => setShowCategoryModal(false)}>
+              <div className="ms-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="ms-modal-header">
+                  <h3>More Categories</h3>
+                  <button className="ms-modal-close" onClick={() => setShowCategoryModal(false)}><Icons.X /></button>
+                </div>
+                <div className="ms-modal-body">
+                  <div className="ms-categories-grid">
+                    {moreCategories.map(cat => (
+                      <button key={cat.id} className="ms-category-btn" onClick={() => handleCategorySelect(cat)}>{cat.name}</button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="ms-popup-footer">
-              <button className="ms-popup-view" onClick={() => {
-                const members = selectedMembers === 'other' ? customMembers : selectedMembers;
-                if (!members) { toast.warning('Please select number of people'); return; }
-                navigate(`/recipe/${selectedRecipe.id}?members=${members}`);
-                setShowMemberPopup(false);
-              }}><Icons.Eye /> View</button>
-              <button className="ms-popup-cook-view" onClick={handleConfirmCooking} disabled={isCooking}>
-                {isCooking ? 'Cooking...' : <><Icons.Chef /> Cook & View</>}
-              </button>
-              <button className="ms-popup-cancel" onClick={() => setShowMemberPopup(false)}><Icons.X /> Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
+          )}
 
-      {showAddMealForm && selectedDate && (
-        <div className="ms-popup-overlay" onClick={() => setShowAddMealForm(false)}>
-          <div className="ms-popup-content" onClick={(e) => e.stopPropagation()}>
-            <div className="ms-popup-header">
-              <h3>{editingMeal ? 'Edit Meal' : 'Add Meal'} — {selectedDate.fullName || selectedDate.id}</h3>
-              <button className="ms-popup-close" onClick={() => setShowAddMealForm(false)}><Icons.X /></button>
+          {showMemberPopup && selectedRecipe && (
+            <div className="ms-popup-overlay" onClick={() => setShowMemberPopup(false)}>
+              <div className="ms-popup-content" onClick={(e) => e.stopPropagation()}>
+                <div className="ms-popup-header">
+                  <h3>{selectedRecipe.name}</h3>
+                  <button className="ms-popup-close" onClick={() => setShowMemberPopup(false)}><Icons.X /></button>
+                </div>
+                <div className="ms-popup-body">
+                  <p className="ms-popup-question">How many people are eating?</p>
+                  <p className="ms-popup-base-info">Base recipe serves: {selectedRecipe.baseServings || 4} persons</p>
+                  <div className="ms-member-options">
+                    {memberOptions.map(option => (
+                      <label key={option.value} className="ms-member-option">
+                        <input type="radio" name="members" value={option.value} checked={option.value === 'other' ? showCustomInput : selectedMembers === option.value} onChange={() => handleMemberSelect(option.value)} />
+                        <span><Icons.Users /> {option.label}</span>
+                      </label>
+                    ))}
+                    {showCustomInput && (
+                      <input type="number" className="ms-custom-member-input" placeholder="Enter number of people" value={customMembers} onChange={handleCustomMemberChange} min="1" autoFocus />
+                    )}
+                  </div>
+                </div>
+                <div className="ms-popup-footer">
+                  <button className="ms-popup-view" onClick={() => {
+                    const members = selectedMembers === 'other' ? customMembers : selectedMembers;
+                    if (!members) { toast.warning('Please select number of people'); return; }
+                    navigate(`/recipe/${selectedRecipe.id}?members=${members}`);
+                    setShowMemberPopup(false);
+                  }}><Icons.Eye /> View</button>
+                  <button className="ms-popup-cook-view" onClick={handleConfirmCooking} disabled={isCooking}>
+                    {isCooking ? 'Cooking...' : <><Icons.Chef /> Cook & View</>}
+                  </button>
+                  <button className="ms-popup-cancel" onClick={() => setShowMemberPopup(false)}><Icons.X /> Cancel</button>
+                </div>
+              </div>
             </div>
-            <div className="ms-popup-body">
-              <div className="ms-form-group">
-                <label>Recipe Name</label>
-                <div className="ms-suggestions-container">
-                  <input type="text" className="ms-recipe-input" placeholder="Type recipe name..." value={manualRecipeName} onChange={handleManualRecipeChange} autoFocus />
-                  {showRecipeSuggestions && recipeSuggestions.length > 0 && (
-                    <div className="ms-suggestions-dropdown">
-                      {recipeSuggestions.map(recipe => (
-                        <div key={recipe._id} className="ms-suggestion-item" onClick={() => selectRecipeSuggestion(recipe)}>{recipe.title}</div>
+          )}
+
+          {showAddMealForm && selectedDate && (
+            <div className="ms-popup-overlay" onClick={() => setShowAddMealForm(false)}>
+              <div className="ms-popup-content" onClick={(e) => e.stopPropagation()}>
+                <div className="ms-popup-header">
+                  <h3>{editingMeal ? 'Edit Meal' : 'Add Meal'} — {selectedDate.fullName || selectedDate.id}</h3>
+                  <button className="ms-popup-close" onClick={() => setShowAddMealForm(false)}><Icons.X /></button>
+                </div>
+                <div className="ms-popup-body">
+                  <div className="ms-form-group">
+                    <label>Recipe Name</label>
+                    <div className="ms-suggestions-container">
+                      <input type="text" className="ms-recipe-input" placeholder="Type recipe name..." value={manualRecipeName} onChange={handleManualRecipeChange} autoFocus />
+                      {showRecipeSuggestions && recipeSuggestions.length > 0 && (
+                        <div className="ms-suggestions-dropdown">
+                          {recipeSuggestions.map(recipe => (
+                            <div key={recipe._id} className="ms-suggestion-item" onClick={() => selectRecipeSuggestion(recipe)}>{recipe.title}</div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <small>Type to search recipes from database</small>
+                  </div>
+                  <div className="ms-form-group">
+                    <label>Number of People</label>
+                    <input type="number" value={selectedMealMembers} onChange={(e) => setSelectedMealMembers(parseInt(e.target.value))} min="1" />
+                  </div>
+                </div>
+                <div className="ms-popup-footer">
+                  <button className="ms-popup-cancel" onClick={() => { setShowAddMealForm(false); setEditingMeal(null); setManualRecipeName(''); setRecipeSuggestions([]); }}><Icons.X /> Cancel</button>
+                  <button className="ms-popup-confirm" onClick={handleSaveMeal}><Icons.Check /> Save</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {showMonthHistory && (
+            <div className="ms-popup-overlay" onClick={() => setShowMonthHistory(false)}>
+              <div className="ms-history-popup" onClick={(e) => e.stopPropagation()}>
+                <div className="ms-popup-header">
+                  <h3>Full Month History</h3>
+                  <button className="ms-popup-close" onClick={() => setShowMonthHistory(false)}><Icons.X /></button>
+                </div>
+                <div className="ms-history-popup-body">
+                  {loadingHistory ? (
+                    <div className="loading-placeholder">Loading history...</div>
+                  ) : monthHistory.length === 0 ? (
+                    <div className="empty-history">
+                      <p>No cooking history found for the last 30 days</p>
+                      <p className="empty-history-sub">Start cooking some recipes to see them here!</p>
+                    </div>
+                  ) : (
+                    <div className="history-list">
+                      {monthHistory.map((meal, idx) => (
+                        <div key={idx} className="history-item" onClick={() => { setShowMonthHistory(false); navigate(`/recipe/${meal.recipeId}`); }}>
+                          <div className="history-date">
+                            <span className="history-day">{meal.dayName}</span>
+                            <span className="history-date-num">{meal.date}</span>
+                          </div>
+                          <div className="history-details">
+                            <span className="history-recipe">{meal.recipeName}</span>
+                            <span className="history-members"><Icons.Users /> {meal.members} persons</span>
+                          </div>
+                          <div className="history-arrow"><Icons.ChevronRight /></div>
+                        </div>
                       ))}
                     </div>
                   )}
                 </div>
-                <small>Type to search recipes from database</small>
-              </div>
-              <div className="ms-form-group">
-                <label>Number of People</label>
-                <input type="number" value={selectedMealMembers} onChange={(e) => setSelectedMealMembers(parseInt(e.target.value))} min="1" />
+                <div className="ms-popup-footer">
+                  <button className="ms-popup-cancel" onClick={() => setShowMonthHistory(false)}>Close</button>
+                </div>
               </div>
             </div>
-            <div className="ms-popup-footer">
-              <button className="ms-popup-cancel" onClick={() => { setShowAddMealForm(false); setEditingMeal(null); setManualRecipeName(''); setRecipeSuggestions([]); }}><Icons.X /> Cancel</button>
-              <button className="ms-popup-confirm" onClick={handleSaveMeal}><Icons.Check /> Save</button>
-            </div>
-          </div>
+          )}
         </div>
-      )}
-
-      {showMonthHistory && (
-        <div className="ms-popup-overlay" onClick={() => setShowMonthHistory(false)}>
-          <div className="ms-history-popup" onClick={(e) => e.stopPropagation()}>
-            <div className="ms-popup-header">
-              <h3>Full Month History</h3>
-              <button className="ms-popup-close" onClick={() => setShowMonthHistory(false)}><Icons.X /></button>
-            </div>
-            <div className="ms-history-popup-body">
-              {loadingHistory ? (
-                <div className="loading-placeholder">Loading history...</div>
-              ) : monthHistory.length === 0 ? (
-                <div className="empty-history">
-                  <p>No cooking history found for the last 30 days</p>
-                  <p className="empty-history-sub">Start cooking some recipes to see them here!</p>
-                </div>
-              ) : (
-                <div className="history-list">
-                  {monthHistory.map((meal, idx) => (
-                    <div key={idx} className="history-item" onClick={() => { setShowMonthHistory(false); navigate(`/recipe/${meal.recipeId}`); }}>
-                      <div className="history-date">
-                        <span className="history-day">{meal.dayName}</span>
-                        <span className="history-date-num">{meal.date}</span>
-                      </div>
-                      <div className="history-details">
-                        <span className="history-recipe">{meal.recipeName}</span>
-                        <span className="history-members"><Icons.Users /> {meal.members} persons</span>
-                      </div>
-                      <div className="history-arrow"><Icons.ChevronRight /></div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="ms-popup-footer">
-              <button className="ms-popup-cancel" onClick={() => setShowMonthHistory(false)}>Close</button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+      );
 };
 
 export default MealSuggestion;

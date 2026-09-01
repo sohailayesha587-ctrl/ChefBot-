@@ -464,8 +464,10 @@ toolsDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
     content: JSON.stringify(item),
-    category: 'measuring-tools',
+category: 'measuring-skills',
+subCategory: 'measuring-tools',
     image: item.image,
+     status: 'published',
   });
 });
 
@@ -473,8 +475,10 @@ techniquesDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
     content: JSON.stringify(item),
-    category: 'measuring-techniques',
+category: 'measuring-skills',
+subCategory: 'measuring-techniques',
     image: item.image,
+     status: 'published',
   });
 });
 
@@ -482,8 +486,10 @@ estimationDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
     content: JSON.stringify(item),
-    category: 'estimation',
-    image: item.image,
+category: 'measuring-skills',
+subCategory: 'estimation',
+       image: item.image,
+     status: 'published',
   });
 });
 
@@ -491,8 +497,10 @@ conversionDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
     content: JSON.stringify(item),
-    category: 'conversions',
-    image: item.image,
+category: 'measuring-skills',
+subCategory: 'conversions',
+       image: item.image,
+     status: 'published',
   });
 });
 
@@ -500,29 +508,44 @@ precisionDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
     content: JSON.stringify(item),
-    category: 'precision',
-    image: item.image,
+category: 'measuring-skills',
+subCategory: 'precision',
+       image: item.image,
+     status: 'published',
   });
 });
 
 const migrate = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('MongoDB connected');
 
-    const admin = await User.findOne({ email: 'chefbot.ai.kitchen@gmail.com' });
+    console.log('MongoDB connected');
+    console.log('DATABASE:', mongoose.connection.name);
+    console.log('HOST:', mongoose.connection.host);
+
+    const admin = await User.findOne({
+      email: 'chefbot.ai.kitchen@gmail.com'
+    });
+
     if (!admin) {
       console.error('Admin not found!');
-      process.exit(1);
+      await mongoose.disconnect();
+      return;
     }
 
-    const toInsert = allGuides.map(g => ({ ...g, createdBy: admin._id }));
+    const toInsert = allGuides.map(g => ({
+      ...g,
+      createdBy: admin._id
+    }));
+
     const result = await BeginnersGuide.insertMany(toInsert);
-    console.log(` ${result.length} measuring skills guides inserted (measuring-tools, measuring-techniques, estimation, conversions, precision)`);
-    process.exit(0);
+
+    console.log(`${result.length} measuring skills guides inserted`);
+
+    await mongoose.disconnect();
   } catch (err) {
     console.error('Migration failed:', err);
-    process.exit(1);
+    await mongoose.disconnect();
   }
 };
 

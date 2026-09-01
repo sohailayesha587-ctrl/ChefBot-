@@ -169,7 +169,7 @@ const MealFeature = () => {
   const fetchPantry = async () => {
     try {
       const token = getToken();
-      const res = await fetch('http://localhost:5000/api/pantry', {
+      const res = await fetch('/api/pantry', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -237,7 +237,7 @@ const MealFeature = () => {
     setSelectedDay(0);
 
     try {
-      let url = `http://localhost:5000/api/mealplan/generate?dietType=${filters.dietType}&allergy=${filters.allergy}&ageGroup=${filters.ageGroup}&familyCount=${getFamilyCount()}&duration=${filters.planDuration}`;
+      let url = `/api/mealplan/generate?dietType=${filters.dietType}&allergy=${filters.allergy}&ageGroup=${filters.ageGroup}&familyCount=${getFamilyCount()}&duration=${filters.planDuration}`;
       if (pantryItems.length) url += `&pantry=${encodeURIComponent(pantryItems.join(','))}`;
 
       const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
@@ -268,7 +268,7 @@ const MealFeature = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/mealplan/save', {
+      const res = await fetch('/api/mealplan/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({
@@ -314,7 +314,7 @@ const MealFeature = () => {
     setModalLoading(true);
     try {
       const token = getToken();
-      const res = await fetch(`http://localhost:5000/api/recipes/search?q=${encodeURIComponent(q)}`, {
+      const res = await fetch(`/api/recipes/search?q=${encodeURIComponent(q)}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();

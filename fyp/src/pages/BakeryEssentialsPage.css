@@ -8,6 +8,7 @@ html, body, #root {
   width: 100%;
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
   background: whitesmoke;
+  --site-nav-height: 100px;
 }
 
 .bep-container {
@@ -186,8 +187,7 @@ html, body, #root {
 .bep-item-card {
   background: #ffffff;
   border-radius: 16px;
-    border: 2px solid #397d7c;
-
+  border: 2px solid #397d7c;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -392,10 +392,80 @@ html, body, #root {
   z-index: 1;
   transition: transform 0.3s ease;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .bep-modal-right-image:hover {
   transform: scale(1.02);
+}
+
+.bep-about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.bep-about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.bep-about-thumb {
+  display: none;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 3px solid #e0eeee;
+  box-shadow: 0 8px 18px #284a4b;
+  cursor: pointer;
+}
+
+.bep-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 51, 52, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 30px;
+  animation: fadeInUp 0.25s ease-out;
+}
+
+.bep-lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px #000000;
+  object-fit: contain;
+}
+
+.bep-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: #ffffff;
+  color: #1a3334;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 4px 15px #000000;
+  transition: all 0.2s;
+}
+
+.bep-lightbox-close:hover {
+  background: #397d7c;
+  color: #ffffff;
+  transform: scale(1.1);
 }
 
 .bep-msec {
@@ -636,6 +706,10 @@ html, body, #root {
   display: none;
 }
 
+.bep-categories-row {
+  display: none;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -665,7 +739,6 @@ html, body, #root {
   cursor: default;
 }
 
-
 .bep-mistake-icon {
   display: flex;
   align-items: center;
@@ -681,10 +754,13 @@ html, body, #root {
   flex: 1;
 }
 
-@media (max-width: 768px) {
-  html, body {
-    height: auto;
+@media (max-width: 780px) {
+  html {
     overflow-x: hidden;
+  }
+
+  body {
+    height: auto;
     overflow-y: auto;
   }
 
@@ -695,7 +771,7 @@ html, body, #root {
   .bep-main {
     margin-left: 0;
     width: 100%;
-    padding: 20px 50px 15px;
+    padding: 15px 16px 10px;
     height: auto;
     overflow-y: visible;
   }
@@ -708,69 +784,63 @@ html, body, #root {
   .bep-mobile-topbar {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    top: 0;
-    z-index: 1020;
-    background: whitesmoke;
-    padding: 20px 12px;
-    border-bottom: 2px solid #e0eeee;
-    box-shadow: 0 2px 8px #000000;
+    height: 100px;
+    background: #1a3334;
+    padding: 14px 16px;
+    border-bottom: 3px solid #397d7c;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 80px;
   }
 
-  .bep-hamburger {
-    display: flex;
-    position: relative;
-    background: #284a4b;
-    border: none;
-    border-radius: 10px;
-    width: 44px;
-    height: 44px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px #284a4b;
-    transition: background 0.2s;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .bep-hamburger:hover {
-    background: #397d7c;
-  }
-
-  .bep-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-
-  .bep-hamburger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .bep-hamburger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .bep-hamburger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
   .bep-mobile-topbar .bep-page-title {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
     margin: 0;
     flex: 1;
+  }
+
+  .bep-hamburger {
+    display: none;
+  }
+
+  .bep-categories-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .bep-cat-btn {
+    padding: 8px 6px;
+    border-radius: 18px;
+    background: #e0eeee;
+    color: #1a3334;
+    font-size: 8.5px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
     white-space: nowrap;
     overflow: hidden;
-    font-family: 'DM Sans', serif;
-    font-weight: 800;
-    color: #284a4b;
+    text-overflow: ellipsis;
+  }
+
+  .bep-cat-btn:hover {
+    background: #397d7c;
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+
+  .bep-cat-btn.active {
+    background: #284a4b;
+    color: #ffffff;
+    border-color: #ffffff;
   }
 
   .bep-main-header .bep-page-title {
@@ -779,10 +849,14 @@ html, body, #root {
 
   .bep-main-header {
     margin-top: 0;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 8px;
     border-bottom: none;
     margin-bottom: 0px;
+  }
+
+  .bep-page-description {
+    font-size: 14px;
   }
 
   .bep-sidebar {
@@ -796,6 +870,7 @@ html, body, #root {
     z-index: 1100;
     overflow-y: auto;
     bottom: auto;
+    padding: 20px 16px;
   }
 
   .bep-sidebar.open {
@@ -803,11 +878,15 @@ html, body, #root {
   }
 
   .bep-sidebar-header {
-    margin-top: 30px;
+    margin-top: 20px;
+  }
+
+  .bep-sidebar-title {
+    font-size: 20px;
   }
 
   .bep-items-grid {
-    gap: 10px;
+    gap: 15px;
   }
 
   .bep-item-card {
@@ -823,7 +902,7 @@ html, body, #root {
   }
 
   .bep-card-content {
-    padding: 8px 12px;
+    padding: 12px 12px;
   }
 
   .bep-card-title {
@@ -842,26 +921,43 @@ html, body, #root {
   }
 
   .bep-modal-inner {
-    flex-direction: row;
-    overflow: hidden;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
   .bep-modal-left {
-    width: 65%;
+    width: 100%;
     padding: 16px;
-    overflow-y: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
   }
 
   .bep-modal-right {
-    width: 35%;
-    padding: 16px 10px;
-    overflow: hidden;
+    display: none;
   }
 
-  .bep-modal-right-image {
-    width: 300px;
-    height: 370px;
+  .bep-about-thumb {
+    display: block;
+    width: 120px;
+    height: 120px;
+  }
+
+  .bep-modal-hero {
+    padding: 16px 20px;
+  }
+
+  .bep-modal-hero-title {
+    font-size: 22px;
+  }
+
+  .bep-modal-two-col {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bep-msec-text {
+    font-size: 12px;
+    padding: 10px 12px;
   }
 
   .bep-uses-badge-row {
@@ -887,24 +983,6 @@ html, body, #root {
     font-size: 12px;
   }
 
-  .bep-modal-hero {
-    padding: 16px 20px;
-  }
-
-  .bep-modal-hero-title {
-    font-size: 22px;
-  }
-
-  .bep-modal-two-col {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .bep-msec-text {
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-
   .bep-back-section {
     margin-top: 2px;
     margin-bottom: 2px;
@@ -926,21 +1004,178 @@ html, body, #root {
   }
 }
 
-@media (max-width: 480px) {
-  .bep-modal-right {
-    width: 35%;
+@media (max-width: 380px) {
+  .bep-main {
+    padding: 10px 10px 8px;
+  }
+
+  .bep-mobile-topbar {
+    padding: 10px 12px;
+  }
+
+  .bep-mobile-topbar .bep-page-title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .bep-categories-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px 10px;
+  }
+
+  .bep-cat-btn {
+    font-size: 8px;
+    padding: 6px 4px;
+  }
+
+  .bep-items-grid {
+    margin: 10px 10px;
+    gap: 10px;
+  }
+
+  .bep-item-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .bep-card-image {
+    height: 60px;
+  }
+
+  .bep-card-content {
+    padding: 6px 10px;
+  }
+
+  .bep-card-title {
+    font-size: 12px;
+  }
+
+  .bep-card-description {
+    font-size: 10px;
+    -webkit-line-clamp: 1;
+  }
+
+  .bep-modal {
+    width: 98%;
+    border-radius: 16px;
+    max-height: 92vh;
   }
 
   .bep-modal-left {
-    width: 65%;
+    width: 100%;
+    padding: 12px;
   }
 
-  .bep-modal-right-image {
-    width: 150px;
-    height: 200px;
+  .bep-about-row {
+    gap: 10px;
+  }
+
+  .bep-about-thumb {
+    width: 110px;
+    height: 110px;
+  }
+
+  .bep-modal-hero {
+    padding: 12px 14px;
+  }
+
+  .bep-modal-hero-title {
+    font-size: 18px;
+  }
+
+  .bep-modal-hero-subtitle {
+    font-size: 12px;
+  }
+
+  .bep-modal-hero-label {
+    font-size: 8px;
+  }
+
+  .bep-modal-close {
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .bep-msec-text {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .bep-msec-label {
+    font-size: 8px;
   }
 
   .bep-uses-wrap {
     grid-template-columns: 1fr;
+  }
+
+  .bep-use-tag {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .bep-step-txt, .bep-tip-txt {
+    font-size: 10px;
+  }
+
+  .bep-step-card, .bep-tip-card {
+    padding: 5px 8px;
+  }
+
+  .bep-step-num {
+    width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  .bep-back-button {
+    padding: 8px 16px;
+    font-size: 12px;
+    min-width: 150px;
+  }
+
+  .bep-mistake-card {
+    padding: 5px 8px;
+  }
+
+  .bep-mistake-card .bep-tip-txt {
+    font-size: 10px;
+  }
+
+  .bep-sidebar {
+    width: 240px;
+    padding: 16px 12px;
+  }
+
+  .bep-sidebar-title {
+    font-size: 18px;
+  }
+
+  .bep-sidebar-subtitle {
+    font-size: 10px;
+  }
+
+  .bep-category-item {
+    padding: 10px 12px;
+  }
+
+  .bep-category-name {
+    font-size: 13px;
+  }
+
+  .bep-lightbox-overlay {
+    padding: 16px;
+  }
+
+  .bep-lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
   }
 }

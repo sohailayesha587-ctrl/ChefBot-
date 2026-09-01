@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LanguagePopup from '../components/LanguagePopup';
@@ -30,7 +30,7 @@ const PublicHome = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/recipes?limit=200');
+        const response = await fetch('/api/recipes?limit=200');
         const data = await response.json();
         if (data.recipes && Array.isArray(data.recipes)) {
           const shuffled = [...data.recipes].sort(() => 0.5 - Math.random());
@@ -102,11 +102,11 @@ const PublicHome = () => {
     
   }, []);
 
-  useEffect(() => {
-    if (!isMobile && heroBackgroundRef.current) {
-      heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
-    }
-  }, [currentCenterIndex, isMobile]);
+useLayoutEffect(() => {
+  if (heroBackgroundRef.current) {
+    heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
+  }
+}, [currentCenterIndex]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -267,14 +267,17 @@ const PublicHome = () => {
   return (
     <>
       <section className="pk-hero-carousel-section">
-        <div className="pk-hero-background-container" ref={heroBackgroundRef}></div>
-        <div className="pk-hero-background-overlay"></div>
+<div
+  className="pk-hero-background-container"
+  ref={heroBackgroundRef}
+  style={{ backgroundImage: `url('${furnitureItems[currentCenterIndex].bgImage}')` }}
+></div>        <div className="pk-hero-background-overlay"></div>
 
         <div className="pk-hero-left-section">
           <div className="pk-hero-section-tag"></div>
-          <h1 className="pk-hero-main-heading">AJ KHANE MEIN KIYA PAKAEN?</h1>
+          <h1 className="pk-hero-main-heading">What should we cook today?</h1>
           <h2 className="pk-hero-second-heading">Let's ask CHEFBOT</h2>
-          <p className="pk-hero-description">"ChefBot: Your smart kitchen AI that cooks up ideas from what you have!"</p>
+          <p className="pk-hero-description">"Your smart kitchen that cooks up ideas from what you have!"</p>
         </div>
 
         <div className="pk-hero-right-section">
@@ -329,34 +332,44 @@ const PublicHome = () => {
       </section>
 
       <section className="pk-section-boxes">
-        <div className="pk-content-box pk-box-1 pk-content-left">
+        <div className="pk-content-box pk-box-1 pk-content-left"
+                    style={{ backgroundImage: "url('/ai.jpg')" }}
+>
           <div className="pk-colored-box">
             <h2>ChefBot Assistant</h2>
-            <p className="pk-box-description">Get instant meal suggestions based on what's in your pantry. Our ChefBot creates personalized meals just for you!</p>
-            <button className="pk-btn" onClick={() => navigate('/login-page')}>Ask ChefBot Now</button>
+            <p className="pk-box-description">ChefBot creates meal suggestions based on what's in your pantry!</p>
+            <button className="pk-btn" onClick={() => navigate('/login-page')}>Ask ChefBot</button>
           </div>
         </div>
 
-        <div className="pk-content-box pk-box-2 pk-content-right">
-          <div className="pk-colored-box">
+        <div className="pk-content-box pk-box-2 pk-content-right"
+                    style={{ backgroundImage: "url('/recipe.jpg')" }}
+>
+ <div className="pk-colored-box">
             <h2>Recipe Diary</h2>
-            <p className="pk-box-description">Explore your recipes from recipes collection and track your cooking journey.</p>
-            <button className="pk-btn" onClick={() => navigate('/login-page')}>Try Now</button>
+            <p className="pk-box-description">Explore recipes from recipes collection.</p>
+            <button className="pk-btn" onClick={() => navigate('/login-page')}>Explore Recipes</button>
           </div>
         </div>
 
-        <div className="pk-content-box pk-box-3 pk-content-left">
+        <div className="pk-content-box pk-box-3 pk-content-left"
+        style={{ backgroundImage: "url('/beginners.jpg')" }}
+>
+
           <div className="pk-colored-box">
             <h2>Complete Guidance for Beginners</h2>
-            <p className="pk-box-description">Get complete guidance and tips designed especially for beginners to start with ease.</p>
+            <p className="pk-box-description">Get complete guidance and tips for beginners.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Explore Guide</button>
           </div>
         </div>
 
-        <div className="pk-content-box pk-box-4 pk-content-right">
+        <div className="pk-content-box pk-box-4 pk-content-right"
+                  style={{ backgroundImage: "url('/pantry-staples.jpg')" }}
+>
+
           <div className="pk-colored-box">
             <h2>Store Pantry Items</h2>
-            <p className="pk-box-description">Keep, organize and track all your pantry essentials in one place so you never run out of ingredients again.</p>
+            <p className="pk-box-description">Keep, organize and track all your pantry essentials in one place.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Fill Your Pantry</button>
           </div>
         </div>
@@ -386,18 +399,23 @@ const PublicHome = () => {
           </div>
         </div>
 
-        <div className="pk-content-box pk-box-5 pk-content-left">
+        <div className="pk-content-box pk-box-5 pk-content-left"
+                  style={{ backgroundImage: "url('/shoppinglist.png')" }}
+>
+
           <div className="pk-colored-box">
             <h2>Create Your Shopping List</h2>
-            <p className="pk-box-description">Create and manage your shopping list easily so you never forget what to buy.</p>
+            <p className="pk-box-description">Create and manage your shopping list easily.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Get Shopping</button>
           </div>
         </div>
         
-        <div className="pk-content-box pk-box-6 pk-content-right">
+        <div className="pk-content-box pk-box-6 pk-content-right"
+                  style={{ backgroundImage: "url('/plannermeal.jpg')" }}
+>
           <div className="pk-colored-box">
             <h2>Smart Meal Planning</h2>
-            <p className="pk-box-description">Plan your weekly meals form grocery lists to organize your cooking schedule.</p>
+            <p className="pk-box-description">Plan your weekly meals form grocery lists.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Start Planning</button>
           </div>
         </div>

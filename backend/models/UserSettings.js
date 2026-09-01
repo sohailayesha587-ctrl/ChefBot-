@@ -8,19 +8,59 @@ const userSettingsSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
+
     soundPreferences: {
-      timerSound: { type: String, default: 'default' },
-      volume: { type: Number, default: 70, min: 0, max: 100 }
+      timerSound: {
+        type: String,
+        default: 'default'
+      },
+      beepEnabled: {
+        type: Boolean,
+        default: true
+      },
+      volume: {
+        type: Number,
+        default: 70,
+        min: 0,
+        max: 100
+      },
+      vibrationEnabled: {
+        type: Boolean,
+        default: true
+      }
     },
+
     notificationPreferences: {
-      emailNotifications: { type: Boolean, default: true },
-      pushNotifications: { type: Boolean, default: true },
-      timerReminders: { type: Boolean, default: true }
+      emailNotifications: {
+        type: Boolean,
+        default: true
+      },
+      pushNotifications: {
+        type: Boolean,
+        default: true
+      },
+      timerReminders: {
+        type: Boolean,
+        default: true
+      },
+      browserNotification: {
+        type: Boolean,
+        default: true
+      }
     },
+
     displayPreferences: {
-      theme: { type: String, enum: ['light', 'dark', 'system'], default: 'light' },
-      language: { type: String, enum: ['en', 'ur'], default: 'en' },
-      fontSize: { type: String, enum: ['small', 'medium', 'large'], default: 'medium' }
+     
+      language: {
+        type: String,
+        enum: ['en', 'ur'],
+        default: 'en'
+      },
+      fontSize: {
+        type: String,
+        enum: ['small', 'medium', 'large'],
+        default: 'medium'
+      }
     }
   },
   {

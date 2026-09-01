@@ -62,7 +62,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import VerifyOTPPage from './pages/VerifyOTPPage';
 import RecipeBreakFast from './pages/RecipeBreakfast';
 import RecipeDetail from './pages/RecipeDetail';
-
+import SearchResults from './pages/SearchResults';
 
 function AppWrapper() {
   const location = useLocation();
@@ -70,6 +70,29 @@ function AppWrapper() {
 
   const openSettings = () => setIsSettingsOpen(true);
   const closeSettings = () => setIsSettingsOpen(false);
+
+React.useEffect(() => {
+  const originalSpeak = window.speechSynthesis?.speak;
+
+  if (!originalSpeak) {
+    return;
+  }
+
+  window.speechSynthesis.speak = function (utterance) {
+    const soundEnabled = localStorage.getItem('soundEnabled');
+
+    if (soundEnabled === 'false') {
+      return;
+    }
+
+    originalSpeak.call(window.speechSynthesis, utterance);
+  };
+
+  return () => {
+    window.speechSynthesis.speak = originalSpeak;
+  };
+}, []);
+
 
   React.useEffect(() => {
 
@@ -154,8 +177,7 @@ function AppWrapper() {
                                       <Route path="/lunch" element={<Lunch/>} />
 
                    <Route path="/recipe/:id" element={<RecipeDetail />} />
-
-
+<Route path="/search-results" element={<SearchResults />} />
         </Routes>
 
         <Footer />
@@ -169,6 +191,7 @@ function App() {
     <Router>
       <AuthProvider>
         <AppWrapper />
+
       </AuthProvider>
     </Router>
   );
