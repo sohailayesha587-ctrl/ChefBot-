@@ -47,7 +47,7 @@
 { 
   max-width: 1400px;
    margin: 0 auto; 
-   padding: 24px 20px 60px;
+   padding: 24px 20px 6px;
    }
 
 .mc-filters-bar {
@@ -328,7 +328,7 @@
 .mc-empty-state
 { 
   text-align: center;
-   padding: 70px 20px; 
+   padding: 30px 20px; 
    color: #666666; 
   }
 .mc-empty-icon
@@ -732,7 +732,7 @@ text-align: center;
 
 .mc-save-row {
   margin-top: 18px;
-   margin-bottom: 40px; 
+   margin-bottom: 4px; 
   }
 
 .mc-save-card {
@@ -1195,6 +1195,35 @@ text-align: center;
   background: #397d7c;
  }
 
+.mc-back-home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.mc-btn-back-home {
+  background: transparent;
+  border: 2px solid #284a4b;
+  color: #284a4b;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14.4px;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+  width: auto;
+}
+.mc-btn-back-home:hover {
+  background: #284a4b;
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
 @media (max-width: 780px) {
   .mc-header {
     margin-top: 130px;
@@ -1253,49 +1282,63 @@ text-align: center;
    }
   .mc-nav-arrow
   {
-     width: 32px;
-      height: 32px;
-       font-size: 19.2px; 
+     width: 26px;
+      height: 26px;
+       font-size: 14px; 
       }
   .mc-week-range {
-     font-size: 15.2px; 
+     font-size: 11px; 
     }
 
   .mc-day-tabs {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow-x: visible;
     justify-content: flex-start;
-    gap: 6px;
-    padding-bottom: 6px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    gap: 4px;
+    padding-bottom: 0;
   }
   .mc-day-tabs::-webkit-scrollbar { 
     display: none; 
   }
   .mc-day-tab
     { 
-      min-width: 54px; 
-      flex-shrink: 0;
-       padding: 8px 10px; 
+      min-width: 0; 
+      width: 100%;
+      flex-shrink: 1;
+       padding: 6px 2px; 
       }
+  .mc-tab-short
+   {
+    font-size: 6.5px;
+   }
   .mc-tab-date
    { 
-    font-size: 15px; 
+    font-size: 10.5px; 
   }
+  .mc-tab-dots
+   {
+    gap: 2px;
+   }
+  .mc-tab-dot
+   {
+    width: 4px;
+    height: 4px;
+   }
 
   .mc-sel-day
      { 
-      font-size: 20.8px;
+      font-size: 15px;
      }
   .mc-sel-date
      {
-       font-size: 14px; 
+       font-size: 11px; 
       }
   .mc-members-pill
   { 
-    font-size: 12px; 
-    padding: 4px 10px; 
+    font-size: 9.5px; 
+    padding: 3px 8px; 
   }
 
   .mc-calendar-section
@@ -1305,40 +1348,26 @@ text-align: center;
        }
   .mc-grid-scroll-wrapper {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+    overflow-x: visible;
+    padding-bottom: 0;
     border-radius: 12px;
   }
-  .mc-grid-scroll-wrapper::-webkit-scrollbar
-       { 
-        height: 6px; 
-      }
-  .mc-grid-scroll-wrapper::-webkit-scrollbar-track
-   { 
-    background: #e0eeee;
-     border-radius: 3px; 
-    }
-  .mc-grid-scroll-wrapper::-webkit-scrollbar-thumb
-   { background: #284a4b;
-     border-radius: 3px; 
-    }
 
   .mc-calendar-grid {
-    width: 645px;
-    min-width: 645px;
+    width: 100%;
+    min-width: 0;
     border-radius: 12px;
   }
   .mc-grid-head,
   .mc-grid-row {
     display: grid;
-    grid-template-columns: 90px 185px 185px 185px;
-    width: 645px;
+    grid-template-columns: 44px repeat(3, minmax(0, 1fr));
+    width: 100%;
   }
 
   .mc-meal-cell
-  { padding: 10px 8px; 
-    min-height: 140px; 
+  { padding: 6px 4px; 
+    min-height: 100px; 
     display: flex; 
     align-items: flex-start; 
     justify-content: center; 
@@ -1347,80 +1376,82 @@ text-align: center;
   .mc-meal-inner
   { flex-direction: column; 
     align-items: center; 
-    gap: 6px; 
+    gap: 4px; 
     width: 100%;
    }
   .mc-thumb
-   { width: 76px; 
-    height: 76px; 
-    min-width: 76px; 
-    min-height: 76px;
-     border-radius: 10px; 
+   { width: 42px; 
+    height: 42px; 
+    min-width: 42px; 
+    min-height: 42px;
+     border-radius: 7px; 
      flex-shrink: 0;
      }
   .mc-meal-text
   { width: 100%;
-     gap: 5px; 
+     gap: 3px; 
      align-items: center; 
      text-align: center; 
     }
   .mc-meal-name
   { 
-    font-size: 11px; 
+    font-size: 7px; 
     white-space: normal;
      overflow: visible; 
      text-align: center; 
-     line-height: 1.3; 
+     line-height: 1.15; 
     }
   .mc-day-short
     {
-       font-size: 10px;
+       font-size: 6.5px;
        }
   .mc-day-num
    { 
-    font-size: 17px; 
+    font-size: 11px; 
   }
   .mc-meal-btns
    {
      justify-content: center;
-      gap: 5px;
+      gap: 3px;
+      flex-direction: column;
      }
   .mc-btn-view,
   .mc-btn-change
    {
-     font-size: 10px; 
-     padding: 4px 8px; 
+     font-size: 6px; 
+     padding: 2px 4px;
+     border-radius: 8px;
     }
   .mc-pct
    {
-     font-size: 9px;
-      padding: 1px 4px;
+     font-size: 6px;
+      padding: 1px 3px;
      }
   .mc-grid-day-cell
    {
-     padding: 12px 4px;
+     padding: 6px 2px;
      }
-  .mc-grid-head-
+  .mc-grid-head-cell
    {
-     font-size: 12px; 
-     padding: 12px 6px;
+     font-size: 7.5px; 
+     padding: 6px 2px;
      }
   .mc-grid-head-day
   { 
-    padding: 12px 4px;
+    padding: 8px 2px;
    }
   .mc-add-cell
    { 
-    min-height: 80px;
+    min-height: 60px;
      border-radius: 8px; 
     }
   .mc-add-plus
    {
-     font-size: 19.2px; 
+     font-size: 15px; 
     }
   .mc-add-lbl
    {
-     font-size: 10px; 
+     font-size: 8px; 
     }
 
   .mc-save-card
@@ -1438,6 +1469,25 @@ text-align: center;
     padding: 10px 22px;
      font-size: 13px;
      }
+
+  .mc-empty-state {
+    padding: 30px 16px;
+  }
+  .mc-empty-state h3 {
+    font-size: 16px;
+  }
+  .mc-empty-state p {
+    font-size: 12.5px;
+  }
+
+  .mc-btn-back-home {
+    padding: 8px 20px;
+    font-size: 13.6px;
+    white-space: nowrap;
+  }
+  .mc-back-home-container {
+    margin: 0 auto 20px;
+  }
 
   .mc-overlay
   { 
@@ -1509,63 +1559,76 @@ text-align: center;
      height: 36px;
      }
 
+  .mc-day-tab
+   {
+    padding: 4px 1px;
+   }
+  .mc-tab-short
+   {
+    font-size: 6px;
+   }
+  .mc-tab-date
+   {
+    font-size: 9.5px;
+   }
   .mc-calendar-grid {
-    width: 545px;
-    min-width: 545px;
+    width: 100%;
+    min-width: 0;
   }
   .mc-grid-head,
   .mc-grid-row {
-    grid-template-columns: 80px 155px 155px 155px;
-    width: 545px;
+    grid-template-columns: 36px repeat(3, minmax(0, 1fr));
+    width: 100%;
   }
 
   .mc-thumb
-    { width: 64px; 
-      height: 64px;
-       min-width: 64px; 
-       min-height: 64px;
+    { width: 34px; 
+      height: 34px;
+       min-width: 34px; 
+       min-height: 34px;
+       border-radius: 6px;
        }
   .mc-meal-cell
     { 
-      padding: 8px 6px;
-       min-height: 120px; 
+      padding: 5px 3px;
+       min-height: 88px; 
       }
   .mc-meal-name
    { 
-    font-size: 10px;
+    font-size: 6.5px;
    }
   .mc-day-short
    {
-     font-size: 9px; 
+     font-size: 6px; 
     }
   .mc-day-num
    {
-     font-size: 15px;
+     font-size: 10px;
      }
   .mc-btn-view,
   .mc-btn-change
   { 
-    font-size: 9px; 
-    padding: 3px 6px;
+    font-size: 5.5px; 
+    padding: 1px 3px;
    }
   .mc-grid-head-cell
   { 
-    font-size: 10px; 
-    padding: 10px 4px; 
+    font-size: 7px; 
+    padding: 5px 2px; 
   }
   .mc-week-range
   { 
-    font-size: 13.6px;
+    font-size: 10px;
    }
   .mc-sel-day
   {
-     font-size: 18.4px; 
+     font-size: 13px; 
     }
   .mc-nav-arrow
   { 
-    width: 28px;
-     height: 28px; 
-     font-size: 16px; 
+    width: 24px;
+     height: 24px; 
+     font-size: 12px; 
     }
 
   .mc-save-card
@@ -1580,4 +1643,23 @@ text-align: center;
     text-align: center; 
     padding: 12px 0;
    }
+
+  .mc-empty-state {
+    padding: 20px 12px;
+  }
+  .mc-empty-state h3 {
+    font-size: 14px;
+  }
+  .mc-empty-state p {
+    font-size: 11.5px;
+  }
+
+  .mc-btn-back-home {
+    padding: 8px 16px;
+    font-size: 12.8px;
+    white-space: nowrap;
+  }
+  .mc-back-home-container {
+    margin: 0 auto 20px;
+  }
 }

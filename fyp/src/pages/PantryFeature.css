@@ -162,11 +162,11 @@ body, html {
   background: #c0392b;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 7px 14px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 13.6px;
+  font-size: 11.5px;
   transition: all 0.3s ease;
   white-space: nowrap;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -182,11 +182,11 @@ body, html {
   background: linear-gradient(135deg, #284a4b, #1a3334);
   color: #ffffff;
   border: none;
-  padding: 10px 22px;
+  padding: 7px 16px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 14.4px;
+  font-size: 11.5px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(40,74,75,0.3);
   white-space: nowrap;
@@ -216,11 +216,11 @@ body, html {
   background: #284a4b;
   color: #ffffff;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 13.12px;
+  font-size: 11px;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
@@ -232,11 +232,11 @@ body, html {
   background: #c0392b;
   color: #ffffff;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 13.12px;
+  font-size: 11px;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
@@ -880,47 +880,112 @@ body, html {
     min-height: 350px; 
   }
 
-  .top-controls-row {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
+  .stats-section {
+    gap: 8px;
+    margin: 16px auto 16px;
+    padding: 0 12px;
+  }
+  .stat-card {
+    min-width: 0;
+    max-width: 100px;
+    padding: 10px 6px;
+    border-radius: 9px;
+  }
+  .stat-number {
+    font-size: 22px;
+  }
+  .stat-label {
+    font-size: 9.5px;
+  }
+.top-controls-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 5px;
   }
   .search-add-section {
-    flex: 1;
-    min-width: 200px;
+    display: contents;
   }
-  .btn-low-stock-filter {
+  .alert-buttons-group {
+    display: contents;
+  }
+  .search-field-pantry {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
     width: auto;
-    flex-shrink: 0;
-    white-space: nowrap;
+    padding: 8px 10px;
+    font-size: 11.5px;
   }
   .btn-add-new-item {
-    width: auto;
+    order: 2;
+    flex: 0 0 auto;
+    min-width: 0;
     white-space: nowrap;
+    padding: 8px 6px;
+    font-size: 9.5px;
+    text-align: center;
+  }
+  .btn-low-stock-filter {
+    order: 3;
+    flex: 0 0 auto;
+    min-width: 0;
+    white-space: nowrap;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 9.5px;
   }
 
   .tabs-nav-bar { 
-    gap: 6px;
-     padding: 8px 10px; 
+    gap: 5px;
+     padding: 7px 8px; 
     }
   .tab-pill-btn { 
-    padding: 5px 10px; 
-    font-size: 11.2px; 
+    padding: 4px 8px; 
+    font-size: 10.4px; 
+    gap: 4px;
+  }
+  .tab-count-badge {
+    font-size: 9.6px;
+    padding: 0px 5px;
+  }
+
+  .tab-items-grid { grid-template-columns: 1fr 1fr; gap: 8px;
+   }
+
+  .tab-item-card {
+    padding: 8px;
+    gap: 4px;
+    border-radius: 10px;
+  }
+  .tab-item-name {
+    font-size: 12px;
+    white-space: normal;
+  }
+  .tab-item-cat {
+    font-size: 9.5px;
+  }
+  .tab-qty-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+  .low-stock-flag {
+    font-size: 9px;
+    padding: 1px 6px;
   }
 
   .tab-btn-cart,
   .tab-btn-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 19.2px;
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
   }
   .tab-btn-cart svg,
   .tab-btn-icon svg {
-    font-size: 19.2px;
+    font-size: 11px;
   }
   .tab-card-actions {
-     gap: 12px; 
+     gap: 4px; 
     }
 
   .modal-btn-cart,
@@ -966,26 +1031,48 @@ body, html {
     font-size: 12px;
    }
 
-  .top-controls-row {
-    flex-direction: column;
-    align-items: flex-start;
+  .stats-section {
+    gap: 6px;
+    padding: 0 10px;
   }
-  .search-add-section {
-    width: 100%;
+  .stat-card {
+    min-width: 0;
+    max-width: 90px;
+    padding: 8px 5px;
+  }
+  .stat-number {
+    font-size: 18px;
+  }
+  .stat-label {
+    font-size: 8.5px;
+  }
+  .top-controls-row {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 3px;
   }
   .search-field-pantry {
-    flex: 1;
-    min-width: 120px;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 0;
+    padding: 7px 7px;
+    font-size: 9.5px;
   }
   .btn-add-new-item {
-    width: auto;
+    flex: 0 0 auto;
     white-space: nowrap;
+    padding: 7px 5px;
+    font-size: 8px;
   }
   .btn-low-stock-filter {
+    flex: 0 0 auto;
     width: auto;
     white-space: nowrap;
+    text-align: center;
+    padding: 7px 5px;
+    font-size: 8px;
+    margin-top: 0;
   }
   .shopping-list-header {
     flex-direction: row;
@@ -1008,24 +1095,43 @@ body, html {
   .tab-pill-btn { padding: 4px 8px; 
     font-size: 10.4px; }
 
-  .tab-items-grid { grid-template-columns: 1fr; gap: 14px;
+  .tab-items-grid { grid-template-columns: 1fr 1fr; gap: 8px;
    }
+
+  .tab-item-card {
+    padding: 7px;
+    gap: 4px;
+    border-radius: 9px;
+  }
+  .tab-item-name {
+    font-size: 11.5px;
+    white-space: normal;
+  }
+  .tab-item-cat {
+    font-size: 9px;
+  }
+  .tab-qty-badge {
+    font-size: 8.5px;
+    padding: 2px 6px;
+  }
+  .low-stock-flag {
+    font-size: 8.5px;
+    padding: 1px 5px;
+  }
+  .tab-card-actions {
+    gap: 3px;
+  }
 
   .tab-btn-cart,
   .tab-btn-icon {
-    width: auto;
-    height: 40px;
-    font-size: 17.6px;
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
     flex: 0 0 auto;
   }
   .tab-btn-cart svg,
   .tab-btn-icon svg {
-    font-size: 17.6px;
-  }
-  .tab-card-actions {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 8px;
+    font-size: 10px;
   }
 
   .modal-btn-cart,

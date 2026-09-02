@@ -157,20 +157,22 @@ body, html {
   color: #c0392b; 
 }
 
+/* --- Desktop: search bar aur buttons --- */
 .shopping-search-add-section {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
   margin: 0 auto 16px;
   gap: 12px;
   width: 100%;
-  max-width: 700px;
+  max-width: 850px;
   padding: 0 20px;
   box-sizing: border-box;
 }
 .shopping-search-field {
-  flex: 1;
-  min-width: 200px;
+  flex: 2.4 1 auto;
+  min-width: 0;
   padding: 11px 16px;
   font-size: 14.4px;
   border-radius: 10px;
@@ -196,6 +198,7 @@ body, html {
   font-size: 14.4px;
   transition: all 0.3s ease;
   box-shadow: 0 3px 8px rgba(40,74,75,0.3);
+  flex: 0 0 auto;
   min-width: 140px;
   white-space: nowrap;
 }
@@ -216,6 +219,7 @@ body, html {
   padding: 0 20px;
   box-sizing: border-box;
 }
+
 .btn-shop-online {
   background: linear-gradient(135deg, #284a4b, #1a3334);
   color: #ffffff;
@@ -235,6 +239,7 @@ body, html {
   background: linear-gradient(135deg, #1a3334, #1a3334); 
   transform: translateY(-2px); 
 }
+
 .btn-whatsapp-share {
   background: linear-gradient(135deg, #397d7c, #1a3334);
   color: #ffffff;
@@ -283,7 +288,6 @@ body, html {
    color: #ffffff; 
    transform: translateX(-4px);
    }
-
 .shopping-categories-checklist {
   display: flex;
   flex-direction: column;
@@ -496,8 +500,11 @@ body, html {
   border-radius: 18px;
   width: 90%;
   max-width: 450px;
+  max-height: 88vh;
   box-shadow: 0 25px 50px rgba(0,0,0,0.4);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .shopping-modal-header-custom {
   background: linear-gradient(135deg, #284a4b, #1a3334);
@@ -506,6 +513,7 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 .shopping-modal-header-custom h2 { margin: 0; 
   font-weight: 600;
@@ -532,7 +540,7 @@ body, html {
 }
 .shopping-modal-body
  { padding: 22px 20px; 
-  max-height: 420px; 
+  flex: 1 1 auto;
   overflow-y: auto; 
 }
 .shopping-modal-body .shopping-form-group
@@ -571,6 +579,7 @@ body, html {
   padding: 16px 20px;
   background: #f5fafa;
   border-top: 1px solid #e0eeee;
+  flex-shrink: 0;
 }
 .shopping-btn-outline-custom {
   background: #ffffff;
@@ -686,18 +695,87 @@ body, html {
   color: #666666; 
 }
 
+/* ============================================================
+   📱 RESPONSIVE: 780px (Tablet)
+   ============================================================ */
 @media (max-width: 780px) {
   .shopping-fullscreen-food-image { 
     height: 400px;
      min-height: 350px;
      }
 
+  .shopping-stats-section {
+    gap: 8px;
+    margin: 28px auto 16px;
+    padding: 0 12px;
+  }
+  .shopping-stat-card {
+    min-width: 0;
+    max-width: 100px;
+    padding: 10px 6px;
+    border-radius: 9px;
+  }
+  .shopping-stat-number {
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+  .shopping-stat-label {
+    font-size: 9px;
+  }
+
+  /* ✅ SEARCH BAR AUR ZYADA LAMBA + BUTTONS RIGHT SIDE */
+  .shopping-controls-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 8px 10px;
+    box-sizing: border-box;
+    gap: 8px;
+  }
+  
+  .shopping-search-add-section,
   .shopping-top-action-buttons {
-    justify-content: center;
-    gap: 10px;
+    display: contents;
+  }
+  
+  /* ✅ Search bar ko aur zyada lamba (flex: 30) */
+  .shopping-search-field {
+    flex: 30 1 auto;
+    min-width: 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 2px solid #e0eeee;
+    margin-right: 4px;
+  }
+  
+  /* ✅ 3 buttons right side + chote */
+  .shopping-btn-primary-custom,
+  .btn-shop-online,
+  .btn-whatsapp-share {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 7px 8px;
+    font-size: 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    gap: 2px;
+    margin-left: 3px;
+  }
+
+  .shopping-categories-checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
   }
   .shopping-category-section { 
-    padding: 14px; 
+    padding: 14px 12px; 
   }
   .shopping-checklist-item { 
     flex-wrap: wrap; 
@@ -712,6 +790,7 @@ body, html {
   .btn-back-home { 
     padding: 8px 20px; 
     font-size: 13.6px; 
+    border-radius: 6px;
   }
 
   .shopping-purchase-btn,
@@ -720,6 +799,7 @@ body, html {
     width: 32px;
     height: 32px;
     font-size: 14.4px;
+    border-radius: 6px;
   }
   .shopping-purchase-btn svg,
   .shopping-edit-action-btn svg,
@@ -727,12 +807,6 @@ body, html {
     font-size: 14.4px;
   }
 
-  .btn-shop-online, .btn-whatsapp-share {
-    flex: 1;
-    justify-content: center;
-    font-size: 13.12px;
-    padding: 10px 12px;
-  }
   .shopping-item-name-simple {
     font-size: 13.6px;
     white-space: normal;
@@ -752,13 +826,13 @@ body, html {
   .shopping-modal {
     margin-top: 0;
     transform: translateY(0);
-    max-height: 80vh;
+    max-height: 85vh;
     top: 5%;
     position: relative;
   }
   .shopping-modal-body {
     overflow-y: auto;
-    max-height: 60vh;
+    flex: 1 1 auto;
     padding-bottom: 20px;
   }
   .shopping-form-group:first-of-type select { 
@@ -770,6 +844,9 @@ body, html {
     }
 }
 
+/* ============================================================
+   📱 RESPONSIVE: 380px (Small Phones)
+   ============================================================ */
 @media (max-width: 380px) {
   .shopping-fullscreen-food-image { 
     height: 220px; 
@@ -787,6 +864,7 @@ body, html {
   .btn-back-home { 
     padding: 8px 16px;
      font-size: 12.8px; 
+     border-radius: 6px;
     }
 
   .shopping-modal-overlay { 
@@ -809,53 +887,84 @@ body, html {
   .shopping-hero-subtitle {
      font-size: 12px;
      }
+
   .shopping-stats-section {
-     gap: 10px; 
+     gap: 6px;
+     padding: 0 10px;
+     margin-top: 22px;
     }
   .shopping-stat-card {
-     min-width: 70px;
-      padding: 10px 6px;
+     min-width: 0;
+     max-width: 90px;
+      padding: 8px 5px;
      }
   .shopping-stat-number { 
-    font-size: 22.4px; 
+    font-size: 16px; 
   }
   .shopping-stat-label { 
-    font-size: 10.4px; 
+    font-size: 8px; 
   }
-  .shopping-search-add-section { 
-    flex-direction: column;
-     gap: 10px; 
-    }
-  .shopping-btn-primary-custom {
+
+  /* ✅ SEARCH BAR BOHOT ZYADA LAMBA + BUTTONS RIGHT SIDE (AUR CHOTE) */
+  .shopping-controls-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
-    text-align: center;
-    justify-content: center;
-    white-space: normal;
+    padding: 0 6px 8px;
+    box-sizing: border-box;
+    gap: 6px;
   }
-  .shopping-category-title-simple { 
-    font-size: 13.6px;
-   }
+  
+  .shopping-search-add-section,
   .shopping-top-action-buttons {
-    flex-direction: column;
-    align-items: stretch;
+    display: contents;
   }
-  .btn-shop-online, .btn-whatsapp-share {
-    width: 100%;
-    justify-content: center;
+  
+  /* ✅ Search bar ko bohot zyada lamba (flex: 40) */
+  .shopping-search-field {
+    flex: 40 1 auto;
+    min-width: 0;
+    padding: 6px 8px;
+    font-size: 10px;
+    border-radius: 6px;
+    border: 2px solid #e0eeee;
+    margin-right: 3px;
   }
+  
+  /* ✅ 3 buttons right side + aur chote */
+  .shopping-btn-primary-custom,
+  .btn-shop-online,
+  .btn-whatsapp-share {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 5px 5px;
+    font-size: 6.5px;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    gap: 1px;
+    margin-left: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  .shopping-categories-checklist {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .shopping-category-section {
+    padding: 10px 8px;
+  }
+
   .shopping-purchase-btn,
   .shopping-edit-action-btn,
   .shopping-delete-action-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 13.6px;
-  }
-  .shopping-modal-footer {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .shopping-btn-outline-custom, .shopping-btn-primary-custom {
-    width: 100%;
-    text-align: center;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 6px;
   }
 }

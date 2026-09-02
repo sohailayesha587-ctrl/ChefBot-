@@ -446,7 +446,6 @@ const MealFeature = () => {
 
         {!generated && !generating && (
           <div className="mc-empty-state">
-            <div className="mc-empty-icon">🍽️</div>
             <h3>Ready to plan your meals?</h3>
             <p>
               Select all preferences above, then click <strong>Generate Plan</strong>.
@@ -559,6 +558,10 @@ const MealFeature = () => {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="mc-back-home-container">
+        <button className="mc-btn-back-home" onClick={() => navigate('/')}>Back to Home</button>
       </div>
 
       {showSearchModal && (

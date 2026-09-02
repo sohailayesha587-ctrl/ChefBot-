@@ -31,7 +31,7 @@ const ShoppingList = () => {
     return;
   }
 
-  let message = "My Shopping List - ${new Date().toLocaleDateString()}\n\n";
+  let message = 'My Shopping List\n';
 
   categories.forEach((category) => {
     const categoryItems = items.filter((item) => item.category === category);
@@ -41,14 +41,13 @@ const ShoppingList = () => {
         const check = item.purchased ? '' : '';
         message += `${check} ${item.name} - ${item.quantity} ${item.unit}\n`;
       });
-      message += `\n`;
     }
   });
 
   const purchasedCount = items.filter((item) => item.purchased).length;
   message += `Total: ${items.length} items (${purchasedCount} purchased)\n`;
-  message += ` ChefBot - Smart Kitchen\n`;
-    message += "Happy Shopping ";
+  message += ` Your ChefBot\n`;
+    message += "Happy Shopping! ";
 
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
