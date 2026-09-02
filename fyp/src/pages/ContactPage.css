@@ -295,10 +295,7 @@
   .info-box p { font-size: 12px; }
   .social-links a { padding: 5px 10px; font-size: 11px; }
 
-  /* --- FIXED: compact form box on mobile --- */
   .form-box { padding: 16px; }
-
-  /* --- FIXED: Name + Email side by side, Message + button full width below --- */
   .form-box form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -329,8 +326,6 @@
   .form-group textarea {
     min-height: 70px;
   }
-
-  /* --- FIXED: much smaller submit button, not full-bleed huge --- */
   .submit-btn {
     grid-column: 1 / -1;
     justify-self: center;
@@ -365,7 +360,6 @@
 
   .social-links a { padding: 4px 8px; font-size: 10.5px; }
 
-  /* --- FIXED: even more compact form on very small screens --- */
   .form-box { padding: 12px; }
 
   .form-box form {

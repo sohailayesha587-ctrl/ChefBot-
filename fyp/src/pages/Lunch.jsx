@@ -1,119 +1,127 @@
-import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Lunch.css';
 
 const Lunch = () => {
   const navigate = useNavigate();
-  const scrollContainerRef = useRef(null);
-
-  const categories = [
+  const location = useLocation();
+  const [activeCategory, setActiveCategory] = useState('veg');
+  const vegCategories = [
     {
       id: 1,
       name: "Plain Vegetables",
-      image: "plainVegetable.jpg",
-      route: "/plain-veg"
+       image: "plainVegetable.jpg",
+      route: "/plain-veg",
+      type: "veg"
     },
     {
       id: 2,
-      name: "Chicken Vegetables",
-      image: "chickenVegetable.jpg",
-      route: "/veg-chick"
+      name: "Chicken + Vegetables",
+        image: "chickenVegetable.jpg",
+      route: "/veg-chick",
+      type: "veg"
     },
     {
       id: 3,
-      name: "Mutton Vegetables",
-      image: "muttonVegetable.jpg",
-      route: "/veg-mutton"
-    },
+      name: "Mutton + Vegetables",
+        image: "muttonVegetable.jpg",
+      route: "/veg-mutton",
+      type: "veg"
+    }
+  ];
+
+  const dalCategories = [
     {
       id: 4,
       name: "Plain Dal",
       image: "plainDal.jpg",
-      route: "/plain-dal"
+      route: "/plain-dal",
+      type: "dal"
     },
     {
       id: 5,
-      name: "Chicken Dal",
+      name: "Chicken + Dal",
       image: "chickenDal.jpg",
-      route: "/dal-chick"
+      route: "/dal-chick",
+      type: "dal"
     },
     {
       id: 6,
-      name: "Mutton Dal",
+      name: "Mutton + Dal",
       image: "muttonDal.jpg",
-      route: "/dal-mutton"
+      route: "/dal-mutton",
+      type: "dal"
     }
   ];
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-    }
-  };
+  const allCategories = [...vegCategories, ...dalCategories];
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+  useEffect(() => {
+    if (location.state?.defaultTab) {
+      setActiveCategory(location.state.defaultTab);
     }
+  }, [location.state]);
+
+  const filteredCategories = allCategories.filter(cat => cat.type === activeCategory);
+
+  const handleTabClick = (categoryType) => {
+    setActiveCategory(categoryType);
   };
 
   return (
     <div className="lunch-page">
-      {/* Header */}
       <header className="lunch-header">
         <div className="lunch-header-content">
-          <h1 className="lunch-page-title">Lunch Offerings</h1>
+          <h1 className="lunch-page-title">
+            {activeCategory === 'veg' ? 'Vegetarian Delights' : 'Lentil Specialties'}
+          </h1>
           <p className="lunch-page-description">
-            Delicious Lunch Creations
+            {activeCategory === 'veg' 
+              ? 'Fresh aur healthy sabziyon ke saath - 3 varieties'
+              : 'Protein-rich daalon ke mazedar recipes - 3 varieties'}
           </p>
         </div>
       </header>
-
       <main className="lunch-main">
-        <div className="lunch-carousel">
-          <button className="lunch-arrow lunch-arrow-left" onClick={scrollLeft}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M15 19l-7-7 7-7" />
-            </svg>
+        <div className="category-tabs">
+          <button 
+            className={`category-tab ${activeCategory === 'veg' ? 'active' : ''}`}
+            onClick={() => handleTabClick('veg')}
+          >
+            <span className="category-name">Vegetables (3)</span>
           </button>
-
-          <div className="lunch-scroll-wrapper" ref={scrollContainerRef}>
-            <div className="lunch-grid">
-              {categories.map((category, index) => (
+          <button 
+            className={`category-tab ${activeCategory === 'dal' ? 'active' : ''}`}
+            onClick={() => handleTabClick('dal')}
+          >
+            <span className="category-name">Lentils - Daal (3)</span>
+          </button>
+        </div>
+        <div className="lunch-grid-section">
+          <div className="lunch-grid">
+            {filteredCategories.map((category) => (
+              <div
+                key={category.id}
+                className="lunch-category-card"
+                onClick={() => navigate(category.route)}
+              >
                 <div
-                  key={category.id}
-                  onClick={() => navigate(category.route)}
-                  className={`lunch-category-card ${index % 2 === 0 ? 'lunch-card-up' : 'lunch-card-down'}`}
-                >
-                  <div className="lunch-card-image-container">
-                    <img
-                      src={category.image}
-                      alt={category.name}
-                      className="lunch-card-img"
-                      loading="lazy"
-                    />
-                    <div className="lunch-card-overlay"></div>
-                  </div>
-
-                  <div className="lunch-card-content">
-                    <h3 className="lunch-card-title">{category.name}</h3>
-                    <div className="lunch-card-button">
-                      <span>Explore Recipes</span>
-                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                  className="lunch-card-image"
+                  style={{ backgroundImage: `url(${category.image})` }}
+                />
+                <div className="lunch-card-content">
+                  <h3 className="lunch-card-title">{category.name}</h3>
+                  <p className="lunch-card-description">{category.tagline}</p>
+                  <div className="lunch-card-button">
+                    <span>Explore Recipes</span>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-
-          <button className="lunch-arrow lunch-arrow-right" onClick={scrollRight}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
         </div>
       </main>
 
@@ -122,8 +130,6 @@ const Lunch = () => {
           <span>←</span> Back to Categories
         </button>
       </div>
-
-      <div className="lunch-bg-pattern"></div>
     </div>
   );
 };
