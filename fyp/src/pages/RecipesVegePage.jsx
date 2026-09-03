@@ -163,8 +163,8 @@ const RecipesVegePage = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/')}>
-          Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/recipes')}>
+          Back to Recipes
         </button>
       </div>
 

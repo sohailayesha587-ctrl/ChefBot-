@@ -63,6 +63,17 @@ import VerifyOTPPage from './pages/VerifyOTPPage';
 import RecipeBreakFast from './pages/RecipeBreakfast';
 import RecipeDetail from './pages/RecipeDetail';
 import SearchResults from './pages/SearchResults';
+import RecipesLunch from './pages/RecipesLunch'
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 
 function AppWrapper() {
   const location = useLocation();
@@ -99,7 +110,7 @@ React.useEffect(() => {
     window.openSettings = openSettings;
   }, []);
 
-  const authPages = ['/login-page', '/signup', '/forgot-password', '/verify-otp', '/reset-password'];
+  const authPages = ['/login-page', '/forgot-password', '/verify-otp', '/reset-password', '/change-account'];
   const hideHeaderOnPages = authPages.includes(location.pathname);
   const shouldShowHeader = !hideHeaderOnPages && !isSettingsOpen;
 
@@ -120,6 +131,7 @@ React.useEffect(() => {
       <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
 
       <div className="app-wrapper english-mode" dir="ltr">
+        <ScrollToTop />
         {shouldShowHeader && <Header onSettingsClick={openSettings} />}
 
         <Routes>
@@ -167,14 +179,17 @@ React.useEffect(() => {
                    <Route path="/qeema" element={<RecipesQeema />} />
                    <Route path="/mutton" element={<RecipesPureMutton />} />
                    <Route path="/rice" element={<RecipesRice />} />
+                                      <Route path="/Regional" element={<RecipesRegionalPage />} />
+
                    <Route path="/Salads" element={<RecipesSaladsPage />} />
-                   <Route path="/Snacks" element={<RecipesSnacksPage />} />
+                   <Route path="/Snack" element={<RecipesSnacksPage />} />
                    <Route path="/StudentRecipe" element={<RecipesStudentsPage />} />
                    <Route path="/veg-chick" element={<RecipesVegChicken />} />
                    <Route path="/Vege" element={<RecipesVegePage />} />
                    <Route path="/veg-mutton" element={<RecipesVegMutton />} />
                                       <Route path="/recipe-dinner" element={<RecipesDinner />} />
                                       <Route path="/lunch" element={<Lunch/>} />
+                                      <Route path="/recipe-lunch" element={<RecipesLunch />} />
 
                    <Route path="/recipe/:id" element={<RecipeDetail />} />
 <Route path="/search-results" element={<SearchResults />} />

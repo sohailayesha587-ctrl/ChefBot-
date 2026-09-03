@@ -10,11 +10,14 @@ const allGuides = [];
   
 const addGuide = (item, category, subCategory = '', filterTags = []) => {
   if (!item || !item.name) return;
+
   allGuides.push({
     title: item.name,
-    category: category,
-    subCategory: subCategory,
-    filterTags: filterTags,
+    category,
+    subCategory,
+    filterTags: item.filterTags || filterTags,
+    spiceType: item.spiceType || '',
+    vegetableType: item.vegetableType || '',
     image: item.image || '',
     content: JSON.stringify({
       name: item.name,
@@ -27,7 +30,12 @@ const addGuide = (item, category, subCategory = '', filterTags = []) => {
       urduName: item.urduName || '',
       properUsage: item.properUsage || '',
       commonMistakes: item.commonMistakes || [],
-      keyFeatures: item.keyFeatures || []
+      keyFeatures: item.keyFeatures || [],
+      spiceType: item.spiceType || '',
+      vegetableType: item.vegetableType || '',
+      category: item.category || '',
+      subCategory: item.subCategory || '',
+      filterTags: item.filterTags || filterTags
     })
   });
 };

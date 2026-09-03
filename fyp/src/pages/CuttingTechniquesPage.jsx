@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CuttingTechniquesPage.css';
 import { useNavigate } from 'react-router-dom';
+import { FaTimes } from "react-icons/fa";
 import axios from 'axios';
 
 const CuttingTechniquesPage = () => {
@@ -259,8 +260,9 @@ const CuttingTechniquesPage = () => {
       {showDetailPanel && selectedTechnique && (
         <div className="ctp-modal-overlay" onClick={closeDetailPanel}>
           <div className="ctp-modal" onClick={e => e.stopPropagation()}>
-            <button className="ctp-modal-close" onClick={closeDetailPanel}>×</button>
-
+<button className="ctp-modal-close" onClick={closeDetailPanel}>
+  <FaTimes />
+</button>
             <div className="ctp-modal-hero">
               <p className="ctp-modal-hero-label">Cutting Technique</p>
               <h2 className="ctp-modal-hero-title">{selectedTechnique.name}</h2>

@@ -428,9 +428,9 @@ html, body, #root {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
-  z-index: 20;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -442,6 +442,7 @@ html, body, #root {
   background: #397d7c;
   transform: scale(1.1);
 }
+
 
 .ktp-modal-hero {
   background: linear-gradient(135deg, #1a3334 0%, #284a4b 60%, #397d7c 100%);

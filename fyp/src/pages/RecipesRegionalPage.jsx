@@ -209,8 +209,8 @@ const RecipesRegionalPage = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/')}>
-          <span>←</span> Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/recipes')}>
+          <span>←</span> Back to Recipes
         </button>
       </div>
 

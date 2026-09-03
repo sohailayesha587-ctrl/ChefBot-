@@ -1148,7 +1148,6 @@ html, body, #root {
   color: #4a5a5b;
   line-height: 1.5;
 }
-
 @media (max-width: 780px) {
   html {
     overflow-x: hidden;
@@ -1190,7 +1189,7 @@ html, body, #root {
   }
 
   .kap-mobile-topbar .kap-page-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: #ffffff;
     text-align: center;
@@ -1247,7 +1246,7 @@ html, body, #root {
   }
 
   .kap-page-description {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .kap-sidebar {
@@ -1273,13 +1272,36 @@ html, body, #root {
   }
 
   .kap-sidebar-title {
-    font-size: 20px;
+    font-size: 19px;
   }
 
-  .kap-companies-grid,
+  .kap-companies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .kap-company-card {
+    padding: 16px;
+  }
+
+  .kap-company-name {
+    font-size: 15px;
+  }
+
+  .kap-company-hint {
+    font-size: 11px;
+  }
+
+  .kap-model-count-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
   .kap-models-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 
   .kap-model-card {
@@ -1289,17 +1311,39 @@ html, body, #root {
 
   .kap-card-image {
     width: 100%;
-    height: 80px;
+    height: 70px;
     border-right: none;
     border-bottom: 1px solid #e0eeee;
   }
 
   .kap-card-content {
-    padding: 10px 12px;
+    padding: 8px 10px;
+  }
+
+  .kap-card-top-row {
+    flex-wrap: wrap;
   }
 
   .kap-card-title {
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  .kap-type-pill {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .kap-card-capacity {
+    font-size: 11px;
+  }
+
+  .kap-card-price {
+    font-size: 12px;
+  }
+
+  .kap-feature-pill {
+    font-size: 9px;
+    padding: 2px 6px;
   }
 
   .kap-modal-overlay {
@@ -1425,7 +1469,7 @@ html, body, #root {
 
   .kap-mobile-topbar .kap-page-title {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .kap-categories-row {
@@ -1435,29 +1479,67 @@ html, body, #root {
   }
 
   .kap-cat-btn {
-    font-size: 7px;
+    font-size: 9px;
     padding: 6px 4px;
   }
 
-  .kap-items-grid {
-    gap: 10px;
+  .kap-companies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
-  .kap-item-card {
+  .kap-company-card {
+    padding: 12px;
+  }
+
+  .kap-company-name {
+    font-size: 13px;
+  }
+
+  .kap-company-hint {
+    font-size: 10px;
+  }
+
+  .kap-models-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .kap-model-card {
     flex-direction: column;
     height: auto;
   }
 
   .kap-card-image {
-    height: 60px;
+    height: 55px;
   }
 
   .kap-card-content {
-    padding: 6px 10px;
+    padding: 6px 8px;
   }
 
   .kap-card-title {
-    font-size: 12px;
+    font-size: 11px;
+  }
+
+  .kap-type-pill {
+    font-size: 8px;
+    padding: 1px 5px;
+  }
+
+  .kap-card-capacity {
+    font-size: 10px;
+  }
+
+  .kap-card-price {
+    font-size: 10px;
+  }
+
+  .kap-feature-pill {
+    font-size: 8px;
+    padding: 1px 5px;
   }
 
   .kap-card-description {
@@ -1553,11 +1635,11 @@ html, body, #root {
   }
 
   .kap-sidebar-title {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .kap-sidebar-subtitle {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .kap-appliance-item {
@@ -1565,7 +1647,7 @@ html, body, #root {
   }
 
   .kap-appliance-name {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .kap-lightbox-overlay {

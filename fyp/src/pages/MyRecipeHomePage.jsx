@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './MyRecipeHomepage.css';
 
 const MyRecipeHomepage = () => {
@@ -128,17 +129,14 @@ const budgetCategories = [
         <div className="rf-hero-split">
 
           <div className="rf-hero-text-side">
-            <span className="rf-hero-eyebrow">Fresh & Flavorful</span>
             <h1 className="rf-hero-title">
-              Culinary <em>Masterpieces</em><br />Made Simple
+              Recipe Collection
             </h1>
             <div className="rf-hero-divider"></div>
-            <p className="rf-hero-desc">
-              Chef-curated recipes to transform your everyday cooking into something extraordinary.
-            </p>
             <p className="rf-hero-sub">
-              From quick weeknight dinners to show-stopping desserts.
+              Recipes to transform your everyday cooking into something extraordinary.
             </p>
+           
           </div>
 
           <div className="rf-hero-image-side">
@@ -233,22 +231,26 @@ const budgetCategories = [
             <p>Advanced features designed for modern home chefs</p>
           </div>
 
-          <div className="rf-features-grid">
-            <div className="rf-feature-card">
-              <div className="rf-feature-icon">
-                <i className="fas fa-brain"></i>
-              </div>
-              <h3>AI-Powered Recipes</h3>
-              <p>Get personalized recipe suggestions based on your preferences</p>
-            </div>
+      <div className="rf-features-grid">
+  <Link to="/meal-suggestion" className="rf-feature-card">
+    <div className="rf-feature-icon">
+      <i className="fas fa-brain"></i>
+    </div>
 
-            <div className="rf-feature-card">
-              <div className="rf-feature-icon">
-                <i className="fas fa-step-forward"></i>
-              </div>
+    <h3>Meal Suggestions</h3>
+    <p>Get personalized recipe suggestions based on your preferences</p>
+  </Link>
+
+
+             <Link to="/meal-suggestion" className="rf-feature-card">
+    <div className="rf-feature-icon">
+      <i className="fas fa-brain"></i>
+    </div>
+
               <h3>Step-by-Step Guide</h3>
               <p>Detailed cooking instructions with timers and tips</p>
-            </div>
+  </Link>
+            
 
             <div className="rf-feature-card">
               <div className="rf-feature-icon">

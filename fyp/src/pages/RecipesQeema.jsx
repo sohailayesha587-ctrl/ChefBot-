@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipesQeema.css';
@@ -166,8 +167,8 @@ const RecipesQeema = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/')}>
-          <span>←</span> Back to Home
+        <button className="back-home-btn" onClick={() => navigate('/recipes')}>
+          <span>←</span> Back to Recipes
         </button>
       </div>
 

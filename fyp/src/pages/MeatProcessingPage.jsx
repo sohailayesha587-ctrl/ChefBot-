@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from "react-icons/fa";
 import './MeatProcessingPage.css';
 
 const MeatProcessingPage = () => {
@@ -343,8 +344,9 @@ const MeatProcessingPage = () => {
       {showModal && selectedItem && (
         <div className="mep-modal-overlay" onClick={() => setShowModal(false)}>
           <div className="mep-modal" onClick={e => e.stopPropagation()}>
-            <button className="mep-modal-close" onClick={() => setShowModal(false)}>×</button>
-
+<button className="mep-modal-close"  onClick={() => setShowModal(false)}>
+  <FaTimes />
+</button>
             <div className="mep-modal-hero">
               <p className="mep-modal-hero-label">Meat Processing</p>
               <h2 className="mep-modal-hero-title">{selectedItem.name}</h2>

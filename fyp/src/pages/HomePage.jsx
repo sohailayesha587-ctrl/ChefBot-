@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
-import Lunch from './Lunch';
 
 const HomePage = () => {
    const [recipes, setRecipes] = useState([]);
@@ -100,14 +99,7 @@ const HomePage = () => {
             <p className="my-hero-subtitle">
               Explore meal suggestions & recipes using ingredients you already have.
             </p>
-            <div className="my-hero-buttons">
-              <a href="#" className="my-btn-primary">
-                <i className="fas fa-utensils"></i> Start
-              </a>
-              <a href="#" className="my-btn-secondary">
-                <i className="fas fa-book-open"></i> Browse
-              </a>
-            </div>
+            
           </div>
         </div>
 

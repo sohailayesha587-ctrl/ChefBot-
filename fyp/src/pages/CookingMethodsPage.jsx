@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from "react-icons/fa";
 import './CookingMethodsPage.css';
 
 const CookingMethodsPage = () => {
@@ -246,8 +247,9 @@ const CookingMethodsPage = () => {
       {showDetailPanel && selectedMethod && (
         <div className="cmp-modal-overlay" onClick={closeDetailPanel}>
           <div className="cmp-modal" onClick={e => e.stopPropagation()}>
-            <button className="cmp-modal-close" onClick={closeDetailPanel}>×</button>
-
+<button className="cmp-modal-close" onClick={closeDetailPanel}>
+  <FaTimes />
+</button>
             <div className="cmp-modal-hero">
               <p className="cmp-modal-hero-label">Cooking Method</p>
               <h2 className="cmp-modal-hero-title">{selectedMethod.name}</h2>

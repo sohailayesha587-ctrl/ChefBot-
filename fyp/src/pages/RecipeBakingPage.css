@@ -30,7 +30,7 @@ body,
   position: relative;
   z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .baking-header-content {
@@ -112,7 +112,7 @@ body,
 }
 
 .baking-card-title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #1a3334;
   margin-bottom: 0;
@@ -809,12 +809,12 @@ body,
 
   .baking-voice-bar {
     padding: 7px 10px 9px;
-    gap: 8px;
+    gap: 1px;
     flex-wrap: nowrap;
   }
   .baking-voice-label {
     display: inline-block;
-    font-size: 8.8px;
+    font-size: 6px;
     letter-spacing: 1px;
   }
   .baking-voice-left {

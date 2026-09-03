@@ -16,7 +16,6 @@ const Header = ({ onSettingsClick }) => {
 
   const authPages = [
     '/login-page',
-    '/signup',
     '/forgot-password',
     '/verify-otp',
     '/reset-password',

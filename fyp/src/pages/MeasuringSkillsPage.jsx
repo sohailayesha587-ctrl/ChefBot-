@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from "react-icons/fa";
 import './MeasuringSkillsPage.css';
 
 const KNOWN_KEYS = [
@@ -64,6 +65,7 @@ const MeasuringSkillsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   const [measuringTools, setMeasuringTools] = useState([]);
   const [measuringTechniques, setMeasuringTechniques] = useState([]);
@@ -130,7 +132,6 @@ const MeasuringSkillsPage = () => {
       subcategory: content.subcategory || guide.subcategory || guide.subCategory || ''
     };
 
-    merged.extraSections = buildExtraSections(raw);
 
     if (window.location.hostname === 'localhost') {
       console.log('mergeContent debug for: ' + guide.title);
@@ -230,6 +231,16 @@ const MeasuringSkillsPage = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedItem(null);
+  };
+
+  const openLightbox = (imageUrl) => {
+    if (imageUrl) {
+      setLightboxImage(imageUrl);
+    }
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
   };
 
   const cleanText = (text) => {
@@ -391,7 +402,9 @@ const MeasuringSkillsPage = () => {
       {showModal && selectedItem && (
         <div className="msp-modal-overlay" onClick={closeModal}>
           <div className="msp-modal" onClick={e => e.stopPropagation()}>
-            <button className="msp-modal-close" onClick={closeModal}>×</button>
+            <button className="msp-modal-close" onClick={closeModal}>
+              <FaTimes />
+            </button>
 
             <div className="msp-modal-hero">
               <div className="msp-modal-hero-label">MEASURING SKILL</div>
@@ -405,11 +418,21 @@ const MeasuringSkillsPage = () => {
               <div className="msp-modal-left">
                 {(selectedItem.fullDesc || selectedItem.description) && (
                   <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">ABOUT THIS SKILL</div>
-                      <p className="msp-msec-text">
-                        {cleanText(selectedItem.fullDesc || selectedItem.description)}
-                      </p>
+                    <div className="msp-about-row">
+                      <div className="msp-about-text">
+                        <div className="msp-msec">
+                          <div className="msp-msec-label">ABOUT THIS SKILL</div>
+                          <p className="msp-msec-text">
+                            {cleanText(selectedItem.fullDesc || selectedItem.description)}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div
+                        className="msp-about-thumb"
+                        style={{ backgroundImage: `url(${getImage(selectedItem)})` }}
+                        onClick={() => openLightbox(getImage(selectedItem))}
+                      />
                     </div>
                     <hr className="msp-mdivider" />
                   </>
@@ -545,24 +568,7 @@ const MeasuringSkillsPage = () => {
                   </>
                 )}
 
-                {selectedItem.extraSections?.map(section => (
-                  <React.Fragment key={section.key}>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">{section.label}</div>
-                      {section.items.length === 1 ? (
-                        <div className="msp-care-card">{section.items[0]}</div>
-                      ) : (
-                        <div className="msp-uses-wrap">
-                          {section.items.map((line, idx) => (
-                            <div key={idx} className="msp-use-tag">{line}</div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </React.Fragment>
-                ))}
-
+                
                 {(selectedItem.material || selectedItem.price || selectedItem.priceRange ||
                   selectedItem.durability || selectedItem.size || selectedItem.capacity ||
                   selectedItem.diameter || selectedItem.length) && (
@@ -634,10 +640,26 @@ const MeasuringSkillsPage = () => {
                 <div
                   className="msp-modal-right-image"
                   style={{ backgroundImage: `url(${getImage(selectedItem)})` }}
+                  onClick={() => openLightbox(getImage(selectedItem))}
                 />
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {lightboxImage && (
+        <div className="msp-lightbox-overlay" onClick={closeLightbox}>
+          <button className="msp-lightbox-close" onClick={closeLightbox}>
+            ×
+          </button>
+
+          <img
+            className="msp-lightbox-image"
+            src={lightboxImage}
+            alt="Full view"
+            onClick={e => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

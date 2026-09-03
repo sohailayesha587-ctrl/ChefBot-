@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from "react-icons/fa";
 import './PantryBasicsPage.css';
 
 const PantryBasicsPage = () => {
@@ -128,7 +129,10 @@ const PantryBasicsPage = () => {
 
   const getFilteredStaples = () => {
     if (staplesCategory === 'all') return staplesData;
-    return staplesData.filter(item => item.category === staplesCategory);
+
+    return staplesData.filter(item =>
+      item.filterTags?.includes(staplesCategory)
+    );
   };
 
   const getFilteredVegetables = () => {
@@ -194,7 +198,7 @@ const PantryBasicsPage = () => {
 
   const PantryIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 7C4 5.89543 4.89543 5 6 5H18C19.1046 5 20 5.89543 20 7V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V7Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M4 7C4 5.89543 4.895 5 6 5H18C19.1046 5 20 5.89543 20 7V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V7Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
       <path d="M8 5V3M16 5V3M7 11H17M7 15H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   );
@@ -306,7 +310,6 @@ const PantryBasicsPage = () => {
             </div>
           </header>
 
-          {/* FILTERS - RETAINED */}
           {selectedCategory === 'spices' && spicesData.length > 0 && (
             <div className="pbp-filter-bar">
               <button 
@@ -344,65 +347,75 @@ const PantryBasicsPage = () => {
               >
                 All ({staplesData.length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'rice' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('rice')}
               >
-                Rice/Grains ({staplesData.filter(s => s.category === 'rice').length})
+                Rice/Grains ({staplesData.filter(s => s.filterTags?.includes('rice')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'flour' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('flour')}
               >
-                Flours ({staplesData.filter(s => s.category === 'flour').length})
+                Flours ({staplesData.filter(s => s.filterTags?.includes('flour')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'pulses' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('pulses')}
               >
-                Pulses ({staplesData.filter(s => s.category === 'pulses').length})
+                Pulses ({staplesData.filter(s => s.filterTags?.includes('pulses')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'nuts' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('nuts')}
               >
-                Nuts ({staplesData.filter(s => s.category === 'nuts').length})
+                Nuts ({staplesData.filter(s => s.filterTags?.includes('nuts')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'dryfruits' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('dryfruits')}
               >
-                Dry Fruits ({staplesData.filter(s => s.category === 'dryfruits').length})
+                Dry Fruits ({staplesData.filter(s => s.filterTags?.includes('dryfruits')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'seeds' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('seeds')}
               >
-                Seeds ({staplesData.filter(s => s.category === 'seeds').length})
+                Seeds ({staplesData.filter(s => s.filterTags?.includes('seeds')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'sweetener' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('sweetener')}
               >
-                Sweeteners ({staplesData.filter(s => s.category === 'sweetener').length})
+                Sweeteners ({staplesData.filter(s => s.filterTags?.includes('sweetener')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'oil' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('oil')}
               >
-                Oils & Ghee ({staplesData.filter(s => s.category === 'oil').length})
+                Oils & Ghee ({staplesData.filter(s => s.filterTags?.includes('oil')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'baking' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('baking')}
               >
-                Baking ({staplesData.filter(s => s.category === 'baking').length})
+                Baking ({staplesData.filter(s => s.filterTags?.includes('baking')).length})
               </button>
+
               <button 
                 className={`pbp-filter-btn ${staplesCategory === 'vinegar' ? 'active' : ''}`} 
                 onClick={() => setStaplesCategory('vinegar')}
               >
-                Vinegars ({staplesData.filter(s => s.category === 'vinegar').length})
+                Vinegars ({staplesData.filter(s => s.filterTags?.includes('vinegar')).length})
               </button>
             </div>
           )}
@@ -501,7 +514,9 @@ const PantryBasicsPage = () => {
         return (
           <div className="pbp-modal-overlay" onClick={closeDetailPanel}>
             <div className="pbp-modal" onClick={e => e.stopPropagation()}>
-              <button className="pbp-modal-close" onClick={closeDetailPanel}>×</button>
+              <button className="pbp-modal-close" onClick={closeDetailPanel}>
+                <FaTimes />
+              </button>
 
               <div className="pbp-modal-hero">
                 <p className="pbp-modal-hero-label">Pantry Essential</p>

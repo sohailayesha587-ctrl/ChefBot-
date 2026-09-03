@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaTimes } from "react-icons/fa";
 import axios from 'axios';
 import './KitchenToolsPage.css';
 
@@ -443,8 +444,9 @@ const KitchenToolsPage = () => {
       {showModal && selectedItem && (
         <div className="ktp-modal-overlay" onClick={closeModal}>
           <div className="ktp-modal" onClick={e => e.stopPropagation()}>
-            <button className="ktp-modal-close" onClick={closeModal}>×</button>
-
+<button className="ktp-modal-close" onClick={closeModal}>
+  <FaTimes />
+</button>
             <div className="ktp-modal-hero">
               <p className="ktp-modal-hero-label">Kitchen Tool</p>
               <h2 className="ktp-modal-hero-title">{selectedItem.name}</h2>

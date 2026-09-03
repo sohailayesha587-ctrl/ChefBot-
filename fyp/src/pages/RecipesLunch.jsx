@@ -1,23 +1,23 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './RecipesDinner.css';
+import './RecipesLunch.css';
 
-const RecipesDinner = () => {
+const RecipesLunch= () => {
   const scrollContainerRef = useRef(null);
 
   const categories = [
     {
       id: 1,
-      name: "Plain Vegetables",
+      name: "Vegetable Dishes",
       image: "plainVegetable.jpg",
-      route: "/dinner",
+      route: "/lunch",
     
     },
     {
       id: 2,
-      name: "Plain Daal",
+      name: "Lentils(Daal) Dishes",
       image: "plainDal.jpg",
-      route: "/dinner",
+      route: "/lunch",
      
     },
     {
@@ -89,56 +89,55 @@ const RecipesDinner = () => {
   };
 
   return (
-    <div className="recipes-dinner-page">
-      {/* Header */}
-      <header className="recipes-dinner-header">
-        <div className="recipes-dinner-header-content">
-          <h1 className="recipes-dinner-title">Dinner Offerings</h1>
-          <p className="recipes-dinner-description">
-            Comforting Dinner Creations
+    <div className="recipes-lunch-page">
+      <header className="recipes-lunch-header">
+        <div className="recipes-lunch-header-content">
+          <h1 className="recipes-lunch-title">Lunch Offerings</h1>
+          <p className="recipes-lunch-description">
+            Comforting Lunch Creations
           </p>
         </div>
       </header>
 
-      <main className="recipes-dinner-main">
-        <div className="recipes-dinner-carousel">
-          <button className="recipes-dinner-arrow recipes-dinner-arrow-left" onClick={scrollLeft}>
+      <main className="recipes-lunch-main">
+        <div className="recipes-lunch-carousel">
+          <button className="recipes-lunch-arrow recipes-lunch-arrow-left" onClick={scrollLeft}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
-          <div className="recipes-dinner-scroll-wrapper" ref={scrollContainerRef}>
-            <div className="recipes-dinner-grid">
+          <div className="recipes-lunch-scroll-wrapper" ref={scrollContainerRef}>
+            <div className="recipes-lunch-grid">
               {categories.map((category, index) => (
                 <Link
                   key={category.id}
                   to={category.route}
                   state={category.state}
-                  className={`recipes-dinner-card ${index % 2 === 0 ? 'recipes-dinner-card-up' : 'recipes-dinner-card-down'}`}
+                  className={`recipes-lunch-card ${index % 2 === 0 ? 'recipes-lunch-card-up' : 'recipes-lunch-card-down'}`}
                 >
-                  <div className="recipes-dinner-card-image-container">
+                  <div className="recipes-lunch-card-image-container">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="recipes-dinner-card-img"
+                      className="recipes-lunch-card-img"
                       loading="lazy"
                     />
-                    <div className="recipes-dinner-card-overlay"></div>
-                    <span className="recipes-dinner-card-badge">
+                    <div className="recipes-lunch-card-overlay"></div>
+                    <span className="recipes-lunch-card-badge">
                       {category.recipeCount}
                     </span>
                   </div>
 
-                  <div className="recipes-dinner-card-content">
-                    <h3 className="recipes-dinner-card-title">{category.name}</h3>
+                  <div className="recipes-lunch-card-content">
+                    <h3 className="recipes-lunch-card-title">{category.name}</h3>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
 
-          <button className="recipes-dinner-arrow recipes-dinner-arrow-right" onClick={scrollRight}>
+          <button className="recipes-lunch-arrow recipes-lunch-arrow-right" onClick={scrollRight}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M9 5l7 7-7 7" />
             </svg>
@@ -146,9 +145,9 @@ const RecipesDinner = () => {
         </div>
       </main>
 
-      <div className="recipes-dinner-bg-pattern"></div>
+      <div className="recipes-lunch-bg-pattern"></div>
     </div>
   );
 };
 
-export default RecipesDinner;
+export default RecipesLunch;

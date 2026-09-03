@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from "react-icons/fa";
 import './BakeryEssentialsPage.css';
 
 const BakeryEssentialsPage = () => {
@@ -279,8 +280,9 @@ const BakeryEssentialsPage = () => {
         return (
           <div className="bep-modal-overlay" onClick={closeDetailPanel}>
             <div className="bep-modal" onClick={e => e.stopPropagation()}>
-              <button className="bep-modal-close" onClick={closeDetailPanel}>×</button>
-
+<button className="bep-modal-close" onClick={closeDetailPanel}>
+  <FaTimes />
+</button>
               <div className="bep-modal-hero">
                 <p className="bep-modal-hero-label">Bakery Essential</p>
                 <h2 className="bep-modal-hero-title">{selectedItem.title}</h2>
