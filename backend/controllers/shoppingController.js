@@ -150,10 +150,120 @@ const deleteShoppingItem = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+const addMissingItems = async (req, res) => {
+  try {
+    const { recipeId, missingIngredients } = req.body;
+    const userId = req.user.id || req.user._id;
 
+    if (!Array.isArray(missingIngredients) || missingIngredients.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No missing ingredients provided'
+      });
+    }
+
+    const items = missingIngredients
+      .filter(item => item && item.trim())
+      .map(item => ({
+        user: userId,
+        name: item.trim(),
+        quantity: 1,
+        unit: 'pieces',
+        category: 'Other',
+        fromPantry: false,
+        purchased: false
+      }));
+
+    if (items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No valid ingredients provided'
+      });
+    }
+
+    await Shopping.insertMany(items);
+
+    const shoppingItems = await Shopping
+      .find({ user: userId })
+      .sort({ category: 1, name: 1 });
+
+    res.status(201).json({
+      success: true,
+      message: 'Missing ingredients added to shopping list!',
+      items: shoppingItems
+    });
+
+  } catch (error) {
+    console.error('ADD missing items error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
+
+
+const addMultipleItems = async (req, res) => {
+  try {
+    const { items } = req.body;
+    const userId = req.user.id || req.user._id;
+
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No items provided'
+      });
+    }
+
+    const shoppingItems = items
+      .filter(item => item && item.name && item.name.trim())
+      .map(item => ({
+        user: userId,
+        name: item.name.trim(),
+        quantity: Number(item.quantity) > 0 ? Number(item.quantity) : 1,
+        unit: item.unit && item.unit.trim()
+          ? item.unit.trim()
+          : 'pieces',
+          
+        category: item.category && item.category.trim()
+          ? item.category.trim()
+          : 'Other',
+        fromPantry: false,
+        purchased: false
+      }));
+
+    if (shoppingItems.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No valid items provided'
+      });
+    }
+
+    await Shopping.insertMany(shoppingItems);
+
+    const allItems = await Shopping
+      .find({ user: userId })
+      .sort({ category: 1, name: 1 });
+
+    res.status(201).json({
+      success: true,
+      message: 'Items added to shopping list!',
+      items: allItems
+    });
+
+  } catch (error) {
+    console.error('ADD multiple items error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
 module.exports = {
-  getShoppingItems,
+   getShoppingItems,
   addShoppingItem,
+  addMissingItems,
+  addMultipleItems,
   updateShoppingItem,
   markAsPurchased,
   deleteShoppingItem

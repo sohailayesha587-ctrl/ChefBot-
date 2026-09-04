@@ -303,19 +303,30 @@ const PantryFeature = () => {
 
   return (
     <div className="pantry-page">
-      <div className="fullscreen-food-image">
-        <div className="fullscreen-food-content">
-          <h1>Your Smart Kitchen Pantry</h1>
-        </div>
-      </div>
+     <div className="pantry-hero-split">
+  <div className="pantry-hero-text-side">
+    <h1 className="pantry-hero-title">
+      Smart Kitchen Pantry
+    </h1>
 
-      <div className="p-hero-section">
-        <div className="p-hero-content">
-          <h1 className="p-hero-title">Your Pantry Items</h1>
-          <p className="p-hero-subtitle">Manage your kitchen inventory efficiently</p>
-        </div>
-      </div>
+    <div className="pantry-hero-divider"></div>
 
+    <p className="pantry-hero-desc">
+      Manage your kitchen inventory efficiently
+    </p>
+  </div>
+
+  <div className="pantry-hero-image-side">
+    <img
+      src="pantry.jpg"
+      alt="Kitchen Pantry"
+      className="pantry-hero-img"
+    />
+
+    <div className="pantry-hero-img-slice"></div>
+    <div className="pantry-hero-img-tint"></div>
+  </div>
+</div>
       {error && <div className="pantry-error-message">{error}</div>}
 
       {items.length > 0 && (
@@ -608,7 +619,7 @@ const PantryFeature = () => {
       )}
 
       <div className="back-home-container">
-        <button className="btn-back-home" onClick={() => navigate('/')}>Back to Home</button>
+        <button className="btn-back-home" onClick={() => navigate('/home')}>Back to Home</button>
       </div>
     </div>
   );

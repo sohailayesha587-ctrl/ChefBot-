@@ -242,7 +242,7 @@ const budgetCategories = [
   </Link>
 
 
-             <Link to="/meal-suggestion" className="rf-feature-card">
+             <Link to="/guidance" className="rf-feature-card">
     <div className="rf-feature-icon">
       <i className="fas fa-brain"></i>
     </div>
@@ -251,22 +251,26 @@ const budgetCategories = [
               <p>Detailed cooking instructions with timers and tips</p>
   </Link>
             
+   <Link to="/meal-planner" className="rf-feature-card">
+    <div className="rf-feature-icon">
+      <i className="fas fa-brain"></i>
+    </div>
 
-            <div className="rf-feature-card">
-              <div className="rf-feature-icon">
-                <i className="fas fa-utensils"></i>
-              </div>
               <h3>Meal Planning</h3>
               <p>Smart weekly meal plans with automatic grocery lists</p>
-            </div>
+  </Link>
+              
+   <Link to="/recipes" className="rf-feature-card">
+    <div className="rf-feature-icon">
+      <i className="fas fa-brain"></i>
+    </div>
 
-            <div className="rf-feature-card">
-              <div className="rf-feature-icon">
-                <i className="fas fa-clock"></i>
-              </div>
               <h3>Quick Cooking</h3>
               <p>Fast and easy recipes for busy schedules</p>
-            </div>
+  </Link>
+            
+
+            
           </div>
         </section>
 

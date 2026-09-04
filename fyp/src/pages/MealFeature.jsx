@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MealFeature.css';
-
 const CustomSelect = ({ label, options, value, onChange, required }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -90,6 +89,8 @@ const MealFeature = () => {
   const [generated, setGenerated] = useState(initialData.generated);
   const [generating, setGenerating] = useState(false);
   const [mealPlan, setMealPlan] = useState(initialData.mealPlan);
+  const [savedPlanId, setSavedPlanId] = useState(null);
+
   const [selectedDay, setSelectedDay] = useState(0);
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
   const [pantryItems, setPantryItems] = useState([]);
@@ -279,24 +280,70 @@ const MealFeature = () => {
       });
 
       const data = await res.json();
-      if (data.success) {
-        alert('Meal plan saved!');
-        localStorage.removeItem('mealPlanFilters');
-        localStorage.removeItem('mealPlanData');
-        localStorage.removeItem('mealPlanGenerated');
-        localStorage.removeItem('mealPlanCustomMembers');
-        setFilters({ dietType: '', allergy: '', ageGroup: '', familyMembers: '', planDuration: '' });
-        setCustomMembers('');
-        setMealPlan({});
-        setGenerated(false);
-        setSelectedDay(0);
-      } else {
+   if (data.success) {
+  setSavedPlanId(data.id);
+  alert('Meal plan saved!');
+}
+      else {
         alert('Save failed: ' + data.message);
       }
     } catch {
       alert('Could not connect.');
     }
   };
+const deletePlan = async () => {
+  const token = getToken();
+
+  if (!token) {
+    navigate('/login-page');
+    return;
+  }
+
+  const confirmDelete = window.confirm(
+    'Are you sure you want to delete this meal plan?'
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert('Meal plan deleted successfully!');
+
+      localStorage.removeItem('mealPlanFilters');
+      localStorage.removeItem('mealPlanData');
+      localStorage.removeItem('mealPlanGenerated');
+      localStorage.removeItem('mealPlanCustomMembers');
+
+      setFilters({
+        dietType: '',
+        allergy: '',
+        ageGroup: '',
+        familyMembers: '',
+        planDuration: ''
+      });
+
+      setCustomMembers('');
+      setMealPlan({});
+      setGenerated(false);
+      setSelectedDay(0);
+      setCurrentWeekOffset(0);
+    } else {
+      alert('Delete failed: ' + (data.message || 'Unable to delete plan.'));
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Could not connect to server.');
+  }
+};
 
   const viewRecipe = (id, name) => {
     if (id) navigate(`/recipe/${id}?members=${getFamilyCount()}`);
@@ -546,22 +593,33 @@ const MealFeature = () => {
                 ))}
               </div>
             </div>
+<div className="mc-save-row">
+  <div className="mc-save-card">
+    <div>
+      <p className="mc-save-title">Your meal plan is ready!</p>
+      <small className="mc-save-sub">
+        Save it to access later from your profile
+      </small>
+    </div>
 
-            <div className="mc-save-row">
-              <div className="mc-save-card">
-                <div>
-                  <p className="mc-save-title">Your meal plan is ready!</p>
-                  <small className="mc-save-sub">Save it to access later from your profile</small>
-                </div>
-                <button className="mc-save-btn" onClick={savePlan}>Save Plan</button>
-              </div>
-            </div>
+    <div className="mc-save-actions">
+      <button className="mc-save-btn" onClick={savePlan}>
+        Save Plan
+      </button>
+{savedPlanId && (
+  <button className="mc-delete-btn" onClick={deletePlan}>
+    Delete Plan
+  </button>
+)}
+    </div>
+  </div>
+</div>
           </div>
         )}
       </div>
 
       <div className="mc-back-home-container">
-        <button className="mc-btn-back-home" onClick={() => navigate('/')}>Back to Home</button>
+        <button className="mc-btn-back-home" onClick={() => navigate('/home')}>Back to Home</button>
       </div>
 
       {showSearchModal && (

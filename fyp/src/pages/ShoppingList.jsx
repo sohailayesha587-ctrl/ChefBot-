@@ -220,20 +220,38 @@ const ShoppingList = () => {
 
   return (
     <div className="shopping-page">
-      <div className="shopping-fullscreen-food-image">
-        <div className="shopping-fullscreen-food-content">
-          <h1>Your Smart Shopping List</h1>
-          <p>Track what you need to buy, mark as purchased</p>
-        </div>
-      </div>
+     
+<div className="shopping-hero-split">
+  <div className="shopping-hero-text-side">
+    <h1 className="shopping-hero-title">
+      Smart Shopping List
+    </h1>
 
-      <div className="shopping-hero-section">
-        <div className="shopping-hero-content">
-          <h1 className="shopping-hero-title">My Shopping List</h1>
-          <p className="shopping-hero-subtitle">Manage items you need to purchase</p>
-        </div>
-      </div>
+    <div className="shopping-hero-divider"></div>
 
+    <p className="shopping-hero-desc">
+      Track what you need to buy, mark as purchased
+    </p>
+  </div>
+
+  <div className="shopping-hero-image-side">
+    <img
+      src="shoppinglist.png"
+      alt="Shopping List"
+      className="shopping-hero-img"
+    />
+
+    <div
+      className="shopping-hero-img-slice"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      className="shopping-hero-img-tint"
+      aria-hidden="true"
+    ></div>
+  </div>
+</div>
       {error && (
         <div className="shopping-error-message">
           <i className="fas fa-exclamation-circle"></i> {error}
@@ -387,7 +405,7 @@ const ShoppingList = () => {
       )}
 
       <div className="back-home-container">
-        <button className="btn-back-home" onClick={() => navigate('/')}>
+        <button className="btn-back-home" onClick={() => navigate('/home')}>
           Back to Home
         </button>
       </div>

@@ -205,19 +205,26 @@ const saveMealPlan = async (req, res) => {
     const userId = req.user?._id || null;
 
     const planMap = new Map();
+
     if (plan && typeof plan === 'object') {
       Object.entries(plan).forEach(([key, value]) => {
         planMap.set(key, value);
       });
     }
 
+    const totalDays = planMap.size || 7;
+
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + totalDays);
+
     const saved = await MealPlan.create({
       name: name || `Meal Plan - ${new Date().toLocaleDateString()}`,
       preferences: preferences || {},
       plan: planMap,
-      totalDays: planMap.size || 7,
+      totalDays,
       familyCount: parseInt(preferences?.familyMembers) || 2,
-      user: userId
+      user: userId,
+      expiresAt
     });
 
     return res.json({
@@ -225,8 +232,10 @@ const saveMealPlan = async (req, res) => {
       message: 'Meal plan saved successfully!',
       id: saved._id
     });
+
   } catch (err) {
     console.error('saveMealPlan error:', err);
+
     return res.status(500).json({
       success: false,
       message: 'Save failed.',
@@ -234,5 +243,54 @@ const saveMealPlan = async (req, res) => {
     });
   }
 };
+const deleteMealPlan = async (req, res) => {
+  try {
+    const userId = req.user?._id;
 
-module.exports = { generateMealPlan, saveMealPlan };
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated.'
+      });
+    }
+
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: 'Meal plan ID is required.'
+      });
+    }
+
+    const deleted = await MealPlan.findOneAndDelete({
+      _id: id,
+      user: userId
+    });
+
+    if (!deleted) {
+      return res.status(404).json({
+        success: false,
+        message: 'Meal plan not found.'
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: 'Meal plan deleted successfully!'
+    });
+  } catch (err) {
+    console.error('deleteMealPlan error:', err);
+
+    return res.status(500).json({
+      success: false,
+      message: 'Delete failed.',
+      error: err.message
+    });
+  }
+};
+module.exports = {
+  generateMealPlan,
+  saveMealPlan,
+  deleteMealPlan
+};

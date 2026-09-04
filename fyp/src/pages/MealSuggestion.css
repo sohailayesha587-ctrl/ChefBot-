@@ -899,9 +899,11 @@
 
 .ms-missing-inline-actions {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
+  width: 100%;
 }
+
 
 .ms-inline-btn {
   padding: 8px 16px;
@@ -912,7 +914,6 @@
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
-  align-items: center;
   gap: 6px;
 }
 
@@ -935,13 +936,16 @@
 }
 
 .ms-inline-skip {
-  background: #e0eeee;
-  color: #284a4b;
+  background: #284a4b;
+  color: #ffffff;
   border: 1px solid #c5d8d8;
+  margin-left: auto;
+
+
 }
 
 .ms-inline-skip:hover {
-  background: #c5d8d8;
+  background: #397d7c;
 }
 
 .ms-show-more {

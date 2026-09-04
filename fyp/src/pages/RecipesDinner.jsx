@@ -10,14 +10,14 @@ const RecipesDinner = () => {
       id: 1,
       name: "Plain Vegetables",
       image: "plainVegetable.jpg",
-      route: "/dinner",
+      route: "/lunch",
     
     },
     {
       id: 2,
       name: "Plain Daal",
       image: "plainDal.jpg",
-      route: "/dinner",
+      route: "/lunch",
      
     },
     {

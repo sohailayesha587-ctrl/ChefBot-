@@ -84,7 +84,10 @@ const mealPlanSchema = new mongoose.Schema(
       type: Number,
       default: 2
     },
-
+expiresAt: {
+  type: Date,
+  index: true
+},
     savedAt: {
       type: Date,
       default: Date.now

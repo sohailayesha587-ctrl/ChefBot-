@@ -428,9 +428,33 @@ const [drawerOpen, setDrawerOpen] = useState(false);
     }
   };
 
-  const handlePatientNext = (type, currentPage, hasMore) => { if (hasMore) fetchPatientRecipes(type, currentPage + 1); };
-  const handlePatientPrev = (type, currentPage) => { if (currentPage > 0) fetchPatientRecipes(type, currentPage - 1); };
+ const handlePatientNext = async (type, currentPage, hasMore) => {
+  if (!hasMore) return;
 
+  const scrollY = window.scrollY;
+
+  await fetchPatientRecipes(type, currentPage + 1);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
+  });
+};
+
+const handlePatientPrev = async (type, currentPage) => {
+  if (currentPage <= 0) return;
+
+  const scrollY = window.scrollY;
+
+  await fetchPatientRecipes(type, currentPage - 1);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
+  });
+};
   const handleAddToShopping = async (recipe) => {
     if (!recipe.missing || recipe.missing.length === 0) { toast.info('No missing ingredients to add'); return; }
     try {
@@ -632,7 +656,7 @@ const handleDayClick = async (day) => {
       const response = await fetch('/api/shopping/add-multiple', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: missingFundamentals.map(item => ({ name: item, quantity: 1, unit: 'piece' })) })
+        body: JSON.stringify({ items: missingFundamentals.map(item => ({ name: item, quantity: 1, unit: 'pieces' })) })
       });
       if (response.ok) toast.success(`${missingFundamentals.length} essential items added to shopping list!`);
       else toast.error('Failed to add items');
@@ -776,7 +800,23 @@ const handleDayClick = async (day) => {
       <div className="patient-section">
         <h3 className="patient-section-title"><span className="patient-label">{label}</span>{title}</h3>
         <div className="horizontal-scroll-container">
-          <button className="scroll-arrow scroll-left" onClick={onPrev} disabled={currentPage === 0}><Icons.ChevronLeft /></button>
+          
+<button
+  type="button"
+  className="scroll-arrow scroll-left"
+  onClick={onPrev}
+  disabled={currentPage === 0}
+>
+  <Icons.ChevronLeft />
+</button>
+<button
+  type="button"
+  className="scroll-arrow scroll-right"
+  onClick={onNext}
+  disabled={!hasMore}
+>
+  <Icons.ChevronRight />
+</button>
           <div className="patient-recipes-wrapper">
             {recipes.map((recipe) => (
               <div key={recipe._id} className="patient-recipe-card">
@@ -985,6 +1025,7 @@ const handleDayClick = async (day) => {
                 <div className="patient-sections-container">
                   {patientTypes.map(type => (
                     <HorizontalScrollSection
+                    
                       key={type.id}
                       title={type.name}
                       label={type.label}
@@ -995,6 +1036,7 @@ const handleDayClick = async (day) => {
                       onNext={() => handlePatientNext(type.id, patientSections[type.id].currentPage, patientSections[type.id].hasMore)}
                       loading={patientSections[type.id].loading}
                     />
+                    
                   ))}
                 </div>
               )}

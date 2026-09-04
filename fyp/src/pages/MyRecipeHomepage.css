@@ -383,6 +383,7 @@ body {
 }
 
 .rf-feature-card h3 {
+  color: #284a4b;
   font-size: 19.2px;
   margin-bottom: 12.8px;
 }
@@ -483,9 +484,8 @@ body {
     line-height: 1.5;
     text-align: left;
     width: 100%;
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto 0 0;
-    display: block;
     text-wrap: balance;
   }
 
@@ -495,11 +495,11 @@ body {
 
   .rf-features-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 19.2px;
+    gap: 18px;
   }
 
   .rf-feature-card {
-    padding: 24px;
+    padding: 10px;
   }
 }
 
@@ -582,20 +582,20 @@ body {
 
   .rf-budget-grid-new {
     grid-template-columns: repeat(3, 1fr);
-    max-width: 320px;
-    gap: 8px;
+    width: 320px;
+    gap: 3px;
     padding: 6px;
   }
 
   .rf-budget-card-new {
-    height: 210px;
-    padding: 12px 6px;
+    height: 170px;
+    padding: 18px 6px;
     max-width: 98px;
     border-radius: 12px;
   }
 
   .rf-budget-card-title {
-    font-size: 7.2px;
+    font-size: 8px;
     letter-spacing: 0px;
     line-height: 1.1;
     text-align: center;
@@ -617,29 +617,25 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    flex: 1;
+    flex: 2;
     padding: 0 1px;
   }
 
   .rf-budget-card-features {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     width: 100%;
   }
 
   .rf-budget-card-features li {
-    font-size: 8px;
-    padding: 1px 3px;
-    line-height: 1.45;
+    font-size: 10px;
+    padding: 1px 1px;
+    line-height: 1;
     text-align: left;
     width: 100%;
-    max-width: 92%;
     margin: 0 auto 0 0;
-    overflow-wrap: break-word;
-    letter-spacing: 0.1px;
-    text-wrap: balance;
   }
 
   .rf-features-section {
@@ -647,12 +643,13 @@ body {
   }
 
   .rf-features-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
   }
 
   .rf-feature-card {
-    padding: 19.2px;
+    padding: 19px 10px;
   }
 
   .rf-feature-icon {
@@ -661,6 +658,7 @@ body {
 
   .rf-feature-card h3 {
     font-size: 16.8px;
+    color: #284a4b ;
   }
 
   .rf-feature-card p {

@@ -1,9 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
 
 const {
   getShoppingItems,
   addShoppingItem,
+  addMissingItems,
+  addMultipleItems,
   updateShoppingItem,
   markAsPurchased,
   deleteShoppingItem
@@ -12,9 +15,16 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 
 router.get('/', protect, getShoppingItems);
+
 router.post('/', protect, addShoppingItem);
+
+router.post('/add-missing', protect, addMissingItems);
+router.post('/add-multiple', protect, addMultipleItems);
+
 router.put('/:itemId', protect, updateShoppingItem);
+
 router.patch('/:itemId/purchased', protect, markAsPurchased);
+
 router.delete('/:itemId', protect, deleteShoppingItem);
 
 module.exports = router;

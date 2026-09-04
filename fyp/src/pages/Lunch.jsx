@@ -77,8 +77,8 @@ const Lunch = () => {
           </h1>
           <p className="lunch-page-description">
             {activeCategory === 'veg' 
-              ? 'Fresh aur healthy sabziyon ke saath - 3 varieties'
-              : 'Protein-rich daalon ke mazedar recipes - 3 varieties'}
+              ? 'Fresh and healthy vegetable recipes(3 varieties)'
+              : 'Protein-rich lentil recipes (3 varieties)'}
           </p>
         </div>
       </header>
@@ -126,7 +126,7 @@ const Lunch = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/recipe-lunch')}>
+        <button className="back-home-btn" onClick={() => navigate(-1)}>
           <span>←</span> Back to Categories
         </button>
       </div>
