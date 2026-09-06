@@ -48,8 +48,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults"],
@@ -104,8 +104,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 390,
     ageGroup: ["adults"],
@@ -159,8 +159,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 385,
     ageGroup: ["adults"],
@@ -213,8 +213,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 370,
     ageGroup: ["adults"],
@@ -268,8 +268,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 375,
     ageGroup: ["adults"],
@@ -321,8 +321,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 360,
     ageGroup: ["adults"],
@@ -372,8 +372,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 75,
+    
+    
     baseServings: 4,
     calories: 365,
     ageGroup: ["adults"],
@@ -425,8 +425,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 370,
     ageGroup: ["adults"],
@@ -480,8 +480,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 370,
     ageGroup: ["adults"],
@@ -533,8 +533,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "premium",
-    costPerServing: 110,
+    
+    
     baseServings: 4,
     calories: 480,
     ageGroup: ["adults"],
@@ -587,8 +587,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 4,
     calories: 520,
     ageGroup: ["adults"],
@@ -642,8 +642,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "premium",
-    costPerServing: 100,
+    
+    
     baseServings: 4,
     calories: 460,
     ageGroup: ["adults"],
@@ -696,8 +696,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 75,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults"],
@@ -748,8 +748,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 350,
     ageGroup: ["adults"],
@@ -799,8 +799,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "premium",
-    costPerServing: 105,
+    
+    
     baseServings: 4,
     calories: 470,
     ageGroup: ["adults"],
@@ -852,8 +852,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 390,
     ageGroup: ["adults"],
@@ -905,8 +905,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 370,
     ageGroup: ["adults"],
@@ -958,8 +958,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 360,
     ageGroup: ["adults"],
@@ -1011,8 +1011,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 390,
     ageGroup: ["adults"],
@@ -1065,8 +1065,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 375,
     ageGroup: ["adults"],
@@ -1118,8 +1118,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: ["soy"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults"],
@@ -1170,8 +1170,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 360,
     ageGroup: ["adults"],
@@ -1223,8 +1223,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 390,
     ageGroup: ["adults"],
@@ -1276,8 +1276,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 375,
     ageGroup: ["adults"],
@@ -1328,8 +1328,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 370,
     ageGroup: ["adults"],
@@ -1381,8 +1381,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 390,
     ageGroup: ["adults"],
@@ -1434,8 +1434,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 85,
+    
+    
     baseServings: 4,
     calories: 400,
     ageGroup: ["adults"],
@@ -1486,8 +1486,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 75,
+    
+    
     baseServings: 4,
     calories: 340,
     ageGroup: ["adults"],
@@ -1538,8 +1538,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 75,
+    
+    
     baseServings: 4,
     calories: 345,
     ageGroup: ["adults"],
@@ -1591,8 +1591,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: [],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults"],

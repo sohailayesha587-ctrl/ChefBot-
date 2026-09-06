@@ -479,6 +479,7 @@ const getMealSuggestions = async (req, res) => {
         dietTypeForFundamental = 'non-veg';
       }
 
+
       const fundamentalCheck = checkFundamentalIngredients(
         pantryItems,
         dietTypeForFundamental
@@ -526,15 +527,17 @@ const getMealSuggestions = async (req, res) => {
       }
     }
 
-    if (dietType && dietType !== 'all') {
-      let dietFilter =
-        dietType === 'veg'
-          ? 'Vegetarian'
-          : 'Non-Vegetarian';
+   if (dietType && dietType !== 'all') {
+  let dietFilter;
 
-      if (dietType === 'eggetarian') {
-        dietFilter = 'Vegetarian';
-      }
+  if (dietType === 'veg') {
+    dietFilter = 'Vegetarian';
+  } else if (dietType === 'non-veg') {
+    dietFilter = 'Non-Vegetarian';
+  }
+
+
+    
 
       conditions.push({ dietType: dietFilter });
     }
@@ -551,7 +554,8 @@ const getMealSuggestions = async (req, res) => {
       const ageMap = {
         toddler: 'toddlers',
         patient: 'seniors',
-        'family-mix': ['adults', 'seniors']
+        teens: 'teens',
+       'family-mix': ['adults', 'seniors']
       };
 
       const ageValue = ageMap[ageGroup];

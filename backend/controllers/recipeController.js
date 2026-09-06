@@ -25,7 +25,7 @@ const getAllRecipes = async (req, res) => {
       mealTime,
       isFeatured,
       page = 1,
-      limit = 20,
+      limit = 40,
     } = req.query;
 
     const filter = { isActive: true };

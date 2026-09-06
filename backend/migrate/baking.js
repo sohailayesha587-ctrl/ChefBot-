@@ -39,10 +39,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 8,
     calories: 380,
     ageGroup: ["adults", "kids"],
@@ -85,10 +85,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "wheat"],
-    budget: "economy",
-    costPerServing: 30,
+    
+    
     baseServings: 1,
     calories: 350,
     ageGroup: ["adults", "kids"],
@@ -136,16 +136,16 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 8,
     calories: 320,
     ageGroup: ["adults", "kids"],
     patientFriendly: ["general"],
     pantryKeywords: ["banana", "butter", "sugar", "egg", "vanilla", "baking soda", "salt", "flour", "walnuts"],
-    searchKeywords: ["banana bread", "banana cake", "bread", "breakfast", "snack"],
+    searchKeywords: ["banana bread", "banana cake", "bread", "breakfast"],
     isFeatured: false,
     averageRating: 0,
     totalRatings: 0,
@@ -185,10 +185,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 55,
+    
+    
     baseServings: 10,
     calories: 450,
     ageGroup: ["adults", "kids"],
@@ -238,10 +238,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 9,
     calories: 380,
     ageGroup: ["adults", "kids"],
@@ -288,10 +288,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 35,
+    
+    
     baseServings: 24,
     calories: 120,
     ageGroup: ["adults", "kids"],
@@ -334,16 +334,16 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["eggs", "peanuts"],
-    budget: "economy",
-    costPerServing: 25,
+    
+    
     baseServings: 18,
     calories: 140,
     ageGroup: ["adults", "kids"],
     patientFriendly: ["general"],
     pantryKeywords: ["peanut butter", "sugar", "egg", "vanilla", "baking soda", "salt"],
-    searchKeywords: ["peanut butter cookies", "cookies", "peanut cookies", "dessert", "snack"],
+    searchKeywords: ["peanut butter cookies", "cookies", "peanut cookies", "dessert"],
     isFeatured: false,
     averageRating: 0,
     totalRatings: 0,
@@ -383,10 +383,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["wheat"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 8,
     calories: 350,
     ageGroup: ["adults", "kids"],
@@ -436,10 +436,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 10,
     calories: 480,
     ageGroup: ["adults", "kids"],
@@ -486,10 +486,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 8,
     calories: 360,
     ageGroup: ["adults", "kids"],
@@ -538,10 +538,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "premium",
-    costPerServing: 80,
+    
+    
     baseServings: 8,
     calories: 320,
     ageGroup: ["adults", "kids"],
@@ -588,10 +588,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 10,
     calories: 350,
     ageGroup: ["adults", "kids"],
@@ -648,10 +648,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 12,
     calories: 380,
     ageGroup: ["adults", "kids"],
@@ -703,16 +703,16 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 35,
+    
+    
     baseServings: 12,
     calories: 250,
     ageGroup: ["adults", "kids"],
     patientFriendly: ["general"],
     pantryKeywords: ["flour", "sugar", "butter", "eggs", "buttermilk", "baking powder", "baking soda", "vanilla", "salt", "blueberries"],
-    searchKeywords: ["blueberry muffins", "muffins", "breakfast", "snack", "blueberry bread"],
+    searchKeywords: ["blueberry muffins", "muffins", "breakfast", "blueberry bread"],
     isFeatured: false,
     averageRating: 0,
     totalRatings: 0,
@@ -758,10 +758,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack", "Breakfast"],
+    suitableForMeals: ["Dessert", "Breakfast"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 9,
     calories: 370,
     ageGroup: ["adults", "kids"],
@@ -812,10 +812,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "premium",
-    costPerServing: 100,
+    
+    
     baseServings: 10,
     calories: 520,
     ageGroup: ["adults", "kids"],
@@ -864,10 +864,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 10,
     calories: 480,
     ageGroup: ["adults", "kids"],
@@ -917,10 +917,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 8,
     calories: 380,
     ageGroup: ["adults", "kids"],
@@ -968,10 +968,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 55,
+    
+    
     baseServings: 10,
     calories: 420,
     ageGroup: ["adults", "kids"],
@@ -1011,10 +1011,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy"],
-    budget: "economy",
-    costPerServing: 25,
+    
+    
     baseServings: 2,
     calories: 280,
     ageGroup: ["adults", "kids"],
@@ -1066,10 +1066,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 10,
     calories: 520,
     ageGroup: ["adults", "kids"],
@@ -1121,10 +1121,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 8,
     calories: 350,
     ageGroup: ["adults", "kids"],
@@ -1177,10 +1177,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 65,
+    
+    
     baseServings: 10,
     calories: 490,
     ageGroup: ["adults", "kids"],
@@ -1232,10 +1232,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 10,
     calories: 420,
     ageGroup: ["adults", "kids"],
@@ -1287,10 +1287,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 55,
+    
+    
     baseServings: 10,
     calories: 460,
     ageGroup: ["adults", "kids"],
@@ -1339,10 +1339,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 6,
     calories: 420,
     ageGroup: ["adults", "kids"],
@@ -1395,10 +1395,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 8,
     calories: 420,
     ageGroup: ["adults", "kids"],
@@ -1444,10 +1444,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 8,
     calories: 400,
     ageGroup: ["adults", "kids"],
@@ -1491,16 +1491,16 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Dessert", "Snack"],
+    suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 6,
     calories: 320,
     ageGroup: ["adults", "kids"],
     patientFriendly: ["general"],
     pantryKeywords: ["puff pastry", "chocolate spread", "egg", "milk", "powdered sugar"],
-    searchKeywords: ["puff pastry hearts", "chocolate hearts", "french pastry", "dessert", "snack"],
+    searchKeywords: ["puff pastry hearts", "chocolate hearts", "french pastry", "dessert"],
     isFeatured: false,
     averageRating: 0,
     totalRatings: 0,
@@ -1538,10 +1538,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "baking",
     dietType: "Vegetarian",
-    suitableForMeals: ["Snack", "Breakfast"],
+    suitableForMeals: ["Breakfast"],
     allergens: ["dairy", "eggs", "wheat"],
-    budget: "economy",
-    costPerServing: 20,
+    
+    
     baseServings: 6,
     calories: 180,
     ageGroup: ["adults", "kids", "seniors"],

@@ -42,8 +42,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "gluten", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 8,
     calories: 350,
     ageGroup: ["adults", "kids", "seniors"],
@@ -92,8 +92,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "nuts"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 420,
     ageGroup: ["adults", "kids", "seniors"],
@@ -144,8 +144,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 4,
     calories: 550,
     ageGroup: ["adults", "kids", "seniors"],
@@ -198,8 +198,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "nuts", "gluten"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 6,
     calories: 380,
     ageGroup: ["adults", "kids", "seniors"],
@@ -253,8 +253,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 35,
+    
+    
     baseServings: 4,
     calories: 320,
     ageGroup: ["adults", "kids", "seniors"],
@@ -307,8 +307,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 4,
     calories: 320,
     ageGroup: ["adults", "kids", "seniors"],
@@ -359,8 +359,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 4,
     calories: 180,
     ageGroup: ["adults", "kids", "seniors"],
@@ -414,8 +414,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "nuts"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "kids", "seniors"],
@@ -467,8 +467,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "nuts"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 6,
     calories: 450,
     ageGroup: ["adults", "kids", "seniors"],
@@ -521,8 +521,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "kids", "seniors"],
@@ -573,8 +573,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "kids", "seniors"],
@@ -627,8 +627,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "nuts"],
-    budget: "standard",
-    costPerServing: 55,
+    
+    
     baseServings: 4,
     calories: 350,
     ageGroup: ["adults", "kids", "seniors"],
@@ -681,8 +681,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "nuts"],
-    budget: "premium",
-    costPerServing: 100,
+    
+    
     baseServings: 4,
     calories: 550,
     ageGroup: ["adults", "kids", "seniors"],
@@ -741,8 +741,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 12,
     calories: 320,
     ageGroup: ["adults", "kids", "seniors"],
@@ -799,8 +799,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "economy",
-    costPerServing: 30,
+    
+    
     baseServings: 6,
     calories: 280,
     ageGroup: ["adults", "kids", "seniors"],
@@ -852,8 +852,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "kids", "seniors"],
@@ -910,8 +910,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat", "nuts"],
-    budget: "premium",
-    costPerServing: 120,
+    
+    
     baseServings: 6,
     calories: 480,
     ageGroup: ["adults", "kids", "seniors"],
@@ -927,7 +927,7 @@ const recipesToMigrate = [
   {
     title: "Kunafa Chocolate",
     image: "kunafa-chocolate.jpg",
-    cuisine: "Arabic",
+    cuisine: "Continental",
     ingredientsRaw: [
       "250g kunafa dough (kataifi), thawed",
       "200g dark chocolate (chopped)",
@@ -967,8 +967,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "gluten", "wheat", "nuts"],
-    budget: "premium",
-    costPerServing: 130,
+    
+    
     baseServings: 6,
     calories: 520,
     ageGroup: ["adults", "kids", "seniors"],
@@ -1027,8 +1027,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "eggs", "gluten", "wheat", "nuts"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 450,
     ageGroup: ["adults", "kids", "seniors"],
@@ -1083,8 +1083,8 @@ const recipesToMigrate = [
     dietType: "Vegetarian",
     suitableForMeals: ["Dessert"],
     allergens: ["dairy", "nuts"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 6,
     calories: 280,
     ageGroup: ["adults", "kids", "seniors"],

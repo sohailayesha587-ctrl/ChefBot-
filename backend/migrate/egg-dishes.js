@@ -49,8 +49,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 320,
   ageGroup: ["adults", "teens", "kids"],
@@ -102,8 +102,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 32,
+  
+  
   baseServings: 4,
   calories: 310,
   ageGroup: ["adults", "teens", "kids"],
@@ -156,8 +156,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs", "dairy"],
-  budget: "standard",
-  costPerServing: 45,
+  
+  
   baseServings: 4,
   calories: 380,
   ageGroup: ["adults", "teens", "kids"],
@@ -210,8 +210,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 38,
+  
+  
   baseServings: 4,
   calories: 360,
   ageGroup: ["adults", "teens", "kids"],
@@ -264,8 +264,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 36,
+  
+  
   baseServings: 4,
   calories: 340,
   ageGroup: ["adults", "teens", "kids"],
@@ -316,8 +316,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 310,
   ageGroup: ["adults", "teens", "kids"],
@@ -369,8 +369,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 42,
+  
+  
   baseServings: 4,
   calories: 370,
   ageGroup: ["adults", "teens", "kids"],
@@ -422,8 +422,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 38,
+  
+  
   baseServings: 4,
   calories: 350,
   ageGroup: ["adults", "teens", "kids"],
@@ -474,8 +474,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 25,
+  
+  
   baseServings: 3,
   calories: 220,
   ageGroup: ["adults", "teens", "kids"],
@@ -527,8 +527,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 28,
+  
+  
   baseServings: 3,
   calories: 240,
   ageGroup: ["adults", "teens", "kids"],
@@ -578,8 +578,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs", "dairy"],
-  budget: "standard",
-  costPerServing: 40,
+  
+  
   baseServings: 3,
   calories: 320,
   ageGroup: ["adults", "teens", "kids"],
@@ -628,8 +628,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs", "dairy", "gluten"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 300,
   ageGroup: ["adults", "teens", "kids"],
@@ -679,8 +679,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 30,
+  
+  
   baseServings: 3,
   calories: 260,
   ageGroup: ["adults", "teens", "kids"],
@@ -737,8 +737,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 40,
+  
+  
   baseServings: 4,
   calories: 360,
   ageGroup: ["adults", "teens", "kids"],
@@ -789,8 +789,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 32,
+  
+  
   baseServings: 4,
   calories: 310,
   ageGroup: ["adults", "teens", "kids"],
@@ -841,8 +841,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 30,
+  
+  
   baseServings: 4,
   calories: 290,
   ageGroup: ["adults", "teens", "kids"],
@@ -893,8 +893,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 28,
+  
+  
   baseServings: 4,
   calories: 300,
   ageGroup: ["adults", "teens", "kids"],
@@ -945,8 +945,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 28,
+  
+  
   baseServings: 4,
   calories: 280,
   ageGroup: ["adults", "teens", "kids"],
@@ -999,8 +999,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 55,
+  
+  
   baseServings: 4,
   calories: 420,
   ageGroup: ["adults", "teens", "kids"],
@@ -1054,8 +1054,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 50,
+  
+  
   baseServings: 4,
   calories: 390,
   ageGroup: ["adults", "teens", "kids"],
@@ -1109,8 +1109,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 48,
+  
+  
   baseServings: 4,
   calories: 410,
   ageGroup: ["adults", "teens", "kids"],
@@ -1157,8 +1157,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs", "soy"],
-  budget: "standard",
-  costPerServing: 25,
+  
+  
   baseServings: 3,
   calories: 280,
   ageGroup: ["adults", "teens", "kids"],
@@ -1215,8 +1215,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 45,
+  
+  
   baseServings: 4,
   calories: 420,
   ageGroup: ["adults", "teens", "kids"],
@@ -1267,8 +1267,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch", "Dinner"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 380,
   ageGroup: ["adults", "teens", "kids"],
@@ -1317,8 +1317,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "gluten"],
-  budget: "standard",
-  costPerServing: 20,
+  
+  
   baseServings: 4,
   calories: 250,
   ageGroup: ["adults", "teens", "kids"],
@@ -1367,8 +1367,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast"],
   beverageCategory: null,
   allergens: ["eggs", "gluten"],
-  budget: "standard",
-  costPerServing: 20,
+  
+  
   baseServings: 4,
   calories: 250,
   ageGroup: ["adults", "teens", "kids"],
@@ -1415,8 +1415,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast"],
   beverageCategory: null,
   allergens: ["eggs", "dairy", "gluten"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 320,
   ageGroup: ["adults", "teens", "kids"],
@@ -1463,8 +1463,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "gluten"],
-  budget: "standard",
-  costPerServing: 45,
+  
+  
   baseServings: 4,
   calories: 380,
   ageGroup: ["adults", "teens", "kids"],
@@ -1509,8 +1509,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "dairy", "gluten"],
-  budget: "standard",
-  costPerServing: 20,
+  
+  
   baseServings: 4,
   calories: 240,
   ageGroup: ["adults", "teens", "kids"],
@@ -1555,8 +1555,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "dairy", "gluten"],
-  budget: "standard",
-  costPerServing: 25,
+  
+  
   baseServings: 4,
   calories: 280,
   ageGroup: ["adults", "teens", "kids"],
@@ -1606,8 +1606,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs"],
-  budget: "standard",
-  costPerServing: 30,
+  
+  
   baseServings: 4,
   calories: 290,
   ageGroup: ["adults", "teens", "kids"],
@@ -1655,8 +1655,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "gluten"],
-  budget: "standard",
-  costPerServing: 35,
+  
+  
   baseServings: 4,
   calories: 310,
   ageGroup: ["adults", "teens", "kids"],
@@ -1705,8 +1705,8 @@ const recipesToMigrate = [
   suitableForMeals: ["Breakfast", "Lunch"],
   beverageCategory: null,
   allergens: ["eggs", "gluten"],
-  budget: "standard",
-  costPerServing: 25,
+  
+  
   baseServings: 4,
   calories: 260,
   ageGroup: ["adults", "teens", "kids"],

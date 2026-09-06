@@ -37,10 +37,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 1,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -88,10 +88,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 1,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -137,10 +137,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 220,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -186,10 +186,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 350,
+    
+    
     baseServings: 2,
     calories: 680,
     ageGroup: ["adults", "teens", "kids"],
@@ -234,10 +234,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -280,10 +280,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 190,
+    
+    
     baseServings: 1,
     calories: 460,
     ageGroup: ["adults", "teens", "kids"],
@@ -328,10 +328,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 190,
+    
+    
     baseServings: 1,
     calories: 470,
     ageGroup: ["adults", "teens", "kids"],
@@ -379,10 +379,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 1,
     calories: 550,
     ageGroup: ["adults", "teens", "kids"],
@@ -429,10 +429,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["fish", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 220,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -480,10 +480,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 120,
+    
+    
     baseServings: 1,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -530,10 +530,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 100,
+    
+    
     baseServings: 1,
     calories: 350,
     ageGroup: ["adults", "teens", "kids"],
@@ -577,10 +577,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -625,10 +625,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 1,
     calories: 460,
     ageGroup: ["adults", "teens", "kids"],
@@ -672,10 +672,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -721,10 +721,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "premium",
-    costPerServing: 280,
+    
+    
     baseServings: 1,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -770,10 +770,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 4,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -817,10 +817,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 130,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -864,10 +864,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 4,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -912,10 +912,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 4,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -955,10 +955,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 4,
     calories: 490,
     ageGroup: ["adults", "teens", "kids"],
@@ -999,10 +999,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 4,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -1046,10 +1046,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 120,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -1093,10 +1093,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 130,
+    
+    
     baseServings: 4,
     calories: 400,
     ageGroup: ["adults", "teens", "kids"],
@@ -1138,10 +1138,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 4,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -1183,10 +1183,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["gluten", "wheat", "soy"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 4,
     calories: 350,
     ageGroup: ["adults", "teens", "kids"],
@@ -1231,10 +1231,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 2,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -1280,10 +1280,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 2,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -1325,10 +1325,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 2,
     calories: 550,
     ageGroup: ["adults", "teens", "kids"],
@@ -1374,10 +1374,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 2,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -1419,10 +1419,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 190,
+    
+    
     baseServings: 2,
     calories: 500,
     ageGroup: ["adults", "teens", "kids"],
@@ -1464,10 +1464,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 2,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -1511,10 +1511,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 2,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -1557,10 +1557,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 220,
+    
+    
     baseServings: 2,
     calories: 580,
     ageGroup: ["adults", "teens", "kids"],
@@ -1603,10 +1603,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 170,
+    
+    
     baseServings: 2,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -1647,10 +1647,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 2,
     calories: 620,
     ageGroup: ["adults", "teens", "kids"],
@@ -1693,10 +1693,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 2,
     calories: 500,
     ageGroup: ["adults", "teens", "kids"],
@@ -1742,10 +1742,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 220,
+    
+    
     baseServings: 2,
     calories: 560,
     ageGroup: ["adults", "teens", "kids"],
@@ -1785,10 +1785,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 120,
+    
+    
     baseServings: 1,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -1830,10 +1830,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -1874,10 +1874,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 130,
+    
+    
     baseServings: 1,
     calories: 400,
     ageGroup: ["adults", "teens", "kids"],
@@ -1916,10 +1916,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -1961,10 +1961,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -2006,10 +2006,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 100,
+    
+    
     baseServings: 1,
     calories: 350,
     ageGroup: ["adults", "teens", "kids"],
@@ -2052,10 +2052,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 1,
     calories: 300,
     ageGroup: ["adults", "teens", "kids"],
@@ -2096,10 +2096,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 1,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -2141,10 +2141,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 120,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -2189,10 +2189,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 170,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -2237,10 +2237,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 190,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -2285,10 +2285,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 220,
+    
+    
     baseServings: 1,
     calories: 500,
     ageGroup: ["adults", "teens", "kids"],
@@ -2329,10 +2329,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 4,
     calories: 320,
     ageGroup: ["adults", "teens", "kids"],
@@ -2376,10 +2376,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 45,
+    
+    
     baseServings: 4,
     calories: 280,
     ageGroup: ["adults", "teens", "kids"],
@@ -2420,10 +2420,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 4,
     calories: 320,
     ageGroup: ["adults", "teens", "kids"],
@@ -2461,10 +2461,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 4,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -2506,10 +2506,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 100,
+    
+    
     baseServings: 4,
     calories: 550,
     ageGroup: ["adults", "teens", "kids"],
@@ -2553,10 +2553,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 4,
     calories: 280,
     ageGroup: ["adults", "teens", "kids"],
@@ -2600,10 +2600,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -2647,10 +2647,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -2692,10 +2692,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 4,
     calories: 220,
     ageGroup: ["adults", "teens", "kids"],
@@ -2736,10 +2736,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 4,
     calories: 250,
     ageGroup: ["adults", "teens", "kids"],
@@ -2780,10 +2780,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 4,
     calories: 320,
     ageGroup: ["adults", "teens", "kids"],
@@ -2824,10 +2824,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -2869,10 +2869,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -2915,10 +2915,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 1,
     calories: 300,
     ageGroup: ["adults", "teens", "kids"],
@@ -2959,10 +2959,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 1,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -3004,10 +3004,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 1,
     calories: 440,
     ageGroup: ["adults", "teens", "kids"],
@@ -3049,10 +3049,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 190,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -3095,10 +3095,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 1,
     calories: 460,
     ageGroup: ["adults", "teens", "kids"],
@@ -3139,10 +3139,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 1,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -3182,10 +3182,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 1,
     calories: 400,
     ageGroup: ["adults", "teens", "kids"],
@@ -3226,10 +3226,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 1,
     calories: 500,
     ageGroup: ["adults", "teens", "kids"],
@@ -3274,10 +3274,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 2,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -3322,10 +3322,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 90,
+    
+    
     baseServings: 2,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -3370,10 +3370,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 95,
+    
+    
     baseServings: 2,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -3416,10 +3416,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 100,
+    
+    
     baseServings: 2,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -3465,10 +3465,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 2,
     calories: 550,
     ageGroup: ["adults", "teens", "kids"],
@@ -3512,10 +3512,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 2,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -3558,10 +3558,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 2,
     calories: 580,
     ageGroup: ["adults", "teens", "kids"],
@@ -3607,10 +3607,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["soy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 2,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -3655,10 +3655,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "soy"],
-    budget: "standard",
-    costPerServing: 130,
+    
+    
     baseServings: 2,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -3699,10 +3699,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "soy"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 3,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -3746,10 +3746,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "soy"],
-    budget: "standard",
-    costPerServing: 170,
+    
+    
     baseServings: 3,
     calories: 450,
     ageGroup: ["adults", "teens", "kids"],
@@ -3793,10 +3793,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["soy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 4,
     calories: 180,
     ageGroup: ["adults", "teens", "kids"],
@@ -3839,10 +3839,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 3,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -3883,10 +3883,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["soy"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 3,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -3927,10 +3927,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "soy"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 3,
     calories: 430,
     ageGroup: ["adults", "teens", "kids"],
@@ -3976,10 +3976,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 2,
     calories: 320,
     ageGroup: ["adults", "teens", "kids"],
@@ -4027,10 +4027,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 4,
     calories: 280,
     ageGroup: ["adults", "teens", "kids"],
@@ -4076,10 +4076,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 2,
     calories: 320,
     ageGroup: ["adults", "teens", "kids"],
@@ -4126,10 +4126,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 2,
     calories: 300,
     ageGroup: ["adults", "teens", "kids"],
@@ -4170,10 +4170,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 4,
     calories: 150,
     ageGroup: ["adults", "teens", "kids"],
@@ -4218,10 +4218,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 60,
+    
+    
     baseServings: 2,
     calories: 280,
     ageGroup: ["adults", "teens", "kids"],
@@ -4266,10 +4266,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 50,
+    
+    
     baseServings: 2,
     calories: 120,
     ageGroup: ["adults", "teens", "kids"],
@@ -4312,10 +4312,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 2,
     calories: 150,
     ageGroup: ["adults", "teens", "kids"],
@@ -4362,10 +4362,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 40,
+    
+    
     baseServings: 4,
     calories: 280,
     ageGroup: ["adults", "teens", "kids"],
@@ -4412,10 +4412,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 70,
+    
+    
     baseServings: 4,
     calories: 350,
     ageGroup: ["adults", "teens", "kids"],
@@ -4459,10 +4459,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 30,
+    
+    
     baseServings: 3,
     calories: 220,
     ageGroup: ["adults", "teens", "kids"],
@@ -4506,10 +4506,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 3,
     calories: 350,
     ageGroup: ["adults", "teens", "kids"],
@@ -4553,10 +4553,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["none"],
-    budget: "standard",
-    costPerServing: 30,
+    
+    
     baseServings: 3,
     calories: 250,
     ageGroup: ["adults", "teens", "kids"],
@@ -4598,10 +4598,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 140,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -4644,10 +4644,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 150,
+    
+    
     baseServings: 1,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -4689,10 +4689,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 130,
+    
+    
     baseServings: 1,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -4735,10 +4735,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["eggs", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 1,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],
@@ -4782,10 +4782,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 100,
+    
+    
     baseServings: 2,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -4824,10 +4824,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 2,
     calories: 420,
     ageGroup: ["adults", "teens", "kids"],
@@ -4872,10 +4872,10 @@ const recipesToMigrate = [
     category: "Lunch",
     subCategory: "cheat-meal",
     dietType: "Non-Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 160,
+    
+    
     baseServings: 2,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -4920,8 +4920,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Dinner"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 3,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -4965,8 +4965,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Lunch", "Dinner"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 180,
+    
+    
     baseServings: 3,
     calories: 480,
     ageGroup: ["adults", "teens", "kids"],
@@ -5009,8 +5009,8 @@ const recipesToMigrate = [
     dietType: "Non-Vegetarian",
     suitableForMeals: ["Dinner"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 200,
+    
+    
     baseServings: 3,
     calories: 520,
     ageGroup: ["adults", "teens", "kids"],
@@ -5049,10 +5049,10 @@ const recipesToMigrate = [
     category: "Snacks",
     subCategory: "cheat-meal",
     dietType: "Vegetarian",
-    suitableForMeals: ["Lunch", "Dinner", "Snack"],
+    suitableForMeals: ["Anytime", "Snack"],
     allergens: ["dairy", "gluten", "wheat"],
-    budget: "standard",
-    costPerServing: 80,
+    
+    
     baseServings: 2,
     calories: 380,
     ageGroup: ["adults", "teens", "kids"],

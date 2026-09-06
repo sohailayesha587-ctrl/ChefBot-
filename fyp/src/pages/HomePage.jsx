@@ -93,7 +93,7 @@ const HomePage = () => {
         <div className="my-hero-content">
           <div className="my-hero-text">
             <h1 className="my-hero-title">
-              Never Stress <br /> Over<br />
+              Never Worry <br /> Over<br />
               <span className="my-hero-highlight">"What to Cook"</span>
             </h1>
             <p className="my-hero-subtitle">

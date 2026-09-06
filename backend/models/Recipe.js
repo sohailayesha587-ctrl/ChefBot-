@@ -33,7 +33,7 @@ const recipeSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ['Breakfast', 'Lunch', 'Dinner', 'LightDinner', 'Snacks', 'Anytime'],
+      enum: ['Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Anytime' , 'Dessert'],
       default: 'Lunch'
     },
 
@@ -80,11 +80,6 @@ const recipeSchema = new mongoose.Schema(
       default: 'Pakistani',
     },
 
-    beverageCategory: {
-      type: String,
-      enum: ['Hot Drinks', 'hot drinks', 'Cold Drinks', 'cold drinks', 'Smoothies', 'smoothies', 'Mocktails', 'mocktails', 'Cocktails', 'cocktails', 'Traditional', 'traditional', null],
-      default: null,
-    },
 
     pantryKeywords: { type: [String], default: [] },
 
@@ -114,12 +109,7 @@ const recipeSchema = new mongoose.Schema(
       default: []
     },
 
-    budget: {
-      type: String,
-      enum: ['economy', 'standard', 'premium', 'deluxe'],
-      default: 'standard',
-    },
-    costPerServing: { type: Number, default: 0 },
+ 
 
     baseServings: { type: Number, default: 4 },
     calories: { type: Number, default: 0 },
@@ -157,7 +147,6 @@ recipeSchema.index({ dietType: 1 });
 recipeSchema.index({ pantryKeywords: 1 });
 recipeSchema.index({ suitableForMeals: 1 });
 recipeSchema.index({ difficulty: 1 });
-recipeSchema.index({ budget: 1 });
 recipeSchema.index({ ageGroup: 1 });
 recipeSchema.index({ patientFriendly: 1 });
 recipeSchema.index({ allergens: 1 });
@@ -208,7 +197,6 @@ recipeSchema.methods.matchesPreferences = function(preferences) {
     }
   }
   
-  if (preferences.budget && this.budget !== preferences.budget) return false;
   if (preferences.mealTime && !this.suitableForMeals.includes(preferences.mealTime)) return false;
   if (preferences.ageGroup && !this.ageGroup.includes(preferences.ageGroup)) return false;
   if (preferences.patientCondition && !this.patientFriendly.includes(preferences.patientCondition)) return false;
