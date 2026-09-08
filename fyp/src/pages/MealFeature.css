@@ -15,7 +15,7 @@
   padding: 28px 20px 24px;
   text-align: center; 
   position: relative; 
-  margin-top: 100px;
+  margin-top: 120px;
 }
 .mc-header::after {
   content: ''; 
@@ -381,6 +381,33 @@
   width: 100%;
  }
 
+.mc-variety-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #5a4a1a;
+}
+.mc-variety-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f2a900;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mc-week-nav
 { 
   display: flex; 
@@ -409,6 +436,10 @@
   background: #284a4b;
    color: #ffffff;
    }
+.mc-nav-arrow:disabled
+{
+   cursor: not-allowed;
+  }
 .mc-week-range
 { 
   font-size: 17.6px; 
@@ -436,6 +467,7 @@
      border: 1.5px solid #e0eeee;
       transition: all .18s; 
       min-width: 64px; 
+      position: relative;
     }
 .mc-day-tab:hover
 { 
@@ -447,6 +479,25 @@
   background: #284a4b;
    border-color: #284a4b; 
   }
+.mc-tab-today:not(.mc-tab-active)
+{
+  border-color: #397d7c;
+  box-shadow: 0 0 0 1.5px #397d7c;
+}
+.mc-today-dot
+{
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #397d7c;
+}
+.mc-tab-active .mc-today-dot
+{
+  background: #ffffff;
+}
 .mc-tab-short
 { 
   font-size: 10px;
@@ -586,6 +637,7 @@ background: #f5fafa;
 border-right: 1px solid #e0eeee; 
 cursor: pointer; 
 text-align: center;
+position: relative;
  }
 .mc-grid-day-cell:hover {
    background: #f5fafa; 
@@ -756,6 +808,11 @@ text-align: center;
   color: whitesmoke; 
   font-size: 12px;
  }
+.mc-save-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 .mc-save-btn {
    padding: 11px 28px; 
    background: #ffffff;
@@ -772,27 +829,19 @@ text-align: center;
   transform: translateY(-2px); 
   box-shadow: 0 6px 16px rgba(0,0,0,0.4); 
 }
-.mc-save-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .mc-delete-btn {
-  border: 1px solid #c0392b;
-  background: #ffffff;
-  color: #c0392b;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
+  padding: 11px 28px;
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
-
+  white-space: nowrap;
 }
-
 .mc-delete-btn:hover {
-  background: #c0392b;
-  color: #fff;
+  background: rgba(255,255,255,0.12);
 }
 
 .mc-overlay {
@@ -1248,7 +1297,7 @@ text-align: center;
 
 @media (max-width: 780px) {
   .mc-header {
-    margin-top: 80px;
+    margin-top: 130px;
     padding: 22px 16px 20px;
   }
   .mc-title
@@ -1482,15 +1531,28 @@ text-align: center;
      flex-wrap: nowrap; 
      align-items: center;
       justify-content: space-between;
-       gap: 12px;
-        padding: 16px 20px; 
+       gap: 10px;
+        padding: 14px 16px; 
       }
-  .mc-save-btn
+  .mc-save-actions {
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .mc-save-btn,
+  .mc-delete-btn
   { 
     flex-shrink: 0; 
-    padding: 10px 22px;
-     font-size: 13px;
+    width: auto;
+    padding: 8px 16px;
+     font-size: 12px;
+     white-space: nowrap;
      }
+
+  .mc-variety-banner {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
 
   .mc-empty-state {
     padding: 30px 16px;
@@ -1550,7 +1612,7 @@ text-align: center;
 
 @media (max-width: 380px) {
   .mc-header {
-    margin-top: 80px;
+    margin-top: 120px;
     padding: 16px 12px 14px;
   }
   .mc-title
@@ -1655,15 +1717,27 @@ text-align: center;
 
   .mc-save-card
   {
-     flex-wrap: wrap; 
-     flex-direction: column;
-      align-items: flex-start;
+     flex-wrap: nowrap; 
+     flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 10px 12px;
      }
-  .mc-save-btn
+  .mc-save-actions {
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    gap: 5px;
+  }
+  .mc-save-btn,
+  .mc-delete-btn
    { 
-    width: 100%; 
+    width: auto; 
+    flex-shrink: 0;
     text-align: center; 
-    padding: 12px 0;
+    padding: 7px 10px;
+    font-size: 10px;
+    white-space: nowrap;
    }
 
   .mc-empty-state {
