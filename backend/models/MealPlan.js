@@ -38,23 +38,18 @@ const mealPlanSchema = new mongoose.Schema(
     preferences: {
       dietType: {
         type: String,
-        enum: ['veg', 'non-veg', 'mixed', 'eggetarian', ''],
+        enum: ['veg', 'non-veg', 'mixed', ''],
         default: ''
       },
       allergy: {
         type: String,
-        enum: ['none', 'egg', 'peanut', 'gluten', 'lactose', 'shellfish', 'nuts', ''],
+        enum: ['none', 'dairy', 'nuts', 'peanuts', 'eggs', 'soy', 'wheat', 'fish', 'shellfish', 'gluten', ''],
         default: 'none'
       },
       ageGroup: {
         type: String,
-        enum: ['general', 'kids', 'teens', 'elderly', 'patient', ''],
+        enum: ['general', 'kids', 'teens', 'patient', ''],
         default: 'general'
-      },
-      budget: {
-        type: String,
-        enum: ['economy', 'standard', 'premium', 'deluxe', ''],
-        default: 'standard'
       },
       familyMembers: {
         type: String,
@@ -84,10 +79,12 @@ const mealPlanSchema = new mongoose.Schema(
       type: Number,
       default: 2
     },
-expiresAt: {
-  type: Date,
-  index: true
-},
+
+    expiresAt: {
+      type: Date,
+      index: true
+    },
+
     savedAt: {
       type: Date,
       default: Date.now

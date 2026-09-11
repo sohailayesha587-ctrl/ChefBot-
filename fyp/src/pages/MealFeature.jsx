@@ -51,6 +51,9 @@ const CustomSelect = ({ label, options, value, onChange, required }) => {
   );
 };
 
+const SHORT_DAY_NAMES = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+const LONG_DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 const MealFeature = () => {
   const navigate = useNavigate();
 
@@ -59,6 +62,8 @@ const MealFeature = () => {
     const savedPlan = localStorage.getItem('mealPlanData');
     const savedGenerated = localStorage.getItem('mealPlanGenerated');
     const savedCustomMembers = localStorage.getItem('mealPlanCustomMembers');
+    const savedPlanIdStored = localStorage.getItem('mealPlanSavedId');
+    const savedVariety = localStorage.getItem('mealPlanVariety');
 
     if (savedFilters && savedPlan && savedGenerated === 'true') {
       try {
@@ -66,7 +71,9 @@ const MealFeature = () => {
           filters: JSON.parse(savedFilters),
           mealPlan: JSON.parse(savedPlan),
           generated: true,
-          customMembers: savedCustomMembers || ''
+          customMembers: savedCustomMembers || '',
+          savedPlanId: savedPlanIdStored || null,
+          varietyInfo: savedVariety ? JSON.parse(savedVariety) : null
         };
       } catch (e) {
         console.error(e);
@@ -77,7 +84,9 @@ const MealFeature = () => {
       filters: { dietType: '', allergy: '', ageGroup: '', familyMembers: '', planDuration: '' },
       mealPlan: {},
       generated: false,
-      customMembers: ''
+      customMembers: '',
+      savedPlanId: null,
+      varietyInfo: null
     };
   };
 
@@ -89,10 +98,8 @@ const MealFeature = () => {
   const [generated, setGenerated] = useState(initialData.generated);
   const [generating, setGenerating] = useState(false);
   const [mealPlan, setMealPlan] = useState(initialData.mealPlan);
-  const [savedPlanId, setSavedPlanId] = useState(null);
-
+  const [savedPlanId, setSavedPlanId] = useState(initialData.savedPlanId);
   const [selectedDay, setSelectedDay] = useState(0);
-  const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
   const [pantryItems, setPantryItems] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [selectedMealSlot, setSelectedMealSlot] = useState({ dayIndex: 0, mealType: 'breakfast' });
@@ -100,27 +107,29 @@ const MealFeature = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [modalLoading, setModalLoading] = useState(false);
   const [noRecipesPopup, setNoRecipesPopup] = useState(null);
+  const [varietyInfo, setVarietyInfo] = useState(initialData.varietyInfo || null);
   const membersRef = useRef(null);
-
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const dayShortNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
   const dietOptions = [
     { value: 'veg', label: 'Vegetarian' },
     { value: 'non-veg', label: 'Non-Vegetarian' },
-    { value: 'mixed', label: 'Mixed' },
-    { value: 'eggetarian', label: 'Eggetarian' }
+    { value: 'mixed', label: 'Mixed' }
   ];
   const allergyOptions = [
     { value: 'none', label: 'None' },
-    { value: 'egg', label: 'Egg' },
-    { value: 'peanut', label: 'Peanut' },
-    { value: 'gluten', label: 'Gluten' },
-    { value: 'lactose', label: 'Lactose' },
-    { value: 'shellfish', label: 'Shellfish' }
+    { value: 'dairy', label: 'Dairy' },
+    { value: 'nuts', label: 'Nuts' },
+    { value: 'peanuts', label: 'Peanuts' },
+    { value: 'eggs', label: 'Eggs' },
+    { value: 'soy', label: 'Soy' },
+    { value: 'wheat', label: 'Wheat' },
+    { value: 'fish', label: 'Fish' },
+    { value: 'shellfish', label: 'Shellfish' },
+    { value: 'gluten', label: 'Gluten' }
   ];
   const ageGroupOptions = [
     { value: 'general', label: 'General' },
+    { value: 'teens', label: 'Teens' },
     { value: 'kids', label: 'Kids' },
     { value: 'patient', label: 'Patient' }
   ];
@@ -142,13 +151,25 @@ const MealFeature = () => {
       localStorage.setItem('mealPlanData', JSON.stringify(mealPlan));
       localStorage.setItem('mealPlanGenerated', 'true');
       localStorage.setItem('mealPlanCustomMembers', customMembers);
+      if (savedPlanId) {
+        localStorage.setItem('mealPlanSavedId', savedPlanId);
+      } else {
+        localStorage.removeItem('mealPlanSavedId');
+      }
+      if (varietyInfo) {
+        localStorage.setItem('mealPlanVariety', JSON.stringify(varietyInfo));
+      } else {
+        localStorage.removeItem('mealPlanVariety');
+      }
     } else if (!generated) {
       localStorage.removeItem('mealPlanFilters');
       localStorage.removeItem('mealPlanData');
       localStorage.removeItem('mealPlanGenerated');
       localStorage.removeItem('mealPlanCustomMembers');
+      localStorage.removeItem('mealPlanSavedId');
+      localStorage.removeItem('mealPlanVariety');
     }
-  }, [filters, mealPlan, generated, customMembers]);
+  }, [filters, mealPlan, generated, customMembers, savedPlanId, varietyInfo]);
 
   useEffect(() => {
     if (showSearchModal && searchTerm.length > 1) {
@@ -180,23 +201,31 @@ const MealFeature = () => {
     }
   };
 
-  const getWeekDates = () => {
+  const getStartDate = () => {
     const today = new Date();
-    const start = new Date(today);
-    start.setDate(today.getDate() - today.getDay() + 1 + currentWeekOffset * 7);
-    return Array.from({ length: 7 }, (_, i) => {
+    today.setHours(0, 0, 0, 0);
+    return today;
+  };
+
+  const getDayInfoList = (count) => {
+    const start = getStartDate();
+    return Array.from({ length: count }, (_, i) => {
       const d = new Date(start);
       d.setDate(start.getDate() + i);
-      return d.getDate();
+      return {
+        dateNum: d.getDate(),
+        short: SHORT_DAY_NAMES[d.getDay()],
+        long: LONG_DAY_NAMES[d.getDay()],
+        dateKey: d.toDateString()
+      };
     });
   };
 
-  const getDateRange = () => {
-    const today = new Date();
-    const start = new Date(today);
-    start.setDate(today.getDate() - today.getDay() + 1 + currentWeekOffset * 7);
+  const getDateRange = (dayInfoList) => {
+    if (dayInfoList.length === 0) return '';
+    const start = getStartDate();
     const end = new Date(start);
-    end.setDate(start.getDate() + 6);
+    end.setDate(start.getDate() + (dayInfoList.length - 1));
     const m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return `${start.getDate()} ${m[start.getMonth()]} – ${end.getDate()} ${m[end.getMonth()]}`;
   };
@@ -206,12 +235,10 @@ const MealFeature = () => {
     if (filters.familyMembers === 'custom') return customMembers ? `${customMembers} members` : 'Enter number';
     return `${filters.familyMembers} ${parseInt(filters.familyMembers) === 1 ? 'member' : 'members'}`;
   };
-
   const getFamilyCount = () => {
     if (filters.familyMembers === 'custom') return parseInt(customMembers) || 10;
     return parseInt(filters.familyMembers) || 1;
   };
-
   const isAllSelected = () =>
     filters.dietType &&
     filters.allergy &&
@@ -225,7 +252,6 @@ const MealFeature = () => {
       alert('Please select all options!');
       return;
     }
-
     const token = getToken();
     if (!token) {
       navigate('/login-page');
@@ -236,7 +262,8 @@ const MealFeature = () => {
     setGenerated(false);
     setNoRecipesPopup(null);
     setSelectedDay(0);
-
+    setSavedPlanId(null);
+    setVarietyInfo(null);
     try {
       let url = `/api/mealplan/generate?dietType=${filters.dietType}&allergy=${filters.allergy}&ageGroup=${filters.ageGroup}&familyCount=${getFamilyCount()}&duration=${filters.planDuration}`;
       if (pantryItems.length) url += `&pantry=${encodeURIComponent(pantryItems.join(','))}`;
@@ -247,10 +274,13 @@ const MealFeature = () => {
       if (data.success && data.plan) {
         setMealPlan(data.plan);
         setGenerated(true);
+        setVarietyInfo(data.variety || null);
         setTimeout(() => document.getElementById('mc-calendar')?.scrollIntoView({ behavior: 'smooth' }), 150);
-      } else if (data.noRecipes) {
+      } 
+      else if (data.noRecipes) {
         setNoRecipesPopup({ message: data.message, tip: data.tip });
-      } else {
+      } 
+      else {
         alert(data.message || 'No recipes found.');
       }
     } catch (e) {
@@ -273,77 +303,76 @@ const MealFeature = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({
+          id: savedPlanId || undefined,
           name: `Meal Plan - ${new Date().toLocaleDateString()}`,
           preferences: { ...filters, familyMembers: filters.familyMembers === 'custom' ? customMembers : filters.familyMembers },
           plan: mealPlan
         })
       });
-
       const data = await res.json();
-   if (data.success) {
-  setSavedPlanId(data.id);
-  alert('Meal plan saved!');
-}
-      else {
+      if (data.success) {
+        setSavedPlanId(data.id);
+        alert(savedPlanId ? 'Meal plan updated!' : 'Meal plan saved!');
+      } else {
         alert('Save failed: ' + data.message);
       }
     } catch {
       alert('Could not connect.');
     }
   };
-const deletePlan = async () => {
-  const token = getToken();
+  const deletePlan = async () => {
+    const token = getToken();
+    if (!token) {
+      navigate('/login-page');
+      return;
+    }
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this meal plan?'
+    );
+    if (!confirmDelete) return;
 
-  if (!token) {
-    navigate('/login-page');
-    return;
-  }
-
-  const confirmDelete = window.confirm(
-    'Are you sure you want to delete this meal plan?'
-  );
-
-  if (!confirmDelete) return;
-
-  try {
-const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      alert('Meal plan deleted successfully!');
-
-      localStorage.removeItem('mealPlanFilters');
-      localStorage.removeItem('mealPlanData');
-      localStorage.removeItem('mealPlanGenerated');
-      localStorage.removeItem('mealPlanCustomMembers');
-
-      setFilters({
-        dietType: '',
-        allergy: '',
-        ageGroup: '',
-        familyMembers: '',
-        planDuration: ''
+    try {
+      const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
-      setCustomMembers('');
-      setMealPlan({});
-      setGenerated(false);
-      setSelectedDay(0);
-      setCurrentWeekOffset(0);
-    } else {
-      alert('Delete failed: ' + (data.message || 'Unable to delete plan.'));
+      const data = await res.json();
+
+      if (data.success) {
+        alert('Meal plan deleted successfully!');
+
+        localStorage.removeItem('mealPlanFilters');
+        localStorage.removeItem('mealPlanData');
+        localStorage.removeItem('mealPlanGenerated');
+        localStorage.removeItem('mealPlanCustomMembers');
+        localStorage.removeItem('mealPlanSavedId');
+        localStorage.removeItem('mealPlanVariety');
+
+        setFilters({
+          dietType: '',
+          allergy: '',
+          ageGroup: '',
+          familyMembers: '',
+          planDuration: ''
+        });
+
+        setCustomMembers('');
+        setMealPlan({});
+        setGenerated(false);
+        setSavedPlanId(null);
+        setVarietyInfo(null);
+        setSelectedDay(0);
+      } else {
+        alert('Delete failed: ' + (data.message || 'Unable to delete plan.'));
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Could not connect to server.');
     }
-  } catch (error) {
-    console.error(error);
-    alert('Could not connect to server.');
-  }
-};
+  };
 
   const viewRecipe = (id, name) => {
     if (id) navigate(`/recipe/${id}?members=${getFamilyCount()}`);
@@ -381,7 +410,7 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
         [selectedMealSlot.mealType]: {
           _id: recipe._id,
           name: recipe.name || recipe.title,
-          image: recipe.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',
+          image: recipe.image || '',
           available: true,
           tagline: `${recipe.dietType || ''} • ${recipe.cuisine || 'Delicious'}`,
           matchScore: 100
@@ -393,8 +422,14 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
     setSearchResults([]);
   };
 
-  const dates = getWeekDates();
   const isWeekly = filters.planDuration === 'weekly';
+  const dayCount = isWeekly ? 7 : 1;
+  const dayInfoList = getDayInfoList(dayCount);
+  const dateRangeLabel = getDateRange(dayInfoList);
+
+  const limitedMealTypes = varietyInfo
+    ? Object.entries(varietyInfo).filter(([, v]) => v.limited).map(([mt]) => mt)
+    : [];
 
   return (
     <div className="mc-app">
@@ -509,20 +544,34 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
 
         {generated && !generating && Object.keys(mealPlan).length > 0 && (
           <div id="mc-calendar" className="mc-calendar-section">
+           {limitedMealTypes.length > 0 && (
+  <div className="mc-variety-banner">
+    <span className="mc-variety-icon">!</span>
+    <span>
+      There are not enough recipes in the database matching your selected filters (diet, allergy, age) for{' '}
+      <strong>{limitedMealTypes.map((mt) => mt.charAt(0).toUpperCase() + mt.slice(1)).join(', ')}</strong>,
+      so some meals may repeat this week. Your filters have not been relaxed  only the variety is limited.
+      For more options, adjust your filters.
+    </span>
+  </div>
+)}
             {isWeekly && (
               <div className="mc-week-nav">
-                <button className="mc-nav-arrow" onClick={() => setCurrentWeekOffset((p) => p - 1)}>&#8249;</button>
-                <span className="mc-week-range">{getDateRange()}</span>
-                <button className="mc-nav-arrow" onClick={() => setCurrentWeekOffset((p) => p + 1)}>&#8250;</button>
+                <span className="mc-week-range">{dateRangeLabel}</span>
               </div>
             )}
 
             {isWeekly && (
               <div className="mc-day-tabs">
-                {days.map((_, index) => (
-                  <div key={index} className={`mc-day-tab ${index === selectedDay ? 'mc-tab-active' : ''}`} onClick={() => setSelectedDay(index)}>
-                    <span className="mc-tab-short">{dayShortNames[index]}</span>
-                    <span className="mc-tab-date">{dates[index]}</span>
+                {dayInfoList.map((info, index) => (
+                  <div
+                    key={index}
+                    className={`mc-day-tab ${index === selectedDay ? 'mc-tab-active' : ''} ${index === 0 ? 'mc-tab-today' : ''}`}
+                    onClick={() => setSelectedDay(index)}
+                  >
+                    <span className="mc-tab-short">{info.short}</span>
+                    <span className="mc-tab-date">{info.dateNum}</span>
+                    {index === 0 && <span className="mc-today-dot" title="Today" />}
                     <div className="mc-tab-dots">
                       {['breakfast', 'lunch', 'dinner'].map((mt) => (
                         <span key={mt} className={`mc-tab-dot ${mealPlan[index]?.[mt] ? 'mc-dot-on' : ''}`} />
@@ -536,8 +585,8 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
             <div className="mc-day-label-row">
               {isWeekly ? (
                 <>
-                  <span className="mc-sel-day">{days[selectedDay]}</span>
-                  <span className="mc-sel-date">{dates[selectedDay]}</span>
+                  <span className="mc-sel-day">{dayInfoList[selectedDay]?.long}</span>
+                  <span className="mc-sel-date">{dayInfoList[selectedDay]?.dateNum}</span>
                 </>
               ) : (
                 <span className="mc-sel-day">Daily Plan</span>
@@ -554,11 +603,12 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
                   <div className="mc-grid-head-cell">Dinner</div>
                 </div>
 
-                {Array.from({ length: isWeekly ? 7 : 1 }, (_, dayIndex) => (
+                {dayInfoList.map((info, dayIndex) => (
                   <div key={dayIndex} className={`mc-grid-row ${dayIndex === selectedDay && isWeekly ? 'mc-row-active' : ''}`}>
                     <div className="mc-grid-day-cell" onClick={() => isWeekly && setSelectedDay(dayIndex)}>
-                      <span className="mc-day-short">{dayShortNames[dayIndex]}</span>
-                      <span className="mc-day-num">{dates[dayIndex]}</span>
+                      <span className="mc-day-short">{info.short}</span>
+                      <span className="mc-day-num">{info.dateNum}</span>
+                      {dayIndex === 0 && <span className="mc-today-dot" title="Today" />}
                     </div>
 
                     {['breakfast', 'lunch', 'dinner'].map((mealType) => {
@@ -593,27 +643,27 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
                 ))}
               </div>
             </div>
-<div className="mc-save-row">
-  <div className="mc-save-card">
-    <div>
-      <p className="mc-save-title">Your meal plan is ready!</p>
-      <small className="mc-save-sub">
-        Save it to access later from your profile
-      </small>
-    </div>
+            <div className="mc-save-row">
+              <div className="mc-save-card">
+                <div>
+                  <p className="mc-save-title">Your meal plan is ready!</p>
+                  <small className="mc-save-sub">
+                    Save it to access later from your profile
+                  </small>
+                </div>
 
-    <div className="mc-save-actions">
-      <button className="mc-save-btn" onClick={savePlan}>
-        Save Plan
-      </button>
-{savedPlanId && (
-  <button className="mc-delete-btn" onClick={deletePlan}>
-    Delete Plan
-  </button>
-)}
-    </div>
-  </div>
-</div>
+                <div className="mc-save-actions">
+                  <button className="mc-save-btn" onClick={savePlan}>
+                    {savedPlanId ? 'Update Plan' : 'Save Plan'}
+                  </button>
+                  {savedPlanId && (
+                    <button className="mc-delete-btn" onClick={deletePlan}>
+                      Delete Plan
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -653,7 +703,7 @@ const res = await fetch(`/api/mealplan/delete/${savedPlanId}`, {
               <div className="mc-results">
                 {searchResults.map((r) => (
                   <div key={r._id} className="mc-result-item" onClick={() => selectRecipe(r)}>
-                    <img src={r.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=80'} alt={r.name || r.title} />
+                    <img src={r.image || ''} alt={r.name || r.title} />
                     <div className="mc-result-info">
                       <p className="mc-result-name">{r.name || r.title}</p>
                       <p className="mc-result-meta">{r.dietType || 'Any'} &bull; {r.cuisine || 'Any cuisine'}</p>
