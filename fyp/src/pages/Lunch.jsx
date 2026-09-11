@@ -1,105 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Lunch.css';
 
 const Lunch = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [activeCategory, setActiveCategory] = useState('veg');
   const vegCategories = [
     {
       id: 1,
       name: "Plain Vegetables",
-       image: "plainVegetable.jpg",
+      image: "plainVegetable.jpg",
       route: "/plain-veg",
-      type: "veg"
+      tagline: "Fresh seasonal vegetables cooked with mild spices"
     },
     {
       id: 2,
-      name: "Chicken + Vegetables",
-        image: "chickenVegetable.jpg",
+      name: "Chicken Vegetables",
+      image: "chickenVegetable.jpg",
       route: "/veg-chick",
-      type: "veg"
+      tagline: "Vegetables cooked with tender chicken pieces"
     },
     {
       id: 3,
-      name: "Mutton + Vegetables",
-        image: "muttonVegetable.jpg",
+      name: "Mutton Vegetables",
+      image: "muttonVegetable.jpg",
       route: "/veg-mutton",
-      type: "veg"
+      tagline: "Rich vegetable curry with succulent mutton"
     }
   ];
-
-  const dalCategories = [
-    {
-      id: 4,
-      name: "Plain Dal",
-      image: "plainDal.jpg",
-      route: "/plain-dal",
-      type: "dal"
-    },
-    {
-      id: 5,
-      name: "Chicken + Dal",
-      image: "chickenDal.jpg",
-      route: "/dal-chick",
-      type: "dal"
-    },
-    {
-      id: 6,
-      name: "Mutton + Dal",
-      image: "muttonDal.jpg",
-      route: "/dal-mutton",
-      type: "dal"
-    }
-  ];
-
-  const allCategories = [...vegCategories, ...dalCategories];
-
-  useEffect(() => {
-    if (location.state?.defaultTab) {
-      setActiveCategory(location.state.defaultTab);
-    }
-  }, [location.state]);
-
-  const filteredCategories = allCategories.filter(cat => cat.type === activeCategory);
-
-  const handleTabClick = (categoryType) => {
-    setActiveCategory(categoryType);
-  };
 
   return (
     <div className="lunch-page">
       <header className="lunch-header">
         <div className="lunch-header-content">
-          <h1 className="lunch-page-title">
-            {activeCategory === 'veg' ? 'Vegetarian Delights' : 'Lentil Specialties'}
-          </h1>
+          <h1 className="lunch-page-title">Vegetarian Delights</h1>
           <p className="lunch-page-description">
-            {activeCategory === 'veg' 
-              ? 'Fresh and healthy vegetable recipes(3 varieties)'
-              : 'Protein-rich lentil recipes (3 varieties)'}
+            Fresh and healthy vegetable recipes
           </p>
         </div>
       </header>
+
       <main className="lunch-main">
-        <div className="category-tabs">
-          <button 
-            className={`category-tab ${activeCategory === 'veg' ? 'active' : ''}`}
-            onClick={() => handleTabClick('veg')}
-          >
-            <span className="category-name">Vegetables (3)</span>
-          </button>
-          <button 
-            className={`category-tab ${activeCategory === 'dal' ? 'active' : ''}`}
-            onClick={() => handleTabClick('dal')}
-          >
-            <span className="category-name">Lentils - Daal (3)</span>
-          </button>
-        </div>
+        {/* 3 Cards Grid */}
         <div className="lunch-grid-section">
           <div className="lunch-grid">
-            {filteredCategories.map((category) => (
+            {vegCategories.map((category) => (
               <div
                 key={category.id}
                 className="lunch-category-card"

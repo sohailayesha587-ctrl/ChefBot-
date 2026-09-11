@@ -5,24 +5,40 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const http = require('http');
+const { Server } = require('socket.io');
 
 dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
-
 const beginnersGuideRoutes = require('./routes/BeginnersGuideRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
 const shoppingRoutes = require('./routes/shoppingRoutes');
 const pantryRoutes = require('./routes/pantryRoutes');
 const pantryShoppingRoutes = require('./routes/pantryShoppingRoutes');
-const mealPlanRoutes = require('./routes/mealPlanRoutes'); 
+const mealPlanRoutes = require('./routes/mealPlanRoutes');
 const mealSuggestionRoutes = require('./routes/mealSuggestionRoutes');
 const settingsRoutes = require('./routes/settingsRoutes');
 const searchRoutes = require('./routes/searchRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const adminMiddleware = require('./middleware/adminMiddleware');
 
 const app = express();
+const server = http.createServer(app);
 
-app.use(cors());
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
@@ -35,15 +51,40 @@ app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/api/users', settingsRoutes);
 app.use('/api/search', searchRoutes);
+
+app.use('/api/admin', adminMiddleware, adminRoutes);
+
+app.get('/api/health', (req, res) => {
+  const dbStatus = mongoose.connection.readyState;
+
+  res.json({
+    success: true,
+    server: 'running',
+    mongodb: dbStatus === 1 ? 'connected' : 'disconnected',
+    mongodbReadyState: dbStatus
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
 
+io.on('connection', (socket) => {
+  console.log('Socket connected:', socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected:', socket.id);
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB connected');
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on port ${process.env.PORT || 5000}`);
+
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => {

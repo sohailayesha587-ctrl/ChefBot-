@@ -1,24 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './RecipesLunch.css';
 
-const RecipesLunch= () => {
+const RecipesLunch = () => {
   const scrollContainerRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
   const categories = [
     {
       id: 1,
       name: "Vegetable Dishes",
       image: "plainVegetable.jpg",
-      route: "/lunch",
-    
+      route: "/lunch"
     },
     {
       id: 2,
-      name: "Lentils(Daal) Dishes",
+      name: "Lentils (Daal) Dishes",
       image: "plainDal.jpg",
-      route: "/lunch",
-     
+      route: "/lentils"
     },
     {
       id: 3,
@@ -76,6 +76,16 @@ const RecipesLunch= () => {
     }
   ];
 
+  const checkScroll = () => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      const scrollLeft = el.scrollLeft;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft < maxScroll - 10);
+    }
+  };
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
@@ -87,6 +97,19 @@ const RecipesLunch= () => {
       scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkScroll);
+      setTimeout(checkScroll, 100);
+      window.addEventListener('resize', checkScroll);
+      return () => {
+        el.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      };
+    }
+  }, []);
 
   return (
     <div className="recipes-lunch-page">
@@ -101,7 +124,11 @@ const RecipesLunch= () => {
 
       <main className="recipes-lunch-main">
         <div className="recipes-lunch-carousel">
-          <button className="recipes-lunch-arrow recipes-lunch-arrow-left" onClick={scrollLeft}>
+          <button 
+            className="recipes-lunch-arrow recipes-lunch-arrow-left" 
+            onClick={scrollLeft}
+            disabled={!showLeftArrow}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 19l-7-7 7-7" />
             </svg>
@@ -113,7 +140,6 @@ const RecipesLunch= () => {
                 <Link
                   key={category.id}
                   to={category.route}
-                  state={category.state}
                   className={`recipes-lunch-card ${index % 2 === 0 ? 'recipes-lunch-card-up' : 'recipes-lunch-card-down'}`}
                 >
                   <div className="recipes-lunch-card-image-container">
@@ -124,9 +150,6 @@ const RecipesLunch= () => {
                       loading="lazy"
                     />
                     <div className="recipes-lunch-card-overlay"></div>
-                    <span className="recipes-lunch-card-badge">
-                      {category.recipeCount}
-                    </span>
                   </div>
 
                   <div className="recipes-lunch-card-content">
@@ -137,7 +160,11 @@ const RecipesLunch= () => {
             </div>
           </div>
 
-          <button className="recipes-lunch-arrow recipes-lunch-arrow-right" onClick={scrollRight}>
+          <button 
+            className="recipes-lunch-arrow recipes-lunch-arrow-right" 
+            onClick={scrollRight}
+            disabled={!showRightArrow}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M9 5l7 7-7 7" />
             </svg>

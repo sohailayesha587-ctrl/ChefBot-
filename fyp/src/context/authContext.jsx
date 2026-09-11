@@ -1,13 +1,15 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+
   if (!context) {
     throw new Error('useAuth must be used within AuthProvider');
   }
+
   return context;
 };
 
@@ -18,28 +20,62 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
+
     if (token && userData) {
-      setUser(JSON.parse(userData));
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+      } catch {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+      }
     }
+
     setLoading(false);
   }, []);
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', {
-        email,
-        password
-      });
-      
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      setUser(response.data.user);
-      
-      return { success: true };
+      const response = await axios.post(
+        'http://localhost:5000/api/auth/login',
+        {
+          email,
+          password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          timeout: 10000
+        }
+      );
+
+      const { token, user } = response.data;
+
+      if (!token || !user) {
+        return {
+          success: false,
+          error: 'Invalid login response from server'
+        };
+      }
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      setUser(user);
+
+      return {
+        success: true,
+        user
+      };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error.response?.data?.message || 'Login failed' 
+      return {
+        success: false,
+        error:
+          error.response?.data?.message ||
+          error.message ||
+          'Login failed'
       };
     }
   };
@@ -50,8 +86,18 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const isAdmin = user?.role === 'admin';
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        isAdmin
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

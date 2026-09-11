@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { SocketProvider } from './context/SocketContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -63,7 +64,9 @@ import VerifyOTPPage from './pages/VerifyOTPPage';
 import RecipeBreakFast from './pages/RecipeBreakfast';
 import RecipeDetail from './pages/RecipeDetail';
 import SearchResults from './pages/SearchResults';
-import RecipesLunch from './pages/RecipesLunch'
+import RecipesLunch from './pages/RecipesLunch';
+import Dashboard from './pages/Dashboard';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -110,7 +113,7 @@ React.useEffect(() => {
     window.openSettings = openSettings;
   }, []);
 
-  const authPages = ['/login-page', '/forgot-password', '/verify-otp', '/reset-password', '/change-account'];
+  const authPages = ['/login-page', '/dashboard' , '/forgot-password', '/verify-otp', '/reset-password', '/change-account'];
   const hideHeaderOnPages = authPages.includes(location.pathname);
   const shouldShowHeader = !hideHeaderOnPages && !isSettingsOpen;
 
@@ -190,9 +193,10 @@ React.useEffect(() => {
                                       <Route path="/recipe-dinner" element={<RecipesDinner />} />
                                       <Route path="/lunch" element={<Lunch/>} />
                                       <Route path="/recipe-lunch" element={<RecipesLunch />} />
-
                    <Route path="/recipe/:id" element={<RecipeDetail />} />
 <Route path="/search-results" element={<SearchResults />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+
         </Routes>
 
         <Footer />
@@ -205,7 +209,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppWrapper />
+       <SocketProvider>
+  <AppWrapper />
+</SocketProvider>
 
       </AuthProvider>
     </Router>

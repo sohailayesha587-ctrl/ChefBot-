@@ -13,13 +13,13 @@ body,
   background: #f5fafa;
 }
 
-.lunch-page {
+.lentils-page {
   width: 100%;
   min-height: 100vh;
   background: #f5fafa;
 }
 
-.lunch-header {
+.lentils-header {
   background: linear-gradient(135deg, #284a4b, #1a3334);
   color: #ffffff;
   padding: 50px 20px 40px;
@@ -30,7 +30,7 @@ body,
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 }
 
-.lunch-header::after {
+.lentils-header::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -42,12 +42,12 @@ body,
   border-radius: 2px;
 }
 
-.lunch-header-content {
+.lentils-header-content {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.lunch-page-title {
+.lentils-page-title {
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 12px;
@@ -58,7 +58,7 @@ body,
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.lunch-page-description {
+.lentils-page-description {
   font-size: 18px;
   opacity: 0.9;
   margin-bottom: 5px;
@@ -71,17 +71,17 @@ body,
   letter-spacing: 0.5px;
 }
 
-.lunch-main {
+.lentils-main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px 40px;
 }
 
-.lunch-grid-section {
+.lentils-grid-section {
   width: 100%;
 }
 
-.lunch-grid {
+.lentils-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -89,7 +89,7 @@ body,
   margin: 0 auto;
 }
 
-.lunch-category-card {
+.lentils-category-card {
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
@@ -104,13 +104,13 @@ body,
   position: relative;
 }
 
-.lunch-category-card:hover {
+.lentils-category-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 50px rgba(40, 74, 75, 0.2);
   border-color: #284a4b;
 }
 
-.lunch-card-image {
+.lentils-card-image {
   width: 100%;
   height: 180px;
   background-size: cover;
@@ -120,11 +120,11 @@ body,
   transition: transform 0.5s ease;
 }
 
-.lunch-category-card:hover .lunch-card-image {
+.lentils-category-card:hover .lentils-card-image {
   transform: scale(1.03);
 }
 
-.lunch-card-image::after {
+.lentils-card-image::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -132,7 +132,7 @@ body,
   pointer-events: none;
 }
 
-.lunch-card-content {
+.lentils-card-content {
   padding: 18px 20px 20px;
   flex: 1;
   display: flex;
@@ -141,7 +141,7 @@ body,
   background: #ffffff;
 }
 
-.lunch-card-title {
+.lentils-card-title {
   font-size: 18px;
   font-weight: 700;
   color: #284a4b;
@@ -154,7 +154,7 @@ body,
   letter-spacing: -0.3px;
 }
 
-.lunch-card-description {
+.lentils-card-description {
   font-size: 13px;
   color: #666666;
   line-height: 1.5;
@@ -168,7 +168,7 @@ body,
   flex: 1;
 }
 
-.lunch-card-button {
+.lentils-card-button {
   display: flex;
   align-items: center;
   color: #284a4b;
@@ -179,28 +179,28 @@ body,
   margin-top: auto;
 }
 
-.lunch-card-button svg {
+.lentils-card-button svg {
   width: 16px;
   height: 16px;
   transition: transform 0.3s ease;
 }
 
-.lunch-category-card:hover .lunch-card-button {
+.lentils-category-card:hover .lentils-card-button {
   color: #397d7c;
 }
 
-.lunch-category-card:hover .lunch-card-button svg {
+.lentils-category-card:hover .lentils-card-button svg {
   transform: translateX(6px);
 }
 
-.back-button-container {
+.lentils-back-button-container {
   max-width: 1200px;
   margin: 0 auto 40px auto;
   padding: 0 20px;
   text-align: center;
 }
 
-.back-home-btn {
+.lentils-back-home-btn {
   background: #284a4b;
   color: #ffffff;
   border: none;
@@ -216,166 +216,166 @@ body,
   box-shadow: 0 4px 15px rgba(40, 74, 75, 0.3);
 }
 
-.back-home-btn:hover {
+.lentils-back-home-btn:hover {
   background: #1a3334;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(40, 74, 75, 0.5);
 }
 
 @media (min-width: 1400px) {
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     max-width: 1300px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 200px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 48px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 320px;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1399px) {
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 170px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 260px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 35px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
   }
-  .lunch-header {
+  .lentils-header {
     padding: 35px 20px;
     margin-top: 80px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 32px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 160px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 250px;
   }
-  .lunch-card-title {
+  .lentils-card-title {
     font-size: 16px;
   }
-  .lunch-page-description {
+  .lentils-page-description {
     font-size: 16px;
   }
 }
 
 @media (max-width: 767px) {
-  .lunch-header {
+  .lentils-header {
     padding: 30px 15px;
     margin-top: 70px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 28px;
   }
-  .lunch-main {
+  .lentils-main {
     padding: 20px 15px 30px;
   }
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 150px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 240px;
   }
-  .lunch-card-title {
+  .lentils-card-title {
     font-size: 15px;
   }
-  .lunch-page-description {
+  .lentils-page-description {
     font-size: 15px;
   }
-  .back-home-btn {
+  .lentils-back-home-btn {
     padding: 10px 25px;
     font-size: 14px;
   }
 }
 
 @media (max-width: 575px) {
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 130px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 210px;
     border-radius: 14px;
   }
-  .lunch-card-title {
+  .lentils-card-title {
     font-size: 14px;
   }
-  .lunch-card-description {
+  .lentils-card-description {
     font-size: 11px;
   }
-  .lunch-card-button {
+  .lentils-card-button {
     font-size: 11px;
   }
-  .lunch-header {
+  .lentils-header {
     padding: 25px 12px;
     margin-top: 60px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 24px;
   }
-  .lunch-page-description {
+  .lentils-page-description {
     font-size: 14px;
   }
-  .back-home-btn {
+  .lentils-back-home-btn {
     padding: 8px 20px;
     font-size: 13px;
   }
 }
 
 @media (max-width: 424px) {
-  .lunch-grid {
+  .lentils-grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
-  .lunch-header {
+  .lentils-header {
     padding: 20px 10px;
     margin-top: 50px;
   }
-  .lunch-page-title {
+  .lentils-page-title {
     font-size: 20px;
   }
-  .lunch-card-image {
+  .lentils-card-image {
     height: 160px;
   }
-  .lunch-category-card {
+  .lentils-category-card {
     min-height: 240px;
   }
-  .lunch-card-title {
+  .lentils-card-title {
     font-size: 15px;
   }
-  .lunch-page-description {
+  .lentils-page-description {
     font-size: 13px;
   }
-  .back-home-btn {
+  .lentils-back-home-btn {
     width: 100%;
     justify-content: center;
     padding: 8px 15px;
