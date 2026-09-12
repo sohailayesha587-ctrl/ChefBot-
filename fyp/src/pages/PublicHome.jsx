@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import LanguagePopup from '../components/LanguagePopup';
 import './PublicHome.css';
 
 const PublicHome = () => {
   const navigate = useNavigate();
   
-  const [showLanguagePopup, setShowLanguagePopup] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +21,6 @@ const PublicHome = () => {
 
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0);
   const heroBackgroundRef = useRef(null);
-  const timeoutRef = useRef(null);
   const redirectTimeoutRef = useRef(null);
   const toastShownRef = useRef(false);
 
@@ -64,7 +61,7 @@ const PublicHome = () => {
       toast.info("You are already logged in! Redirecting to dashboard...");
       
       redirectTimeoutRef.current = setTimeout(() => {
-        window.location.href = savedLanguage === 'urdu' ? '/urdu-home' : '/home';
+        window.location.href = '/home';
       }, 2000);
       return;
     }
@@ -81,32 +78,17 @@ const PublicHome = () => {
       return;
     }
     
-    const sessionLanguageSelected = sessionStorage.getItem('sessionLanguageSelected');
-    
-    if (sessionLanguageSelected === 'true') {
-      console.log('Session me language already selected - popup nahi aayega');
-      return;
-    }
-    
-    if (!isLoggedIn && sessionLanguageSelected !== 'true') {
-      console.log('New session - showing language popup in 5 seconds');
-      timeoutRef.current = setTimeout(() => {
-        setShowLanguagePopup(true);
-      }, 5000);
-    }
-    
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current);
     };
     
   }, []);
 
-useLayoutEffect(() => {
-  if (heroBackgroundRef.current) {
-    heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
-  }
-}, [currentCenterIndex]);
+  useLayoutEffect(() => {
+    if (heroBackgroundRef.current) {
+      heroBackgroundRef.current.style.backgroundImage = `url('${furnitureItems[currentCenterIndex].bgImage}')`;
+    }
+  }, [currentCenterIndex]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -267,11 +249,12 @@ useLayoutEffect(() => {
   return (
     <>
       <section className="pk-hero-carousel-section">
-<div
-  className="pk-hero-background-container"
-  ref={heroBackgroundRef}
-  style={{ backgroundImage: `url('${furnitureItems[currentCenterIndex].bgImage}')` }}
-></div>        <div className="pk-hero-background-overlay"></div>
+        <div
+          className="pk-hero-background-container"
+          ref={heroBackgroundRef}
+          style={{ backgroundImage: `url('${furnitureItems[currentCenterIndex].bgImage}')` }}
+        ></div>
+        <div className="pk-hero-background-overlay"></div>
 
         <div className="pk-hero-left-section">
           <div className="pk-hero-section-tag"></div>
@@ -345,7 +328,7 @@ useLayoutEffect(() => {
         <div className="pk-content-box pk-box-2 pk-content-right"
                     style={{ backgroundImage: "url('/recipe.jpg')" }}
 >
- <div className="pk-colored-box">
+          <div className="pk-colored-box">
             <h2>Recipe Diary</h2>
             <p className="pk-box-description">Explore recipes from recipes collection.</p>
             <button className="pk-btn" onClick={() => navigate('/login-page')}>Explore Recipes</button>
@@ -353,9 +336,8 @@ useLayoutEffect(() => {
         </div>
 
         <div className="pk-content-box pk-box-3 pk-content-left"
-        style={{ backgroundImage: "url('/beginners.jpg')" }}
+                    style={{ backgroundImage: "url('/beginners.jpg')" }}
 >
-
           <div className="pk-colored-box">
             <h2>Complete Guidance for Beginners</h2>
             <p className="pk-box-description">Get complete guidance and tips for beginners.</p>
@@ -364,9 +346,8 @@ useLayoutEffect(() => {
         </div>
 
         <div className="pk-content-box pk-box-4 pk-content-right"
-                  style={{ backgroundImage: "url('/pantry-staples.jpg')" }}
+                    style={{ backgroundImage: "url('/pantry-staples.jpg')" }}
 >
-
           <div className="pk-colored-box">
             <h2>Store Pantry Items</h2>
             <p className="pk-box-description">Keep, organize and track all your pantry essentials in one place.</p>
@@ -400,9 +381,8 @@ useLayoutEffect(() => {
         </div>
 
         <div className="pk-content-box pk-box-5 pk-content-left"
-                  style={{ backgroundImage: "url('/shoppinglist.png')" }}
+                    style={{ backgroundImage: "url('/shoppinglist.png')" }}
 >
-
           <div className="pk-colored-box">
             <h2>Create Your Shopping List</h2>
             <p className="pk-box-description">Create and manage your shopping list easily.</p>
@@ -411,7 +391,7 @@ useLayoutEffect(() => {
         </div>
         
         <div className="pk-content-box pk-box-6 pk-content-right"
-                  style={{ backgroundImage: "url('/plannermeal.jpg')" }}
+                    style={{ backgroundImage: "url('/plannermeal.jpg')" }}
 >
           <div className="pk-colored-box">
             <h2>Smart Meal Planning</h2>
@@ -421,7 +401,6 @@ useLayoutEffect(() => {
         </div>
       </section>
 
-      {showLanguagePopup && <LanguagePopup />}
     </>
   );
 };

@@ -526,7 +526,7 @@ const MealSuggestion = () => {
         if (data.message) setError(data.message);
       }
     } catch (err) {
-      setError('Failed to load suggestions. Please try again.');
+      setError('Failed to load suggestions. Please login first or check internet connection ');
       setSuggestionsData([]);
     } finally {
       setLoading(false);

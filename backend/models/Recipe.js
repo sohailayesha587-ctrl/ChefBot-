@@ -30,12 +30,12 @@ const recipeSchema = new mongoose.Schema(
     steps: { type: [stepSchema], default: [] },
     voiceUrl: { type: String, default: '' },
 
-    category: {
-      type: String,
-      required: true,
-      enum: ['Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Anytime' , 'Dessert'],
-      default: 'Lunch'
-    },
+ category: {
+  type: [String],
+  required: true,
+  enum: ['Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Anytime', 'Dessert'],
+  default: ['Lunch']
+},
 
     subCategory: {
       type: String,

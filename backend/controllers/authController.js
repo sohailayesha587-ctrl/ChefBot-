@@ -73,12 +73,12 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Please enter the correct email' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Please enter the correct password' });
     }
 
     const expiresIn = remember ? '30d' : '7d';
@@ -170,10 +170,10 @@ const verifyOTP = async (req, res) => {
 
     delete otpStore[email];
 
-    res.status(200).json({
-      message: 'OTP verified successfully',
-      email
-    });
+     return res.status(500).json({
+    message: 'Failed to send OTP email. Please try again later.'
+  });
+
   } catch (error) {
     console.error('Verify OTP Error:', error);
     res.status(500).json({ message: 'Server error' });

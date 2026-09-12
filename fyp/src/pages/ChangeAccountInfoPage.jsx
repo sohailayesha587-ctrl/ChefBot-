@@ -12,7 +12,6 @@ const ChangeAccountInfoPage = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState('');
-  const [sentOtp] = useState('123456');
   const [oldValue, setOldValue] = useState('');
   const [newValue, setNewValue] = useState('');
   const [message, setMessage] = useState('');
@@ -38,13 +37,7 @@ const ChangeAccountInfoPage = () => {
     return changeType === 'email' ? 'Enter new email address' : 'Enter new mobile number';
   };
 
-  const getSuccessMessage = () => {
-    return changeType === 'email' 
-      ? 'Email address changed successfully!' 
-      : 'Mobile number changed successfully!';
-  };
-
-  const sendOTP = () => {
+  const sendOTP = async () => {
     if (!oldValue) {
       setError(`Please enter your ${changeType === 'email' ? 'email' : 'mobile number'}`);
       return;
@@ -54,21 +47,33 @@ const ChangeAccountInfoPage = () => {
     setError('');
     setMessage('');
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: oldValue })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send verification code');
+      }
+
       setStep(2);
       setMessage(`OTP sent to your ${changeType === 'email' ? 'email address' : 'mobile number'}`);
+    } catch (err) {
+      setError(err.message || 'Something went wrong');
+    } finally {
       setLoading(false);
-    }, 800);
+    }
   };
 
-  const verifyAndUpdate = () => {
+  const verifyAndUpdate = async () => {
     if (!otp) {
       setError('Please enter OTP');
-      return;
-    }
-
-    if (otp !== sentOtp) {
-      setError('Invalid OTP. Please try again.');
       return;
     }
 
@@ -81,7 +86,21 @@ const ChangeAccountInfoPage = () => {
     setError('');
     setMessage('');
 
-    setTimeout(() => {
+    try {
+      const verifyResponse = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: oldValue, otp })
+      });
+
+      const verifyData = await verifyResponse.json();
+
+      if (!verifyResponse.ok) {
+        throw new Error(verifyData.message || 'Invalid OTP');
+      }
+
       const userData = JSON.parse(localStorage.getItem('user') || '{}');
       if (changeType === 'email') {
         userData.email = newValue;
@@ -89,14 +108,18 @@ const ChangeAccountInfoPage = () => {
         userData.mobile = newValue;
       }
       localStorage.setItem('user', JSON.stringify(userData));
-      
-      setMessage(getSuccessMessage());
-      setLoading(false);
+
+      setMessage(changeType === 'email' ? 'Email changed successfully!' : 'Mobile number changed successfully!');
       
       setTimeout(() => {
         navigate('/home');
       }, 1500);
-    }, 800);
+
+    } catch (err) {
+      setError(err.message || 'Verification failed');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -184,7 +207,7 @@ const ChangeAccountInfoPage = () => {
             <div className="change-form-container">
               <div className="change-form-header">
                 <h2>Verify & Update</h2>
-                <p>Enter OTP and your new {changeType === 'email' ? 'email' : 'mobile number'}</p>
+                <p>Enter OTP and your new {changeType === 'email' ? 'email address' : 'mobile number'}</p>
               </div>
 
               <div className="change-form-group">
@@ -199,9 +222,6 @@ const ChangeAccountInfoPage = () => {
                     onChange={(e) => setOtp(e.target.value)}
                   />
                 </div>
-                <small style={{color: '#666', fontSize: '0.75rem', marginTop: '5px', display: 'block'}}>
-                  Demo OTP: 123456
-                </small>
               </div>
 
               <div className="change-form-group">

@@ -21,10 +21,10 @@ import BakeryEssentialsPage from './pages/BakeryEssentialsPage';
 import MealSuggestion from './pages/MealSuggestion';
 import ChangeAccountInfoPage from './pages/ChangeAccountInfoPage';
 import PantryFeature from './pages/PantryFeature';
-import ContactPage from "./pages/ContactPage";
-import AboutPage from "./pages/AboutPage";
-import ShoppingList from "./pages/ShoppingList";
-import MealFeature from "./pages/MealFeature";
+import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
+import ShoppingList from './pages/ShoppingList';
+import MealFeature from './pages/MealFeature';
 import SettingsSidebar from './components/SettingsSidebar';
 import RecipeDessertsPage from './pages/RecipeDessertsPage';
 import RecipesSoupsPage from './pages/RecipesSoupsPage';
@@ -66,6 +66,7 @@ import RecipeDetail from './pages/RecipeDetail';
 import SearchResults from './pages/SearchResults';
 import RecipesLunch from './pages/RecipesLunch';
 import Dashboard from './pages/Dashboard';
+import LanguagePopup from './components/LanguagePopup';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -77,130 +78,175 @@ function ScrollToTop() {
   return null;
 }
 
-
 function AppWrapper() {
   const location = useLocation();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [language, setLanguage] = useState('en');
+const [showLanguagePopup, setShowLanguagePopup] = useState(
+  sessionStorage.getItem('languagePopupSelected') !== 'true'
+);
+  const isUrdu = language === 'ur';
 
   const openSettings = () => setIsSettingsOpen(true);
   const closeSettings = () => setIsSettingsOpen(false);
 
-React.useEffect(() => {
-  const originalSpeak = window.speechSynthesis?.speak;
+  React.useEffect(() => {
+    const isUrdu = document.cookie.includes('googtrans=/en/ur');
 
-  if (!originalSpeak) {
-    return;
-  }
+    if (isUrdu) {
+      setLanguage('ur');
+    }
+  }, []);
 
-  window.speechSynthesis.speak = function (utterance) {
-    const soundEnabled = localStorage.getItem('soundEnabled');
+  React.useEffect(() => {
+    const direction = isUrdu ? 'rtl' : 'ltr';
+    const lang = isUrdu ? 'ur' : 'en';
 
-    if (soundEnabled === 'false') {
+    document.documentElement.setAttribute('dir', direction);
+    document.documentElement.setAttribute('lang', lang);
+
+    document.body.setAttribute('dir', direction);
+
+    document.body.classList.remove('urdu-mode', 'english-mode');
+    document.body.classList.add(
+      isUrdu ? 'urdu-mode' : 'english-mode'
+    );
+  }, [isUrdu]);
+
+  React.useEffect(() => {
+    const originalSpeak = window.speechSynthesis?.speak;
+
+    if (!originalSpeak) {
       return;
     }
 
-    originalSpeak.call(window.speechSynthesis, utterance);
-  };
+    window.speechSynthesis.speak = function (utterance) {
+      const soundEnabled = localStorage.getItem('soundEnabled');
 
-  return () => {
-    window.speechSynthesis.speak = originalSpeak;
-  };
-}, []);
+      if (soundEnabled === 'false') {
+        return;
+      }
 
+      originalSpeak.call(window.speechSynthesis, utterance);
+    };
 
-  React.useEffect(() => {
-
-    window.openSettings = openSettings;
+    return () => {
+      window.speechSynthesis.speak = originalSpeak;
+    };
   }, []);
 
-  const authPages = ['/login-page', '/dashboard' , '/forgot-password', '/verify-otp', '/reset-password', '/change-account'];
+  React.useEffect(() => {
+    window.openSettings = openSettings;
+
+    return () => {
+      delete window.openSettings;
+    };
+  }, []);
+
+  const authPages = [
+    '/login-page',
+    '/dashboard',
+    '/forgot-password',
+    '/verify-otp',
+    '/reset-password',
+    '/change-account'
+  ];
+
   const hideHeaderOnPages = authPages.includes(location.pathname);
   const shouldShowHeader = !hideHeaderOnPages && !isSettingsOpen;
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
+      <ToastContainer />
+
+      <SettingsSidebar
+        isOpen={isSettingsOpen}
+        onClose={closeSettings}
       />
 
-      <SettingsSidebar isOpen={isSettingsOpen} onClose={closeSettings} />
-
-      <div className="app-wrapper english-mode" dir="ltr">
+      <div
+        className={`app-wrapper ${
+          isUrdu ? 'urdu-mode' : 'english-mode'
+        }`}
+        dir={isUrdu ? 'rtl' : 'ltr'}
+      >
         <ScrollToTop />
-        {shouldShowHeader && <Header onSettingsClick={openSettings} />}
+
+        {shouldShowHeader && (
+          <Header
+            onSettingsClick={openSettings}
+            onLanguageChange={setLanguage}
+          />
+        )}
 
         <Routes>
           <Route path="/" element={<PublicHome />} />
-          <Route path="/login-page" element={<LoginPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/verify-otp" element={<VerifyOTPPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/guidance" element={<BeginnersPage />} />
+          <Route path="/beginners" element={<BeginnersPage />} />
           <Route path="/measuring-skills" element={<MeasuringSkillsPage />} />
           <Route path="/kitchen-appliances" element={<KitchenAppliancesPage />} />
           <Route path="/cutting-techniques" element={<CuttingTechniquesPage />} />
           <Route path="/kitchen-tools" element={<KitchenToolsPage />} />
           <Route path="/cooking-methods" element={<CookingMethodsPage />} />
-          <Route path="/meat-cuts" element={<MeatProcessingPage />} />
+          <Route path="/meat-processing" element={<MeatProcessingPage />} />
+          <Route path="/login-page" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/pantry-basics" element={<PantryBasicsPage />} />
           <Route path="/bakery-essentials" element={<BakeryEssentialsPage />} />
           <Route path="/meal-suggestion" element={<MealSuggestion />} />
           <Route path="/change-account" element={<ChangeAccountInfoPage />} />
-          <Route path="/smart-pantry" element={<PantryFeature />} />
-          <Route path="/meal-planner" element={<MealFeature />} />
-          <Route path="/smart-shopping" element={<ShoppingList />} />
+          <Route path="/pantry-feature" element={<PantryFeature />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/recipes" element={<MyRecipeHomepage />} />
-          <Route path="/desserts" element={<RecipeDessertsPage />} />
-          <Route path="/soups" element={<RecipesSoupsPage />} />
-                   <Route path="/Baking" element={<RecipeBakingPage />} />
-                   <Route path="/Beverage" element={<RecipeBeveragePage />} />
-                   <Route path="/Breakfast" element={<RecipeBreakFast />} />
-                   <Route path="/cheat-meal" element={<RecipeCheatMealPage />} />
-                   <Route path="/plain-veg" element={<RecipePlainVegetables />} />
-                   <Route path="/QuickRecipe" element={<RecipeQuickPage />} />
-                   <Route path="/appetizers" element={<RecipesAppetizers />} />
-                                      <Route path="/BBQ" element={<RecipesBBQ />} />
-                   <Route path="/breads" element={<RecipesBread />} />
-                   <Route path="/egg-dishes" element={<RecipesEggDishes/>} />
-                   <Route path="/fish-dishes" element={<RecipesFish />} />
-                   <Route path="/heavy-gravy" element={<RecipesHeavyGravy />} />
-                   <Route path="/plain-dal" element={<RecipesPlainDal />} />
-                   <Route path="/chicken" element={<RecipesPureChicken />} />
-                   <Route path="/mutton" element={<RecipesPureMutton />} />
-                   <Route path="/qeema" element={<RecipesQeema />} />
-                   <Route path="/mutton" element={<RecipesPureMutton />} />
-                   <Route path="/rice" element={<RecipesRice />} />
-                                      <Route path="/Regional" element={<RecipesRegionalPage />} />
-
-                   <Route path="/Salads" element={<RecipesSaladsPage />} />
-                   <Route path="/Snack" element={<RecipesSnacksPage />} />
-                   <Route path="/StudentRecipe" element={<RecipesStudentsPage />} />
-                   <Route path="/veg-chick" element={<RecipesVegChicken />} />
-                   <Route path="/Vege" element={<RecipesVegePage />} />
-                   <Route path="/veg-mutton" element={<RecipesVegMutton />} />
-                                      <Route path="/recipe-dinner" element={<RecipesDinner />} />
-                                      <Route path="/lunch" element={<Lunch/>} />
-                                      <Route path="/recipe-lunch" element={<RecipesLunch />} />
-                   <Route path="/recipe/:id" element={<RecipeDetail />} />
-<Route path="/search-results" element={<SearchResults />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-
+          <Route path="/shopping-list" element={<ShoppingList />} />
+          <Route path="/meal-feature" element={<MealFeature />} />
+          <Route path="/recipe-desserts" element={<RecipeDessertsPage />} />
+          <Route path="/recipes-soups" element={<RecipesSoupsPage />} />
+          <Route path="/recipe-cheat-meal" element={<RecipeCheatMealPage />} />
+          <Route path="/recipe-beverage" element={<RecipeBeveragePage />} />
+          <Route path="/recipe-baking" element={<RecipeBakingPage />} />
+          <Route path="/recipes-regional" element={<RecipesRegionalPage />} />
+          <Route path="/recipes-salads" element={<RecipesSaladsPage />} />
+          <Route path="/recipes-snacks" element={<RecipesSnacksPage />} />
+          <Route path="/recipes-students" element={<RecipesStudentsPage />} />
+          <Route path="/recipe-quick" element={<RecipeQuickPage />} />
+          <Route path="/recipes-vege" element={<RecipesVegePage />} />
+          <Route path="/recipes-heavy-gravy" element={<RecipesHeavyGravy />} />
+          <Route path="/recipes-fish" element={<RecipesFish />} />
+          <Route path="/my-recipe-home" element={<MyRecipeHomepage />} />
+          <Route path="/lunch" element={<Lunch />} />
+          <Route path="/recipe-breakfast" element={<RecipeBreakfast />} />
+          <Route path="/recipes-bread" element={<RecipesBread />} />
+          <Route path="/recipes-egg-dishes" element={<RecipesEggDishes />} />
+          <Route path="/recipes-bbq" element={<RecipesBBQ />} />
+          <Route path="/recipes-dal-mutton" element={<RecipesDalMutton />} />
+          <Route path="/recipes-dinner" element={<RecipesDinner />} />
+          <Route path="/recipes-appetizers" element={<RecipesAppetizers />} />
+          <Route path="/recipes-plain-dal" element={<RecipesPlainDal />} />
+          <Route path="/recipes-pure-chicken" element={<RecipesPureChicken />} />
+          <Route path="/recipe-plain-vegetables" element={<RecipePlainVegetables />} />
+          <Route path="/recipes-qeema" element={<RecipesQeema />} />
+          <Route path="/recipes-veg-chicken" element={<RecipesVegChicken />} />
+          <Route path="/recipes-veg-mutton" element={<RecipesVegMutton />} />
+          <Route path="/recipes-rice" element={<RecipesRice />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/verify-otp" element={<VerifyOTPPage />} />
+          <Route path="/recipe-breakfast" element={<RecipeBreakFast />} />
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/recipes-lunch" element={<RecipesLunch />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
 
         <Footer />
       </div>
+
+      {showLanguagePopup && (
+        <LanguagePopup
+          onLanguageSelected={() => setShowLanguagePopup(false)}
+        />
+      )}
     </>
   );
 }
@@ -209,10 +255,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-       <SocketProvider>
-  <AppWrapper />
-</SocketProvider>
-
+        <SocketProvider>
+          <AppWrapper />
+        </SocketProvider>
       </AuthProvider>
     </Router>
   );

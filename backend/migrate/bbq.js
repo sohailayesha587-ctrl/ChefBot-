@@ -1748,7 +1748,7 @@ const recipesToMigrate = [
     image: "tandoori-paneer.jpg",
     cuisine: "Pakistani",
     ingredientsRaw: [
-      "500g paneer - cut into 1-inch pieces",
+      "500g paneer, cut into 1-inch pieces",
       "1 capsicum - cut into pieces",
       "1 onion - cut into pieces",
       "1/2 cup yogurt",

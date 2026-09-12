@@ -11,7 +11,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   const [name, setName] = useState(''); 
  
   const [soundEnabled, setSoundEnabled] = useState(true); 
-  const [language, setLanguage] = useState('en'); 
  
   useEffect(() => { 
     if (isOpen) { 
@@ -52,14 +51,10 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
         const sound = 
           settings.soundPreferences?.beepEnabled ?? true; 
  
-        const lang = 
-          settings.displayPreferences?.language ?? 'en'; 
  
         setSoundEnabled(sound); 
-        setLanguage(lang); 
  
         localStorage.setItem('soundEnabled', String(sound)); 
-        localStorage.setItem('language', lang); 
       } 
     } catch (error) { 
       console.error('Error fetching settings:', error); 
@@ -95,15 +90,11 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
       const response = await axiosInstance.put('/users/settings', { 
         soundPreferences: { 
           beepEnabled: soundEnabled 
-        }, 
-        displayPreferences: { 
-          language 
-        } 
+        }
       }); 
  
       if (response.data.success) { 
         localStorage.setItem('soundEnabled', String(soundEnabled)); 
-        localStorage.setItem('language', language); 
       } 
     } catch (error) { 
       console.error('Error saving settings:', error); 
@@ -148,7 +139,6 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     localStorage.removeItem('token'); 
     localStorage.removeItem('user'); 
     localStorage.removeItem('soundEnabled'); 
-    localStorage.removeItem('language'); 
  
     window.location.href = '/login-page'; 
   }; 
@@ -306,36 +296,9 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               </div> 
             </div> 
  
-            <div className="settings-block"> 
-              <div className="block-title"> 
-                <h4>Language</h4> 
-              </div> 
+           
  
-              <div className="setting-item"> 
-                <div className="setting-left"> 
-                  <div> 
-                    <div className="setting-title"> 
-                      Language 
-                    </div> 
- 
-                    <div className="setting-desc"> 
-                      Choose your preferred language 
-                    </div> 
-                  </div> 
-                </div> 
- 
-                <select 
-                  className="language-select" 
-                  value={language} 
-                  onChange={(e) => 
-                    setLanguage(e.target.value) 
-                  } 
-                > 
-                  <option value="en">English</option> 
-                  <option value="ur">Urdu</option> 
-                </select> 
-              </div> 
-            </div> 
+             
  
             <button 
               className="save-btn-main" 

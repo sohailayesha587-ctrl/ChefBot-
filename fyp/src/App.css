@@ -53,7 +53,12 @@ body {
   direction: rtl;
   text-align: right;
 }
-
+html[dir="rtl"] .arrow,
+html[dir="rtl"] .chevron,
+html[dir="rtl"] .back-arrow,
+html[dir="rtl"] .forward-arrow {
+    transform: scaleX(-1);
+}
 /* Urdu Font - Important for proper RTL display */
 .urdu-mode body,
 .urdu-mode .app-wrapper,

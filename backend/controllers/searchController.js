@@ -1,8 +1,20 @@
 const Recipe = require('../models/Recipe');
 const BeginnersGuide = require('../models/BeginnersGuide');
 
+const normalizeSearchField = (value) => {
+  if (Array.isArray(value)) {
+    return value.join(' ').toLowerCase();
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.values(value).join(' ').toLowerCase();
+  }
+
+  return String(value || '').toLowerCase();
+};
+
 const getGuideRoute = (guide) => {
-  const category = (guide.category || '').toLowerCase();
+  const category = normalizeSearchField(guide.category);
 
   const routes = {
     'measuring-skills': '/measuring-skills',
@@ -21,13 +33,12 @@ const getGuideRoute = (guide) => {
 };
 
 const getPriority = (item, query) => {
-  const search = query.toLowerCase();
-
-  const title = (item.title || '').toLowerCase();
-  const name = (item.name || '').toLowerCase();
-  const category = (item.category || '').toLowerCase();
-  const mainCategory = (item.mainCategory || '').toLowerCase();
-  const subCategory = (item.subCategory || '').toLowerCase();
+  const search = normalizeSearchField(query);
+  const title = normalizeSearchField(item.title);
+  const name = normalizeSearchField(item.name);
+  const category = normalizeSearchField(item.category);
+  const mainCategory = normalizeSearchField(item.mainCategory);
+  const subCategory = normalizeSearchField(item.subCategory);
 
   if (item.type === 'feature') {
     if (title === search) return 1;
@@ -112,9 +123,10 @@ const globalSearch = async (req, res) => {
     ];
 
     features.forEach((feature) => {
-      const matched = feature.keywords.some((keyword) =>
-        keyword.includes(normalizedQuery) ||
-        normalizedQuery.includes(keyword)
+      const matched = feature.keywords.some(
+        (keyword) =>
+          keyword.includes(normalizedQuery) ||
+          normalizedQuery.includes(keyword)
       );
 
       if (matched) {
@@ -145,7 +157,9 @@ const globalSearch = async (req, res) => {
           { cuisine: regex }
         ]
       })
-        .select('_id title tagline description image category subCategory cuisine pantryKeywords')
+        .select(
+          '_id title tagline description image category subCategory cuisine pantryKeywords'
+        )
         .limit(20)
         .lean(),
 
@@ -187,7 +201,9 @@ const globalSearch = async (req, res) => {
           { equipment: regex }
         ]
       })
-        .select('_id title name tagline description fullDesc image previewImg category mainCategory subCategory')
+        .select(
+          '_id title name tagline description fullDesc image previewImg category mainCategory subCategory'
+        )
         .limit(20)
         .lean()
     ]);

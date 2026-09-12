@@ -9,9 +9,7 @@ function Footer() {
     '/signup',
     '/forgot-password',
     '/verify-otp',
-    '/reset-password',
-    '/Alarm',
-    '/alarm'
+    '/reset-password'
   ];
 
   if (hideFooter.includes(currentPath)) {

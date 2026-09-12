@@ -34,7 +34,7 @@
 
 .ms-hero-title {
   font-family: 'DM Sans', serif;
-  font-size: 2.8rem;
+  font-size: 45px;
   line-height: 1.1;
   margin: 0 0 18px;
   color: #ffffff;
@@ -48,7 +48,7 @@
 }
 
 .ms-hero-desc {
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
   color: #ffffff;
   opacity: 0.9;
@@ -73,7 +73,7 @@
 .ms-hero-img-tint {
   position: absolute;
   inset: 0;
-  background: rgba(40, 74, 75, 0.15);
+  background: rgba(40, 74, 75, 0.3);
 }
 
 .ms-hero-img-slice {
@@ -101,7 +101,7 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 12px 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border: 2px solid #397d7c;
   position: sticky;
   top: 20px;
@@ -129,7 +129,7 @@
   transition: all 0.2s;
   border-radius: 8px;
   position: relative;
-  overflow: visible !important;
+  overflow: visible;
 }
 
 .ms-day-item:hover {
@@ -174,14 +174,16 @@
   border-radius: 50%;
   background: #c0392b;
   animation: pulse-red 1.5s infinite;
-  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.2);
+  box-shadow: 0 0 0 2px rgba(40, 74, 75, 0.3);
 }
 
 @keyframes pulse-red {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.2);
     opacity: 0.7;
@@ -369,12 +371,13 @@
 }
 
 .ms-search-input::placeholder {
-  color: #b8cccc;
+  color: #666666;
+  opacity: 0.6;
 }
 
 .ms-search-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.15);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.4);
 }
 
 .ms-search-actions {
@@ -471,7 +474,6 @@
   font-size: 11px;
   font-weight: 600;
   color: #ffffff;
-  opacity: 1;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -527,7 +529,7 @@
 }
 
 .patient-section-title {
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: 700;
   color: #284a4b;
   margin-bottom: 16px;
@@ -591,12 +593,12 @@
   cursor: pointer;
   transition: all 0.2s;
   border: 1px solid #e0eeee;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .patient-recipe-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   border-color: #397d7c;
 }
 
@@ -658,7 +660,7 @@
 }
 
 .patient-view-btn:hover {
-  background: #c5d8d8;
+  background: #e0eeee;
 }
 
 .patient-cook-btn {
@@ -700,7 +702,7 @@
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   transition: all 0.25s ease;
   border: 1px solid #e0eeee;
   display: flex;
@@ -709,7 +711,7 @@
 
 .ms-recipe-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
   border-color: #397d7c;
 }
 
@@ -731,7 +733,7 @@
   font-size: 11px;
   font-weight: 700;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .ms-recipe-content {
@@ -782,7 +784,7 @@
 }
 
 .ms-missing-ingredients {
-  background: #fef3e8;
+  background: #fecaca;
   padding: 6px 10px;
   border-radius: 8px;
   font-size: 11px;
@@ -799,11 +801,11 @@
 }
 
 .ms-full-match {
-  background: #e6f9ed;
+  background: #f5fafa;
   padding: 6px 10px;
   border-radius: 8px;
   font-size: 11px;
-  color: #2e7d32;
+  color: #397d7c;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -821,6 +823,7 @@
 .ms-match-progress-bar {
   height: 100%;
   border-radius: 4px;
+  background: #397d7c;
 }
 
 .ms-recipe-actions {
@@ -850,7 +853,7 @@
 }
 
 .ms-btn-view:hover {
-  background: #c5d8d8;
+  background: #e0eeee;
 }
 
 .ms-btn-cook {
@@ -868,11 +871,11 @@
 }
 
 .ms-btn-shop:hover {
-  background: #c5d8d8;
+  background: #e0eeee;
 }
 
 .ms-missing-inline {
-  background: #fef3e8;
+  background: #fecaca;
   border-left: 4px solid #c0392b;
   border-radius: 12px;
   padding: 16px;
@@ -908,7 +911,6 @@
   width: 100%;
 }
 
-
 .ms-inline-btn {
   padding: 8px 16px;
   border: none;
@@ -942,10 +944,8 @@
 .ms-inline-skip {
   background: #284a4b;
   color: #ffffff;
-  border: 1px solid #c5d8d8;
+  border: 1px solid #e0eeee;
   margin-left: auto;
-
-
 }
 
 .ms-inline-skip:hover {
@@ -981,7 +981,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
@@ -998,7 +998,7 @@
   max-width: 450px;
   overflow: hidden;
   animation: fadeIn 0.2s ease;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes fadeIn {
@@ -1006,6 +1006,7 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1119,7 +1120,7 @@
 
 .ms-custom-member-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.4);
 }
 
 .ms-popup-footer {
@@ -1145,14 +1146,13 @@
   margin-bottom: 10px;
 }
 
-
 .ms-popup-cancel {
   background: #e0eeee;
   color: #284a4b;
 }
 
 .ms-popup-cancel:hover {
-  background: #c5d8d8;
+  background: #e0eeee;
 }
 
 .ms-popup-confirm,
@@ -1200,7 +1200,7 @@
 
 .ms-form-group input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.4);
 }
 
 .ms-form-group small {
@@ -1228,7 +1228,7 @@
 
 .ms-recipe-input:focus {
   border-color: #397d7c;
-  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.1);
+  box-shadow: 0 0 0 2px rgba(57, 125, 124, 0.4);
 }
 
 .ms-suggestions-dropdown {
@@ -1243,7 +1243,7 @@
   max-height: 200px;
   overflow-y: auto;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .ms-suggestion-item {
@@ -1268,7 +1268,7 @@
   max-height: 80vh;
   overflow: hidden;
   animation: fadeIn 0.2s ease;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
 }
 
 .ms-history-popup-body {
@@ -1431,12 +1431,13 @@
   border-radius: 10px;
   border: 2px solid #1a3334;
   padding: 10px 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   z-index: 30;
 }
+
 .ms-cook-coachmark p {
   font-size: 12px;
-  color: #0c447c;
+  color: #284a4b;
   margin: 0 0 8px;
   line-height: 1.45;
 }
@@ -1444,12 +1445,13 @@
 .ms-cook-coachmark button {
   font-size: 11px;
   padding: 4px 10px;
-  background: #378add;
+  background: #397d7c;
   color: #ffffff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
+
 .ms-coach-arrow {
   position: absolute;
   top: -7px;
@@ -1474,7 +1476,7 @@
 .ms-empty-state h3 {
   margin-bottom: 8px;
   color: #284a4b;
-  font-size: 1.1rem;
+  font-size: 18px;
 }
 
 .ms-back-section {
@@ -1505,9 +1507,9 @@
   background: #ffffff;
   border-radius: 20px;
   padding: 14px 12px 12px;
-  border: 1px solid #d4e8e8;
+  border: 1px solid #e0eeee;
   margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   width: 100%;
 }
 
@@ -1520,13 +1522,13 @@
 
 .ms-mobile-calendar-hub .hub-header .month {
   font-weight: 700;
-  color: #1a4a4b;
+  color: #1a3334;
   font-size: 14px;
 }
 
 .ms-mobile-calendar-hub .hub-header .week-label {
   font-size: 11px;
-  color: #8aa8a8;
+  color: #666666;
   font-weight: 500;
 }
 
@@ -1544,19 +1546,19 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  border: 1px solid transparent;
-  background: #fafcfc;
+  border: 1px solid #ffffff;
+  background: #f5fafa;
   position: relative;
 }
 
 .ms-mobile-day:hover {
-  background: #f0f6f7;
+  background: #e0eeee;
 }
 
 .ms-mobile-day .day-name {
   font-size: 8px;
   font-weight: 600;
-  color: #8aa8a8;
+  color: #666666;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
@@ -1564,7 +1566,7 @@
 .ms-mobile-day .day-num {
   font-size: 15px;
   font-weight: 700;
-  color: #1a4a4b;
+  color: #1a3334;
   width: 32px;
   height: 32px;
   display: flex;
@@ -1576,12 +1578,13 @@
 }
 
 .ms-mobile-day.active {
-  background: #1a4a4b;
-  border-color: #1a4a4b;
+  background: #1a3334;
+  border-color: #1a3334;
 }
 
 .ms-mobile-day.active .day-name {
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  opacity: 0.7;
 }
 
 .ms-mobile-day.active .day-num {
@@ -1589,7 +1592,7 @@
 }
 
 .ms-mobile-day.today .day-num {
-  border: 2px solid #3a8a8a;
+  border: 2px solid #397d7c;
 }
 
 .ms-mobile-day.today.active .day-num {
@@ -1605,7 +1608,7 @@
 }
 
 .ms-mobile-day .dot.completed {
-  background: #2d8a5e;
+  background: #397d7c;
 }
 
 .ms-mobile-day .dot.pending {
@@ -1615,20 +1618,21 @@
 
 .ms-mobile-day .meal-count {
   font-size: 7px;
-  color: #8aa8a8;
+  color: #666666;
   font-weight: 500;
   margin-top: 1px;
 }
 
 .ms-mobile-day.active .meal-count {
-  color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  opacity: 0.6;
 }
 
 .ms-mobile-day-details {
   background: #f5fafa;
   border-radius: 14px;
   padding: 0 14px;
-  border: 1px solid #d4e8e8;
+  border: 1px solid #e0eeee;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
@@ -1648,14 +1652,14 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  color: #1a4a4b;
+  color: #1a3334;
   font-size: 12px;
   margin-bottom: 6px;
 }
 
 .ms-mobile-day-details .detail-header .meal-total {
   font-size: 11px;
-  color: #6a8a8a;
+  color: #666666;
   font-weight: 500;
 }
 
@@ -1666,18 +1670,18 @@
   background: #ffffff;
   padding: 5px 12px;
   border-radius: 30px;
-  border: 1px solid #d4e8e8;
+  border: 1px solid #e0eeee;
   margin-bottom: 4px;
   font-size: 12px;
 }
 
 .ms-mobile-day-details .meal-row .meal-name {
   font-weight: 600;
-  color: #1a4a4b;
+  color: #1a3334;
 }
 
 .ms-mobile-day-details .meal-row .meal-members {
-  color: #6a8a8a;
+  color: #666666;
   font-size: 11px;
 }
 
@@ -1692,7 +1696,7 @@
 
 .ms-mobile-day-details .empty-day {
   text-align: center;
-  color: #8aa8a8;
+  color: #666666;
   font-size: 12px;
   padding: 6px 0;
 }
@@ -1724,21 +1728,21 @@
 }
 
 .ms-mobile-day-details .detail-actions .btn-primary {
-  background: #1a4a4b;
+  background: #1a3334;
   color: #ffffff;
 }
 
 .ms-mobile-day-details .detail-actions .btn-primary:hover {
-  background: #2d6a6b;
+  background: #397d7c;
 }
 
 .ms-mobile-day-details .detail-actions .btn-secondary {
-  background: #d4e8e8;
-  color: #1a4a4b;
+  background: #e0eeee;
+  color: #1a3334;
 }
 
 .ms-mobile-day-details .detail-actions .btn-secondary:hover {
-  background: #c0d8d8;
+  background: #e0eeee;
 }
 
 .ms-mobile-day-details .detail-actions .btn-danger {
@@ -1747,13 +1751,7 @@
 }
 
 .ms-mobile-day-details .detail-actions .btn-danger:hover {
-  background: #f8b4b4;
-}
-
-@media (max-width: 1024px) {
-  .ms-suggestions-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  background: #fecaca;
 }
 
 @media (max-width: 780px) {
@@ -1769,15 +1767,13 @@
   }
 
   .ms-hero-title {
-    font-size: 1.4rem;
+    font-size: 22px;
     line-height: 1.1;
     margin-bottom: 8px;
   }
 
-  
-
   .ms-hero-desc {
-    font-size: 0.75rem;
+    font-size: 12px;
     line-height: 1.5;
   }
 
@@ -1794,7 +1790,6 @@
   }
 
   .ms-layout {
-    display: flex;
     flex-direction: column;
     width: 100%;
     padding: 10px;
@@ -1802,7 +1797,7 @@
   }
 
   .ms-days-calendar {
-    display: none !important;
+    display: none;
   }
 
   .ms-main-content {
@@ -1815,22 +1810,13 @@
   }
 
   .ms-search-form {
-    display: flex;
-    flex-direction: row;
     gap: 6px;
-    flex-wrap: nowrap;
     width: 100%;
-  }
-
-  .ms-search-wrapper {
-    flex: 1;
-    min-width: 0;
   }
 
   .ms-search-input {
     padding: 10px 12px 10px 34px;
     font-size: 13px;
-    width: 100%;
   }
 
   .ms-search-icon {
@@ -1845,12 +1831,10 @@
   .ms-search-btn {
     padding: 10px 14px;
     font-size: 12px;
-    flex-shrink: 0;
   }
 
   .ms-search-actions {
     gap: 4px;
-    flex-shrink: 0;
   }
 
   .ms-refresh-btn,
@@ -1877,21 +1861,21 @@
     flex: 0 0 calc(33.33% - 6px);
     min-width: 60px;
   }
-  
+
   .ms-filter-select {
     font-size: 10px;
     padding: 6px 8px;
     min-width: 60px;
   }
-  
+
   .ms-plus-btn {
     padding: 6px 12px;
     font-size: 10px;
     margin-left: 0;
   }
+
   .ms-mobile-calendar-hub {
     display: block;
-    width: 100%;
   }
 
   .ms-suggestions-grid {
@@ -1960,8 +1944,6 @@
   }
 }
 
-
-
 @media (max-width: 380px) {
   .ms-hero-split {
     margin-top: 80px;
@@ -1975,16 +1957,15 @@
   }
 
   .ms-hero-title {
-    font-size: 0.9rem;
+    font-size: 14px;
     margin-bottom: 3px;
   }
 
   .ms-hero-desc {
     margin-top: 10px;
     font-size: 7px;
-    line-height: 1.35 ;
+    line-height: 1.35;
   }
-
 
   .ms-hero-image-side {
     flex: 0 0 60%;
@@ -2041,23 +2022,22 @@
   }
 
   .ms-filters-bar {
-    padding: 8px 8px;
+    padding: 8px;
     gap: 4px;
     border-radius: 10px;
-    
   }
 
-    .ms-filter-group {
+  .ms-filter-group {
     flex: 0 0 calc(20% - 3px);
     min-width: 40px;
   }
-  
+
   .ms-filter-select {
     font-size: 8px;
-    padding: 4px 4px;
+    padding: 4px;
     min-width: 40px;
   }
-  
+
   .ms-plus-btn {
     padding: 4px 5px;
     margin-left: 15px;
@@ -2099,7 +2079,7 @@
     padding: 3px 7px;
   }
 
-   .ms-suggestions-grid {
+  .ms-suggestions-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
   }

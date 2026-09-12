@@ -1,41 +1,52 @@
 import React from 'react';
 import './LanguagePopup.css';
 
-const LanguagePopup = () => {
-  const handleLanguageSelect = (lang) => {
-    const token = localStorage.getItem('token');
-    const isLoggedIn = !!token;
-    
-    if (isLoggedIn) {
-      localStorage.setItem('userLanguage', lang);
-      localStorage.setItem('languageSelectedByLoggedInUser', 'true');
-      
-      if (lang === 'urdu') {
-        window.location.href = '/urdu-home';
-      } else {
-        window.location.href = '/home';
-      }
+const LanguagePopup = ({ onLanguageSelected }) => {
+  const handleEnglish = () => {
+    sessionStorage.setItem('languagePopupSelected', 'true');
+
+    if (onLanguageSelected) {
+      onLanguageSelected();
+    }
+
+    if (window.changeChefBotLanguage) {
+      window.changeChefBotLanguage('en', true);
     } else {
-      sessionStorage.setItem('sessionLanguage', lang);
-      sessionStorage.setItem('sessionLanguageSelected', 'true');
-      
-      if (lang === 'urdu') {
-        window.location.href = '/urdu-public';
-      } else {
-        window.location.href = '/';
-      }
+      window.location.href = '/';
+    }
+  };
+
+  const handleUrdu = () => {
+    sessionStorage.setItem('languagePopupSelected', 'true');
+
+    if (onLanguageSelected) {
+      onLanguageSelected();
+    }
+
+    if (window.changeChefBotLanguage) {
+      window.changeChefBotLanguage('ur', true);
     }
   };
 
   return (
     <div className="lang-popup-overlay">
-      <div className="lang-popup-box">
+      <div className="lang-popup-box notranslate">
         <h2>Select Language</h2>
         <p>Choose your preferred language</p>
-        <button className="lang-btn english-btn" onClick={() => handleLanguageSelect('en')}>
+
+        <button
+          type="button"
+          className="lang-btn english-btn"
+          onClick={handleEnglish}
+        >
           English
         </button>
-        <button className="lang-btn urdu-btn" onClick={() => handleLanguageSelect('urdu')}>
+
+        <button
+          type="button"
+          className="lang-btn urdu-btn"
+          onClick={handleUrdu}
+        >
           اردو
         </button>
       </div>
