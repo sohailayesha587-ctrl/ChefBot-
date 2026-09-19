@@ -136,8 +136,8 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
   }; 
  
   const handleLogout = () => { 
-    localStorage.removeItem('token'); 
-    localStorage.removeItem('user'); 
+    localStorage.removeItem('userToken'); 
+    localStorage.removeItem('userData'); 
     localStorage.removeItem('soundEnabled'); 
  
     window.location.href = '/login-page'; 

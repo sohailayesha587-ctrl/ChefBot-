@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const Activity = require('../models/Activity');
 const Pantry = require('../models/Pantry');
 const MealPlan = require('../models/MealPlan');
 const CookingLog = require('../models/CookingLog');
 const Recipe = require('../models/Recipe');
 const CookingGuidance = require('../models/BeginnersGuide');
-const Settings = require('../models/Settings');
 const BeginnersGuide = require('../models/BeginnersGuide');
-const PantryShopping = require('../models/PantryShopping');
 const ShoppingList = require('../models/ShoppingList');
 
 const sendSuccess = (res, data, message = 'Success') => {

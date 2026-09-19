@@ -6,6 +6,8 @@ const RecipesVegChicken = () => {
   const navigate = useNavigate();
   const [vegChickenRecipes, setVegChickenRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
   const [selectedVegChicken, setSelectedVegChicken] = useState(null);
   const [showDetailPanel, setShowDetailPanel] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -157,7 +159,7 @@ const RecipesVegChicken = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/recipes')}>
+        <button className="back-home-btn" onClick={() => navigate(-1)}>
           <span>←</span> Back to Recipes
         </button>
       </div>

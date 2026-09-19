@@ -52,7 +52,7 @@ const PublicHome = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userToken');
     const savedLanguage = localStorage.getItem('userLanguage');
     const isLoggedIn = !!token;
     

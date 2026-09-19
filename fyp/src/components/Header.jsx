@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import './Header.css';
 
 const Header = ({ onSettingsClick, onLanguageChange }) => {
@@ -229,8 +229,8 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
     localStorage.removeItem('hideHeader');
     window.location.href = '/login-page';
   };

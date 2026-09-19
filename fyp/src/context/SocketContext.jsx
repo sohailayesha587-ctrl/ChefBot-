@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     console.log('SocketProvider: Connecting to socket server...');
 
-    const newSocket = io('http://localhost:5000', {
+    const newSocket = io('/api', {
       transports: ['websocket'],
       withCredentials: true
     });

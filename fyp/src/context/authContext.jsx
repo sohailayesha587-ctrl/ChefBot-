@@ -15,20 +15,28 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
+    const userData = localStorage.getItem('userData');
+    const adminData = localStorage.getItem('adminData');
 
-    if (token && userData) {
+    if (userData) {
       try {
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
+        setUser(JSON.parse(userData));
       } catch {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setUser(null);
+        localStorage.removeItem('userData');
+        localStorage.removeItem('userToken');
+      }
+    }
+
+    if (adminData) {
+      try {
+        setAdmin(JSON.parse(adminData));
+      } catch {
+        localStorage.removeItem('adminData');
+        localStorage.removeItem('adminToken');
       }
     }
 
@@ -37,19 +45,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/auth/login',
-        {
-          email,
-          password
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          timeout: 10000
-        }
-      );
+      const response = await axios.post('/api/auth/login', {
+        email,
+        password
+      });
 
       const { token, user } = response.data;
 
@@ -60,10 +59,15 @@ export const AuthProvider = ({ children }) => {
         };
       }
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-
-      setUser(user);
+      if (user.role === 'admin') {
+        localStorage.setItem('adminToken', token);
+        localStorage.setItem('adminData', JSON.stringify(user));
+        setAdmin(user);
+      } else {
+        localStorage.setItem('userToken', token);
+        localStorage.setItem('userData', JSON.stringify(user));
+        setUser(user);
+      }
 
       return {
         success: true,
@@ -81,21 +85,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
     setUser(null);
   };
 
-  const isAdmin = user?.role === 'admin';
+  const adminLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminData');
+    setAdmin(null);
+  };
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        admin,
         loading,
         login,
         logout,
-        isAdmin
+        adminLogout,
+        isAdmin: admin?.role === 'admin'
       }}
     >
       {children}

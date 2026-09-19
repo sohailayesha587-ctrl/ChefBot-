@@ -268,7 +268,7 @@ const recipesToMigrate = [
     cookingTime: 45,
     isActive: true,
     isHalal: true,
-    description: "Extra spicy chicken curry with chana dal – full of red chili and green chilies, great for heat lovers.",
+    description: "Extra spicy chicken curry with chana dal, full of red chili and green chilies, great for heat lovers.",
     category: "Dinner",
     subCategory: "dal-chicken",
     dietType: "Non-Vegetarian",

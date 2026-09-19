@@ -24,7 +24,7 @@ const ShoppingList = () => {
   const categories = ['Groceries', 'Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Meat', 'Beverages', 'Snacks', 'Household', 'Other'];
   const units = ['pieces', 'kg', 'g', 'liters', 'ml', 'dozen', 'packets', 'bottles'];
 
-  const getToken = () => localStorage.getItem('token');
+  const getToken = () => localStorage.getItem('userToken');
   const shareOnWhatsApp = () => {
   if (items.length === 0) {
     showToast('No items to share!', 'warning');

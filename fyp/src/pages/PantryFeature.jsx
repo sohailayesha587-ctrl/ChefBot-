@@ -55,7 +55,7 @@ const PantryFeature = () => {
     return item.quantity <= 0.5;
   };
 
-  const getToken = () => localStorage.getItem('token');
+  const getToken = () => localStorage.getItem('userToken');
 
   const fetchPantryItems = async () => {
     try {

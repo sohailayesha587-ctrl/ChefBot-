@@ -101,13 +101,13 @@ const ChangeAccountInfoPage = () => {
         throw new Error(verifyData.message || 'Invalid OTP');
       }
 
-      const userData = JSON.parse(localStorage.getItem('user') || '{}');
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
       if (changeType === 'email') {
         userData.email = newValue;
       } else {
         userData.mobile = newValue;
       }
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userData', JSON.stringify(userData));
 
       setMessage(changeType === 'email' ? 'Email changed successfully!' : 'Mobile number changed successfully!');
       

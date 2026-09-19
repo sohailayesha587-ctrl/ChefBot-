@@ -139,7 +139,7 @@ const MealFeature = () => {
   ];
   const quickMembers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  const getToken = () => localStorage.getItem('token');
+  const getToken = () => localStorage.getItem('userToken');
 
   useEffect(() => {
     fetchPantry();

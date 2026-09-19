@@ -157,7 +157,7 @@ const RecipesDalMutton = () => {
       </main>
 
       <div className="back-button-container">
-        <button className="back-home-btn" onClick={() => navigate('/recipes')}>
+        <button className="back-home-btn" onClick={() => navigate(-1)}>
           <span>←</span> Back to Recipes
         </button>
       </div>

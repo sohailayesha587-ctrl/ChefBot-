@@ -129,11 +129,8 @@ router.put('/recipe-collection/:id', adminController.updateRecipe);
 
 router.delete('/recipe-collection/:id', adminController.deleteFromRecipe);
 
-router.get('/daily-report', adminController.getDailyReports);
 
-router.get('/settings', adminController.getSettings);
 
-router.put('/settings', adminController.updateSettings);
 
 router.get('/export', adminController.exportData);
 

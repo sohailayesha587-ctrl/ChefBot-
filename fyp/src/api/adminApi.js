@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const ADMIN_API_URL = 'http://localhost:5000/api/admin';
+const ADMIN_API_URL = '/api/admin';
 
 const getToken = () => {
-  return localStorage.getItem('token');
+  return localStorage.getItem('adminToken');
 };
 
 const getConfig = () => ({

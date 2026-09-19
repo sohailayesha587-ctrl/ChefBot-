@@ -272,7 +272,7 @@ const MealSuggestion = () => {
   const fetchMonthHistory = async () => {
     try {
       setLoadingHistory(true);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/meal-suggestions/cooking-log/month', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -293,7 +293,7 @@ const MealSuggestion = () => {
 
   const fetchAllRecipes = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/recipes?limit=100', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -306,7 +306,7 @@ const MealSuggestion = () => {
 
   const fetchPantryItems = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/pantry', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -325,7 +325,7 @@ const MealSuggestion = () => {
 
   const fetchCookingLogForDate = async (date) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch(`/api/meal-suggestions/cooking-log/${date}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -349,7 +349,7 @@ const MealSuggestion = () => {
   const loadAllDayStatuses = async () => {
     for (const day of weekDays) {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('userToken');
         const response = await fetch(`/api/meal-suggestions/cooking-log/${day.date}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -371,7 +371,7 @@ const MealSuggestion = () => {
       return;
     }
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch(`/api/recipes/search?q=${encodeURIComponent(query)}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -411,7 +411,7 @@ const MealSuggestion = () => {
 
   const fetchPatientRecipes = async (type, page = 0) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const limit = 5;
       setPatientSections(prev => ({ ...prev, [type]: { ...prev[type], loading: true } }));
       const response = await fetch(`/api/recipes/patient/${type}?limit=${limit}&skip=${page * limit}&dietType=${filters.dietType}`, {
@@ -462,7 +462,7 @@ const MealSuggestion = () => {
   const handleAddToShopping = async (recipe) => {
     if (!recipe.missing || recipe.missing.length === 0) { toast.info('No missing ingredients to add'); return; }
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const shoppingResponse = await fetch('/api/shopping', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -497,7 +497,7 @@ const MealSuggestion = () => {
     try {
       setLoading(true);
       setError(null);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       let pantryNames = pantryItems;
       if (pantryNames.length === 0) pantryNames = await fetchPantryItems();
       let url = `/api/meal-suggestions?`;
@@ -544,7 +544,7 @@ const MealSuggestion = () => {
   const handleNoCooking = async () => {
     if (!selectedDate) { toast.error('No date selected'); return; }
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/meal-suggestions/cooking-log', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -590,7 +590,7 @@ const MealSuggestion = () => {
   const handleDeleteMeal = async (meal) => {
     if (!selectedDate) return toast.error('No date selected');
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const mealId = meal._id || meal.id;
       const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${mealId}`, {
         method: 'DELETE',
@@ -619,7 +619,7 @@ const MealSuggestion = () => {
     if (!selectedDate) return toast.error('No date selected');
     if (!manualRecipeName.trim()) return toast.warning('Please enter recipe name');
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       if (editingMeal) {
         const response = await fetch(`/api/meal-suggestions/cooking-log/${selectedDate.date}/meal/${editingMeal._id || editingMeal.id}`, {
           method: 'PUT',
@@ -656,7 +656,7 @@ const MealSuggestion = () => {
 
   const handleAddMissingToShopping = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/shopping/add-multiple', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -684,7 +684,7 @@ const MealSuggestion = () => {
     if (!membersValue || membersValue === '') return toast.warning('Please select number of people');
     setIsCooking(true);
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       const response = await fetch('/api/meal-suggestions/cook', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -746,7 +746,7 @@ const MealSuggestion = () => {
 
   const getUserIdFromToken = () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userToken');
       if (!token) return null;
 
       const payload = JSON.parse(atob(token.split('.')[1]));

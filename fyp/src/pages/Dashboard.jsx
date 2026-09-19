@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import adminApi from '../api/adminApi';
 import { showToast } from '../components/Toast';
 import ForgotPasswordPage from './ForgotPasswordPage';
@@ -7,8 +7,7 @@ import ResetPasswordPage from './ResetPasswordPage';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const { user, loading: authLoading, login, logout } = useAuth();
-
+const { admin, loading: authLoading, login, adminLogout } = useAuth();
   const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || '';
   const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || '';
 
@@ -70,8 +69,7 @@ const Dashboard = () => {
     totalShoppingLists: 0
   });
 
-  const isAdmin = user?.role === 'admin';
-
+const isAdmin = admin?.role === 'admin';
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -87,7 +85,7 @@ const Dashboard = () => {
     }
 
     if (result.user?.role !== 'admin') {
-      logout();
+adminLogout();
       setLoginError('Admin access is required.');
       setLoginLoading(false);
       return;
@@ -117,7 +115,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
-      logout();
+      adminLogout();
       setUsers([]);
       setPantryItems([]);
       setShoppingItems([]);
@@ -139,7 +137,7 @@ const Dashboard = () => {
 
   const checkSystemHealth = async () => {
     try {
-      const serverRes = await fetch('http://localhost:5000/api/health');
+      const serverRes = await fetch('/api/health');
 
       setServerStatus(serverRes.ok ? 'Online' : 'Offline');
     } catch {
@@ -147,15 +145,14 @@ const Dashboard = () => {
     }
 
     try {
-      const token = localStorage.getItem('token');
-
+const token = localStorage.getItem('adminToken');
       if (!token) {
         setDatabaseStatus('Disconnected');
         return;
       }
 
       const dbRes = await fetch(
-        'http://localhost:5000/api/admin/dashboard/stats',
+        '/api/admin/dashboard/stats',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -313,8 +310,8 @@ const Dashboard = () => {
       return;
     }
 
-    if (!user) {
-      setLoading(false);
+if (!admin) {
+        setLoading(false);
       return;
     }
 
@@ -326,7 +323,7 @@ const Dashboard = () => {
 
     fetchDashboardData();
     checkSystemHealth();
-  }, [authLoading, user, isAdmin]);
+  },[authLoading, admin, isAdmin]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -808,14 +805,14 @@ const Dashboard = () => {
 
   if (authLoading) {
     return (
-      <div className="dashboard-loading">
+      <div className="d-dashboard-loading">
         <h2>Checking authentication...</h2>
-        <div className="spinner"></div>
+        <div className="d-spinner"></div>
       </div>
     );
   }
 
-  if (!user && authPage === 'forgot') {
+  if (!admin && authPage === 'forgot') {
     return (
       <ForgotPasswordPage
         onBack={goToLogin}
@@ -824,7 +821,7 @@ const Dashboard = () => {
     );
   }
 
-  if (!user && authPage === 'reset') {
+  if (!admin && authPage === 'reset') {
     return (
       <ResetPasswordPage
         email={resetEmail}
@@ -835,20 +832,20 @@ const Dashboard = () => {
     );
   }
 
-  if (!user) {
+  if (!admin) {
     return (
-      <div className="dashboard-login-wrapper">
-        <div className="dashboard-login-container">
-          <div className="dashboard-login-left">
-            <div className="dashboard-login-logo">
-              <div className="dashboard-login-logo-circle">
+      <div className="d-dashboard-login-wrapper">
+        <div className="d-dashboard-login-container">
+          <div className="d-dashboard-login-left">
+            <div className="d-dashboard-login-logo">
+              <div className="d-dashboard-login-logo-circle">
                 <span>CB</span>
               </div>
               <h1>ChefBot</h1>
               <p>Admin Dashboard</p>
             </div>
 
-            <div className="dashboard-login-features">
+            <div className="d-dashboard-login-features">
               <ul>
                 <li>Manage user accounts</li>
                 <li>Oversee recipes and meal plans</li>
@@ -858,23 +855,23 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="dashboard-login-right">
-            <div className="dashboard-login-header">
+          <div className="d-dashboard-login-right">
+            <div className="d-dashboard-login-header">
               <h2>Admin Login</h2>
               <p>Enter your credentials to access the dashboard</p>
             </div>
 
             {loginError && (
-              <div className="dashboard-login-error">
+              <div className="d-dashboard-login-error">
                 {loginError}
               </div>
             )}
 
             <form
-              className="dashboard-login-form"
+              className="d-dashboard-login-form"
               onSubmit={handleLogin}
             >
-              <div className="dashboard-login-group">
+              <div className="d-dashboard-login-group">
                 <label>Email Address</label>
                 <input
                   type="email"
@@ -885,10 +882,10 @@ const Dashboard = () => {
                 />
               </div>
 
-              <div className="dashboard-login-group">
+              <div className="d-dashboard-login-group">
                 <label>Password</label>
 
-                <div className="dashboard-login-password-wrapper">
+                <div className="d-dashboard-login-password-wrapper">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
@@ -899,7 +896,7 @@ const Dashboard = () => {
 
                   <button
                     type="button"
-                    className="dashboard-login-password-toggle"
+                    className="d-dashboard-login-password-toggle"
                     onClick={togglePasswordVisibility}
                   >
                     {showPassword ? 'Hide' : 'Show'}
@@ -907,10 +904,10 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="dashboard-login-forgot">
+              <div className="d-dashboard-login-forgot">
                 <button
                   type="button"
-                  className="dashboard-login-forgot-link"
+                  className="d-dashboard-login-forgot-link"
                   onClick={goToForgotPassword}
                 >
                   Forgot Password?
@@ -919,7 +916,7 @@ const Dashboard = () => {
 
               <button
                 type="submit"
-                className="dashboard-login-btn"
+                className="d-dashboard-login-btn"
                 disabled={loginLoading}
               >
                 {loginLoading ? 'Logging in...' : 'Login'}
@@ -933,7 +930,7 @@ const Dashboard = () => {
 
   if (!isAdmin) {
     return (
-      <div className="dashboard-error">
+      <div className="d-dashboard-error">
         <h2>Access Denied</h2>
         <p>Admin access is required to use this dashboard.</p>
         <button onClick={handleLogout}>Logout</button>
@@ -943,16 +940,16 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="dashboard-loading">
+      <div className="d-dashboard-loading">
         <h2>Loading Dashboard...</h2>
-        <div className="spinner"></div>
+        <div className="d-spinner"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="dashboard-error">
+      <div className="d-dashboard-error">
         <h2>Error</h2>
         <p>{error}</p>
         <button onClick={fetchDashboardData}>Try Again</button>
@@ -961,14 +958,14 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="chefbot-dashboard">
+    <div className="d-chefbot-dashboard">
       {showConfirmModal && confirmUser && (
-        <div className="modal-overlay" onClick={closeConfirmModal}>
+        <div className="d-modal-overlay" onClick={closeConfirmModal}>
           <div
-            className="modal-container"
+            className="d-modal-container"
             onClick={e => e.stopPropagation()}
           >
-            <div className="modal-icon">
+            <div className="d-modal-icon">
               {confirmAction === 'delete'
                 ? 'Delete'
                 : confirmAction === 'block'
@@ -976,7 +973,7 @@ const Dashboard = () => {
                   : 'Unblock'}
             </div>
 
-            <h3 className="modal-title">
+            <h3 className="d-modal-title">
               {confirmAction === 'delete'
                 ? 'Delete User'
                 : confirmAction === 'block'
@@ -984,25 +981,25 @@ const Dashboard = () => {
                   : 'Unblock User'}
             </h3>
 
-            <p className="modal-message">
+            <p className="d-modal-message">
               {confirmMessage}
             </p>
 
-            <div className="modal-actions">
+            <div className="d-modal-actions">
               <button
-                className="modal-cancel"
+                className="d-modal-cancel"
                 onClick={closeConfirmModal}
               >
                 Cancel
               </button>
 
               <button
-                className={`modal-confirm ${
+                className={`d-modal-confirm ${
                   confirmAction === 'delete'
-                    ? 'confirm-delete'
+                    ? 'd-confirm-delete'
                     : confirmAction === 'block'
-                      ? 'confirm-block'
-                      : 'confirm-unblock'
+                      ? 'd-confirm-block'
+                      : 'd-confirm-unblock'
                 }`}
                 onClick={handleConfirmAction}
               >
@@ -1019,34 +1016,34 @@ const Dashboard = () => {
 
       {showPantryDeleteModal && pantryItemToDelete && (
         <div
-          className="modal-overlay"
+          className="d-modal-overlay"
           onClick={closePantryDeleteModal}
         >
           <div
-            className="modal-container"
+            className="d-modal-container"
             onClick={e => e.stopPropagation()}
           >
-            <div className="modal-icon">Delete</div>
+            <div className="d-modal-icon">Delete</div>
 
-            <h3 className="modal-title">
+            <h3 className="d-modal-title">
               Delete Pantry Item
             </h3>
 
-            <p className="modal-message">
+            <p className="d-modal-message">
               Are you sure you want to delete{' '}
               <strong>{pantryItemToDelete.name}</strong>?
             </p>
 
-            <div className="modal-actions">
+            <div className="d-modal-actions">
               <button
-                className="modal-cancel"
+                className="d-modal-cancel"
                 onClick={closePantryDeleteModal}
               >
                 Cancel
               </button>
 
               <button
-                className="modal-confirm confirm-delete"
+                className="d-modal-confirm d-confirm-delete"
                 onClick={handlePantryDeleteConfirm}
               >
                 Delete
@@ -1058,36 +1055,36 @@ const Dashboard = () => {
 
       {showRecipeModal && recipeModalData && (
         <div
-          className="modal-overlay"
+          className="d-modal-overlay"
           onClick={closeRecipeModal}
         >
           <div
-            className="modal-container"
+            className="d-modal-container"
             onClick={e => e.stopPropagation()}
           >
-            <div className="modal-icon">
+            <div className="d-modal-icon">
               {recipeModalAction === 'delete' ? 'Delete' : 'Edit'}
             </div>
 
-            <h3 className="modal-title">
+            <h3 className="d-modal-title">
               {recipeModalAction === 'delete'
                 ? 'Delete Recipe'
                 : 'Edit Recipe'}
             </h3>
 
-            <p className="modal-message">
+            <p className="d-modal-message">
               {recipeModalMessage}
             </p>
 
             {recipeModalAction === 'edit' && (
-              <div className="modal-input-group">
-                <label className="modal-label">
+              <div className="d-modal-input-group">
+                <label className="d-modal-label">
                   Recipe Name
                 </label>
 
                 <input
                   type="text"
-                  className="modal-input"
+                  className="d-modal-input"
                   value={editRecipeName}
                   onChange={e =>
                     setEditRecipeName(e.target.value)
@@ -1097,19 +1094,19 @@ const Dashboard = () => {
               </div>
             )}
 
-            <div className="modal-actions">
+            <div className="d-modal-actions">
               <button
-                className="modal-cancel"
+                className="d-modal-cancel"
                 onClick={closeRecipeModal}
               >
                 Cancel
               </button>
 
               <button
-                className={`modal-confirm ${
+                className={`d-modal-confirm ${
                   recipeModalAction === 'delete'
-                    ? 'confirm-delete'
-                    : 'confirm-edit'
+                    ? 'd-confirm-delete'
+                    : 'd-confirm-edit'
                 }`}
                 onClick={handleRecipeConfirm}
               >
@@ -1124,36 +1121,36 @@ const Dashboard = () => {
 
       {showEditModal && editModalData && (
         <div
-          className="modal-overlay"
+          className="d-modal-overlay"
           onClick={closeEditModal}
         >
           <div
-            className="modal-container"
+            className="d-modal-container"
             onClick={e => e.stopPropagation()}
           >
-            <div className="modal-icon">Edit</div>
+            <div className="d-modal-icon">Edit</div>
 
-            <h3 className="modal-title">
+            <h3 className="d-modal-title">
               Edit {editModalType}
             </h3>
 
-            <p className="modal-message">
+            <p className="d-modal-message">
               Update the details below
             </p>
 
-            <div className="modal-input-group">
+            <div className="d-modal-input-group">
               {Object.keys(editModalFields).map(key => (
                 <div
                   key={key}
                   style={{ marginBottom: '12px' }}
                 >
-                  <label className="modal-label">
+                  <label className="d-modal-label">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </label>
 
                   <input
                     type="text"
-                    className="modal-input"
+                    className="d-modal-input"
                     value={editModalFields[key] || ''}
                     onChange={e =>
                       setEditModalFields({
@@ -1167,16 +1164,16 @@ const Dashboard = () => {
               ))}
             </div>
 
-            <div className="modal-actions">
+            <div className="d-modal-actions">
               <button
-                className="modal-cancel"
+                className="d-modal-cancel"
                 onClick={closeEditModal}
               >
                 Cancel
               </button>
 
               <button
-                className="modal-confirm confirm-edit"
+                className="d-modal-confirm d-confirm-edit"
                 onClick={handleEditConfirm}
               >
                 Save Changes
@@ -1188,33 +1185,33 @@ const Dashboard = () => {
 
       {showDeleteModal && deleteModalData && (
         <div
-          className="modal-overlay"
+          className="d-modal-overlay"
           onClick={closeDeleteModal}
         >
           <div
-            className="modal-container"
+            className="d-modal-container"
             onClick={e => e.stopPropagation()}
           >
-            <div className="modal-icon">Delete</div>
+            <div className="d-modal-icon">Delete</div>
 
-            <h3 className="modal-title">
+            <h3 className="d-modal-title">
               {deleteModalType}
             </h3>
 
-            <p className="modal-message">
+            <p className="d-modal-message">
               {deleteModalMessage}
             </p>
 
-            <div className="modal-actions">
+            <div className="d-modal-actions">
               <button
-                className="modal-cancel"
+                className="d-modal-cancel"
                 onClick={closeDeleteModal}
               >
                 Cancel
               </button>
 
               <button
-                className="modal-confirm confirm-delete"
+                className="d-modal-confirm d-confirm-delete"
                 onClick={handleDeleteConfirm}
               >
                 Delete
@@ -1225,27 +1222,27 @@ const Dashboard = () => {
       )}
 
       <div
-        className={`sidebar-overlay ${
-          sidebarOpen ? 'open' : ''
+        className={`d-sidebar-overlay ${
+          sidebarOpen ? 'd-open' : ''
         }`}
         onClick={closeSidebar}
       />
 
       <aside
-        className={`sidebar ${
-          sidebarOpen ? 'open' : ''
+        className={`d-sidebar ${
+          sidebarOpen ? 'd-open' : ''
         }`}
       >
-        <div className="logo-area">
+        <div className="d-logo-area">
           <h2>ChefBot</h2>
-          <span className="admin-badge">Admin</span>
+          <span className="d-admin-badge">Admin</span>
         </div>
 
-        <nav className="nav-menu">
+        <nav className="d-nav-menu">
           <button
             className={
               activeSection === 'dashboard'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1259,7 +1256,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'users'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1273,7 +1270,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'pantry'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1287,7 +1284,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'suggestions'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1301,7 +1298,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'collection'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1315,7 +1312,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'mealplans'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1329,7 +1326,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'shoppinglists'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1343,7 +1340,7 @@ const Dashboard = () => {
           <button
             className={
               activeSection === 'beginners'
-                ? 'active'
+                ? 'd-active'
                 : ''
             }
             onClick={() => {
@@ -1355,9 +1352,9 @@ const Dashboard = () => {
           </button>
         </nav>
 
-        <div className="sidebar-logout">
+        <div className="d-sidebar-logout">
           <button
-            className="logout-sidebar-btn"
+            className="d-logout-sidebar-btn"
             onClick={handleLogout}
           >
             Logout
@@ -1365,11 +1362,11 @@ const Dashboard = () => {
         </div>
       </aside>
 
-      <main className="main-content">
+      <main className="d-main-content">
         {activeSection === 'dashboard' && (
-          <div className="section overview-section">
-            <div className="date-time-header">
-              <div className="current-date">
+          <div className="d-section d-overview-section">
+            <div className="d-date-time-header">
+              <div className="d-current-date">
                 {currentTime.toLocaleDateString('en-US', {
                   weekday: 'long',
                   year: 'numeric',
@@ -1378,13 +1375,13 @@ const Dashboard = () => {
                 })}
               </div>
 
-              <div className="current-time">
+              <div className="d-current-time">
                 {currentTime.toLocaleTimeString()}
               </div>
             </div>
 
-            <div className="welcome-banner-simple">
-              <div className="welcome-text-simple">
+            <div className="d-welcome-banner-simple">
+              <div className="d-welcome-text-simple">
                 <h2>Welcome back, Admin</h2>
                 <p>
                   Here's what's happening with your ChefBot
@@ -1393,36 +1390,36 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="overview-stats-grid">
+            <div className="d-overview-stats-grid">
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() => setActiveSection('users')}
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>{systemStats.totalUsers || 0}</h3>
                   <p>Total Users</p>
                 </div>
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('collection')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>{systemStats.totalRecipes || 0}</h3>
                   <p>Total Recipes</p>
                 </div>
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('suggestions')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>
                     {systemStats.totalSuggestions || 0}
                   </h3>
@@ -1431,12 +1428,12 @@ const Dashboard = () => {
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('mealplans')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>
                     {systemStats.totalMealPlans || 0}
                   </h3>
@@ -1445,12 +1442,12 @@ const Dashboard = () => {
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('pantry')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>
                     {systemStats.totalPantryItems || 0}
                   </h3>
@@ -1459,12 +1456,12 @@ const Dashboard = () => {
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('shoppinglists')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>
                     {systemStats.totalShoppingLists || 0}
                   </h3>
@@ -1473,30 +1470,30 @@ const Dashboard = () => {
               </div>
 
               <div
-                className="overview-stat-card"
+                className="d-overview-stat-card"
                 onClick={() =>
                   setActiveSection('beginners')
                 }
               >
-                <div className="overview-stat-info">
+                <div className="d-overview-stat-info">
                   <h3>{beginnersGuide.length}</h3>
                   <p>Beginners Guide</p>
                 </div>
               </div>
             </div>
 
-            <div className="system-health">
+            <div className="d-system-health">
               <h3>System Health</h3>
 
-              <div className="health-stats">
-                <div className="health-item">
+              <div className="d-health-stats">
+                <div className="d-health-item">
                   <div>Server Status</div>
 
                   <div
                     className={
                       serverStatus === 'Online'
-                        ? 'online'
-                        : 'offline'
+                        ? 'd-online'
+                        : 'd-offline'
                     }
                   >
                     {serverStatus === 'Checking...'
@@ -1507,14 +1504,14 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="health-item">
+                <div className="d-health-item">
                   <div>Database Status</div>
 
                   <div
                     className={
                       databaseStatus === 'Connected'
-                        ? 'online'
-                        : 'offline'
+                        ? 'd-online'
+                        : 'd-offline'
                     }
                   >
                     {databaseStatus === 'Checking...'
@@ -1542,45 +1539,45 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'users' && (
-          <div className="section users-section">
-            <div className="section-header">
+          <div className="d-section d-users-section">
+            <div className="d-section-header">
               <h2>Manage User Accounts</h2>
-              <span className="total-count">
+              <span className="d-total-count">
                 {users.length} users
               </span>
             </div>
 
             {!Array.isArray(users) || users.length === 0 ? (
-              <div className="empty-state">
+              <div className="d-empty-state">
                 <p>No users registered yet</p>
-                <p className="empty-sub">
+                <p className="d-empty-sub">
                   Users will appear here once they register
                 </p>
               </div>
             ) : (
-              <div className="users-grid">
+              <div className="d-users-grid">
                 {users.map(userData => (
                   <div
                     key={userData._id}
-                    className="user-square-card"
+                    className="d-user-square-card"
                   >
-                    <div className="user-square-avatar">
+                    <div className="d-user-square-avatar">
                       {userData.name?.charAt(0).toUpperCase() ||
                         'U'}
                     </div>
 
-                    <div className="user-square-name">
+                    <div className="d-user-square-name">
                       {userData.name}
                     </div>
 
-                    <div className="user-square-email">
+                    <div className="d-user-square-email">
                       {userData.email}
                     </div>
 
-                    <div className="user-square-actions">
+                    <div className="d-user-square-actions">
                       {userData.isBlocked ? (
                         <button
-                          className="unblock-btn"
+                          className="d-unblock-btn"
                           onClick={() =>
                             handleUnblockUser(userData)
                           }
@@ -1589,7 +1586,7 @@ const Dashboard = () => {
                         </button>
                       ) : (
                         <button
-                          className="block-btn"
+                          className="d-block-btn"
                           onClick={() =>
                             handleBlockUser(userData)
                           }
@@ -1599,7 +1596,7 @@ const Dashboard = () => {
                       )}
 
                       <button
-                        className="delete-btn"
+                        className="d-delete-btn"
                         onClick={() =>
                           handleDeleteUser(userData)
                         }
@@ -1615,17 +1612,17 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'pantry' && (
-          <div className="section pantry-section">
-            <div className="section-header">
+          <div className="d-section d-pantry-section">
+            <div className="d-section-header">
               <h2>User Pantry Items</h2>
 
-              <div className="header-actions">
-                <span className="total-count">
+              <div className="d-header-actions">
+                <span className="d-total-count">
                   {pantryItems.length} items
                 </span>
 
                 <button
-                  className="refresh-btn"
+                  className="d-refresh-btn"
                   onClick={fetchDashboardData}
                   title="Refresh pantry data"
                 >
@@ -1635,9 +1632,9 @@ const Dashboard = () => {
             </div>
 
             {pantryItems.length === 0 ? (
-              <div className="empty-state">
+              <div className="d-empty-state">
                 <p>No pantry items added by users yet</p>
-                <p className="empty-sub">
+                <p className="d-empty-sub">
                   Ask users to add items to their pantry
                 </p>
               </div>
@@ -1663,69 +1660,69 @@ const Dashboard = () => {
               ).map(userGroup => (
                 <div
                   key={userGroup.userId}
-                  className="user-pantry-group"
+                  className="d-user-pantry-group"
                 >
-                  <div className="user-pantry-header">
-                    <div className="user-info">
+                  <div className="d-user-pantry-header">
+                    <div className="d-user-info">
                       <span
-                        className="suggestion-user-info"
+                        className="d-suggestion-user-info"
                         style={{ marginBottom: '0' }}
                       >
-                        <span className="user-email-only">
+                        <span className="d-user-email-only">
                           {userGroup.userEmail ||
                             'No Email'}
                         </span>
                       </span>
                     </div>
 
-                    <div className="user-stats">
-                      <span className="item-count-badge">
+                    <div className="d-user-stats">
+                      <span className="d-item-count-badge">
                         {userGroup.items.length} items
                       </span>
                     </div>
                   </div>
 
-                  <div className="pantry-items-grid">
+                  <div className="d-pantry-items-grid">
                     {userGroup.items.map(item => (
                       <div
                         key={item._id}
-                        className="pantry-item-card"
+                        className="d-pantry-item-card"
                       >
-                        <div className="pantry-item-header">
-                          <span className="pantry-item-name">
+                        <div className="d-pantry-item-header">
+                          <span className="d-pantry-item-name">
                             {item.name}
                           </span>
 
                           {item.isLowStock && (
-                            <span className="low-stock-badge">
+                            <span className="d-low-stock-badge">
                               Low Stock
                             </span>
                           )}
                         </div>
 
-                        <div className="pantry-item-details">
+                        <div className="d-pantry-item-details">
                           <p>
-                            <span className="detail-label">
+                            <span className="d-detail-label">
                               Quantity:
                             </span>
 
-                            <span className="detail-value">
+                            <span className="d-detail-value">
                               {item.quantity}{' '}
                               {item.unit || 'units'}
                             </span>
                           </p>
 
                           <p>
-                            <span className="detail-label">
+                            <span className="d-detail-label">
                               Category:
                             </span>
 
-                            <span className="detail-value">
+                            <span className="d-detail-value">
                               {item.category || 'General'}
                             </span>
                           </p>
 
-                          <p className="pantry-item-added">
+                          <p className="d-pantry-item-added">
                             Added:{' '}
                             {item.createdAt
                               ? new Date(
@@ -1735,9 +1732,9 @@ const Dashboard = () => {
                           </p>
                         </div>
 
-                        <div className="pantry-item-actions">
+                        <div className="d-pantry-item-actions">
                           <button
-                            className="delete-btn"
+                            className="d-delete-btn"
                             onClick={() =>
                               openPantryDeleteModal(item)
                             }
@@ -1755,23 +1752,23 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'suggestions' && (
-          <div className="section suggestions-section">
-            <div className="section-header">
+          <div className="d-section d-suggestions-section">
+            <div className="d-section-header">
               <h2>Meal Suggestions</h2>
 
-              <div className="header-actions">
-                <span className="total-count">
+              <div className="d-header-actions">
+                <span className="d-total-count">
                   {mealSuggestions.length} suggestions
                 </span>
               </div>
             </div>
 
-            <div className="items-grid">
+            <div className="d-items-grid">
               {!Array.isArray(mealSuggestions) ||
               mealSuggestions.length === 0 ? (
-                <div className="empty-state">
+                <div className="d-empty-state">
                   <p>No meal suggestions found</p>
-                  <p className="empty-sub">
+                  <p className="d-empty-sub">
                     No suggestions available at the moment
                   </p>
                 </div>
@@ -1791,21 +1788,21 @@ const Dashboard = () => {
                   return (
                     <div
                       key={suggestion._id}
-                      className="item-card"
+                      className="d-item-card"
                     >
-                      <div className="suggestion-recipe-header">
-                        <span className="recipe-name">
+                      <div className="d-suggestion-recipe-header">
+                        <span className="d-recipe-name">
                           {recipeName}
                         </span>
                       </div>
 
-                      <div className="suggestion-user-info">
-                        <span className="user-email-only">
+                      <div className="d-suggestion-user-info">
+                        <span className="d-user-email-only">
                           {userEmail || 'No Email'}
                         </span>
                       </div>
 
-                      <div className="item-details">
+                      <div className="d-item-details">
                         {suggestion.members > 0 && (
                           <p>
                             <strong>Members:</strong>{' '}
@@ -1814,9 +1811,9 @@ const Dashboard = () => {
                         )}
                       </div>
 
-                      <div className="card-actions">
+                      <div className="d-card-actions">
                         <button
-                          className="delete-btn remove-only-btn"
+                          className="d-delete-btn d-remove-only-btn"
                           onClick={() =>
                             handleDeleteSuggestion(
                               suggestion
@@ -1835,22 +1832,22 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'collection' && (
-          <div className="section collection-section">
-            <div className="section-header">
+          <div className="d-section d-collection-section">
+            <div className="d-section-header">
               <h2>Recipe Collection</h2>
 
-              <span className="total-count">
+              <span className="d-total-count">
                 {recipeCollection.length} recipes
               </span>
             </div>
 
-            <div className="recipe-category-filters">
+            <div className="d-recipe-category-filters">
               {getRecipeCategories().map(category => (
                 <button
                   key={category}
-                  className={`filter-btn ${
+                  className={`d-filter-btn ${
                     selectedRecipeCategory === category
-                      ? 'active'
+                      ? 'd-active'
                       : ''
                   }`}
                   onClick={() =>
@@ -1862,17 +1859,17 @@ const Dashboard = () => {
               ))}
             </div>
 
-            <div className="recipe-count">
+            <div className="d-recipe-count">
               Showing {getFilteredRecipes().length} of{' '}
               {recipeCollection.length} recipes
             </div>
 
-            <div className="items-grid">
+            <div className="d-items-grid">
               {getFilteredRecipes().length === 0 ? (
-                <div className="empty-state">
+                <div className="d-empty-state">
                   <p>No recipes found</p>
 
-                  <p className="empty-sub">
+                  <p className="d-empty-sub">
                     {recipeCollection.length === 0
                       ? 'No recipes in collection yet'
                       : 'Try selecting a different category'}
@@ -1882,29 +1879,29 @@ const Dashboard = () => {
                 getFilteredRecipes().map(recipe => (
                   <div
                     key={recipe._id}
-                    className="item-card"
+                    className="d-item-card"
                   >
-                    <div className="item-header">
+                    <div className="d-item-header">
                       <h3>{recipe.recipeName}</h3>
 
                       {recipe.views > 50 && (
-                        <span className="popular-badge">
+                        <span className="d-popular-badge">
                           Popular
                         </span>
                       )}
                     </div>
 
-                    <div className="item-details">
-                      <p className="item-category">
+                    <div className="d-item-details">
+                      <p className="d-item-category">
                         {Array.isArray(recipe.category)
                           ? recipe.category.join(', ')
                           : recipe.category || 'General'}
                       </p>
                     </div>
 
-                    <div className="card-actions">
+                    <div className="d-card-actions">
                       <button
-                        className="edit-btn"
+                        className="d-edit-btn"
                         onClick={() =>
                           handleEditRecipe(recipe)
                         }
@@ -1913,7 +1910,7 @@ const Dashboard = () => {
                       </button>
 
                       <button
-                        className="delete-btn"
+                        className="d-delete-btn"
                         onClick={() =>
                           handleDeleteFromCollection(recipe)
                         }
@@ -1929,25 +1926,25 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'mealplans' && (
-          <div className="section mealplans-section">
-            <div className="section-header">
+          <div className="d-section d-mealplans-section">
+            <div className="d-section-header">
               <h2>Meal Plans</h2>
 
-              <span className="total-count">
+              <span className="d-total-count">
                 {mealPlans.length} plans
               </span>
             </div>
 
             {!Array.isArray(mealPlans) ||
             mealPlans.length === 0 ? (
-              <div className="empty-state">
+              <div className="d-empty-state">
                 <p>No meal plans created yet</p>
-                <p className="empty-sub">
+                <p className="d-empty-sub">
                   Meal plans will appear here once created
                 </p>
               </div>
             ) : (
-              <div className="mealplans-grid">
+              <div className="d-mealplans-grid">
                 {mealPlans.map(plan => {
                   let userEmail = 'No Email';
 
@@ -1992,27 +1989,27 @@ const Dashboard = () => {
                   return (
                     <div
                       key={plan._id}
-                      className="item-card"
+                      className="d-item-card"
                     >
                       <div
-                        className="suggestion-user-info"
+                        className="d-suggestion-user-info"
                         style={{ marginBottom: '8px' }}
                       >
-                        <span className="user-email-only">
+                        <span className="d-user-email-only">
                           {userEmail}
                         </span>
                       </div>
 
-                      <div className="item-header">
+                      <div className="d-item-header">
                         <h3>
                           {plan.planType || 'Daily'}
                         </h3>
                       </div>
 
-                      <div className="item-details">
+                      <div className="d-item-details">
                         {mealsArray.length > 0 && (
                           <div
-                            className="mealplan-meals"
+                            className="d-mealplan-meals"
                             style={{ marginTop: '6px' }}
                           >
                             <strong>Meals:</strong>
@@ -2021,7 +2018,7 @@ const Dashboard = () => {
                               (meal, index) => (
                                 <div
                                   key={index}
-                                  className="mealplan-meal-item"
+                                  className="d-mealplan-meal-item"
                                 >
                                   {meal}
                                 </div>
@@ -2030,7 +2027,7 @@ const Dashboard = () => {
                           </div>
                         )}
 
-                        <p className="item-date">
+                        <p className="d-item-date">
                           {displayDate
                             ? new Date(
                                 displayDate
@@ -2039,9 +2036,9 @@ const Dashboard = () => {
                         </p>
                       </div>
 
-                      <div className="card-actions">
+                      <div className="d-card-actions">
                         <button
-                          className="delete-btn"
+                          className="d-delete-btn"
                           onClick={() =>
                             handleDeleteMealPlan(plan)
                           }
@@ -2058,21 +2055,21 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'shoppinglists' && (
-          <div className="section shoppinglists-section">
-            <div className="section-header">
+          <div className="d-section d-shoppinglists-section">
+            <div className="d-section-header">
               <h2>Shopping Lists</h2>
 
-              <span className="total-count">
+              <span className="d-total-count">
                 {shoppingLists.length} lists
               </span>
             </div>
 
-            <div className="items-grid">
+            <div className="d-items-grid">
               {!shoppingLists ||
               shoppingLists.length === 0 ? (
-                <div className="empty-state">
+                <div className="d-empty-state">
                   <p>No shopping lists found</p>
-                  <p className="empty-sub">
+                  <p className="d-empty-sub">
                     No shopping lists available
                   </p>
                 </div>
@@ -2094,33 +2091,33 @@ const Dashboard = () => {
                   return (
                     <div
                       key={list._id}
-                      className="item-card"
+                      className="d-item-card"
                     >
                       <div
-                        className="suggestion-user-info"
+                        className="d-suggestion-user-info"
                         style={{ marginBottom: '8px' }}
                       >
-                        <span className="user-email-only">
+                        <span className="d-user-email-only">
                           {displayEmail}
                         </span>
                       </div>
 
-                      <div className="item-header">
+                      <div className="d-item-header">
                         <h3>
                           {list.name || 'Unnamed List'}
                         </h3>
                       </div>
 
-                      <div className="item-details">
+                      <div className="d-item-details">
                         {list.totalItems > 0 && (
-                          <p className="item-progress">
+                          <p className="d-item-progress">
                             Progress:{' '}
                             {list.purchasedItems || 0}/
                             {list.totalItems}
                           </p>
                         )}
 
-                        <p className="item-date">
+                        <p className="d-item-date">
                           {list.createdAt
                             ? new Date(
                                 list.createdAt
@@ -2129,9 +2126,9 @@ const Dashboard = () => {
                         </p>
                       </div>
 
-                      <div className="card-actions">
+                      <div className="d-card-actions">
                         <button
-                          className="delete-btn"
+                          className="d-delete-btn"
                           onClick={() =>
                             handleDeleteShoppingList(
                               list
@@ -2150,25 +2147,25 @@ const Dashboard = () => {
         )}
 
         {activeSection === 'beginners' && (
-          <div className="section beginners-section">
-            <div className="section-header">
+          <div className="d-section d-beginners-section">
+            <div className="d-section-header">
               <h2>Beginners Guide</h2>
 
               <button
-                className="primary-btn"
+                className="d-primary-btn"
                 onClick={handleAddBeginnersGuide}
               >
                 Add Item
               </button>
             </div>
 
-            <div className="beginners-categories-grid">
+            <div className="d-beginners-categories-grid">
               {getBeginnersCategories().map(category => (
                 <button
                   key={category}
-                  className={`beginners-category-btn ${
+                  className={`d-beginners-category-btn ${
                     selectedBeginnersCategory === category
-                      ? 'active'
+                      ? 'd-active'
                       : ''
                   }`}
                   onClick={() =>
@@ -2180,17 +2177,17 @@ const Dashboard = () => {
               ))}
             </div>
 
-            <div className="recipe-count">
+            <div className="d-recipe-count">
               Showing {getFilteredBeginnersGuide().length}{' '}
               of {beginnersGuide.length} items
             </div>
 
-            <div className="items-grid">
+            <div className="d-items-grid">
               {getFilteredBeginnersGuide().length === 0 ? (
-                <div className="empty-state">
+                <div className="d-empty-state">
                   <p>No items found</p>
 
-                  <p className="empty-sub">
+                  <p className="d-empty-sub">
                     {beginnersGuide.length === 0
                       ? 'Click "Add Item" to add your first guide'
                       : 'Try selecting a different category'}
@@ -2200,26 +2197,26 @@ const Dashboard = () => {
                 getFilteredBeginnersGuide().map(item => (
                   <div
                     key={item._id}
-                    className="item-card"
+                    className="d-item-card"
                   >
-                    <div className="item-header">
+                    <div className="d-item-header">
                       <h3>{item.title || 'Unnamed'}</h3>
                     </div>
 
-                    <div className="item-details">
-                      <p className="item-description">
+                    <div className="d-item-details">
+                      <p className="d-item-description">
                         {item.description ||
                           'No description'}
                       </p>
 
-                      <p className="item-category">
+                      <p className="d-item-category">
                         {item.category || 'General'}
                       </p>
                     </div>
 
-                    <div className="card-actions">
+                    <div className="d-card-actions">
                       <button
-                        className="edit-btn"
+                        className="d-edit-btn"
                         onClick={() =>
                           handleEditBeginnersGuide(item)
                         }
@@ -2228,7 +2225,7 @@ const Dashboard = () => {
                       </button>
 
                       <button
-                        className="delete-btn"
+                        className="d-delete-btn"
                         onClick={() =>
                           handleDeleteBeginnersGuide(item)
                         }

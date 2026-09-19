@@ -9,13 +9,12 @@ export default function AboutPage() {
       <section className="about-hero">
         <div className="hero-content">
           <h1>About Us</h1>
-          <p>ChefBot - Your Personal Kitchen Assistant</p>
+          <p>ChefBot,Your Personal Kitchen Assistant</p>
         </div>
       </section>
       <section className="about-section combined-section">
         <div className="section-container">
           <div className="two-col-grid">
-            {/* What is ChefBot */}
             <div className="info-card">
               <div className="info-card-inner">
                 <div className="info-text">
