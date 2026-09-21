@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/authContext.jsx';
-import { SocketProvider } from './context/SocketContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -69,7 +68,7 @@ import RecipesLunch from './pages/RecipesLunch';
 import Dashboard from './pages/Dashboard';
 import LanguagePopup from './components/LanguagePopup';
 import Lentils from './pages/Lentils';
-
+import SignUpVerifyOTP from './pages/SignUpVerifyOTP';
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -157,7 +156,8 @@ const [showLanguagePopup, setShowLanguagePopup] = useState(
     '/forgot-password',
     '/verify-otp',
     '/reset-password',
-    '/change-account'
+    '/change-account',
+    '/signup-verify-otp'
   ];
 
   const hideHeaderOnPages = authPages.includes(location.pathname);
@@ -247,7 +247,7 @@ const [showLanguagePopup, setShowLanguagePopup] = useState(
                                       <Route path="lentils" element={<Lentils />} />
                                       <Route path="dal-chick" element={<RecipesDalChicken />} />
                                       <Route path="dal-mutton" element={<RecipesDalMutton/>} />
-
+<Route path="/signup-verify-otp" element={<SignUpVerifyOTP />}/>
 <Route path="/search-results" element={<SearchResults />} />
               <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
@@ -268,9 +268,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <SocketProvider>
+       
           <AppWrapper />
-        </SocketProvider>
+    
       </AuthProvider>
     </Router>
   );

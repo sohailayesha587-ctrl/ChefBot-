@@ -1,29 +1,35 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: process.env.SMTP_HOST || 'mail.chefbot.pk',
+  port: parseInt(process.env.SMTP_PORT, 10) || 465,
+  secure: true,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
 const sendOTPEmail = async (email, otp) => {
   try {
     await transporter.sendMail({
-      from: `"ChefBot" <${process.env.EMAIL_USER}>`,
+      from: `"ChefBot" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: 'ChefBot - Password Reset OTP',
+      subject: 'ChefBot - Email Verification OTP',
       html: `
         <h2>ChefBot</h2>
         <p>Your OTP is: <strong>${otp}</strong></p>
         <p>Valid for 10 minutes.</p>
       `
     });
+
     return true;
   } catch (error) {
     console.error('Email error:', error.message);
-    return false;
+    throw error;
   }
 };
 

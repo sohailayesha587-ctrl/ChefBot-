@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const http = require('http');
-const { Server } = require('socket.io');
 
 dotenv.config();
 
@@ -22,21 +21,11 @@ const settingsRoutes = require('./routes/settingsRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const adminMiddleware = require('./middleware/adminMiddleware');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: [
-      'http://localhost:5173',
-      'https://chefbot.pk',
-      'https://www.chefbot.pk'
-    ],
-    methods: ['GET', 'POST'],
-    credentials: true
-  }
-});
 
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -55,6 +44,7 @@ app.use('/api/mealplan', mealPlanRoutes);
 app.use('/api/meal-suggestions', mealSuggestionRoutes);
 app.use('/api/users', settingsRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.use('/api/admin', adminMiddleware, adminRoutes);
 
@@ -73,13 +63,6 @@ app.get('/', (req, res) => {
   res.send('Server is running');
 });
 
-io.on('connection', (socket) => {
-  console.log('Socket connected:', socket.id);
-
-  socket.on('disconnect', () => {
-    console.log('Socket disconnected:', socket.id);
-  });
-});
 
 const PORT = process.env.PORT || 5000;
 

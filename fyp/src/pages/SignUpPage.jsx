@@ -5,9 +5,11 @@ import './SignUpPage.css';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -18,6 +20,7 @@ const SignUpPage = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value
@@ -26,7 +29,23 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError('');
+
+    if (!formData.fullname.trim()) {
+      setError('Please enter your full name');
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setError('Please enter your email');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -41,17 +60,28 @@ const SignUpPage = () => {
     setLoading(true);
 
     try {
-      await axios.post('/api/auth/register', {
-        fullname: formData.fullname,
-        email: formData.email,
+      const response = await axios.post('/api/auth/register', {
+        fullname: formData.fullname.trim(),
+        email: formData.email.trim(),
         password: formData.password,
         confirmPassword: formData.confirmPassword,
         terms: formData.terms
       });
 
-      navigate('/login-page');
+      if (response.data?.email) {
+        navigate('/signup-verify-otp', {
+          state: {
+            email: response.data.email
+          }
+        });
+      } else {
+        setError('OTP could not be sent');
+      }
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(
+        err.response?.data?.message ||
+        'Registration failed'
+      );
     } finally {
       setLoading(false);
     }
@@ -60,31 +90,73 @@ const SignUpPage = () => {
   return (
     <div className="signup-page-wrapper">
       <div className="signup-section">
+
         <div className="signup-image">
           <div className="signup-content">
+
             <h1>Join Our Culinary Community</h1>
-            <p>Create your account and unlock a world of delicious recipes, smart meal planning, and AI-powered cooking assistance.</p>
+
+            <p>
+              Create your account and unlock a world of delicious recipes,
+              smart meal planning, and AI-powered cooking assistance.
+            </p>
 
             <ul className="features">
-              <li><span className="check-icon">✓</span> Personalized recipe recommendations</li>
-              <li><span className="check-icon">✓</span> Smart meal planning tools</li>
-              <li><span className="check-icon">✓</span> Step-by-step cooking guidance</li>
-              <li><span className="check-icon">✓</span> Nutritional tracking</li>
-              <li><span className="check-icon">✓</span> Save and organize your favorite recipes</li>
+
+              <li>
+                <span className="check-icon">✓</span>
+                Personalized recipe recommendations
+              </li>
+
+              <li>
+                <span className="check-icon">✓</span>
+                Smart meal planning tools
+              </li>
+
+              <li>
+                <span className="check-icon">✓</span>
+                Step-by-step cooking guidance
+              </li>
+
+              <li>
+                <span className="check-icon">✓</span>
+                Nutritional tracking
+              </li>
+
+              <li>
+                <span className="check-icon">✓</span>
+                Save and organize your favorite recipes
+              </li>
+
             </ul>
+
           </div>
         </div>
 
         <div className="signup-form-container">
-          <div className="signup-form">
-            <h2>Create Account</h2>
-            <p>Sign up to start your culinary journey</p>
 
-            {error && <div className="error-message">{error}</div>}
+          <div className="signup-form">
+
+            <h2>Create Account</h2>
+
+            <p>
+              Sign up to start your culinary journey
+            </p>
+
+            {error && (
+              <div className="error-message">
+                {error}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit}>
+
               <div className="form-group">
-                <label htmlFor="fullname">Full Name</label>
+
+                <label htmlFor="fullname">
+                  Full Name
+                </label>
+
                 <input
                   type="text"
                   id="fullname"
@@ -95,10 +167,15 @@ const SignUpPage = () => {
                   onChange={handleChange}
                   required
                 />
+
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+
+                <label htmlFor="email">
+                  Email Address
+                </label>
+
                 <input
                   type="email"
                   id="email"
@@ -109,13 +186,19 @@ const SignUpPage = () => {
                   onChange={handleChange}
                   required
                 />
+
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+
+                <label htmlFor="password">
+                  Password
+                </label>
+
                 <div className="password-container">
+
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     name="password"
                     className="form-control"
@@ -124,21 +207,37 @@ const SignUpPage = () => {
                     onChange={handleChange}
                     required
                   />
+
                   <button
                     type="button"
                     className="toggle-password"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
                   >
-                    <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                    <i
+                      className={
+                        showPassword
+                          ? 'fas fa-eye-slash'
+                          : 'fas fa-eye'
+                      }
+                    ></i>
                   </button>
+
                 </div>
+
               </div>
 
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+
+                <label htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
+
                 <div className="password-container">
+
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     name="confirmPassword"
                     className="form-control"
@@ -147,10 +246,13 @@ const SignUpPage = () => {
                     onChange={handleChange}
                     required
                   />
+
                 </div>
+
               </div>
 
               <div className="checkbox-container">
+
                 <input
                   type="checkbox"
                   id="terms"
@@ -159,19 +261,34 @@ const SignUpPage = () => {
                   onChange={handleChange}
                   required
                 />
-                <label htmlFor="terms">I agree to the Terms of Service and Privacy Policy</label>
+
+                <label htmlFor="terms">
+                  I agree to the Terms of Service and Privacy Policy
+                </label>
+
               </div>
 
-              <button type="submit" className="btn-signup" disabled={loading}>
-                {loading ? 'Creating...' : 'Create Account'}
+              <button
+                type="submit"
+                className="btn-signup"
+                disabled={loading}
+              >
+                {loading ? 'Sending OTP...' : 'Create Account'}
               </button>
 
               <div className="login-link">
-                Already have an account? <Link to="/login-page">Log in</Link>
+                Already have an account?{' '}
+                <Link to="/login-page">
+                  Log in
+                </Link>
               </div>
+
             </form>
+
           </div>
+
         </div>
+
       </div>
     </div>
   );

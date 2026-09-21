@@ -7,7 +7,7 @@ const ChangeAccountInfoPage = () => {
   const location = useLocation();
   
   const queryParams = new URLSearchParams(location.search);
-  const changeType = queryParams.get('type');
+  const changeType = queryParams.get('type') || 'email';
   
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
@@ -17,29 +17,13 @@ const ChangeAccountInfoPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const getTitle = () => {
-    return changeType === 'email' ? 'Change Email Address' : 'Change Mobile Number';
-  };
-
-  const getOldLabel = () => {
-    return changeType === 'email' ? 'Current Email Address' : 'Current Mobile Number';
-  };
-
-  const getOldPlaceholder = () => {
-    return changeType === 'email' ? 'Enter your current email' : 'Enter your current mobile number';
-  };
-
-  const getNewLabel = () => {
-    return changeType === 'email' ? 'New Email Address' : 'New Mobile Number';
-  };
-
-  const getNewPlaceholder = () => {
-    return changeType === 'email' ? 'Enter new email address' : 'Enter new mobile number';
-  };
-
   const sendOTP = async () => {
-    if (!oldValue) {
-      setError(`Please enter your ${changeType === 'email' ? 'email' : 'mobile number'}`);
+    if (!oldValue.trim()) {
+      setError('Please enter your current email');
+      return;
+    }
+    if (!newValue.trim()) {
+      setError('Please enter your new email');
       return;
     }
 
@@ -48,12 +32,10 @@ const ChangeAccountInfoPage = () => {
     setMessage('');
 
     try {
-      const response = await fetch('/api/auth/forgot-password', {
+      const response = await fetch('/api/auth/send-change-email-otp', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: oldValue })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentEmail: oldValue.trim(), newEmail: newValue.trim() })
       });
 
       const data = await response.json();
@@ -63,7 +45,7 @@ const ChangeAccountInfoPage = () => {
       }
 
       setStep(2);
-      setMessage(`OTP sent to your ${changeType === 'email' ? 'email address' : 'mobile number'}`);
+      setMessage(data.message || 'OTP sent to your new email');
     } catch (err) {
       setError(err.message || 'Something went wrong');
     } finally {
@@ -72,13 +54,8 @@ const ChangeAccountInfoPage = () => {
   };
 
   const verifyAndUpdate = async () => {
-    if (!otp) {
+    if (!otp.trim()) {
       setError('Please enter OTP');
-      return;
-    }
-
-    if (!newValue) {
-      setError(`Please enter new ${changeType === 'email' ? 'email' : 'mobile number'}`);
       return;
     }
 
@@ -87,29 +64,23 @@ const ChangeAccountInfoPage = () => {
     setMessage('');
 
     try {
-      const verifyResponse = await fetch('/api/auth/verify-otp', {
+      const response = await fetch('/api/auth/verify-update-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: oldValue, otp })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentEmail: oldValue.trim(), otp: otp.trim() })
       });
 
-      const verifyData = await verifyResponse.json();
+      const data = await response.json();
 
-      if (!verifyResponse.ok) {
-        throw new Error(verifyData.message || 'Invalid OTP');
+      if (!response.ok) {
+        throw new Error(data.message || 'Invalid OTP');
       }
 
       const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-      if (changeType === 'email') {
-        userData.email = newValue;
-      } else {
-        userData.mobile = newValue;
-      }
+      userData.email = data.newEmail || newValue;
       localStorage.setItem('userData', JSON.stringify(userData));
 
-      setMessage(changeType === 'email' ? 'Email changed successfully!' : 'Mobile number changed successfully!');
+      setMessage(data.message || 'Email changed successfully!');
       
       setTimeout(() => {
         navigate('/home');
@@ -136,27 +107,16 @@ const ChangeAccountInfoPage = () => {
             </div>
           </div>
           <div className="change-welcome-section">
-            <h2>{getTitle()}</h2>
-            <p>Update your account information securely. We'll send a verification code to confirm your identity.</p>
+            <h2>Change Email Address</h2>
+            <p>Update your account information securely. We will send a verification code to your new email.</p>
           </div>
           
-          {changeType === 'email' && (
-            <ul className="change-security-tips">
-              <li><i className="fas fa-check"></i> Enter your current email address</li>
-              <li><i className="fas fa-check"></i> Verify with OTP sent to your email</li>
-              <li><i className="fas fa-check"></i> Enter your new email address</li>
-              <li><i className="fas fa-check"></i> Done! Your email will be updated</li>
-            </ul>
-          )}
-          
-          {changeType === 'mobile' && (
-            <ul className="change-security-tips">
-              <li><i className="fas fa-check"></i> Enter your current mobile number</li>
-              <li><i className="fas fa-check"></i> Verify with OTP sent via SMS</li>
-              <li><i className="fas fa-check"></i> Enter your new mobile number</li>
-              <li><i className="fas fa-check"></i> Done! Your mobile will be updated</li>
-            </ul>
-          )}
+          <ul className="change-security-tips">
+            <li><i className="fas fa-check"></i> Enter your current email address</li>
+            <li><i className="fas fa-check"></i> Enter your new email address</li>
+            <li><i className="fas fa-check"></i> Verify OTP sent to your new email</li>
+            <li><i className="fas fa-check"></i> Email updated in database</li>
+          </ul>
         </div>
 
         <div className="change-right-panel">
@@ -174,19 +134,32 @@ const ChangeAccountInfoPage = () => {
           {step === 1 ? (
             <div className="change-form-container">
               <div className="change-form-header">
-                <h2>Verify Identity</h2>
-                <p>Enter your current {changeType === 'email' ? 'email address' : 'mobile number'}</p>
+                <h2>Change Email</h2>
+                <p>Enter your current and new email address</p>
               </div>
 
               <div className="change-form-group">
-                <label className="change-form-label">{getOldLabel()}</label>
+                <label className="change-form-label">Current Email Address</label>
                 <div className="change-input-wrapper">
                   <input
-                    type={changeType === 'email' ? 'email' : 'tel'}
+                    type="email"
                     className="change-input"
-                    placeholder={getOldPlaceholder()}
+                    placeholder="Enter your current email"
                     value={oldValue}
                     onChange={(e) => setOldValue(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="change-form-group">
+                <label className="change-form-label">New Email Address</label>
+                <div className="change-input-wrapper">
+                  <input
+                    type="email"
+                    className="change-input"
+                    placeholder="Enter new email address"
+                    value={newValue}
+                    onChange={(e) => setNewValue(e.target.value)}
                   />
                 </div>
               </div>
@@ -207,7 +180,7 @@ const ChangeAccountInfoPage = () => {
             <div className="change-form-container">
               <div className="change-form-header">
                 <h2>Verify & Update</h2>
-                <p>Enter OTP and your new {changeType === 'email' ? 'email address' : 'mobile number'}</p>
+                <p>Enter 6-digit OTP sent to <b>{newValue}</b></p>
               </div>
 
               <div className="change-form-group">
@@ -224,25 +197,12 @@ const ChangeAccountInfoPage = () => {
                 </div>
               </div>
 
-              <div className="change-form-group">
-                <label className="change-form-label">{getNewLabel()}</label>
-                <div className="change-input-wrapper">
-                  <input
-                    type={changeType === 'email' ? 'email' : 'tel'}
-                    className="change-input"
-                    placeholder={getNewPlaceholder()}
-                    value={newValue}
-                    onChange={(e) => setNewValue(e.target.value)}
-                  />
-                </div>
-              </div>
-
               <button 
                 className="change-submit-btn" 
                 onClick={verifyAndUpdate} 
                 disabled={loading}
               >
-                {loading ? 'Updating...' : 'Update & Save'}
+                {loading ? 'Updating...' : 'Verify & Update Email'}
               </button>
 
               <div className="change-back-link">
