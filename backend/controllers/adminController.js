@@ -23,7 +23,6 @@ exports.getDashboardStats = async (req, res) => {
     const totalRecipes = await Recipe.countDocuments().catch(() => 0);
     const totalMealPlans = await MealPlan.countDocuments().catch(() => 0);
     const totalShoppingItems = await ShoppingList.countDocuments().catch(() => 0);
-    const totalActivities = await Activity.countDocuments().catch(() => 0);
     const totalGuidance = await CookingGuidance.countDocuments().catch(() => 0);
     const totalSuggestions = await CookingLog.countDocuments().catch(() => 0);
 
@@ -56,7 +55,6 @@ exports.getDashboardStats = async (req, res) => {
       totalPantryItems,
       totalShoppingItems,
       totalSuggestions,
-      totalActivities,
       totalGuidance,
       totalShoppingLists
     };
@@ -69,8 +67,7 @@ exports.getDashboardStats = async (req, res) => {
         totalUsers: 0, totalRecipes: 0, totalMealPlans: 0,
         activeUsers: 0, totalPantryItems: 0,
         totalShoppingItems: 0, totalSuggestions: 0,
-        totalActivities: 0, totalGuidance: 0,
-        totalShoppingLists: 0
+        totalGuidance: 0, totalShoppingLists: 0
       }
     });
   }
@@ -164,16 +161,18 @@ exports.getPantryItems = async (req, res) => {
           const userInfo = usersMap[userId] || { name: 'Unknown User', email: '' };
           if (doc.items?.length) {
             doc.items.forEach(item => {
+              const qty = Number(item.quantity);
+              const finalQty = Number.isFinite(qty) ? qty : 0;
+
               pantryData.push({
                 _id: item._id || new mongoose.Types.ObjectId(),
                 name: item.name || 'Unnamed Item',
-                quantity: item.quantity || 0,
+                quantity: finalQty,
                 unit: item.unit || 'units',
                 category: item.category || 'General',
                 userId: userId,
                 userName: userInfo.name,
                 userEmail: userInfo.email,
-                isLowStock: (item.quantity || 0) < 5,
                 createdAt: item.createdAt || doc.createdAt || new Date()
               });
             });
@@ -737,6 +736,8 @@ exports.getMealSuggestions = async (req, res) => {
       .sort({ createdAt: -1 })
       .lean();
 
+    console.log(`[getMealSuggestions] Total CookingLogs found: ${cookingLogs.length}`);
+
     const allUsers = await User.find({}).select('name email _id').lean();
     const usersMap = {};
     allUsers.forEach(user => {
@@ -746,32 +747,53 @@ exports.getMealSuggestions = async (req, res) => {
       };
     });
 
-    const firstUser = allUsers.length > 0 ? allUsers[0] : null;
-
     const transformedSuggestions = [];
 
     for (const log of cookingLogs) {
+      if (!log.meals || !Array.isArray(log.meals) || log.meals.length === 0) {
+        continue;
+      }
+
       let userId = log.userId || null;
-      let userName = log.userName || 'Unknown User';
-      let userEmail = log.userEmail || 'No Email';
+      let userName = 'Unknown User';
+      let userEmail = 'No Email';
 
       if (userId) {
         const userIdStr = userId.toString();
         if (usersMap[userIdStr]) {
           userName = usersMap[userIdStr].name || userName;
           userEmail = usersMap[userIdStr].email || userEmail;
+        } else {
+          const user = await User.findById(userId).select('name email').lean();
+          if (user) {
+            userName = user.name || userName;
+            userEmail = user.email || userEmail;
+          }
         }
-      } else if (firstUser) {
-        userId = firstUser._id;
-        userName = firstUser.name || 'Admin';
-        userEmail = firstUser.email || 'admin@chefbot.com';
       }
 
       for (const meal of log.meals) {
+        if (!meal) continue;
+
+        let mealCreatedAt;
+
+        if (meal.createdAt) {
+          mealCreatedAt = meal.createdAt;
+        } else if (meal._id) {
+          try {
+            mealCreatedAt = new mongoose.Types.ObjectId(meal._id).getTimestamp();
+          } catch (e) {
+            mealCreatedAt = log.createdAt || new Date();
+          }
+        } else {
+          mealCreatedAt = log.createdAt || new Date();
+        }
+
         transformedSuggestions.push({
           _id: meal._id || new mongoose.Types.ObjectId(),
           mealName: meal.recipeName || 'Unnamed Meal',
           title: meal.recipeName || 'Unnamed Meal',
+          recipeName: meal.recipeName || 'Unnamed Meal',
           category: 'Cooking Log',
           mealType: 'Cooking Log',
           dietType: 'Regular',
@@ -796,11 +818,17 @@ exports.getMealSuggestions = async (req, res) => {
           recipeId: meal.recipeId || null,
           date: log.date,
           dayName: log.dayName,
-          createdAt: log.createdAt || new Date(),
+          createdAt: mealCreatedAt,
           updatedAt: log.updatedAt || new Date()
         });
       }
     }
+
+    transformedSuggestions.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    console.log(`[getMealSuggestions] Total suggestions transformed: ${transformedSuggestions.length}`);
 
     res.json({
       success: true,
@@ -808,6 +836,7 @@ exports.getMealSuggestions = async (req, res) => {
       count: transformedSuggestions.length
     });
   } catch (error) {
+    console.error('Error in getMealSuggestions:', error);
     res.status(500).json({
       success: false,
       message: error.message
@@ -906,7 +935,8 @@ exports.createMealSuggestion = async (req, res) => {
       recipeId: recipeId || null,
       recipeName,
       members: parseInt(members) || 4,
-      ingredientsUsed: ingredientsUsed || []
+      ingredientsUsed: ingredientsUsed || [],
+      createdAt: new Date()
     });
 
     await cookingLog.save();
@@ -973,7 +1003,11 @@ exports.deleteMealSuggestion = async (req, res) => {
       meal => meal._id.toString() !== id
     );
 
-    await cookingLog.save();
+    if (cookingLog.meals.length === 0) {
+      await CookingLog.findByIdAndDelete(cookingLog._id);
+    } else {
+      await cookingLog.save();
+    }
 
     res.json({
       success: true,
@@ -1171,17 +1205,32 @@ exports.addToRecipe = async (req, res) => {
 
 exports.updateRecipe = async (req, res) => {
   try {
+    const updateData = {};
+
+    if (req.body.recipeName) {
+      updateData.title = req.body.recipeName;
+      updateData.recipeName = req.body.recipeName;
+    }
+    if (req.body.title) {
+      updateData.title = req.body.title;
+      updateData.recipeName = req.body.title;
+    }
+    if (req.body.category !== undefined) updateData.category = req.body.category;
+    if (req.body.prepTime !== undefined) updateData.prepTime = req.body.prepTime;
+
     const recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true }
     );
+
     if (!recipe) {
       return res.status(404).json({
         success: false,
         message: 'Recipe not found'
       });
     }
+
     res.json({ success: true, data: recipe });
   } catch (error) {
     sendError(res, error);

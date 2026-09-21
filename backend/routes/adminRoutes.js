@@ -63,90 +63,57 @@ router.get('/shopping', adminController.getShoppingItems);
 
 router.get('/shoppings', adminController.getShoppingLists);
 
-router.post('/shoppings', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.post('/shoppings', adminController.addShoppingList);
 
-router.put('/shoppings/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.put('/shoppings/:id', adminController.updateShoppingList);
 
-router.delete('/shoppings/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.delete('/shoppings/:id', adminController.deleteShoppingList);
 
 router.get('/mealplans', adminController.getMealPlans);
 
-router.post('/mealplans', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.post('/mealplans', adminController.createMealPlan);
 
-router.put('/mealplans/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.put('/mealplans/:id', adminController.updateMealPlan);
 
 router.delete('/mealplans/:id', adminController.deleteMealPlan);
 
 router.get('/meal-suggestions', adminController.getMealSuggestions);
 
-router.get('/meal-suggestions/filter/by-category/:category', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.get('/meal-suggestions/filter/by-category/:category', adminController.getMealSuggestionsByCategory);
 
 router.get('/meal-suggestions/filter/by-diet/:dietType', async (req, res) => {
   res.status(501).json({ success: false, message: 'Not implemented' });
 });
 
-router.get('/meal-suggestions/filter/by-user/:userId', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.get('/meal-suggestions/filter/by-user/:userId', adminController.getMealSuggestionsByUser);
 
-router.get('/meal-suggestions/recommendations/:userId', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.get('/meal-suggestions/recommendations/:userId', adminController.getPersonalizedRecommendations);
 
-router.get('/meal-suggestions/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.get('/meal-suggestions/:id', adminController.getMealSuggestionById);
 
-router.post('/meal-suggestions', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.post('/meal-suggestions', adminController.createMealSuggestion);
 
-router.put('/meal-suggestions/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.put('/meal-suggestions/:id', adminController.updateMealSuggestion);
 
 router.delete('/meal-suggestions/:id', adminController.deleteMealSuggestion);
 
 router.get('/recipe-collection', adminController.getRecipe);
 
-router.post('/recipe-collection', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.post('/recipe-collection', adminController.addToRecipe);
 
 router.put('/recipe-collection/:id', adminController.updateRecipe);
 
 router.delete('/recipe-collection/:id', adminController.deleteFromRecipe);
 
-
-
-
 router.get('/export', adminController.exportData);
 
 router.get('/beginners-guide', adminController.getBeginnersGuide);
 
-router.post('/beginners-guide', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.post('/beginners-guide', adminController.addBeginnersGuide);
 
-router.put('/beginners-guide/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.put('/beginners-guide/:id', adminController.updateBeginnersGuide);
 
-router.delete('/beginners-guide/:id', async (req, res) => {
-  res.status(501).json({ success: false, message: 'Not implemented' });
-});
+router.delete('/beginners-guide/:id', adminController.deleteBeginnersGuide);
 
 router.get('/collections', async (req, res) => {
   try {

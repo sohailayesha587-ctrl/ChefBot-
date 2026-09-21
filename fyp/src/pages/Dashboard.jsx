@@ -7,7 +7,7 @@ import ResetPasswordPage from './ResetPasswordPage';
 import './Dashboard.css';
 
 const Dashboard = () => {
-const { admin, loading: authLoading, login, adminLogout } = useAuth();
+  const { admin, loading: authLoading, login, adminLogout } = useAuth();
   const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || '';
   const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || '';
 
@@ -54,6 +54,8 @@ const { admin, loading: authLoading, login, adminLogout } = useAuth();
   const [serverStatus, setServerStatus] = useState('Checking...');
   const [databaseStatus, setDatabaseStatus] = useState('Checking...');
 
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const [authPage, setAuthPage] = useState('login');
   const [resetEmail, setResetEmail] = useState('');
   const [resetToken, setResetToken] = useState('');
@@ -69,10 +71,10 @@ const { admin, loading: authLoading, login, adminLogout } = useAuth();
     totalShoppingLists: 0
   });
 
-const isAdmin = admin?.role === 'admin';
+  const isAdmin = admin?.role === 'admin';
+
   const handleLogin = async (e) => {
     e.preventDefault();
-
     setLoginError('');
     setLoginLoading(true);
 
@@ -85,7 +87,7 @@ const isAdmin = admin?.role === 'admin';
     }
 
     if (result.user?.role !== 'admin') {
-adminLogout();
+      adminLogout();
       setLoginError('Admin access is required.');
       setLoginLoading(false);
       return;
@@ -114,21 +116,30 @@ adminLogout();
   };
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      adminLogout();
-      setUsers([]);
-      setPantryItems([]);
-      setShoppingItems([]);
-      setRecipeCollection([]);
-      setMealSuggestions([]);
-      setMealPlans([]);
-      setShoppingLists([]);
-      setBeginnersGuide([]);
-      setActiveSection('dashboard');
-      setAuthPage('login');
-      setLoginEmail(ADMIN_EMAIL);
-      setLoginPassword(ADMIN_PASSWORD);
-    }
+    setShowLogoutModal(true);
+    setSidebarOpen(false);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    adminLogout();
+    setUsers([]);
+    setPantryItems([]);
+    setShoppingItems([]);
+    setRecipeCollection([]);
+    setMealSuggestions([]);
+    setMealPlans([]);
+    setShoppingLists([]);
+    setBeginnersGuide([]);
+    setActiveSection('dashboard');
+    setAuthPage('login');
+    setSidebarOpen(false);
+    setLoginEmail(ADMIN_EMAIL);
+    setLoginPassword(ADMIN_PASSWORD);
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   const togglePasswordVisibility = () => {
@@ -138,28 +149,24 @@ adminLogout();
   const checkSystemHealth = async () => {
     try {
       const serverRes = await fetch('/api/health');
-
       setServerStatus(serverRes.ok ? 'Online' : 'Offline');
     } catch {
       setServerStatus('Offline');
     }
 
     try {
-const token = localStorage.getItem('adminToken');
+      const token = localStorage.getItem('adminToken');
       if (!token) {
         setDatabaseStatus('Disconnected');
         return;
       }
 
-      const dbRes = await fetch(
-        '/api/admin/dashboard/stats',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+      const dbRes = await fetch('/api/admin/dashboard/stats', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       setDatabaseStatus(dbRes.ok ? 'Connected' : 'Disconnected');
     } catch {
@@ -182,7 +189,6 @@ const token = localStorage.getItem('adminToken');
             : [];
 
         setUsers(userData);
-
         setSystemStats(prev => ({
           ...prev,
           totalUsers: userData.length
@@ -195,7 +201,6 @@ const token = localStorage.getItem('adminToken');
 
       if (mealPlansRes?.success && Array.isArray(mealPlansRes.data)) {
         setMealPlans(mealPlansRes.data);
-
         setSystemStats(prev => ({
           ...prev,
           totalMealPlans: mealPlansRes.data.length
@@ -231,7 +236,6 @@ const token = localStorage.getItem('adminToken');
         : [];
 
       setMealSuggestions(suggestionsData);
-
       setSystemStats(prev => ({
         ...prev,
         totalSuggestions: suggestionsData.length
@@ -242,7 +246,6 @@ const token = localStorage.getItem('adminToken');
         : [];
 
       setPantryItems(pantryData);
-
       setSystemStats(prev => ({
         ...prev,
         totalPantryItems: pantryData.length
@@ -260,7 +263,6 @@ const token = localStorage.getItem('adminToken');
         : [];
 
       setRecipeCollection(recipesData);
-
       setSystemStats(prev => ({
         ...prev,
         totalRecipes: recipesData.length
@@ -272,25 +274,21 @@ const token = localStorage.getItem('adminToken');
 
       setShoppingItems(shoppingData);
 
-      const shoppingListsData =
-        shoppingListsRes?.success && Array.isArray(shoppingListsRes.data)
-          ? shoppingListsRes.data
-          : [];
+      const shoppingListsData = shoppingListsRes?.success && Array.isArray(shoppingListsRes.data)
+        ? shoppingListsRes.data
+        : [];
 
       setShoppingLists(shoppingListsData);
-
       setSystemStats(prev => ({
         ...prev,
         totalShoppingLists: shoppingListsData.length
       }));
 
-      const beginnersData =
-        beginnersRes?.success && Array.isArray(beginnersRes.data)
-          ? beginnersRes.data
-          : [];
+      const beginnersData = beginnersRes?.success && Array.isArray(beginnersRes.data)
+        ? beginnersRes.data
+        : [];
 
       setBeginnersGuide(beginnersData);
-
       setSystemStats(prev => ({
         ...prev,
         totalGuidance: beginnersData.length
@@ -310,8 +308,8 @@ const token = localStorage.getItem('adminToken');
       return;
     }
 
-if (!admin) {
-        setLoading(false);
+    if (!admin) {
+      setLoading(false);
       return;
     }
 
@@ -323,7 +321,7 @@ if (!admin) {
 
     fetchDashboardData();
     checkSystemHealth();
-  },[authLoading, admin, isAdmin]);
+  }, [authLoading, admin, isAdmin]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -353,11 +351,18 @@ if (!admin) {
     };
 
     document.addEventListener('keydown', handleEscape);
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [sidebarOpen]);
+
+  useEffect(() => {
+    const mainContent = document.querySelector('.d-main-content');
+    if (mainContent) {
+      mainContent.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, [activeSection]);
 
   const toggleSidebar = () => {
     setSidebarOpen(prev => !prev);
@@ -430,9 +435,7 @@ if (!admin) {
     }
 
     try {
-      const response = await adminApi.deletePantryItem(
-        pantryItemToDelete._id
-      );
+      const response = await adminApi.deletePantryItem(pantryItemToDelete._id);
 
       if (response.success) {
         alert(`Pantry item "${pantryItemToDelete.name}" deleted successfully`);
@@ -470,13 +473,10 @@ if (!admin) {
 
     try {
       if (recipeModalAction === 'edit') {
-        const response = await adminApi.updateRecipeCollection(
-          recipeModalData._id,
-          {
-            recipeName: editRecipeName,
-            title: editRecipeName
-          }
-        );
+        const response = await adminApi.updateRecipeCollection(recipeModalData._id, {
+          recipeName: editRecipeName,
+          title: editRecipeName
+        });
 
         if (response.success) {
           alert(`Recipe updated to "${editRecipeName}"`);
@@ -488,9 +488,7 @@ if (!admin) {
       }
 
       if (recipeModalAction === 'delete') {
-        const response = await adminApi.deleteFromRecipeCollection(
-          recipeModalData._id
-        );
+        const response = await adminApi.deleteFromRecipeCollection(recipeModalData._id);
 
         if (response.success) {
           alert(`Recipe "${recipeModalData.recipeName}" removed`);
@@ -531,24 +529,15 @@ if (!admin) {
 
       switch (editModalType) {
         case 'beginnersGuide':
-          response = await adminApi.updateBeginnersGuide(
-            id,
-            editModalFields
-          );
+          response = await adminApi.updateBeginnersGuide(id, editModalFields);
           break;
 
         case 'recipe':
-          response = await adminApi.updateRecipeCollection(
-            id,
-            editModalFields
-          );
+          response = await adminApi.updateRecipeCollection(id, editModalFields);
           break;
 
         case 'user':
-          response = await adminApi.updateUser(
-            id,
-            editModalFields
-          );
+          response = await adminApi.updateUser(id, editModalFields);
           break;
 
         default:
@@ -571,9 +560,7 @@ if (!admin) {
   const openDeleteModal = (type, data, message) => {
     setDeleteModalType(type);
     setDeleteModalData(data);
-    setDeleteModalMessage(
-      message || `Are you sure you want to delete this ${type}?`
-    );
+    setDeleteModalMessage(message || `Are you sure you want to delete this ${type}?`);
     setShowDeleteModal(true);
   };
 
@@ -640,49 +627,24 @@ if (!admin) {
   };
 
   const handleBlockUser = (userData) => {
-    openConfirmModal(
-      'block',
-      userData,
-      `Are you sure you want to block ${userData.name}?`
-    );
+    openConfirmModal('block', userData, `Are you sure you want to block ${userData.name}?`);
   };
 
   const handleUnblockUser = (userData) => {
-    openConfirmModal(
-      'unblock',
-      userData,
-      `Are you sure you want to unblock ${userData.name}?`
-    );
+    openConfirmModal('unblock', userData, `Are you sure you want to unblock ${userData.name}?`);
   };
 
   const handleDeleteUser = (userData) => {
-    openDeleteModal(
-      'user',
-      userData,
-      `Are you sure you want to delete user "${userData.name}"?`
-    );
+    openDeleteModal('user', userData, `Are you sure you want to delete user "${userData.name}"?`);
   };
 
   const handleDeleteSuggestion = (suggestion) => {
-    const name =
-      suggestion.recipeName ||
-      suggestion.mealName ||
-      suggestion.title ||
-      'Unnamed Meal';
-
-    openDeleteModal(
-      'suggestion',
-      suggestion,
-      `Are you sure you want to delete suggestion "${name}"?`
-    );
+    const name = suggestion.recipeName || suggestion.mealName || suggestion.title || 'Unnamed Meal';
+    openDeleteModal('suggestion', suggestion, `Are you sure you want to delete suggestion "${name}"?`);
   };
 
   const handleDeleteFromCollection = (recipe) => {
-    openDeleteModal(
-      'recipe',
-      recipe,
-      `Are you sure you want to delete recipe "${recipe.recipeName}"?`
-    );
+    openDeleteModal('recipe', recipe, `Are you sure you want to delete recipe "${recipe.recipeName}"?`);
   };
 
   const handleEditRecipe = (recipe) => {
@@ -719,34 +681,20 @@ if (!admin) {
 
   const handleEditBeginnersGuide = (guide) => {
     openEditModal('beginnersGuide', guide, {
-      title: guide.title || '',
-      category: guide.category || '',
-      description: guide.description || ''
+      title: guide.title || ''
     });
   };
 
   const handleDeleteBeginnersGuide = (guide) => {
-    openDeleteModal(
-      'beginnersGuide',
-      guide,
-      `Are you sure you want to delete "${guide.title}"?`
-    );
+    openDeleteModal('beginnersGuide', guide, `Are you sure you want to delete "${guide.title}"?`);
   };
 
   const handleDeleteMealPlan = (plan) => {
-    openDeleteModal(
-      'mealPlan',
-      plan,
-      `Are you sure you want to delete meal plan for "${plan.userName}"?`
-    );
+    openDeleteModal('mealPlan', plan, `Are you sure you want to delete meal plan for "${plan.userName}"?`);
   };
 
   const handleDeleteShoppingList = (list) => {
-    openDeleteModal(
-      'shoppingList',
-      list,
-      `Are you sure you want to delete shopping list "${list.name}"?`
-    );
+    openDeleteModal('shoppingList', list, `Are you sure you want to delete shopping list "${list.name}"?`);
   };
 
   const getRecipeCategories = () => {
@@ -780,16 +728,12 @@ if (!admin) {
       if (Array.isArray(recipe.category)) {
         return recipe.category.includes(selectedRecipeCategory);
       }
-
       return recipe.category === selectedRecipeCategory;
     });
   };
 
   const getBeginnersCategories = () => {
-    const categories = beginnersGuide
-      .map(item => item.category)
-      .filter(Boolean);
-
+    const categories = beginnersGuide.map(item => item.category).filter(Boolean);
     return ['All', ...new Set(categories)];
   };
 
@@ -798,9 +742,7 @@ if (!admin) {
       return beginnersGuide;
     }
 
-    return beginnersGuide.filter(
-      item => item.category === selectedBeginnersCategory
-    );
+    return beginnersGuide.filter(item => item.category === selectedBeginnersCategory);
   };
 
   if (authLoading) {
@@ -867,10 +809,7 @@ if (!admin) {
               </div>
             )}
 
-            <form
-              className="d-dashboard-login-form"
-              onSubmit={handleLogin}
-            >
+            <form className="d-dashboard-login-form" onSubmit={handleLogin}>
               <div className="d-dashboard-login-group">
                 <label>Email Address</label>
                 <input
@@ -884,7 +823,6 @@ if (!admin) {
 
               <div className="d-dashboard-login-group">
                 <label>Password</label>
-
                 <div className="d-dashboard-login-password-wrapper">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -893,7 +831,6 @@ if (!admin) {
                     onChange={e => setLoginPassword(e.target.value)}
                     required
                   />
-
                   <button
                     type="button"
                     className="d-dashboard-login-password-toggle"
@@ -959,12 +896,47 @@ if (!admin) {
 
   return (
     <div className="d-chefbot-dashboard">
+      <button
+        type="button"
+        className={`d-hamburger ${sidebarOpen ? 'd-open' : ''}`}
+        onClick={toggleSidebar}
+        aria-label="Toggle navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {showLogoutModal && (
+        <div className="d-modal-overlay" onClick={cancelLogout}>
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
+            <div className="d-modal-icon">Logout</div>
+
+            <h3 className="d-modal-title">Confirm Logout</h3>
+
+            <p className="d-modal-message">
+              Are you sure you want to logout from the admin dashboard?
+            </p>
+
+            <div className="d-modal-actions">
+              <button className="d-modal-cancel" onClick={cancelLogout}>
+                Cancel
+              </button>
+
+              <button
+                className="d-modal-confirm d-confirm-delete"
+                onClick={confirmLogout}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showConfirmModal && confirmUser && (
         <div className="d-modal-overlay" onClick={closeConfirmModal}>
-          <div
-            className="d-modal-container"
-            onClick={e => e.stopPropagation()}
-          >
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
             <div className="d-modal-icon">
               {confirmAction === 'delete'
                 ? 'Delete'
@@ -981,15 +953,10 @@ if (!admin) {
                   : 'Unblock User'}
             </h3>
 
-            <p className="d-modal-message">
-              {confirmMessage}
-            </p>
+            <p className="d-modal-message">{confirmMessage}</p>
 
             <div className="d-modal-actions">
-              <button
-                className="d-modal-cancel"
-                onClick={closeConfirmModal}
-              >
+              <button className="d-modal-cancel" onClick={closeConfirmModal}>
                 Cancel
               </button>
 
@@ -1015,30 +982,18 @@ if (!admin) {
       )}
 
       {showPantryDeleteModal && pantryItemToDelete && (
-        <div
-          className="d-modal-overlay"
-          onClick={closePantryDeleteModal}
-        >
-          <div
-            className="d-modal-container"
-            onClick={e => e.stopPropagation()}
-          >
+        <div className="d-modal-overlay" onClick={closePantryDeleteModal}>
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
             <div className="d-modal-icon">Delete</div>
 
-            <h3 className="d-modal-title">
-              Delete Pantry Item
-            </h3>
+            <h3 className="d-modal-title">Delete Pantry Item</h3>
 
             <p className="d-modal-message">
-              Are you sure you want to delete{' '}
-              <strong>{pantryItemToDelete.name}</strong>?
+              Are you sure you want to delete <strong>{pantryItemToDelete.name}</strong>?
             </p>
 
             <div className="d-modal-actions">
-              <button
-                className="d-modal-cancel"
-                onClick={closePantryDeleteModal}
-              >
+              <button className="d-modal-cancel" onClick={closePantryDeleteModal}>
                 Cancel
               </button>
 
@@ -1054,65 +1009,43 @@ if (!admin) {
       )}
 
       {showRecipeModal && recipeModalData && (
-        <div
-          className="d-modal-overlay"
-          onClick={closeRecipeModal}
-        >
-          <div
-            className="d-modal-container"
-            onClick={e => e.stopPropagation()}
-          >
+        <div className="d-modal-overlay" onClick={closeRecipeModal}>
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
             <div className="d-modal-icon">
               {recipeModalAction === 'delete' ? 'Delete' : 'Edit'}
             </div>
 
             <h3 className="d-modal-title">
-              {recipeModalAction === 'delete'
-                ? 'Delete Recipe'
-                : 'Edit Recipe'}
+              {recipeModalAction === 'delete' ? 'Delete Recipe' : 'Edit Recipe'}
             </h3>
 
-            <p className="d-modal-message">
-              {recipeModalMessage}
-            </p>
+            <p className="d-modal-message">{recipeModalMessage}</p>
 
             {recipeModalAction === 'edit' && (
               <div className="d-modal-input-group">
-                <label className="d-modal-label">
-                  Recipe Name
-                </label>
-
+                <label className="d-modal-label">Recipe Name</label>
                 <input
                   type="text"
                   className="d-modal-input"
                   value={editRecipeName}
-                  onChange={e =>
-                    setEditRecipeName(e.target.value)
-                  }
+                  onChange={e => setEditRecipeName(e.target.value)}
                   placeholder="Enter recipe name"
                 />
               </div>
             )}
 
             <div className="d-modal-actions">
-              <button
-                className="d-modal-cancel"
-                onClick={closeRecipeModal}
-              >
+              <button className="d-modal-cancel" onClick={closeRecipeModal}>
                 Cancel
               </button>
 
               <button
                 className={`d-modal-confirm ${
-                  recipeModalAction === 'delete'
-                    ? 'd-confirm-delete'
-                    : 'd-confirm-edit'
+                  recipeModalAction === 'delete' ? 'd-confirm-delete' : 'd-confirm-edit'
                 }`}
                 onClick={handleRecipeConfirm}
               >
-                {recipeModalAction === 'delete'
-                  ? 'Delete'
-                  : 'Save Changes'}
+                {recipeModalAction === 'delete' ? 'Delete' : 'Save Changes'}
               </button>
             </div>
           </div>
@@ -1120,34 +1053,20 @@ if (!admin) {
       )}
 
       {showEditModal && editModalData && (
-        <div
-          className="d-modal-overlay"
-          onClick={closeEditModal}
-        >
-          <div
-            className="d-modal-container"
-            onClick={e => e.stopPropagation()}
-          >
+        <div className="d-modal-overlay" onClick={closeEditModal}>
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
             <div className="d-modal-icon">Edit</div>
 
-            <h3 className="d-modal-title">
-              Edit {editModalType}
-            </h3>
+            <h3 className="d-modal-title">Edit {editModalType}</h3>
 
-            <p className="d-modal-message">
-              Update the details below
-            </p>
+            <p className="d-modal-message">Update the name below</p>
 
             <div className="d-modal-input-group">
               {Object.keys(editModalFields).map(key => (
-                <div
-                  key={key}
-                  style={{ marginBottom: '12px' }}
-                >
+                <div key={key} style={{ marginBottom: '12px' }}>
                   <label className="d-modal-label">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </label>
-
                   <input
                     type="text"
                     className="d-modal-input"
@@ -1165,10 +1084,7 @@ if (!admin) {
             </div>
 
             <div className="d-modal-actions">
-              <button
-                className="d-modal-cancel"
-                onClick={closeEditModal}
-              >
+              <button className="d-modal-cancel" onClick={closeEditModal}>
                 Cancel
               </button>
 
@@ -1184,29 +1100,16 @@ if (!admin) {
       )}
 
       {showDeleteModal && deleteModalData && (
-        <div
-          className="d-modal-overlay"
-          onClick={closeDeleteModal}
-        >
-          <div
-            className="d-modal-container"
-            onClick={e => e.stopPropagation()}
-          >
+        <div className="d-modal-overlay" onClick={closeDeleteModal}>
+          <div className="d-modal-container" onClick={e => e.stopPropagation()}>
             <div className="d-modal-icon">Delete</div>
 
-            <h3 className="d-modal-title">
-              {deleteModalType}
-            </h3>
+            <h3 className="d-modal-title">{deleteModalType}</h3>
 
-            <p className="d-modal-message">
-              {deleteModalMessage}
-            </p>
+            <p className="d-modal-message">{deleteModalMessage}</p>
 
             <div className="d-modal-actions">
-              <button
-                className="d-modal-cancel"
-                onClick={closeDeleteModal}
-              >
+              <button className="d-modal-cancel" onClick={closeDeleteModal}>
                 Cancel
               </button>
 
@@ -1222,17 +1125,11 @@ if (!admin) {
       )}
 
       <div
-        className={`d-sidebar-overlay ${
-          sidebarOpen ? 'd-open' : ''
-        }`}
+        className={`d-sidebar-overlay ${sidebarOpen ? 'd-open' : ''}`}
         onClick={closeSidebar}
       />
 
-      <aside
-        className={`d-sidebar ${
-          sidebarOpen ? 'd-open' : ''
-        }`}
-      >
+      <aside className={`d-sidebar ${sidebarOpen ? 'd-open' : ''}`}>
         <div className="d-logo-area">
           <h2>ChefBot</h2>
           <span className="d-admin-badge">Admin</span>
@@ -1240,11 +1137,7 @@ if (!admin) {
 
         <nav className="d-nav-menu">
           <button
-            className={
-              activeSection === 'dashboard'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'dashboard' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('dashboard');
               closeSidebar();
@@ -1254,11 +1147,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'users'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'users' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('users');
               closeSidebar();
@@ -1268,11 +1157,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'pantry'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'pantry' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('pantry');
               closeSidebar();
@@ -1282,11 +1167,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'suggestions'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'suggestions' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('suggestions');
               closeSidebar();
@@ -1296,11 +1177,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'collection'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'collection' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('collection');
               closeSidebar();
@@ -1310,11 +1187,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'mealplans'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'mealplans' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('mealplans');
               closeSidebar();
@@ -1324,11 +1197,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'shoppinglists'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'shoppinglists' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('shoppinglists');
               closeSidebar();
@@ -1338,11 +1207,7 @@ if (!admin) {
           </button>
 
           <button
-            className={
-              activeSection === 'beginners'
-                ? 'd-active'
-                : ''
-            }
+            className={activeSection === 'beginners' ? 'd-active' : ''}
             onClick={() => {
               setActiveSection('beginners');
               closeSidebar();
@@ -1354,6 +1219,7 @@ if (!admin) {
 
         <div className="d-sidebar-logout">
           <button
+            type="button"
             className="d-logout-sidebar-btn"
             onClick={handleLogout}
           >
@@ -1383,10 +1249,7 @@ if (!admin) {
             <div className="d-welcome-banner-simple">
               <div className="d-welcome-text-simple">
                 <h2>Welcome back, Admin</h2>
-                <p>
-                  Here's what's happening with your ChefBot
-                  platform today.
-                </p>
+                <p>Here's what's happening with your ChefBot platform today.</p>
               </div>
             </div>
 
@@ -1403,9 +1266,7 @@ if (!admin) {
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('collection')
-                }
+                onClick={() => setActiveSection('collection')}
               >
                 <div className="d-overview-stat-info">
                   <h3>{systemStats.totalRecipes || 0}</h3>
@@ -1415,65 +1276,47 @@ if (!admin) {
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('suggestions')
-                }
+                onClick={() => setActiveSection('suggestions')}
               >
                 <div className="d-overview-stat-info">
-                  <h3>
-                    {systemStats.totalSuggestions || 0}
-                  </h3>
+                  <h3>{systemStats.totalSuggestions || 0}</h3>
                   <p>Meal Suggestions</p>
                 </div>
               </div>
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('mealplans')
-                }
+                onClick={() => setActiveSection('mealplans')}
               >
                 <div className="d-overview-stat-info">
-                  <h3>
-                    {systemStats.totalMealPlans || 0}
-                  </h3>
+                  <h3>{systemStats.totalMealPlans || 0}</h3>
                   <p>Meal Plans</p>
                 </div>
               </div>
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('pantry')
-                }
+                onClick={() => setActiveSection('pantry')}
               >
                 <div className="d-overview-stat-info">
-                  <h3>
-                    {systemStats.totalPantryItems || 0}
-                  </h3>
+                  <h3>{systemStats.totalPantryItems || 0}</h3>
                   <p>Pantry Items</p>
                 </div>
               </div>
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('shoppinglists')
-                }
+                onClick={() => setActiveSection('shoppinglists')}
               >
                 <div className="d-overview-stat-info">
-                  <h3>
-                    {systemStats.totalShoppingLists || 0}
-                  </h3>
+                  <h3>{systemStats.totalShoppingLists || 0}</h3>
                   <p>Shopping Lists</p>
                 </div>
               </div>
 
               <div
                 className="d-overview-stat-card"
-                onClick={() =>
-                  setActiveSection('beginners')
-                }
+                onClick={() => setActiveSection('beginners')}
               >
                 <div className="d-overview-stat-info">
                   <h3>{beginnersGuide.length}</h3>
@@ -1488,12 +1331,9 @@ if (!admin) {
               <div className="d-health-stats">
                 <div className="d-health-item">
                   <div>Server Status</div>
-
                   <div
                     className={
-                      serverStatus === 'Online'
-                        ? 'd-online'
-                        : 'd-offline'
+                      serverStatus === 'Online' ? 'd-online' : 'd-offline'
                     }
                   >
                     {serverStatus === 'Checking...'
@@ -1506,12 +1346,9 @@ if (!admin) {
 
                 <div className="d-health-item">
                   <div>Database Status</div>
-
                   <div
                     className={
-                      databaseStatus === 'Connected'
-                        ? 'd-online'
-                        : 'd-offline'
+                      databaseStatus === 'Connected' ? 'd-online' : 'd-offline'
                     }
                   >
                     {databaseStatus === 'Checking...'
@@ -1542,9 +1379,7 @@ if (!admin) {
           <div className="d-section d-users-section">
             <div className="d-section-header">
               <h2>Manage User Accounts</h2>
-              <span className="d-total-count">
-                {users.length} users
-              </span>
+              <span className="d-total-count">{users.length} users</span>
             </div>
 
             {!Array.isArray(users) || users.length === 0 ? (
@@ -1557,39 +1392,26 @@ if (!admin) {
             ) : (
               <div className="d-users-grid">
                 {users.map(userData => (
-                  <div
-                    key={userData._id}
-                    className="d-user-square-card"
-                  >
+                  <div key={userData._id} className="d-user-square-card">
                     <div className="d-user-square-avatar">
-                      {userData.name?.charAt(0).toUpperCase() ||
-                        'U'}
+                      {userData.name?.charAt(0).toUpperCase() || 'U'}
                     </div>
 
-                    <div className="d-user-square-name">
-                      {userData.name}
-                    </div>
-
-                    <div className="d-user-square-email">
-                      {userData.email}
-                    </div>
+                    <div className="d-user-square-name">{userData.name}</div>
+                    <div className="d-user-square-email">{userData.email}</div>
 
                     <div className="d-user-square-actions">
                       {userData.isBlocked ? (
                         <button
                           className="d-unblock-btn"
-                          onClick={() =>
-                            handleUnblockUser(userData)
-                          }
+                          onClick={() => handleUnblockUser(userData)}
                         >
                           Unblock
                         </button>
                       ) : (
                         <button
                           className="d-block-btn"
-                          onClick={() =>
-                            handleBlockUser(userData)
-                          }
+                          onClick={() => handleBlockUser(userData)}
                         >
                           Block
                         </button>
@@ -1597,9 +1419,7 @@ if (!admin) {
 
                       <button
                         className="d-delete-btn"
-                        onClick={() =>
-                          handleDeleteUser(userData)
-                        }
+                        onClick={() => handleDeleteUser(userData)}
                       >
                         Delete
                       </button>
@@ -1615,12 +1435,8 @@ if (!admin) {
           <div className="d-section d-pantry-section">
             <div className="d-section-header">
               <h2>User Pantry Items</h2>
-
               <div className="d-header-actions">
-                <span className="d-total-count">
-                  {pantryItems.length} items
-                </span>
-
+                <span className="d-total-count">{pantryItems.length} items</span>
                 <button
                   className="d-refresh-btn"
                   onClick={fetchDashboardData}
@@ -1646,22 +1462,17 @@ if (!admin) {
                   if (!acc[key]) {
                     acc[key] = {
                       userId: key,
-                      userName:
-                        item.userName || 'Unknown User',
+                      userName: item.userName || 'Unknown User',
                       userEmail: item.userEmail || '',
                       items: []
                     };
                   }
 
                   acc[key].items.push(item);
-
                   return acc;
                 }, {})
               ).map(userGroup => (
-                <div
-                  key={userGroup.userId}
-                  className="d-user-pantry-group"
-                >
+                <div key={userGroup.userId} className="d-user-pantry-group">
                   <div className="d-user-pantry-header">
                     <div className="d-user-info">
                       <span
@@ -1669,8 +1480,7 @@ if (!admin) {
                         style={{ marginBottom: '0' }}
                       >
                         <span className="d-user-email-only">
-                          {userGroup.userEmail ||
-                            'No Email'}
+                          {userGroup.userEmail || 'No Email'}
                         </span>
                       </span>
                     </div>
@@ -1684,39 +1494,21 @@ if (!admin) {
 
                   <div className="d-pantry-items-grid">
                     {userGroup.items.map(item => (
-                      <div
-                        key={item._id}
-                        className="d-pantry-item-card"
-                      >
+                      <div key={item._id} className="d-pantry-item-card">
                         <div className="d-pantry-item-header">
-                          <span className="d-pantry-item-name">
-                            {item.name}
-                          </span>
-
-                          {item.isLowStock && (
-                            <span className="d-low-stock-badge">
-                              Low Stock
-                            </span>
-                          )}
+                          <span className="d-pantry-item-name">{item.name}</span>
                         </div>
 
                         <div className="d-pantry-item-details">
                           <p>
-                            <span className="d-detail-label">
-                              Quantity:
-                            </span>
-
+                            <span className="d-detail-label">Quantity:</span>
                             <span className="d-detail-value">
-                              {item.quantity}{' '}
-                              {item.unit || 'units'}
+                              {item.quantity} {item.unit || 'units'}
                             </span>
                           </p>
 
                           <p>
-                            <span className="d-detail-label">
-                              Category:
-                            </span>
-
+                            <span className="d-detail-label">Category:</span>
                             <span className="d-detail-value">
                               {item.category || 'General'}
                             </span>
@@ -1725,9 +1517,7 @@ if (!admin) {
                           <p className="d-pantry-item-added">
                             Added:{' '}
                             {item.createdAt
-                              ? new Date(
-                                  item.createdAt
-                                ).toLocaleDateString()
+                              ? new Date(item.createdAt).toLocaleDateString()
                               : 'N/A'}
                           </p>
                         </div>
@@ -1735,9 +1525,7 @@ if (!admin) {
                         <div className="d-pantry-item-actions">
                           <button
                             className="d-delete-btn"
-                            onClick={() =>
-                              openPantryDeleteModal(item)
-                            }
+                            onClick={() => openPantryDeleteModal(item)}
                           >
                             Delete Item
                           </button>
@@ -1755,17 +1543,22 @@ if (!admin) {
           <div className="d-section d-suggestions-section">
             <div className="d-section-header">
               <h2>Meal Suggestions</h2>
-
               <div className="d-header-actions">
                 <span className="d-total-count">
                   {mealSuggestions.length} suggestions
                 </span>
+                <button
+                  className="d-refresh-btn"
+                  onClick={fetchDashboardData}
+                  title="Refresh meal suggestions"
+                >
+                  Refresh
+                </button>
               </div>
             </div>
 
             <div className="d-items-grid">
-              {!Array.isArray(mealSuggestions) ||
-              mealSuggestions.length === 0 ? (
+              {!Array.isArray(mealSuggestions) || mealSuggestions.length === 0 ? (
                 <div className="d-empty-state">
                   <p>No meal suggestions found</p>
                   <p className="d-empty-sub">
@@ -1781,19 +1574,12 @@ if (!admin) {
                     'Unnamed Meal';
 
                   const userEmail =
-                    suggestion.userEmail ||
-                    suggestion.user?.email ||
-                    '';
+                    suggestion.userEmail || suggestion.user?.email || '';
 
                   return (
-                    <div
-                      key={suggestion._id}
-                      className="d-item-card"
-                    >
+                    <div key={suggestion._id} className="d-item-card">
                       <div className="d-suggestion-recipe-header">
-                        <span className="d-recipe-name">
-                          {recipeName}
-                        </span>
+                        <span className="d-recipe-name">{recipeName}</span>
                       </div>
 
                       <div className="d-suggestion-user-info">
@@ -1805,20 +1591,22 @@ if (!admin) {
                       <div className="d-item-details">
                         {suggestion.members > 0 && (
                           <p>
-                            <strong>Members:</strong>{' '}
-                            {suggestion.members}
+                            <strong>Members:</strong> {suggestion.members}
                           </p>
                         )}
+
+                        <p className="d-item-date">
+                          Added:{' '}
+                          {suggestion.createdAt
+                            ? new Date(suggestion.createdAt).toLocaleDateString()
+                            : 'N/A'}
+                        </p>
                       </div>
 
                       <div className="d-card-actions">
                         <button
                           className="d-delete-btn d-remove-only-btn"
-                          onClick={() =>
-                            handleDeleteSuggestion(
-                              suggestion
-                            )
-                          }
+                          onClick={() => handleDeleteSuggestion(suggestion)}
                         >
                           Remove
                         </button>
@@ -1835,7 +1623,6 @@ if (!admin) {
           <div className="d-section d-collection-section">
             <div className="d-section-header">
               <h2>Recipe Collection</h2>
-
               <span className="d-total-count">
                 {recipeCollection.length} recipes
               </span>
@@ -1846,29 +1633,19 @@ if (!admin) {
                 <button
                   key={category}
                   className={`d-filter-btn ${
-                    selectedRecipeCategory === category
-                      ? 'd-active'
-                      : ''
+                    selectedRecipeCategory === category ? 'd-active' : ''
                   }`}
-                  onClick={() =>
-                    setSelectedRecipeCategory(category)
-                  }
+                  onClick={() => setSelectedRecipeCategory(category)}
                 >
                   {category}
                 </button>
               ))}
             </div>
 
-            <div className="d-recipe-count">
-              Showing {getFilteredRecipes().length} of{' '}
-              {recipeCollection.length} recipes
-            </div>
-
             <div className="d-items-grid">
               {getFilteredRecipes().length === 0 ? (
                 <div className="d-empty-state">
                   <p>No recipes found</p>
-
                   <p className="d-empty-sub">
                     {recipeCollection.length === 0
                       ? 'No recipes in collection yet'
@@ -1877,17 +1654,11 @@ if (!admin) {
                 </div>
               ) : (
                 getFilteredRecipes().map(recipe => (
-                  <div
-                    key={recipe._id}
-                    className="d-item-card"
-                  >
+                  <div key={recipe._id} className="d-item-card">
                     <div className="d-item-header">
                       <h3>{recipe.recipeName}</h3>
-
                       {recipe.views > 50 && (
-                        <span className="d-popular-badge">
-                          Popular
-                        </span>
+                        <span className="d-popular-badge">Popular</span>
                       )}
                     </div>
 
@@ -1902,18 +1673,14 @@ if (!admin) {
                     <div className="d-card-actions">
                       <button
                         className="d-edit-btn"
-                        onClick={() =>
-                          handleEditRecipe(recipe)
-                        }
+                        onClick={() => handleEditRecipe(recipe)}
                       >
                         Edit
                       </button>
 
                       <button
                         className="d-delete-btn"
-                        onClick={() =>
-                          handleDeleteFromCollection(recipe)
-                        }
+                        onClick={() => handleDeleteFromCollection(recipe)}
                       >
                         Delete
                       </button>
@@ -1929,14 +1696,10 @@ if (!admin) {
           <div className="d-section d-mealplans-section">
             <div className="d-section-header">
               <h2>Meal Plans</h2>
-
-              <span className="d-total-count">
-                {mealPlans.length} plans
-              </span>
+              <span className="d-total-count">{mealPlans.length} plans</span>
             </div>
 
-            {!Array.isArray(mealPlans) ||
-            mealPlans.length === 0 ? (
+            {!Array.isArray(mealPlans) || mealPlans.length === 0 ? (
               <div className="d-empty-state">
                 <p>No meal plans created yet</p>
                 <p className="d-empty-sub">
@@ -1949,20 +1712,13 @@ if (!admin) {
                   let userEmail = 'No Email';
 
                   if (plan.userId) {
-                    const foundUser = users.find(
-                      item => item._id === plan.userId
-                    );
-
+                    const foundUser = users.find(item => item._id === plan.userId);
                     if (foundUser) {
-                      userEmail =
-                        foundUser.email || 'No Email';
+                      userEmail = foundUser.email || 'No Email';
                     }
                   }
 
-                  if (
-                    userEmail === 'No Email' &&
-                    plan.userEmail
-                  ) {
+                  if (userEmail === 'No Email' && plan.userEmail) {
                     userEmail = plan.userEmail;
                   }
 
@@ -1972,38 +1728,27 @@ if (!admin) {
                     if (typeof meal !== 'string') {
                       return Boolean(meal);
                     }
-
                     const value = meal.trim();
-
                     return (
                       value !== '' &&
                       value !== 'No meals added' &&
-                      value !==
-                        'No meals added yet. Click Edit to add meals.'
+                      value !== 'No meals added yet. Click Edit to add meals.'
                     );
                   });
 
-                  const displayDate =
-                    plan.date || plan.createdAt;
+                  const displayDate = plan.date || plan.createdAt;
 
                   return (
-                    <div
-                      key={plan._id}
-                      className="d-item-card"
-                    >
+                    <div key={plan._id} className="d-item-card">
                       <div
                         className="d-suggestion-user-info"
                         style={{ marginBottom: '8px' }}
                       >
-                        <span className="d-user-email-only">
-                          {userEmail}
-                        </span>
+                        <span className="d-user-email-only">{userEmail}</span>
                       </div>
 
                       <div className="d-item-header">
-                        <h3>
-                          {plan.planType || 'Daily'}
-                        </h3>
+                        <h3>{plan.planType || 'Daily'}</h3>
                       </div>
 
                       <div className="d-item-details">
@@ -2013,25 +1758,17 @@ if (!admin) {
                             style={{ marginTop: '6px' }}
                           >
                             <strong>Meals:</strong>
-
-                            {mealsArray.map(
-                              (meal, index) => (
-                                <div
-                                  key={index}
-                                  className="d-mealplan-meal-item"
-                                >
-                                  {meal}
-                                </div>
-                              )
-                            )}
+                            {mealsArray.map((meal, index) => (
+                              <div key={index} className="d-mealplan-meal-item">
+                                {meal}
+                              </div>
+                            ))}
                           </div>
                         )}
 
                         <p className="d-item-date">
                           {displayDate
-                            ? new Date(
-                                displayDate
-                              ).toLocaleDateString()
+                            ? new Date(displayDate).toLocaleDateString()
                             : 'N/A'}
                         </p>
                       </div>
@@ -2039,9 +1776,7 @@ if (!admin) {
                       <div className="d-card-actions">
                         <button
                           className="d-delete-btn"
-                          onClick={() =>
-                            handleDeleteMealPlan(plan)
-                          }
+                          onClick={() => handleDeleteMealPlan(plan)}
                         >
                           Delete
                         </button>
@@ -2058,70 +1793,49 @@ if (!admin) {
           <div className="d-section d-shoppinglists-section">
             <div className="d-section-header">
               <h2>Shopping Lists</h2>
-
-              <span className="d-total-count">
-                {shoppingLists.length} lists
-              </span>
+              <span className="d-total-count">{shoppingLists.length} lists</span>
             </div>
 
             <div className="d-items-grid">
-              {!shoppingLists ||
-              shoppingLists.length === 0 ? (
+              {!shoppingLists || shoppingLists.length === 0 ? (
                 <div className="d-empty-state">
                   <p>No shopping lists found</p>
-                  <p className="d-empty-sub">
-                    No shopping lists available
-                  </p>
+                  <p className="d-empty-sub">No shopping lists available</p>
                 </div>
               ) : (
                 shoppingLists.map(list => {
-                  const foundUser = users.find(
-                    item => item._id === list.userId
-                  );
-
+                  const foundUser = users.find(item => item._id === list.userId);
                   let displayEmail = 'No Email';
 
                   if (foundUser) {
-                    displayEmail =
-                      foundUser.email || 'No Email';
+                    displayEmail = foundUser.email || 'No Email';
                   } else if (list.userEmail) {
                     displayEmail = list.userEmail;
                   }
 
                   return (
-                    <div
-                      key={list._id}
-                      className="d-item-card"
-                    >
+                    <div key={list._id} className="d-item-card">
                       <div
                         className="d-suggestion-user-info"
                         style={{ marginBottom: '8px' }}
                       >
-                        <span className="d-user-email-only">
-                          {displayEmail}
-                        </span>
+                        <span className="d-user-email-only">{displayEmail}</span>
                       </div>
 
                       <div className="d-item-header">
-                        <h3>
-                          {list.name || 'Unnamed List'}
-                        </h3>
+                        <h3>{list.name || 'Unnamed List'}</h3>
                       </div>
 
                       <div className="d-item-details">
                         {list.totalItems > 0 && (
                           <p className="d-item-progress">
-                            Progress:{' '}
-                            {list.purchasedItems || 0}/
-                            {list.totalItems}
+                            Progress: {list.purchasedItems || 0}/{list.totalItems}
                           </p>
                         )}
 
                         <p className="d-item-date">
                           {list.createdAt
-                            ? new Date(
-                                list.createdAt
-                              ).toLocaleDateString()
+                            ? new Date(list.createdAt).toLocaleDateString()
                             : 'N/A'}
                         </p>
                       </div>
@@ -2129,11 +1843,7 @@ if (!admin) {
                       <div className="d-card-actions">
                         <button
                           className="d-delete-btn"
-                          onClick={() =>
-                            handleDeleteShoppingList(
-                              list
-                            )
-                          }
+                          onClick={() => handleDeleteShoppingList(list)}
                         >
                           Delete
                         </button>
@@ -2150,11 +1860,7 @@ if (!admin) {
           <div className="d-section d-beginners-section">
             <div className="d-section-header">
               <h2>Beginners Guide</h2>
-
-              <button
-                className="d-primary-btn"
-                onClick={handleAddBeginnersGuide}
-              >
+              <button className="d-primary-btn" onClick={handleAddBeginnersGuide}>
                 Add Item
               </button>
             </div>
@@ -2164,29 +1870,19 @@ if (!admin) {
                 <button
                   key={category}
                   className={`d-beginners-category-btn ${
-                    selectedBeginnersCategory === category
-                      ? 'd-active'
-                      : ''
+                    selectedBeginnersCategory === category ? 'd-active' : ''
                   }`}
-                  onClick={() =>
-                    setSelectedBeginnersCategory(category)
-                  }
+                  onClick={() => setSelectedBeginnersCategory(category)}
                 >
                   {category}
                 </button>
               ))}
             </div>
 
-            <div className="d-recipe-count">
-              Showing {getFilteredBeginnersGuide().length}{' '}
-              of {beginnersGuide.length} items
-            </div>
-
             <div className="d-items-grid">
               {getFilteredBeginnersGuide().length === 0 ? (
                 <div className="d-empty-state">
                   <p>No items found</p>
-
                   <p className="d-empty-sub">
                     {beginnersGuide.length === 0
                       ? 'Click "Add Item" to add your first guide'
@@ -2195,40 +1891,35 @@ if (!admin) {
                 </div>
               ) : (
                 getFilteredBeginnersGuide().map(item => (
-                  <div
-                    key={item._id}
-                    className="d-item-card"
-                  >
+                  <div key={item._id} className="d-item-card">
                     <div className="d-item-header">
                       <h3>{item.title || 'Unnamed'}</h3>
                     </div>
 
                     <div className="d-item-details">
-                      <p className="d-item-description">
-                        {item.description ||
-                          'No description'}
-                      </p>
-
-                      <p className="d-item-category">
-                        {item.category || 'General'}
-                      </p>
+                      {item.description && (
+                        <p className="d-item-description">
+                          {item.description}
+                        </p>
+                      )}
+                      {item.category && (
+                        <p className="d-item-category">
+                          {item.category}
+                        </p>
+                      )}
                     </div>
 
                     <div className="d-card-actions">
                       <button
                         className="d-edit-btn"
-                        onClick={() =>
-                          handleEditBeginnersGuide(item)
-                        }
+                        onClick={() => handleEditBeginnersGuide(item)}
                       >
                         Edit
                       </button>
 
                       <button
                         className="d-delete-btn"
-                        onClick={() =>
-                          handleDeleteBeginnersGuide(item)
-                        }
+                        onClick={() => handleDeleteBeginnersGuide(item)}
                       >
                         Delete
                       </button>
