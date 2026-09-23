@@ -9,41 +9,17 @@ const User = require('../models/User');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const allGuides = [];
-const addGuide = (item, mainCategory, subCategory, filterTags = []) => {
-  if (!item || !item.name) return;
+
+const addGuide = (item, subCategory) => {
   allGuides.push({
     title: item.name,
-    category: mainCategory,
+    content: item,
+    category: 'kitchen-tools',
     subCategory: subCategory,
-    filterTags: filterTags,
-    image: item.image || '',
-    content: {
-      id: item.id,
-      name: item.name,
-      tagline: item.tagline || '',
-      fullDesc: item.fullDesc || '',
-      keyUses: item.keyUses || [],
-      bestFor: item.bestFor || '',
-      type: item.type || subCategory,
-      material: item.material || '',
-      size: item.size || '',
-      price: item.price || '',
-      priceRange: item.priceRange || '',
-      durability: item.durability || '',
-      pros: item.pros || [],
-      cons: item.cons || [],
-      care: item.care || '',
-      bladeType: item.bladeType || '',
-      utensilType: item.utensilType || '',
-      cookwareType: item.cookwareType || '',
-      crockeryType: item.crockeryType || '',
-      cutleryType: item.cutleryType || '',
-      servingType: item.servingType || '',
-      capacity: item.capacity || '',
-      materialType: item.materialType || ''
-    }
+    image: item.image
   });
 };
+
 const knivesData = [
   {
     id: 1,
@@ -52,7 +28,7 @@ const knivesData = [
     size: "8-10 inches",
     bestFor: "All-purpose chopping, slicing, dicing",
     material: "High-carbon stainless steel",
-    price: "Rs.700 to Rs.4,500",
+    price: "Rs.700 - Rs.4,500",
     priceRange: "Mid to Premium",
     fullDesc: "The most versatile knife in the kitchen. The curved blade allows a rocking motion for fast chopping. Perfect for chopping vegetables, slicing meats, and mincing herbs. A quality chef's knife is the only knife many cooks need.",
     keyUses: ["Chopping vegetables", "Slicing meats", "Mincing herbs", "Dicing onions", "Crushing garlic"],
@@ -70,7 +46,7 @@ const knivesData = [
     size: "3-4 inches",
     bestFor: "Peeling, precision work, small tasks",
     material: "Stainless steel",
-    price: "Rs.200 to Rs.4,000",
+    price: "Rs.200 - Rs.4,000",
     priceRange: "Budget to Mid",
     fullDesc: "A small knife ideal for peeling fruits, deveining shrimp, removing seeds, and detailed cutting work. The short blade gives you precise control for intricate tasks where a larger knife would be awkward. Often used in hand, not on a cutting board.",
     keyUses: ["Peeling fruits and vegetables", "Deveining shrimp", "Removing seeds", "Detailed cutting", "Trimming small items"],
@@ -88,7 +64,7 @@ const knivesData = [
     size: "8-10 inches",
     bestFor: "Slicing crusty bread, cakes, tomatoes",
     material: "Stainless steel with serrated edge",
-    price: "Rs.350 to Rs.1,5000",
+    price: "Rs.350 - Rs.1,500",
     priceRange: "Budget to Mid",
     fullDesc: "The serrated edge of a bread knife easily cuts through crusty bread without crushing the soft interior. The sawing motion works well for any food with a hard exterior and soft interior, including tomatoes and cakes. Unlike straight-edge knives, serrated knives stay sharp for years.",
     keyUses: ["Slicing crusty bread", "Cutting cakes and pastries", "Slicing tomatoes", "Cutting bagels", "Slicing citrus fruits"],
@@ -106,7 +82,7 @@ const knivesData = [
     size: "5-7 inches",
     bestFor: "Japanese-style slicing, chopping",
     material: "Japanese steel (VG-10, Shun, etc.)",
-    price: "Rs.350 to Rs.3,500",
+    price: "Rs.350 - Rs.3,500",
     priceRange: "Mid to Premium",
     fullDesc: "A Japanese style all-purpose knife meaning 'three virtues' used for slicing, dicing, and mincing. The straighter edge and sheepsfoot blade tip allow for precise cutting. Granton edges (dimples) prevent food from sticking to the blade. Typically lighter than Western chef's knives.",
     keyUses: ["Slicing vegetables", "Cutting meat", "Chopping herbs", "Precision cuts", "Push cutting"],
@@ -124,13 +100,13 @@ const knivesData = [
     size: "5-7 inches",
     bestFor: "Removing bones from meat, filleting fish",
     material: "Flexible stainless steel",
-    price: "Rs.400 to Rs.7,000",
+    price: "Rs.400 - Rs.7,000",
     priceRange: "Budget to Mid",
     fullDesc: "A thin, flexible blade perfect for deboning chicken, filleting fish, and trimming meats. The narrow blade can maneuver around bones and joints. Flexibility varies by brand and stiffer for beef, more flexible for fish.",
     keyUses: ["Deboning chicken", "Filleting fish", "Trimming meat", "Removing silver skin", "Butchery tasks"],
     care: "Hand wash, keep sharp, store safely",
     durability: "5-10 years",
-    pros: ["Flexible blade  around bones", "Precise deboning control", "Thin profile for tight spaces", "Essential for meat preparation"],
+    pros: ["Flexible blade around bones", "Precise deboning control", "Thin profile for tight spaces", "Essential for meat preparation"],
     cons: ["Fragile tip can break", "Specialized use only", "Not for everyday cutting", "Requires sharpening skill"],
     type: "knife",
     bladeType: "boning"
@@ -142,10 +118,9 @@ const knivesData = [
     size: "4-6 inches",
     bestFor: "Mid-sized cutting tasks",
     material: "Stainless steel",
-    price: "Rs.350 to Rs.1500",
+    price: "Rs.350 - Rs.1,500",
     priceRange: "Budget",
-    bestFor: "Small to medium cutting tasks between chef's and paring knives",
-    fullDesc: "A mid sized knife that fills the gap between a chef's knife and a paring knife. Useful for cutting sandwiches, small vegetables, and fruits where a chef's knife feels too large but a paring knife is too small. A good extra knife for tasks that don not require a specialized blade.",
+    fullDesc: "A mid sized knife that fills the gap between a chef's knife and a paring knife. Useful for cutting sandwiches, small vegetables, and fruits where a chef's knife feels too large but a paring knife is too small. A good extra knife for tasks that do not require a specialized blade.",
     keyUses: ["Cutting sandwiches", "Slicing small vegetables", "Cutting fruit", "Everyday small tasks", "When chef's knife is too large"],
     care: "Hand wash recommended",
     durability: "5-10 years",
@@ -161,9 +136,8 @@ const knivesData = [
     size: "6-7 inches",
     bestFor: "Vegetable chopping",
     material: "Japanese carbon steel",
-    price: "Rs.2,000 to Rs.6,000",
+    price: "Rs.2,000 - Rs.6,000",
     priceRange: "Premium",
-    bestFor: "Vegetable preparation, especially chopping and slicing",
     fullDesc: "A traditional Japanese vegetable knife with a straight blade edge and sheepsfoot tip. The straight edge allows you to chop through vegetables with a straight up-and-down motion rather than a rocking motion. Excellent for thin, precise vegetable cuts.",
     keyUses: ["Chopping vegetables", "Slicing vegetables thinly", "Vegetable preparation", "Precision vegetable cuts", "Making coleslaw"],
     care: "Hand wash, dry immediately to prevent rust (carbon steel)",
@@ -184,7 +158,7 @@ const cuttingBoardTypes = [
     cons: ["Can dull knives faster than wood", "Absorbs moisture", "May crack over time", "Requires regular oiling"],
     bestFor: "General vegetable chopping, fruits, bread",
     care: "Hand wash, oil monthly with mineral oil",
-    price: "$20-$50",
+    price: "Rs.5,600 - Rs.14,000",
     priceRange: "Budget",
     fullDesc: "Made from fast-growing bamboo, these boards are an eco-friendly alternative to traditional wood. Bamboo is harder than many woods, which makes it durable but can be harder on knife edges. Naturally antibacterial and lightweight.",
     durability: "3-5 years",
@@ -200,7 +174,7 @@ const cuttingBoardTypes = [
     cons: ["Heavier than bamboo", "More expensive", "Requires regular oiling", "Can stain"],
     bestFor: "All-purpose cutting, meat preparation, cheese boards",
     care: "Hand wash, oil regularly with food-grade mineral oil",
-    price: "$50-$150",
+    price: "Rs.14,000 - Rs.42,000",
     priceRange: "Mid to Premium",
     fullDesc: "Hard maple is the gold standard for cutting boards. It's hard enough to be durable but soft enough to be gentle on knife edges. The closed grain resists moisture and bacteria. With proper care, a maple board can last for decades.",
     durability: "10+ years (lifetime with care)",
@@ -216,7 +190,7 @@ const cuttingBoardTypes = [
     cons: ["Can harbor bacteria in knife grooves", "Not eco-friendly", "Scratches easily", "Shorter lifespan"],
     bestFor: "Raw meat, fish (use color-coded boards)",
     care: "Dishwasher safe, replace when deeply grooved",
-    price: "$10-$30",
+    price: "Rs.2,800 - Rs.8,400",
     priceRange: "Budget",
     fullDesc: "Affordable and dishwasher-safe, plastic boards are convenient for raw meat and fish. Use different colors for different food types to prevent cross-contamination. Replace when the surface becomes deeply grooved from knife cuts.",
     durability: "1-2 years (replace when grooved)",
@@ -232,7 +206,7 @@ const cuttingBoardTypes = [
     cons: ["Heavy", "Can stain (especially from beets, turmeric)", "Expensive", "Limited availability"],
     bestFor: "Professional kitchens, heavy daily use",
     care: "Hand wash, sanitize regularly",
-    price: "$40-$100",
+    price: "Rs.11,200 - Rs.28,000",
     priceRange: "Premium",
     fullDesc: "Professional-grade cutting boards made from rubber. The surface is self-healing, meaning knife cuts close up rather than creating grooves. Extremely gentle on knife edges. Non-slip base keeps board stable. Used in many professional kitchens.",
     durability: "5-7 years",
@@ -252,7 +226,7 @@ const mixingBowlTypes = [
     bestFor: "Mixing, marinating, storing, baking prep",
     sizes: "1, 1.5, 2.5, 3, 5 quart set",
     care: "Dishwasher safe",
-    price: "$30-$80",
+    price: "Rs.8,400 - Rs.22,400",
     priceRange: "Mid",
     fullDesc: "Virtually indestructible, non-reactive, and won't absorb stains or odors. Stainless steel bowls are the workhorses of any kitchen. They're lightweight, nest for compact storage, and don't break when dropped. Perfect for everything from mixing batter to marinating meat.",
     durability: "Lifetime",
@@ -269,7 +243,7 @@ const mixingBowlTypes = [
     bestFor: "Baking, microwave use, serving, melting butter/chocolate",
     sizes: "0.5, 1.5, 2.5, 4 quart set",
     care: "Dishwasher safe",
-    price: "$25-$60",
+    price: "Rs.7,000 - Rs.16,800",
     priceRange: "Budget to Mid",
     fullDesc: "Perfect for microwave use and serving. Glass bowls let you see what's inside, which is helpful for melting chocolate or checking dough consistency. Non-porous surface won't stain from tomato sauce or curry. Can go from microwave to table.",
     durability: "5-10 years (breakable)",
@@ -286,7 +260,7 @@ const mixingBowlTypes = [
     bestFor: "Serving, baking, mixing, table presentation",
     sizes: "Various sizes, often sold as nesting sets",
     care: "Hand wash recommended for hand-painted pieces",
-    price: "$40-$100",
+    price: "Rs.11,200 - Rs.28,000",
     priceRange: "Mid to Premium",
     fullDesc: "Beautiful enough for serving and functional for baking. Ceramic bowls retain heat well, keeping food warm longer. Excellent heat distribution for oven use. Many are microwave and dishwasher safe, but hand-painted pieces need gentle care.",
     durability: "10+ years with care",
@@ -303,7 +277,7 @@ const mixingBowlTypes = [
     bestFor: "Everyday mixing, kids helping, outdoor cooking",
     sizes: "Set of 3-5 from small to large",
     care: "Dishwasher safe (top rack recommended)",
-    price: "$15-$40",
+    price: "Rs.4,200 - Rs.11,200",
     priceRange: "Budget",
     fullDesc: "Lightweight and unbreakable, plastic bowls are great for everyday use, especially when kids are helping in the kitchen. They're affordable and come in fun colors. However, they can stain and absorb odors over time and aren't suitable for hot contents.",
     durability: "2-3 years",
@@ -324,7 +298,7 @@ const cookwareTypes = [
     material: "Stainless steel or Aluminum",
     capacity: "3, 5, 6, 8, 10 liters",
     care: "Hand wash, check gasket regularly, clean valve",
-    price: "$40-$150",
+    price: "Rs.11,200 - Rs.42,000",
     priceRange: "Mid to Premium",
     fullDesc: "A pressure cooker cooks food up to 70% faster than conventional methods by trapping steam and raising the internal temperature. Perfect for beans, tough meats, and stocks. Modern pressure cookers have multiple safety features, making them much safer than old models.",
     durability: "10+ years (replace gasket every 1-2 years)",
@@ -341,7 +315,7 @@ const cookwareTypes = [
     material: "Cast Iron, Non-stick, or Carbon Steel",
     diameter: "8, 10, 12 inches",
     care: "Cast iron: season regularly, Non-stick: gentle cleaning",
-    price: "$15-$50",
+    price: "Rs.4,200 - Rs.14,000",
     priceRange: "Budget to Mid",
     fullDesc: "Essential for making flatbreads (roti, chapati, paratha) and dosa. A flat, round pan that distributes heat evenly. Cast iron versions develop a natural non-stick seasoning over time. Non-stick versions are easier to maintain but less durable.",
     durability: "Cast iron: lifetime, Non-stick: 3-5 years",
@@ -358,7 +332,7 @@ const cookwareTypes = [
     material: "Carbon steel, Cast iron, or Non-stick",
     capacity: "2, 3, 4, 5 liters",
     care: "Carbon steel: season before first use, hand wash, dry immediately",
-    price: "$25-$80",
+    price: "Rs.7,000 - Rs.22,400",
     priceRange: "Budget to Mid",
     fullDesc: "A deep, curved pan perfect for high-heat cooking. The curved shape allows easy tossing of ingredients. Traditional karahi is carbon steel, which develops a natural non-stick patina. Perfect for stir-fries, curries, and deep-frying.",
     durability: "Carbon steel/cast iron: lifetime, Non-stick: 3-5 years",
@@ -375,7 +349,7 @@ const cookwareTypes = [
     material: "Non-stick, Stainless steel, Cast iron, Carbon steel",
     diameter: "8, 10, 12 inches",
     care: "Varies by material (see cookware materials section)",
-    price: "$20-$100",
+    price: "Rs.5,600 - Rs.28,000",
     priceRange: "Budget to Premium",
     fullDesc: "The most-used pan in most kitchens. Low, slightly curved sides make it easy to flip foods and slide them onto plates. Perfect for everything from eggs to seared steaks. Available in every material - choose based on your cooking style.",
     durability: "5-10 years (non-stick less)",
@@ -392,7 +366,7 @@ const cookwareTypes = [
     material: "Enameled cast iron or raw cast iron",
     capacity: "4, 5.5, 7 quarts",
     care: "Enameled: hand wash, avoid metal utensils; Raw: season regularly",
-    price: "$50-$300",
+    price: "Rs.14,000 - Rs.84,000",
     priceRange: "Premium",
     fullDesc: "A large, heavy pot with tight-fitting lid. Legendary for heat retention and even cooking. Goes from stovetop to oven. Perfect for slow-cooked stews, braised meats, no-knead bread, and soups. Enameled versions don't require seasoning but are more expensive.",
     durability: "Lifetime (heirloom piece)",
@@ -409,7 +383,7 @@ const cookwareTypes = [
     material: "Stainless steel (most common)",
     capacity: "8, 12, 16, 20 quarts",
     care: "Dishwasher safe",
-    price: "$30-$120",
+    price: "Rs.8,400 - Rs.33,600",
     priceRange: "Budget to Mid",
     fullDesc: "A large, tall pot designed for cooking large quantities of liquid-based dishes. The tall sides help prevent boil-overs. Perfect for making stocks from bones, cooking pasta for a crowd, or preparing large batches of soup for freezing.",
     durability: "10+ years",
@@ -428,7 +402,7 @@ const cookwareMaterials = [
     bestFor: "All-purpose cooking, searing meat, deglazing for sauces",
     care: "Dishwasher safe, use Bar Keepers Friend for stains",
     durability: "Lifetime",
-    price: "$$-$$$ (Mid to Premium)",
+    price: "Rs.5,000 - Rs.25,000",
     fullDesc: "The workhorse of professional kitchens. Stainless steel is durable, non-reactive, and can handle high heat. Food does stick, which is actually good for creating fond (the browned bits) that form the base of pan sauces. Quality cookware has an aluminum or copper core for even heating.",
     type: "cookware-material",
     material: "Stainless Steel with aluminum/copper core"
@@ -442,7 +416,7 @@ const cookwareMaterials = [
     bestFor: "Eggs, pancakes, fish, delicate foods",
     care: "Hand wash only, use wooden/silicone utensils, no metal, no high heat",
     durability: "2-5 years (coating degrades)",
-    price: "$-$$ (Budget to Mid)",
+    price: "Rs.2,000 - Rs.10,000",
     fullDesc: "Perfect for delicate foods that tend to stick like eggs, fish, and pancakes. The non-stick coating allows cooking with minimal oil. However, the coating is fragile and will eventually wear off. Never use metal utensils or high heat, which damages the coating.",
     type: "cookware-material",
     material: "Aluminum with PTFE (Teflon) or ceramic coating"
@@ -456,7 +430,7 @@ const cookwareMaterials = [
     bestFor: "High heat cooking, searing steaks, frying, baking cornbread",
     care: "Season regularly with oil, dry immediately after washing, never soap",
     durability: "Lifetime (heirloom)",
-    price: "$$-$$$ (Mid to Premium)",
+    price: "Rs.5,000 - Rs.25,000",
     fullDesc: "Cast iron lasts forever and gets better with age as seasoning builds. Excellent heat retention means it stays hot even after adding cold food. Naturally non-stick when properly seasoned. Adds a small amount of dietary iron to your food. Can go from stovetop to oven to campfire.",
     type: "cookware-material",
     material: "Cast Iron"
@@ -474,7 +448,7 @@ const utensilItems = [
     bestFor: "Stirring sauces, mixing batters, non-stick pans",
     material: "Beechwood, Olive wood, Bamboo",
     care: "Hand wash, oil monthly with mineral oil",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "A timeless kitchen tool. Wooden spoons won't scratch any cookware, including delicate non-stick.",
     durability: "5+ years",
     type: "utensil",
@@ -490,7 +464,7 @@ const utensilItems = [
     bestFor: "Flipping pancakes, eggs, burgers, fish",
     material: "Silicone, Metal, Wood",
     care: "Dishwasher safe (silicone), hand wash wood",
-    price: "$8-$20",
+    price: "Rs.2,240 - Rs.5,600",
     fullDesc: "Essential for flipping foods. Silicone is best for non-stick pans.",
     durability: "3-5 years",
     type: "utensil",
@@ -506,7 +480,7 @@ const utensilItems = [
     bestFor: "Beating eggs, mixing sauces, whipping cream",
     material: "Stainless steel",
     care: "Hand wash recommended",
-    price: "$6-$18",
+    price: "Rs.1,680 - Rs.5,040",
     fullDesc: "Incorporates air into mixtures for fluffy eggs, whipped cream, and smooth sauces.",
     durability: "5+ years",
     type: "utensil",
@@ -522,7 +496,7 @@ const utensilItems = [
     bestFor: "Turning meat, serving pasta, grilling",
     material: "Stainless steel with silicone tips",
     care: "Dishwasher safe",
-    price: "$10-$25",
+    price: "Rs.2,800 - Rs.7,000",
     fullDesc: "Like an extension of your hand. Great for flipping and gripping hot foods.",
     durability: "5-10 years",
     type: "utensil",
@@ -538,7 +512,7 @@ const utensilItems = [
     bestFor: "Serving soups, stews, sauces",
     material: "Stainless steel",
     care: "Dishwasher safe",
-    price: "$8-$20",
+    price: "Rs.2,240 - Rs.5,600",
     fullDesc: "Perfect for serving soups, stews, and sauces. Deep bowl holds plenty.",
     durability: "10+ years",
     type: "utensil",
@@ -554,7 +528,7 @@ const utensilItems = [
     bestFor: "Serving vegetables, pasta, fried foods",
     material: "Stainless steel",
     care: "Dishwasher safe",
-    price: "$7-$18",
+    price: "Rs.1,960 - Rs.5,040",
     fullDesc: "Drains liquids while serving. Perfect for pasta, vegetables, and fried foods.",
     durability: "10+ years",
     type: "utensil",
@@ -570,7 +544,7 @@ const utensilItems = [
     bestFor: "Serving spaghetti, fettuccine, linguine",
     material: "Stainless steel, Nylon",
     care: "Dishwasher safe",
-    price: "$8-$15",
+    price: "Rs.2,240 - Rs.4,200",
     fullDesc: "Specialized tool with curved teeth that grip and hold pasta while draining water.",
     durability: "5-10 years",
     type: "utensil",
@@ -586,7 +560,7 @@ const utensilItems = [
     bestFor: "Mashing potatoes, yams, bananas, beans",
     material: "Stainless steel",
     care: "Dishwasher safe",
-    price: "$10-$20",
+    price: "Rs.2,800 - Rs.5,600",
     fullDesc: "Makes smooth mashed potatoes quickly. Zigzag pattern mashes efficiently.",
     durability: "10+ years",
     type: "utensil",
@@ -602,7 +576,7 @@ const utensilItems = [
     bestFor: "Peeling potatoes, carrots, apples, cucumbers",
     material: "Stainless steel blade",
     care: "Hand wash, dry immediately",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Makes quick work of peeling. Swivel blade follows contours of produce.",
     durability: "2-3 years",
     type: "utensil",
@@ -619,7 +593,7 @@ const utensilItems = [
     material: "Stainless steel",
     sizes: "4-sided with different grate sizes",
     care: "Hand wash with brush",
-    price: "$10-$25",
+    price: "Rs.2,800 - Rs.7,000",
     fullDesc: "4-sided grater with different grate sizes for cheese, vegetables, and zesting.",
     durability: "10+ years",
     type: "utensil",
@@ -636,7 +610,7 @@ const utensilItems = [
     material: "Stainless steel",
     length: "8-10 inches",
     care: "Hand wash carefully",
-    price: "$8-$15",
+    price: "Rs.2,240 - Rs.4,200",
     fullDesc: "Microplane-style grater perfect for citrus zest, hard cheese, garlic, and ginger.",
     durability: "10+ years",
     type: "utensil",
@@ -652,7 +626,7 @@ const utensilItems = [
     bestFor: "Mincing garlic cloves quickly",
     material: "Stainless steel, Cast aluminum",
     care: "Hand wash, clean holes after use",
-    price: "$10-$20",
+    price: "Rs.2,800 - Rs.5,600",
     fullDesc: "Presses garlic cloves through small holes, instantly mincing them without a knife.",
     durability: "10+ years",
     type: "utensil",
@@ -668,7 +642,7 @@ const utensilItems = [
     bestFor: "Opening canned goods safely",
     material: "Stainless steel",
     care: "Wipe clean, dry",
-    price: "$8-$20",
+    price: "Rs.2,240 - Rs.5,600",
     fullDesc: "Essential for opening canned goods. Smooth cutting wheel leaves no sharp edges.",
     durability: "5-10 years",
     type: "utensil",
@@ -685,7 +659,7 @@ const utensilItems = [
     material: "Wood, Marble, Silicone",
     length: "12-18 inches",
     care: "Hand wash, dry immediately",
-    price: "$10-$40",
+    price: "Rs.2,800 - Rs.11,200",
     fullDesc: "Essential for baking. Marble stays cold (good for pastry). Wood is traditional.",
     durability: "Lifetime",
     type: "utensil",
@@ -701,7 +675,7 @@ const utensilItems = [
     bestFor: "Applying egg wash, butter, oil to pastries and breads",
     material: "Silicone, Natural bristle",
     care: "Hand wash, air dry",
-    price: "$5-$12",
+    price: "Rs.1,400 - Rs.3,360",
     fullDesc: "Applies egg wash, melted butter, or oil evenly on baked goods.",
     durability: "3-5 years",
     type: "utensil",
@@ -718,7 +692,7 @@ const utensilItems = [
     material: "Stainless steel",
     size: "4x5 inches",
     care: "Dishwasher safe",
-    price: "$8-$15",
+    price: "Rs.2,240 - Rs.4,200",
     fullDesc: "Essential for bread making. Divides dough and scrapes work surfaces clean.",
     durability: "Lifetime",
     type: "utensil",
@@ -735,7 +709,7 @@ const utensilItems = [
     material: "Stainless steel",
     capacity: "2-4 cups",
     care: "Hand wash, dry well",
-    price: "$10-$25",
+    price: "Rs.2,800 - Rs.7,000",
     fullDesc: "Removes lumps from flour and adds air for lighter baked goods.",
     durability: "10+ years",
     type: "utensil",
@@ -752,7 +726,7 @@ const utensilItems = [
     material: "Stainless steel, Plastic",
     sizes: "1/4, 1/3, 1/2, 1 cup",
     care: "Dishwasher safe (most)",
-    price: "$10-$25",
+    price: "Rs.2,800 - Rs.7,000",
     fullDesc: "Essential set for precise baking. Level off excess for accuracy.",
     durability: "10+ years",
     type: "utensil",
@@ -769,7 +743,7 @@ const utensilItems = [
     material: "Stainless steel, Plastic",
     sizes: "1/8 tsp, 1/4 tsp, 1/2 tsp, 1 tsp, 1 tbsp",
     care: "Dishwasher safe",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Essential for precise seasoning and baking. Get stainless steel for durability.",
     durability: "10+ years",
     type: "utensil",
@@ -786,7 +760,7 @@ const utensilItems = [
     material: "Glass, Plastic",
     capacity: "1 cup, 2 cups, 4 cups",
     care: "Dishwasher safe",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Designed for accurate liquid measurement. Read at eye level for precision.",
     durability: "5-10 years (glass), 2-3 years (plastic)",
     type: "utensil",
@@ -803,7 +777,7 @@ const utensilItems = [
     material: "Stainless steel, Plastic",
     capacity: "5-11 lbs / 2-5 kg",
     care: "Wipe clean, remove batteries if not used",
-    price: "$15-$40",
+    price: "Rs.4,200 - Rs.11,200",
     fullDesc: "Most accurate way to measure ingredients. Essential for serious bakers.",
     durability: "5-10 years",
     type: "utensil",
@@ -819,7 +793,7 @@ const utensilItems = [
     bestFor: "Cutting herbs, opening packages, snipping poultry",
     material: "Stainless steel",
     care: "Hand wash, dry immediately",
-    price: "$12-$30",
+    price: "Rs.3,360 - Rs.8,400",
     fullDesc: "Incredibly versatile. Use for herbs, packaging, poultry, and even pizza.",
     durability: "5-10 years",
     type: "utensil",
@@ -835,7 +809,7 @@ const utensilItems = [
     bestFor: "Tenderizing steaks, chicken breasts, pounding meat",
     material: "Cast aluminum, Stainless steel",
     care: "Hand wash, dry",
-    price: "$10-$25",
+    price: "Rs.2,800 - Rs.7,000",
     fullDesc: "Dual-sided tool - flat side for pounding, pointed side for tenderizing.",
     durability: "Lifetime",
     type: "utensil",
@@ -851,13 +825,14 @@ const utensilItems = [
     bestFor: "Basting meats, applying marinades, brushing sauce",
     material: "Silicone, Natural bristle",
     care: "Dishwasher safe (silicone), hand wash (bristle)",
-    price: "$5-$12",
+    price: "Rs.1,400 - Rs.3,360",
     fullDesc: "Applies marinades and sauces to meats while cooking. Silicone is easiest to clean.",
     durability: "3-5 years",
     type: "utensil",
     utensilType: "basting-brush"
   }
 ];
+
 const crockeryItems = [
   {
     id: 1,
@@ -869,7 +844,7 @@ const crockeryItems = [
     bestFor: "Main course, formal dining, everyday meals",
     material: "Porcelain, Stoneware",
     care: "Dishwasher safe",
-    price: "$5-$25 each",
+    price: "Rs.1,400 - Rs.7,000 each",
     fullDesc: "The foundation of your table setting. Dinner plates are typically 10-11 inches.",
     durability: "5-10 years",
     type: "crockery",
@@ -886,7 +861,7 @@ const crockeryItems = [
     bestFor: "Salad, bread, snacks, dessert",
     material: "Porcelain, Stoneware",
     care: "Dishwasher safe",
-    price: "$3-$15 each",
+    price: "Rs.840 - Rs.4,200 each",
     fullDesc: "Also called salad or dessert plates. Perfect for bread, salad, and desserts.",
     durability: "5-10 years",
     type: "crockery",
@@ -904,7 +879,7 @@ const crockeryItems = [
     material: "Ceramic, Stoneware",
     capacity: "12-20 oz",
     care: "Dishwasher safe",
-    price: "$4-$18 each",
+    price: "Rs.1,120 - Rs.5,040 each",
     fullDesc: "Deeper than cereal bowls. Perfect for broth-based meals.",
     durability: "5-10 years",
     type: "crockery",
@@ -921,7 +896,7 @@ const crockeryItems = [
     material: "Ceramic, Stoneware",
     capacity: "16-24 oz",
     care: "Dishwasher safe",
-    price: "$3-$12 each",
+    price: "Rs.840 - Rs.3,360 each",
     fullDesc: "Everyday essentials. Great for breakfast and small meals.",
     durability: "3-5 years",
     type: "crockery",
@@ -938,7 +913,7 @@ const crockeryItems = [
     material: "Ceramic, Stoneware",
     capacity: "1-3 quarts",
     care: "Dishwasher safe",
-    price: "$10-$35",
+    price: "Rs.2,800 - Rs.9,800",
     fullDesc: "Brings the family together for shared meals.",
     durability: "5-10 years",
     type: "crockery",
@@ -955,7 +930,7 @@ const crockeryItems = [
     material: "Fine porcelain, Bone china",
     capacity: "6-8 oz",
     care: "Hand wash recommended",
-    price: "$10-$40 per set",
+    price: "Rs.2,800 - Rs.11,200 per set",
     fullDesc: "Adds elegance to any gathering. Perfect for afternoon tea.",
     durability: "10+ years",
     type: "crockery",
@@ -972,7 +947,7 @@ const crockeryItems = [
     material: "Ceramic, Stoneware",
     capacity: "10-16 oz",
     care: "Dishwasher safe",
-    price: "$5-$20 each",
+    price: "Rs.1,400 - Rs.5,600 each",
     fullDesc: "Everyday essentials for morning coffee or evening tea.",
     durability: "5-10 years",
     type: "crockery",
@@ -989,7 +964,7 @@ const crockeryItems = [
     material: "Ceramic, Porcelain, Cast iron",
     capacity: "4-8 cups",
     care: "Hand wash recommended",
-    price: "$15-$50",
+    price: "Rs.4,200 - Rs.14,000",
     fullDesc: "Essential for tea lovers. Brews and serves tea beautifully.",
     durability: "10+ years",
     type: "crockery",
@@ -1006,7 +981,7 @@ const crockeryItems = [
     material: "Ceramic, Porcelain",
     capacity: "8-12 oz",
     care: "Dishwasher safe",
-    price: "$8-$20",
+    price: "Rs.2,240 - Rs.5,600",
     fullDesc: "Essential for tea and coffee service. Keeps sugar fresh and dry.",
     durability: "5-10 years",
     type: "crockery",
@@ -1023,7 +998,7 @@ const crockeryItems = [
     material: "Ceramic, Porcelain",
     capacity: "6-10 oz",
     care: "Dishwasher safe",
-    price: "$6-$18",
+    price: "Rs.1,680 - Rs.5,040",
     fullDesc: "Perfect for serving milk or cream with tea and coffee.",
     durability: "5-10 years",
     type: "crockery",
@@ -1040,7 +1015,7 @@ const crockeryItems = [
     material: "Ceramic, Stoneware",
     capacity: "12-16 oz",
     care: "Dishwasher safe",
-    price: "$15-$30 per set",
+    price: "Rs.4,200 - Rs.8,400 per set",
     fullDesc: "Perfect for coffee lovers. Thicker ceramic keeps beverages hot longer.",
     durability: "5-10 years",
     type: "crockery",
@@ -1057,7 +1032,7 @@ const crockeryItems = [
     material: "Glass",
     capacity: "10-16 oz",
     care: "Dishwasher safe",
-    price: "$2-$10 each",
+    price: "Rs.560 - Rs.2,800 each",
     fullDesc: "Everyday drinking glasses for water and cold beverages.",
     durability: "3-5 years",
     type: "crockery",
@@ -1074,7 +1049,7 @@ const crockeryItems = [
     material: "Glass",
     capacity: "6-8 oz",
     care: "Dishwasher safe",
-    price: "$1-$6 each",
+    price: "Rs.280 - Rs.1,680 each",
     fullDesc: "Perfect for morning juice or small beverage servings.",
     durability: "3-5 years",
     type: "crockery",
@@ -1091,7 +1066,7 @@ const crockeryItems = [
     material: "Glass, Plastic",
     capacity: "1-2 liters",
     care: "Dishwasher safe",
-    price: "$10-$30",
+    price: "Rs.2,800 - Rs.8,400",
     fullDesc: "Essential for serving drinks at the table or for parties.",
     durability: "3-5 years",
     type: "crockery",
@@ -1108,13 +1083,14 @@ const crockeryItems = [
     material: "Glass, Stainless steel",
     capacity: "12-14 oz",
     care: "Dishwasher safe",
-    price: "$3-$8 each",
+    price: "Rs.840 - Rs.2,240 each",
     fullDesc: "Sturdy everyday glasses for water and cold beverages.",
     durability: "5+ years",
     type: "crockery",
     crockeryType: "tumbler"
   }
 ];
+
 const cutleryItems = [
   {
     id: 1,
@@ -1127,7 +1103,7 @@ const cutleryItems = [
     material: "Stainless steel 18/10",
     length: "7-8 inches",
     care: "Dishwasher safe",
-    price: "$2-$8 each",
+    price: "Rs.560 - Rs.2,240 each",
     fullDesc: "Your most-used eating utensil. Quality 18/10 stainless steel resists rust.",
     durability: "10+ years",
     type: "cutlery",
@@ -1144,7 +1120,7 @@ const cutleryItems = [
     material: "Stainless steel 18/10",
     length: "8-9 inches",
     care: "Dishwasher safe",
-    price: "$3-$10 each",
+    price: "Rs.840 - Rs.2,800 each",
     fullDesc: "Designed to cut food on your plate. Quality knives have full tang.",
     durability: "10+ years",
     type: "cutlery",
@@ -1161,7 +1137,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "6-7 inches",
     care: "Dishwasher safe",
-    price: "$2-$6 each",
+    price: "Rs.560 - Rs.1,680 each",
     fullDesc: "Larger than teaspoons. Great for serving and eating main courses.",
     durability: "10+ years",
     type: "cutlery",
@@ -1178,7 +1154,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "5-6 inches",
     care: "Dishwasher safe",
-    price: "$1-$5 each",
+    price: "Rs.280 - Rs.1,400 each",
     fullDesc: "For stirring coffee and eating desserts. Every kitchen needs many.",
     durability: "10+ years",
     type: "cutlery",
@@ -1195,7 +1171,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "6-7 inches",
     care: "Dishwasher safe",
-    price: "$2-$7 each",
+    price: "Rs.560 - Rs.1,960 each",
     fullDesc: "Smaller than tablespoon, larger than teaspoon. Perfect for desserts.",
     durability: "10+ years",
     type: "cutlery",
@@ -1212,7 +1188,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "6-7 inches",
     care: "Dishwasher safe",
-    price: "$2-$7 each",
+    price: "Rs.560 - Rs.1,960 each",
     fullDesc: "Round bowl to hold more liquid. Essential for soup lovers.",
     durability: "10+ years",
     type: "cutlery",
@@ -1229,7 +1205,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "6-7 inches",
     care: "Dishwasher safe",
-    price: "$2-$6 each",
+    price: "Rs.560 - Rs.1,680 each",
     fullDesc: "Smaller than dinner fork. Used for salad courses and appetizers.",
     durability: "10+ years",
     type: "cutlery",
@@ -1246,7 +1222,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "4-5 inches",
     care: "Dishwasher safe",
-    price: "$1-$4 each",
+    price: "Rs.280 - Rs.1,120 each",
     fullDesc: "Small spoon designed for espresso and demitasse cups.",
     durability: "10+ years",
     type: "cutlery",
@@ -1263,7 +1239,7 @@ const cutleryItems = [
     material: "Stainless steel, Silver",
     length: "4-5 inches",
     care: "Hand wash recommended",
-    price: "$3-$10 each",
+    price: "Rs.840 - Rs.2,800 each",
     fullDesc: "Small spoon with a deep bowl for scooping sugar.",
     durability: "10+ years",
     type: "cutlery",
@@ -1280,7 +1256,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "6-7 inches",
     care: "Dishwasher safe",
-    price: "$2-$6 each",
+    price: "Rs.560 - Rs.1,680 each",
     fullDesc: "Rounded tips for safe spreading. Essential for breakfast.",
     durability: "10+ years",
     type: "cutlery",
@@ -1297,7 +1273,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "5-6 inches",
     care: "Hand wash",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Combines spoon and strainer. Perfect for loose leaf tea.",
     durability: "10+ years",
     type: "cutlery",
@@ -1314,7 +1290,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "9-10 inches",
     care: "Dishwasher safe",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Large fork for carving and serving meat dishes.",
     durability: "10+ years",
     type: "cutlery",
@@ -1331,7 +1307,7 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "8-9 inches",
     care: "Dishwasher safe",
-    price: "$4-$12",
+    price: "Rs.1,120 - Rs.3,360",
     fullDesc: "Large spoon for serving main dishes and sides.",
     durability: "10+ years",
     type: "cutlery",
@@ -1348,13 +1324,14 @@ const cutleryItems = [
     material: "Stainless steel",
     length: "8-9 inches",
     care: "Dishwasher safe",
-    price: "$5-$15",
+    price: "Rs.1,400 - Rs.4,200",
     fullDesc: "Perfect for serving foods that need draining.",
     durability: "10+ years",
     type: "cutlery",
     cutleryType: "slotted-serving-spoon"
   }
 ];
+
 const utensilsServing = {
   id: 1,
   name: "Serving Utensils Set",
@@ -1372,7 +1349,7 @@ const utensilsServing = {
   image: "ser_utensils_set.png",
   type: "serving-utensils",
   material: "Stainless Steel 18/10",
-  price: "$30-$70",
+  price: "Rs.8,400 - Rs.19,600",
   priceRange: "Mid Range",
   bestFor: "Everyday serving, parties, family dinners, entertaining guests",
   durability: "10+ years with proper care",
@@ -1403,6 +1380,7 @@ const utensilsServing = {
     "Tongs"
   ]
 };
+
 const cutleryEating = {
   id: 2,
   name: "Cutlery Set",
@@ -1419,7 +1397,7 @@ const cutleryEating = {
   image: "ser_cutlery_set.png",
   type: "cutlery",
   material: "Stainless Steel 18/10",
-  price: "$20-$60",
+  price: "Rs.5,600 - Rs.16,800",
   priceRange: "Budget to Mid",
   bestFor: "Daily dining, family meals, formal dinner settings, entertaining guests",
   durability: "10-15 years with proper care",
@@ -1449,6 +1427,7 @@ const cutleryEating = {
     "Teaspoon"
   ]
 };
+
 const dinnerwareBowls = {
   id: 3,
   name: "Dinnerware - Bowls",
@@ -1466,7 +1445,7 @@ const dinnerwareBowls = {
   type: "dinnerware",
   subcategory: "bowls",
   material: "Ceramic / Stoneware / Glass / Porcelain",
-  price: "$25-$120 (set dependent)",
+  price: "Rs.7,000 - Rs.33,600",
   priceRange: "Budget to Premium",
   bestFor: "Serving all types of food, family-style meals, entertaining",
   durability: "5-10 years with careful use",
@@ -1495,6 +1474,7 @@ const dinnerwareBowls = {
     "Sugar Bowl"
   ]
 };
+
 const dinnerwarePlatters = {
   id: 4,
   name: "Dinnerware - Platters & Trays",
@@ -1512,7 +1492,7 @@ const dinnerwarePlatters = {
   type: "dinnerware",
   subcategory: "platters-and-trays",
   material: "Ceramic / Slate / Wood / Marble / Porcelain",
-  price: "$20-$80 (per piece)",
+  price: "Rs.5,600 - Rs.22,400",
   priceRange: "Mid to Premium",
   bestFor: "Entertaining guests, holiday meals, special occasions, buffet-style serving",
   durability: "5-10+ years with careful use",
@@ -1543,6 +1523,7 @@ const dinnerwarePlatters = {
     "Cake Stand (multi-tier)"
   ]
 };
+
 const dinnerwareGravy = {
   id: 5,
   name: "Dinnerware - Gravy & Sauceware",
@@ -1560,7 +1541,7 @@ const dinnerwareGravy = {
   type: "dinnerware",
   subcategory: "gravy-and-sauceware",
   material: "Ceramic / Porcelain / Glass",
-  price: "$15-$45 (per set)",
+  price: "Rs.4,200 - Rs.12,600",
   priceRange: "Budget to Mid",
   bestFor: "Holiday dinners, family meals, parties, formal dining",
   durability: "5-10 years with careful use",
@@ -1590,6 +1571,7 @@ const dinnerwareGravy = {
     "Butter Dish with lid"
   ]
 };
+
 const dinnerwareAccessories = {
   id: 6,
   name: "Dinnerware - Accessories",
@@ -1607,7 +1589,7 @@ const dinnerwareAccessories = {
   type: "dinnerware",
   subcategory: "accessories",
   material: "Ceramic / Porcelain / Glass / Wood / Metal",
-  price: "$10-$60 (set dependent)",
+  price: "Rs.2,800 - Rs.16,800",
   priceRange: "Budget to Premium",
   bestFor: "Complete table setting, tea time, coffee service, everyday dining",
   durability: "5-10+ years with careful use",
@@ -1637,36 +1619,22 @@ const dinnerwareAccessories = {
     "Coasters (set of 4-6)"
   ]
 };
-knivesData.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'knives', ['knife', 'cutting', 'chef', 'paring', 'bread', 'santoku', 'boning', 'utility', 'nakiri']);
-});
-cuttingBoardTypes.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'cutting-boards', ['cutting-board', 'chopping-board', 'bamboo', 'maple', 'plastic', 'rubber']);
-});
-mixingBowlTypes.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'mixing-bowls', ['mixing-bowl', 'stainless-steel', 'glass', 'ceramic', 'plastic']);
-});-
-cookwareTypes.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'cookware', ['cookware', 'pressure-cooker', 'tawa', 'karahi', 'skillet', 'dutch-oven', 'stock-pot']);
-});
-cookwareMaterials.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'cookware-materials', ['cookware-material', 'stainless-steel', 'non-stick', 'cast-iron']);
-});
-utensilItems.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'utensils', ['utensil', 'cooking', 'prep', 'baking', 'measuring', 'specialty']);
-});
-crockeryItems.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'crockery', ['crockery', 'plate', 'bowl', 'cup', 'mug', 'teapot', 'dinnerware']);
-});
-cutleryItems.forEach(item => {
-  addGuide(item, 'kitchen-tools', 'cutlery', ['cutlery', 'fork', 'knife', 'spoon', 'dinner', 'tea', 'serving']);
-});
-addGuide(utensilsServing, 'kitchen-tools', 'servingware', ['utensils', 'serving', 'serving-utensils', 'complete-set', 'stainless-steel', 'entertaining']);
-addGuide(cutleryEating, 'kitchen-tools', 'servingware', ['cutlery', 'eating', 'dining', 'complete-set', 'stainless-steel', 'fork', 'spoon', 'knife']);
-addGuide(dinnerwareBowls, 'kitchen-tools', 'servingware', ['dinnerware', 'bowls', 'serving-bowls', 'ceramic', 'stoneware', 'soup-bowl', 'salad-bowl']);
-addGuide(dinnerwarePlatters, 'kitchen-tools', 'servingware', ['dinnerware', 'platters', 'trays', 'cake-stand', 'ceramic', 'serving-tray']);
-addGuide(dinnerwareGravy, 'kitchen-tools', 'servingware', ['dinnerware', 'gravy', 'sauce', 'condiments', 'gravy-boat', 'cruet-set', 'butter-dish']);
-addGuide(dinnerwareAccessories, 'kitchen-tools', 'servingware', ['dinnerware', 'accessories', 'tea-pot', 'coffee', 'sugar-bowl', 'salt-pepper', 'table-accessories']);
+
+knivesData.forEach(item => addGuide(item, 'knives'));
+cuttingBoardTypes.forEach(item => addGuide(item, 'cutting-boards'));
+mixingBowlTypes.forEach(item => addGuide(item, 'mixing-bowls'));
+cookwareTypes.forEach(item => addGuide(item, 'cookware'));
+cookwareMaterials.forEach(item => addGuide(item, 'cookware-materials'));
+utensilItems.forEach(item => addGuide(item, 'utensils'));
+crockeryItems.forEach(item => addGuide(item, 'crockery'));
+cutleryItems.forEach(item => addGuide(item, 'cutlery'));
+
+addGuide(utensilsServing, 'servingware');
+addGuide(cutleryEating, 'servingware');
+addGuide(dinnerwareBowls, 'servingware');
+addGuide(dinnerwarePlatters, 'servingware');
+addGuide(dinnerwareGravy, 'servingware');
+addGuide(dinnerwareAccessories, 'servingware');
 
 const migrate = async () => {
   try {

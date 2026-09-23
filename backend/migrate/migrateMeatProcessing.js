@@ -9,14 +9,13 @@ const User = require('../models/User');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const allMeatGuides = [];
-const addMeatGuide = (title, contentObj, category, image) => {
-  allMeatGuides.push({
-    title,
+const allGuides = [];   
+const addMeatGuide = (title, contentObj, image) => {
+  allGuides.push({
+    title: title,
     content: contentObj,
-    category,
-    image,
-    video: ''
+    category: 'meat-processing',
+  image: image
   });
 };
 addMeatGuide(
@@ -1015,7 +1014,7 @@ const migrate = async () => {
       process.exit(1);
     }
 
-    const validGuides = allMeatGuides.filter(g => g.title && g.content);
+    const validGuides = allGuides.filter(g => g.title && g.content);
     if (validGuides.length === 0) {
       console.log('No guides to insert');
       process.exit(0);

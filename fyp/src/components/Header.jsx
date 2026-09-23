@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import './Header.css';
+
+const currentPath = window.location.pathname;
 
 const Header = ({ onSettingsClick, onLanguageChange }) => {
   const { user } = useAuth();
@@ -9,134 +11,64 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [showLang, setShowLang] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activeLang, setActiveLang] = useState('en');
 
-  const location = useLocation();
   const navigate = useNavigate();
 
   const authPages = [
     '/login-page',
+    '/signup',
     '/forgot-password',
     '/verify-otp',
     '/reset-password',
-    '/logout',
+    '/signup-verify-otp',
     '/dashboard'
   ];
 
-  const clearGoogleTranslateCookie = () => {
-    const hostname = window.location.hostname;
-    const expire =
-      'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+  if (authPages.includes(currentPath)) {
+    return null;
+  }
 
-    document.cookie = `googtrans=; ${expire} path=/;`;
-    document.cookie = `googtrans=; ${expire} path=/; domain=${hostname};`;
-    document.cookie = `googtrans=; ${expire} path=/; domain=.${hostname};`;
-  };
-
-  const changeLanguage = (langCode, redirectToHome = false) => {
-    setShowLang(false);
-
-    const select = document.querySelector('.goog-te-combo');
-
-    if (langCode === 'en') {
-      setActiveLang('en');
-
-      if (onLanguageChange) {
-        onLanguageChange('en');
-      }
-
-      clearGoogleTranslateCookie();
-
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', 'en');
-
-      document.body.setAttribute('dir', 'ltr');
-      document.body.classList.remove('urdu-mode');
-      document.body.classList.add('english-mode');
-
-      if (select) {
-        select.value = 'en';
-        select.dispatchEvent(new Event('change'));
-      }
-
-      if (redirectToHome) {
-        window.location.href = '/';
-      }
-
-      return;
-    }
-
-    setActiveLang('ur');
+  const changeLanguage = (langCode) => {
+    setActiveLang(langCode);
 
     if (onLanguageChange) {
-      onLanguageChange('ur');
+      onLanguageChange(langCode);
     }
 
-    document.cookie = 'googtrans=/en/ur; path=/;';
-
-    const hostname = window.location.hostname;
-
-    document.cookie = `googtrans=/en/ur; path=/; domain=${hostname};`;
-    document.cookie = `googtrans=/en/ur; path=/; domain=.${hostname};`;
-
-    document.documentElement.setAttribute('dir', 'rtl');
-    document.documentElement.setAttribute('lang', 'ur');
-
-    document.body.setAttribute('dir', 'rtl');
-    document.body.classList.remove('english-mode');
-    document.body.classList.add('urdu-mode');
-
-    if (select) {
-      select.value = 'ur';
-      select.dispatchEvent(new Event('change'));
+    if (langCode === 'ur') {
+      document.cookie = 'googtrans=/en/ur; path=/;';
+    } else {
+      document.cookie = 'googtrans=; max-age=0; path=/;';
     }
 
-    if (redirectToHome) {
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000);
+    if (langCode === 'ur') {
+      document.documentElement.setAttribute('dir', 'rtl');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
     }
+
+    window.location.reload();
   };
-
-  useEffect(() => {
-    window.changeChefBotLanguage = changeLanguage;
-
-    return () => {
-      delete window.changeChefBotLanguage;
-    };
-  }, [onLanguageChange]);
 
   useEffect(() => {
     const isUrdu = document.cookie.includes('googtrans=/en/ur');
 
-    if (isUrdu) {
-      setActiveLang('ur');
+    setActiveLang(isUrdu ? 'ur' : 'en');
 
-      document.documentElement.setAttribute('dir', 'rtl');
-      document.documentElement.setAttribute('lang', 'ur');
+    document.documentElement.setAttribute(
+      'dir',
+      isUrdu ? 'rtl' : 'ltr'
+    );
 
-      document.body.setAttribute('dir', 'rtl');
-      document.body.classList.remove('english-mode');
-      document.body.classList.add('urdu-mode');
-    } else {
-      setActiveLang('en');
-
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', 'en');
-
-      document.body.setAttribute('dir', 'ltr');
-      document.body.classList.remove('urdu-mode');
-      document.body.classList.add('english-mode');
-    }
+    document.documentElement.setAttribute(
+      'lang',
+      isUrdu ? 'ur' : 'en'
+    );
 
     window.googleTranslateElementInit = () => {
-      if (
-        window.google &&
-        window.google.translate &&
-        document.getElementById('google_translate_element')
-      ) {
+      if (window.google && window.google.translate) {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
@@ -158,66 +90,31 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
 
       document.body.appendChild(script);
     }
-
-    const observer = new MutationObserver(() => {
-      const banner = document.querySelector('.goog-te-banner-frame');
-
-      if (banner) {
-        banner.style.display = 'none';
-      }
-
-      document.body.style.top = '0px';
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const searchData = async () => {
-      if (search.trim().length < 2) {
-        setResults([]);
-        setShowResults(false);
-        return;
-      }
+    if (search.trim().length < 2) {
+      setResults([]);
+      setShowResults(false);
+      return;
+    }
 
-      try {
-        const response = await fetch(
-          `/api/search?q=${encodeURIComponent(search.trim())}`
-        );
-
-        const data = await response.json();
-
+    fetch(`/api/search?q=${search.trim()}`)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.success) {
           setResults(data.results || []);
           setShowResults(true);
         }
-      } catch {
+      })
+      .catch(() => {
         setResults([]);
         setShowResults(false);
-      }
-    };
-
-    const timer = setTimeout(searchData, 300);
-
-    return () => clearTimeout(timer);
+      });
   }, [search]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    if (search.trim()) {
-      navigate(
-        `/search-results?q=${encodeURIComponent(search.trim())}`
-      );
-
-      setShowResults(false);
-      setMobileMenu(false);
-    }
   };
 
   const handleResultClick = (result) => {
@@ -232,26 +129,24 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userData');
     localStorage.removeItem('hideHeader');
+
     window.location.href = '/login-page';
   };
 
-  if (authPages.includes(location.pathname)) return null;
-  if (location.pathname === '/urdu-login') return null;
 
   return (
     <>
-      <nav className="navbar-top">
+      <div className="navbar-top">
         <div className="welcome-text">
           Hey guys! Welcome to ChefBot, Your Cooking Assistant
         </div>
-      </nav>
+      </div>
 
-      <nav className="navbar-main navbar-desktop">
+
+      <div className="navbar-main navbar-desktop">
         <div className="logo">
           <img
-            src="/logo.png"
-            alt="ChefBot Logo"
-            className="logo-img"
+            src="/logo.png" alt="ChefBot Logo" className="logo-img"
           />
         </div>
 
@@ -281,11 +176,9 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                   className="h-search-input"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  onFocus={() => {
-                    if (results.length > 0) {
-                      setShowResults(true);
-                    }
-                  }}
+                  onFocus={() =>
+                    results.length > 0 && setShowResults(true)
+                  }
                   autoComplete="off"
                 />
 
@@ -306,55 +199,30 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
               </form>
             </div>
 
-            {showResults && (
-              <div className="search-dropdown">
-                {results.length > 0 ? (
-                  results.map((result) => (
-                    <div
-                      className="search-result-item"
-                      key={`${result.type}-${result.id}`}
-                      onClick={() => handleResultClick(result)}
-                    >
-                      {result.image ? (
-                        <img
-                          src={result.image}
-                          alt={result.title}
-                          className="search-result-image"
-                        />
-                      ) : (
-                        <div className="search-result-placeholder">
-                          <i className="fas fa-utensils"></i>
-                        </div>
-                      )}
+           {showResults && (
+  <div className="search-dropdown">
+    {results.map((result) => (
+      <div
+        className="search-result-item"
+        key={result.id}
+        onClick={() => navigate(result.route)}
+      >
+        {result.image && (
+          <img
+            src={result.image}
+            alt={result.title}
+            className="search-result-image"
+          />
+        )}
 
-                      <div className="search-result-content">
-                        <div className="search-result-title">
-                          {result.title}
-                        </div>
-
-                        <div className="search-result-description">
-                          {result.description}
-                        </div>
-
-                        <span
-                          className={`search-result-type ${result.type}`}
-                        >
-                          {result.type === 'recipe'
-                            ? 'Recipe'
-                            : result.type === 'guide'
-                            ? 'Guide'
-                            : 'Feature'}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="search-no-results">
-                    No results found
-                  </div>
-                )}
-              </div>
-            )}
+        <div className="search-result-content">
+          <b>{result.title}</b>
+          <p>{result.type}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
           </div>
         </div>
 
@@ -386,7 +254,7 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
               className={`lang-toggle-btn ${
                 activeLang === 'ur' ? 'active' : ''
               }`}
-              onClick={() => changeLanguage('ur', true)}
+              onClick={() => changeLanguage('ur')}
             >
               اردو
             </button>
@@ -410,9 +278,9 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
             </div>
           )}
         </div>
-      </nav>
+      </div>
 
-      <nav className="navbar-main navbar-mobile">
+      <div className="navbar-main navbar-mobile">
         <div className="mobile-logo">
           <img
             src="/logo.png"
@@ -478,7 +346,7 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
               to="/meal-suggestion"
               className="mobile-dropdown-link"
             >
-              <i className="fas fa-utensil-spoon"></i>
+              <i className="fas fa-utensil-spoon"></i>{' '}
               Meal Suggestion
             </Link>
 
@@ -486,24 +354,21 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
               to="/home"
               className="mobile-dropdown-link"
             >
-              <i className="fas fa-home"></i>
-              Home
+              <i className="fas fa-home"></i> Home
             </Link>
 
             <Link
               to="/about"
               className="mobile-dropdown-link"
             >
-              <i className="fas fa-info-circle"></i>
-              About
+              <i className="fas fa-info-circle"></i> About
             </Link>
 
             <Link
               to="/contact"
               className="mobile-dropdown-link"
             >
-              <i className="fas fa-envelope"></i>
-              Contact
+              <i className="fas fa-envelope"></i> Contact
             </Link>
 
             <div className="mobile-dropdown-divider"></div>
@@ -526,7 +391,7 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                 className={`lang-toggle-btn ${
                   activeLang === 'ur' ? 'active' : ''
                 }`}
-                onClick={() => changeLanguage('ur', true)}
+                onClick={() => changeLanguage('ur')}
               >
                 اردو
               </button>
@@ -538,27 +403,24 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                   className="mobile-dropdown-link"
                   onClick={onSettingsClick}
                 >
-                  <i className="fas fa-cog"></i>
-                  Settings
+                  <i className="fas fa-cog"></i> Settings
                 </div>
 
                 <div
                   className="mobile-dropdown-link mobile-logout"
                   onClick={logout}
                 >
-                  <i className="fas fa-sign-out-alt"></i>
-                  Logout
+                  <i className="fas fa-sign-out-alt"></i> Logout
                 </div>
               </>
             )}
           </div>
         )}
-      </nav>
+      </div>
 
       <div
         id="google_translate_element"
-        style={{ display: 'none' }}
-      ></div>
+        style={{ display: 'none' }}></div>
     </>
   );
 };

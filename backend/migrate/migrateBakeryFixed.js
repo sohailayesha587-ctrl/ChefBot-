@@ -622,53 +622,48 @@ const decoratingData = [
     presentation: ["Cake stands elevate display", "Cake domes protect while showing", "Boxes for transport and gifting", "Ribbons decorative finishing"]
   }
 ];
-
 toolsData.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
+    content: item,
     category: 'tools',
-    image: item.image,
-    video: ''
+    image: item.image
   });
 });
 
 techniquesData.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
+    content: item,
     category: 'techniques',
-    image: item.image,
-    video: ''
+    image: item.image
   });
 });
 
 ingredientsData.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
+    content: item,
     category: 'ingredients',
-    image: item.image,
-    video: ''
+    image: item.image
   });
 });
 
 temperatureData.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
+    content: item,
     category: 'temperature',
-    image: item.image,
-    video: ''
+    image: item.image
   });
 });
 
 decoratingData.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
+    content: item,
     category: 'decorating',
-    image: item.image,
+    image: item.image
   });
 });
 

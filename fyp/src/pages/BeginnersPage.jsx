@@ -1,133 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './BeginnersPage.css';
+
+const skillCards = [
+  {
+    id: '01',
+    image: 'KitchenTools.png',
+    title: 'Kitchen Tools',
+    route: '/kitchen-tools'
+  },
+  {
+    id: '02',
+    image: 'CuttingTechniques.png',
+    title: 'Cutting Techniques',
+    route: '/cutting-techniques'
+  },
+  {
+    id: '03',
+    image: 'CookingMethods.png',
+    title: 'Cooking Methods',
+    route: '/cooking-methods'
+  },
+  {
+    id: '04',
+    image: 'MeatCuts.png',
+    title: 'Meat Cuts',
+    route: '/meat-cuts'
+  },
+  {
+    id: '05',
+    image: 'KitchenAppliances.png',
+    title: 'Kitchen Appliances',
+    route: '/kitchen-appliances'
+  },
+  {
+    id: '06',
+    image: 'PantryBasics.png',
+    title: 'Pantry Basics',
+    route: '/pantry-basics'
+  },
+  {
+    id: '07',
+    image: 'MeasuringSkills.png',
+    title: 'Measuring Skills',
+    route: '/measuring-skills'
+  },
+  {
+    id: '08',
+    image: 'BakingEssentials.png',
+    title: 'Bakery Essentials',
+    route: '/bakery-essentials'
+  }
+];
 
 const BeginnersPage = () => {
   const navigate = useNavigate();
-  const [skillCards, setSkillCards] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const routeMapping = {
-    'Kitchen Tools': '/kitchen-tools',
-    'Cutting Techniques': '/cutting-techniques',
-    'Cooking Methods': '/cooking-methods',
-    'Meat Cuts': '/meat-cuts',
-    'Kitchen Appliances': '/kitchen-appliances',
-    'Pantry Basics': '/pantry-basics',
-    'Measuring Skills': '/measuring-skills',
-    'Bakery Essentials': '/bakery-essentials'
-  };
-
-  const imageMapping = {
-    'Kitchen Tools': 'KitchenTools.png',
-    'Cutting Techniques': 'CuttingTechniques.png',
-    'Cooking Methods': 'CookingMethods.png',
-    'Meat Cuts': 'MeatCuts.png',
-    'Kitchen Appliances': 'KitchenAppliances.png',
-    'Pantry Basics': 'PantryBasics.png',
-    'Measuring Skills': 'MeasuringSkills.png',
-    'Bakery Essentials': 'BakingEssentials.png'
-  };
-
-  
-
-  useEffect(() => {
-    fetchSkillCards();
-  }, []);
-
-  const fetchSkillCards = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get('/api/beginners-guides', {
-        params: { category: 'basics' }
-      });
-      
-      const guides = response.data.guides || [];
-      const cards = guides.map((guide, index) => {
-        let content = guide.content;
-        try {
-          if (typeof content === 'string' && content.startsWith('{')) {
-            const parsed = JSON.parse(content);
-            content = parsed.features ? parsed.features.join(' ') : parsed.fullDesc || guide.content;
-          }
-        } catch (e) {}
-        return {
-          id: String(index + 1).padStart(2, '0'),
-          image: imageMapping[guide.title] || `${guide.title.replace(/\s/g, '')}.png`,
-          title: guide.title,
-          route: routeMapping[guide.title] || `/${guide.title.toLowerCase().replace(/\s/g, '-')}`,
-          features: [typeof content === 'string' ? content.substring(0, 100) : 'Learn essential skills']
-        };
-      });
-      setSkillCards(cards.length === 0 ? getDefaultCards() : cards);
-    } catch (error) {
-      console.error('Error fetching skill cards:', error);
-      setSkillCards(getDefaultCards());
-      setError('Using offline data');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getDefaultCards = () => [
-    { id: '01', 
-      image: 'KitchenTools.png', 
-      title: 'Kitchen Tools', 
-      route: '/kitchen-tools',
-      },
-    { id: '02',
-       image: 'CuttingTechniques.png', 
-       title: 'Cutting Techniques', 
-       route: '/cutting-techniques', 
-       },
-    { id: '03',
-      image: 'CookingMethods.png', 
-      title: 'Cooking Methods', 
-      route: '/cooking-methods', 
-     },
-    { id: '04',
-       image: 'MeatCuts.png', 
-       title: 'Meat Cuts', 
-       route: '/meat-cuts', 
-       },
-    { id: '05',
-       image: 'KitchenAppliances.png', 
-       title: 'Kitchen Appliances',
-        route: '/kitchen-appliances', 
-      },
-    { id: '06',
-       image: 'PantryBasics.png', 
-       title: 'Pantry Basics', 
-       route: '/pantry-basics', 
-       },
-    { id: '07',
-       image: 'MeasuringSkills.png',
-        title: 'Measuring Skills', 
-        
-        route: '/measuring-skills',
-       },
-    { id: '08', 
-      image: 'BakingEssentials.png', 
-      title: 'Bakery Essentials',
-       route: '/bakery-essentials', 
-       }
-  ];
 
   const handleCardClick = (route) => navigate(route);
-
-  if (loading) {
-    return (
-      <div className="beginners-page">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading kitchen essentials...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="beginners-page">
@@ -177,7 +106,7 @@ const BeginnersPage = () => {
                 <div className="guide-card-cta">
                   <span>Explore</span>
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>
@@ -191,7 +120,7 @@ const BeginnersPage = () => {
       <div className="beg-back-home-container">
         <button className="beg-back-home-btn" onClick={() => navigate('/home')}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           Back to Home
         </button>

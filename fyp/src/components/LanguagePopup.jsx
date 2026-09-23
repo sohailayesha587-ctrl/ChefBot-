@@ -2,30 +2,23 @@ import React from 'react';
 import './LanguagePopup.css';
 
 const LanguagePopup = ({ onLanguageSelected }) => {
-  const handleEnglish = () => {
+  const selectLanguage = (langCode) => {
     sessionStorage.setItem('languagePopupSelected', 'true');
 
     if (onLanguageSelected) {
       onLanguageSelected();
     }
 
-    if (window.changeChefBotLanguage) {
-      window.changeChefBotLanguage('en', true);
+    if (langCode === 'ur') {
+      document.cookie = 'googtrans=/en/ur; path=/;';
     } else {
-      window.location.href = '/';
-    }
-  };
-
-  const handleUrdu = () => {
-    sessionStorage.setItem('languagePopupSelected', 'true');
-
-    if (onLanguageSelected) {
-      onLanguageSelected();
+      document.cookie = 'googtrans=; max-age=0; path=/;';
     }
 
-    if (window.changeChefBotLanguage) {
-      window.changeChefBotLanguage('ur', true);
-    }
+    document.documentElement.setAttribute('dir', langCode === 'ur' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', langCode);
+
+    window.location.href = '/';
   };
 
   return (
@@ -37,7 +30,7 @@ const LanguagePopup = ({ onLanguageSelected }) => {
         <button
           type="button"
           className="lang-btn english-btn"
-          onClick={handleEnglish}
+          onClick={() => selectLanguage('en')}
         >
           English
         </button>
@@ -45,7 +38,7 @@ const LanguagePopup = ({ onLanguageSelected }) => {
         <button
           type="button"
           className="lang-btn urdu-btn"
-          onClick={handleUrdu}
+          onClick={() => selectLanguage('ur')}
         >
           اردو
         </button>

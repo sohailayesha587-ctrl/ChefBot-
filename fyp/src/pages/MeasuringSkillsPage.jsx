@@ -4,57 +4,31 @@ import axios from 'axios';
 import { FaTimes } from "react-icons/fa";
 import './MeasuringSkillsPage.css';
 
-const KNOWN_KEYS = [
-  '_id', 'id', 'image', 'title', 'name', 'tagline', 'fullDesc', 'description',
+const ALREADY_RENDERED = [
+  'id', 'image', 'name', 'title', 'tagline', 'fullDesc', 'description',
   'keyUses', 'keyFeatures', 'bestFor', 'type', 'material', 'price', 'priceRange',
   'durability', 'pros', 'cons', 'care', 'size', 'sizes', 'capacity', 'diameter',
   'length', 'properUsage', 'steps', 'methods', 'tips', 'commonMistakes', 'types',
   'usage', 'commonConversions', 'criticalRules', 'category', 'subCategory',
-  'subcategory', 'items', 'commonItems', 'content'
+  'subcategory', 'items', 'commonItems', 'content', 'extraSections',
+  '_id', 'createdBy', 'createdAt', 'updatedAt', '__v', 'status',
+  'filterTags', 'tags', 'avgRating', 'totalRatings', 'totalViews',
+  'totalSaves', 'publishedAt', 'lastUpdatedBy'
 ];
 
-const META_KEY_PATTERN = /^_|id$|status|slug|version|by$|by[A-Z]|at$|At$|date|Date|filterTags|isPublished|isActive|isDeleted|views|author|__v/;
-
-const isMetaKey = (key) => META_KEY_PATTERN.test(key);
-
 const toLabel = (key) => {
-  const spaced = key.replace(/([a-z])([A-Z])/g, '$1 $2');
-  return spaced.replace(/^./, c => c.toUpperCase()).toUpperCase();
+  return key
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/^./, c => c.toUpperCase())
+    .toUpperCase();
 };
 
-const toStringValue = (value) => {
+const getValue = (value) => {
   if (value === null || value === undefined) return '';
   if (typeof value === 'object') {
-    if (value.name && value.description) return `${value.name}: ${value.description}`;
     return value.name || value.description || '';
   }
   return String(value);
-};
-
-const buildExtraSections = (raw) => {
-  const sections = [];
-
-  Object.keys(raw).forEach(key => {
-    if (KNOWN_KEYS.includes(key)) return;
-    if (isMetaKey(key)) return;
-
-    const value = raw[key];
-    if (value === null || value === undefined) return;
-
-    let items = [];
-
-    if (Array.isArray(value)) {
-      items = value.map(toStringValue).filter(Boolean);
-    } else if (typeof value === 'string' && value.trim()) {
-      items = [value];
-    }
-
-    if (items.length > 0) {
-      sections.push({ key, label: toLabel(key), items });
-    }
-  });
-
-  return sections;
 };
 
 const MeasuringSkillsPage = () => {
@@ -94,9 +68,8 @@ const MeasuringSkillsPage = () => {
       content = guide.content;
     }
 
-    const raw = { ...guide, ...content };
-
-    const merged = {
+    return {
+      ...content,
       id: guide._id,
       image: guide.image || content.image || '',
       name: guide.title || content.name || guide.name || '',
@@ -131,14 +104,6 @@ const MeasuringSkillsPage = () => {
       commonItems: content.commonItems || guide.commonItems || [],
       subcategory: content.subcategory || guide.subcategory || guide.subCategory || ''
     };
-
-
-    if (window.location.hostname === 'localhost') {
-      console.log('mergeContent debug for: ' + guide.title);
-      console.log(JSON.stringify({ rawContentType: typeof guide.content, parsedContent: content, extraSections: merged.extraSections }, null, 2));
-    }
-
-    return merged;
   };
 
   useEffect(() => {
@@ -248,14 +213,6 @@ const MeasuringSkillsPage = () => {
     return String(text).replace(/\\n/g, ' ').replace(/\\"/g, '"').replace(/\\/g, '');
   };
 
-  const getValue = (value) => {
-    if (value === null || value === undefined) return '';
-    if (typeof value === 'object') {
-      return value.name || value.description || '';
-    }
-    return String(value);
-  };
-
   const getImage = (item) => {
     const image = item?.image || '';
 
@@ -268,6 +225,47 @@ const MeasuringSkillsPage = () => {
     }
 
     return `https://chefbot.pk/${image}`;
+  };
+
+  const renderExtraSections = () => {
+    return Object.keys(selectedItem)
+      .filter(key => {
+        if (ALREADY_RENDERED.includes(key)) return false;
+        if (key.startsWith('_')) return false;
+
+        const value = selectedItem[key];
+        if (value === null || value === undefined) return false;
+
+        if (Array.isArray(value)) {
+          return value.length > 0;
+        }
+
+        if (typeof value === 'string') {
+          return value.trim().length > 0;
+        }
+
+        return false;
+      })
+      .map(key => {
+        const value = selectedItem[key];
+        const items = Array.isArray(value) ? value : [value];
+
+        return (
+          <React.Fragment key={key}>
+            <div className="msp-msec">
+              <div className="msp-msec-label">{toLabel(key)}</div>
+              <div className="msp-uses-wrap">
+                {items.map((item, idx) => (
+                  <div key={idx} className="msp-use-tag">
+                    {getValue(item)}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <hr className="msp-mdivider" />
+          </React.Fragment>
+        );
+      });
   };
 
   if (loading) {
@@ -568,7 +566,6 @@ const MeasuringSkillsPage = () => {
                   </>
                 )}
 
-                
                 {(selectedItem.material || selectedItem.price || selectedItem.priceRange ||
                   selectedItem.durability || selectedItem.size || selectedItem.capacity ||
                   selectedItem.diameter || selectedItem.length) && (
@@ -605,6 +602,8 @@ const MeasuringSkillsPage = () => {
                     <hr className="msp-mdivider" />
                   </>
                 )}
+
+                {renderExtraSections()}
 
                 {(selectedItem.pros?.length > 0 || selectedItem.cons?.length > 0) && (
                   <div className="msp-modal-two-col">

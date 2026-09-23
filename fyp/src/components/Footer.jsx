@@ -37,7 +37,7 @@ function Footer() {
           <h3>ChefBot</h3>
           <p>
             Your kitchen partner that suggests recipes, helps plan meals,
-            and makes cooking stress-free and fun.
+            and makes cooking fun.
           </p>
         </div>
 

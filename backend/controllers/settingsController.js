@@ -1,7 +1,7 @@
 const User = require('../models/User');
-const UserSettings = require('../models/UserSettings');
+const UserSettings = require('../models/UserSettings')
 
-exports.getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select('-password');
     if (!user) {
@@ -13,7 +13,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-exports.updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
   try {
     const { name, profilePicture } = req.body;
     
@@ -43,7 +43,7 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-exports.getSettings = async (req, res) => {
+const getSettings = async (req, res) => {
   try {
     let settings = await UserSettings.findOne({ userId: req.user._id });
     
@@ -57,9 +57,9 @@ exports.getSettings = async (req, res) => {
   }
 };
 
-exports.updateSettings = async (req, res) => {
+const updateSettings = async (req, res) => {
   try {
-    const { soundPreferences, notificationPreferences, displayPreferences } = req.body;
+    const { soundPreferences } = req.body;
     
     let settings = await UserSettings.findOne({ userId: req.user._id });
     
@@ -70,17 +70,17 @@ exports.updateSettings = async (req, res) => {
     if (soundPreferences) {
       settings.soundPreferences = { ...settings.soundPreferences, ...soundPreferences };
     }
-    if (notificationPreferences) {
-      settings.notificationPreferences = { ...settings.notificationPreferences, ...notificationPreferences };
-    }
-    if (displayPreferences) {
-      settings.displayPreferences = { ...settings.displayPreferences, ...displayPreferences };
-    }
-    
     await settings.save();
     
     res.json({ success: true, message: 'Settings updated', settings });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
+};
+module.exports = {
+getProfile,
+updateProfile,
+getSettings,
+updateSettings 
+
 };

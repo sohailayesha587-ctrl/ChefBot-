@@ -7,39 +7,15 @@ const BeginnersGuide = require('../models/BeginnersGuide');
 const User = require('../models/User');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 const allGuides = [];
-  
-const addGuide = (item, category, subCategory = '', filterTags = []) => {
-  if (!item || !item.name) return;
-
+  const addGuide = (item, subCategory) => {
   allGuides.push({
     title: item.name,
-    category,
-    subCategory,
-    filterTags: item.filterTags || filterTags,
-    spiceType: item.spiceType || '',
-    vegetableType: item.vegetableType || '',
-    image: item.image || '',
-    content: JSON.stringify({
-      name: item.name,
-      tagline: item.tagline || '',
-      fullDesc: item.fullDesc || '',
-      storageTips: item.storageTips || '',
-      shelfLife: item.shelfLife || '',
-      keyUses: item.keyUses || [],
-      bestFor: item.bestFor || '',
-      urduName: item.urduName || '',
-      properUsage: item.properUsage || '',
-      commonMistakes: item.commonMistakes || [],
-      keyFeatures: item.keyFeatures || [],
-      spiceType: item.spiceType || '',
-      vegetableType: item.vegetableType || '',
-      category: item.category || '',
-      subCategory: item.subCategory || '',
-      filterTags: item.filterTags || filterTags
-    })
+    content: item,
+    category: 'pantry-basics',
+    subCategory: subCategory,
+    image: item.image
   });
 };
-
 const kitchenBasics = [
   {
     id: 1,
@@ -3364,24 +3340,10 @@ const vegetables = [
     filterTags: ["other", "sweet", "colorful"]
   }
 ];
-
-kitchenBasics.forEach(item => {
-  addGuide(item, 'pantry-basics', 'kitchen-basics', ['essential', 'basic', item.type]);
-});
-
-spices.forEach(item => {
-  addGuide(item, 'pantry-basics', 'spices', ['spice', item.spiceType, item.category]);
-});
-
-staples.forEach(item => {
-  addGuide(item, 'pantry-basics', 'staples', ['staple', item.type, item.category]);
-});
-
-vegetables.forEach(item => {
-  addGuide(item, 'pantry-basics', 'vegetables', ['vegetable', item.vegetableType, item.category]);
-});
-
-
+kitchenBasics.forEach(item => addGuide(item, 'kitchen-basics'));
+spices.forEach(item => addGuide(item, 'spices'));
+staples.forEach(item => addGuide(item, 'staples'));
+vegetables.forEach(item => addGuide(item, 'vegetables'));
 const migrate = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

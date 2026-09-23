@@ -38,7 +38,6 @@ html, body, #root {
 }
 
 .kap-sidebar-header {
-  margin-top: 0;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f5fafa;
@@ -47,10 +46,9 @@ html, body, #root {
 .kap-sidebar-title {
   font-family: serif;
   font-size: 24px;
-  font-weight: 1000;
+  font-weight: 900;
   color: #ffffff;
   margin-bottom: 10px;
-  margin-top: 0;
   text-align: center;
 }
 
@@ -65,19 +63,20 @@ html, body, #root {
 
 .kap-appliances-list {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .kap-appliance-wrapper {
-  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 .kap-appliance-item {
   padding: 13px 16px;
   border-radius: 10px;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   transition: all 0.25s ease;
   border: 1px solid #397d7c;
   background: #284a4b;
@@ -99,19 +98,15 @@ html, body, #root {
   color: #ffffff;
 }
 
-.kap-dropdown-arrow {
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-}
-
 .kap-types-list {
-  margin-left: 0;
   padding: 6px 8px 8px;
   background: #1a3334;
   border-radius: 0 0 10px 10px;
   border: 1px solid #397d7c;
   border-top: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   animation: fadeInUp 0.25s ease;
 }
 
@@ -119,10 +114,7 @@ html, body, #root {
   padding: 9px 12px;
   border-radius: 8px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
   transition: all 0.2s ease;
-  margin-bottom: 4px;
   border: 1px solid #397d7c;
   background: #284a4b;
 }
@@ -156,14 +148,6 @@ html, body, #root {
   border-radius: 4px;
 }
 
-.kap-sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #000000;
-  z-index: 1050;
-}
-
 .kap-main {
   flex: 1;
   background: whitesmoke;
@@ -172,7 +156,6 @@ html, body, #root {
   margin-left: 280px;
   width: calc(100% - 280px);
   padding: 30px 40px;
-  position: relative;
 }
 
 .kap-main-header {
@@ -180,9 +163,6 @@ html, body, #root {
   margin-bottom: 28px;
   padding-bottom: 16px;
   border-bottom: 2px solid #e0eeee;
-  position: relative;
-  z-index: 10;
-  background: whitesmoke;
 }
 
 .kap-page-title {
@@ -192,10 +172,6 @@ html, body, #root {
   color: #284a4b;
   margin-bottom: 10px;
   letter-spacing: -0.5px;
-}
-
-.kap-page-title.desktop-title {
-  display: block;
 }
 
 .kap-page-description {
@@ -220,18 +196,6 @@ html, body, #root {
   text-align: center;
 }
 
-.kap-welcome-icon {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #284a4b, #397d7c);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  margin-bottom: 24px;
-}
-
 .kap-welcome-heading {
   font-family: 'DM Sans', serif;
   font-size: 26px;
@@ -245,50 +209,10 @@ html, body, #root {
   color: #666666;
   max-width: 480px;
   line-height: 1.6;
-  margin-bottom: 40px;
-}
-
-.kap-stats {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.kap-stat-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 24px 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #e0eeee;
-  min-width: 120px;
-}
-
-.kap-stat-num {
-  font-family: 'DM Sans', serif;
-  font-size: 36px;
-  font-weight: 800;
-  color: #284a4b;
-  line-height: 1;
-}
-
-.kap-stat-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #666666;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .kap-companies-section {
   margin-bottom: 40px;
-}
-
-.kap-section-intro {
-  margin-bottom: 24px;
 }
 
 .kap-section-title {
@@ -299,17 +223,11 @@ html, body, #root {
   margin-bottom: 8px;
 }
 
-.kap-section-desc {
-  font-size: 15px;
-  color: #666666;
-  line-height: 1.6;
-  max-width: 600px;
-}
-
 .kap-companies-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  margin-top: 20px;
 }
 
 .kap-company-card {
@@ -333,6 +251,7 @@ html, body, #root {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  gap: 12px;
 }
 
 .kap-company-name {
@@ -349,7 +268,7 @@ html, body, #root {
   color: #ffffff;
   padding: 4px 10px;
   border-radius: 20px;
-  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .kap-company-hint {
@@ -386,6 +305,7 @@ html, body, #root {
   color: #284a4b;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .kap-nav-btn:hover {
@@ -450,7 +370,6 @@ html, body, #root {
   border: 1px solid #e0eeee;
   display: flex;
   height: 140px;
-  width: 100%;
   animation: fadeInUp 0.4s ease-out;
 }
 
@@ -460,47 +379,13 @@ html, body, #root {
   border-color: #397d7c;
 }
 
-.kap-model-card.kap-ref {
-  border-left: 4px solid #397d7c;
-}
-
-.kap-model-card.kap-wm {
-  border-left: 4px solid #284a4b;
-}
-
-.kap-model-card.kap-ac {
-  border-left: 4px solid #397d7c;
-}
-
-.kap-model-card.kap-micro {
-  border-left: 4px solid #1a3334;
-}
-
-.kap-model-card.kap-wh {
-  border-left: 4px solid #c0392b;
-}
-
-.kap-model-card.kap-dw {
-  border-left: 4px solid #284a4b;
-}
-
-.kap-model-card.kap-oven {
-  border-left: 4px solid #397d7c;
-}
-
-.kap-model-card.kap-freezer {
-  border-left: 4px solid #1a3334;
-}
-
-.kap-model-card.kap-stove {
-  border-left: 4px solid #c0392b;
-}
-
 .kap-card-image {
   width: 120px;
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #e5e5e5;
   flex-shrink: 0;
   border-right: 1px solid #e0eeee;
 }
@@ -512,14 +397,13 @@ html, body, #root {
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  gap: 4px;
+  gap: 6px;
 }
 
 .kap-card-top-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 2px;
 }
 
 .kap-card-title {
@@ -557,32 +441,6 @@ html, body, #root {
   color: #397d7c;
 }
 
-.kap-card-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 2px;
-}
-
-.kap-feature-pill {
-  font-size: 10px;
-  background: #f5fafa;
-  color: #4a5a5b;
-  border: 1px solid #e0eeee;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.kap-no-models {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 48px 20px;
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e0eeee;
-}
-
 .kap-back-section {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -603,7 +461,6 @@ html, body, #root {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px #000000;
-  font-family: 'DM Sans', sans-serif;
 }
 
 .kap-back-button:hover {
@@ -661,7 +518,6 @@ html, body, #root {
 }
 
 .kap-mobile-topbar {
-  margin-top: 120px;
   display: none;
 }
 
@@ -695,7 +551,7 @@ html, body, #root {
   background: #ffffff;
   border-radius: 28px;
   width: 96%;
-  max-width: 1000px;
+  max-width: 1100px;
   max-height: 90vh;
   overflow: hidden;
   position: relative;
@@ -731,9 +587,7 @@ html, body, #root {
 
 .kap-modal-hero {
   background: linear-gradient(135deg, #1a3334 0%, #284a4b 60%, #397d7c 100%);
-  padding: 17px 36px 22px;
-  position: relative;
-  overflow: hidden;
+  padding: 20px 36px 24px;
   flex-shrink: 0;
 }
 
@@ -748,21 +602,17 @@ html, body, #root {
 
 .kap-modal-hero-title {
   font-family: 'DM Sans', serif;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.1;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
+  line-height: 1.2;
+  margin-bottom: 6px;
 }
 
 .kap-modal-hero-subtitle {
   font-size: 14px;
   color: #ffffff;
   font-style: italic;
-  position: relative;
-  z-index: 1;
 }
 
 .kap-modal-inner {
@@ -796,7 +646,7 @@ html, body, #root {
 }
 
 .kap-modal-right {
-  width: 280px;
+  width: 300px;
   flex-shrink: 0;
   background: #ffffff;
   border-left: 2px solid #e0eeee;
@@ -804,35 +654,19 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   padding: 28px 20px;
-  position: relative;
   overflow: hidden;
 }
 
-.kap-modal-right::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 20%, #397d7c 0%, transparent 60%);
-  pointer-events: none;
-}
-
 .kap-modal-right-image {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #e5e5e5;
   border: 3px solid #e0eeee;
   box-shadow: 0 20px 50px #284a4b;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.kap-modal-right-image:hover {
-  transform: scale(1.02);
 }
 
 .kap-about-row {
@@ -852,62 +686,16 @@ html, body, #root {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #e5e5e5;
   border-radius: 50%;
   border: 3px solid #e0eeee;
-  box-shadow: 0 8px 18px #284a4b;
-  cursor: pointer;
-}
-
-.kap-lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(26, 51, 52, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3000;
-  padding: 30px;
-  animation: fadeInUp 0.25s ease-out;
-}
-
-.kap-lightbox-image {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px #000000;
-  object-fit: contain;
-}
-
-.kap-lightbox-close {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background: #ffffff;
-  color: #1a3334;
-  border: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  box-shadow: 0 4px 15px #000000;
-  transition: all 0.2s;
-}
-
-.kap-lightbox-close:hover {
-  background: #397d7c;
-  color: #ffffff;
-  transform: scale(1.1);
 }
 
 .kap-msec {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .kap-msec-label {
@@ -931,23 +719,9 @@ html, body, #root {
 
 .kap-mdivider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e0eeee 30%, #e0eeee 70%, transparent);
+  background: #e0eeee;
   border: none;
   margin: 4px 0;
-}
-
-.kap-features-info-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-
-.kap-features-section {
-  flex: 2;
-}
-
-.kap-quickinfo-section {
-  flex: 1;
 }
 
 .kap-uses-wrap {
@@ -968,7 +742,6 @@ html, body, #root {
   color: #284a4b;
   font-weight: 500;
   transition: all 0.2s;
-  cursor: default;
 }
 
 .kap-use-tag:hover {
@@ -980,84 +753,30 @@ html, body, #root {
   flex-shrink: 0;
 }
 
-.kap-quickinfo-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.kap-info-badge {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #f5fafa;
-  border: 1px solid #e0eeee;
-  border-radius: 12px;
-  padding: 8px 12px;
-  width: 100%;
-  transition: all 0.2s;
-}
-
-.kap-info-badge:hover {
-  background: #f5fafa;
-  border-color: #e0eeee;
-}
-
-.kap-info-badge-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: #397d7c;
-}
-
-.kap-info-badge-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-
-.kap-info-badge-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #397d7c;
-}
-
-.kap-info-badge-value {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1a3334;
-  line-height: 1.3;
-}
-
-.kap-price-value {
-  color: #397d7c;
-}
-
 .kap-specs-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
 }
 
 .kap-spec-card {
   background: #f5fafa;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
   border: 1px solid #e0eeee;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  min-width: 0;
 }
 
 .kap-spec-label {
   font-size: 12px;
   font-weight: 600;
   color: #666666;
+  flex-shrink: 0;
 }
 
 .kap-spec-value {
@@ -1065,6 +784,9 @@ html, body, #root {
   font-weight: 500;
   color: #1a3334;
   text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .kap-modal-two-col {
@@ -1080,9 +802,6 @@ html, body, #root {
 }
 
 .kap-tip-card {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
   background: #f5fafa;
   border: 1px solid #e0eeee;
   border-radius: 10px;
@@ -1092,13 +811,6 @@ html, body, #root {
 
 .kap-tip-card:hover {
   background: #e0eeee;
-}
-
-.kap-tip-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .kap-tip-txt {
@@ -1121,19 +833,13 @@ html, body, #root {
   border: 1px solid #e0eeee;
   border-radius: 10px;
   padding: 8px 12px;
-  transition: all 0.2s;
-}
-
-.kap-step-card:hover {
-  background: #f5fafa;
-  border-color: #e0eeee;
 }
 
 .kap-step-num {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #284a4b, #397d7c);
+  background: #284a4b;
   color: #ffffff;
   font-size: 10px;
   font-weight: 800;
@@ -1148,6 +854,7 @@ html, body, #root {
   color: #4a5a5b;
   line-height: 1.5;
 }
+
 @media (max-width: 780px) {
   html {
     overflow-x: hidden;
@@ -1156,10 +863,6 @@ html, body, #root {
   body {
     height: auto;
     overflow-y: auto;
-  }
-
-  .kap-sidebar-overlay.visible {
-    display: block;
   }
 
   .kap-main {
@@ -1179,12 +882,10 @@ html, body, #root {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    height: 100px;
+    height: 80px;
     background: #1a3334;
     padding: 14px 16px;
     border-bottom: 3px solid #397d7c;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 80px;
   }
 
@@ -1192,9 +893,7 @@ html, body, #root {
     font-size: 20px;
     font-weight: 700;
     color: #ffffff;
-    text-align: center;
     margin: 0;
-    flex: 1;
   }
 
   .kap-categories-row {
@@ -1203,34 +902,28 @@ html, body, #root {
     gap: 6px;
     padding: 10px 16px;
     background: #ffffff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid #e0eeee;
   }
 
   .kap-cat-btn {
-    padding: 8px 6px;
+    padding: 10px 8px;
     border-radius: 18px;
     background: #e0eeee;
     color: #1a3334;
-    font-size: 8.5px;
+    font-size: 12px;
     font-weight: 600;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    border: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .kap-cat-btn:hover {
-    background: #397d7c;
-    color: #ffffff;
-    transform: scale(1.05);
-  }
-
   .kap-cat-btn.active {
     background: #284a4b;
     color: #ffffff;
-    border-color: #ffffff;
   }
 
   .kap-main-header .kap-page-title {
@@ -1242,7 +935,7 @@ html, body, #root {
     padding-top: 10px;
     padding-bottom: 8px;
     border-bottom: none;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .kap-page-description {
@@ -1255,10 +948,9 @@ html, body, #root {
     top: 0;
     height: 100vh;
     width: 270px;
-    margin-top: 0px;
+    margin-top: 0;
     transform: translateX(-100%);
     z-index: 1100;
-    overflow-y: auto;
     bottom: auto;
     padding: 20px 16px;
   }
@@ -1276,7 +968,6 @@ html, body, #root {
   }
 
   .kap-companies-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
@@ -1299,7 +990,6 @@ html, body, #root {
   }
 
   .kap-models-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
@@ -1341,13 +1031,7 @@ html, body, #root {
     font-size: 12px;
   }
 
-  .kap-feature-pill {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
-
   .kap-modal-overlay {
-    align-items: center;
     padding: 10px;
   }
 
@@ -1366,7 +1050,6 @@ html, body, #root {
     width: 100%;
     padding: 16px;
     overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
   }
 
   .kap-modal-right {
@@ -1387,31 +1070,12 @@ html, body, #root {
     font-size: 22px;
   }
 
-  .kap-features-info-row {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .kap-uses-wrap {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-  }
-
-  .kap-use-tag {
-    font-size: 11px;
-    padding: 4px 8px;
-  }
-
-  .kap-info-badge {
-    padding: 7px 10px;
-  }
-
-  .kap-info-badge-value {
-    font-size: 12px;
+  .kap-specs-grid {
+    grid-template-columns: 1fr;
   }
 
   .kap-modal-two-col {
-    grid-template-columns: 3fr;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -1420,41 +1084,14 @@ html, body, #root {
     gap: 12px;
   }
 
-  .kap-specs-grid {
-    grid-template-columns: 1fr;
-  }
-
   .kap-msec-text {
     font-size: 12px;
     padding: 10px 12px;
   }
 
-  .kap-back-section {
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
-
   .kap-back-button {
     padding: 12px 24px;
     font-size: 14px;
-    width: auto;
-    min-width: 200px;
-  }
-
-  .kap-stats {
-    gap: 12px;
-  }
-
-  .kap-stat-card {
-    padding: 18px 24px;
-  }
-
-  .kap-mistake-card {
-    padding: 7px 10px;
-  }
-
-  .kap-mistake-card .kap-tip-txt {
-    font-size: 11px;
   }
 }
 
@@ -1468,23 +1105,21 @@ html, body, #root {
   }
 
   .kap-mobile-topbar .kap-page-title {
-    text-align: center;
     font-size: 18px;
   }
 
   .kap-categories-row {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 4px;
     padding: 8px 10px;
   }
 
   .kap-cat-btn {
-    font-size: 9px;
-    padding: 6px 4px;
+    font-size: 11px;
+    padding: 8px 6px;
   }
 
   .kap-companies-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
@@ -1502,7 +1137,6 @@ html, body, #root {
   }
 
   .kap-models-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
@@ -1537,16 +1171,6 @@ html, body, #root {
     font-size: 10px;
   }
 
-  .kap-feature-pill {
-    font-size: 8px;
-    padding: 1px 5px;
-  }
-
-  .kap-card-description {
-    font-size: 10px;
-    -webkit-line-clamp: 1;
-  }
-
   .kap-modal {
     width: 98%;
     border-radius: 16px;
@@ -1554,21 +1178,12 @@ html, body, #root {
   }
 
   .kap-modal-left {
-    width: 100%;
     padding: 12px;
-  }
-
-  .kap-about-row {
-    gap: 10px;
   }
 
   .kap-about-thumb {
     width: 110px;
     height: 110px;
-  }
-
-  .kap-modal-hero {
-    padding: 12px 14px;
   }
 
   .kap-modal-hero-title {
@@ -1609,11 +1224,13 @@ html, body, #root {
     padding: 3px 6px;
   }
 
-  .kap-step-txt, .kap-tip-txt {
+  .kap-step-txt,
+  .kap-tip-txt {
     font-size: 10px;
   }
 
-  .kap-step-card, .kap-tip-card {
+  .kap-step-card,
+  .kap-tip-card {
     padding: 5px 8px;
   }
 
@@ -1626,7 +1243,6 @@ html, body, #root {
   .kap-back-button {
     padding: 8px 16px;
     font-size: 12px;
-    min-width: 150px;
   }
 
   .kap-sidebar {
@@ -1648,18 +1264,6 @@ html, body, #root {
 
   .kap-appliance-name {
     font-size: 12px;
-  }
-
-  .kap-lightbox-overlay {
-    padding: 16px;
-  }
-
-  .kap-lightbox-close {
-    top: 14px;
-    right: 14px;
-    width: 34px;
-    height: 34px;
-    font-size: 18px;
   }
 
   .kap-specs-grid {

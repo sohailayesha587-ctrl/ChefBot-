@@ -19,8 +19,7 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'Passwords do not match' });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({ message: 'Please enter a valid email address' });
     }
 
@@ -28,9 +27,9 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
 
-    const normalizedEmail = email.toLowerCase().trim();
-    const existingUser = await User.findOne({ email: normalizedEmail });
+    const userEmail = email.toLowerCase().trim();
 
+    const existingUser = await User.findOne({ email: userEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' });
     }
@@ -38,9 +37,9 @@ const register = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    signupOtpStore[normalizedEmail] = {
+    signupOtpStore[userEmail] = {
       fullname,
-      email: normalizedEmail,
+      email: userEmail,
       password: hashedPassword,
       terms,
       otp,
@@ -48,9 +47,9 @@ const register = async (req, res) => {
     };
 
     try {
-      await sendOTPEmail(normalizedEmail, otp);
-    } catch (emailError) {
-      delete signupOtpStore[normalizedEmail];
+      await sendOTPEmail(userEmail, otp);
+    } catch (err) {
+      delete signupOtpStore[userEmail];
       return res.status(400).json({
         message: 'We couldn’t send a verification code to this email address. Please check that your email address is correct and try again.'
       });
@@ -58,7 +57,7 @@ const register = async (req, res) => {
 
     res.status(200).json({
       message: 'Verification code sent! Please check your inbox or spam folder.',
-      email: normalizedEmail
+      email: userEmail
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -68,52 +67,39 @@ const register = async (req, res) => {
 const verifySignupOTP = async (req, res) => {
   try {
     const { email, otp } = req.body;
+    const userEmail = email.toLowerCase().trim();
+    const data = signupOtpStore[userEmail];
 
-    if (!email || !otp) {
-      return res.status(400).json({ message: 'Email and OTP are required' });
-    }
-
-    const normalizedEmail = email.toLowerCase().trim();
-    const stored = signupOtpStore[normalizedEmail];
-
-    if (!stored) {
+    if (!data) {
       return res.status(400).json({ message: 'OTP not found' });
     }
 
-    if (Date.now() > stored.expiresAt) {
-      delete signupOtpStore[normalizedEmail];
-      return res.status(400).json({ message: 'This verification code has expired. Please request a new code.' });
+    if (Date.now() > data.expiresAt) {
+      delete signupOtpStore[userEmail];
+      return res.status(400).json({
+        message: 'This verification code has expired. Please request a new code.'
+      });
     }
 
-    if (stored.otp !== otp) {
-      return res.status(400).json({ message: 'Invalid verification code. Please check the code in your email and try again.' });
-    }
-
-    const existingUser = await User.findOne({ email: normalizedEmail });
-    if (existingUser) {
-      delete signupOtpStore[normalizedEmail];
-      return res.status(400).json({ message: 'Email already registered' });
+    if (data.otp !== otp) {
+      return res.status(400).json({
+        message: 'Invalid verification code. Please check the code in your email and try again.'
+      });
     }
 
     const user = await User.create({
-      name: stored.fullname,
-      email: stored.email,
-      password: stored.password,
-      agreeToTerms: stored.terms,
+      name: data.fullname,
+      email: data.email,
+      password: data.password,
+      agreeToTerms: data.terms,
       isEmailVerified: true
     });
 
-    delete signupOtpStore[normalizedEmail];
+    delete signupOtpStore[userEmail];
 
     res.status(201).json({
       message: 'Account created and email verified successfully',
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        language: user.language
-      }
+      user
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -122,30 +108,24 @@ const verifySignupOTP = async (req, res) => {
 
 const resendSignupOTP = async (req, res) => {
   try {
-    const { email } = req.body;
+    const userEmail = req.body.email.toLowerCase().trim();
+    const data = signupOtpStore[userEmail];
 
-    if (!email) {
-      return res.status(400).json({ message: 'Email is required' });
-    }
-
-    const normalizedEmail = email.toLowerCase().trim();
-    const stored = signupOtpStore[normalizedEmail];
-
-    if (!stored) {
-      return res.status(400).json({ message: 'Signup session expired. Please sign up again.' });
+    if (!data) {
+      return res.status(400).json({
+        message: 'Signup session expired. Please sign up again.'
+      });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    stored.otp = otp;
-    stored.expiresAt = Date.now() + 10 * 60 * 1000;
+    data.otp = otp;
+    data.expiresAt = Date.now() + 10 * 60 * 1000;
 
-    try {
-      await sendOTPEmail(normalizedEmail, otp);
-    } catch (emailError) {
-      return res.status(400).json({ message: 'We couldn’t send a new verification code to this email address. Please check your email address and try again.' });
-    }
+    await sendOTPEmail(userEmail, otp);
 
-    res.status(200).json({ message: 'A new verification code has been sent to your email.' });
+    res.status(200).json({
+      message: 'A new verification code has been sent to your email.'
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -159,7 +139,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Please enter both email and password' });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
 
     if (!user) {
       return res.status(401).json({ message: 'Please enter the correct email' });
@@ -174,11 +154,10 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Please enter the correct password' });
     }
 
-    const expiresIn = remember ? '30d' : '7d';
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn }
+      { expiresIn: remember ? '30d' : '7d' }
     );
 
     res.status(200).json({
@@ -197,39 +176,33 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
-  try {
-    res.status(200).json({ message: 'Logout successful!' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
+const logout = (req, res) => {
+  res.status(200).json({ message: 'Logout successful!' });
 };
 
 const forgotPassword = async (req, res) => {
   try {
-    const { email } = req.body;
-
-    if (!email) {
+    if (!req.body.email) {
       return res.status(400).json({ message: 'Email is required' });
     }
 
-    const user = await User.findOne({ email });
+    const userEmail = req.body.email.toLowerCase().trim();
+
+    const user = await User.findOne({ email: userEmail });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    otpStore[email] = {
+
+    otpStore[userEmail] = {
       otp,
       expiresAt: Date.now() + 10 * 60 * 1000
     };
 
-    await sendOTPEmail(email, otp);
+    await sendOTPEmail(userEmail, otp);
 
-    res.status(200).json({
-      message: 'OTP sent to your email',
-      email
-    });
+    res.status(200).json({ message: 'OTP sent to your email', email: userEmail });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -243,13 +216,15 @@ const verifyOTP = async (req, res) => {
       return res.status(400).json({ message: 'Email and OTP are required' });
     }
 
-    const stored = otpStore[email];
+    const userEmail = email.toLowerCase().trim();
+    const stored = otpStore[userEmail];
+
     if (!stored) {
       return res.status(400).json({ message: 'OTP not found' });
     }
 
     if (Date.now() > stored.expiresAt) {
-      delete otpStore[email];
+      delete otpStore[userEmail];
       return res.status(400).json({ message: 'OTP expired' });
     }
 
@@ -257,9 +232,9 @@ const verifyOTP = async (req, res) => {
       return res.status(400).json({ message: 'Invalid OTP' });
     }
 
-    delete otpStore[email];
+    delete otpStore[userEmail];
 
-    return res.status(200).json({ message: 'OTP verified successfully' });
+    res.status(200).json({ message: 'OTP verified successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -277,13 +252,12 @@ const resetPassword = async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 6 characters' });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
+    user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
 
     res.status(200).json({ message: 'Password reset successfully' });
@@ -300,37 +274,36 @@ const sendChangeEmailOTP = async (req, res) => {
       return res.status(400).json({ message: 'Current email and new email are required' });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(newEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
       return res.status(400).json({ message: 'Please enter a valid new email address' });
     }
 
-    const normCurrent = currentEmail.toLowerCase().trim();
-    const normNew = newEmail.toLowerCase().trim();
+    const oldEmail = currentEmail.toLowerCase().trim();
+    const updatedEmail = newEmail.toLowerCase().trim();
 
-    if (normCurrent === normNew) {
+    if (oldEmail === updatedEmail) {
       return res.status(400).json({ message: 'New email cannot be the same as current email' });
     }
 
-    const user = await User.findOne({ email: normCurrent });
+    const user = await User.findOne({ email: oldEmail });
     if (!user) {
       return res.status(404).json({ message: 'Current user not found' });
     }
 
-    const existingNewEmail = await User.findOne({ email: normNew });
-    if (existingNewEmail) {
+    const emailTaken = await User.findOne({ email: updatedEmail });
+    if (emailTaken) {
       return res.status(400).json({ message: 'This new email is already registered' });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    changeEmailOtpStore[normCurrent] = {
-      newEmail: normNew,
+    changeEmailOtpStore[oldEmail] = {
+      newEmail: updatedEmail,
       otp,
       expiresAt: Date.now() + 10 * 60 * 1000
     };
 
-    await sendOTPEmail(normNew, otp);
+    await sendOTPEmail(updatedEmail, otp);
 
     res.status(200).json({ message: 'Verification code sent to your new email' });
   } catch (error) {
@@ -346,15 +319,15 @@ const verifyAndUpdateEmail = async (req, res) => {
       return res.status(400).json({ message: 'Current email and OTP are required' });
     }
 
-    const normCurrent = currentEmail.toLowerCase().trim();
-    const stored = changeEmailOtpStore[normCurrent];
+    const oldEmail = currentEmail.toLowerCase().trim();
+    const stored = changeEmailOtpStore[oldEmail];
 
     if (!stored) {
       return res.status(400).json({ message: 'OTP session expired. Please request again.' });
     }
 
     if (Date.now() > stored.expiresAt) {
-      delete changeEmailOtpStore[normCurrent];
+      delete changeEmailOtpStore[oldEmail];
       return res.status(400).json({ message: 'OTP has expired' });
     }
 
@@ -362,16 +335,16 @@ const verifyAndUpdateEmail = async (req, res) => {
       return res.status(400).json({ message: 'Invalid verification code' });
     }
 
-    const user = await User.findOne({ email: normCurrent });
+    const user = await User.findOne({ email: oldEmail });
     if (!user) {
-      delete changeEmailOtpStore[normCurrent];
+      delete changeEmailOtpStore[oldEmail];
       return res.status(404).json({ message: 'User not found' });
     }
 
     user.email = stored.newEmail;
     await user.save();
 
-    delete changeEmailOtpStore[normCurrent];
+    delete changeEmailOtpStore[oldEmail];
 
     res.status(200).json({
       message: 'Email updated successfully!',

@@ -142,50 +142,16 @@
   border-top: 1px solid #397d7c;
 }
 
-@media (max-width: 992px) {
-  .footer-main {
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 40px;
-    gap: 30px;
-  }
-
-  .footer-content {
-    text-align: center;
-    width: 100%;
-  }
-
-  .footer-content p {
-    margin: 0 auto;
-    max-width: 700px;
-  }
-
-  .footer-content h4 {
-    margin: 0 0 15px 0;
-    text-align: center;
-  }
-
-  .footer-content h4::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .footer-content ul {
-    justify-content: center;
-    gap: 10px 25px;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 708px) {
   .footer-images {
-    height: 50px;
+    height: 60px;
     overflow-x: auto;
     overflow-y: hidden;
     gap: 2px;
   }
 
   .footer-images img {
-    width: 80px;
+    width: 120px;
     height: 50px;
     min-width: 80px;
   }

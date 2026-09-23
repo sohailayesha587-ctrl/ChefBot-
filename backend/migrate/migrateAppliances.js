@@ -18091,58 +18091,25 @@ const appliancesData = [
 }
   ]
   }
-]; 
-
-function convertToBeginnersGuide(data) {
+]; function convertToBeginnersGuide(data) {
   const guides = [];
-  
+
   data.forEach(appliance => {
     appliance.companies.forEach(company => {
       company.models.forEach(model => {
-        const guide = {
+        guides.push({
           title: `${company.name} ${model.name}`,
-          name: model.name,
+          content: model,
           category: 'kitchen-appliances',
-          mainCategory: appliance.id,
-          subCategory: model.type,
-          filterTags: [appliance.id, model.type, company.name.toLowerCase(), ...(model.features || [])],
-          tags: [appliance.id, model.type, company.name.toLowerCase()],
-          image: model.image || '',
-          fullDesc: model.usageGuide || model.description || '',
-          description: model.bestFor || '',
-          tagline: `${company.name} ${model.type}`,
-          price: model.price || '',
-          priceRange: model.priceRange || '',
-          capacity: model.capacity || '',
-          brand: company.name,
-          warranty: model.warranty || '',
-          features: model.features || [],
-          specifications: model.specifications || {},
-          usageGuide: model.usageGuide || '',
-          maintenance: model.maintenance || '',
-          installationTips: model.installationTips || '',
-          energySavingTips: model.energySavingTips || '',
-          safetyTips: model.safetyTips || '',
-          troubleshooting: model.troubleshooting || [],
-          bestFor: model.bestFor || '',
-          estimatedConsumption: model.estimatedConsumption || '',
-          estimatedPowerConsumption: model.estimatedPowerConsumption || '',
-          estimatedGasConsumption: model.estimatedGasConsumption || '',
-          cookingTips: model.cookingTips || '',
-          washPrograms: model.washPrograms || '',
-          placeSettings: model.placeSettings || '',
-          coolingCapacity: model.coolingCapacity || '',
-          dryCapacity: model.dryCapacity || '',
-          hotWaterTemp: model.hotWaterTemp || '',
-          coldWaterTemp: model.coldWaterTemp || '',
-          burners: model.burners || '',
-          status: 'published'
-        };
-        guides.push(guide);
+          image: model.image,
+          mainCategory: appliance.id,        
+  subCategory: model.type,          
+  brand: company.name
+        });
       });
     });
   });
-  
+
   return guides;
 }
 

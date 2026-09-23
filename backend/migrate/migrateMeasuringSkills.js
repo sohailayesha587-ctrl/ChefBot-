@@ -459,62 +459,55 @@ const precisionDataMeas = [
     usage: ["Recipe development", "Baking logs", "Meal planning", "Diet tracking", "Kitchen experiments"]
   }
 ];
-
 toolsDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
-category: 'measuring-skills',
-subCategory: 'measuring-tools',
-    image: item.image,
-     status: 'published',
+    content: item,
+    category: 'measuring-skills',
+    subCategory: 'measuring-tools',
+    image: item.image
   });
 });
 
 techniquesDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
-category: 'measuring-skills',
-subCategory: 'measuring-techniques',
-    image: item.image,
-     status: 'published',
+    content: item,
+    category: 'measuring-skills',
+    subCategory: 'measuring-techniques',
+    image: item.image
   });
 });
 
 estimationDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
-category: 'measuring-skills',
-subCategory: 'estimation',
-       image: item.image,
-     status: 'published',
+    content: item,
+    category: 'measuring-skills',
+    subCategory: 'estimation',
+    image: item.image
   });
 });
 
 conversionDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
-category: 'measuring-skills',
-subCategory: 'conversions',
-       image: item.image,
-     status: 'published',
+    content: item,
+    category: 'measuring-skills',
+    subCategory: 'conversions',
+    image: item.image
   });
 });
 
 precisionDataMeas.forEach(item => {
   allGuides.push({
     title: item.name,
-    content: JSON.stringify(item),
-category: 'measuring-skills',
-subCategory: 'precision',
-       image: item.image,
-     status: 'published',
+    content: item,
+    category: 'measuring-skills',
+    subCategory: 'precision',
+    image: item.image
   });
 });
-
 const migrate = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

@@ -76,10 +76,11 @@
   padding: 6px 12px;
   color: #284a4b;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   text-decoration: none;
   border-radius: 6px;
   transition: 0.3s;
+  letter-spacing: -0.5px;
 }
 
 .nav-link:hover {

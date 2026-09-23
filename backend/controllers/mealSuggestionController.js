@@ -1,5 +1,6 @@
 const Pantry = require('../models/Pantry');
-const Recipe = require('../models/Recipe');const ShoppingList = require('../models/ShoppingList');
+const Recipe = require('../models/Recipe');
+const ShoppingList = require('../models/ShoppingList');
 const CookingLog = require('../models/CookingLog');
 const { checkFundamentalIngredients } = require('../utils/pantryHelper');
 const { normalizeIngredient, getIngredientCategory } = require('../utils/urduHelper');
