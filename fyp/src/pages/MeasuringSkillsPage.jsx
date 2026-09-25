@@ -1,295 +1,135 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaLightbulb, FaExclamationTriangle, FaBirthdayCake, FaDotCircle, FaArrowLeft } from 'react-icons/fa';
 import './MeasuringSkillsPage.css';
 
-const ALREADY_RENDERED = [
-  'id', 'image', 'name', 'title', 'tagline', 'fullDesc', 'description',
-  'keyUses', 'keyFeatures', 'bestFor', 'type', 'material', 'price', 'priceRange',
-  'durability', 'pros', 'cons', 'care', 'size', 'sizes', 'capacity', 'diameter',
-  'length', 'properUsage', 'steps', 'methods', 'tips', 'commonMistakes', 'types',
-  'usage', 'commonConversions', 'criticalRules', 'category', 'subCategory',
-  'subcategory', 'items', 'commonItems', 'content', 'extraSections',
-  '_id', 'createdBy', 'createdAt', 'updatedAt', '__v', 'status',
-  'filterTags', 'tags', 'avgRating', 'totalRatings', 'totalViews',
-  'totalSaves', 'publishedAt', 'lastUpdatedBy'
+const CATEGORIES = [
+  { key: 'measuring-tools', label: 'Tools & Equipment', description: 'Essential tools and equipment for accurate measuring.' },
+  { key: 'measuring-techniques', label: 'Measuring Techniques', description: 'Master fundamental measuring techniques.' },
+  { key: 'estimation', label: 'Estimation Skills', description: 'Learn to estimate quantities without tools.' },
+  { key: 'conversions', label: 'Conversion Skills', description: 'Convert between different measurement units.' },
+  { key: 'precision', label: 'Precision Skills', description: 'Achieve precise measurements for perfect results.' },
 ];
 
-const toLabel = (key) => {
-  return key
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
-    .replace(/^./, c => c.toUpperCase())
-    .toUpperCase();
-};
-
-const getValue = (value) => {
-  if (value === null || value === undefined) return '';
-  if (typeof value === 'object') {
-    return value.name || value.description || '';
+const parseContent = (content) => {
+  if (!content) return {};
+  if (typeof content === 'object') return content;
+  try {
+    return JSON.parse(content);
+  } catch {
+    return {};
   }
-  return String(value);
 };
 
 const MeasuringSkillsPage = () => {
-  const navigate = useNavigate();
-  const [selectedTool, setSelectedTool] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [activeTab, setActiveTab] = useState('measuring-tools');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState(null);
 
-  const [measuringTools, setMeasuringTools] = useState([]);
-  const [measuringTechniques, setMeasuringTechniques] = useState([]);
-  const [estimationSkills, setEstimationSkills] = useState([]);
-  const [conversionSkills, setConversionSkills] = useState([]);
-  const [precisionSkills, setPrecisionSkills] = useState([]);
+  const [toolsData, setToolsData] = useState([]);
+  const [techniquesData, setTechniquesData] = useState([]);
+  const [estimationData, setEstimationData] = useState([]);
+  const [conversionsData, setConversionsData] = useState([]);
+  const [precisionData, setPrecisionData] = useState([]);
 
-  const categories = [
-    { id: 'tools', name: 'Tools & Equipment', subCategory: 'measuring-tools' },
-    { id: 'techniques', name: 'Measuring Techniques', subCategory: 'measuring-techniques' },
-    { id: 'estimation', name: 'Estimation Skills', subCategory: 'estimation' },
-    { id: 'conversions', name: 'Conversion Skills', subCategory: 'conversions' },
-    { id: 'precision', name: 'Precision Skills', subCategory: 'precision' }
-  ];
-
-  const mergeContent = (guide) => {
-    let content = {};
-
-    if (typeof guide.content === 'string' && guide.content.startsWith('{')) {
-      try {
-        content = JSON.parse(guide.content);
-      } catch (e) {
-        content = {};
-      }
-    } else if (typeof guide.content === 'object' && guide.content !== null) {
-      content = guide.content;
-    }
-
-    return {
-      ...content,
-      id: guide._id,
-      image: guide.image || content.image || '',
-      name: guide.title || content.name || guide.name || '',
-      tagline: content.tagline || guide.tagline || guide.title || '',
-      fullDesc: content.fullDesc || guide.fullDesc || '',
-      description: content.description || guide.description || '',
-      keyUses: content.keyUses || guide.keyUses || [],
-      keyFeatures: content.keyFeatures || guide.keyFeatures || [],
-      bestFor: content.bestFor || guide.bestFor || '',
-      type: content.type || guide.type || '',
-      material: content.material || guide.material || '',
-      price: content.price || guide.price || '',
-      priceRange: content.priceRange || guide.priceRange || '',
-      durability: content.durability || guide.durability || '',
-      pros: content.pros || guide.pros || [],
-      cons: content.cons || guide.cons || [],
-      care: content.care || guide.care || '',
-      size: content.size || guide.size || '',
-      sizes: content.sizes || guide.sizes || '',
-      capacity: content.capacity || guide.capacity || '',
-      diameter: content.diameter || guide.diameter || '',
-      length: content.length || guide.length || '',
-      properUsage: content.properUsage || guide.properUsage || content.steps || content.methods || [],
-      tips: content.tips || guide.tips || '',
-      commonMistakes: content.commonMistakes || guide.commonMistakes || [],
-      types: content.types || guide.types || [],
-      usage: content.usage || guide.usage || [],
-      commonConversions: content.commonConversions || guide.commonConversions || [],
-      criticalRules: content.criticalRules || guide.criticalRules || [],
-      category: content.category || guide.category || '',
-      items: content.items || guide.items || [],
-      commonItems: content.commonItems || guide.commonItems || [],
-      subcategory: content.subcategory || guide.subcategory || guide.subCategory || ''
-    };
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchAllData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get('/api/beginners-guides?category=measuring-skills');
+        const guides = response.data.guides || [];
+
+        setToolsData(guides.filter(g => g.subCategory === 'measuring-tools'));
+        setTechniquesData(guides.filter(g => g.subCategory === 'measuring-techniques'));
+        setEstimationData(guides.filter(g => g.subCategory === 'estimation'));
+        setConversionsData(guides.filter(g => g.subCategory === 'conversions'));
+        setPrecisionData(guides.filter(g => g.subCategory === 'precision'));
+
+        if (guides.length === 0) setError('No measuring skills found in database.');
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load data from server.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchAllData();
   }, []);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setSidebarOpen(false);
-      }
+      if (window.innerWidth > 768) setSidebarOpen(false);
     };
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const fetchAllData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.get('/api/beginners-guides', {
-        params: { category: 'measuring-skills' }
-      });
-
-      const allGuides = response.data.guides || [];
-
-      const tools = allGuides.filter(g => g.subCategory === 'measuring-tools' || g.subcategory === 'measuring-tools');
-      const techniques = allGuides.filter(g => g.subCategory === 'measuring-techniques' || g.subcategory === 'measuring-techniques');
-      const estimation = allGuides.filter(g => g.subCategory === 'estimation' || g.subcategory === 'estimation');
-      const conversions = allGuides.filter(g => g.subCategory === 'conversions' || g.subcategory === 'conversions');
-      const precision = allGuides.filter(g => g.subCategory === 'precision' || g.subcategory === 'precision');
-
-      setMeasuringTools(tools.map(mergeContent));
-      setMeasuringTechniques(techniques.map(mergeContent));
-      setEstimationSkills(estimation.map(mergeContent));
-      setConversionSkills(conversions.map(mergeContent));
-      setPrecisionSkills(precision.map(mergeContent));
-
-      if (tools.length > 0) {
-        setSelectedTool({ id: 'tools', name: 'Tools & Equipment', isCategory: true });
-      } else if (techniques.length > 0) {
-        setSelectedTool({ id: 'techniques', name: 'Measuring Techniques', isCategory: true });
-      } else if (estimation.length > 0) {
-        setSelectedTool({ id: 'estimation', name: 'Estimation Skills', isCategory: true });
-      } else if (conversions.length > 0) {
-        setSelectedTool({ id: 'conversions', name: 'Conversion Skills', isCategory: true });
-      } else if (precision.length > 0) {
-        setSelectedTool({ id: 'precision', name: 'Precision Skills', isCategory: true });
-      }
-    } catch (err) {
-      console.error('Error fetching data:', err);
-      setError('Failed to load measuring skills');
-    } finally {
-      setLoading(false);
-    }
+  const getCurrentData = () => {
+    if (activeTab === 'measuring-tools') return toolsData;
+    if (activeTab === 'measuring-techniques') return techniquesData;
+    if (activeTab === 'estimation') return estimationData;
+    if (activeTab === 'conversions') return conversionsData;
+    if (activeTab === 'precision') return precisionData;
+    return toolsData;
   };
 
-  const getCurrentItems = () => {
-    if (!selectedTool) return [];
+  const activeCategory = CATEGORIES.find(c => c.key === activeTab);
+  const currentData = getCurrentData();
 
-    switch (selectedTool.name) {
-      case 'Tools & Equipment':
-        return measuringTools;
-      case 'Measuring Techniques':
-        return measuringTechniques;
-      case 'Estimation Skills':
-        return estimationSkills;
-      case 'Conversion Skills':
-        return conversionSkills;
-      case 'Precision Skills':
-        return precisionSkills;
-      default:
-        return [];
-    }
-  };
-
-  const handleCategorySelect = (category) => {
-    setSelectedTool({ id: category.id, name: category.name, isCategory: true });
-    setSidebarOpen(false);
-  };
-
-  const openModal = (item) => {
+  const handleItemSelect = (item) => {
     setSelectedItem(item);
-    setShowModal(true);
     setSidebarOpen(false);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedItem(null);
-  };
-
-  const openLightbox = (imageUrl) => {
-    if (imageUrl) {
-      setLightboxImage(imageUrl);
-    }
-  };
-
-  const closeLightbox = () => {
-    setLightboxImage(null);
-  };
-
-  const cleanText = (text) => {
-    if (!text) return '';
-    return String(text).replace(/\\n/g, ' ').replace(/\\"/g, '"').replace(/\\/g, '');
-  };
-
-  const getImage = (item) => {
-    const image = item?.image || '';
-
-    if (!image) {
-      return 'https://via.placeholder.com/300x200?text=No+Image';
-    }
-
-    if (image.startsWith('http://') || image.startsWith('https://') || image.startsWith('/')) {
-      return image;
-    }
-
-    return `https://chefbot.pk/${image}`;
-  };
-
-  const renderExtraSections = () => {
-    return Object.keys(selectedItem)
-      .filter(key => {
-        if (ALREADY_RENDERED.includes(key)) return false;
-        if (key.startsWith('_')) return false;
-
-        const value = selectedItem[key];
-        if (value === null || value === undefined) return false;
-
-        if (Array.isArray(value)) {
-          return value.length > 0;
-        }
-
-        if (typeof value === 'string') {
-          return value.trim().length > 0;
-        }
-
-        return false;
-      })
-      .map(key => {
-        const value = selectedItem[key];
-        const items = Array.isArray(value) ? value : [value];
-
-        return (
-          <React.Fragment key={key}>
-            <div className="msp-msec">
-              <div className="msp-msec-label">{toLabel(key)}</div>
-              <div className="msp-uses-wrap">
-                {items.map((item, idx) => (
-                  <div key={idx} className="msp-use-tag">
-                    {getValue(item)}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <hr className="msp-mdivider" />
-          </React.Fragment>
-        );
-      });
-  };
+  const closeDetailPanel = () => setSelectedItem(null);
+  const openLightbox = (url) => setLightboxImage(url);
+  const closeLightbox = () => setLightboxImage(null);
 
   if (loading) {
     return (
       <div className="msp-container">
-        <div className="loading-spinner">Loading measuring skills...</div>
+        <div className="loading-spinner">Loading...</div>
       </div>
     );
   }
 
-  const currentItems = getCurrentItems();
+  if (error && currentData.length === 0) {
+    return (
+      <div className="msp-container">
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={() => window.location.reload()} className="retry-button">
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="msp-container">
       <div className="msp-mobile-topbar">
-        <button
-          className={`msp-hamburger ${sidebarOpen ? 'open' : ''}`}
-          onClick={() => setSidebarOpen(prev => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-        <h1 className="msp-page-title">Measuring Skills</h1>
+        <h1 className="msp-page-title">{activeCategory.label}</h1>
+      </div>
+
+      <div className="msp-categories-row">
+        {CATEGORIES.map(cat => (
+          <button
+            key={cat.key}
+            className={`msp-cat-btn ${activeTab === cat.key ? 'active' : ''}`}
+            onClick={() => setActiveTab(cat.key)}
+          >
+            {cat.label}
+          </button>
+        ))}
       </div>
 
       <div
@@ -303,356 +143,75 @@ const MeasuringSkillsPage = () => {
             <h2 className="msp-sidebar-title">Measuring Skills</h2>
             <p className="msp-sidebar-subtitle">Master Kitchen Measurements</p>
           </div>
-
-          <div className="msp-sidebar-categories">
-            <ul className="msp-categories-list">
-              {categories.map(category => {
-                let hasItems = false;
-
-                if (category.id === 'tools') hasItems = measuringTools.length > 0;
-                if (category.id === 'techniques') hasItems = measuringTechniques.length > 0;
-                if (category.id === 'estimation') hasItems = estimationSkills.length > 0;
-                if (category.id === 'conversions') hasItems = conversionSkills.length > 0;
-                if (category.id === 'precision') hasItems = precisionSkills.length > 0;
-
-                if (!hasItems) return null;
-
-                return (
-                  <li
-                    key={category.id}
-                    className={`msp-category-item${selectedTool?.name === category.name ? ' msp-active' : ''}`}
-                    onClick={() => handleCategorySelect(category)}
-                  >
-                    <span className="msp-category-name">{category.name}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <ul className="msp-categories-list">
+            {CATEGORIES.map(cat => (
+              <li
+                key={cat.key}
+                className={`msp-category-item${activeTab === cat.key ? ' msp-active' : ''}`}
+                onClick={() => { setActiveTab(cat.key); setSidebarOpen(false); }}
+              >
+                <span className="msp-category-name">{cat.label}</span>
+              </li>
+            ))}
+          </ul>
         </aside>
 
         <main className="msp-main">
-          {error ? (
-            <div className="msp-error-container">
-              <div className="msp-error-icon">🔒</div>
-              <h2>Authentication Required</h2>
-              <p>{error}</p>
-              <button className="msp-login-btn" onClick={() => navigate('/login')}>
-                Go to Login
-              </button>
+          <header className="msp-main-header">
+            <div className="msp-header-content">
+              <h1 className="msp-page-title desktop-title">{activeCategory.label}</h1>
+              <p className="msp-page-description">{activeCategory.description}</p>
+              {error && <p className="error-note">{error}</p>}
             </div>
-          ) : selectedTool ? (
-            <>
-              <header className="msp-main-header">
-                <h1 className="msp-page-title">{selectedTool.name}</h1>
-                <p className="msp-page-description">
-                  {selectedTool.tagline || 'Explore our measuring skills and kitchen measurement essentials'}
-                </p>
-              </header>
+          </header>
 
-              <div className="msp-content-area">
-                <div className="msp-items-grid">
-                  {currentItems.length > 0 ? (
-                    currentItems.map(item => (
-                      <div key={item.id} className="msp-card" onClick={() => openModal(item)}>
-                        <div
-                          className="msp-card-image"
-                          style={{ backgroundImage: `url(${getImage(item)})` }}
-                        />
-                        <div className="msp-card-content">
-                          <h4 className="msp-card-title">{item.name}</h4>
-                          <p className="msp-card-sub">
-                            {item.tagline || item.bestFor || 'Measuring Essential'}
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="msp-empty-state">
-                      <p>No items found in this category.</p>
-                      <p className="msp-empty-sub">Please check back later.</p>
+          <div className="msp-items-grid-section">
+            <div className="msp-items-grid">
+              {currentData.map((item, index) => {
+                const content = parseContent(item.content);
+                return (
+                  <div
+                    key={item._id || index}
+                    className="msp-item-card"
+                    onClick={() => handleItemSelect(item)}
+                  >
+                    <div
+                      className="msp-card-image"
+                      style={{ backgroundImage: `url(${item.image || '/api/placeholder/120/120'})` }}
+                    />
+                    <div className="msp-card-content">
+                      <h3 className="msp-card-title">{item.title}</h3>
+                      <p className="msp-card-description">{content.tagline || item.title}</p>
                     </div>
-                  )}
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="msp-loading">Loading...</div>
-          )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           <div className="msp-back-section">
             <button className="msp-back-button" onClick={() => navigate('/guidance')}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <FaArrowLeft />
               <span>Back to Guidance Page</span>
             </button>
           </div>
         </main>
       </div>
 
-      {showModal && selectedItem && (
-        <div className="msp-modal-overlay" onClick={closeModal}>
-          <div className="msp-modal" onClick={e => e.stopPropagation()}>
-            <button className="msp-modal-close" onClick={closeModal}>
-              <FaTimes />
-            </button>
-
-            <div className="msp-modal-hero">
-              <div className="msp-modal-hero-label">MEASURING SKILL</div>
-              <h2 className="msp-modal-hero-title">{selectedItem.name}</h2>
-              {selectedItem.tagline && (
-                <p className="msp-modal-hero-subtitle">{selectedItem.tagline}</p>
-              )}
-            </div>
-
-            <div className="msp-modal-inner">
-              <div className="msp-modal-left">
-                {(selectedItem.fullDesc || selectedItem.description) && (
-                  <>
-                    <div className="msp-about-row">
-                      <div className="msp-about-text">
-                        <div className="msp-msec">
-                          <div className="msp-msec-label">ABOUT THIS SKILL</div>
-                          <p className="msp-msec-text">
-                            {cleanText(selectedItem.fullDesc || selectedItem.description)}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div
-                        className="msp-about-thumb"
-                        style={{ backgroundImage: `url(${getImage(selectedItem)})` }}
-                        onClick={() => openLightbox(getImage(selectedItem))}
-                      />
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.bestFor && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">BEST FOR</div>
-                      <div className="msp-best-badge">{selectedItem.bestFor}</div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {(selectedItem.keyFeatures?.length > 0 || selectedItem.keyUses?.length > 0) && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">KEY FEATURES</div>
-                      <div className="msp-uses-wrap">
-                        {(selectedItem.keyFeatures?.length ? selectedItem.keyFeatures : selectedItem.keyUses).map((feature, idx) => (
-                          <div key={idx} className="msp-use-tag">{getValue(feature)}</div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.properUsage?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">PROPER USAGE</div>
-                      <div className="msp-steps-list">
-                        {selectedItem.properUsage.map((step, idx) => (
-                          <div key={idx} className="msp-step-card">
-                            <span className="msp-step-num">{idx + 1}</span>
-                            <span className="msp-step-txt">{getValue(step)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.tips && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">TIPS</div>
-                      <div className="msp-care-card">{getValue(selectedItem.tips)}</div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.commonMistakes?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">COMMON MISTAKES</div>
-                      <div className="msp-mistakes-list">
-                        {selectedItem.commonMistakes.map((mistake, idx) => (
-                          <div key={idx} className="msp-mistake-card">
-                            <span className="msp-mistake-icon">!</span>
-                            <span className="msp-tip-txt">{getValue(mistake)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.types?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">TYPES</div>
-                      <div className="msp-types-grid">
-                        {selectedItem.types.map((type, idx) => (
-                          <div key={idx} className="msp-type-card">
-                            <h4>{getValue(type.name)}</h4>
-                            {type.description && <p>{getValue(type.description)}</p>}
-                            {type.capacity && <p><strong>Capacity:</strong> {getValue(type.capacity)}</p>}
-                            {type.sizes && <p><strong>Sizes:</strong> {getValue(type.sizes)}</p>}
-                            {type.bestFor && <p><strong>Best For:</strong> {getValue(type.bestFor)}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.usage?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">USAGE</div>
-                      <div className="msp-uses-wrap">
-                        {selectedItem.usage.map((usage, idx) => (
-                          <div key={idx} className="msp-use-tag">{getValue(usage)}</div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.commonConversions?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">COMMON CONVERSIONS</div>
-                      <div className="msp-conversions-grid">
-                        {selectedItem.commonConversions.map((conversion, idx) => (
-                          <div key={idx} className="msp-conversion-box">{getValue(conversion)}</div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {selectedItem.criticalRules?.length > 0 && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">CRITICAL RULES</div>
-                      <div className="msp-critical-rules-grid">
-                        {selectedItem.criticalRules.map((rule, idx) => (
-                          <div key={idx} className="msp-critical-rule-box">{getValue(rule)}</div>
-                        ))}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {(selectedItem.material || selectedItem.price || selectedItem.priceRange ||
-                  selectedItem.durability || selectedItem.size || selectedItem.capacity ||
-                  selectedItem.diameter || selectedItem.length) && (
-                  <>
-                    <div className="msp-msec">
-                      <div className="msp-msec-label">SPECIFICATIONS</div>
-                      <div className="msp-specs-grid">
-                        {selectedItem.material && (
-                          <div className="msp-spec-item"><strong>Material:</strong> {selectedItem.material}</div>
-                        )}
-                        {selectedItem.price && (
-                          <div className="msp-spec-item"><strong>Price:</strong> {selectedItem.price}</div>
-                        )}
-                        {selectedItem.priceRange && (
-                          <div className="msp-spec-item"><strong>Price Range:</strong> {selectedItem.priceRange}</div>
-                        )}
-                        {selectedItem.durability && (
-                          <div className="msp-spec-item"><strong>Durability:</strong> {selectedItem.durability}</div>
-                        )}
-                        {selectedItem.size && (
-                          <div className="msp-spec-item"><strong>Size:</strong> {selectedItem.size}</div>
-                        )}
-                        {selectedItem.capacity && (
-                          <div className="msp-spec-item"><strong>Capacity:</strong> {selectedItem.capacity}</div>
-                        )}
-                        {selectedItem.diameter && (
-                          <div className="msp-spec-item"><strong>Diameter:</strong> {selectedItem.diameter}</div>
-                        )}
-                        {selectedItem.length && (
-                          <div className="msp-spec-item"><strong>Length:</strong> {selectedItem.length}</div>
-                        )}
-                      </div>
-                    </div>
-                    <hr className="msp-mdivider" />
-                  </>
-                )}
-
-                {renderExtraSections()}
-
-                {(selectedItem.pros?.length > 0 || selectedItem.cons?.length > 0) && (
-                  <div className="msp-modal-two-col">
-                    {selectedItem.pros?.length > 0 && (
-                      <div className="msp-msec">
-                        <div className="msp-msec-label">PROS</div>
-                        {selectedItem.pros.map((pro, idx) => (
-                          <div key={idx} className="msp-pro-card">{getValue(pro)}</div>
-                        ))}
-                      </div>
-                    )}
-
-                    {selectedItem.cons?.length > 0 && (
-                      <div className="msp-msec">
-                        <div className="msp-msec-label">CONS</div>
-                        {selectedItem.cons.map((con, idx) => (
-                          <div key={idx} className="msp-con-card">{getValue(con)}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {selectedItem.care && (
-                  <div className="msp-msec">
-                    <div className="msp-msec-label">CARE INSTRUCTIONS</div>
-                    <div className="msp-care-card">{getValue(selectedItem.care)}</div>
-                  </div>
-                )}
-              </div>
-
-              <div className="msp-modal-right">
-                <div
-                  className="msp-modal-right-image"
-                  style={{ backgroundImage: `url(${getImage(selectedItem)})` }}
-                  onClick={() => openLightbox(getImage(selectedItem))}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+      {selectedItem && (
+        <DetailModal
+          item={selectedItem}
+          categoryLabel={activeCategory.label}
+          onClose={closeDetailPanel}
+          onImageClick={openLightbox}
+        />
       )}
 
       {lightboxImage && (
         <div className="msp-lightbox-overlay" onClick={closeLightbox}>
           <button className="msp-lightbox-close" onClick={closeLightbox}>
-            ×
+            <FaTimes />
           </button>
-
           <img
             className="msp-lightbox-image"
             src={lightboxImage}
@@ -661,6 +220,194 @@ const MeasuringSkillsPage = () => {
           />
         </div>
       )}
+    </div>
+  );
+};
+
+const DetailModal = ({ item, categoryLabel, onClose, onImageClick }) => {
+  const content = parseContent(item.content);
+  const image = item.image || '/api/placeholder/400/400';
+  const tipIcons = [<FaLightbulb />, <FaLightbulb />, <FaExclamationTriangle />];
+
+  const allKeys = Object.keys(content);
+
+  const extraSections = allKeys.filter(key => {
+    const reserved = [
+      'name', 'image', 'tagline', 'fullDesc', 'description',
+      'keyFeatures', 'properUsage', 'steps', 'tips', 'commonMistakes',
+      'category', 'subCategory', 'subcategory', 'type', 'types',
+      'id', '_id', 'createdBy', 'createdAt', 'updatedAt', '__v',
+      'filterTags', 'tags', 'status', 'material', 'price', 'priceRange',
+      'durability', 'pros', 'cons', 'care', 'size', 'sizes', 'capacity',
+      'diameter', 'length'
+    ];
+    if (reserved.includes(key)) return false;
+    if (key.startsWith('_')) return false;
+    const value = content[key];
+    if (value === null || value === undefined) return false;
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === 'string') return value.trim().length > 0;
+    if (typeof value === 'object') return Object.keys(value).length > 0;
+    return false;
+  });
+
+  const formatValue = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object') return value.name || value.description || JSON.stringify(value);
+    return String(value);
+  };
+
+  const toLabel = (key) =>
+    key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase());
+
+  return (
+    <div className="msp-modal-overlay" onClick={onClose}>
+      <div className="msp-modal" onClick={e => e.stopPropagation()}>
+        <button className="msp-modal-close" onClick={onClose}>
+          <FaTimes />
+        </button>
+
+        <div className="msp-modal-hero">
+          <p className="msp-modal-hero-label">Measuring Skill</p>
+          <h2 className="msp-modal-hero-title">{item.title}</h2>
+          <p className="msp-modal-hero-subtitle">{content.tagline || item.title}</p>
+        </div>
+
+        <div className="msp-modal-inner">
+          <div className="msp-modal-left">
+            <div className="msp-about-row">
+              <div className="msp-about-text">
+                <div className="msp-msec">
+                  <span className="msp-msec-label">About this skill</span>
+                  <p className="msp-msec-text">
+                    {content.fullDesc || content.description || content.tagline || item.title}
+                  </p>
+                </div>
+              </div>
+              <div
+                className="msp-about-thumb"
+                style={{ backgroundImage: `url(${image})` }}
+                onClick={() => onImageClick(image)}
+              />
+            </div>
+
+            <hr className="msp-mdivider" />
+
+            {content.keyFeatures?.length > 0 && (
+              <>
+                <div className="msp-uses-badge-row">
+                  <div className="msp-uses-section">
+                    <span className="msp-msec-label">Key Features</span>
+                    <div className="msp-uses-wrap">
+                      {content.keyFeatures.map((f, idx) => (
+                        <div key={idx} className="msp-use-tag">
+                          <span className="msp-use-dot"><FaDotCircle /></span>
+                          {formatValue(f)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="msp-badge-section">
+                    <span className="msp-msec-label">Category</span>
+                    <div className="msp-category-badge">
+                      <span className="msp-category-badge-icon"><FaBirthdayCake /></span>
+                      <span className="msp-category-badge-value">{categoryLabel}</span>
+                    </div>
+                  </div>
+                </div>
+                <hr className="msp-mdivider" />
+              </>
+            )}
+
+            <div className="msp-modal-two-col">
+              {content.properUsage?.length > 0 && (
+                <div className="msp-msec">
+                  <span className="msp-msec-label">How to use it</span>
+                  <div className="msp-steps-list">
+                    {content.properUsage.map((step, idx) => (
+                      <div key={idx} className="msp-step-card">
+                        <span className="msp-step-num">{idx + 1}</span>
+                        <span className="msp-step-txt">{formatValue(step)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {content.steps?.length > 0 && !content.properUsage?.length && (
+                <div className="msp-msec">
+                  <span className="msp-msec-label">How to use it</span>
+                  <div className="msp-steps-list">
+                    {content.steps.map((step, idx) => (
+                      <div key={idx} className="msp-step-card">
+                        <span className="msp-step-num">{idx + 1}</span>
+                        <span className="msp-step-txt">{formatValue(step)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {content.tips && typeof content.tips === 'string' && (
+                <div className="msp-msec">
+                  <span className="msp-msec-label">Pro Tips</span>
+                  <div className="msp-tip-card">
+                    <span className="msp-tip-icon"><FaLightbulb /></span>
+                    <span className="msp-tip-txt">{content.tips}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {content.commonMistakes?.length > 0 && (
+              <>
+                <hr className="msp-mdivider" />
+                <div className="msp-msec">
+                  <span className="msp-msec-label">Common Mistakes</span>
+                  <div className="msp-mistakes-list">
+                    {content.commonMistakes.map((m, idx) => (
+                      <div key={idx} className="msp-mistake-card">
+                        <span className="msp-mistake-icon"><FaExclamationTriangle /></span>
+                        <span className="msp-tip-txt">{formatValue(m)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {extraSections.map(key => {
+              const value = content[key];
+              const items = Array.isArray(value) ? value : [value];
+
+              return (
+                <React.Fragment key={key}>
+                  <hr className="msp-mdivider" />
+                  <div className="msp-msec">
+                    <span className="msp-msec-label">{toLabel(key)}</span>
+                    <div className="msp-uses-wrap">
+                      {items.map((entry, idx) => (
+                        <div key={idx} className="msp-use-tag">
+                          <span className="msp-use-dot"><FaDotCircle /></span>
+                          {formatValue(entry)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </div>
+
+          <div className="msp-modal-right">
+            <div
+              className="msp-modal-right-image"
+              style={{ backgroundImage: `url(${image})` }}
+              onClick={() => onImageClick(image)}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

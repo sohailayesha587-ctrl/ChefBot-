@@ -129,6 +129,11 @@ const KitchenAppliancesPage = () => {
     setSelectedModel(null);
   };
 
+  const formatText = (text) => {
+    if (!text) return '';
+    return String(text).replace(/-/g, ' ');
+  };
+
   if (loading) {
     return (
       <div className="kap-container">
@@ -163,7 +168,7 @@ const KitchenAppliancesPage = () => {
             className={`kap-cat-btn ${selectedAppliance === appliance.id ? 'active' : ''}`}
             onClick={() => openAppliance(appliance.id)}
           >
-            {appliance.name}
+            {formatText(appliance.name)}
           </button>
         ))}
       </div>
@@ -182,7 +187,7 @@ const KitchenAppliancesPage = () => {
                 className={`kap-appliance-item ${selectedAppliance === appliance.id ? 'kap-active' : ''}`}
                 onClick={() => openAppliance(appliance.id)}
               >
-                {appliance.name}
+                <span className="kap-appliance-name">{formatText(appliance.name)}</span>
               </li>
             ))}
           </ul>
@@ -191,7 +196,7 @@ const KitchenAppliancesPage = () => {
         <main className="kap-main">
           <header className="kap-main-header">
             <h1 className="kap-page-title desktop-title">
-              {currentAppliance ? currentAppliance.name : 'Kitchen Appliances Guide'}
+              {currentAppliance ? formatText(currentAppliance.name) : 'Kitchen Appliances Guide'}
             </h1>
             <p className="kap-page-description">
               Browse appliances, compare brands, and find the perfect model.
@@ -200,14 +205,16 @@ const KitchenAppliancesPage = () => {
 
           {!selectedAppliance && (
             <div className="kap-welcome-screen">
-              <h2>Select an appliance from the sidebar</h2>
-              <p>Each appliance includes brands, models, and specifications.</p>
+              <h2 className="kap-welcome-heading">Select an appliance from the sidebar</h2>
+              <p className="kap-welcome-text">
+                Each appliance includes brands, models, and specifications.
+              </p>
             </div>
           )}
 
           {selectedAppliance && !selectedBrand && currentAppliance && (
             <div className="kap-companies-section">
-              <h2 className="kap-section-title">{currentAppliance.name}</h2>
+              <h2 className="kap-section-title">{formatText(currentAppliance.name)}</h2>
 
               <div className="kap-companies-grid">
                 {currentAppliance.brands.map(brand => (
@@ -216,8 +223,11 @@ const KitchenAppliancesPage = () => {
                     className="kap-company-card"
                     onClick={() => openBrand(brand.name)}
                   >
-                    <h3 className="kap-company-name">{brand.name}</h3>
-                    <span className="kap-model-count-badge">{brand.models.length} models</span>
+                    <div className="kap-company-card-top">
+                      <h3 className="kap-company-name">{formatText(brand.name)}</h3>
+                      <span className="kap-model-count-badge">{brand.models.length} models</span>
+                    </div>
+                    <p className="kap-company-hint">Tap to view models</p>
                   </div>
                 ))}
               </div>
@@ -229,7 +239,7 @@ const KitchenAppliancesPage = () => {
               <div className="kap-models-section-header">
                 <div>
                   <h2 className="kap-section-title">
-                    {currentBrand.name} — {currentAppliance.name}
+                    {formatText(currentBrand.name)} — {formatText(currentAppliance.name)}
                   </h2>
                 </div>
 
@@ -259,7 +269,7 @@ const KitchenAppliancesPage = () => {
                       className={`kap-type-tab ${selectedType === type ? 'kap-tab-active' : ''}`}
                       onClick={() => setSelectedType(type)}
                     >
-                      {type}
+                      {formatText(type)}
                     </button>
                   ))}
                 </div>
@@ -277,10 +287,18 @@ const KitchenAppliancesPage = () => {
                       style={model.image ? { backgroundImage: `url(${model.image})` } : undefined}
                     />
                     <div className="kap-card-content">
-                      <h3 className="kap-card-title">{model.name}</h3>
-                      {model.type && <span className="kap-type-pill">{model.type}</span>}
-                      {model.capacity && <p className="kap-card-capacity">{model.capacity}</p>}
-                      {model.price && <p className="kap-card-price">{model.price}</p>}
+                      <div className="kap-card-top-row">
+                        <h3 className="kap-card-title">{formatText(model.name)}</h3>
+                        {model.type && (
+                          <span className="kap-type-pill">{formatText(model.type)}</span>
+                        )}
+                      </div>
+                      {model.capacity && (
+                        <p className="kap-card-capacity">{formatText(model.capacity)}</p>
+                      )}
+                      {model.price && (
+                        <p className="kap-card-price">{formatText(model.price)}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -311,6 +329,11 @@ const KitchenAppliancesPage = () => {
 const ModelModal = ({ model, brandName, onClose }) => {
   const data = model.data;
 
+  const formatText = (text) => {
+    if (!text) return '';
+    return String(text).replace(/-/g, ' ');
+  };
+
   return (
     <div className="kap-modal-overlay" onClick={onClose}>
       <div className="kap-modal" onClick={e => e.stopPropagation()}>
@@ -320,9 +343,10 @@ const ModelModal = ({ model, brandName, onClose }) => {
 
         <div className="kap-modal-hero">
           <p className="kap-modal-hero-label">Kitchen Appliance</p>
-          <h2 className="kap-modal-hero-title">{model.name}</h2>
+          <h2 className="kap-modal-hero-title">{formatText(model.name)}</h2>
           <p className="kap-modal-hero-subtitle">
-            {brandName} · {model.type}{model.capacity ? ` · ${model.capacity}` : ''}
+            {formatText(brandName)} · {formatText(model.type)}
+            {model.capacity ? ` · ${formatText(model.capacity)}` : ''}
           </p>
         </div>
 
@@ -331,56 +355,62 @@ const ModelModal = ({ model, brandName, onClose }) => {
             {data.bestFor && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Best For</span>
-                <p className="kap-msec-text">{data.bestFor}</p>
+                <p className="kap-msec-text">{formatText(data.bestFor)}</p>
               </div>
             )}
 
             {data.features?.length > 0 && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Features</span>
-                <ul>
-                  {data.features.map((f, i) => <li key={i}>{f}</li>)}
-                </ul>
+                <div className="kap-uses-wrap">
+                  {data.features.map((f, i) => (
+                    <div key={i} className="kap-use-tag">
+                      {formatText(f)}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
             {data.specifications && Object.keys(data.specifications).length > 0 && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Specifications</span>
-                {Object.entries(data.specifications).map(([key, value]) => (
-                  <div key={key} className="kap-spec-card">
-                    <span className="kap-spec-label">{key}</span>
-                    <span className="kap-spec-value">{String(value)}</span>
-                  </div>
-                ))}
+                <div className="kap-specs-grid">
+                  {Object.entries(data.specifications).map(([key, value]) => (
+                    <div key={key} className="kap-spec-card">
+                      <span className="kap-spec-label">{formatText(key)}</span>
+                      <span className="kap-spec-value">{formatText(String(value))}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
             {data.warranty && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Warranty</span>
-                <p className="kap-msec-text">{data.warranty}</p>
+                <p className="kap-msec-text">{formatText(data.warranty)}</p>
               </div>
             )}
 
             {data.usageGuide && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Usage Guide</span>
-                <p className="kap-msec-text">{data.usageGuide}</p>
+                <p className="kap-msec-text">{formatText(data.usageGuide)}</p>
               </div>
             )}
 
             {data.maintenance && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Maintenance</span>
-                <p className="kap-msec-text">{data.maintenance}</p>
+                <p className="kap-msec-text">{formatText(data.maintenance)}</p>
               </div>
             )}
 
             {data.safetyTips && (
               <div className="kap-msec">
                 <span className="kap-msec-label">Safety Tips</span>
-                <p className="kap-msec-text">{data.safetyTips}</p>
+                <p className="kap-msec-text">{formatText(data.safetyTips)}</p>
               </div>
             )}
           </div>

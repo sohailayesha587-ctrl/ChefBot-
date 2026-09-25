@@ -181,20 +181,20 @@ html, body, #root {
   margin-top: 8px;
 }
 
-.ktp-tabs {
+.ktp-filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  padding-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #e0eeee;
-  margin-bottom: 20px;
 }
 
-.ktp-tab {
+.ktp-filter-btn {
   background: #ffffff;
   border: 1px solid #e0eeee;
-  padding: 8px 20px;
-  font-size: 14px;
+  padding: 8px 18px;
+  font-size: 13px;
   font-weight: 600;
   color: #666666;
   cursor: pointer;
@@ -203,19 +203,19 @@ html, body, #root {
   font-family: 'DM Sans', sans-serif;
 }
 
-.ktp-tab:hover {
+.ktp-filter-btn:hover {
   color: #284a4b;
   background: #f5fafa;
   border-color: #397d7c;
 }
 
-.ktp-tab.ktp-tab-active {
+.ktp-filter-btn.active {
   background: #284a4b;
   color: #ffffff;
   border-color: #284a4b;
 }
 
-.ktp-tab.ktp-tab-active:hover {
+.ktp-filter-btn.active:hover {
   background: #397d7c;
   border-color: #397d7c;
 }
@@ -442,7 +442,6 @@ html, body, #root {
   background: #397d7c;
   transform: scale(1.1);
 }
-
 
 .ktp-modal-hero {
   background: linear-gradient(135deg, #1a3334 0%, #284a4b 60%, #397d7c 100%);
@@ -793,13 +792,40 @@ html, body, #root {
   line-height: 1.5;
 }
 
-.ktp-mobile-topbar {
-  margin-top: 120px;
-  display: none;
+.ktp-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.ktp-categories-row {
-  display: none;
+.ktp-step-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #f5fafa;
+  border: 1px solid #e0eeee;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.ktp-step-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #284a4b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ktp-step-txt {
+  font-size: 12px;
+  color: #4a5a5b;
+  line-height: 1.5;
 }
 
 @media (max-width: 780px) {
@@ -929,17 +955,29 @@ html, body, #root {
     font-size: 20px;
   }
 
-  .ktp-tabs {
-    gap: 8px;
+  .ktp-filter-bar {
+    gap: 6px;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 8px;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .ktp-tab {
-    padding: 6px 16px;
-    font-size: 12px;
+  .ktp-filter-bar::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .ktp-filter-bar::-webkit-scrollbar-thumb {
+    background: #e0eeee;
+    border-radius: 4px;
+  }
+
+  .ktp-filter-btn {
+    padding: 6px 14px;
+    font-size: 11px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .ktp-items-grid {
@@ -1222,11 +1260,11 @@ html, body, #root {
     grid-template-columns: 1fr;
   }
 
-  .ktp-tabs {
+  .ktp-filter-bar {
     gap: 4px;
   }
 
-  .ktp-tab {
+  .ktp-filter-btn {
     font-size: 10px;
     padding: 4px 12px;
   }

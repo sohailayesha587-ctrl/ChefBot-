@@ -25,7 +25,11 @@ const pantryItemSchema = new mongoose.Schema({
   isLowStock: {
     type: Boolean,
     default: false
-  }
+  },
+  createdAt: {
+  type: Date,
+  default: Date.now
+}
 });
 
 const pantrySchema = new mongoose.Schema(

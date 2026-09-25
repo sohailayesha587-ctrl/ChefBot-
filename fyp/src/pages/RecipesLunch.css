@@ -455,42 +455,15 @@ body,
   color: #1f4e4f;
 }
 
-@media (min-width: 1600px) {
-  .recipes-lunch-card {
-    width: 210px;
-    min-width: 210px;
-    height: 280px;
-  }
-  .recipes-lunch-card-image-container {
-    height: 135px;
-  }
-  .recipes-lunch-card-title {
-    font-size: 17px;
-  }
-}
 
-@media (min-width: 1400px) and (max-width: 1599px) {
-  .recipes-lunch-card {
-    width: 200px;
-    min-width: 200px;
-  }
-}
 
-@media (min-width: 992px) and (max-width: 1199px) {
-  .recipes-lunch-card {
-    width: 180px;
-    min-width: 180px;
-    height: 250px;
-  }
-  .recipes-lunch-card-image-container {
-    height: 115px;
-  }
-  .recipes-lunch-title {
-    font-size: 40px;
-  }
-}
+@media (min-width: 768px){
+  .recipes-lunch-header {
+margin-top:80px;
+margin-bottom: -80px;
 
-@media (min-width: 768px) and (max-width: 991px) {
+
+  }
   .recipes-lunch-card {
     width: 165px;
     min-width: 165px;
@@ -514,75 +487,15 @@ body,
   }
 }
 
-@media (min-width: 576px) and (max-width: 767px) {
+
+@media (max-width: 380px) {
+  
   .recipes-lunch-header {
-    padding: 18px;
-  }
-  .recipes-lunch-title {
-    font-size: 32px;
-  }
-  .recipes-lunch-card {
-    width: 150px;
-    min-width: 150px;
-    height: 230px;
-  }
-  .recipes-lunch-card-image-container {
-    height: 100px;
-  }
-  .recipes-lunch-title::before,
-  .recipes-lunch-title::after {
-    display: none;
-  }
-  .recipes-lunch-carousel {
-    gap: 6px;
+margin-top:80px;
+margin-bottom: -80px;
+
   }
 
-  .recipes-lunch-arrow {
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-  }
-  .recipes-lunch-arrow svg {
-    width: 11px;
-    height: 11px;
-  }
-}
-
-@media (max-width: 575px) {
-  .recipes-lunch-header {
-    padding: 15px;
-  }
-  .recipes-lunch-title {
-    font-size: 28px;
-  }
-  .recipes-lunch-card {
-    width: 140px;
-    min-width: 140px;
-    height: 220px;
-  }
-  .recipes-lunch-card-image-container {
-    height: 95px;
-  }
-  .recipes-lunch-title::before,
-  .recipes-lunch-title::after {
-    display: none;
-  }
-  .recipes-lunch-carousel {
-    gap: 5px;
-  }
-
-  .recipes-lunch-arrow {
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-  }
-  .recipes-lunch-arrow svg {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-@media (max-width: 424px) {
   .recipes-lunch-card {
     width: 130px;
     min-width: 130px;

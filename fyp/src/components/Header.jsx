@@ -39,14 +39,16 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
 
     if (langCode === 'ur') {
       document.cookie = 'googtrans=/en/ur; path=/;';
-    } else {
-      document.cookie = 'googtrans=; max-age=0; path=/;';
-    }
-
-    if (langCode === 'ur') {
+      document.cookie = `googtrans=/en/ur; path=/; domain=${window.location.hostname};`;
       document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', 'ur');
     } else {
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+      document.cookie = 'googtrans=/en/en; path=/;';
+      document.cookie = `googtrans=/en/en; path=/; domain=${window.location.hostname};`;
       document.documentElement.setAttribute('dir', 'ltr');
+      document.documentElement.setAttribute('lang', 'en');
     }
 
     window.location.reload();
@@ -115,6 +117,17 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    const trimmedSearch = search.trim();
+
+    if (!trimmedSearch) return;
+
+    navigate(`/search?q=${encodeURIComponent(trimmedSearch)}`);
+
+    setSearch('');
+    setResults([]);
+    setShowResults(false);
+    setMobileMenu(false);
   };
 
   const handleResultClick = (result) => {
@@ -133,7 +146,6 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
     window.location.href = '/login-page';
   };
 
-
   return (
     <>
       <div className="navbar-top">
@@ -142,11 +154,12 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
         </div>
       </div>
 
-
       <div className="navbar-main navbar-desktop">
         <div className="logo">
           <img
-            src="/logo.png" alt="ChefBot Logo" className="logo-img"
+            src="/logo.png"
+            alt="ChefBot Logo"
+            className="logo-img"
           />
         </div>
 
@@ -199,30 +212,30 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
               </form>
             </div>
 
-           {showResults && (
-  <div className="search-dropdown">
-    {results.map((result) => (
-      <div
-        className="search-result-item"
-        key={result.id}
-        onClick={() => navigate(result.route)}
-      >
-        {result.image && (
-          <img
-            src={result.image}
-            alt={result.title}
-            className="search-result-image"
-          />
-        )}
+            {showResults && (
+              <div className="search-dropdown">
+                {results.map((result) => (
+                  <div
+                    className="search-result-item"
+                    key={result.id}
+                    onClick={() => navigate(result.route)}
+                  >
+                    {result.image && (
+                      <img
+                        src={result.image}
+                        alt={result.title}
+                        className="search-result-image"
+                      />
+                    )}
 
-        <div className="search-result-content">
-          <b>{result.title}</b>
-          <p>{result.type}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+                    <div className="search-result-content">
+                      <b>{result.title}</b>
+                      <p>{result.type}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -300,10 +313,38 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                 className="mobile-search-input"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                onFocus={() =>
+                  results.length > 0 && setShowResults(true)
+                }
                 autoComplete="off"
               />
             </form>
           </div>
+
+          {showResults && results.length > 0 && (
+            <div className="search-dropdown mobile-search-dropdown">
+              {results.map((result) => (
+                <div
+                  className="search-result-item"
+                  key={result.id}
+                  onClick={() => handleResultClick(result)}
+                >
+                  {result.image && (
+                    <img
+                      src={result.image}
+                      alt={result.title}
+                      className="search-result-image"
+                    />
+                  )}
+
+                  <div className="search-result-content">
+                    <b>{result.title}</b>
+                    <p>{result.type}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="mobile-nav-right">
@@ -379,7 +420,10 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                 className={`lang-toggle-btn ${
                   activeLang === 'en' ? 'active' : ''
                 }`}
-                onClick={() => changeLanguage('en')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  changeLanguage('en');
+                }}
               >
                 EN
               </button>
@@ -391,7 +435,10 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
                 className={`lang-toggle-btn ${
                   activeLang === 'ur' ? 'active' : ''
                 }`}
-                onClick={() => changeLanguage('ur')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  changeLanguage('ur');
+                }}
               >
                 اردو
               </button>
@@ -420,7 +467,8 @@ const Header = ({ onSettingsClick, onLanguageChange }) => {
 
       <div
         id="google_translate_element"
-        style={{ display: 'none' }}></div>
+        style={{ display: 'none' }}
+      ></div>
     </>
   );
 };

@@ -222,40 +222,8 @@ body,
   box-shadow: 0 8px 25px rgba(40, 74, 75, 0.5);
 }
 
-@media (min-width: 1400px) {
-  .lunch-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1300px;
-  }
-  .lunch-card-image {
-    height: 200px;
-  }
-  .lunch-page-title {
-    font-size: 48px;
-  }
-  .lunch-category-card {
-    min-height: 320px;
-  }
-}
 
-@media (min-width: 992px) and (max-width: 1399px) {
-  .lunch-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .lunch-card-image {
-    height: 170px;
-  }
-  .lunch-category-card {
-    min-height: 260px;
-  }
-  .lunch-page-title {
-    font-size: 35px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 780px)  {
   .lunch-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
@@ -281,10 +249,10 @@ body,
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 380px) {
   .lunch-header {
     padding: 30px 15px;
-    margin-top: 70px;
+    margin-top: 80px;
   }
   .lunch-page-title {
     font-size: 28px;
@@ -311,74 +279,5 @@ body,
   .back-home-btn {
     padding: 10px 25px;
     font-size: 14px;
-  }
-}
-
-@media (max-width: 575px) {
-  .lunch-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .lunch-card-image {
-    height: 130px;
-  }
-  .lunch-category-card {
-    min-height: 210px;
-    border-radius: 14px;
-  }
-  .lunch-card-title {
-    font-size: 14px;
-  }
-  .lunch-card-description {
-    font-size: 11px;
-  }
-  .lunch-card-button {
-    font-size: 11px;
-  }
-  .lunch-header {
-    padding: 25px 12px;
-    margin-top: 60px;
-  }
-  .lunch-page-title {
-    font-size: 24px;
-  }
-  .lunch-page-description {
-    font-size: 14px;
-  }
-  .back-home-btn {
-    padding: 8px 20px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 424px) {
-  .lunch-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .lunch-header {
-    padding: 20px 10px;
-    margin-top: 50px;
-  }
-  .lunch-page-title {
-    font-size: 20px;
-  }
-  .lunch-card-image {
-    height: 160px;
-  }
-  .lunch-category-card {
-    min-height: 240px;
-  }
-  .lunch-card-title {
-    font-size: 15px;
-  }
-  .lunch-page-description {
-    font-size: 13px;
-  }
-  .back-home-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 8px 15px;
-    font-size: 12px;
   }
 }

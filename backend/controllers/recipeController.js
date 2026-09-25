@@ -223,13 +223,11 @@ const getRecipeCount = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 const getRecipesByPatientType = async (req, res) => {
   try {
     const { type } = req.params;
-    const { limit = 5, skip = 0, dietType } = req.query;
-
-    let filter = { isActive: true };
+    const { limit = 5, skip = 0, dietType, mealTime, allergy, search, pantry } = req.query;
+    const filter = { isActive: true };
 
     switch (type) {
       case 'diabetes':
@@ -254,26 +252,70 @@ const getRecipesByPatientType = async (req, res) => {
     if (dietType && dietType !== 'all') {
       filter.dietType = dietType === 'veg' ? 'Vegetarian' : 'Non-Vegetarian';
     }
+if (mealTime && mealTime !== 'all') {
+  const mealMap = {
+    breakfast: 'Breakfast',
+    lunch: 'Lunch',
+    dinner: 'Dinner',
+    snack: 'Snack',
+    appetizer: 'Appetizer',
+    dessert: 'Dessert',
+    anytime: 'Anytime'
+  };
+
+  const mealValue = mealMap[mealTime];
+
+  if (mealValue) {
+    filter.$and = [
+      {
+        $or: [
+          { category: mealValue },
+          { suitableForMeals: mealValue }
+        ]
+      }
+    ];
+  }
+}
+    if (allergy && allergy !== 'none') {
+      filter.allergens = { $nin: [allergy.toLowerCase()] };
+    }
+
+    if (search && search.trim()) {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      filter.$or = [
+        { title: searchRegex },
+        { tagline: searchRegex },
+        { category: searchRegex },
+        { subCategory: searchRegex }
+      ];
+    }
+
+    if (pantry && pantry.trim()) {
+      const pantryKeywords = pantry.split(',').map(item => item.trim().toLowerCase()).filter(item => item);
+      if (pantryKeywords.length > 0) {
+        filter.pantryKeywords = { $in: pantryKeywords };
+      }
+    }
 
     const recipes = await Recipe.find(filter)
-      .select('title tagline image category subCategory dietType cookingTime difficulty patientFriendly')
-      .skip(parseInt(skip))
-      .limit(parseInt(limit))
+      .select('title tagline image category subCategory dietType cookingTime difficulty patientFriendly suitableForMeals allergens pantryKeywords baseServings')
+      .skip(Number(skip) || 0)
+      .limit(Number(limit) || 5)
       .lean();
 
     const total = await Recipe.countDocuments(filter);
+    const currentSkip = Number(skip) || 0;
 
     res.status(200).json({
       success: true,
       recipes,
       total,
-      hasMore: skip + recipes.length < total
+      hasMore: currentSkip + recipes.length < total
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
 const getRecipesByCategoryFilter = async (req, res) => {
   try {
     const { type } = req.params;

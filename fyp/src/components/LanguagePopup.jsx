@@ -2,6 +2,12 @@ import React from 'react';
 import './LanguagePopup.css';
 
 const LanguagePopup = ({ onLanguageSelected }) => {
+  const token = localStorage.getItem('userToken');
+
+  if (token) {
+    return null;
+  }
+
   const selectLanguage = (langCode) => {
     sessionStorage.setItem('languagePopupSelected', 'true');
 

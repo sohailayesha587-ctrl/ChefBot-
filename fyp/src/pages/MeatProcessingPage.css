@@ -174,7 +174,7 @@ html, body, #root {
   margin-top: 8px;
 }
 
-.mep-tabs {
+.mep-filter-bar {
   display: flex;
   gap: 12px;
   margin-bottom: 28px;
@@ -182,7 +182,7 @@ html, body, #root {
   padding-bottom: 16px;
 }
 
-.mep-tab {
+.mep-filter-btn {
   padding: 10px 24px;
   background: #ffffff;
   border: 1px solid #e0eeee;
@@ -195,19 +195,19 @@ html, body, #root {
   font-family: 'DM Sans', sans-serif;
 }
 
-.mep-tab:hover {
+.mep-filter-btn:hover {
   background: #f5fafa;
   border-color: #397d7c;
   color: #284a4b;
 }
 
-.mep-tab.mep-tab-active {
+.mep-filter-btn.active {
   background: #284a4b;
   color: #ffffff;
   border-color: #284a4b;
 }
 
-.mep-tab.mep-tab-active:hover {
+.mep-filter-btn.active:hover {
   background: #397d7c;
   border-color: #397d7c;
 }
@@ -961,17 +961,28 @@ html, body, #root {
     font-size: 20px;
   }
 
-  .mep-tabs {
+  .mep-filter-bar {
     gap: 8px;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .mep-tab {
+  .mep-filter-bar::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .mep-filter-bar::-webkit-scrollbar-thumb {
+    background: #e0eeee;
+    border-radius: 4px;
+  }
+
+  .mep-filter-btn {
     padding: 6px 16px;
     font-size: 12px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .mep-items-grid {
@@ -1267,11 +1278,11 @@ html, body, #root {
     font-size: 18px;
   }
 
-  .mep-tabs {
+  .mep-filter-bar {
     gap: 4px;
   }
 
-  .mep-tab {
+  .mep-filter-btn {
     font-size: 10px;
     padding: 4px 12px;
   }

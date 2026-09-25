@@ -34,6 +34,11 @@ const KitchenToolsPage = () => {
   const [error, setError] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const [utensilFilter, setUtensilFilter] = useState('all');
+  const [crockeryFilter, setCrockeryFilter] = useState('all');
+  const [cutleryFilter, setCutleryFilter] = useState('all');
+  const [servingwareFilter, setServingwareFilter] = useState('all');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,8 +79,40 @@ const KitchenToolsPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const currentData = data[activeTab] || [];
+  const getFilteredUtensils = () => {
+    const list = data['utensils'] || [];
+    if (utensilFilter === 'all') return list;
+    return list.filter(item => parseContent(item.content).category === utensilFilter);
+  };
+
+  const getFilteredCrockery = () => {
+    const list = data['crockery'] || [];
+    if (crockeryFilter === 'all') return list;
+    return list.filter(item => parseContent(item.content).category === crockeryFilter);
+  };
+
+  const getFilteredCutlery = () => {
+    const list = data['cutlery'] || [];
+    if (cutleryFilter === 'all') return list;
+    return list.filter(item => parseContent(item.content).category === cutleryFilter);
+  };
+
+  const getFilteredServingware = () => {
+    const list = data['servingware'] || [];
+    if (servingwareFilter === 'all') return list;
+    return list.filter(item => parseContent(item.content).subcategory === servingwareFilter);
+  };
+
+  const getCurrentData = () => {
+    if (activeTab === 'utensils') return getFilteredUtensils();
+    if (activeTab === 'crockery') return getFilteredCrockery();
+    if (activeTab === 'cutlery') return getFilteredCutlery();
+    if (activeTab === 'servingware') return getFilteredServingware();
+    return data[activeTab] || [];
+  };
+
   const activeCategory = SUBCATEGORIES.find(s => s.key === activeTab) || SUBCATEGORIES[0];
+  const currentData = getCurrentData();
 
   const handleItemSelect = (item) => {
     setSelectedItem(item);
@@ -104,6 +141,11 @@ const KitchenToolsPage = () => {
       </div>
     );
   }
+
+  const utensilsList = data['utensils'] || [];
+  const crockeryList = data['crockery'] || [];
+  const cutleryList = data['cutlery'] || [];
+  const servingwareList = data['servingware'] || [];
 
   return (
     <div className="ktp-container">
@@ -157,6 +199,140 @@ const KitchenToolsPage = () => {
               {error && <p className="error-note">{error}</p>}
             </div>
           </header>
+
+          {activeTab === 'utensils' && utensilsList.length > 0 && (
+            <div className="ktp-filter-bar">
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'all' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('all')}
+              >
+                All ({utensilsList.length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'cooking' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('cooking')}
+              >
+                Cooking ({utensilsList.filter(u => parseContent(u.content).category === 'cooking').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'prep' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('prep')}
+              >
+                Prep ({utensilsList.filter(u => parseContent(u.content).category === 'prep').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'baking' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('baking')}
+              >
+                Baking ({utensilsList.filter(u => parseContent(u.content).category === 'baking').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'measuring' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('measuring')}
+              >
+                Measuring ({utensilsList.filter(u => parseContent(u.content).category === 'measuring').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${utensilFilter === 'specialty' ? 'active' : ''}`}
+                onClick={() => setUtensilFilter('specialty')}
+              >
+                Specialty ({utensilsList.filter(u => parseContent(u.content).category === 'specialty').length})
+              </button>
+            </div>
+          )}
+
+          {activeTab === 'crockery' && crockeryList.length > 0 && (
+            <div className="ktp-filter-bar">
+              <button
+                className={`ktp-filter-btn ${crockeryFilter === 'all' ? 'active' : ''}`}
+                onClick={() => setCrockeryFilter('all')}
+              >
+                All ({crockeryList.length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${crockeryFilter === 'dining' ? 'active' : ''}`}
+                onClick={() => setCrockeryFilter('dining')}
+              >
+                Dining ({crockeryList.filter(c => parseContent(c.content).category === 'dining').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${crockeryFilter === 'tea' ? 'active' : ''}`}
+                onClick={() => setCrockeryFilter('tea')}
+              >
+                Tea & Coffee ({crockeryList.filter(c => parseContent(c.content).category === 'tea').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${crockeryFilter === 'water' ? 'active' : ''}`}
+                onClick={() => setCrockeryFilter('water')}
+              >
+                Water & Drinks ({crockeryList.filter(c => parseContent(c.content).category === 'water').length})
+              </button>
+            </div>
+          )}
+
+          {activeTab === 'cutlery' && cutleryList.length > 0 && (
+            <div className="ktp-filter-bar">
+              <button
+                className={`ktp-filter-btn ${cutleryFilter === 'all' ? 'active' : ''}`}
+                onClick={() => setCutleryFilter('all')}
+              >
+                All ({cutleryList.length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${cutleryFilter === 'dinner' ? 'active' : ''}`}
+                onClick={() => setCutleryFilter('dinner')}
+              >
+                Dinner ({cutleryList.filter(c => parseContent(c.content).category === 'dinner').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${cutleryFilter === 'tea' ? 'active' : ''}`}
+                onClick={() => setCutleryFilter('tea')}
+              >
+                Tea ({cutleryList.filter(c => parseContent(c.content).category === 'tea').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${cutleryFilter === 'serving' ? 'active' : ''}`}
+                onClick={() => setCutleryFilter('serving')}
+              >
+                Serving ({cutleryList.filter(c => parseContent(c.content).category === 'serving').length})
+              </button>
+            </div>
+          )}
+
+          {activeTab === 'servingware' && servingwareList.length > 0 && (
+            <div className="ktp-filter-bar">
+              <button
+                className={`ktp-filter-btn ${servingwareFilter === 'all' ? 'active' : ''}`}
+                onClick={() => setServingwareFilter('all')}
+              >
+                All ({servingwareList.length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${servingwareFilter === 'bowls' ? 'active' : ''}`}
+                onClick={() => setServingwareFilter('bowls')}
+              >
+                Bowls ({servingwareList.filter(s => parseContent(s.content).subcategory === 'bowls').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${servingwareFilter === 'platters-and-trays' ? 'active' : ''}`}
+                onClick={() => setServingwareFilter('platters-and-trays')}
+              >
+                Platters & Trays ({servingwareList.filter(s => parseContent(s.content).subcategory === 'platters-and-trays').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${servingwareFilter === 'gravy-and-sauceware' ? 'active' : ''}`}
+                onClick={() => setServingwareFilter('gravy-and-sauceware')}
+              >
+                Gravy & Sauce ({servingwareList.filter(s => parseContent(s.content).subcategory === 'gravy-and-sauceware').length})
+              </button>
+              <button
+                className={`ktp-filter-btn ${servingwareFilter === 'accessories' ? 'active' : ''}`}
+                onClick={() => setServingwareFilter('accessories')}
+              >
+                Accessories ({servingwareList.filter(s => parseContent(s.content).subcategory === 'accessories').length})
+              </button>
+            </div>
+          )}
 
           <div className="ktp-items-grid-section">
             <div className="ktp-items-grid">

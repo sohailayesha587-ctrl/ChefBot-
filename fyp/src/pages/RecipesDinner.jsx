@@ -12,13 +12,13 @@ const RecipesDinner = () => {
       id: 1,
       name: "Vegetable Dishes",
       image: "plainVegetable.jpg",
-      route: "/dinner-veg"
+      route: "/lunch"
     },
     {
       id: 2,
       name: "Lentils (Daal) Dishes",
       image: "plainDal.jpg",
-      route: "/dinner-dal"
+      route: "/lentils"
     },
     {
       id: 3,

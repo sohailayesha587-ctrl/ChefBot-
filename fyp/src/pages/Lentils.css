@@ -15,7 +15,7 @@ body,
 
 .lentils-page {
   width: 100%;
-  min-height: 100vh;
+  min-height: 120vh;
   background: #f5fafa;
 }
 
@@ -26,7 +26,7 @@ body,
   text-align: center;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  margin-top: 100px;
+  margin-top: 80px;
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -222,40 +222,7 @@ body,
   box-shadow: 0 8px 25px rgba(40, 74, 75, 0.5);
 }
 
-@media (min-width: 1400px) {
-  .lentils-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1300px;
-  }
-  .lentils-card-image {
-    height: 200px;
-  }
-  .lentils-page-title {
-    font-size: 48px;
-  }
-  .lentils-category-card {
-    min-height: 320px;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1399px) {
-  .lentils-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .lentils-card-image {
-    height: 170px;
-  }
-  .lentils-category-card {
-    min-height: 260px;
-  }
-  .lentils-page-title {
-    font-size: 35px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 780px) {
   .lentils-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
@@ -281,84 +248,14 @@ body,
   }
 }
 
-@media (max-width: 767px) {
-  .lentils-header {
-    padding: 30px 15px;
-    margin-top: 70px;
-  }
-  .lentils-page-title {
-    font-size: 28px;
-  }
-  .lentils-main {
-    padding: 20px 15px 30px;
-  }
+@media (max-width: 380px) {
   .lentils-grid {
+    gap: 10px;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .lentils-card-image {
-    height: 150px;
-  }
-  .lentils-category-card {
-    min-height: 240px;
-  }
-  .lentils-card-title {
-    font-size: 15px;
-  }
-  .lentils-page-description {
-    font-size: 15px;
-  }
-  .lentils-back-home-btn {
-    padding: 10px 25px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 575px) {
-  .lentils-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .lentils-card-image {
-    height: 130px;
-  }
-  .lentils-category-card {
-    min-height: 210px;
-    border-radius: 14px;
-  }
-  .lentils-card-title {
-    font-size: 14px;
-  }
-  .lentils-card-description {
-    font-size: 11px;
-  }
-  .lentils-card-button {
-    font-size: 11px;
-  }
-  .lentils-header {
-    padding: 25px 12px;
-    margin-top: 60px;
-  }
-  .lentils-page-title {
-    font-size: 24px;
-  }
-  .lentils-page-description {
-    font-size: 14px;
-  }
-  .lentils-back-home-btn {
-    padding: 8px 20px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 424px) {
-  .lentils-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
   }
   .lentils-header {
     padding: 20px 10px;
-    margin-top: 50px;
+    margin-top: 80px;
   }
   .lentils-page-title {
     font-size: 20px;
@@ -367,7 +264,7 @@ body,
     height: 160px;
   }
   .lentils-category-card {
-    min-height: 240px;
+    min-height: 300px;
   }
   .lentils-card-title {
     font-size: 15px;

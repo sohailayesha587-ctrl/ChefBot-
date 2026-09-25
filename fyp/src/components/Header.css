@@ -451,27 +451,27 @@ iframe.goog-te-banner-frame {
   visibility: hidden;
   height: 0;
 }
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
 
 body {
-  top: 0;
-  position: static;
+  top: 0 !important;
+  position: static !important;
 }
 
 html {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
 #google_translate_element,
 .goog-te-gadget,
 .goog-tooltip,
 .skiptranslate {
-  display: none;
-}
-
-.goog-text-highlight {
-  background: none;
-  box-shadow: none;
-  border: none;
+  display: none !important;
 }
 
 html[dir="rtl"] {

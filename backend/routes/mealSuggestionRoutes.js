@@ -6,6 +6,8 @@ const {
   cookRecipe,
   getCookingLogByDate,
   addToCookingLog,
+  getPatientRecipeSuggestions,
+  
   updateCookingLogMeal,
   deleteCookingLogMeal,
   getMonthHistory
@@ -22,6 +24,7 @@ router.get('/cooking-log/:date', getCookingLogByDate);
 router.post('/cooking-log', addToCookingLog);
 router.put('/cooking-log/:date/meal/:mealId', updateCookingLogMeal);
 router.delete('/cooking-log/:date/meal/:mealId', deleteCookingLogMeal);
+router.get('/patient/:type', getPatientRecipeSuggestions);
 
 router.get('/cooking-log/month', getMonthHistory);
 

@@ -633,6 +633,143 @@ const getMealSuggestions = async (req, res) => {
     });
   }
 };
+
+const getPatientRecipeSuggestions = async (req, res) => {
+  try {
+    const { type } = req.params;
+    const {
+      limit = 5,
+      skip = 0,
+      dietType,
+      mealTime,
+      allergy,
+      search,
+      pantry: pantryQuery
+    } = req.query;
+
+    const userId = req.user._id || req.user.id;
+
+    const filter = { isActive: true };
+
+    switch (type) {
+      case 'diabetes':
+        filter.patientFriendly = 'diabetes';
+        break;
+      case 'heart':
+        filter.patientFriendly = 'heart';
+        break;
+      case 'bp':
+        filter.patientFriendly = { $in: ['bp', 'lowsalt'] };
+        break;
+      case 'kidney':
+        filter.patientFriendly = 'kidney';
+        break;
+      case 'lowfat':
+        filter.patientFriendly = 'lowfat';
+        break;
+      default:
+        filter.patientFriendly = type;
+    }
+
+    if (dietType && dietType !== 'all') {
+      filter.dietType = dietType === 'veg' ? 'Vegetarian' : 'Non-Vegetarian';
+    }
+
+    if (mealTime && mealTime !== 'all') {
+      const mealMap = {
+        breakfast: 'Breakfast',
+        lunch: 'Lunch',
+        dinner: 'Dinner',
+        snack: 'Snack',
+        appetizer: 'Appetizer',
+        dessert: 'Dessert',
+        anytime: 'Anytime'
+      };
+
+      const mealValue = mealMap[mealTime];
+
+      if (mealValue) {
+        filter.$and = [
+          {
+            $or: [
+              { category: mealValue },
+              { suitableForMeals: mealValue }
+            ]
+          }
+        ];
+      }
+    }
+
+    if (allergy && allergy !== 'none') {
+      filter.allergens = { $nin: [allergy.toLowerCase()] };
+    }
+
+    if (search && search.trim()) {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      filter.$or = [
+        { title: searchRegex },
+        { tagline: searchRegex },
+        { category: searchRegex },
+        { subCategory: searchRegex }
+      ];
+    }
+
+    let pantryItems = [];
+
+    if (pantryQuery && pantryQuery.trim() !== '') {
+      pantryItems = pantryQuery
+        .split(',')
+        .map(name => ({
+          name: name.trim().toLowerCase(),
+          itemName: name.trim().toLowerCase()
+        }));
+    }
+
+    if (pantryItems.length === 0) {
+      const pantryDoc = await Pantry.findOne({ userId }).lean();
+
+      if (pantryDoc?.items) {
+        pantryItems = pantryDoc.items;
+      }
+    }
+
+    const recipes = await Recipe.find(filter)
+      .select('title tagline image category subCategory dietType cookingTime difficulty patientFriendly suitableForMeals allergens pantryKeywords ingredients ingredientsRaw baseServings')
+      .lean();
+
+    const withMatch = recipes.map(recipe => {
+      const match = calculateMatchPercentage(recipe, pantryItems);
+      const missing = getMissingIngredients(recipe, pantryItems);
+
+      return {
+        ...recipe,
+        match: isNaN(match) ? 50 : match,
+        missing
+      };
+    });
+
+    withMatch.sort((a, b) => b.match - a.match);
+
+    const skipNum = Number(skip) || 0;
+    const limitNum = Number(limit) || 5;
+
+    const paginated = withMatch.slice(skipNum, skipNum + limitNum);
+    const total = withMatch.length;
+
+    res.status(200).json({
+      success: true,
+      recipes: paginated,
+      total,
+      hasMore: skipNum + paginated.length < total
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 const cookRecipe = async (req, res) => {
   try {
     const {
@@ -1045,5 +1182,6 @@ module.exports = {
   addToCookingLog,
   updateCookingLogMeal,
   deleteCookingLogMeal,
-  getMonthHistory
+  getMonthHistory,
+  getPatientRecipeSuggestions
 };
